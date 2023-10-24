@@ -1,13 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import Store from "./components/store/store";
+import reportWebVitals from "./reportWebVitals";
+import { IntlProvider } from "react-intl";
+import translations from "./i18n/locales";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
+let locale = navigator.language;
+locale = window.location.search.replace("?locale=", "") || locale;
+const messages = translations[locale];
+
 root.render(
   <React.StrictMode>
-    <App />
+    <Store>
+      <IntlProvider
+        locale={locale}
+        key={locale}
+        messages={messages}
+        defaultLocale="en"
+      >
+        <App />
+      </IntlProvider>
+    </Store>
   </React.StrictMode>
 );
 
