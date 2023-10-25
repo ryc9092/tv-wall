@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import Store from "./components/store/store";
+import VarsProvider from "./components/vars/varsProvider";
 import reportWebVitals from "./reportWebVitals";
 import { IntlProvider } from "react-intl";
 import translations from "./i18n/locales";
@@ -21,7 +22,9 @@ root.render(
         messages={messages}
         defaultLocale="en"
       >
-        <App />
+        <VarsProvider>
+          <App />
+        </VarsProvider>
       </IntlProvider>
     </Store>
   </React.StrictMode>

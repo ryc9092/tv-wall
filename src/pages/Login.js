@@ -6,7 +6,6 @@ import { Actions } from "../components/store/reducer";
 import { StoreContext } from "../components/store/store";
 import Messages from "../messages";
 import { loginAPI } from "../api/API";
-// import "./Login.scss";
 
 const { Text } = Typography;
 
@@ -36,7 +35,7 @@ const Login = () => {
           onLogin({ account: values.account, password: values.password })
         }
       >
-        <Text className="login-form-text">
+        <Text>
           <FormattedMessage {...Messages.Text_Login_Account} />
         </Text>
         <Form.Item
@@ -45,16 +44,14 @@ const Login = () => {
           style={{ marginBottom: "20px" }}
         >
           <Input
-            className="login-form-input"
             placeholder={intl.formatMessage(Messages.Text_Login_EnterAccount)}
           />
         </Form.Item>
-        <Text className="login-form-text">
+        <Text>
           <FormattedMessage {...Messages.Text_Login_Password} />
         </Text>
         <Form.Item name="password" rules={[{ required: true }]}>
           <Input.Password
-            className="login-form-input"
             placeholder={intl.formatMessage(Messages.Text_Login_EnterPassword)}
           />
         </Form.Item>
