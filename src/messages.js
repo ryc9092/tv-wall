@@ -22,4 +22,8 @@ export default defineMessages({
     id: "Text-Login-ButtonLogin",
     defaultMessage: "登入",
   },
+  Text_Login_FailMsg: {
+    id: "Text-Login-FailMsg",
+    defaultMessage: "登入失敗",
+  },
 });

@@ -3,5 +3,6 @@
   "Text-Login-Password": "密碼",
   "Text-Login-EnterAccount": "請輸入帳號",
   "Text-Login-EnterPassword": "請輸入密碼",
-  "Text-Login-ButtonLogin": "登入"
+  "Text-Login-ButtonLogin": "登入",
+  "Text-Login-FailMsg": "登入失敗"
 }

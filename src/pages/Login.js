@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { Button, Form, Input, Typography } from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import { Alert, Button, Form, Input, Typography } from "antd";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Actions } from "../components/store/reducer";
@@ -14,6 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [store, dispatch] = useContext(StoreContext);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (store.account) loginComplete(location, navigate);
@@ -23,8 +24,16 @@ const Login = () => {
     }
   }, [store.account, dispatch, location, navigate]);
 
-  const onLogin = ({ account, password }) => {
-    signIn(account, password, dispatch, navigate, location);
+  const onLogin = async ({ account, password }) => {
+    const token = await loginAPI(account, password);
+    if (token) {
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("account", account);
+      dispatch({ type: Actions.SetAccount, payload: account });
+      loginComplete(location, navigate);
+    } else {
+      setError(intl.formatMessage(Messages.Text_Login_FailMsg));
+    }
   };
 
   return (
@@ -38,11 +47,7 @@ const Login = () => {
         <Text>
           <FormattedMessage {...Messages.Text_Login_Account} />
         </Text>
-        <Form.Item
-          name="account"
-          rules={[{ required: true }]}
-          style={{ marginBottom: "20px" }}
-        >
+        <Form.Item name="account" rules={[{ required: true }]}>
           <Input
             placeholder={intl.formatMessage(Messages.Text_Login_EnterAccount)}
           />
@@ -61,21 +66,12 @@ const Login = () => {
           </Button>
         </Form.Item>
       </Form>
+      {error ? <Alert message={error} type="error" /> : null}
     </div>
   );
 };
 
 export default Login;
-
-async function signIn(account, password, dispatch, navigate, location) {
-  const token = await loginAPI(account, password);
-  if (token) {
-    sessionStorage.setItem("token", token);
-    sessionStorage.setItem("account", account);
-    dispatch({ type: Actions.SetAccount, payload: account });
-    loginComplete(location, navigate);
-  }
-}
 
 function loginComplete(location, navigate) {
   // redirect to previous state or root
