@@ -1,6 +1,8 @@
 import loadable from "@loadable/component";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./utils/PrivateRoute";
+import ResponsiveLayout from "./layouts/responsiveLayout";
+import Sidebar from "./components/sidebar/sidebar";
 import "./App.css";
 
 const Login = loadable(() => import("./pages/Login"));
@@ -15,7 +17,10 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <Main />
+              <ResponsiveLayout
+                sidebar={<Sidebar />}
+                main={<Main />}
+              ></ResponsiveLayout>
             </PrivateRoute>
           }
         />

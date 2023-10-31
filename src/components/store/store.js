@@ -4,6 +4,7 @@ import Reducer from "./reducer";
 export const clearState = {
   account: null,
   token: null,
+  siderCollapse: false,
 };
 
 export const initialState = {
