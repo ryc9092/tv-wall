@@ -9,7 +9,7 @@ export const loadVarsJson = async () => {
 };
 
 const VarsProvider = ({ children }) => {
-  const [store, dispatch] = useContext(StoreContext);
+  const [, dispatch] = useContext(StoreContext);
 
   // load vars.json
   useEffect(() => {
@@ -17,7 +17,7 @@ const VarsProvider = ({ children }) => {
       let config = await loadVarsJson();
       dispatch({ type: Actions.SetVars, payload: config });
     })();
-  }, []);
+  }, [dispatch]);
 
   return <div>{children}</div>;
 };

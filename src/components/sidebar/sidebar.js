@@ -35,7 +35,7 @@ const Sidebar = () => {
       </div>
       <div style={{ marginTop: 120, marginLeft: -15 }}>
         <Menu
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={["2"]}
           mode="inline"
           items={items}
           style={{ border: "0 solid white" }}

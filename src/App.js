@@ -6,7 +6,7 @@ import Sidebar from "./components/sidebar/sidebar";
 import "./App.css";
 
 const Login = loadable(() => import("./pages/Login"));
-const Main = loadable(() => import("./pages/Main"));
+const TVWall = loadable(() => import("./pages/TVWall"));
 
 function App() {
   return (
@@ -14,16 +14,14 @@ function App() {
       <Routes>
         <Route path="/login" element=<Login /> />
         <Route
-          path="/"
+          path="/tv-wall"
           element={
             <PrivateRoute>
-              <ResponsiveLayout
-                sidebar={<Sidebar />}
-                main={<Main />}
-              ></ResponsiveLayout>
+              <ResponsiveLayout sidebar={<Sidebar />} main={<TVWall />} />
             </PrivateRoute>
           }
         />
+        <Route path="*" element=<Login /> />
       </Routes>
     </BrowserRouter>
   );

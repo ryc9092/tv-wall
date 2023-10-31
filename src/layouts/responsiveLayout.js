@@ -36,7 +36,7 @@ const ResponsiveLayout = ({ sidebar, main }) => {
       <Content
         style={{
           paddingTop: 10,
-          paddingLeft: store.siderCollapse ? 150 : 50,
+          paddingLeft: store.siderCollapse ? 100 : 50,
           backgroundColor: "white",
         }}
       >
