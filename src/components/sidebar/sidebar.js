@@ -30,15 +30,10 @@ const Sidebar = () => {
 
   return (
     <div style={{ width: SIDEBAR_WIDTH }}>
-      <div>
-        <img
-          src={Logo}
-          style={{ cursor: "pointer", margin: "6px 0px 0px 6px" }}
-          alt="IPEC"
-          width={100}
-        />
+      <div style={{ top: 6, left: 6, position: "absolute" }}>
+        <img src={Logo} style={{ cursor: "pointer" }} alt="IPEC" width={100} />
       </div>
-      <div style={{ marginTop: 60, marginLeft: -15 }}>
+      <div style={{ marginTop: 120, marginLeft: -15 }}>
         <Menu
           defaultSelectedKeys={["1"]}
           mode="inline"

@@ -8,7 +8,7 @@ const { Content, Sider } = Layout;
 export const SIDEBAR_WIDTH = 240;
 
 const ResponsiveLayout = ({ sidebar, main }) => {
-  const [, dispatch] = useContext(StoreContext);
+  const [store, dispatch] = useContext(StoreContext);
 
   const onCollapse = (collapsed) => {
     dispatch({ type: Actions.SetSiderCollapse, payload: collapsed });
@@ -33,7 +33,15 @@ const ResponsiveLayout = ({ sidebar, main }) => {
       >
         {sidebar}
       </Sider>
-      <Content>{main}</Content>
+      <Content
+        style={{
+          paddingTop: 10,
+          paddingLeft: store.siderCollapse ? 150 : 50,
+          backgroundColor: "white",
+        }}
+      >
+        {main}
+      </Content>
     </Layout>
   );
 };
