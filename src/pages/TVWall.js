@@ -19,8 +19,8 @@ const TVWall = () => {
   let encoderElement = [];
   encoders.forEach((encoder) => {
     encoderElement.push(
-      <Row style={{ marginTop: "10px" }}>
-        <span class="encoder-normal-dot" />
+      <Row key={encoder} style={{ marginTop: "10px" }}>
+        <span className="encoder-normal-dot" />
         {encoder}
       </Row>
     );

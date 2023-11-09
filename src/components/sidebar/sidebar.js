@@ -8,15 +8,15 @@ import Logo from "../../assets/ipec.png";
 
 const bulletPoint = "\u25CF";
 const items = [
-  { key: "1", label: `${bulletPoint} 設備即時狀態` },
-  { key: "2", label: `${bulletPoint} 電視牆影音管理` },
-  { key: "3", label: `${bulletPoint} 單畫面影音管理` },
-  { key: "4", label: `${bulletPoint} USB管理` },
-  { key: "5", label: `${bulletPoint} RS232管理` },
-  { key: "6", label: `${bulletPoint} 影音排程管理` },
-  { key: "7", label: `${bulletPoint} 情境管理` },
-  { key: "8", label: `${bulletPoint} 事件及告警` },
-  { key: "9", label: `${bulletPoint} 系統設定` },
+  { key: "equipment-status", label: `${bulletPoint} 設備即時狀態` },
+  { key: "tv-wall", label: `${bulletPoint} 電視牆影音管理` },
+  { key: "single-screen", label: `${bulletPoint} 單畫面影音管理` },
+  { key: "usb", label: `${bulletPoint} USB管理` },
+  { key: "rs232", label: `${bulletPoint} RS232管理` },
+  { key: "schedule", label: `${bulletPoint} 影音排程管理` },
+  { key: "situation", label: `${bulletPoint} 情境管理` },
+  { key: "event", label: `${bulletPoint} 事件及告警` },
+  { key: "setting", label: `${bulletPoint} 系統設定` },
 ];
 
 const Sidebar = () => {
@@ -28,6 +28,11 @@ const Sidebar = () => {
     navigate("/login");
   };
 
+  const onNavigate = (e) => {
+    const path = e.key;
+    navigate(`/${path}`);
+  };
+
   return (
     <div style={{ width: SIDEBAR_WIDTH }}>
       <div style={{ top: 6, left: 6, position: "absolute" }}>
@@ -35,10 +40,11 @@ const Sidebar = () => {
       </div>
       <div style={{ marginTop: 120, marginLeft: -15 }}>
         <Menu
-          defaultSelectedKeys={["2"]}
+          defaultSelectedKeys={["tv-wall"]}
           mode="inline"
           items={items}
           style={{ border: "0 solid white" }}
+          onClick={onNavigate}
         />
       </div>
       <div
