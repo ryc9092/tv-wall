@@ -8,6 +8,7 @@ import "./App.css";
 const Login = loadable(() => import("./pages/Login"));
 const TVWall = loadable(() => import("./pages/TVWall"));
 const SingleScreen = loadable(() => import("./pages/SingleScreen"));
+const USB = loadable(() => import("./pages/USB"));
 
 function App() {
   return (
@@ -27,6 +28,14 @@ function App() {
           element={
             <PrivateRoute>
               <ResponsiveLayout sidebar={<Sidebar />} main={<SingleScreen />} />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/usb"
+          element={
+            <PrivateRoute>
+              <ResponsiveLayout sidebar={<Sidebar />} main={<USB />} />
             </PrivateRoute>
           }
         />
