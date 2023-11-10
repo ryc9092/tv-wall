@@ -1,0 +1,32 @@
+.single-screen-col-layout {
+    display: grid;
+    width: 99%;
+    grid-template-columns: 50fr 50fr;
+}
+
+.single-screen-row-layout {
+    display: grid;
+    height: 87vh;
+}
+
+.encoder-normal-dot {
+    height: 14px;
+    width: 14px;
+    background-color: #0B9129;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 3px 6px 0px 0px;
+}
+
+.encoder-abnormal-dot {
+    height: 14px;
+    width: 14px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 2px 6px 0px 0px;
+}
+
+.video {
+    object-fit: cover;
+}

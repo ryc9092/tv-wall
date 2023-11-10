@@ -28,7 +28,6 @@ const TVWall = () => {
 
   const encoderBlock = (
     <div>
-      {" "}
       <Row style={{ margin: "8px 0px 0px 8px" }}>
         <Col>
           <Typography.Text style={{ fontSize: "20px", marginRight: "10px" }}>
@@ -47,7 +46,7 @@ const TVWall = () => {
           style={{
             margin: "15px 5px 0px 15px",
             maxHeight: "29vh",
-            overflowY: "scroll",
+            overflowY: "auto",
           }}
         >
           {encoderElement}
@@ -56,7 +55,7 @@ const TVWall = () => {
           style={{
             margin: "15px 5px 0px 15px",
             maxHeight: "29vh",
-            overflowY: "scroll",
+            overflowY: "auto",
           }}
         >
           {encoderElement}
@@ -71,14 +70,13 @@ const TVWall = () => {
       <div
         style={{
           border: "1px solid gray",
-          minHeight: "87vh",
           margin: "16px 16px 16px 0px",
         }}
       >
-        <Row style={{ borderBottom: "1px solid gray", minHeight: "50vh" }}>
+        <Row style={{ borderBottom: "1px solid gray", height: "50vh" }}>
           top
         </Row>
-        <Row style={{ minHeight: "37vh" }}>
+        <Row>
           <div className="tvwall-video-layout">
             {encoderBlock}
             <div>

@@ -7,6 +7,7 @@ import "./App.css";
 
 const Login = loadable(() => import("./pages/Login"));
 const TVWall = loadable(() => import("./pages/TVWall"));
+const SingleScreen = loadable(() => import("./pages/SingleScreen"));
 
 function App() {
   return (
@@ -18,6 +19,14 @@ function App() {
           element={
             <PrivateRoute>
               <ResponsiveLayout sidebar={<Sidebar />} main={<TVWall />} />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/single-screen"
+          element={
+            <PrivateRoute>
+              <ResponsiveLayout sidebar={<Sidebar />} main={<SingleScreen />} />
             </PrivateRoute>
           }
         />
