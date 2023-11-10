@@ -7,16 +7,23 @@ import { StoreContext } from "../store/store";
 import Logo from "../../assets/ipec.png";
 
 const bulletPoint = "\u25CF";
+const MenuItem = ({ item }) => {
+  return (
+    <div style={{ fontSize: 16 }}>
+      {bulletPoint} {item}
+    </div>
+  );
+};
 const items = [
-  { key: "equipment-status", label: `${bulletPoint} 設備即時狀態` },
-  { key: "tv-wall", label: `${bulletPoint} 電視牆影音管理` },
-  { key: "single-screen", label: `${bulletPoint} 單畫面影音管理` },
-  { key: "usb", label: `${bulletPoint} USB管理` },
-  { key: "rs232", label: `${bulletPoint} RS232管理` },
-  { key: "schedule", label: `${bulletPoint} 影音排程管理` },
-  { key: "situation", label: `${bulletPoint} 情境管理` },
-  { key: "event", label: `${bulletPoint} 事件及告警` },
-  { key: "setting", label: `${bulletPoint} 系統設定` },
+  { key: "equipment-status", label: <MenuItem item={"設備即時狀態"} /> },
+  { key: "tv-wall", label: <MenuItem item={"電視牆影音管理"} /> },
+  { key: "single-screen", label: <MenuItem item={"單畫面影音管理"} /> },
+  { key: "usb", label: <MenuItem item={"USB管理"} /> },
+  { key: "rs232", label: <MenuItem item={"RS232管理"} /> },
+  { key: "schedule", label: <MenuItem item={"影音排程管理"} /> },
+  { key: "situation", label: <MenuItem item={"情境管理"} /> },
+  { key: "event", label: <MenuItem item={"事件及告警"} /> },
+  { key: "setting", label: <MenuItem item={"系統設定"} /> },
 ];
 
 const Sidebar = () => {
