@@ -9,21 +9,3 @@
     width: 100%;
     grid-template-columns: 50fr 50fr;
 }
-
-.encoder-normal-dot {
-    height: 14px;
-    width: 14px;
-    background-color: #0B9129;
-    border-radius: 50%;
-    display: inline-block;
-    margin: 3px 6px 0px 0px;
-}
-
-.encoder-abnormal-dot {
-    height: 14px;
-    width: 14px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    margin: 2px 6px 0px 0px;
-}

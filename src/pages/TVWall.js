@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { StoreContext } from "../components/store/store";
 import { Col, Input, Row, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import "../App.scss";
 import "./TVWall.scss";
 
 const TVWall = () => {
+  const [store] = useContext(StoreContext);
+
   const encoders = [
     "編碼器1",
     "編碼器2",
@@ -66,7 +69,11 @@ const TVWall = () => {
 
   return (
     <div>
-      <div className="page-title">電視牆影音管理</div>
+      {store.siderCollapse ? (
+        <div className="page-title">電視牆影音管理</div>
+      ) : (
+        <div style={{ marginTop: 60 }} />
+      )}
       <div
         style={{
           border: "1px solid gray",

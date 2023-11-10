@@ -7,7 +7,6 @@ import "./SingleScreen.scss";
 
 const SingleScreen = () => {
   const [store] = useContext(StoreContext);
-  console.log(store.siderCollapse);
 
   const encoders = [
     "編碼器1",
@@ -101,7 +100,11 @@ const SingleScreen = () => {
 
   return (
     <div>
-      <div className="page-title">單畫面影音管理</div>
+      {store.siderCollapse ? (
+        <div className="page-title">單畫面影音管理</div>
+      ) : (
+        <div style={{ marginTop: 60 }} />
+      )}
       <div
         className="single-screen-col-layout"
         style={{
