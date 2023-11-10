@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Button, Col, Input, Radio, Row, Switch, Typography } from "antd";
+import { Col, Input, Radio, Row, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { ENCODER_TYPERS, FAKE_ENCODERS } from "../utils/EncoderConstant";
 import "../App.scss";
 import "./USB.scss";
 
@@ -9,64 +10,8 @@ const USB = () => {
   const [store] = useContext(StoreContext);
   const [encoderType, setEncoderType] = useState("1");
 
-  const options = [
-    {
-      label: "ZyperUHD60",
-      value: "1",
-    },
-    {
-      label: "Zyper4k",
-      value: "2",
-    },
-    {
-      label: "Zyper4k-XS",
-      value: "3",
-      disabled: true,
-    },
-    {
-      label: "Zyper4k-XR",
-      value: "4",
-      disabled: true,
-    },
-  ];
-
-  const encoders = [
-    "編碼器1",
-    "編碼器2",
-    "編碼器3",
-    "編碼器4",
-    "編碼器5",
-    "編碼器6",
-    "編碼器7",
-    "編碼器8",
-    "編碼器61",
-    "編碼器71",
-    "編碼器81",
-    "編碼器22",
-    "編碼器32",
-    "編碼器42",
-    "編碼器52",
-    "編碼器62",
-    "編碼器72",
-    "編碼器82",
-    "編碼器612",
-    "編碼器712",
-    "編碼器812",
-    "編碼器8124",
-    "編碼器23",
-    "編碼器33",
-    "編碼器43",
-    "編碼器53",
-    "編碼器63",
-    "編碼器73",
-    "編碼器83",
-    "編碼器613",
-    "編碼器713",
-    "編碼器813",
-  ];
-
   let encoderElement = [];
-  encoders.forEach((encoder) => {
+  FAKE_ENCODERS.forEach((encoder) => {
     encoderElement.push(
       <div key={encoder} style={{ marginTop: "10px" }}>
         <span className="encoder-normal-dot" />
@@ -102,7 +47,7 @@ const USB = () => {
           </Row>
           <Row>
             <Radio.Group
-              options={options}
+              options={ENCODER_TYPERS}
               onChange={changeEncoderType}
               value={encoderType}
               optionType="button"

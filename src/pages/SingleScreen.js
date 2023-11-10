@@ -1,29 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Button, Col, Input, Row, Switch, Typography } from "antd";
+import { Button, Col, Input, Radio, Row, Switch, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { ENCODER_TYPERS, FAKE_ENCODERS } from "../utils/EncoderConstant";
 import "../App.scss";
 import "./SingleScreen.scss";
 
 const SingleScreen = () => {
   const [store] = useContext(StoreContext);
-
-  const encoders = [
-    "編碼器1",
-    "編碼器2",
-    "編碼器3",
-    "編碼器4",
-    "編碼器5",
-    "編碼器6",
-    "編碼器7",
-    "編碼器8",
-    "編碼器61",
-    "編碼器71",
-    "編碼器81",
-  ];
+  const [encoderType, setEncoderType] = useState("1");
 
   let encoderElement = [];
-  encoders.forEach((encoder) => {
+  FAKE_ENCODERS.forEach((encoder) => {
     encoderElement.push(
       <Row key={encoder} style={{ marginTop: "10px" }}>
         <span className="encoder-normal-dot" />
@@ -31,6 +19,10 @@ const SingleScreen = () => {
       </Row>
     );
   });
+
+  const changeEncoderType = ({ target: { value } }) => {
+    setEncoderType(value);
+  };
 
   const encoderBlock = (
     <div>
@@ -44,11 +36,21 @@ const SingleScreen = () => {
           <Input prefix={<SearchOutlined />} />
         </Col>
       </Row>
+      <Row>
+        <Radio.Group
+          options={ENCODER_TYPERS}
+          onChange={changeEncoderType}
+          value={encoderType}
+          optionType="button"
+          buttonStyle="solid"
+          style={{ margin: "10px 0px 0px 8px" }}
+        />
+      </Row>
       <div className="single-screen-col-layout">
         <div
           style={{
-            margin: "15px 5px 5px 15px",
-            height: "38vh",
+            margin: "6px 5px 5px 15px",
+            height: "33vh",
             overflowY: "auto",
           }}
         >
@@ -56,8 +58,8 @@ const SingleScreen = () => {
         </div>
         <div
           style={{
-            margin: "15px 5px 5px 15px",
-            height: "38vh",
+            margin: "6px 5px 5px 15px",
+            height: "33vh",
             overflowY: "auto",
           }}
         >
@@ -68,7 +70,7 @@ const SingleScreen = () => {
   );
 
   let encoderScreen = [];
-  encoders.forEach((encoder) => {
+  FAKE_ENCODERS.forEach((encoder) => {
     encoderScreen.push(
       <div
         key={`${encoder}-screen`}

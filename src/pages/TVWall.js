@@ -1,26 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Col, Input, Row, Typography } from "antd";
+import { Col, Input, Radio, Row, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { ENCODER_TYPERS, FAKE_ENCODERS } from "../utils/EncoderConstant";
 import "../App.scss";
 import "./TVWall.scss";
 
 const TVWall = () => {
   const [store] = useContext(StoreContext);
+  const [encoderType, setEncoderType] = useState("1");
 
-  const encoders = [
-    "編碼器1",
-    "編碼器2",
-    "編碼器3",
-    "編碼器4",
-    "編碼器5",
-    "編碼器6",
-    "編碼器7",
-    "編碼器8",
-  ];
+  const changeEncoderType = ({ target: { value } }) => {
+    setEncoderType(value);
+  };
 
   let encoderElement = [];
-  encoders.forEach((encoder) => {
+  FAKE_ENCODERS.forEach((encoder) => {
     encoderElement.push(
       <Row key={encoder} style={{ marginTop: "10px" }}>
         <span className="encoder-normal-dot" />
@@ -41,14 +36,24 @@ const TVWall = () => {
           <Input prefix={<SearchOutlined />} />
         </Col>
       </Row>
+      <Row>
+        <Radio.Group
+          options={ENCODER_TYPERS}
+          onChange={changeEncoderType}
+          value={encoderType}
+          optionType="button"
+          buttonStyle="solid"
+          style={{ margin: "10px 0px 0px 8px" }}
+        />
+      </Row>
       <div
         className="tvwall-encoder-layout"
         style={{ borderRight: "1px solid gray" }}
       >
         <div
           style={{
-            margin: "15px 5px 0px 15px",
-            maxHeight: "29vh",
+            margin: "5px 5px 0px 15px",
+            height: "29vh",
             overflowY: "auto",
           }}
         >
@@ -56,7 +61,7 @@ const TVWall = () => {
         </div>
         <div
           style={{
-            margin: "15px 5px 0px 15px",
+            margin: "5px 5px 0px 15px",
             maxHeight: "29vh",
             overflowY: "auto",
           }}
@@ -80,7 +85,7 @@ const TVWall = () => {
           margin: "16px 16px 16px 0px",
         }}
       >
-        <Row style={{ borderBottom: "1px solid gray", height: "50vh" }}>
+        <Row style={{ borderBottom: "1px solid gray", height: "45vh" }}>
           top
         </Row>
         <Row>
