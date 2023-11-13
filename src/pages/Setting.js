@@ -15,7 +15,7 @@ const Setting = () => {
   let optionsObject = [];
   options.forEach((option) => {
     optionsObject.push(
-      <Button className="setting-option-button">
+      <Button key={option.title} className="setting-option-button">
         <Typography.Text className="setting-option-text">
           {option.title}
         </Typography.Text>
