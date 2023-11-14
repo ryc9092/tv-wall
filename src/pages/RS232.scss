@@ -1,0 +1,24 @@
+.rs232-row-layout {
+    display: grid;
+    height: 87vh;
+    grid-template-rows: 45fr 55fr;
+}
+
+.rs232-col-layout {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 45fr 55fr;
+}
+
+.encoder-block {
+    display: flex;
+    flex-flow: column wrap;
+    height: 34vh;
+    overflow-x: auto;
+    margin: 12px 0px 12px 0px;
+}
+
+.encoder-block div {
+    height: 30px;
+    width: 220px;
+}
