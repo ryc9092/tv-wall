@@ -25,7 +25,7 @@ const TVWall = () => {
   });
 
   const encoderBlock = (
-    <div>
+    <div style={{ borderRight: "1px solid gray" }}>
       <Row style={{ margin: "8px 0px 0px 8px" }}>
         <Col>
           <Typography.Text style={{ fontSize: "20px", marginRight: "10px" }}>
@@ -46,10 +46,7 @@ const TVWall = () => {
           style={{ margin: "10px 0px 0px 8px" }}
         />
       </Row>
-      <div
-        className="tvwall-encoder-layout"
-        style={{ borderRight: "1px solid gray" }}
-      >
+      <div className="tvwall-encoder-layout">
         <div
           style={{
             margin: "5px 5px 0px 15px",
