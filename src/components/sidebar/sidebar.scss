@@ -1,0 +1,11 @@
+.logout-btn {
+    left: 14px;
+    bottom: 18px;
+}
+
+@media(max-height: 540px) {
+    .logout-btn {
+        left: 14px;
+        top: 520px;
+    }
+}

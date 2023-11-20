@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Actions } from "../store/reducer";
 import { StoreContext } from "../store/store";
 import Logo from "../../assets/ipec.png";
+import "./sidebar.scss";
 
 const bulletPoint = "\u25CF";
 const MenuItem = ({ item }) => {
@@ -55,16 +56,11 @@ const Sidebar = () => {
         />
       </div>
       <div
-        style={{
-          position: store.siderCollapse ? "relative" : "absolute",
-          bottom: 16,
-          left: 14,
-        }}
+        style={{ position: store.siderCollapse ? "relative" : "absolute" }}
+        className="logout-btn"
       >
-        {bulletPoint}
         <Typography.Text style={{ fontSize: 16 }}>
-          {" "}
-          {store.account}
+          {bulletPoint} {store.account}
           <Button type="text" style={{ fontSize: 16 }} onClick={onLogout}>
             登出
           </Button>
