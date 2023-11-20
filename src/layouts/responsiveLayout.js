@@ -17,8 +17,9 @@ const ResponsiveLayout = ({ sidebar, main }) => {
   };
 
   useEffect(() => {
-    if (width > 1024) onCollapse(false);
-    else onCollapse(true);
+    if (width > 1024 && store.siderCollapse) onCollapse(false);
+    else if (width < 1024 && !store.siderCollapse) onCollapse(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width]);
 
   return (
