@@ -1,11 +1,40 @@
+.container-border {
+    border: 1px solid gray;
+}
+
+.container-height {
+    height: 90vh;
+}
+
+@media(max-height: 768px) {
+    .container-height {
+        height: 86vh;
+    }
+}
+
+@media(max-height: 576px) {
+    .container-height {
+        height: 468px;
+    }
+}
+
+.container-width {
+    width: 98%;
+}
+
+@media(max-width: 718px) {
+    .container-width {
+        width: 588px;
+    }
+}
+
 .tvwall-video-layout {
-    display: grid;
-    width: 100%;
-    grid-template-columns: 60fr 40fr;
+    display: flex;
 }
 
 .tvwall-encoder-layout {
     display: grid;
     width: 100%;
-    grid-template-columns: 50fr 50fr;
+    height: 67%;
+    grid-template-columns: 1fr 1fr;
 }

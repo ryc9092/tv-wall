@@ -1,14 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
 import { Button, Col, Input, Radio, Row, Switch, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import useWindowDimensions from "../utils/WindowDimension";
 import { ENCODER_TYPERS, FAKE_ENCODERS } from "../utils/EncoderConstant";
 import "../App.scss";
 import "./SingleScreen.scss";
 
 const SingleScreen = () => {
+  const { height, width } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [encoderType, setEncoderType] = useState("1");
+  const [isSmallElement, setIsSmallElement] = useState(false);
+
+  // The elements size would be changed according to width
+  useEffect(() => {
+    if (width > 960 && isSmallElement) setIsSmallElement(false);
+    else if (width < 960 && !isSmallElement) setIsSmallElement(true);
+  }, [isSmallElement, width]);
 
   let encoderElement = [];
   FAKE_ENCODERS.forEach((encoder) => {
@@ -25,8 +34,8 @@ const SingleScreen = () => {
   };
 
   const encoderBlock = (
-    <div>
-      <Row style={{ margin: "8px 0px 0px 8px" }}>
+    <div style={{ borderBottom: "1px solid gray", height: "60%" }}>
+      <Row style={{ margin: "8px 0px 0px 8px", height: "11%" }}>
         <Col>
           <Typography.Text style={{ fontSize: "20px", marginRight: "10px" }}>
             影像來源
@@ -36,7 +45,7 @@ const SingleScreen = () => {
           <Input prefix={<SearchOutlined />} />
         </Col>
       </Row>
-      <Row>
+      <Row style={{ height: "15%" }}>
         <Radio.Group
           options={ENCODER_TYPERS}
           onChange={changeEncoderType}
@@ -44,13 +53,14 @@ const SingleScreen = () => {
           optionType="button"
           buttonStyle="solid"
           style={{ margin: "10px 0px 0px 8px" }}
+          size={isSmallElement ? "small" : "middle"}
         />
       </Row>
-      <div className="single-screen-col-layout">
+      <div className="single-screen-layout" style={{ height: "74%" }}>
         <div
           style={{
+            width: "50%",
             margin: "6px 5px 5px 15px",
-            height: "33vh",
             overflowY: "auto",
           }}
         >
@@ -58,8 +68,8 @@ const SingleScreen = () => {
         </div>
         <div
           style={{
+            width: "50%",
             margin: "6px 5px 5px 15px",
-            height: "33vh",
             overflowY: "auto",
           }}
         >
@@ -76,14 +86,15 @@ const SingleScreen = () => {
         key={`${encoder}-screen`}
         style={{
           margin: "12px 6px 0px 0px",
-          width: store.siderCollapse ? "21.5vw" : "18vw",
+          height: "48%",
+          width: "48%",
           textAlign: "center",
         }}
       >
         <div
           key={`${encoder}-screen`}
           style={{
-            height: "28vh",
+            height: "82%",
             border: "1px solid gray",
             marginBottom: "2px",
           }}
@@ -99,6 +110,7 @@ const SingleScreen = () => {
       </div>
     );
   });
+  console.log(height);
 
   return (
     <div>
@@ -107,44 +119,45 @@ const SingleScreen = () => {
       ) : (
         <div style={{ marginTop: 60 }} />
       )}
-      <div
-        className="single-screen-col-layout"
-        style={{
-          border: "1px solid gray",
-          margin: "16px 16px 16px 0px",
-        }}
-      >
-        <div
-          className="single-screen-row-layout"
-          style={{ borderRight: "1px solid gray" }}
-        >
-          <div style={{ borderBottom: "1px solid gray", height: "47vh" }}>
-            {encoderBlock}
-          </div>
-          <div style={{ height: "40vh" }}>
+      <div className="container-border container-height container-width single-screen-layout">
+        <div style={{ borderRight: "1px solid gray", width: "50%" }}>
+          {encoderBlock}
+          <div style={{ height: "39%" }}>
             <video controls width="100%" height="100%">
               <source src={""} type="video/mp4" />
               Sorry, your browser doesn't support embedded videos.
             </video>
           </div>
         </div>
-        <div style={{ margin: "8px 0px 0px 8px", height: "18vh" }}>
-          <Row>
-            <Typography.Text style={{ fontSize: "20px", marginRight: "20px" }}>
-              顯示終端
-            </Typography.Text>
-            <Typography.Text style={{ fontSize: "20px" }}>
-              區域名稱
-            </Typography.Text>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Button style={{ width: "87px", marginRight: "6px" }}>群組</Button>
-            <Button style={{ width: "87px" }}>單顯示器</Button>
-          </Row>
-          <Row style={{ width: "180px", marginTop: "10px" }}>
-            <Input prefix={<SearchOutlined />} />
-          </Row>
-          <Row style={{ overflowY: "auto", height: "68vh" }}>
+        <div style={{ margin: "8px 0px 0px 8px", width: "50%" }}>
+          <div style={{ height: height < "750" ? "25%" : "20%" }}>
+            <Row style={{ height: "30%" }}>
+              <Typography.Text
+                style={{ fontSize: "20px", marginRight: "20px" }}
+              >
+                顯示終端
+              </Typography.Text>
+              <Typography.Text style={{ fontSize: "20px" }}>
+                區域名稱
+              </Typography.Text>
+            </Row>
+            <Row style={{ marginTop: "10px", height: "30%" }}>
+              <Button style={{ width: "87px", marginRight: "6px" }}>
+                群組
+              </Button>
+              <Button style={{ width: "87px" }}>單顯示器</Button>
+            </Row>
+            <Row style={{ width: "180px", marginTop: "10px" }}>
+              <Input prefix={<SearchOutlined />} />
+            </Row>
+          </div>
+          <Row
+            style={{
+              marginTop: "8px",
+              overflowY: "auto",
+              height: height < "750" ? "72%" : "78%",
+            }}
+          >
             {encoderScreen}
           </Row>
         </div>

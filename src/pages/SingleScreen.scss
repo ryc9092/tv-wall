@@ -1,10 +1,33 @@
-.single-screen-col-layout {
-    display: grid;
-    width: 99%;
-    grid-template-columns: 50fr 50fr;
+.container-border {
+    border: 1px solid gray;
 }
 
-.single-screen-row-layout {
-    display: grid;
-    height: 87vh;
+.container-height {
+    height: 90vh;
+}
+
+@media(max-height: 768px) {
+    .container-height {
+        height: 86vh;
+    }
+}
+
+@media(max-height: 576px) {
+    .container-height {
+        height: 468px;
+    }
+}
+
+.container-width {
+    width: 98%;
+}
+
+@media(max-width: 828px) {
+    .container-width {
+        width: 698px;
+    }
+}
+
+.single-screen-layout {
+    display: flex;
 }
