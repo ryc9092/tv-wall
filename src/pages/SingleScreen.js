@@ -110,7 +110,6 @@ const SingleScreen = () => {
       </div>
     );
   });
-  console.log(height);
 
   return (
     <div>

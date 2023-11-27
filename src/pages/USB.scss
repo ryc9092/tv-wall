@@ -1,7 +1,15 @@
-.usb-row-layout {
-    display: grid;
+.usb-layout {
     height: 87vh;
-    grid-template-rows: 45fr 55fr;
+}
+
+.container-width {
+    width: 98%;
+}
+
+@media(max-width: 685px) {
+    .container-width {
+        width: 558px;
+    }
 }
 
 .usb-col-layout {
@@ -13,7 +21,7 @@
 .encoder-block {
     display: flex;
     flex-flow: column wrap;
-    height: 34vh;
+    height: 72%;
     overflow-x: auto;
     margin: 12px 0px 12px 0px;
 }

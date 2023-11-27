@@ -2,11 +2,13 @@ import React, { useContext, useState } from "react";
 import { StoreContext } from "../components/store/store";
 import { Col, Input, Radio, Row, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import useWindowDimensions from "../utils/WindowDimension";
 import { ENCODER_TYPERS, FAKE_ENCODERS } from "../utils/EncoderConstant";
 import "../App.scss";
 import "./USB.scss";
 
 const USB = () => {
+  const { height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [encoderType, setEncoderType] = useState("1");
 
@@ -31,9 +33,14 @@ const USB = () => {
       ) : (
         <div style={{ marginTop: 60 }} />
       )}
-      <div className="usb-row-layout" style={{ margin: "16px 16px 16px 0px" }}>
-        <div style={{ height: "47vh" }}>
-          <Row>
+      <div
+        className="usb-layout container-width"
+        style={{ margin: "16px 16px 0px 0px" }}
+      >
+        <div
+          style={{ height: height < "750" ? "50%" : "55%", minHeight: "250px" }}
+        >
+          <Row style={{ height: "13%" }}>
             <Col>
               <Typography.Text
                 style={{ fontSize: "20px", marginRight: "10px" }}
@@ -45,7 +52,7 @@ const USB = () => {
               <Input prefix={<SearchOutlined />} />
             </Col>
           </Row>
-          <Row>
+          <Row style={{ height: "14%" }}>
             <Radio.Group
               options={ENCODER_TYPERS}
               onChange={changeEncoderType}
@@ -59,7 +66,12 @@ const USB = () => {
         </div>
         <div
           className="usb-col-layout"
-          style={{ border: "1px solid gray", height: "40vh" }}
+          style={{
+            border: "1px solid gray",
+            height: "45%",
+            minHeight: "220px",
+            marginTop: "12px",
+          }}
         >
           <div style={{ borderRight: "1px solid gray" }}>USB連接狀態</div>
           <div>USB來源選擇</div>
