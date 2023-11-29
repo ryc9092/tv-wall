@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
 import { Col, Input, Radio, Row, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import TVWallTemplate from "../components/tvwall/tvWallTemplate";
 import useWindowDimensions from "../utils/WindowDimension";
 import { ENCODER_TYPERS, FAKE_ENCODERS } from "../utils/EncoderConstant";
 import "../App.scss";
@@ -76,7 +77,9 @@ const TVWall = () => {
         <div style={{ marginTop: 60 }} />
       )}
       <div className="container-border container-height container-width">
-        <div style={{ borderBottom: "1px solid gray", height: "50%" }}>top</div>
+        <div style={{ borderBottom: "1px solid gray", height: "50%" }}>
+          <TVWallTemplate />
+        </div>
         <div style={{ height: "50%" }} className="tvwall-video-layout ">
           {encoderBlock}
           <div style={{ width: "40%" }}>
