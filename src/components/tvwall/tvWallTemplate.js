@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Input, Modal } from "antd";
+import { Button, Col, Input, Modal, Row } from "antd";
 import "./tvWallTemplate.scss";
 
 const TVWallTemplate = () => {
@@ -7,10 +7,10 @@ const TVWallTemplate = () => {
   const [tvWallCol, setTvWallCol] = useState(1);
   const [tvWallRow, setTvWallRow] = useState(1);
 
-  const j = Array.from(Array(tvWallCol));
-  let cell = (
+  const col = Array.from(Array(tvWallCol));
+  let screen = (
     <>
-      {j.map((item) => {
+      {col.map(() => {
         return (
           <td key={Math.random()}>
             <Button key={Math.random()} />
@@ -20,12 +20,12 @@ const TVWallTemplate = () => {
     </>
   );
 
-  const i = Array.from(Array(tvWallRow));
-  let test = (
+  const row = Array.from(Array(tvWallRow));
+  let tvWall = (
     <table>
       <tbody>
-        {i.map((item) => {
-          return <tr key={Math.random()}>{cell}</tr>;
+        {row.map(() => {
+          return <tr key={Math.random()}>{screen}</tr>;
         })}
       </tbody>
     </table>
@@ -40,25 +40,50 @@ const TVWallTemplate = () => {
           setIsModalOpen(false);
         }}
       >
-        <Input
-          type="number"
-          defaultValue={1}
-          min={1}
-          max={20}
-          onChange={(e) => {
-            setTvWallCol(parseInt(e.target.value));
-          }}
-        ></Input>
-        <Input
-          type="number"
-          defaultValue={1}
-          min={1}
-          max={20}
-          onChange={(e) => {
-            setTvWallRow(parseInt(e.target.value));
-          }}
-        ></Input>
-        {test}
+        <Row>
+          <Col>{"電視牆大小: "}</Col>
+          <Col>
+            <Input
+              type="number"
+              defaultValue={1}
+              min={1}
+              max={6}
+              size="small"
+              onChange={(e) => {
+                const col = parseInt(e.target.value);
+                if (col > 0 && col <= 6) setTvWallCol(col);
+              }}
+            ></Input>
+          </Col>
+          <Col>{" X "}</Col>
+          <Col>
+            <Input
+              type="number"
+              defaultValue={1}
+              min={1}
+              max={6}
+              size="small"
+              onChange={(e) => {
+                const row = parseInt(e.target.value);
+                if (row > 0 && row <= 6) setTvWallRow(row);
+              }}
+            ></Input>
+          </Col>
+        </Row>
+        <Row>
+          <Col>{tvWall}</Col>
+          <Col>
+            <Row>
+              <Button>畫面1</Button>
+            </Row>
+            <Row>
+              <Button>畫面2</Button>
+            </Row>
+            <Row>
+              <Button>畫面3</Button>
+            </Row>
+          </Col>
+        </Row>
       </Modal>
     </div>
   );
