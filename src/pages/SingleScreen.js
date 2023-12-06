@@ -3,7 +3,7 @@ import { StoreContext } from "../components/store/store";
 import { Button, Col, Input, Radio, Row, Switch, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import useWindowDimensions from "../utils/WindowDimension";
-import { ENCODER_TYPERS, FAKE_ENCODERS } from "../utils/EncoderConstant";
+import { ENCODER_TYPERS, FAKE_ENCODERS } from "../utils/Constant";
 import "../App.scss";
 import "./SingleScreen.scss";
 

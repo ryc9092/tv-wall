@@ -4,7 +4,7 @@ import { Col, Input, Radio, Row, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import TVWallTemplate from "../components/tvwall/tvWallTemplate";
 import useWindowDimensions from "../utils/WindowDimension";
-import { ENCODER_TYPERS, FAKE_ENCODERS } from "../utils/EncoderConstant";
+import { ENCODER_TYPERS, FAKE_ENCODERS } from "../utils/Constant";
 import "../App.scss";
 import "./TVWall.scss";
 

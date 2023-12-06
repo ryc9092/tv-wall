@@ -53,3 +53,13 @@ export const FAKE_ENCODERS = [
   "編碼器713",
   "編碼器813",
 ];
+
+export const screenColorList = [
+  "#FF7979",
+  "#FFBC79",
+  "#FFFF79",
+  "#A8FF79",
+  "#79FFE7",
+  "#7983FF",
+  "#CC79FF",
+];
