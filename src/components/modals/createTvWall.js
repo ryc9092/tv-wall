@@ -8,11 +8,14 @@ import {
   Radio,
   Row,
   Space,
+  Typography,
 } from "antd";
 import { screenColorList } from "../../utils/Constant";
-import "./tvWallTemplate.scss";
+import { EditOutlined } from "@ant-design/icons";
+import "./createTvWall.scss";
+import "../../App.scss";
 
-const TVWallTemplate = () => {
+const CreateTvWall = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tvWallName, setTvWallName] = useState(null);
   const [tvWallSize, setTvWallSize] = useState({ col: 1, row: 1 });
@@ -99,7 +102,7 @@ const TVWallTemplate = () => {
               backgroundColor: screenColorList[screen - 1],
             }}
           >
-            畫面 {screen}
+            區塊 {screen}
           </Radio>
         );
       })}
@@ -108,7 +111,16 @@ const TVWallTemplate = () => {
 
   return (
     <div>
-      <Button onClick={() => setIsModalOpen(true)}>建立牆面版型</Button>
+      <Button
+        onClick={() => setIsModalOpen(true)}
+        className="setting-option-button"
+      >
+        <Typography.Text className="setting-option-text">
+          建立電視牆及版型
+        </Typography.Text>
+        <></>
+        <EditOutlined className="setting-option-icon" />
+      </Button>
       <Modal
         width={520}
         open={isModalOpen}
@@ -119,63 +131,57 @@ const TVWallTemplate = () => {
         }}
       >
         <Row>
-          <Col style={{ marginRight: "6px" }}>{"牆面版型名稱:"}</Col>
-          <Col>
+          <Col style={{ marginRight: "6px" }}>{"電視牆名稱:"}</Col>
+          <Col style={{ marginRight: "12px" }}>
             <Input
               value={tvWallName}
               size="small"
+              style={{ width: "120px" }}
               onChange={(e) => {
                 setTvWallName(e.target.value);
               }}
             />
           </Col>
-        </Row>
-        <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "20px" }}>{"電視牆大小:"}</Col>
-          <Col>
+          <Col style={{ marginRight: "6px" }}>{"維度:"}</Col>
+          <Col style={{ marginRight: "6px" }}>
             <InputNumber
               value={tvWallSize.col}
               min={1}
               max={6}
               size="small"
+              style={{ width: "48px" }}
               onChange={(value) => setTvWallSize({ ...tvWallSize, col: value })}
             ></InputNumber>
           </Col>
-          <Col>{" X "}</Col>
+          <Col style={{ marginRight: "6px" }}>{" X "}</Col>
           <Col>
             <InputNumber
               value={tvWallSize.row}
               min={1}
               max={6}
               size="small"
+              style={{ width: "48px" }}
               onChange={(value) => setTvWallSize({ ...tvWallSize, row: value })}
             ></InputNumber>
           </Col>
         </Row>
         <Row style={{ marginTop: "16px" }}>
-          <Col
-            style={{
-              border: "1px solid black",
-              minWidth: "270px",
-              minHeight: "260px",
-              marginRight: "16px",
-            }}
-          >
-            <table>
-              <tbody>{tvWallTemplate}</tbody>
-            </table>
+          <Col style={{ marginRight: "16px" }}>
+            <Row style={{ marginBottom: "6px" }}>畫面編號</Row>
+            <Row
+              style={{
+                border: "1px solid black",
+                minWidth: "270px",
+                minHeight: "260px",
+              }}
+            >
+              <table>
+                <tbody>{tvWallTemplate}</tbody>
+              </table>
+            </Row>
           </Col>
           <Col>
-            <Row style={{ marginBottom: "6px" }}>
-              <Button
-                onClick={() => {
-                  let screenNum = parseInt(screens) + 1;
-                  if (screenNum <= 7) setScreens(screenNum);
-                }}
-              >
-                新增畫面
-              </Button>
-            </Row>
+            <Row style={{ marginBottom: "6px" }}>解碼器對應</Row>
             <Row>
               <Radio.Group
                 onChange={(e) => {
@@ -189,12 +195,12 @@ const TVWallTemplate = () => {
           </Col>
         </Row>
         <Row style={{ marginTop: "16px" }}>
-          <Button onClick={resetTemplate}>重置版型</Button>
-          <Button>送出</Button>
+          <Button onClick={resetTemplate}>重置電視牆</Button>
+          <Button>儲存</Button>
         </Row>
       </Modal>
     </div>
   );
 };
 
-export default TVWallTemplate;
+export default CreateTvWall;
