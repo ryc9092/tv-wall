@@ -89,7 +89,7 @@ export const FAKE_DECODERS = [
   "解碼器813",
 ];
 
-export const FAKE_WALL = [
+const FAKE_SCREEN_LIST1 = [
   {
     number: 1,
     decoder: "解碼器1",
@@ -125,6 +125,70 @@ export const FAKE_WALL = [
   {
     number: 9,
     decoder: "解碼器61",
+  },
+];
+
+const FAKE_SCREEN_LIST2 = [
+  {
+    number: 1,
+    decoder: "解碼器1",
+  },
+  {
+    number: 2,
+    decoder: "解碼器2",
+  },
+  {
+    number: 3,
+    decoder: "解碼器3",
+  },
+  {
+    number: 4,
+    decoder: "解碼器4",
+  },
+  {
+    number: 5,
+    decoder: "解碼器5",
+  },
+  {
+    number: 6,
+    decoder: "解碼器6",
+  },
+  {
+    number: 7,
+    decoder: "解碼器7",
+  },
+  {
+    number: 8,
+    decoder: "解碼器8",
+  },
+  {
+    number: 9,
+    decoder: "解碼器61",
+  },
+  {
+    number: 10,
+    decoder: "解碼器71",
+  },
+  {
+    number: 11,
+    decoder: "解碼器81",
+  },
+  {
+    number: 12,
+    decoder: "解碼器611",
+  },
+];
+
+export const FAKE_WALLS = [
+  {
+    name: "fake_wall1",
+    dimension: { col: 3, row: 3 },
+    screens: FAKE_SCREEN_LIST1,
+  },
+  {
+    name: "fake_wall2",
+    dimension: { col: 4, row: 3 },
+    screens: FAKE_SCREEN_LIST2,
   },
 ];
 

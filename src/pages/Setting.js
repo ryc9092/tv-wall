@@ -1,6 +1,7 @@
 import { Button, Typography } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import CreateTvWall from "../components/modals/createTvWall";
+import CreateTvWallTemplate from "../components/modals/createTvWallTemplate";
 import "../App.scss";
 import "./Setting.scss";
 
@@ -33,6 +34,7 @@ const Setting = () => {
       </div>
       {optionsObject}
       <CreateTvWall />
+      <CreateTvWallTemplate />
     </div>
   );
 };
