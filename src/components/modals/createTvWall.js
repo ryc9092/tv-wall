@@ -5,13 +5,12 @@ import {
   Input,
   InputNumber,
   Modal,
-  Radio,
   Row,
-  Space,
+  Select,
   Typography,
 } from "antd";
-import { screenColorList } from "../../utils/Constant";
 import { EditOutlined } from "@ant-design/icons";
+import { FAKE_DECODERS } from "../../utils/Constant";
 import "./createTvWall.scss";
 import "../../App.scss";
 
@@ -19,28 +18,29 @@ const CreateTvWall = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tvWallName, setTvWallName] = useState(null);
   const [tvWallSize, setTvWallSize] = useState({ col: 1, row: 1 });
-  const [screens, setScreens] = useState(1);
-  const [screenColor, setScreenColor] = useState("white");
   const [screenList, setScreenList] = useState([]);
   const [tvWallTemplate, setTvWallTemplate] = useState(null);
-  const [updateFlag, setUpdateFlag] = useState(0);
+
+  let decoderOptions = [];
+  FAKE_DECODERS.forEach((decoder) => {
+    decoderOptions.push({ value: decoder, label: decoder });
+  });
 
   const resetTemplate = () => {
     setTvWallName(null);
     setTvWallSize({ col: 1, row: 1 });
-    setScreens(1);
-    setScreenList(
-      Array.from({ length: 1 * 1 }, (v, i) => {
-        return { number: i + 1, screen: "", color: "white" };
-      })
-    );
+    setScreenList([]);
   };
 
   useEffect(() => {
-    // generate default screen list: [{number: 1, screen: "", color: ""}, {number: 2, screen: "", color: ""}, ...]
+    resetTemplate();
+  }, [isModalOpen]);
+
+  useEffect(() => {
+    // generate default screen list: [{number: 1, decoder: ""}, {number: 2, decoder: ""}, ...]
     setScreenList(
       Array.from({ length: tvWallSize.col * tvWallSize.row }, (v, i) => {
-        return { number: i + 1, screen: "", color: "white" };
+        return { number: i + 1, decoder: "" };
       })
     );
   }, [tvWallSize]);
@@ -52,28 +52,10 @@ const CreateTvWall = () => {
     screenList.forEach((screen) => {
       tvWallTempRow.push(
         <td
-          style={{
-            width: "42px",
-            height: "42px",
-            backgroundColor: screen.color,
-          }}
+          style={{ width: "40px", height: "40px", textAlign: "center" }}
           key={screen.number}
         >
-          <Button
-            style={{
-              width: "42px",
-              height: "42px",
-              border: "0px",
-              backgroundColor: screen.color,
-            }}
-            key={screen.number}
-            value={screen.number}
-            onClick={(e) => {
-              clickTvWallScreen(e.target.value);
-            }}
-          >
-            {screen.number}
-          </Button>
+          {screen.number}
         </td>
       );
       if (tvWallTempRow.length === tvWallSize.col) {
@@ -82,32 +64,17 @@ const CreateTvWall = () => {
       }
     });
     setTvWallTemplate(tvWallTemplate);
-  }, [screenList, screenColor, updateFlag]);
+  }, [screenList]);
 
-  const clickTvWallScreen = (number) => {
-    screenList[number - 1].color = screenColor;
+  const setScreenDecoder = ({ screenNumber, decoder }) => {
+    let list = screenList;
+    list[screenNumber - 1] = { number: screenNumber, decoder: decoder };
     setScreenList(screenList);
-    setUpdateFlag(updateFlag + 1);
   };
 
-  const screenNum = Array.from({ length: screens }, (v, i) => i + 1); // make a screen list [1, 2, 3, ...]
-  let screenRadios = (
-    <>
-      {screenNum.map((screen) => {
-        return (
-          <Radio
-            key={screen}
-            value={screen}
-            style={{
-              backgroundColor: screenColorList[screen - 1],
-            }}
-          >
-            區塊 {screen}
-          </Radio>
-        );
-      })}
-    </>
-  );
+  const saveTvWall = () => {
+    console.log(screenList);
+  };
 
   return (
     <div>
@@ -116,13 +83,15 @@ const CreateTvWall = () => {
         className="setting-option-button"
       >
         <Typography.Text className="setting-option-text">
-          建立電視牆及版型
+          建立電視牆
         </Typography.Text>
         <></>
         <EditOutlined className="setting-option-icon" />
       </Button>
       <Modal
-        width={520}
+        title={"建立電視牆"}
+        className="modal-title"
+        width={568}
         open={isModalOpen}
         footer={null}
         onCancel={() => {
@@ -130,9 +99,9 @@ const CreateTvWall = () => {
           setIsModalOpen(false);
         }}
       >
-        <Row>
+        <Row style={{ marginTop: "20px" }}>
           <Col style={{ marginRight: "6px" }}>{"電視牆名稱:"}</Col>
-          <Col style={{ marginRight: "12px" }}>
+          <Col style={{ marginRight: "16px" }}>
             <Input
               value={tvWallName}
               size="small"
@@ -166,37 +135,60 @@ const CreateTvWall = () => {
           </Col>
         </Row>
         <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "16px" }}>
-            <Row style={{ marginBottom: "6px" }}>畫面編號</Row>
-            <Row
+          <Col style={{ marginRight: "12px" }}>
+            <div style={{ marginBottom: "2px" }}>畫面編號</div>
+            <div
               style={{
+                width: "279px",
+                height: "279px",
                 border: "1px solid black",
-                minWidth: "270px",
-                minHeight: "260px",
               }}
             >
               <table>
                 <tbody>{tvWallTemplate}</tbody>
               </table>
-            </Row>
+            </div>
           </Col>
           <Col>
-            <Row style={{ marginBottom: "6px" }}>解碼器對應</Row>
-            <Row>
-              <Radio.Group
-                onChange={(e) => {
-                  const value = e.target.value;
-                  setScreenColor(screenColorList[value - 1]);
-                }}
-              >
-                <Space direction="vertical">{screenRadios}</Space>
-              </Radio.Group>
-            </Row>
+            <div style={{ marginBottom: "2px" }}>解碼器對應</div>
+            <div
+              style={{
+                width: "225px",
+                height: "279px",
+                border: "1px solid black",
+                overflowY: "scroll",
+              }}
+            >
+              {screenList.map((screen, index) => {
+                return (
+                  <Row key={screen.number}>
+                    <Typography.Text
+                      style={{ fontSize: "14px", margin: "4px" }}
+                    >
+                      畫面{screen.number}:
+                    </Typography.Text>
+                    <Select
+                      options={decoderOptions}
+                      size="small"
+                      style={{ width: "135px", margin: "4px 4px 4px 8px" }}
+                      onChange={(value, option) => {
+                        setScreenDecoder({
+                          screenNumber: screen.number,
+                          decoder: value,
+                        });
+                      }}
+                    />
+                  </Row>
+                );
+              })}
+            </div>
           </Col>
         </Row>
         <Row style={{ marginTop: "16px" }}>
-          <Button onClick={resetTemplate}>重置電視牆</Button>
-          <Button>儲存</Button>
+          <Button onClick={resetTemplate} style={{ marginRight: "16px" }}>
+            重置電視牆
+          </Button>
+          <Button onClick={saveTvWall}>儲存</Button>
         </Row>
       </Modal>
     </div>
