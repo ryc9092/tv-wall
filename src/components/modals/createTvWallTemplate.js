@@ -234,6 +234,7 @@ const CreateTvWallTemplate = () => {
               }}
             >
               <Radio.Group
+                value={currentBlock}
                 onChange={(e) => {
                   setCurrentBlock(e.target.value);
                 }}
