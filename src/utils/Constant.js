@@ -93,38 +93,47 @@ const FAKE_SCREEN_LIST1 = [
   {
     number: 1,
     decoder: "解碼器1",
+    block: "",
   },
   {
     number: 2,
     decoder: "解碼器2",
+    block: "",
   },
   {
     number: 3,
     decoder: "解碼器3",
+    block: "",
   },
   {
     number: 4,
     decoder: "解碼器4",
+    block: "",
   },
   {
     number: 5,
     decoder: "解碼器5",
+    block: "",
   },
   {
     number: 6,
     decoder: "解碼器6",
+    block: "",
   },
   {
     number: 7,
     decoder: "解碼器7",
+    block: "",
   },
   {
     number: 8,
     decoder: "解碼器8",
+    block: "",
   },
   {
     number: 9,
     decoder: "解碼器61",
+    block: "",
   },
 ];
 
@@ -132,50 +141,62 @@ const FAKE_SCREEN_LIST2 = [
   {
     number: 1,
     decoder: "解碼器1",
+    block: "",
   },
   {
     number: 2,
     decoder: "解碼器2",
+    block: "",
   },
   {
     number: 3,
     decoder: "解碼器3",
+    block: "",
   },
   {
     number: 4,
     decoder: "解碼器4",
+    block: "",
   },
   {
     number: 5,
     decoder: "解碼器5",
+    block: "",
   },
   {
     number: 6,
     decoder: "解碼器6",
+    block: "",
   },
   {
     number: 7,
     decoder: "解碼器7",
+    block: "",
   },
   {
     number: 8,
     decoder: "解碼器8",
+    block: "",
   },
   {
     number: 9,
     decoder: "解碼器61",
+    block: "",
   },
   {
     number: 10,
     decoder: "解碼器71",
+    block: "",
   },
   {
     number: 11,
     decoder: "解碼器81",
+    block: "",
   },
   {
     number: 12,
     decoder: "解碼器611",
+    block: "",
   },
 ];
 
@@ -193,6 +214,16 @@ export const FAKE_WALLS = [
 ];
 
 export const screenColorList = [
+  "#FF7979",
+  "#FFBC79",
+  "#FFFF79",
+  "#A8FF79",
+  "#79FFE7",
+  "#7983FF",
+  "#CC79FF",
+];
+
+export const blockColorList = [
   "#FF7979",
   "#FFBC79",
   "#FFFF79",

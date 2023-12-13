@@ -40,7 +40,7 @@ const CreateTvWall = () => {
     // generate default screen list: [{number: 1, decoder: ""}, {number: 2, decoder: ""}, ...]
     setScreenList(
       Array.from({ length: tvWallSize.col * tvWallSize.row }, (v, i) => {
-        return { number: i + 1, decoder: "" };
+        return { number: i + 1, decoder: "", block: "" };
       })
     );
   }, [tvWallSize]);

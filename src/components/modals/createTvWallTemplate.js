@@ -8,10 +8,12 @@ import {
   Radio,
   Row,
   Select,
+  Space,
+  Tooltip,
   Typography,
 } from "antd";
 import { EditOutlined } from "@ant-design/icons";
-import { FAKE_WALLS, screenColorList } from "../../utils/Constant";
+import { FAKE_WALLS, blockColorList } from "../../utils/Constant";
 import "./createTvWallTemplate.scss";
 import "../../App.scss";
 
@@ -23,7 +25,7 @@ const CreateTvWallTemplate = () => {
   const [screenList, setScreenList] = useState([]);
   const [tvWallTemplate, setTvWallTemplate] = useState(null);
   const [blocks, setBlocks] = useState(1);
-  const [blockColor, setBlockColor] = useState("white");
+  const [currentBlock, setCurrentBlock] = useState(1);
 
   let tvWallOptions = [];
   FAKE_WALLS.forEach((wall) => {
@@ -39,8 +41,8 @@ const CreateTvWallTemplate = () => {
             key={block}
             value={block}
             style={{
-              margin: "6px",
-              backgroundColor: screenColorList[block - 1],
+              margin: "4px",
+              backgroundColor: blockColorList[block - 1],
               borderRadius: "6px",
             }}
           >
@@ -52,22 +54,17 @@ const CreateTvWallTemplate = () => {
   );
 
   const resetTemplate = () => {
+    setScreenList([]);
     setSelectedWall(null);
+    setTemplateName(null);
     setTvWallSize({ col: 1, row: 1 });
+    setBlocks(1);
+    setCurrentBlock(1);
   };
 
   useEffect(() => {
     resetTemplate();
   }, [isModalOpen]);
-
-  useEffect(() => {
-    // generate default screen list: [{number: 1, decoder: ""}, {number: 2, decoder: ""}, ...]
-    setScreenList(
-      Array.from({ length: tvWallSize.col * tvWallSize.row }, (v, i) => {
-        return { number: i + 1, decoder: "" };
-      })
-    );
-  }, [tvWallSize]);
 
   useEffect(() => {
     // create tv wall table
@@ -79,21 +76,23 @@ const CreateTvWallTemplate = () => {
           style={{ width: "40px", height: "40px", textAlign: "center" }}
           key={screen.number}
         >
-          <Button
-            style={{
-              width: "42px",
-              height: "42px",
-              border: "0px",
-              backgroundColor: screen.color,
-            }}
-            key={screen.number}
-            value={screen.number}
-            onClick={(e) => {
-              // clickTvWallScreen(e.target.value);
-            }}
-          >
-            {screen.number}
-          </Button>
+          <Tooltip placement="topLeft" title={screen.decoder}>
+            <Button
+              style={{
+                width: "42px",
+                height: "42px",
+                border: "0px",
+                backgroundColor: blockColorList[screen.block - 1],
+              }}
+              key={screen.number}
+              value={screen.number}
+              onClick={(e) => {
+                clickTvWallScreen(e.target.value);
+              }}
+            >
+              {screen.number}
+            </Button>
+          </Tooltip>
         </td>
       );
       if (tvWallTempRow.length === tvWallSize.col) {
@@ -102,15 +101,22 @@ const CreateTvWallTemplate = () => {
       }
     });
     setTvWallTemplate(tvWallTemplate);
-  }, [screenList]);
+  }, [screenList, currentBlock]);
 
   const selectTvWall = (selectedWallName) => {
     FAKE_WALLS.forEach((wall) => {
       if (wall.name === selectedWallName) {
         setSelectedWall(wall.name);
         setTvWallSize(wall.dimension);
+        setScreenList(JSON.parse(JSON.stringify(wall.screens))); // deep copy
       }
     });
+  };
+
+  const clickTvWallScreen = (number) => {
+    let temp = [...screenList];
+    temp[number - 1].block = currentBlock;
+    setScreenList(temp);
   };
 
   const saveTvWall = () => {
@@ -162,7 +168,6 @@ const CreateTvWallTemplate = () => {
               style={{ width: "135px", margin: "0px 4px 4px 8px" }}
               value={selectedWall}
               onChange={(value, option) => {
-                console.log(value, option);
                 selectTvWall(value);
               }}
             />
@@ -228,7 +233,13 @@ const CreateTvWallTemplate = () => {
                 overflowY: "scroll",
               }}
             >
-              {blockRadios}
+              <Radio.Group
+                onChange={(e) => {
+                  setCurrentBlock(e.target.value);
+                }}
+              >
+                <Space direction="vertical">{blockRadios}</Space>
+              </Radio.Group>
             </div>
           </Col>
         </Row>
