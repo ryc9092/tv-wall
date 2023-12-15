@@ -79,7 +79,7 @@ const TVWall = () => {
       )}
       <div className="container-border container-height container-width">
         <div style={{ borderBottom: "1px solid gray", height: "50%" }}>
-          <TVWallTemplate />
+          {/* <TVWallTemplate /> */}
           <TvWall />
         </div>
         <div style={{ height: "50%" }} className="tvwall-video-layout ">

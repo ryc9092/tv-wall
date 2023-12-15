@@ -83,27 +83,94 @@ const fakewall = [
 const TvWall = () => {
   const [tvWallSize, setTvWallSize] = useState({ col: 4, row: 3 });
   const [tvWallTemplate, setTvWallTemplate] = useState(null);
+  const [blocks, setBlocks] = useState([]);
   const screenSizeUnit = 40;
 
-  useEffect(() => {
-    // create tv wall table
-    let currentRow = 1;
-    let tvWallTemplate = [];
-    fakewall.forEach((screen, index) => {
-      if (screen.number === 1) {
-        tvWallTemplate.push({ block: screen.block, col: 1, row: 1 });
-      }
+  const getAboveScreen = (screen) => {
+    if (screen.number > tvWallSize.col) {
+      return fakewall[screen.number - tvWallSize.col - 1];
+    } else return { block: "" };
+  };
 
-      // go next row
-      if (screen.number % tvWallSize.col === 0) {
-        currentRow = currentRow + 1;
+  const getLeftScreen = (screen) => {
+    if (screen.number % tvWallSize.col === 1) return { block: "" };
+    else return fakewall[screen.number - 2];
+  };
+
+  const updateBlocks = (blocks, blockNumber, addCol, addRow, addDecoder) => {
+    blocks.forEach((block, index) => {
+      if (block.block === blockNumber) {
+        blocks[index].col = blocks[index].col + addCol;
+        blocks[index].row = blocks[index].row + addRow;
+        blocks[index].decoder.push(addDecoder);
       }
     });
+    return blocks;
+  };
+
+  useEffect(() => {
+    // create tv blocks col, row list
+    let tempBlocks = [];
+    fakewall.forEach((screen) => {
+      const aboveScreen = getAboveScreen(screen);
+      const leftScreen = getLeftScreen(screen);
+      const block = screen.block;
+      const decoder = screen.decoder;
+      if (aboveScreen.block === block && leftScreen.block === block) {
+        tempBlocks = updateBlocks(tempBlocks, block, 0, 0, decoder);
+      } else if (aboveScreen.block === block && leftScreen.block !== block) {
+        tempBlocks = updateBlocks(tempBlocks, block, 0, 1, decoder);
+      } else if (aboveScreen.block !== block && leftScreen.block === block) {
+        tempBlocks = updateBlocks(tempBlocks, block, 1, 0, decoder);
+      } else if (aboveScreen.block !== block && leftScreen.block !== block) {
+        tempBlocks.push({
+          col: 1,
+          row: 1,
+          block: block,
+          decoder: [decoder],
+        });
+      }
+    });
+    setBlocks(tempBlocks);
   }, [fakewall]);
+
+  useEffect(() => {
+    // create tv wall template
+    let wall = [];
+    let currentColInRows = {};
+    for (let i = 1; i <= tvWallSize.row; i++) {
+      currentColInRows[i] = 0;
+    }
+
+    // let currentCol = 0;
+    // let currentRow = 0;
+    blocks.forEach((block) => {
+      // add to this row
+      // if (currentCol < tvWallSize.col) {
+      //   // margin =
+      //   // add to next row
+      // } else {
+      // }
+
+      wall.push(
+        <div
+          key={block.block}
+          style={{
+            width: screenSizeUnit * block.col,
+            height: screenSizeUnit * block.row,
+            border: "1px dashed black",
+          }}
+        >
+          {block.block}
+        </div>
+      );
+    });
+    setTvWallTemplate(<div>{wall}</div>);
+  }, [blocks]);
 
   return (
     <div>
-      <div
+      {/* <div
         style={{
           width: screenSizeUnit * tvWallSize.col,
           height: screenSizeUnit * tvWallSize.row,
@@ -119,7 +186,9 @@ const TvWall = () => {
             border: "1px dashed black",
             display: "inline-block",
           }}
-        ></div>
+        >
+          1
+        </div>
         <div
           style={{
             width: 79,
@@ -127,7 +196,9 @@ const TvWall = () => {
             border: "1px dashed black",
             display: "inline-block",
           }}
-        ></div>
+        >
+          2
+        </div>
         <div
           style={{
             width: 79,
@@ -135,7 +206,9 @@ const TvWall = () => {
             border: "1px dashed black",
             display: "inline-block",
           }}
-        ></div>
+        >
+          3
+        </div>
         <div
           style={{
             width: 79,
@@ -144,8 +217,22 @@ const TvWall = () => {
             border: "1px dashed black",
             display: "inline-block",
           }}
-        ></div>
-      </div>
+        >
+          4
+        </div> */}
+      {/* <div
+          style={{
+            width: 79,
+            height: 39,
+            marginTop: -40,
+            border: "1px dashed black",
+            display: "inline-block",
+          }}
+        >
+          5
+        </div>
+      </div> */}
+      {tvWallTemplate}
 
       {/* <table>
         <thead>
