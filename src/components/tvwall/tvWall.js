@@ -12,23 +12,23 @@ import "../../App.scss";
 import "./tvWall.scss";
 
 const TvWall = () => {
+  const [tvWallScreens, setTvWallScreens] = useState(fakewall4);
   const [tvWallSize, setTvWallSize] = useState({ col: 4, row: 5 });
   const [tvWallTemplate, setTvWallTemplate] = useState(null);
   const [blocks, setBlocks] = useState([]);
   const [blocksWithPosition, setBlocksWithPosition] = useState([]);
   const [needUpdateBlocks, setNeedUpdateBlocks] = useState(null);
-  const screenSizeUnit = { horizontal: 60, straight: 40 };
-  const fakewall = fakewall4;
+  const screenSizeUnit = { horizontal: 60, straight: 45 };
 
   const getAboveScreen = (screen) => {
     if (screen.number > tvWallSize.col) {
-      return fakewall[screen.number - tvWallSize.col - 1];
+      return tvWallScreens[screen.number - tvWallSize.col - 1];
     } else return { block: "" };
   };
 
   const getLeftScreen = (screen) => {
     if (screen.number % tvWallSize.col === 1) return { block: "" };
-    else return fakewall[screen.number - 2];
+    else return tvWallScreens[screen.number - 2];
   };
 
   const updateBlocks = (blocks, blockNumber, addCol, addRow, addDecoder) => {
@@ -45,7 +45,7 @@ const TvWall = () => {
   useEffect(() => {
     // create tv blocks col, row list
     let tempBlocks = [];
-    fakewall.forEach((screen) => {
+    tvWallScreens.forEach((screen) => {
       const aboveScreen = getAboveScreen(screen);
       const leftScreen = getLeftScreen(screen);
       const block = screen.block;
@@ -62,12 +62,13 @@ const TvWall = () => {
           row: 1,
           block: block,
           decoder: [decoder],
+          encoder: screen.encoder,
           marginLeft: (screen.number - 1) % tvWallSize.col,
         });
       }
     });
     setBlocks(tempBlocks);
-  }, [fakewall]);
+  }, [tvWallScreens]);
 
   useEffect(() => {
     // create blocks list with margin top info
@@ -121,13 +122,13 @@ const TvWall = () => {
           <Button
             style={{ width: "100%", height: "100%" }}
             onClick={() => {
-              setVideoToBlock(index);
+              setEncoder(index);
             }}
           >
             <img
               style={{ width: "100%", height: "100%" }}
-              src={block.video}
-              alt={"video"}
+              src={block.encoder?.video}
+              alt={block.block}
             />
           </Button>
         </div>
@@ -138,10 +139,25 @@ const TvWall = () => {
     setTvWallTemplate(<div>{wall}</div>);
   }, [blocksWithPosition, needUpdateBlocks]);
 
-  const setVideoToBlock = (blockIdx) => {
+  const setEncoder = (blockIdx, encoder) => {
+    // let video = "https://www.gstatic.com/webp/gallery3/2.png"; // encoder.video;
+    encoder = { video: "https://www.gstatic.com/webp/gallery3/2.png" };
+
+    // add video to block
     let tempBlocks = blocksWithPosition;
-    tempBlocks[blockIdx].video = "https://www.gstatic.com/webp/gallery3/2.png";
+    tempBlocks[blockIdx].encoder = encoder;
     setBlocks(tempBlocks);
+
+    // add video to screens
+    let tempScreens = tvWallScreens;
+    tempScreens.forEach((screen, idx) => {
+      if (screen.block === tempBlocks[blockIdx].block) {
+        tempScreens[idx].encoder = encoder;
+      }
+    });
+    setTvWallScreens(tempScreens);
+
+    // re-render wall
     setNeedUpdateBlocks(Math.random);
   };
 
