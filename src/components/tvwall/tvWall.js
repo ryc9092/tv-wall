@@ -1,18 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Button,
-  Col,
-  Input,
-  InputNumber,
-  Modal,
-  Radio,
-  Row,
-  Select,
-  Space,
-  Tooltip,
-  Typography,
-} from "antd";
-import { EditOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 import {
   fakewall1,
   fakewall2,
@@ -29,7 +16,7 @@ const TvWall = () => {
   const [tvWallTemplate, setTvWallTemplate] = useState(null);
   const [blocks, setBlocks] = useState([]);
   const [blocksWithPosition, setBlocksWithPosition] = useState([]);
-  const [blocksByHtml, setBlocksByHtml] = useState([]);
+  const [needUpdateBlocks, setNeedUpdateBlocks] = useState(null);
   const screenSizeUnit = { horizontal: 60, straight: 40 };
   const fakewall = fakewall4;
 
@@ -133,12 +120,15 @@ const TvWall = () => {
         >
           <Button
             style={{ width: "100%", height: "100%" }}
-            onClick={setVideoToBlock(index)}
+            onClick={() => {
+              setVideoToBlock(index);
+            }}
           >
             <img
               style={{ width: "100%", height: "100%" }}
               src={block.video}
-            ></img>
+              alt={"video"}
+            />
           </Button>
         </div>
       );
@@ -146,13 +136,13 @@ const TvWall = () => {
       currentAppearedRow = currentAppearedRow + block.row;
     });
     setTvWallTemplate(<div>{wall}</div>);
-  }, [blocksWithPosition]);
+  }, [blocksWithPosition, needUpdateBlocks]);
 
   const setVideoToBlock = (blockIdx) => {
-    //https://www.gstatic.com/webp/gallery3/2.png
     let tempBlocks = blocksWithPosition;
     tempBlocks[blockIdx].video = "https://www.gstatic.com/webp/gallery3/2.png";
     setBlocks(tempBlocks);
+    setNeedUpdateBlocks(Math.random);
   };
 
   return <div>{tvWallTemplate}</div>;
