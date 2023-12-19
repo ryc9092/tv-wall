@@ -25,7 +25,7 @@ const Login = () => {
   }, [store.account, dispatch, location, navigate]);
 
   const onLogin = async ({ account, password }) => {
-    const token = await loginAPI(account, password);
+    const token = await loginAPI(account, password, store);
     if (token) {
       sessionStorage.setItem("token", token);
       sessionStorage.setItem("account", account);
