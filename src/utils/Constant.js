@@ -6,6 +6,7 @@ export const ENCODER_TYPERS = [
   {
     label: "Zyper4k",
     value: "2",
+    disabled: true,
   },
   {
     label: "Zyper4k-XS",

@@ -38,3 +38,10 @@
     height: 67%;
     grid-template-columns: 1fr 1fr;
 }
+
+.tvwall-encoder {
+    &:hover {
+        color: #598DDE !important;
+        border-color: #598DDE !important;
+    }
+}

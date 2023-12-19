@@ -25,12 +25,23 @@ const TVWall = () => {
     setEncoderType(value);
   };
 
+  const handleChooseEncoder = (event) => {
+    console.log(event.target.id);
+  };
+
   let encoderElement = [];
   FAKE_ENCODERS.forEach((encoder) => {
     encoderElement.push(
       <Row key={encoder} style={{ marginTop: "10px" }}>
-        <span className="encoder-normal-dot" />
-        {encoder}
+        <div
+          id={encoder}
+          style={{ cursor: "pointer" }}
+          className="tvwall-encoder"
+          onClick={handleChooseEncoder}
+        >
+          <span className="encoder-normal-dot" />
+          {encoder}
+        </div>
       </Row>
     );
   });
