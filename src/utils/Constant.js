@@ -203,11 +203,13 @@ const FAKE_SCREEN_LIST2 = [
 
 export const FAKE_WALLS = [
   {
+    key: "fake_wall1",
     name: "fake_wall1",
     dimension: { col: 3, row: 3 },
     screens: FAKE_SCREEN_LIST1,
   },
   {
+    key: "fake_wall2",
     name: "fake_wall2",
     dimension: { col: 4, row: 3 },
     screens: FAKE_SCREEN_LIST2,
