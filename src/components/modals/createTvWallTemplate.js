@@ -12,20 +12,26 @@ import {
   Tooltip,
   Typography,
 } from "antd";
-import { EditOutlined } from "@ant-design/icons";
 import { FAKE_WALLS, blockColorList } from "../../utils/Constant";
 import "./createTvWallTemplate.scss";
 import "../../App.scss";
 
-const CreateTvWallTemplate = () => {
+const CreateTvWallTemplate = ({ wall }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [templateName, setTemplateName] = useState(null);
-  const [selectedWall, setSelectedWall] = useState(null);
   const [tvWallSize, setTvWallSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
   const [tvWallTemplate, setTvWallTemplate] = useState(null);
   const [blocks, setBlocks] = useState(1);
   const [currentBlock, setCurrentBlock] = useState(1);
+
+  useEffect(() => {
+    if (wall && isModalOpen) {
+      setTvWallSize(wall.dimension);
+      setScreenList(JSON.parse(JSON.stringify(wall.screens))); // deep copy
+    }
+    if (!isModalOpen) resetTemplate();
+  }, [wall, isModalOpen]);
 
   let tvWallOptions = [];
   FAKE_WALLS.forEach((wall) => {
@@ -55,16 +61,11 @@ const CreateTvWallTemplate = () => {
 
   const resetTemplate = () => {
     setScreenList([]);
-    setSelectedWall(null);
     setTemplateName(null);
     setTvWallSize({ col: 1, row: 1 });
     setBlocks(1);
     setCurrentBlock(1);
   };
-
-  useEffect(() => {
-    resetTemplate();
-  }, [isModalOpen]);
 
   useEffect(() => {
     // create tv wall table
@@ -103,16 +104,6 @@ const CreateTvWallTemplate = () => {
     setTvWallTemplate(tvWallTemplate);
   }, [screenList, currentBlock]);
 
-  const selectTvWall = (selectedWallName) => {
-    FAKE_WALLS.forEach((wall) => {
-      if (wall.name === selectedWallName) {
-        setSelectedWall(wall.name);
-        setTvWallSize(wall.dimension);
-        setScreenList(JSON.parse(JSON.stringify(wall.screens))); // deep copy
-      }
-    });
-  };
-
   const clickTvWallScreen = (number) => {
     let temp = [...screenList];
     temp[number - 1].block = currentBlock;
@@ -125,15 +116,8 @@ const CreateTvWallTemplate = () => {
 
   return (
     <div>
-      <Button
-        onClick={() => setIsModalOpen(true)}
-        className="setting-option-button"
-      >
-        <Typography.Text className="setting-option-text">
-          建立電視牆版型
-        </Typography.Text>
-        <></>
-        <EditOutlined className="setting-option-icon" />
+      <Button onClick={() => setIsModalOpen(true)}>
+        <Typography.Text>建立新版型</Typography.Text>
       </Button>
       <Modal
         title={"建立電視牆版型"}
@@ -142,7 +126,7 @@ const CreateTvWallTemplate = () => {
         open={isModalOpen}
         footer={null}
         onCancel={() => {
-          resetTemplate();
+          // resetTemplate();
           setIsModalOpen(false);
         }}
       >
@@ -166,10 +150,8 @@ const CreateTvWallTemplate = () => {
               options={tvWallOptions}
               size="small"
               style={{ width: "135px", margin: "0px 4px 4px 8px" }}
-              value={selectedWall}
-              onChange={(value, option) => {
-                selectTvWall(value);
-              }}
+              value={wall.name}
+              disabled
             />
           </Col>
           <Col style={{ marginRight: "6px" }}>{"維度:"}</Col>

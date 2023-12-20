@@ -11,12 +11,14 @@ import {
 import { EditOutlined } from "@ant-design/icons";
 import CreateTvWall from "../modals/createTvWall";
 import ViewTvWall from "../modals/viewTvWall";
+import TvWallTemplateSettingModal from "../modals/tvWallTemplateSettingModal";
 import "../../App.scss";
 
 const TvWallSettingModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [openViewWallModal, setOpenViewWallModal] = useState(false);
   const [selectedWall, setSelectedWall] = useState(null);
+  const [openViewWallModal, setOpenViewWallModal] = useState(false);
+  const [openTemplateWallModal, setOpenTemplateWallModal] = useState(false);
   const data = FAKE_WALLS;
 
   const zones = [
@@ -89,7 +91,13 @@ const TvWallSettingModal = () => {
   };
 
   const templateSetting = (e) => {
-    console.log("template setting: ", e.currentTarget.id);
+    let wallName = e.currentTarget.id;
+    FAKE_WALLS.forEach((wall) => {
+      if (wall.name === wallName) {
+        setOpenTemplateWallModal(true);
+        setSelectedWall(wall);
+      }
+    });
   };
 
   return (
@@ -127,6 +135,11 @@ const TvWallSettingModal = () => {
           wall={selectedWall}
           modalOpen={openViewWallModal}
           setModalOpen={setOpenViewWallModal}
+        />
+        <TvWallTemplateSettingModal
+          wall={selectedWall}
+          modalOpen={openTemplateWallModal}
+          setModalOpen={setOpenTemplateWallModal}
         />
       </Modal>
     </div>
