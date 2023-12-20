@@ -216,18 +216,81 @@ export const FAKE_WALLS = [
   },
 ];
 
+const FAKE_SCREEN_LIST3 = [
+  {
+    number: 1,
+    decoder: "解碼器1",
+    block: "1",
+  },
+  {
+    number: 2,
+    decoder: "解碼器2",
+    block: "1",
+  },
+  {
+    number: 3,
+    decoder: "解碼器3",
+    block: "1",
+  },
+  {
+    number: 4,
+    decoder: "解碼器4",
+    block: "2",
+  },
+  {
+    number: 5,
+    decoder: "解碼器5",
+    block: "1",
+  },
+  {
+    number: 6,
+    decoder: "解碼器6",
+    block: "1",
+  },
+  {
+    number: 7,
+    decoder: "解碼器7",
+    block: "1",
+  },
+  {
+    number: 8,
+    decoder: "解碼器8",
+    block: "3",
+  },
+  {
+    number: 9,
+    decoder: "解碼器61",
+    block: "1",
+  },
+  {
+    number: 10,
+    decoder: "解碼器71",
+    block: "1",
+  },
+  {
+    number: 11,
+    decoder: "解碼器81",
+    block: "1",
+  },
+  {
+    number: 12,
+    decoder: "解碼器611",
+    block: "4",
+  },
+];
+
 export const FAKE_TEMPLATES = [
   {
     key: "fake_template1",
     name: "fake_template1",
-    dimension: { col: 3, row: 3 },
-    screens: FAKE_SCREEN_LIST1,
+    dimension: { col: 4, row: 3 },
+    screens: FAKE_SCREEN_LIST3,
   },
   {
     key: "fake_template2",
     name: "fake_template2",
-    dimension: { col: 3, row: 3 },
-    screens: FAKE_SCREEN_LIST1,
+    dimension: { col: 4, row: 3 },
+    screens: FAKE_SCREEN_LIST3,
   },
 ];
 

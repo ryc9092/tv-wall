@@ -1,28 +1,16 @@
 import { useEffect, useState } from "react";
-import { Button, Modal, Row, Select, Table, Typography } from "antd";
+import { Button, Modal, Row, Table } from "antd";
 import {
-  fakewall1,
-  fakewall2,
-  fakewall3,
-  fakewall4,
-  FAKE_WALLS,
   FAKE_TEMPLATES,
-  blockColorList,
 } from "../../utils/Constant";
 import CreateTvWallTemplate from "../modals/createTvWallTemplate";
+import ViewTemplate from "./viewTemplate"
 import "../../App.scss";
 
 const TvWallTemplateSettingModal = ({ wall, modalOpen, setModalOpen }) => {
-  const [openViewWallModal, setOpenViewWallModal] = useState(false);
-  const [selectedWall, setSelectedWall] = useState(null);
+  const [openViewTemplateModal, setOpenViewTemplateModal] = useState(false);
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
   const data = FAKE_TEMPLATES;
-
-  const zones = [
-    {
-      value: "zone1",
-      label: "區域1",
-    },
-  ];
 
   const columns = [
     {
@@ -47,7 +35,7 @@ const TvWallTemplateSettingModal = ({ wall, modalOpen, setModalOpen }) => {
           <Button
             key={`${text}-edit`}
             id={text}
-            onClick={viewWall}
+            onClick={viewTemplate}
             style={{ marginRight: 6 }}
           >
             檢視
@@ -61,15 +49,15 @@ const TvWallTemplateSettingModal = ({ wall, modalOpen, setModalOpen }) => {
   ];
 
   const removeWall = (e) => {
-    console.log("remove wall: ", e.currentTarget.id);
+    console.log("remove template: ", e.currentTarget.id);
   };
 
-  const viewWall = (e) => {
-    let wallName = e.currentTarget.id;
-    FAKE_WALLS.forEach((wall) => {
-      if (wall.name === wallName) {
-        setOpenViewWallModal(true);
-        setSelectedWall(wall);
+  const viewTemplate = (e) => {
+    let templateName = e.currentTarget.id;
+    FAKE_TEMPLATES.forEach((template) => {
+      if (template.name === templateName) {
+        setOpenViewTemplateModal(true);
+        setSelectedTemplate(template);
       }
     });
   };
@@ -91,6 +79,10 @@ const TvWallTemplateSettingModal = ({ wall, modalOpen, setModalOpen }) => {
         </Row>
         <Table columns={columns} dataSource={data} style={{ width: "95%" }} />
       </Modal>
+      <ViewTemplate 
+          template={selectedTemplate}
+          modalOpen={openViewTemplateModal}
+          setModalOpen={setOpenViewTemplateModal}/>
     </div>
   );
 };
