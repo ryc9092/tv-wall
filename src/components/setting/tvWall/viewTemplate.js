@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Input, InputNumber, Modal, Row, Tooltip } from "antd";
-import { blockColorList } from "../../utils/Constant";
-import "../../App.scss";
+import { blockColorList } from "../../../utils/Constant";
+import "../../../App.scss";
 
 const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
   const [templateName, setTemplateName] = useState(null);
   const [templateSize, setTemplateSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
-  const [tvWallTemplate, setTvWallTemplate] = useState(null);
+  const [wallTemplate, setWallTemplate] = useState(null);
 
   useEffect(() => {
     if (template && modalOpen) {
@@ -23,10 +23,10 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
 
   useEffect(() => {
     // create template table
-    let tvWallTempRow = [];
-    let tvWallTemplate = [];
+    let tempRow = [];
+    let template = [];
     screenList.forEach((screen) => {
-      tvWallTempRow.push(
+      tempRow.push(
         <td
           style={{ width: "40px", height: "40px", textAlign: "center" }}
           key={screen.number}
@@ -47,12 +47,12 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
           </Tooltip>
         </td>
       );
-      if (tvWallTempRow.length === templateSize.col) {
-        tvWallTemplate.push(<tr key={screen.number}>{tvWallTempRow}</tr>);
-        tvWallTempRow = []; // clear row
+      if (tempRow.length === templateSize.col) {
+        template.push(<tr key={screen.number}>{tempRow}</tr>);
+        tempRow = []; // clear row
       }
     });
-    setTvWallTemplate(tvWallTemplate);
+    setWallTemplate(template);
   }, [screenList]);
 
   return (
@@ -78,8 +78,8 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
               disabled
             />
           </Col>
-          </Row>
-          <Row style={{marginTop: "12px"}}>
+        </Row>
+        <Row style={{ marginTop: "12px" }}>
           <Col style={{ marginRight: "32px" }}>{"維度:"}</Col>
           <Col style={{ marginRight: "6px" }}>
             <InputNumber
@@ -113,7 +113,7 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
               }}
             >
               <table>
-                <tbody>{tvWallTemplate}</tbody>
+                <tbody>{wallTemplate}</tbody>
               </table>
             </div>
           </Col>

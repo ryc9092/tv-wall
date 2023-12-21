@@ -1,24 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Modal, Row, Select, Table, Typography } from "antd";
-import {
-  fakewall1,
-  fakewall2,
-  fakewall3,
-  fakewall4,
-  FAKE_WALLS,
-  blockColorList,
-} from "../../utils/Constant";
+import { FAKE_WALLS } from "../../../utils/Constant";
 import { EditOutlined } from "@ant-design/icons";
-import CreateTvWall from "../modals/createTvWall";
-import ViewTvWall from "../modals/viewTvWall";
-import TvWallTemplateSettingModal from "../modals/tvWallTemplateSettingModal";
-import "../../App.scss";
+import CreateWall from "./createWall";
+import ViewWall from "./viewWall";
+import SettingTemplateModal from "./settingTemplateModal";
+import "../../../App.scss";
 
-const TvWallSettingModal = () => {
+const SettingWallModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedWall, setSelectedWall] = useState(null);
   const [openViewWallModal, setOpenViewWallModal] = useState(false);
-  const [openTemplateWallModal, setOpenTemplateWallModal] = useState(false);
+  const [openSettingTemplateModal, setOpenSettingTemplateModal] =
+    useState(false);
   const data = FAKE_WALLS;
 
   const zones = [
@@ -63,13 +57,13 @@ const TvWallSettingModal = () => {
       ),
     },
     {
-      title: "版型設定",
+      title: "版型管理",
       dataIndex: "name",
       key: "template",
       render: (text) => (
         <div key={`${text}-template`} style={{ width: 50 }}>
           <Button key={`${text}-template`} id={text} onClick={templateSetting}>
-            設定
+            管理
           </Button>
         </div>
       ),
@@ -94,7 +88,7 @@ const TvWallSettingModal = () => {
     let wallName = e.currentTarget.id;
     FAKE_WALLS.forEach((wall) => {
       if (wall.name === wallName) {
-        setOpenTemplateWallModal(true);
+        setOpenSettingTemplateModal(true);
         setSelectedWall(wall);
       }
     });
@@ -128,22 +122,22 @@ const TvWallSettingModal = () => {
             defaultValue={"zone1"}
             style={{ width: "120px", marginRight: 8 }}
           />
-          <CreateTvWall />
+          <CreateWall />
         </Row>
         <Table columns={columns} dataSource={data} style={{ width: "95%" }} />
-        <ViewTvWall
+        <ViewWall
           wall={selectedWall}
           modalOpen={openViewWallModal}
           setModalOpen={setOpenViewWallModal}
         />
-        <TvWallTemplateSettingModal
+        <SettingTemplateModal
           wall={selectedWall}
-          modalOpen={openTemplateWallModal}
-          setModalOpen={setOpenTemplateWallModal}
+          modalOpen={openSettingTemplateModal}
+          setModalOpen={setOpenSettingTemplateModal}
         />
       </Modal>
     </div>
   );
 };
 
-export default TvWallSettingModal;
+export default SettingWallModal;

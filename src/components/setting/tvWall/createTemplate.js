@@ -12,30 +12,30 @@ import {
   Tooltip,
   Typography,
 } from "antd";
-import { FAKE_WALLS, blockColorList } from "../../utils/Constant";
-import "./createTvWallTemplate.scss";
-import "../../App.scss";
+import { FAKE_WALLS, blockColorList } from "../../../utils/Constant";
+import "./tvWall.scss";
+import "../../../App.scss";
 
-const CreateTvWallTemplate = ({ wall }) => {
+const CreateTemplate = ({ wall }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [templateName, setTemplateName] = useState(null);
-  const [tvWallSize, setTvWallSize] = useState({ col: 1, row: 1 });
+  const [wallSize, setWallSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
-  const [tvWallTemplate, setTvWallTemplate] = useState(null);
+  const [wallTemplate, setWallTemplate] = useState(null);
   const [blocks, setBlocks] = useState(1);
   const [currentBlock, setCurrentBlock] = useState(1);
 
   useEffect(() => {
     if (wall && isModalOpen) {
-      setTvWallSize(wall.dimension);
+      setWallSize(wall.dimension);
       setScreenList(JSON.parse(JSON.stringify(wall.screens))); // deep copy
     }
     if (!isModalOpen) resetTemplate();
   }, [wall, isModalOpen]);
 
-  let tvWallOptions = [];
+  let wallOptions = [];
   FAKE_WALLS.forEach((wall) => {
-    tvWallOptions.push({ value: wall.name, label: wall.name });
+    wallOptions.push({ value: wall.name, label: wall.name });
   });
 
   const blockNum = Array.from({ length: blocks }, (v, i) => i + 1); // make a block list [1, 2, 3, ...]
@@ -62,17 +62,17 @@ const CreateTvWallTemplate = ({ wall }) => {
   const resetTemplate = () => {
     setScreenList([]);
     setTemplateName(null);
-    setTvWallSize({ col: 1, row: 1 });
+    setWallSize({ col: 1, row: 1 });
     setBlocks(1);
     setCurrentBlock(1);
   };
 
   useEffect(() => {
     // create tv wall table
-    let tvWallTempRow = [];
-    let tvWallTemplate = [];
+    let tempRow = [];
+    let template = [];
     screenList.forEach((screen) => {
-      tvWallTempRow.push(
+      tempRow.push(
         <td
           style={{ width: "40px", height: "40px", textAlign: "center" }}
           key={screen.number}
@@ -88,7 +88,7 @@ const CreateTvWallTemplate = ({ wall }) => {
               key={screen.number}
               value={screen.number}
               onClick={(e) => {
-                clickTvWallScreen(e.target.value);
+                clickWallScreen(e.target.value);
               }}
             >
               {screen.number}
@@ -96,21 +96,21 @@ const CreateTvWallTemplate = ({ wall }) => {
           </Tooltip>
         </td>
       );
-      if (tvWallTempRow.length === tvWallSize.col) {
-        tvWallTemplate.push(<tr key={screen.number}>{tvWallTempRow}</tr>);
-        tvWallTempRow = []; // clear row
+      if (tempRow.length === wallSize.col) {
+        template.push(<tr key={screen.number}>{tempRow}</tr>);
+        tempRow = []; // clear row
       }
     });
-    setTvWallTemplate(tvWallTemplate);
+    setWallTemplate(template);
   }, [screenList, currentBlock]);
 
-  const clickTvWallScreen = (number) => {
+  const clickWallScreen = (number) => {
     let temp = [...screenList];
     temp[number - 1].block = currentBlock;
     setScreenList(temp);
   };
 
-  const saveTvWall = () => {
+  const saveWall = () => {
     console.log(screenList);
   };
 
@@ -126,7 +126,7 @@ const CreateTvWallTemplate = ({ wall }) => {
         open={isModalOpen}
         footer={null}
         onCancel={() => {
-          // resetTemplate();
+          resetTemplate();
           setIsModalOpen(false);
         }}
       >
@@ -147,7 +147,7 @@ const CreateTvWallTemplate = ({ wall }) => {
           <Col>{"電視牆名稱:"}</Col>
           <Col style={{ marginRight: "16px" }}>
             <Select
-              options={tvWallOptions}
+              options={wallOptions}
               size="small"
               style={{ width: "135px", margin: "0px 4px 4px 8px" }}
               value={wall.name}
@@ -158,7 +158,7 @@ const CreateTvWallTemplate = ({ wall }) => {
           <Col style={{ marginRight: "6px" }}>
             <InputNumber
               disabled
-              value={tvWallSize.col}
+              value={wallSize.col}
               min={1}
               max={6}
               size="small"
@@ -169,7 +169,7 @@ const CreateTvWallTemplate = ({ wall }) => {
           <Col>
             <InputNumber
               disabled
-              value={tvWallSize.row}
+              value={wallSize.row}
               min={1}
               max={6}
               size="small"
@@ -188,7 +188,7 @@ const CreateTvWallTemplate = ({ wall }) => {
               }}
             >
               <table>
-                <tbody>{tvWallTemplate}</tbody>
+                <tbody>{wallTemplate}</tbody>
               </table>
             </div>
           </Col>
@@ -230,11 +230,11 @@ const CreateTvWallTemplate = ({ wall }) => {
           <Button onClick={resetTemplate} style={{ marginRight: "16px" }}>
             重置版型
           </Button>
-          <Button onClick={saveTvWall}>儲存</Button>
+          <Button onClick={saveWall}>儲存</Button>
         </Row>
       </Modal>
     </div>
   );
 };
 
-export default CreateTvWallTemplate;
+export default CreateTemplate;

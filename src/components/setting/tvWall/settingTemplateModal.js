@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Modal, Row, Table } from "antd";
-import {
-  FAKE_TEMPLATES,
-} from "../../utils/Constant";
-import CreateTvWallTemplate from "../modals/createTvWallTemplate";
-import ViewTemplate from "./viewTemplate"
-import "../../App.scss";
+import { FAKE_TEMPLATES } from "../../../utils/Constant";
+import CreateTemplate from "./createTemplate";
+import ViewTemplate from "./viewTemplate";
+import "../../../App.scss";
 
-const TvWallTemplateSettingModal = ({ wall, modalOpen, setModalOpen }) => {
+const SettingTemplateModal = ({ wall, modalOpen, setModalOpen }) => {
   const [openViewTemplateModal, setOpenViewTemplateModal] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const data = FAKE_TEMPLATES;
@@ -65,7 +63,7 @@ const TvWallTemplateSettingModal = ({ wall, modalOpen, setModalOpen }) => {
   return (
     <div>
       <Modal
-        title={`${wall?.name} 版型設定`}
+        title={`${wall?.name} 版型管理`}
         className="modal-title"
         width={580}
         open={modalOpen}
@@ -75,16 +73,17 @@ const TvWallTemplateSettingModal = ({ wall, modalOpen, setModalOpen }) => {
         }}
       >
         <Row style={{ marginTop: 16, marginBottom: 12 }}>
-          <CreateTvWallTemplate wall={wall} />
+          <CreateTemplate wall={wall} />
         </Row>
         <Table columns={columns} dataSource={data} style={{ width: "95%" }} />
       </Modal>
-      <ViewTemplate 
-          template={selectedTemplate}
-          modalOpen={openViewTemplateModal}
-          setModalOpen={setOpenViewTemplateModal}/>
+      <ViewTemplate
+        template={selectedTemplate}
+        modalOpen={openViewTemplateModal}
+        setModalOpen={setOpenViewTemplateModal}
+      />
     </div>
   );
 };
 
-export default TvWallTemplateSettingModal;
+export default SettingTemplateModal;

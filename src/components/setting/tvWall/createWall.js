@@ -9,17 +9,15 @@ import {
   Select,
   Typography,
 } from "antd";
-import { EditOutlined } from "@ant-design/icons";
-import { FAKE_DECODERS } from "../../utils/Constant";
-import "./createTvWall.scss";
-import "../../App.scss";
+import { FAKE_DECODERS } from "../../../utils/Constant";
+import "../../../App.scss";
 
-const CreateTvWall = () => {
+const CreateWall = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [tvWallName, setTvWallName] = useState(null);
-  const [tvWallSize, setTvWallSize] = useState({ col: 1, row: 1 });
+  const [wallName, setWallName] = useState(null);
+  const [wallSize, setWallSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
-  const [tvWallTemplate, setTvWallTemplate] = useState(null);
+  const [wallTemplate, setWallTemplate] = useState(null);
 
   let decoderOptions = [];
   FAKE_DECODERS.forEach((decoder) => {
@@ -27,8 +25,8 @@ const CreateTvWall = () => {
   });
 
   const resetTemplate = () => {
-    setTvWallName(null);
-    setTvWallSize({ col: 1, row: 1 });
+    setWallName(null);
+    setWallSize({ col: 1, row: 1 });
     setScreenList([]);
   };
 
@@ -39,18 +37,18 @@ const CreateTvWall = () => {
   useEffect(() => {
     // generate default screen list: [{number: 1, decoder: ""}, {number: 2, decoder: ""}, ...]
     setScreenList(
-      Array.from({ length: tvWallSize.col * tvWallSize.row }, (v, i) => {
+      Array.from({ length: wallSize.col * wallSize.row }, (v, i) => {
         return { number: i + 1, decoder: "", block: "" };
       })
     );
-  }, [tvWallSize]);
+  }, [wallSize]);
 
   useEffect(() => {
     // create tv wall table
-    let tvWallTempRow = [];
-    let tvWallTemplate = [];
+    let tempRow = [];
+    let template = [];
     screenList.forEach((screen) => {
-      tvWallTempRow.push(
+      tempRow.push(
         <td
           style={{ width: "40px", height: "40px", textAlign: "center" }}
           key={screen.number}
@@ -58,12 +56,12 @@ const CreateTvWall = () => {
           {screen.number}
         </td>
       );
-      if (tvWallTempRow.length === tvWallSize.col) {
-        tvWallTemplate.push(<tr key={screen.number}>{tvWallTempRow}</tr>);
-        tvWallTempRow = []; // clear row
+      if (tempRow.length === wallSize.col) {
+        template.push(<tr key={screen.number}>{tempRow}</tr>);
+        tempRow = []; // clear row
       }
     });
-    setTvWallTemplate(tvWallTemplate);
+    setWallTemplate(template);
   }, [screenList]);
 
   const setScreenDecoder = ({ screenNumber, decoder }) => {
@@ -72,7 +70,7 @@ const CreateTvWall = () => {
     setScreenList(screenList);
   };
 
-  const saveTvWall = () => {
+  const saveWall = () => {
     console.log(screenList);
   };
 
@@ -96,34 +94,34 @@ const CreateTvWall = () => {
           <Col style={{ marginRight: "6px" }}>{"電視牆名稱:"}</Col>
           <Col style={{ marginRight: "16px" }}>
             <Input
-              value={tvWallName}
+              value={wallName}
               size="small"
               style={{ width: "120px" }}
               onChange={(e) => {
-                setTvWallName(e.target.value);
+                setWallName(e.target.value);
               }}
             />
           </Col>
           <Col style={{ marginRight: "6px" }}>{"維度:"}</Col>
           <Col style={{ marginRight: "6px" }}>
             <InputNumber
-              value={tvWallSize.col}
+              value={wallSize.col}
               min={1}
               max={6}
               size="small"
               style={{ width: "48px" }}
-              onChange={(value) => setTvWallSize({ ...tvWallSize, col: value })}
+              onChange={(value) => setWallSize({ ...wallSize, col: value })}
             ></InputNumber>
           </Col>
           <Col style={{ marginRight: "6px" }}>{" X "}</Col>
           <Col>
             <InputNumber
-              value={tvWallSize.row}
+              value={wallSize.row}
               min={1}
               max={6}
               size="small"
               style={{ width: "48px" }}
-              onChange={(value) => setTvWallSize({ ...tvWallSize, row: value })}
+              onChange={(value) => setWallSize({ ...wallSize, row: value })}
             ></InputNumber>
           </Col>
         </Row>
@@ -138,7 +136,7 @@ const CreateTvWall = () => {
               }}
             >
               <table>
-                <tbody>{tvWallTemplate}</tbody>
+                <tbody>{wallTemplate}</tbody>
               </table>
             </div>
           </Col>
@@ -181,11 +179,11 @@ const CreateTvWall = () => {
           <Button onClick={resetTemplate} style={{ marginRight: "16px" }}>
             重置電視牆
           </Button>
-          <Button onClick={saveTvWall}>儲存</Button>
+          <Button onClick={saveWall}>儲存</Button>
         </Row>
       </Modal>
     </div>
   );
 };
 
-export default CreateTvWall;
+export default CreateWall;

@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { Col, Input, InputNumber, Modal, Row, Select, Typography } from "antd";
-import { FAKE_DECODERS } from "../../utils/Constant";
-import "../../App.scss";
+import { FAKE_DECODERS } from "../../../utils/Constant";
+import "../../../App.scss";
 
-const ViewTvWall = ({ wall, modalOpen, setModalOpen }) => {
-  const [tvWallName, setTvWallName] = useState(null);
-  const [tvWallSize, setTvWallSize] = useState({ col: 1, row: 1 });
+const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
+  const [wallName, setWallName] = useState(null);
+  const [wallSize, setWallSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
-  const [tvWallTemplate, setTvWallTemplate] = useState(null);
+  const [wallTemplate, setWallTemplate] = useState(null);
 
   useEffect(() => {
     if (wall) {
       setScreenList(wall.screens);
-      setTvWallSize(wall.dimension);
-      setTvWallName(wall.name);
+      setWallSize(wall.dimension);
+      setWallName(wall.name);
     }
   }, [wall]);
 
@@ -27,11 +27,11 @@ const ViewTvWall = ({ wall, modalOpen, setModalOpen }) => {
   }, [modalOpen, setModalOpen]);
 
   useEffect(() => {
-    // create tv wall table
-    let tvWallTempRow = [];
-    let tvWallTemplate = [];
+    // create template table
+    let tempRow = [];
+    let template = [];
     screenList.forEach((screen) => {
-      tvWallTempRow.push(
+      tempRow.push(
         <td
           style={{ width: "40px", height: "40px", textAlign: "center" }}
           key={screen.number}
@@ -39,12 +39,12 @@ const ViewTvWall = ({ wall, modalOpen, setModalOpen }) => {
           {screen.number}
         </td>
       );
-      if (tvWallTempRow.length === tvWallSize.col) {
-        tvWallTemplate.push(<tr key={screen.number}>{tvWallTempRow}</tr>);
-        tvWallTempRow = []; // clear row
+      if (tempRow.length === wallSize.col) {
+        template.push(<tr key={screen.number}>{tempRow}</tr>);
+        tempRow = []; // clear row
       }
     });
-    setTvWallTemplate(tvWallTemplate);
+    setWallTemplate(template);
   }, [screenList]);
 
   return (
@@ -64,7 +64,7 @@ const ViewTvWall = ({ wall, modalOpen, setModalOpen }) => {
           <Col style={{ marginRight: "6px" }}>{"版型名稱:"}</Col>
           <Col style={{ marginRight: "16px" }}>
             <Input
-              value={tvWallName}
+              value={wallName}
               size="small"
               style={{ width: "120px" }}
               disabled
@@ -73,7 +73,7 @@ const ViewTvWall = ({ wall, modalOpen, setModalOpen }) => {
           <Col style={{ marginRight: "6px" }}>{"維度:"}</Col>
           <Col style={{ marginRight: "6px" }}>
             <InputNumber
-              value={tvWallSize.col}
+              value={wallSize.col}
               min={1}
               max={6}
               size="small"
@@ -84,7 +84,7 @@ const ViewTvWall = ({ wall, modalOpen, setModalOpen }) => {
           <Col style={{ marginRight: "6px" }}>{" X "}</Col>
           <Col>
             <InputNumber
-              value={tvWallSize.row}
+              value={wallSize.row}
               min={1}
               max={6}
               size="small"
@@ -104,7 +104,7 @@ const ViewTvWall = ({ wall, modalOpen, setModalOpen }) => {
               }}
             >
               <table>
-                <tbody>{tvWallTemplate}</tbody>
+                <tbody>{wallTemplate}</tbody>
               </table>
             </div>
           </Col>
@@ -143,4 +143,4 @@ const ViewTvWall = ({ wall, modalOpen, setModalOpen }) => {
   );
 };
 
-export default ViewTvWall;
+export default ViewWall;
