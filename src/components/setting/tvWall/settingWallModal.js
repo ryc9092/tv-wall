@@ -117,11 +117,11 @@ const SettingWallModal = () => {
         }}
       >
         <Row style={{ marginTop: 16, marginBottom: 12 }}>
-          <Select
+          {/* <Select
             options={zones}
             defaultValue={"zone1"}
             style={{ width: "120px", marginRight: 8 }}
-          />
+          /> */}
           <CreateWall />
         </Row>
         <Table columns={columns} dataSource={data} style={{ width: "95%" }} />

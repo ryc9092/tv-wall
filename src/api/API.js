@@ -123,3 +123,13 @@ const apiPOST = async ({
     if (setError) setError(error.message);
   }
 };
+
+// Device ========================================================
+
+export const getDecoders = () => {
+
+}
+
+export const getEncoders = () => {
+
+}
