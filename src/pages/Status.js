@@ -32,18 +32,22 @@ const Status = () => {
     },
     {
       title: "狀態",
-      key: "status",
-      dataIndex: "status",
-      sorter: (a, b) => a.status.length - b.status.length,
-      render: (_, { status }) => (
+      key: "state",
+      dataIndex: "state",
+      sorter: (a, b) => a.state.length - b.state.length,
+      render: (_, { state }) => (
         <>
-          {status === "nice" ? (
-            <Tag color={"green"} key={status}>
-              {status}
+          {state === "Up" ? (
+            <Tag color={"green"} key={state}>
+              {state}
+            </Tag>
+          ) : state === "Down" ? (
+            <Tag color={"orange"} key={state}>
+              {state}
             </Tag>
           ) : (
-            <Tag color={"volcano"} key={status}>
-              {status}
+            <Tag color={"volcano"} key={state}>
+              {state}
             </Tag>
           )}
         </>
@@ -71,56 +75,56 @@ const Status = () => {
       type: "encoder",
       name: "encoder1",
       id: "encoder1",
-      status: "nice",
+      state: "Up",
     },
     {
       key: "2",
       type: "encoder",
       name: "encoder2",
       id: "encoder2",
-      status: "nice",
+      state: "Down",
     },
     {
       key: "3",
       type: "encoder",
       name: "encoder3",
       id: "encoder3",
-      status: "bad",
+      state: "Bad",
     },
     {
       key: "4",
       type: "decoder",
       name: "decoder4",
       id: "decoder4",
-      status: "bad",
+      state: "Up",
     },
     {
       key: "5",
       type: "encoder",
       name: "encoder1",
       id: "encoder5",
-      status: "nice",
+      state: "Down",
     },
     {
       key: "6",
       type: "encoder",
       name: "encoder2",
       id: "encoder6",
-      status: "nice",
+      state: "Bad",
     },
     {
       key: "7",
       type: "encoder",
       name: "encoder7",
       id: "encoder7",
-      status: "bad",
+      state: "Up",
     },
     {
       key: "8",
       type: "decoder",
       name: "decoder4",
       id: "decoder8",
-      status: "bad",
+      state: "Up",
     },
   ];
 
