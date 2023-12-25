@@ -1,20 +1,53 @@
-import { useState } from "react";
-import { Button, Modal, Row, Table } from "antd";
+import { useEffect, useState } from "react";
+import { Button, Checkbox, Modal, Row, Table, Typography } from "antd";
 import { FAKE_TEMPLATES } from "../../../utils/Constant";
+import { EditOutlined } from "@ant-design/icons";
 import CreateTemplate from "./createTemplate";
 import ViewTemplate from "./viewTemplate";
 import "../../../App.scss";
 
-const SettingTemplateModal = ({ wall, modalOpen, setModalOpen }) => {
+const SettingTemplateModal = ({}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [openViewTemplateModal, setOpenViewTemplateModal] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
-  const data = FAKE_TEMPLATES;
+  const [templates, setTemplates] = useState(FAKE_TEMPLATES);
+
+  const changeDefaultTemplate = (record) => {
+    let tempTemplates = templates.slice();
+    templates.forEach((template, idx) => {
+      if (template.name === record.name) tempTemplates[idx].default = true;
+      else if (
+        template.dimension.col === record.dimension.col &&
+        template.dimension.row === record.dimension.row
+      )
+        tempTemplates[idx].default = false;
+    });
+    setTemplates(tempTemplates);
+  };
+
+  useEffect(() => {
+    console.log(templates);
+  }, [templates]);
 
   const columns = [
     {
+      title: "預設",
+      dataIndex: ["default", "name", "dimension"],
+      key: "default",
+      render: (text, record) => (
+        <Checkbox
+          checked={record.default}
+          onChange={() => {
+            changeDefaultTemplate(record);
+          }}
+        ></Checkbox>
+      ),
+    },
+    {
       title: "名稱",
-      dataIndex: "name",
+      dataIndex: ["name", "default"],
       key: "name",
+      render: (text, record) => <span>{record.name}</span>,
     },
     {
       title: "維度",
@@ -62,20 +95,34 @@ const SettingTemplateModal = ({ wall, modalOpen, setModalOpen }) => {
 
   return (
     <div>
+      <Button
+        onClick={() => setIsModalOpen(true)}
+        className="setting-option-button"
+      >
+        <Typography.Text className="setting-option-text">
+          電視牆版型設定
+        </Typography.Text>
+        <></>
+        <EditOutlined className="setting-option-icon" />
+      </Button>
       <Modal
-        title={`${wall?.name} 版型管理`}
+        title={`版型管理`}
         className="modal-title"
-        width={580}
-        open={modalOpen}
+        width={650}
+        open={isModalOpen}
         footer={null}
         onCancel={() => {
-          setModalOpen(false);
+          setIsModalOpen(false);
         }}
       >
         <Row style={{ marginTop: 16, marginBottom: 12 }}>
-          <CreateTemplate wall={wall} />
+          <CreateTemplate />
         </Row>
-        <Table columns={columns} dataSource={data} style={{ width: "95%" }} />
+        <Table
+          columns={columns}
+          dataSource={templates}
+          style={{ width: "95%" }}
+        />
       </Modal>
       <ViewTemplate
         template={selectedTemplate}

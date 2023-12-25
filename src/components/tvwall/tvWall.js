@@ -9,7 +9,6 @@ import {
   blockColorList,
 } from "../../utils/Constant";
 import "../../App.scss";
-import "./tvWall.scss";
 
 const TvWall = () => {
   const [tvWallScreens, setTvWallScreens] = useState(fakewall4);

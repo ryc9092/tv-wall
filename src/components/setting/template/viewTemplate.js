@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Input, InputNumber, Modal, Row, Tooltip } from "antd";
+import { Button, Col, Input, InputNumber, Modal, Row } from "antd";
 import { blockColorList } from "../../../utils/Constant";
 import "../../../App.scss";
 
@@ -31,20 +31,18 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
           style={{ width: "40px", height: "40px", textAlign: "center" }}
           key={screen.number}
         >
-          <Tooltip placement="topLeft" title={screen.decoder}>
-            <Button
-              style={{
-                width: "42px",
-                height: "42px",
-                border: "0px",
-                backgroundColor: blockColorList[screen.block - 1],
-              }}
-              key={screen.number}
-              value={screen.number}
-            >
-              {screen.number}
-            </Button>
-          </Tooltip>
+          <Button
+            style={{
+              width: "42px",
+              height: "42px",
+              border: "0px",
+              backgroundColor: blockColorList[screen.block - 1],
+            }}
+            key={screen.number}
+            value={screen.number}
+          >
+            {screen.number}
+          </Button>
         </td>
       );
       if (tempRow.length === templateSize.col) {

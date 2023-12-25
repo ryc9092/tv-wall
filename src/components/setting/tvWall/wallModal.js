@@ -4,15 +4,12 @@ import { FAKE_WALLS } from "../../../utils/Constant";
 import { EditOutlined } from "@ant-design/icons";
 import CreateWall from "./createWall";
 import ViewWall from "./viewWall";
-import SettingTemplateModal from "./settingTemplateModal";
 import "../../../App.scss";
 
 const SettingWallModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedWall, setSelectedWall] = useState(null);
   const [openViewWallModal, setOpenViewWallModal] = useState(false);
-  const [openSettingTemplateModal, setOpenSettingTemplateModal] =
-    useState(false);
   const data = FAKE_WALLS;
 
   const zones = [
@@ -56,18 +53,6 @@ const SettingWallModal = () => {
         </div>
       ),
     },
-    {
-      title: "版型管理",
-      dataIndex: "name",
-      key: "template",
-      render: (text) => (
-        <div key={`${text}-template`} style={{ width: 50 }}>
-          <Button key={`${text}-template`} id={text} onClick={templateSetting}>
-            管理
-          </Button>
-        </div>
-      ),
-    },
   ];
 
   const removeWall = (e) => {
@@ -79,16 +64,6 @@ const SettingWallModal = () => {
     FAKE_WALLS.forEach((wall) => {
       if (wall.name === wallName) {
         setOpenViewWallModal(true);
-        setSelectedWall(wall);
-      }
-    });
-  };
-
-  const templateSetting = (e) => {
-    let wallName = e.currentTarget.id;
-    FAKE_WALLS.forEach((wall) => {
-      if (wall.name === wallName) {
-        setOpenSettingTemplateModal(true);
         setSelectedWall(wall);
       }
     });
@@ -129,11 +104,6 @@ const SettingWallModal = () => {
           wall={selectedWall}
           modalOpen={openViewWallModal}
           setModalOpen={setOpenViewWallModal}
-        />
-        <SettingTemplateModal
-          wall={selectedWall}
-          modalOpen={openSettingTemplateModal}
-          setModalOpen={setOpenSettingTemplateModal}
         />
       </Modal>
     </div>

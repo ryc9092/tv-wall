@@ -279,18 +279,66 @@ const FAKE_SCREEN_LIST3 = [
   },
 ];
 
+const FAKE_SCREEN_LIST4 = [
+  {
+    number: 1,
+    block: "1",
+  },
+  {
+    number: 2,
+    block: "1",
+  },
+  {
+    number: 3,
+    block: "1",
+  },
+  {
+    number: 4,
+    block: "1",
+  },
+  {
+    number: 5,
+    block: "1",
+  },
+  {
+    number: 6,
+    block: "1",
+  },
+  {
+    number: 7,
+    block: "1",
+  },
+  {
+    number: 8,
+    block: "1",
+  },
+  {
+    number: 9,
+    block: "1",
+  },
+];
+
 export const FAKE_TEMPLATES = [
   {
     key: "fake_template1",
     name: "fake_template1",
     dimension: { col: 4, row: 3 },
     screens: FAKE_SCREEN_LIST3,
+    default: false,
   },
   {
     key: "fake_template2",
     name: "fake_template2",
     dimension: { col: 4, row: 3 },
     screens: FAKE_SCREEN_LIST3,
+    default: true,
+  },
+  {
+    key: "fake_template3",
+    name: "fake_template3",
+    dimension: { col: 3, row: 3 },
+    screens: FAKE_SCREEN_LIST4,
+    default: true,
   },
 ];
 

@@ -7,16 +7,14 @@ import {
   Modal,
   Radio,
   Row,
-  Select,
   Space,
   Tooltip,
   Typography,
 } from "antd";
-import { FAKE_WALLS, blockColorList } from "../../../utils/Constant";
-import "./tvWall.scss";
+import { blockColorList } from "../../../utils/Constant";
 import "../../../App.scss";
 
-const CreateTemplate = ({ wall }) => {
+const CreateTemplate = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [templateName, setTemplateName] = useState(null);
   const [wallSize, setWallSize] = useState({ col: 1, row: 1 });
@@ -25,18 +23,26 @@ const CreateTemplate = ({ wall }) => {
   const [blocks, setBlocks] = useState(1);
   const [currentBlock, setCurrentBlock] = useState(1);
 
-  useEffect(() => {
-    if (wall && isModalOpen) {
-      setWallSize(wall.dimension);
-      setScreenList(JSON.parse(JSON.stringify(wall.screens))); // deep copy
-    }
-    if (!isModalOpen) resetTemplate();
-  }, [wall, isModalOpen]);
+  const resetTemplate = () => {
+    setScreenList([]);
+    setTemplateName(null);
+    setWallSize({ col: 1, row: 1 });
+    setBlocks(1);
+    setCurrentBlock(1);
+  };
 
-  let wallOptions = [];
-  FAKE_WALLS.forEach((wall) => {
-    wallOptions.push({ value: wall.name, label: wall.name });
-  });
+  useEffect(() => {
+    resetTemplate();
+  }, [isModalOpen]);
+
+  useEffect(() => {
+    // generate screen list by dimension: [{number: 1, block: ""}, {number: 2, block: ""}, ...]
+    setScreenList(
+      Array.from({ length: wallSize.col * wallSize.row }, (v, i) => {
+        return { number: i + 1, block: "" };
+      })
+    );
+  }, [wallSize]);
 
   const blockNum = Array.from({ length: blocks }, (v, i) => i + 1); // make a block list [1, 2, 3, ...]
   let blockRadios = (
@@ -59,16 +65,8 @@ const CreateTemplate = ({ wall }) => {
     </>
   );
 
-  const resetTemplate = () => {
-    setScreenList([]);
-    setTemplateName(null);
-    setWallSize({ col: 1, row: 1 });
-    setBlocks(1);
-    setCurrentBlock(1);
-  };
-
   useEffect(() => {
-    // create tv wall table
+    // create template table
     let tempRow = [];
     let template = [];
     screenList.forEach((screen) => {
@@ -144,37 +142,27 @@ const CreateTemplate = ({ wall }) => {
           </Col>
         </Row>
         <Row style={{ marginTop: "16px" }}>
-          <Col>{"電視牆名稱:"}</Col>
-          <Col style={{ marginRight: "16px" }}>
-            <Select
-              options={wallOptions}
-              size="small"
-              style={{ width: "135px", margin: "0px 4px 4px 8px" }}
-              value={wall.name}
-              disabled
-            />
-          </Col>
           <Col style={{ marginRight: "6px" }}>{"維度:"}</Col>
           <Col style={{ marginRight: "6px" }}>
             <InputNumber
-              disabled
               value={wallSize.col}
               min={1}
               max={6}
               size="small"
               style={{ width: "48px" }}
-            />
+              onChange={(value) => setWallSize({ ...wallSize, col: value })}
+            ></InputNumber>
           </Col>
           <Col style={{ marginRight: "6px" }}>{" X "}</Col>
           <Col>
             <InputNumber
-              disabled
               value={wallSize.row}
               min={1}
               max={6}
               size="small"
               style={{ width: "48px" }}
-            />
+              onChange={(value) => setWallSize({ ...wallSize, row: value })}
+            ></InputNumber>
           </Col>
         </Row>
         <Row style={{ marginTop: "16px" }}>
