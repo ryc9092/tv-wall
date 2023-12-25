@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Col, Input, Radio, Row, Typography } from "antd";
+import { Button, Col, Input, Radio, Row, Select, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import TvWall from "../components/tvwall/tvWall";
 import useWindowDimensions from "../utils/WindowDimension";
-import { ENCODER_TYPERS, FAKE_ENCODERS } from "../utils/Constant";
+import { ENCODER_TYPERS, FAKE_ENCODERS, FAKE_WALLS } from "../utils/Constant";
 import "../App.scss";
 import "./TVWall.scss";
 
@@ -13,12 +13,21 @@ const TVWall = () => {
   const [store] = useContext(StoreContext);
   const [encoderType, setEncoderType] = useState("1");
   const [isSmallElement, setIsSmallElement] = useState(false);
+  const [wallOptions, setWallOptions] = useState([]);
 
   // The elements size would be changed according to width
   useEffect(() => {
     if (width > 824 && isSmallElement) setIsSmallElement(false);
     else if (width < 824 && !isSmallElement) setIsSmallElement(true);
   }, [isSmallElement, width]);
+
+  useEffect(() => {
+    let tempWallOptions = [];
+    FAKE_WALLS.forEach((wall) => {
+      tempWallOptions.push({ value: wall.name, label: wall.name });
+    });
+    setWallOptions(tempWallOptions);
+  }, [FAKE_WALLS]);
 
   const changeEncoderType = ({ target: { value } }) => {
     setEncoderType(value);
@@ -89,7 +98,32 @@ const TVWall = () => {
       )}
       <div className="container-border container-height container-width">
         <div style={{ borderBottom: "1px solid gray", height: "50%" }}>
-          <TvWall />
+          <Row>
+            <Col style={{ width: 270, margin: 8 }}>
+              <Row>
+                <Select
+                  defaultValue={wallOptions[0]?.value}
+                  options={wallOptions}
+                  style={{ minWidth: 120 }}
+                ></Select>
+                <Button style={{ marginLeft: 12, color: "#f5222d" }}>
+                  清除牆面連接
+                </Button>
+              </Row>
+              <Row style={{ marginTop: 8 }}>
+                <Button>版型1</Button>
+              </Row>
+              <Row style={{ marginTop: 8 }}>
+                <Button>版型2</Button>
+              </Row>
+              <Row style={{ marginTop: 8 }}>
+                <Button>版型3</Button>
+              </Row>
+            </Col>
+            <Col style={{ margin: 8 }}>
+              <TvWall />
+            </Col>
+          </Row>
         </div>
         <div style={{ height: "50%" }} className="tvwall-video-layout ">
           {encoderBlock}
