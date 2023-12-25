@@ -6,6 +6,7 @@ import TvWall from "../components/tvwall/tvWall";
 import useWindowDimensions from "../utils/WindowDimension";
 import { ENCODER_TYPERS, FAKE_ENCODERS } from "../utils/Constant";
 import "../App.scss";
+import "./TVWall.scss";
 
 const TVWall = () => {
   const { width } = useWindowDimensions();
