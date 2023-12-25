@@ -42,11 +42,11 @@ const Status = () => {
               {state}
             </Tag>
           ) : state === "Down" ? (
-            <Tag color={"orange"} key={state}>
+            <Tag color={"yellow"} key={state}>
               {state}
             </Tag>
           ) : (
-            <Tag color={"volcano"} key={state}>
+            <Tag color={"red"} key={state}>
               {state}
             </Tag>
           )}
