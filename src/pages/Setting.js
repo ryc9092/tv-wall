@@ -2,12 +2,12 @@ import { Button, Typography } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import SettingTemplateModal from "../components/setting/template/templateModal";
 import SettingWallModal from "../components/setting/tvWall/wallModal";
+import SettingDeviceModal from "../components/setting/device/deviceModal";
 import "../App.scss";
 import "./Setting.scss";
 
 const Setting = () => {
   const options = [
-    { title: "設備進階設定" },
     { title: "顯示器群組設定" },
     { title: "RS232設定" },
     { title: "帳號&權限設定" },
@@ -33,6 +33,7 @@ const Setting = () => {
       </div>
       <SettingTemplateModal />
       <SettingWallModal />
+      <SettingDeviceModal />
       {optionsObject}
     </div>
   );

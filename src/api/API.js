@@ -63,7 +63,7 @@ const apiGET = async ({
   try {
     const json = await response.json();
     if (json.code !== 0) throw new Error(json.msg);
-    result = json.data;
+    result = json.Data;
     return result;
   } catch (error) {
     if (response.status === 401)
@@ -126,10 +126,102 @@ const apiPOST = async ({
 
 // Device ========================================================
 
-export const getDecoders = () => {
+export const getDecoders = async (store) => {
+  const apiPath = `/device/decoders`;
+  // return await apiGET({
+  //   apiPath,
+  //   store,
+  // });
+  const result = [
+    {
+      mac: "0:1c:d5:1:11:cb",
+      model: "ZyperUHD60",
+      type: "decoder",
+      virtualType: "none",
+      name: "1D",
+      state: "Up",
+      productCode: "ZUHDDEC60",
+      productDescription: "Copper Decoder - HDMI 2.0",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
+    },
+    {
+      mac: "0:1c:d5:1:11:e4",
+      model: "ZyperUHD60",
+      type: "decoder",
+      virtualType: "none",
+      name: "3D",
+      state: "Down",
+      productCode: "ZUHDDEC60",
+      productDescription: "Copper Decoder - HDMI 2.0",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
+    },
+    {
+      mac: "0:1c:d5:1:11:f0",
+      model: "ZyperUHD60",
+      type: "decoder",
+      virtualType: "none",
+      name: "2D",
+      state: "Up",
+      productCode: "ZUHDDEC60",
+      productDescription: "Copper Decoder - HDMI 2.0",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
+    },
+    {
+      mac: "0:1c:d5:1:13:e2",
+      model: "ZyperUHD60",
+      type: "decoder",
+      virtualType: "none",
+      name: "4D",
+      state: "Down",
+      productCode: "ZUHDDEC60A",
+      productDescription: "Copper Decoder - HDMI 2.0 Dante",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
+    },
+  ];
+  return result;
+};
 
-}
-
-export const getEncoders = () => {
-
-}
+export const getEncoders = async (store) => {
+  const apiPath = `/device/encoders`;
+  // return await apiGET({
+  //   apiPath,
+  //   store,
+  // });
+  const result = [
+    {
+      mac: "0:1c:d5:1:2d:dc",
+      model: "ZyperUHD60",
+      type: "encoder",
+      virtualType: "none",
+      name: "1E",
+      state: "Up",
+      productCode: "ZUHDENC60V2",
+      productDescription: "Copper Encoder - HDMI 2.0",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
+    },
+    {
+      mac: "0:1c:d5:1:2f:89",
+      model: "ZyperUHD60",
+      type: "encoder",
+      virtualType: "none",
+      name: "2E",
+      state: "Up",
+      productCode: "ZUHDENC60V2",
+      productDescription: "Copper Encoder - HDMI 2.0",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
+    },
+  ];
+  return result;
+};

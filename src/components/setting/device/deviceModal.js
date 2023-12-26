@@ -1,14 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
-import { StoreContext } from "../components/store/store";
-import { Button, Modal, Table, Tag } from "antd";
-import { getEncoders, getDecoders } from "../api/API";
-import "./Status.scss";
+import { useContext, useEffect, useState } from "react";
+import { StoreContext } from "../../../components/store/store";
+import { Button, Modal, Table, Tag, Typography } from "antd";
+import { EditOutlined } from "@ant-design/icons";
+import { getEncoders, getDecoders } from "../../../api/API";
+import "../../../App.scss";
+import "./deviceModal.scss";
 
-const Status = () => {
+const SettingDeviceModal = () => {
   const [store] = useContext(StoreContext);
   const [devices, setDevices] = useState([]);
-  const [details, setDetails] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const editDevice = (e) => {
+    console.log(e.currentTarget.id, "!!!");
+  };
 
   useEffect(() => {
     (async () => {
@@ -25,7 +30,7 @@ const Status = () => {
         decoder.key = decoder.name;
         tempDevices.push(decoder);
       });
-
+      console.log(tempDevices);
       setDevices(tempDevices);
     })();
   }, []);
@@ -77,72 +82,47 @@ const Status = () => {
       ),
     },
     {
-      title: "詳細資訊",
-      dataIndex: ["name", "mac", "model", "productCode", "productDescription"],
-      key: "details",
-      render: (text, record) => (
-        <Button
-          onClick={() => {
-            openDetailsModal(
-              record.name,
-              record.mac,
-              record.model,
-              record.productCode,
-              record.productDescription
-            );
-          }}
-        >
-          內容
-        </Button>
+      title: "編輯",
+      key: "edit",
+      dataIndex: "id",
+      render: (_, { id }) => (
+        <div key={id} id={id} onClick={editDevice}>
+          <EditOutlined className="device-edit" />
+        </div>
       ),
     },
   ];
 
-  const openDetailsModal = (
-    name,
-    mac,
-    model,
-    productCode,
-    productDescription
-  ) => {
-    const tempDetails = (
-      <>
-        <span>名稱: {name}</span>
-        <br />
-        <span>MAC: {mac}</span>
-        <br />
-        <span>模型: {model}</span>
-        <br />
-        <span>產品編號: {productCode}</span>
-        <br />
-        <span>產品描述: {productDescription}</span>
-      </>
-    );
-    setDetails(tempDetails);
-    setIsModalOpen(true);
-  };
-
   return (
     <div>
-      {store.siderCollapse ? (
-        <div className="page-title" style={{ marginTop: 20, marginBottom: 20 }}>
-          設備即時狀態
-        </div>
-      ) : (
-        <div style={{ marginTop: 60, marginBottom: 20 }} />
-      )}
-      <Table columns={columns} dataSource={devices} style={{ width: "95%" }} />
+      <Button
+        onClick={() => setIsModalOpen(true)}
+        className="setting-option-button"
+      >
+        <Typography.Text className="setting-option-text">
+          設備進階設定
+        </Typography.Text>
+        <></>
+        <EditOutlined className="setting-option-icon" />
+      </Button>
       <Modal
+        title={`設備進階設定`}
+        className="modal-title"
+        width={660}
         open={isModalOpen}
+        footer={null}
         onCancel={() => {
           setIsModalOpen(false);
         }}
-        footer={null}
       >
-        {details}
+        <Table
+          columns={columns}
+          dataSource={devices}
+          style={{ width: "95%", marginTop: 20 }}
+        />
       </Modal>
     </div>
   );
 };
 
-export default Status;
+export default SettingDeviceModal;
