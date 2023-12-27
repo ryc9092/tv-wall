@@ -1,4 +1,5 @@
 import { Actions } from "../components/store/reducer";
+import { FAKE_TEMPLATES } from "../utils/Constant";
 
 // Login API ========================================================
 
@@ -223,5 +224,49 @@ export const getEncoders = async (store) => {
       groupName: "",
     },
   ];
+  return result;
+};
+
+// Template ========================================================
+
+export const getTemplates = async (store) => {
+  const apiPath = `/templates`;
+  // return await apiGET({
+  //   apiPath,
+  //   store,
+  // });
+  const result = FAKE_TEMPLATES;
+  return result;
+};
+
+export const createTemplate = async (store) => {
+  const apiPath = `/template`;
+  // return await apiGET({
+  //   apiPath,
+  //   store,
+  // });
+  const result = true;
+  return result;
+};
+
+export const deleteTemplate = async (store) => {
+  const apiPath = `/template`;
+  // return await apiGET({
+  //   apiPath,
+  //   store,
+  // });
+  const result = true;
+  return result;
+};
+
+// Wall ========================================================
+
+export const getWalls = async (store) => {
+  const apiPath = `/walls`;
+  // return await apiGET({
+  //   apiPath,
+  //   store,
+  // });
+  const result = [];
   return result;
 };

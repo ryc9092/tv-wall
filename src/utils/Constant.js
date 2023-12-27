@@ -320,21 +320,18 @@ const FAKE_SCREEN_LIST4 = [
 
 export const FAKE_TEMPLATES = [
   {
-    key: "fake_template1",
     name: "fake_template1",
-    dimension: { col: 4, row: 3 },
-    screens: FAKE_SCREEN_LIST3,
-    default: false,
-  },
-  {
-    key: "fake_template2",
-    name: "fake_template2",
     dimension: { col: 4, row: 3 },
     screens: FAKE_SCREEN_LIST3,
     default: true,
   },
   {
-    key: "fake_template3",
+    name: "fake_template2",
+    dimension: { col: 4, row: 3 },
+    screens: FAKE_SCREEN_LIST3,
+    default: false,
+  },
+  {
     name: "fake_template3",
     dimension: { col: 3, row: 3 },
     screens: FAKE_SCREEN_LIST4,

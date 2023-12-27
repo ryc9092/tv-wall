@@ -1,16 +1,33 @@
 import { useEffect, useState } from "react";
 import { Button, Checkbox, Modal, Row, Table, Typography } from "antd";
-import { FAKE_TEMPLATES } from "../../../utils/Constant";
 import { EditOutlined } from "@ant-design/icons";
 import CreateTemplate from "./createTemplate";
 import ViewTemplate from "./viewTemplate";
+import { getTemplates, deleteTemplate } from "../../../api/API";
+import {
+  showWarningNotification,
+  showSuccessNotificationByMsg,
+} from "../../../utils/Utils";
 import "../../../App.scss";
 
-const SettingTemplateModal = ({}) => {
+const SettingTemplateModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openViewTemplateModal, setOpenViewTemplateModal] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
-  const [templates, setTemplates] = useState(FAKE_TEMPLATES);
+  const [templates, setTemplates] = useState([]);
+  const [reload, setReload] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let tempTemplates = [];
+      const result = await getTemplates();
+      result.forEach((template) => {
+        template.key = template.name;
+        tempTemplates.push(template);
+      });
+      setTemplates(tempTemplates);
+    })();
+  }, [reload]);
 
   const changeDefaultTemplate = (record) => {
     let tempTemplates = templates.slice();
@@ -24,10 +41,6 @@ const SettingTemplateModal = ({}) => {
     });
     setTemplates(tempTemplates);
   };
-
-  useEffect(() => {
-    console.log(templates);
-  }, [templates]);
 
   const columns = [
     {
@@ -71,7 +84,7 @@ const SettingTemplateModal = ({}) => {
           >
             檢視
           </Button>
-          <Button key={`${text}-delete`} id={text} onClick={removeWall}>
+          <Button key={`${text}-delete`} id={text} onClick={removeTemplate}>
             刪除
           </Button>
         </div>
@@ -79,13 +92,21 @@ const SettingTemplateModal = ({}) => {
     },
   ];
 
-  const removeWall = (e) => {
-    console.log("remove template: ", e.currentTarget.id);
+  const removeTemplate = (e) => {
+    const templateName = e.currentTarget.id;
+    console.log(`remove template: ${templateName}`);
+    (async () => {
+      const result = await deleteTemplate();
+      if (result) {
+        showSuccessNotificationByMsg("版型移除成功");
+        setReload(Math.random);
+      } else showWarningNotification("版型移除失敗");
+    })();
   };
 
   const viewTemplate = (e) => {
     let templateName = e.currentTarget.id;
-    FAKE_TEMPLATES.forEach((template) => {
+    templates.forEach((template) => {
       if (template.name === templateName) {
         setOpenViewTemplateModal(true);
         setSelectedTemplate(template);
@@ -116,7 +137,7 @@ const SettingTemplateModal = ({}) => {
         }}
       >
         <Row style={{ marginTop: 16, marginBottom: 12 }}>
-          <CreateTemplate />
+          <CreateTemplate setReload={setReload} />
         </Row>
         <Table
           columns={columns}

@@ -12,12 +12,17 @@ import {
   Typography,
 } from "antd";
 import { blockColorList } from "../../../utils/Constant";
+import { createTemplate } from "../../../api/API";
+import {
+  showWarningNotification,
+  showSuccessNotificationByMsg,
+} from "../../../utils/Utils";
 import "../../../App.scss";
 
-const CreateTemplate = () => {
+const CreateTemplate = ({ setReload }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [templateName, setTemplateName] = useState(null);
-  const [wallSize, setWallSize] = useState({ col: 1, row: 1 });
+  const [templateSize, setTemplateSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
   const [wallTemplate, setWallTemplate] = useState(null);
   const [blocks, setBlocks] = useState(1);
@@ -26,7 +31,7 @@ const CreateTemplate = () => {
   const resetTemplate = () => {
     setScreenList([]);
     setTemplateName(null);
-    setWallSize({ col: 1, row: 1 });
+    setTemplateSize({ col: 1, row: 1 });
     setBlocks(1);
     setCurrentBlock(1);
   };
@@ -35,15 +40,16 @@ const CreateTemplate = () => {
     resetTemplate();
   }, [isModalOpen]);
 
+  // initialize screen list by dimension: [{number: 1, block: ""}, {number: 2, block: ""}, ...]
   useEffect(() => {
-    // generate screen list by dimension: [{number: 1, block: ""}, {number: 2, block: ""}, ...]
     setScreenList(
-      Array.from({ length: wallSize.col * wallSize.row }, (v, i) => {
+      Array.from({ length: templateSize.col * templateSize.row }, (v, i) => {
         return { number: i + 1, block: "" };
       })
     );
-  }, [wallSize]);
+  }, [templateSize]);
 
+  // initialize block radios by block number:
   const blockNum = Array.from({ length: blocks }, (v, i) => i + 1); // make a block list [1, 2, 3, ...]
   let blockRadios = (
     <>
@@ -68,7 +74,7 @@ const CreateTemplate = () => {
   useEffect(() => {
     // create template table
     let tempRow = [];
-    let template = [];
+    let tempTemplate = [];
     screenList.forEach((screen) => {
       tempRow.push(
         <td
@@ -94,22 +100,35 @@ const CreateTemplate = () => {
           </Tooltip>
         </td>
       );
-      if (tempRow.length === wallSize.col) {
-        template.push(<tr key={screen.number}>{tempRow}</tr>);
+      if (tempRow.length === templateSize.col) {
+        tempTemplate.push(<tr key={screen.number}>{tempRow}</tr>);
         tempRow = []; // clear row
       }
     });
-    setWallTemplate(template);
+    setWallTemplate(tempTemplate);
   }, [screenList, currentBlock]);
 
+  // set block number to clicked screen
   const clickWallScreen = (number) => {
-    let temp = [...screenList];
-    temp[number - 1].block = currentBlock;
-    setScreenList(temp);
+    let tempScreenList = [...screenList];
+    tempScreenList[number - 1].block = currentBlock;
+    setScreenList(tempScreenList);
   };
 
   const saveWall = () => {
-    console.log(screenList);
+    console.log(
+      `template name: ${templateName}, template size: ${JSON.stringify(
+        templateSize
+      )}, screen list: ${JSON.stringify(screenList)}`
+    );
+    (async () => {
+      const result = await createTemplate();
+      if (result) {
+        showSuccessNotificationByMsg("版型建立成功");
+        setReload(Math.random);
+        setIsModalOpen(false);
+      } else showWarningNotification("版型建立失敗");
+    })();
   };
 
   return (
@@ -145,23 +164,27 @@ const CreateTemplate = () => {
           <Col style={{ marginRight: "6px" }}>{"維度:"}</Col>
           <Col style={{ marginRight: "6px" }}>
             <InputNumber
-              value={wallSize.col}
+              value={templateSize.col}
               min={1}
               max={6}
               size="small"
               style={{ width: "48px" }}
-              onChange={(value) => setWallSize({ ...wallSize, col: value })}
+              onChange={(value) =>
+                setTemplateSize({ ...templateSize, col: value })
+              }
             ></InputNumber>
           </Col>
           <Col style={{ marginRight: "6px" }}>{" X "}</Col>
           <Col>
             <InputNumber
-              value={wallSize.row}
+              value={templateSize.row}
               min={1}
               max={6}
               size="small"
               style={{ width: "48px" }}
-              onChange={(value) => setWallSize({ ...wallSize, row: value })}
+              onChange={(value) =>
+                setTemplateSize({ ...templateSize, row: value })
+              }
             ></InputNumber>
           </Col>
         </Row>

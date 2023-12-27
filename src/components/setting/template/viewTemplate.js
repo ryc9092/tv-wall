@@ -24,7 +24,7 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
   useEffect(() => {
     // create template table
     let tempRow = [];
-    let template = [];
+    let tempTemplate = [];
     screenList.forEach((screen) => {
       tempRow.push(
         <td
@@ -46,11 +46,11 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
         </td>
       );
       if (tempRow.length === templateSize.col) {
-        template.push(<tr key={screen.number}>{tempRow}</tr>);
+        tempTemplate.push(<tr key={screen.number}>{tempRow}</tr>);
         tempRow = []; // clear row
       }
     });
-    setWallTemplate(template);
+    setWallTemplate(tempTemplate);
   }, [screenList]);
 
   return (
