@@ -1,5 +1,5 @@
 import { Actions } from "../components/store/reducer";
-import { FAKE_TEMPLATES } from "../utils/Constant";
+import { FAKE_TEMPLATES, FAKE_WALLS } from "../utils/Constant";
 
 // Login API ========================================================
 
@@ -267,6 +267,26 @@ export const getWalls = async (store) => {
   //   apiPath,
   //   store,
   // });
-  const result = [];
+  const result = FAKE_WALLS;
+  return result;
+};
+
+export const deleteWall = async (store) => {
+  const apiPath = `/wall`;
+  // return await apiGET({
+  //   apiPath,
+  //   store,
+  // });
+  const result = true;
+  return result;
+};
+
+export const createWall = async (store) => {
+  const apiPath = `/wall`;
+  // return await apiGET({
+  //   apiPath,
+  //   store,
+  // });
+  const result = true;
   return result;
 };

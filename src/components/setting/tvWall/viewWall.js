@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Col, Input, InputNumber, Modal, Row, Select, Typography } from "antd";
-import { FAKE_DECODERS } from "../../../utils/Constant";
 import "../../../App.scss";
 
 const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
   const [wallName, setWallName] = useState(null);
   const [wallSize, setWallSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
-  const [wallTemplate, setWallTemplate] = useState(null);
+  const [wallObj, setWallObj] = useState(null);
 
   useEffect(() => {
     if (wall) {
@@ -17,19 +16,14 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
     }
   }, [wall]);
 
-  let decoderOptions = [];
-  FAKE_DECODERS.forEach((decoder) => {
-    decoderOptions.push({ value: decoder, label: decoder });
-  });
-
   useEffect(() => {
     setModalOpen(modalOpen);
   }, [modalOpen, setModalOpen]);
 
   useEffect(() => {
-    // create template table
+    // create wall table
     let tempRow = [];
-    let template = [];
+    let tempWall = [];
     screenList.forEach((screen) => {
       tempRow.push(
         <td
@@ -40,17 +34,17 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
         </td>
       );
       if (tempRow.length === wallSize.col) {
-        template.push(<tr key={screen.number}>{tempRow}</tr>);
+        tempWall.push(<tr key={screen.number}>{tempRow}</tr>);
         tempRow = []; // clear row
       }
     });
-    setWallTemplate(template);
+    setWallObj(tempWall);
   }, [screenList]);
 
   return (
     <div>
       <Modal
-        title={"版型"}
+        title={"電視牆"}
         className="modal-title"
         width={568}
         open={modalOpen}
@@ -61,7 +55,7 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
         }}
       >
         <Row style={{ marginTop: "20px" }}>
-          <Col style={{ marginRight: "6px" }}>{"版型名稱:"}</Col>
+          <Col style={{ marginRight: "6px" }}>{"電視牆名稱:"}</Col>
           <Col style={{ marginRight: "16px" }}>
             <Input
               value={wallName}
@@ -104,7 +98,7 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
               }}
             >
               <table>
-                <tbody>{wallTemplate}</tbody>
+                <tbody>{wallObj}</tbody>
               </table>
             </div>
           </Col>

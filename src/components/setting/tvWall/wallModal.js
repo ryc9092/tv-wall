@@ -1,16 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Modal, Row, Select, Table, Typography } from "antd";
-import { FAKE_WALLS } from "../../../utils/Constant";
 import { EditOutlined } from "@ant-design/icons";
 import CreateWall from "./createWall";
 import ViewWall from "./viewWall";
+import { getWalls, deleteWall } from "../../../api/API";
+import {
+  showWarningNotification,
+  showSuccessNotificationByMsg,
+} from "../../../utils/Utils";
 import "../../../App.scss";
 
 const SettingWallModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedWall, setSelectedWall] = useState(null);
   const [openViewWallModal, setOpenViewWallModal] = useState(false);
-  const data = FAKE_WALLS;
+  const [walls, setWalls] = useState([]);
+  const [reload, setReload] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let tempWalls = [];
+      const result = await getWalls();
+      result.forEach((wall) => {
+        wall.key = wall.name;
+        tempWalls.push(wall);
+      });
+      setWalls(tempWalls);
+    })();
+  }, [reload]);
 
   const zones = [
     {
@@ -57,11 +74,18 @@ const SettingWallModal = () => {
 
   const removeWall = (e) => {
     console.log("remove wall: ", e.currentTarget.id);
+    (async () => {
+      const result = await deleteWall();
+      if (result) {
+        showSuccessNotificationByMsg("電視牆移除成功");
+        setReload(Math.random);
+      } else showWarningNotification("電視牆移除失敗");
+    })();
   };
 
   const viewWall = (e) => {
     let wallName = e.currentTarget.id;
-    FAKE_WALLS.forEach((wall) => {
+    walls.forEach((wall) => {
       if (wall.name === wallName) {
         setOpenViewWallModal(true);
         setSelectedWall(wall);
@@ -97,9 +121,9 @@ const SettingWallModal = () => {
             defaultValue={"zone1"}
             style={{ width: "120px", marginRight: 8 }}
           /> */}
-          <CreateWall />
+          <CreateWall setReload={setReload} />
         </Row>
-        <Table columns={columns} dataSource={data} style={{ width: "95%" }} />
+        <Table columns={columns} dataSource={walls} style={{ width: "95%" }} />
         <ViewWall
           wall={selectedWall}
           modalOpen={openViewWallModal}

@@ -172,7 +172,7 @@ const CreateTemplate = ({ setReload }) => {
               onChange={(value) =>
                 setTemplateSize({ ...templateSize, col: value })
               }
-            ></InputNumber>
+            />
           </Col>
           <Col style={{ marginRight: "6px" }}>{" X "}</Col>
           <Col>
@@ -185,7 +185,7 @@ const CreateTemplate = ({ setReload }) => {
               onChange={(value) =>
                 setTemplateSize({ ...templateSize, row: value })
               }
-            ></InputNumber>
+            />
           </Col>
         </Row>
         <Row style={{ marginTop: "16px" }}>

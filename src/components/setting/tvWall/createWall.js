@@ -9,29 +9,43 @@ import {
   Select,
   Typography,
 } from "antd";
-import { FAKE_DECODERS } from "../../../utils/Constant";
+import { getDecoders, createWall } from "../../../api/API";
+import {
+  showWarningNotification,
+  showSuccessNotificationByMsg,
+} from "../../../utils/Utils";
 import "../../../App.scss";
 
-const CreateWall = () => {
+const CreateWall = ({ setReload }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [wallName, setWallName] = useState(null);
   const [wallSize, setWallSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
-  const [wallTemplate, setWallTemplate] = useState(null);
+  const [decoderOptions, setDecoderOptions] = useState([]);
+  const [wallObj, setWallObj] = useState(null);
 
-  let decoderOptions = [];
-  FAKE_DECODERS.forEach((decoder) => {
-    decoderOptions.push({ value: decoder, label: decoder });
-  });
+  // get decoders
+  useEffect(() => {
+    let tempDecoders = [];
+    let tempDecoderOptions = [];
+    (async () => {
+      const decoders = await getDecoders();
+      if (decoders) tempDecoders = decoders;
+      tempDecoders.forEach((decoder) => {
+        tempDecoderOptions.push({ value: decoder.name, label: decoder.name });
+      });
+      setDecoderOptions(tempDecoderOptions);
+    })();
+  }, []);
 
-  const resetTemplate = () => {
+  const resetWall = () => {
     setWallName(null);
     setWallSize({ col: 1, row: 1 });
     setScreenList([]);
   };
 
   useEffect(() => {
-    resetTemplate();
+    resetWall();
   }, [isModalOpen]);
 
   useEffect(() => {
@@ -44,9 +58,9 @@ const CreateWall = () => {
   }, [wallSize]);
 
   useEffect(() => {
-    // create tv wall table
+    // create wall table
     let tempRow = [];
-    let template = [];
+    let tempWall = [];
     screenList.forEach((screen) => {
       tempRow.push(
         <td
@@ -57,11 +71,11 @@ const CreateWall = () => {
         </td>
       );
       if (tempRow.length === wallSize.col) {
-        template.push(<tr key={screen.number}>{tempRow}</tr>);
+        tempWall.push(<tr key={screen.number}>{tempRow}</tr>);
         tempRow = []; // clear row
       }
     });
-    setWallTemplate(template);
+    setWallObj(tempWall);
   }, [screenList]);
 
   const setScreenDecoder = ({ screenNumber, decoder }) => {
@@ -71,7 +85,19 @@ const CreateWall = () => {
   };
 
   const saveWall = () => {
-    console.log(screenList);
+    console.log(
+      `wall name: ${wallName}, wall size: ${JSON.stringify(
+        wallSize
+      )}, screen list: ${JSON.stringify(screenList)}`
+    );
+    (async () => {
+      const result = await createWall();
+      if (result) {
+        showSuccessNotificationByMsg("電視牆建立成功");
+        setReload(Math.random);
+        setIsModalOpen(false);
+      } else showWarningNotification("電視牆建立失敗");
+    })();
   };
 
   return (
@@ -86,7 +112,7 @@ const CreateWall = () => {
         open={isModalOpen}
         footer={null}
         onCancel={() => {
-          resetTemplate();
+          resetWall();
           setIsModalOpen(false);
         }}
       >
@@ -111,7 +137,7 @@ const CreateWall = () => {
               size="small"
               style={{ width: "48px" }}
               onChange={(value) => setWallSize({ ...wallSize, col: value })}
-            ></InputNumber>
+            />
           </Col>
           <Col style={{ marginRight: "6px" }}>{" X "}</Col>
           <Col>
@@ -122,7 +148,7 @@ const CreateWall = () => {
               size="small"
               style={{ width: "48px" }}
               onChange={(value) => setWallSize({ ...wallSize, row: value })}
-            ></InputNumber>
+            />
           </Col>
         </Row>
         <Row style={{ marginTop: "16px" }}>
@@ -136,7 +162,7 @@ const CreateWall = () => {
               }}
             >
               <table>
-                <tbody>{wallTemplate}</tbody>
+                <tbody>{wallObj}</tbody>
               </table>
             </div>
           </Col>
@@ -176,7 +202,7 @@ const CreateWall = () => {
           </Col>
         </Row>
         <Row style={{ marginTop: "16px" }}>
-          <Button onClick={resetTemplate} style={{ marginRight: "16px" }}>
+          <Button onClick={resetWall} style={{ marginRight: "16px" }}>
             重置電視牆
           </Button>
           <Button onClick={saveWall}>儲存</Button>
