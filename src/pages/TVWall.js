@@ -4,7 +4,8 @@ import { Button, Col, Input, Radio, Row, Select, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import TvWall from "../components/tvwall/tvWall";
 import useWindowDimensions from "../utils/WindowDimension";
-import { ENCODER_TYPERS, FAKE_ENCODERS, FAKE_WALLS } from "../utils/Constant";
+import { ENCODER_TYPERS } from "../utils/Constant";
+import { getWalls, getTemplates, getEncoders } from "../api/API";
 import "../App.scss";
 import "./TVWall.scss";
 
@@ -14,6 +15,8 @@ const TVWall = () => {
   const [encoderType, setEncoderType] = useState("1");
   const [isSmallElement, setIsSmallElement] = useState(false);
   const [wallOptions, setWallOptions] = useState([]);
+  const [encoderElementsNormal, setEncoderElementsNormal] = useState([]);
+  const [encoderElementsAbnormal, setEncoderElementsAbnormal] = useState([]);
 
   // The elements size would be changed according to width
   useEffect(() => {
@@ -21,38 +24,80 @@ const TVWall = () => {
     else if (width < 824 && !isSmallElement) setIsSmallElement(true);
   }, [isSmallElement, width]);
 
+  // Set wall options and normal/abnormal encoder list
   useEffect(() => {
-    let tempWallOptions = [];
-    FAKE_WALLS.forEach((wall) => {
-      tempWallOptions.push({ value: wall.name, label: wall.name });
-    });
-    setWallOptions(tempWallOptions);
-  }, [FAKE_WALLS]);
+    (async () => {
+      let tempWallOptions = [];
+      const result = await getWalls();
+      result.forEach((wall) => {
+        tempWallOptions.push({ value: wall.name, label: wall.name });
+      });
+      setWallOptions(tempWallOptions);
+    })();
+
+    (async () => {
+      let tempNormalEncoders = [];
+      let tempAbnormalEncoders = [];
+      const encoders = await getEncoders(store);
+      encoders.forEach((encoder) => {
+        if (encoder.state === "Up") tempNormalEncoders.push(encoder);
+        else tempAbnormalEncoders.push(encoder);
+      });
+
+      let tempNormalEncoderElements = [];
+      tempNormalEncoders.forEach((encoder) => {
+        tempNormalEncoderElements.push(
+          <Row key={encoder.name} style={{ marginTop: "6px" }}>
+            <Button
+              id={encoder.name}
+              type="text"
+              size="small"
+              style={{ cursor: "pointer" }}
+              className="tvwall-encoder"
+              onClick={handleChooseEncoder}
+            >
+              <span className="encoder-normal-dot" />
+              {encoder.name}
+            </Button>
+          </Row>
+        );
+      });
+
+      let tempAbnormalEncoderElements = [];
+      tempAbnormalEncoders.forEach((encoder) => {
+        tempAbnormalEncoderElements.push(
+          <Row key={encoder.name} style={{ marginTop: "6px" }}>
+            <Button
+              id={encoder.name}
+              type="text"
+              size="small"
+              style={{ cursor: "pointer" }}
+            >
+              <span
+                className={
+                  encoder.state === "Down"
+                    ? "encoder-down-dot"
+                    : "encoder-abnormal-dot"
+                }
+              />
+              {encoder.name}
+            </Button>
+          </Row>
+        );
+      });
+
+      setEncoderElementsNormal(tempNormalEncoderElements);
+      setEncoderElementsAbnormal(tempAbnormalEncoderElements);
+    })();
+  }, []);
 
   const changeEncoderType = ({ target: { value } }) => {
     setEncoderType(value);
   };
 
   const handleChooseEncoder = (event) => {
-    console.log(event.target.id);
+    console.log(event.currentTarget.id);
   };
-
-  let encoderElement = [];
-  FAKE_ENCODERS.forEach((encoder) => {
-    encoderElement.push(
-      <Row key={encoder} style={{ marginTop: "10px" }}>
-        <div
-          id={encoder}
-          style={{ cursor: "pointer" }}
-          className="tvwall-encoder"
-          onClick={handleChooseEncoder}
-        >
-          <span className="encoder-normal-dot" />
-          {encoder}
-        </div>
-      </Row>
-    );
-  });
 
   const encoderBlock = (
     <div
@@ -83,8 +128,12 @@ const TVWall = () => {
         className="tvwall-encoder-layout"
         style={{ margin: "8px 0px 0px 15px" }}
       >
-        <div style={{ overflowY: "auto", width: "89%" }}>{encoderElement}</div>
-        <div style={{ overflowY: "auto", width: "89%" }}>{encoderElement}</div>
+        <div style={{ overflowY: "scroll", width: "89%" }}>
+          {encoderElementsNormal}
+        </div>
+        <div style={{ overflowY: "scroll", width: "89%" }}>
+          {encoderElementsAbnormal}
+        </div>
       </div>
     </div>
   );

@@ -290,3 +290,7 @@ export const createWall = async (store) => {
   const result = true;
   return result;
 };
+
+export const wallVideoAssociate = async (store) => {
+  return true;
+};

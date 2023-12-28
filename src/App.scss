@@ -18,19 +18,28 @@ th {
 .encoder-normal-dot {
     height: 14px;
     width: 14px;
-    background-color: #0B9129;
+    background-color: #389e0d;
     border-radius: 50%;
     display: inline-block;
-    margin: 3px 6px 0px 0px;
+    margin: 0px 6px -2px 0px;
+}
+
+.encoder-down-dot {
+    height: 14px;
+    width: 14px;
+    background-color: #d4b106;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0px 6px -2px 0px;
 }
 
 .encoder-abnormal-dot {
     height: 14px;
     width: 14px;
-    background-color: #D8382E;
+    background-color: #cf1322;
     border-radius: 50%;
     display: inline-block;
-    margin: 2px 6px 0px 0px;
+    margin: 0px 6px -2px 0px;
 }
 
 .setting-option-button {
