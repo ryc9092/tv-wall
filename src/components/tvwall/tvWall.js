@@ -1,18 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "antd";
-import {
-  fakewall1,
-  fakewall2,
-  fakewall3,
-  fakewall4,
-  FAKE_WALLS,
-  blockColorList,
-} from "../../utils/Constant";
 import "../../App.scss";
 
 const TvWall = ({ selectedWall, selectedTemplate }) => {
-  const [tvWallScreens, setTvWallScreens] = useState(fakewall4);
-  const [tvWallSize, setTvWallSize] = useState({ col: 4, row: 5 });
+  const [tvWallScreens, setTvWallScreens] = useState([]);
+  const [tvWallSize, setTvWallSize] = useState({ col: 0, row: 0 });
   const [tvWallTemplate, setTvWallTemplate] = useState(null);
   const [blocks, setBlocks] = useState([]);
   const [blocksWithPosition, setBlocksWithPosition] = useState([]);
