@@ -219,62 +219,50 @@ export const FAKE_WALLS = [
 const FAKE_SCREEN_LIST3 = [
   {
     number: 1,
-    decoder: "解碼器1",
     block: "1",
   },
   {
     number: 2,
-    decoder: "解碼器2",
     block: "1",
   },
   {
     number: 3,
-    decoder: "解碼器3",
     block: "1",
   },
   {
     number: 4,
-    decoder: "解碼器4",
     block: "2",
   },
   {
     number: 5,
-    decoder: "解碼器5",
     block: "1",
   },
   {
     number: 6,
-    decoder: "解碼器6",
     block: "1",
   },
   {
     number: 7,
-    decoder: "解碼器7",
     block: "1",
   },
   {
     number: 8,
-    decoder: "解碼器8",
     block: "3",
   },
   {
     number: 9,
-    decoder: "解碼器61",
     block: "1",
   },
   {
     number: 10,
-    decoder: "解碼器71",
     block: "1",
   },
   {
     number: 11,
-    decoder: "解碼器81",
     block: "1",
   },
   {
     number: 12,
-    decoder: "解碼器611",
     block: "4",
   },
 ];
@@ -318,11 +306,62 @@ const FAKE_SCREEN_LIST4 = [
   },
 ];
 
+const FAKE_SCREEN_LIST5 = [
+  {
+    number: 1,
+    block: "1",
+  },
+  {
+    number: 2,
+    block: "1",
+  },
+  {
+    number: 3,
+    block: "5",
+  },
+  {
+    number: 4,
+    block: "2",
+  },
+  {
+    number: 5,
+    block: "1",
+  },
+  {
+    number: 6,
+    block: "1",
+  },
+  {
+    number: 7,
+    block: "6",
+  },
+  {
+    number: 8,
+    block: "3",
+  },
+  {
+    number: 9,
+    block: "1",
+  },
+  {
+    number: 10,
+    block: "1",
+  },
+  {
+    number: 11,
+    block: "7",
+  },
+  {
+    number: 12,
+    block: "4",
+  },
+];
+
 export const FAKE_TEMPLATES = [
   {
     name: "fake_template1",
     dimension: { col: 4, row: 3 },
-    screens: FAKE_SCREEN_LIST3,
+    screens: FAKE_SCREEN_LIST5,
     default: false,
   },
   {
@@ -364,162 +403,130 @@ export const fakewall1 = [
   {
     number: 1,
     decoder: "解碼器1",
-    block: 1,
   },
   {
     number: 2,
     decoder: "解碼器2",
-    block: 1,
   },
   {
     number: 3,
     decoder: "解碼器3",
-    block: 1,
   },
   {
     number: 4,
     decoder: "解碼器4",
-    block: 2,
   },
   {
     number: 5,
     decoder: "解碼器5",
-    block: 1,
   },
   {
     number: 6,
     decoder: "解碼器6",
-    block: 1,
   },
   {
     number: 7,
     decoder: "解碼器7",
-    block: 1,
   },
   {
     number: 8,
     decoder: "解碼器8",
-    block: 3,
   },
   {
     number: 9,
     decoder: "解碼器61",
-    block: 1,
   },
   {
     number: 10,
     decoder: "解碼器71",
-    block: 1,
   },
   {
     number: 11,
     decoder: "解碼器81",
-    block: 1,
   },
   {
     number: 12,
     decoder: "解碼器611",
-    block: 4,
   },
   {
     number: 13,
     decoder: "解碼器611",
-    block: 5,
   },
   {
     number: 14,
     decoder: "解碼器611",
-    block: 5,
   },
   {
     number: 15,
     decoder: "解碼器611",
-    block: 6,
   },
   {
     number: 16,
     decoder: "解碼器611",
-    block: 7,
   },
   {
     number: 17,
     decoder: "解碼器611",
-    block: 5,
   },
   {
     number: 18,
     decoder: "解碼器611",
-    block: 5,
   },
   {
     number: 19,
     decoder: "解碼器611",
-    block: 8,
   },
   {
     number: 20,
     decoder: "解碼器611",
-    block: 9,
   },
   {
     number: 21,
     decoder: "解碼器611",
-    block: 10,
   },
   {
     number: 22,
     decoder: "解碼器611",
-    block: 11,
   },
   {
     number: 23,
     decoder: "解碼器611",
-    block: 11,
   },
   {
     number: 24,
     decoder: "解碼器611",
-    block: 11,
   },
   {
     number: 25,
     decoder: "解碼器611",
-    block: 12,
   },
   {
     number: 26,
     decoder: "解碼器611",
-    block: 11,
   },
   {
     number: 27,
     decoder: "解碼器611",
-    block: 11,
   },
   {
     number: 28,
     decoder: "解碼器611",
-    block: 11,
   },
   {
     number: 29,
     decoder: "解碼器611",
-    block: 13,
   },
   {
     number: 30,
     decoder: "解碼器611",
-    block: 11,
   },
   {
     number: 31,
     decoder: "解碼器611",
-    block: 11,
   },
   {
     number: 32,
     decoder: "解碼器611",
-    block: 11,
   },
 ];
 
@@ -528,47 +535,38 @@ export const fakewall2 = [
   {
     number: 1,
     decoder: "解碼器611",
-    block: 1,
   },
   {
     number: 2,
     decoder: "解碼器611",
-    block: 2,
   },
   {
     number: 3,
     decoder: "解碼器611",
-    block: 2,
   },
   {
     number: 4,
     decoder: "解碼器611",
-    block: 3,
   },
   {
     number: 5,
     decoder: "解碼器611",
-    block: 2,
   },
   {
     number: 6,
     decoder: "解碼器611",
-    block: 2,
   },
   {
     number: 7,
     decoder: "解碼器611",
-    block: 4,
   },
   {
     number: 8,
     decoder: "解碼器611",
-    block: 2,
   },
   {
     number: 9,
     decoder: "解碼器611",
-    block: 2,
   },
 ];
 
@@ -577,62 +575,50 @@ export const fakewall3 = [
   {
     number: 1,
     decoder: "解碼器1",
-    block: 1,
   },
   {
     number: 2,
     decoder: "解碼器2",
-    block: 1,
   },
   {
     number: 3,
     decoder: "解碼器3",
-    block: 1,
   },
   {
     number: 4,
     decoder: "解碼器4",
-    block: 2,
   },
   {
     number: 5,
     decoder: "解碼器5",
-    block: 1,
   },
   {
     number: 6,
     decoder: "解碼器6",
-    block: 1,
   },
   {
     number: 7,
     decoder: "解碼器7",
-    block: 1,
   },
   {
     number: 8,
     decoder: "解碼器8",
-    block: 3,
   },
   {
     number: 9,
     decoder: "解碼器61",
-    block: 1,
   },
   {
     number: 10,
     decoder: "解碼器71",
-    block: 1,
   },
   {
     number: 11,
     decoder: "解碼器81",
-    block: 1,
   },
   {
     number: 12,
     decoder: "解碼器611",
-    block: 4,
   },
 ];
 
@@ -641,101 +627,81 @@ export const fakewall4 = [
   {
     number: 1,
     decoder: "解碼器1",
-    block: 1,
   },
   {
     number: 2,
     decoder: "解碼器2",
-    block: 1,
   },
   {
     number: 3,
     decoder: "解碼器3",
-    block: 1,
   },
   {
     number: 4,
     decoder: "解碼器4",
-    block: 2,
   },
   {
     number: 5,
     decoder: "解碼器5",
-    block: 1,
   },
   {
     number: 6,
     decoder: "解碼器6",
-    block: 1,
   },
   {
     number: 7,
     decoder: "解碼器7",
-    block: 1,
   },
   {
     number: 8,
     decoder: "解碼器8",
-    block: 3,
   },
   {
     number: 9,
     decoder: "解碼器61",
-    block: 1,
   },
   {
     number: 10,
     decoder: "解碼器71",
-    block: 1,
   },
   {
     number: 11,
     decoder: "解碼器81",
-    block: 1,
   },
   {
     number: 12,
     decoder: "解碼器611",
-    block: 4,
   },
   {
     number: 13,
     decoder: "解碼器611",
-    block: 5,
   },
   {
     number: 14,
     decoder: "解碼器611",
-    block: 5,
   },
   {
     number: 15,
     decoder: "解碼器611",
-    block: 6,
   },
   {
     number: 16,
     decoder: "解碼器611",
-    block: 7,
   },
   {
     number: 17,
     decoder: "解碼器611",
-    block: 5,
   },
   {
     number: 18,
     decoder: "解碼器611",
-    block: 5,
   },
   {
     number: 19,
     decoder: "解碼器611",
-    block: 8,
   },
   {
     number: 20,
     decoder: "解碼器611",
-    block: 9,
   },
 ];

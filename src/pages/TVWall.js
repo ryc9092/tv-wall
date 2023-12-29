@@ -64,6 +64,7 @@ const TVWall = () => {
         tempNormalEncoderElements.push(
           <Row key={encoder.name} style={{ marginTop: "6px" }}>
             <Button
+              key={encoder.name}
               id={encoder.name}
               type="text"
               size="small"
@@ -83,6 +84,7 @@ const TVWall = () => {
         tempAbnormalEncoderElements.push(
           <Row key={encoder.name} style={{ marginTop: "6px" }}>
             <Button
+              key={encoder.name}
               id={encoder.name}
               type="text"
               size="small"
@@ -229,7 +231,7 @@ const TVWall = () => {
                 <Space direction="vertical">
                   {templateOptions.map((template) => (
                     <Radio
-                      key={template.name}
+                      key={template?.name}
                       value={template.name}
                       {...template}
                       style={{ marginTop: 5 }}

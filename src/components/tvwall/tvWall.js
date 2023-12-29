@@ -19,6 +19,27 @@ const TvWall = ({ selectedWall, selectedTemplate }) => {
   const [needUpdateBlocks, setNeedUpdateBlocks] = useState(null);
   const screenSizeUnit = { horizontal: 60, straight: 45 };
 
+  useEffect(() => {
+    let tempScreens = [];
+    if (
+      selectedWall &&
+      selectedTemplate &&
+      selectedWall.dimension.col === selectedTemplate.dimension.col &&
+      selectedWall.dimension.row === selectedTemplate.dimension.row
+    ) {
+      selectedWall.screens.forEach((screen, idx) => {
+        let tempScreen = screen;
+        tempScreen.block = parseInt(selectedTemplate.screens[idx].block);
+        tempScreens.push(tempScreen);
+      });
+      setTvWallScreens(tempScreens);
+      setTvWallSize({
+        col: selectedWall.dimension.col,
+        row: selectedWall.dimension.row,
+      });
+    }
+  }, [selectedWall, selectedTemplate]);
+
   const getAboveScreen = (screen) => {
     if (screen.number > tvWallSize.col) {
       return tvWallScreens[screen.number - tvWallSize.col - 1];
@@ -109,7 +130,7 @@ const TvWall = ({ selectedWall, selectedTemplate }) => {
     blocksWithPosition.forEach((block, index) => {
       wall.push(
         <div
-          key={block.block}
+          key={index}
           style={{
             width: screenSizeUnit.horizontal * block.col,
             height: screenSizeUnit.straight * block.row,
@@ -119,6 +140,7 @@ const TvWall = ({ selectedWall, selectedTemplate }) => {
           }}
         >
           <Button
+            key={index}
             style={{ width: "100%", height: "100%" }}
             onClick={() => {
               setEncoder(index);
