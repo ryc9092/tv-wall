@@ -323,13 +323,13 @@ export const FAKE_TEMPLATES = [
     name: "fake_template1",
     dimension: { col: 4, row: 3 },
     screens: FAKE_SCREEN_LIST3,
-    default: true,
+    default: false,
   },
   {
     name: "fake_template2",
     dimension: { col: 4, row: 3 },
     screens: FAKE_SCREEN_LIST3,
-    default: false,
+    default: true,
   },
   {
     name: "fake_template3",

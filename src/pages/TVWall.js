@@ -1,6 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Button, Col, Input, Radio, Row, Select, Typography } from "antd";
+import {
+  Button,
+  Col,
+  Input,
+  Radio,
+  Row,
+  Select,
+  Space,
+  Typography,
+} from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import TvWall from "../components/tvwall/tvWall";
 import useWindowDimensions from "../utils/WindowDimension";
@@ -12,9 +21,13 @@ import "./TVWall.scss";
 const TVWall = () => {
   const { width } = useWindowDimensions();
   const [store] = useContext(StoreContext);
-  const [encoderType, setEncoderType] = useState("1");
   const [isSmallElement, setIsSmallElement] = useState(false);
+  const [encoderType, setEncoderType] = useState("1");
   const [wallOptions, setWallOptions] = useState([]);
+  const [wallDimension, setWallDimension] = useState({ col: 0, row: 0 });
+  const [selectedWall, setSelectedWall] = useState({});
+  const [templateOptions, setTemplateOptions] = useState([]);
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [encoderElementsNormal, setEncoderElementsNormal] = useState([]);
   const [encoderElementsAbnormal, setEncoderElementsAbnormal] = useState([]);
 
@@ -24,15 +37,17 @@ const TVWall = () => {
     else if (width < 824 && !isSmallElement) setIsSmallElement(true);
   }, [isSmallElement, width]);
 
-  // Set wall options and normal/abnormal encoder list
+  // Set "wall options" and "template buttons" and "normal/abnormal encoder list"
   useEffect(() => {
     (async () => {
       let tempWallOptions = [];
       const result = await getWalls();
       result.forEach((wall) => {
-        tempWallOptions.push({ value: wall.name, label: wall.name });
+        tempWallOptions.push({ value: wall.name, label: wall.name, ...wall });
       });
       setWallOptions(tempWallOptions);
+      setWallDimension(tempWallOptions[0].dimension);
+      setSelectedWall(tempWallOptions[0]);
     })();
 
     (async () => {
@@ -90,6 +105,46 @@ const TVWall = () => {
       setEncoderElementsAbnormal(tempAbnormalEncoderElements);
     })();
   }, []);
+
+  // Set "template buttons" when dimension is changed
+  useEffect(() => {
+    (async () => {
+      let tempTemplateOptions = [];
+      const result = await getTemplates();
+      result.forEach((template) => {
+        if (
+          template.dimension.col === wallDimension.col &&
+          template.dimension.row === wallDimension.row
+        ) {
+          tempTemplateOptions.push({
+            value: template.name,
+            label: template.name,
+            ...template,
+          });
+        }
+      });
+      tempTemplateOptions.forEach((template) => {
+        if (template.default === true) setSelectedTemplate(template.name);
+      });
+      setTemplateOptions(tempTemplateOptions);
+    })();
+  }, [wallDimension]);
+
+  const changeWallSelected = (wall) => {
+    setWallDimension(wall.dimension);
+    setSelectedWall(wall);
+  };
+
+  const changeTemplateSelected = (template) => {
+    let tempTemplateOptions = templateOptions.slice();
+    templateOptions.forEach((option, idx) => {
+      if (option.name === template.value) {
+        tempTemplateOptions[idx].default = true;
+        setSelectedTemplate(template.value);
+      } else tempTemplateOptions[idx].default = false;
+    });
+    setTemplateOptions(tempTemplateOptions);
+  };
 
   const changeEncoderType = ({ target: { value } }) => {
     setEncoderType(value);
@@ -151,23 +206,39 @@ const TVWall = () => {
             <Col style={{ width: 270, margin: 8 }}>
               <Row>
                 <Select
-                  defaultValue={wallOptions[0]?.value}
                   options={wallOptions}
-                  style={{ minWidth: 120 }}
-                ></Select>
-                <Button style={{ marginLeft: 12, color: "#f5222d" }}>
+                  value={selectedWall}
+                  onChange={(value, option) => {
+                    changeWallSelected(option);
+                  }}
+                  style={{ minWidth: 130 }}
+                />
+                <Button style={{ marginLeft: 8, color: "#f5222d" }}>
                   清除牆面連接
                 </Button>
               </Row>
-              <Row style={{ marginTop: 8 }}>
-                <Button>版型1</Button>
-              </Row>
-              <Row style={{ marginTop: 8 }}>
-                <Button>版型2</Button>
-              </Row>
-              <Row style={{ marginTop: 8 }}>
-                <Button>版型3</Button>
-              </Row>
+              <Radio.Group
+                onChange={(e) => {
+                  changeTemplateSelected(e.target);
+                }}
+                value={selectedTemplate}
+                style={{ margin: "10px 0px 0px 0px" }}
+                size={isSmallElement ? "small" : "middle"}
+              >
+                <Space direction="vertical">
+                  {templateOptions.map((template) => (
+                    <Radio
+                      key={template.name}
+                      value={template.name}
+                      {...template}
+                      style={{ marginTop: 5 }}
+                    >
+                      {template.name}
+                    </Radio>
+                  ))}
+                </Space>
+              </Radio.Group>
+              <br />
             </Col>
             <Col style={{ margin: 8 }}>
               <TvWall />
