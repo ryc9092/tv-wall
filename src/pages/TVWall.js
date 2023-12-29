@@ -37,7 +37,7 @@ const TVWall = () => {
     else if (width < 824 && !isSmallElement) setIsSmallElement(true);
   }, [isSmallElement, width]);
 
-  // Set "wall options" and "template buttons" and "normal/abnormal encoder list"
+  // Set "wall options" and "normal/abnormal encoder list"
   useEffect(() => {
     (async () => {
       let tempWallOptions = [];
@@ -106,7 +106,7 @@ const TVWall = () => {
     })();
   }, []);
 
-  // Set "template buttons" when dimension is changed
+  // Set "template radios" when dimension is changed
   useEffect(() => {
     (async () => {
       let tempTemplateOptions = [];
@@ -124,7 +124,7 @@ const TVWall = () => {
         }
       });
       tempTemplateOptions.forEach((template) => {
-        if (template.default === true) setSelectedTemplate(template.name);
+        if (template.default === true) setSelectedTemplate(template);
       });
       setTemplateOptions(tempTemplateOptions);
     })();
@@ -140,7 +140,8 @@ const TVWall = () => {
     templateOptions.forEach((option, idx) => {
       if (option.name === template.value) {
         tempTemplateOptions[idx].default = true;
-        setSelectedTemplate(template.value);
+        template.name = template.value;
+        setSelectedTemplate(template);
       } else tempTemplateOptions[idx].default = false;
     });
     setTemplateOptions(tempTemplateOptions);
@@ -221,7 +222,7 @@ const TVWall = () => {
                 onChange={(e) => {
                   changeTemplateSelected(e.target);
                 }}
-                value={selectedTemplate}
+                value={selectedTemplate?.name}
                 style={{ margin: "10px 0px 0px 0px" }}
                 size={isSmallElement ? "small" : "middle"}
               >
@@ -241,7 +242,10 @@ const TVWall = () => {
               <br />
             </Col>
             <Col style={{ margin: 8 }}>
-              <TvWall />
+              <TvWall
+                selectedWall={selectedWall}
+                selectedTemplate={selectedTemplate}
+              />
             </Col>
           </Row>
         </div>

@@ -10,7 +10,7 @@ import {
 } from "../../utils/Constant";
 import "../../App.scss";
 
-const TvWall = () => {
+const TvWall = ({ selectedWall, selectedTemplate }) => {
   const [tvWallScreens, setTvWallScreens] = useState(fakewall4);
   const [tvWallSize, setTvWallSize] = useState({ col: 4, row: 5 });
   const [tvWallTemplate, setTvWallTemplate] = useState(null);
