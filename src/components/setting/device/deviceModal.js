@@ -54,8 +54,8 @@ const SettingDeviceModal = () => {
     },
     {
       title: "別名",
-      dataIndex: "alias",
-      key: "alias",
+      dataIndex: "nickName",
+      key: "nickName",
       render: (text) => <span>{text}</span>,
     },
     {
