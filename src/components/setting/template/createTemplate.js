@@ -21,6 +21,7 @@ import "../../../App.scss";
 
 const CreateTemplate = ({ setReload }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [templateId, setTemplateId] = useState(null);
   const [templateName, setTemplateName] = useState(null);
   const [templateSize, setTemplateSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
@@ -40,11 +41,11 @@ const CreateTemplate = ({ setReload }) => {
     resetTemplate();
   }, [isModalOpen]);
 
-  // initialize screen list by dimension: [{number: 1, block: ""}, {number: 2, block: ""}, ...]
+  // initialize screen list by dimension: [{num: 1, block: ""}, {num: 2, block: ""}, ...]
   useEffect(() => {
     setScreenList(
       Array.from({ length: templateSize.col * templateSize.row }, (v, i) => {
-        return { number: i + 1, block: "" };
+        return { num: i + 1, block: "" };
       })
     );
   }, [templateSize]);
@@ -79,7 +80,7 @@ const CreateTemplate = ({ setReload }) => {
       tempRow.push(
         <td
           style={{ width: "40px", height: "40px", textAlign: "center" }}
-          key={screen.number}
+          key={screen.num}
         >
           <Tooltip placement="topLeft" title={screen.decoder}>
             <Button
@@ -89,19 +90,19 @@ const CreateTemplate = ({ setReload }) => {
                 border: "0px",
                 backgroundColor: blockColorList[screen.block - 1],
               }}
-              key={screen.number}
-              value={screen.number}
+              key={screen.num}
+              value={screen.num}
               onClick={(e) => {
                 clickWallScreen(e.target.value);
               }}
             >
-              {screen.number}
+              {screen.num}
             </Button>
           </Tooltip>
         </td>
       );
       if (tempRow.length === templateSize.col) {
-        tempTemplate.push(<tr key={screen.number}>{tempRow}</tr>);
+        tempTemplate.push(<tr key={screen.num}>{tempRow}</tr>);
         tempRow = []; // clear row
       }
     });
@@ -109,15 +110,15 @@ const CreateTemplate = ({ setReload }) => {
   }, [screenList, currentBlock]);
 
   // set block number to clicked screen
-  const clickWallScreen = (number) => {
+  const clickWallScreen = (num) => {
     let tempScreenList = [...screenList];
-    tempScreenList[number - 1].block = currentBlock;
+    tempScreenList[num - 1].block = currentBlock;
     setScreenList(tempScreenList);
   };
 
   const saveWall = () => {
     console.log(
-      `template name: ${templateName}, template size: ${JSON.stringify(
+      `template id: ${templateId}, template name: ${templateName}, template size: ${JSON.stringify(
         templateSize
       )}, screen list: ${JSON.stringify(screenList)}`
     );
@@ -148,7 +149,20 @@ const CreateTemplate = ({ setReload }) => {
         }}
       >
         <Row style={{ marginTop: "20px" }}>
-          <Col style={{ marginRight: "22px" }}>{"版型名稱:"}</Col>
+          <Col style={{ marginRight: "22px" }}>{"版型 ID:"}</Col>
+          <Col style={{ marginRight: "16px" }}>
+            <Input
+              value={templateId}
+              size="small"
+              style={{ width: "120px" }}
+              onChange={(e) => {
+                setTemplateId(e.target.value);
+              }}
+            />
+          </Col>
+        </Row>
+        <Row style={{ marginTop: "16px" }}>
+          <Col style={{ marginRight: "12px" }}>{"版型名稱:"}</Col>
           <Col style={{ marginRight: "16px" }}>
             <Input
               value={templateName}
@@ -161,7 +175,7 @@ const CreateTemplate = ({ setReload }) => {
           </Col>
         </Row>
         <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "6px" }}>{"維度:"}</Col>
+          <Col style={{ marginRight: "40px" }}>{"維度:"}</Col>
           <Col style={{ marginRight: "6px" }}>
             <InputNumber
               value={templateSize.col}

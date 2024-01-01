@@ -22,7 +22,7 @@ const SettingTemplateModal = () => {
       let tempTemplates = [];
       const result = await getTemplates();
       result.forEach((template) => {
-        template.key = template.name;
+        template.key = template.templateId;
         tempTemplates.push(template);
       });
       setTemplates(tempTemplates);
@@ -32,12 +32,12 @@ const SettingTemplateModal = () => {
   const changeDefaultTemplate = (record) => {
     let tempTemplates = templates.slice();
     templates.forEach((template, idx) => {
-      if (template.name === record.name) tempTemplates[idx].default = true;
+      if (template.templateId === record.templateId) tempTemplates[idx].isDefault = true;
       else if (
-        template.dimension.col === record.dimension.col &&
-        template.dimension.row === record.dimension.row
+        template.col === record.col &&
+        template.row === record.row
       )
-        tempTemplates[idx].default = false;
+        tempTemplates[idx].isDefault = false;
     });
     setTemplates(tempTemplates);
   };
@@ -45,11 +45,12 @@ const SettingTemplateModal = () => {
   const columns = [
     {
       title: "預設",
-      dataIndex: ["default", "name", "dimension"],
+      dataIndex: ["isDefault", "templateId", "col", "row"],
       key: "default",
       render: (text, record) => (
         <Checkbox
-          checked={record.default}
+          key={record.templateId}
+          checked={record.isDefault}
           onChange={() => {
             changeDefaultTemplate(record);
           }}
@@ -57,22 +58,28 @@ const SettingTemplateModal = () => {
       ),
     },
     {
+      title: "ID",
+      dataIndex: "templateId",
+      key: "templateId",
+      render: (text) => <span>{text}</span>,
+    },
+    {
       title: "名稱",
-      dataIndex: ["name", "default"],
-      key: "name",
-      render: (text, record) => <span>{record.name}</span>,
+      dataIndex: "templateName",
+      key: "templateName",
+      render: (text) => <span>{text}</span>,
     },
     {
       title: "維度",
-      dataIndex: "dimension",
+      dataIndex: ["col", "row"],
       key: "dimension",
-      render: (dimension) => (
-        <span>{`${dimension.col} X ${dimension.row}`}</span>
+      render: (text, record) => (
+        <span>{`${record.col} X ${record.row}`}</span>
       ),
     },
     {
       title: "操作",
-      dataIndex: "name",
+      dataIndex: "templateId",
       key: "action",
       render: (text) => (
         <div key={`${text}-action`}>
@@ -105,9 +112,9 @@ const SettingTemplateModal = () => {
   };
 
   const viewTemplate = (e) => {
-    let templateName = e.currentTarget.id;
+    let templateId = e.currentTarget.id;
     templates.forEach((template) => {
-      if (template.name === templateName) {
+      if (template.templateId === templateId) {
         setOpenViewTemplateModal(true);
         setSelectedTemplate(template);
       }
@@ -129,7 +136,7 @@ const SettingTemplateModal = () => {
       <Modal
         title={`版型管理`}
         className="modal-title"
-        width={650}
+        width={680}
         open={isModalOpen}
         footer={null}
         onCancel={() => {

@@ -218,163 +218,169 @@ export const FAKE_WALLS = [
 
 const FAKE_SCREEN_LIST3 = [
   {
-    number: 1,
+    num: 1,
     block: "1",
   },
   {
-    number: 2,
+    num: 2,
     block: "1",
   },
   {
-    number: 3,
+    num: 3,
     block: "1",
   },
   {
-    number: 4,
+    num: 4,
     block: "2",
   },
   {
-    number: 5,
+    num: 5,
     block: "1",
   },
   {
-    number: 6,
+    num: 6,
     block: "1",
   },
   {
-    number: 7,
+    num: 7,
     block: "1",
   },
   {
-    number: 8,
+    num: 8,
     block: "3",
   },
   {
-    number: 9,
+    num: 9,
     block: "1",
   },
   {
-    number: 10,
+    num: 10,
     block: "1",
   },
   {
-    number: 11,
+    num: 11,
     block: "1",
   },
   {
-    number: 12,
+    num: 12,
     block: "4",
   },
 ];
 
 const FAKE_SCREEN_LIST4 = [
   {
-    number: 1,
+    num: 1,
     block: "1",
   },
   {
-    number: 2,
+    num: 2,
     block: "1",
   },
   {
-    number: 3,
+    num: 3,
     block: "1",
   },
   {
-    number: 4,
+    num: 4,
     block: "1",
   },
   {
-    number: 5,
+    num: 5,
     block: "1",
   },
   {
-    number: 6,
+    num: 6,
     block: "1",
   },
   {
-    number: 7,
+    num: 7,
     block: "1",
   },
   {
-    number: 8,
+    num: 8,
     block: "1",
   },
   {
-    number: 9,
+    num: 9,
     block: "1",
   },
 ];
 
 const FAKE_SCREEN_LIST5 = [
   {
-    number: 1,
+    num: 1,
     block: "1",
   },
   {
-    number: 2,
+    num: 2,
     block: "1",
   },
   {
-    number: 3,
+    num: 3,
     block: "5",
   },
   {
-    number: 4,
+    num: 4,
     block: "2",
   },
   {
-    number: 5,
+    num: 5,
     block: "1",
   },
   {
-    number: 6,
+    num: 6,
     block: "1",
   },
   {
-    number: 7,
+    num: 7,
     block: "6",
   },
   {
-    number: 8,
+    num: 8,
     block: "3",
   },
   {
-    number: 9,
+    num: 9,
     block: "1",
   },
   {
-    number: 10,
+    num: 10,
     block: "1",
   },
   {
-    number: 11,
+    num: 11,
     block: "7",
   },
   {
-    number: 12,
+    num: 12,
     block: "4",
   },
 ];
 
 export const FAKE_TEMPLATES = [
   {
-    name: "fake_template1",
-    dimension: { col: 4, row: 3 },
+    templateId: "ft1",
+    templateName: "fake_template1",
+    col: 4,
+    row: 3,
     screens: FAKE_SCREEN_LIST5,
-    default: false,
+    isDefault: false,
   },
   {
-    name: "fake_template2",
-    dimension: { col: 4, row: 3 },
+    templateId: "ft2",
+    templateName: "fake_template2",
+    col: 4,
+    row: 3,
     screens: FAKE_SCREEN_LIST3,
-    default: true,
+    isDefault: true,
   },
   {
+    templateId: "ft3",
     name: "fake_template3",
-    dimension: { col: 3, row: 3 },
+    col: 3,
+    row: 3,
     screens: FAKE_SCREEN_LIST4,
-    default: true,
+    isDefault: true,
   },
 ];
 

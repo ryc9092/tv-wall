@@ -12,8 +12,8 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
   useEffect(() => {
     if (template && modalOpen) {
       setScreenList(template.screens);
-      setTemplateSize(template.dimension);
-      setTemplateName(template.name);
+      setTemplateSize({col: template.col, row: template.row});
+      setTemplateName(template.templateName);
     }
   }, [template, modalOpen]);
 
@@ -29,7 +29,7 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
       tempRow.push(
         <td
           style={{ width: "40px", height: "40px", textAlign: "center" }}
-          key={screen.number}
+          key={screen.num}
         >
           <Button
             style={{
@@ -38,15 +38,15 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
               border: "0px",
               backgroundColor: blockColorList[screen.block - 1],
             }}
-            key={screen.number}
-            value={screen.number}
+            key={screen.num}
+            value={screen.num}
           >
-            {screen.number}
+            {screen.num}
           </Button>
         </td>
       );
       if (tempRow.length === templateSize.col) {
-        tempTemplate.push(<tr key={screen.number}>{tempRow}</tr>);
+        tempTemplate.push(<tr key={screen.num}>{tempRow}</tr>);
         tempRow = []; // clear row
       }
     });
