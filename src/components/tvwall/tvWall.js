@@ -16,8 +16,8 @@ const TvWall = ({ selectedWall, selectedTemplate }) => {
     if (
       selectedWall &&
       selectedTemplate &&
-      selectedWall.dimension.col === selectedTemplate.dimension.col &&
-      selectedWall.dimension.row === selectedTemplate.dimension.row
+      selectedWall.col === selectedTemplate.col &&
+      selectedWall.row === selectedTemplate.row
     ) {
       selectedWall.screens.forEach((screen, idx) => {
         let tempScreen = screen;
@@ -26,21 +26,21 @@ const TvWall = ({ selectedWall, selectedTemplate }) => {
       });
       setTvWallScreens(tempScreens);
       setTvWallSize({
-        col: selectedWall.dimension.col,
-        row: selectedWall.dimension.row,
+        col: selectedWall.col,
+        row: selectedWall.row,
       });
     }
   }, [selectedWall, selectedTemplate]);
 
   const getAboveScreen = (screen) => {
-    if (screen.number > tvWallSize.col) {
-      return tvWallScreens[screen.number - tvWallSize.col - 1];
+    if (screen.num > tvWallSize.col) {
+      return tvWallScreens[screen.num - tvWallSize.col - 1];
     } else return { block: "" };
   };
 
   const getLeftScreen = (screen) => {
-    if (screen.number % tvWallSize.col === 1) return { block: "" };
-    else return tvWallScreens[screen.number - 2];
+    if (screen.num % tvWallSize.col === 1) return { block: "" };
+    else return tvWallScreens[screen.num - 2];
   };
 
   const updateBlocks = (blocks, blockNumber, addCol, addRow, addDecoder) => {
@@ -75,7 +75,7 @@ const TvWall = ({ selectedWall, selectedTemplate }) => {
           block: block,
           decoder: [decoder],
           encoder: screen.encoder,
-          marginLeft: (screen.number - 1) % tvWallSize.col,
+          marginLeft: (screen.num - 1) % tvWallSize.col,
         });
       }
     });

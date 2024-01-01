@@ -43,10 +43,10 @@ const TVWall = () => {
       let tempWallOptions = [];
       const result = await getWalls();
       result.forEach((wall) => {
-        tempWallOptions.push({ value: wall.name, label: wall.name, ...wall });
+        tempWallOptions.push({ value: wall.wallName, label: wall.wallName, ...wall });
       });
       setWallOptions(tempWallOptions);
-      setWallDimension(tempWallOptions[0].dimension);
+      setWallDimension({col: tempWallOptions[0].col, row: tempWallOptions[0].row});
       setSelectedWall(tempWallOptions[0]);
     })();
 
@@ -115,36 +115,36 @@ const TVWall = () => {
       const result = await getTemplates();
       result.forEach((template) => {
         if (
-          template.dimension.col === wallDimension.col &&
-          template.dimension.row === wallDimension.row
+          template.col === wallDimension.col &&
+          template.row === wallDimension.row
         ) {
           tempTemplateOptions.push({
-            value: template.name,
-            label: template.name,
+            value: template.templateName,
+            label: template.templateName,
             ...template,
           });
         }
       });
       tempTemplateOptions.forEach((template) => {
-        if (template.default === true) setSelectedTemplate(template);
+        if (template.isDefault === true) setSelectedTemplate(template);
       });
       setTemplateOptions(tempTemplateOptions);
     })();
   }, [wallDimension]);
 
   const changeWallSelected = (wall) => {
-    setWallDimension(wall.dimension);
+    setWallDimension({col: wall.col, row: wall.row});
     setSelectedWall(wall);
   };
 
   const changeTemplateSelected = (template) => {
     let tempTemplateOptions = templateOptions.slice();
     templateOptions.forEach((option, idx) => {
-      if (option.name === template.value) {
-        tempTemplateOptions[idx].default = true;
-        template.name = template.value;
+      if (option.templateId === template.value) {
+        tempTemplateOptions[idx].isDefault = true;
+        template.templateId = template.value;
         setSelectedTemplate(template);
-      } else tempTemplateOptions[idx].default = false;
+      } else tempTemplateOptions[idx].isDefault = false;
     });
     setTemplateOptions(tempTemplateOptions);
   };
@@ -224,19 +224,18 @@ const TVWall = () => {
                 onChange={(e) => {
                   changeTemplateSelected(e.target);
                 }}
-                value={selectedTemplate?.name}
+                value={selectedTemplate?.templateId}
                 style={{ margin: "10px 0px 0px 0px" }}
                 size={isSmallElement ? "small" : "middle"}
               >
                 <Space direction="vertical">
                   {templateOptions.map((template) => (
                     <Radio
-                      key={template?.name}
-                      value={template.name}
-                      {...template}
+                      key={template?.templateName}
+                      value={template.templateId}
                       style={{ marginTop: 5 }}
                     >
-                      {template.name}
+                      {template.templateName}
                     </Radio>
                   ))}
                 </Space>

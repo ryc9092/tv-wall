@@ -386,7 +386,7 @@ export const FAKE_TEMPLATES = [
   },
   {
     templateId: "ft3",
-    name: "fake_template3",
+    templateName: "fake_template3",
     col: 3,
     row: 3,
     screens: FAKE_SCREEN_LIST4,
