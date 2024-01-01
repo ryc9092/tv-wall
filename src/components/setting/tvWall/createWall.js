@@ -18,6 +18,7 @@ import "../../../App.scss";
 
 const CreateWall = ({ setReload }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [wallId, setWallId] = useState(null);
   const [wallName, setWallName] = useState(null);
   const [wallSize, setWallSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
@@ -52,7 +53,7 @@ const CreateWall = ({ setReload }) => {
     // generate default screen list: [{number: 1, decoder: ""}, {number: 2, decoder: ""}, ...]
     setScreenList(
       Array.from({ length: wallSize.col * wallSize.row }, (v, i) => {
-        return { number: i + 1, decoder: "", block: "" };
+        return { num: i + 1, decoder: "", block: "" };
       })
     );
   }, [wallSize]);
@@ -65,13 +66,13 @@ const CreateWall = ({ setReload }) => {
       tempRow.push(
         <td
           style={{ width: "40px", height: "40px", textAlign: "center" }}
-          key={screen.number}
+          key={screen.num}
         >
-          {screen.number}
+          {screen.num}
         </td>
       );
       if (tempRow.length === wallSize.col) {
-        tempWall.push(<tr key={screen.number}>{tempRow}</tr>);
+        tempWall.push(<tr key={screen.num}>{tempRow}</tr>);
         tempRow = []; // clear row
       }
     });
@@ -80,13 +81,13 @@ const CreateWall = ({ setReload }) => {
 
   const setScreenDecoder = ({ screenNumber, decoder }) => {
     let list = screenList;
-    list[screenNumber - 1] = { number: screenNumber, decoder: decoder };
+    list[screenNumber - 1] = { num: screenNumber, decoder: decoder };
     setScreenList(screenList);
   };
 
   const saveWall = () => {
     console.log(
-      `wall name: ${wallName}, wall size: ${JSON.stringify(
+      `wall id: ${wallId}, wall name: ${wallName}, wall size: ${JSON.stringify(
         wallSize
       )}, screen list: ${JSON.stringify(screenList)}`
     );
@@ -117,6 +118,19 @@ const CreateWall = ({ setReload }) => {
         }}
       >
         <Row style={{ marginTop: "20px" }}>
+          <Col style={{ marginRight: "16px" }}>{"電視牆 ID:"}</Col>
+          <Col style={{ marginRight: "16px" }}>
+            <Input
+              value={wallId}
+              size="small"
+              style={{ width: "120px" }}
+              onChange={(e) => {
+                setWallId(e.target.value);
+              }}
+            />
+          </Col>
+        </Row>
+        <Row style={{ marginTop: "16px" }}>
           <Col style={{ marginRight: "6px" }}>{"電視牆名稱:"}</Col>
           <Col style={{ marginRight: "16px" }}>
             <Input
@@ -128,7 +142,9 @@ const CreateWall = ({ setReload }) => {
               }}
             />
           </Col>
-          <Col style={{ marginRight: "6px" }}>{"維度:"}</Col>
+        </Row>
+        <Row style={{ marginTop: "16px" }}>
+          <Col style={{ marginRight: "48px" }}>{"維度:"}</Col>
           <Col style={{ marginRight: "6px" }}>
             <InputNumber
               value={wallSize.col}
@@ -178,11 +194,11 @@ const CreateWall = ({ setReload }) => {
             >
               {screenList.map((screen, index) => {
                 return (
-                  <Row key={screen.number}>
+                  <Row key={screen.num}>
                     <Typography.Text
                       style={{ fontSize: "14px", margin: "4px" }}
                     >
-                      畫面{screen.number}:
+                      畫面{screen.num}:
                     </Typography.Text>
                     <Select
                       options={decoderOptions}
@@ -190,7 +206,7 @@ const CreateWall = ({ setReload }) => {
                       style={{ width: "135px", margin: "4px 4px 4px 8px" }}
                       onChange={(value, option) => {
                         setScreenDecoder({
-                          screenNumber: screen.number,
+                          screenNumber: screen.num,
                           decoder: value,
                         });
                       }}

@@ -22,7 +22,7 @@ const SettingWallModal = () => {
       let tempWalls = [];
       const result = await getWalls();
       result.forEach((wall) => {
-        wall.key = wall.name;
+        wall.key = wall.wallId;
         tempWalls.push(wall);
       });
       setWalls(tempWalls);
@@ -38,21 +38,27 @@ const SettingWallModal = () => {
 
   const columns = [
     {
+      title: "ID",
+      dataIndex: "wallId",
+      key: "wallId",
+      render: (text) => <span>{text}</span>,
+    },
+    {
       title: "名稱",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "wallName",
+      key: "wallName",
     },
     {
       title: "維度",
-      dataIndex: "dimension",
+      dataIndex: ["col", "row"],
       key: "dimension",
-      render: (dimension) => (
-        <span>{`${dimension.col} X ${dimension.row}`}</span>
+      render: (text, record) => (
+        <span>{`${record.col} X ${record.row}`}</span>
       ),
     },
     {
       title: "操作",
-      dataIndex: "name",
+      dataIndex: "wallId",
       key: "action",
       render: (text) => (
         <div key={`${text}-action`}>
@@ -84,9 +90,9 @@ const SettingWallModal = () => {
   };
 
   const viewWall = (e) => {
-    let wallName = e.currentTarget.id;
+    let wallId = e.currentTarget.id;
     walls.forEach((wall) => {
-      if (wall.name === wallName) {
+      if (wall.wallId === wallId) {
         setOpenViewWallModal(true);
         setSelectedWall(wall);
       }

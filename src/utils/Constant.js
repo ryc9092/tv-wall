@@ -92,47 +92,47 @@ export const FAKE_DECODERS = [
 
 const FAKE_SCREEN_LIST1 = [
   {
-    number: 1,
+    num: 1,
     decoder: "解碼器1",
     block: "",
   },
   {
-    number: 2,
+    num: 2,
     decoder: "解碼器2",
     block: "",
   },
   {
-    number: 3,
+    num: 3,
     decoder: "解碼器3",
     block: "",
   },
   {
-    number: 4,
+    num: 4,
     decoder: "解碼器4",
     block: "",
   },
   {
-    number: 5,
+    num: 5,
     decoder: "解碼器5",
     block: "",
   },
   {
-    number: 6,
+    num: 6,
     decoder: "解碼器6",
     block: "",
   },
   {
-    number: 7,
+    num: 7,
     decoder: "解碼器7",
     block: "",
   },
   {
-    number: 8,
+    num: 8,
     decoder: "解碼器8",
     block: "",
   },
   {
-    number: 9,
+    num: 9,
     decoder: "解碼器61",
     block: "",
   },
@@ -140,62 +140,62 @@ const FAKE_SCREEN_LIST1 = [
 
 const FAKE_SCREEN_LIST2 = [
   {
-    number: 1,
+    num: 1,
     decoder: "解碼器1",
     block: "",
   },
   {
-    number: 2,
+    num: 2,
     decoder: "解碼器2",
     block: "",
   },
   {
-    number: 3,
+    num: 3,
     decoder: "解碼器3",
     block: "",
   },
   {
-    number: 4,
+    num: 4,
     decoder: "解碼器4",
     block: "",
   },
   {
-    number: 5,
+    num: 5,
     decoder: "解碼器5",
     block: "",
   },
   {
-    number: 6,
+    num: 6,
     decoder: "解碼器6",
     block: "",
   },
   {
-    number: 7,
+    num: 7,
     decoder: "解碼器7",
     block: "",
   },
   {
-    number: 8,
+    num: 8,
     decoder: "解碼器8",
     block: "",
   },
   {
-    number: 9,
+    num: 9,
     decoder: "解碼器61",
     block: "",
   },
   {
-    number: 10,
+    num: 10,
     decoder: "解碼器71",
     block: "",
   },
   {
-    number: 11,
+    num: 11,
     decoder: "解碼器81",
     block: "",
   },
   {
-    number: 12,
+    num: 12,
     decoder: "解碼器611",
     block: "",
   },
@@ -203,15 +203,25 @@ const FAKE_SCREEN_LIST2 = [
 
 export const FAKE_WALLS = [
   {
-    key: "fake_wall1",
-    name: "fake_wall1",
-    dimension: { col: 3, row: 3 },
+    groupId: -1,
+    wallName: "會議室1",
+    wallId: "area01",
+    col: 3,
+    row: 3,
     screens: FAKE_SCREEN_LIST1,
   },
   {
-    key: "fake_wall2",
-    name: "fake_wall2",
-    dimension: { col: 4, row: 3 },
+    wallId: "fake_wall1",
+    wallName: "fake_wall1",
+    col: 3,
+    row: 3,
+    screens: FAKE_SCREEN_LIST1,
+  },
+  {
+    wallId: "fake_wall2",
+    wallName: "fake_wall2",
+    col: 4,
+    row: 3,
     screens: FAKE_SCREEN_LIST2,
   },
 ];

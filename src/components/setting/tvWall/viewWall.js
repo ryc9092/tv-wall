@@ -11,8 +11,8 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
   useEffect(() => {
     if (wall) {
       setScreenList(wall.screens);
-      setWallSize(wall.dimension);
-      setWallName(wall.name);
+      setWallSize({col: wall.col, row: wall.row});
+      setWallName(wall.wallName);
     }
   }, [wall]);
 
@@ -28,13 +28,13 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
       tempRow.push(
         <td
           style={{ width: "40px", height: "40px", textAlign: "center" }}
-          key={screen.number}
+          key={screen.num}
         >
-          {screen.number}
+          {screen.num}
         </td>
       );
       if (tempRow.length === wallSize.col) {
-        tempWall.push(<tr key={screen.number}>{tempRow}</tr>);
+        tempWall.push(<tr key={screen.num}>{tempRow}</tr>);
         tempRow = []; // clear row
       }
     });
@@ -114,11 +114,11 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
             >
               {screenList.map((screen, index) => {
                 return (
-                  <Row key={screen.number}>
+                  <Row key={screen.num}>
                     <Typography.Text
                       style={{ fontSize: "14px", margin: "4px" }}
                     >
-                      畫面{screen.number}:
+                      畫面{screen.num}:
                     </Typography.Text>
                     <Select
                       size="small"
