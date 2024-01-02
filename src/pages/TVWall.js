@@ -28,6 +28,7 @@ const TVWall = () => {
   const [selectedWall, setSelectedWall] = useState({});
   const [templateOptions, setTemplateOptions] = useState([]);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [searchFilter, setSearchFilter] = useState("");
   const [encoderElementsNormal, setEncoderElementsNormal] = useState([]);
   const [encoderElementsAbnormal, setEncoderElementsAbnormal] = useState([]);
 
@@ -37,26 +38,65 @@ const TVWall = () => {
     else if (width < 824 && !isSmallElement) setIsSmallElement(true);
   }, [isSmallElement, width]);
 
-  // Set "wall options" and "normal/abnormal encoder list"
+  // Set "wall options"
   useEffect(() => {
     (async () => {
       let tempWallOptions = [];
       const result = await getWalls();
       result.forEach((wall) => {
-        tempWallOptions.push({ value: wall.wallName, label: wall.wallName, ...wall });
+        tempWallOptions.push({
+          value: wall.wallName,
+          label: wall.wallName,
+          ...wall,
+        });
       });
       setWallOptions(tempWallOptions);
-      setWallDimension({col: tempWallOptions[0].col, row: tempWallOptions[0].row});
+      setWallDimension({
+        col: tempWallOptions[0].col,
+        row: tempWallOptions[0].row,
+      });
       setSelectedWall(tempWallOptions[0]);
     })();
+  }, []);
 
+  // Set "template radios" when dimension is changed
+  useEffect(() => {
+    (async () => {
+      let tempTemplateOptions = [];
+      const result = await getTemplates();
+      result.forEach((template) => {
+        if (
+          template.col === wallDimension.col &&
+          template.row === wallDimension.row
+        ) {
+          tempTemplateOptions.push({
+            value: template.templateName,
+            label: template.templateName,
+            ...template,
+          });
+        }
+      });
+      tempTemplateOptions.forEach((template) => {
+        if (template.isDefault === true) setSelectedTemplate(template);
+      });
+      setTemplateOptions(tempTemplateOptions);
+    })();
+  }, [wallDimension]);
+
+  // Set "normal/abnormal encoder list" when search filter is changed
+  useEffect(() => {
     (async () => {
       let tempNormalEncoders = [];
       let tempAbnormalEncoders = [];
       const encoders = await getEncoders(store);
       encoders.forEach((encoder) => {
-        if (encoder.state === "Up") tempNormalEncoders.push(encoder);
-        else tempAbnormalEncoders.push(encoder);
+        if (
+          encoder.name.includes(searchFilter) ||
+          encoder.nickName.includes(searchFilter)
+        ) {
+          if (encoder.state === "Up") tempNormalEncoders.push(encoder);
+          else tempAbnormalEncoders.push(encoder);
+        }
       });
 
       let tempNormalEncoderElements = [];
@@ -106,34 +146,10 @@ const TVWall = () => {
       setEncoderElementsNormal(tempNormalEncoderElements);
       setEncoderElementsAbnormal(tempAbnormalEncoderElements);
     })();
-  }, []);
-
-  // Set "template radios" when dimension is changed
-  useEffect(() => {
-    (async () => {
-      let tempTemplateOptions = [];
-      const result = await getTemplates();
-      result.forEach((template) => {
-        if (
-          template.col === wallDimension.col &&
-          template.row === wallDimension.row
-        ) {
-          tempTemplateOptions.push({
-            value: template.templateName,
-            label: template.templateName,
-            ...template,
-          });
-        }
-      });
-      tempTemplateOptions.forEach((template) => {
-        if (template.isDefault === true) setSelectedTemplate(template);
-      });
-      setTemplateOptions(tempTemplateOptions);
-    })();
-  }, [wallDimension]);
+  }, [searchFilter]);
 
   const changeWallSelected = (wall) => {
-    setWallDimension({col: wall.col, row: wall.row});
+    setWallDimension({ col: wall.col, row: wall.row });
     setSelectedWall(wall);
   };
 
@@ -168,7 +184,12 @@ const TVWall = () => {
           </Typography.Text>
         </Col>
         <Col>
-          <Input prefix={<SearchOutlined />} />
+          <Input
+            onChange={(e) => {
+              setSearchFilter(e.target.value);
+            }}
+            prefix={<SearchOutlined />}
+          />
         </Col>
       </Row>
       <Row style={{ height: "15%" }}>
