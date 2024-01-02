@@ -31,6 +31,7 @@ const TVWall = () => {
   const [searchFilter, setSearchFilter] = useState("");
   const [encoderElementsNormal, setEncoderElementsNormal] = useState([]);
   const [encoderElementsAbnormal, setEncoderElementsAbnormal] = useState([]);
+  const [selectedEncoder, setSelectedEncoder] = useState(null);
 
   // The elements size would be changed according to width
   useEffect(() => {
@@ -255,6 +256,8 @@ const TVWall = () => {
                       key={template?.templateName}
                       value={template.templateId}
                       style={{ marginTop: 5 }}
+                      col={template?.col}
+                      row={template?.row}
                     >
                       {template.templateName}
                     </Radio>
@@ -263,10 +266,11 @@ const TVWall = () => {
               </Radio.Group>
               <br />
             </Col>
-            <Col style={{ margin: 8 }}>
+            <Col style={{ marginTop: 8, margin: "auto" }}>
               <TvWall
                 selectedWall={selectedWall}
                 selectedTemplate={selectedTemplate}
+                selectedEncoder={selectedEncoder}
               />
             </Col>
           </Row>

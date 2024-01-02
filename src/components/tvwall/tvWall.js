@@ -12,7 +12,12 @@ const TvWall = ({ selectedWall, selectedTemplate }) => {
   const [blocks, setBlocks] = useState([]);
   const [blocksWithPosition, setBlocksWithPosition] = useState([]);
   const [needUpdateBlocks, setNeedUpdateBlocks] = useState(null);
-  const screenSizeUnit = { horizontal: 60, straight: 45 };
+  const screenSizeUnit =
+    tvWallSize.col * tvWallSize.row >= 25
+      ? { horizontal: 60, straight: 45 }
+      : tvWallSize.col * tvWallSize.row >= 16
+      ? { horizontal: 80, straight: 60 }
+      : { horizontal: 120, straight: 90 };
 
   useEffect(() => {
     let tempScreens = [];
@@ -33,6 +38,7 @@ const TvWall = ({ selectedWall, selectedTemplate }) => {
         );
         wallScreens.forEach((screen, idx) => {
           let tempScreen = screen;
+          tempScreen.encoder = "";
           tempScreen.block = parseInt(templateScreens[idx].block);
           tempScreens.push(tempScreen);
         });
