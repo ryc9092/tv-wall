@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { StoreContext } from "../../../components/store/store";
 import { Col, Input, InputNumber, Modal, Row, Select, Typography } from "antd";
+import { getWallScreensById } from "../../../api/API";
 import "../../../App.scss";
 
 const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
+  const [store] = useContext(StoreContext);
   const [wallName, setWallName] = useState(null);
   const [wallSize, setWallSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
@@ -10,9 +13,12 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
 
   useEffect(() => {
     if (wall) {
-      setScreenList(wall.screens);
-      setWallSize({col: wall.col, row: wall.row});
-      setWallName(wall.wallName);
+      (async () => {
+        const screens = await getWallScreensById(store, wall.wallId);
+        setScreenList(screens);
+        setWallSize({ col: wall.col, row: wall.row });
+        setWallName(wall.wallName);
+      })();
     }
   }, [wall]);
 

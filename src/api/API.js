@@ -5,6 +5,8 @@ import {
   FAKE_TEMPLATE_SCREEN_LIST4,
   FAKE_TEMPLATE_SCREEN_LIST5,
   FAKE_WALLS,
+  FAKE_WALL_SCREEN_LIST1,
+  FAKE_WALL_SCREEN_LIST2,
 } from "../utils/Constant";
 
 // Login API ========================================================
@@ -335,6 +337,20 @@ export const createWall = async (store) => {
   // });
   const result = true;
   return result;
+};
+
+export const getWallScreensById = async (store, id) => {
+  const apiPath = `/wall`;
+  // return await apiGET({
+  //   apiPath,
+  //   store,
+  // });
+  const result = {
+    area01: FAKE_WALL_SCREEN_LIST1,
+    fake_wall1: FAKE_WALL_SCREEN_LIST1,
+    fake_wall2: FAKE_WALL_SCREEN_LIST2,
+  };
+  return result[id];
 };
 
 export const wallVideoAssociate = async (store) => {

@@ -90,7 +90,7 @@ export const FAKE_DECODERS = [
   "解碼器813",
 ];
 
-const FAKE_SCREEN_LIST1 = [
+export const FAKE_WALL_SCREEN_LIST1 = [
   {
     num: 1,
     decoder: "解碼器1",
@@ -138,7 +138,7 @@ const FAKE_SCREEN_LIST1 = [
   },
 ];
 
-const FAKE_SCREEN_LIST2 = [
+export const FAKE_WALL_SCREEN_LIST2 = [
   {
     num: 1,
     decoder: "解碼器1",
@@ -208,21 +208,20 @@ export const FAKE_WALLS = [
     wallId: "area01",
     col: 3,
     row: 3,
-    screens: FAKE_SCREEN_LIST1,
   },
   {
+    groupId: -1,
     wallId: "fake_wall1",
     wallName: "fake_wall1",
     col: 3,
     row: 3,
-    screens: FAKE_SCREEN_LIST1,
   },
   {
+    groupId: -1,
     wallId: "fake_wall2",
     wallName: "fake_wall2",
     col: 4,
     row: 3,
-    screens: FAKE_SCREEN_LIST2,
   },
 ];
 

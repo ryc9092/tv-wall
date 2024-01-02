@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../components/store/store";
 import { Button } from "antd";
-import { getTemplateScreensById } from "../../api/API";
+import { getTemplateScreensById, getWallScreensById } from "../../api/API";
 import "../../App.scss";
 
 const TvWall = ({ selectedWall, selectedTemplate }) => {
@@ -27,7 +27,11 @@ const TvWall = ({ selectedWall, selectedTemplate }) => {
           store,
           selectedTemplate.templateId
         );
-        selectedWall.screens.forEach((screen, idx) => {
+        const wallScreens = await getWallScreensById(
+          store,
+          selectedWall.wallId
+        );
+        wallScreens.forEach((screen, idx) => {
           let tempScreen = screen;
           tempScreen.block = parseInt(templateScreens[idx].block);
           tempScreens.push(tempScreen);
