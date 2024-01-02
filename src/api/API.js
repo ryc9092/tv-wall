@@ -1,5 +1,11 @@
 import { Actions } from "../components/store/reducer";
-import { FAKE_TEMPLATES, FAKE_WALLS } from "../utils/Constant";
+import {
+  FAKE_TEMPLATES,
+  FAKE_TEMPLATE_SCREEN_LIST3,
+  FAKE_TEMPLATE_SCREEN_LIST4,
+  FAKE_TEMPLATE_SCREEN_LIST5,
+  FAKE_WALLS,
+} from "../utils/Constant";
 
 // Login API ========================================================
 
@@ -135,62 +141,62 @@ export const getDecoders = async (store) => {
   // });
   const result = [
     {
-      "nickName": "1DD",
-      "mac": "0:1c:d5:1:11:cb",
-      "model": "ZyperUHD60",
-      "type": "decoder",
-      "virtualType": "none",
-      "name": "1D",
-      "state": "Up",
-      "productCode": "ZUHDDEC60",
-      "productDescription": "Copper Decoder - HDMI 2.0",
-      "pid": "0x0",
-      "groupId": "",
-      "groupName": ""
+      nickName: "1DD",
+      mac: "0:1c:d5:1:11:cb",
+      model: "ZyperUHD60",
+      type: "decoder",
+      virtualType: "none",
+      name: "1D",
+      state: "Up",
+      productCode: "ZUHDDEC60",
+      productDescription: "Copper Decoder - HDMI 2.0",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
     },
     {
-      "nickName": "",
-      "mac": "0:1c:d5:1:11:e4",
-      "model": "ZyperUHD60",
-      "type": "decoder",
-      "virtualType": "none",
-      "name": "3D",
-      "state": "Down",
-      "productCode": "ZUHDDEC60",
-      "productDescription": "Copper Decoder - HDMI 2.0",
-      "pid": "0x0",
-      "groupId": "",
-      "groupName": ""
+      nickName: "",
+      mac: "0:1c:d5:1:11:e4",
+      model: "ZyperUHD60",
+      type: "decoder",
+      virtualType: "none",
+      name: "3D",
+      state: "Down",
+      productCode: "ZUHDDEC60",
+      productDescription: "Copper Decoder - HDMI 2.0",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
     },
     {
-      "nickName": "",
-      "mac": "0:1c:d5:1:11:f0",
-      "model": "ZyperUHD60",
-      "type": "decoder",
-      "virtualType": "none",
-      "name": "2D",
-      "state": "Up",
-      "productCode": "ZUHDDEC60",
-      "productDescription": "Copper Decoder - HDMI 2.0",
-      "pid": "0x0",
-      "groupId": "",
-      "groupName": ""
+      nickName: "",
+      mac: "0:1c:d5:1:11:f0",
+      model: "ZyperUHD60",
+      type: "decoder",
+      virtualType: "none",
+      name: "2D",
+      state: "Up",
+      productCode: "ZUHDDEC60",
+      productDescription: "Copper Decoder - HDMI 2.0",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
     },
     {
-      "nickName": "",
-      "mac": "0:1c:d5:1:13:e2",
-      "model": "ZyperUHD60",
-      "type": "decoder",
-      "virtualType": "none",
-      "name": "4D",
-      "state": "Down",
-      "productCode": "ZUHDDEC60A",
-      "productDescription": "Copper Decoder - HDMI 2.0 Dante",
-      "pid": "0x0",
-      "groupId": "",
-      "groupName": ""
-    }
-  ]
+      nickName: "",
+      mac: "0:1c:d5:1:13:e2",
+      model: "ZyperUHD60",
+      type: "decoder",
+      virtualType: "none",
+      name: "4D",
+      state: "Down",
+      productCode: "ZUHDDEC60A",
+      productDescription: "Copper Decoder - HDMI 2.0 Dante",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
+    },
+  ];
   return result;
 };
 
@@ -202,51 +208,54 @@ export const getEncoders = async (store) => {
   // });
   const result = [
     {
-      "nickName": "",
-      "mac": "0:1c:d5:1:2d:dc",
-      "model": "ZyperUHD60",
-      "type": "encoder",
-      "virtualType": "none",
-      "name": "1E",
-      "state": "Up",
-      "productCode": "ZUHDENC60V2",
-      "productDescription": "Copper Encoder - HDMI 2.0",
-      "pid": "0x0",
-      "groupId": "",
-      "groupName": "",
-      "previewUrl": "http://192.168.0.70:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0"
+      nickName: "",
+      mac: "0:1c:d5:1:2d:dc",
+      model: "ZyperUHD60",
+      type: "encoder",
+      virtualType: "none",
+      name: "1E",
+      state: "Up",
+      productCode: "ZUHDENC60V2",
+      productDescription: "Copper Encoder - HDMI 2.0",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
+      previewUrl:
+        "http://192.168.0.70:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0",
     },
     {
-      "nickName": "",
-      "mac": "0:1c:d5:1:2f:7e",
-      "model": "ZyperUHD60",
-      "type": "encoder",
-      "virtualType": "none",
-      "name": "EN1-PC1",
-      "state": "Down",
-      "productCode": "ZUHDENC60V2",
-      "productDescription": "Copper Encoder - HDMI 2.0",
-      "pid": "0x0",
-      "groupId": "",
-      "groupName": "",
-      "previewUrl": "http://172.16.1.11:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0"
+      nickName: "",
+      mac: "0:1c:d5:1:2f:7e",
+      model: "ZyperUHD60",
+      type: "encoder",
+      virtualType: "none",
+      name: "EN1-PC1",
+      state: "Down",
+      productCode: "ZUHDENC60V2",
+      productDescription: "Copper Encoder - HDMI 2.0",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
+      previewUrl:
+        "http://172.16.1.11:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0",
     },
     {
-      "nickName": "2EE",
-      "mac": "0:1c:d5:1:2f:89",
-      "model": "ZyperUHD60",
-      "type": "encoder",
-      "virtualType": "none",
-      "name": "2E",
-      "state": "Down",
-      "productCode": "ZUHDENC60V2",
-      "productDescription": "Copper Encoder - HDMI 2.0",
-      "pid": "0x0",
-      "groupId": "",
-      "groupName": "",
-      "previewUrl": "http://192.168.0.71:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0"
-    }
-  ]
+      nickName: "2EE",
+      mac: "0:1c:d5:1:2f:89",
+      model: "ZyperUHD60",
+      type: "encoder",
+      virtualType: "none",
+      name: "2E",
+      state: "Down",
+      productCode: "ZUHDENC60V2",
+      productDescription: "Copper Encoder - HDMI 2.0",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
+      previewUrl:
+        "http://192.168.0.71:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0",
+    },
+  ];
   return result;
 };
 
@@ -280,6 +289,20 @@ export const deleteTemplate = async (store) => {
   // });
   const result = true;
   return result;
+};
+
+export const getTemplateScreensById = async (store, id) => {
+  const apiPath = `/template`;
+  // return await apiGET({
+  //   apiPath,
+  //   store,
+  // });
+  const result = {
+    ft1: FAKE_TEMPLATE_SCREEN_LIST5,
+    ft2: FAKE_TEMPLATE_SCREEN_LIST3,
+    ft3: FAKE_TEMPLATE_SCREEN_LIST4,
+  };
+  return result[id];
 };
 
 // Wall ========================================================

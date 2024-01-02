@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { StoreContext } from "../../../components/store/store";
 import { Button, Col, Input, InputNumber, Modal, Row } from "antd";
 import { blockColorList } from "../../../utils/Constant";
+import { getTemplateScreensById } from "../../../api/API";
 import "../../../App.scss";
 
 const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
+  const [store] = useContext(StoreContext);
   const [templateName, setTemplateName] = useState(null);
   const [templateSize, setTemplateSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
@@ -11,9 +14,15 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
 
   useEffect(() => {
     if (template && modalOpen) {
-      setScreenList(template.screens);
-      setTemplateSize({col: template.col, row: template.row});
-      setTemplateName(template.templateName);
+      (async () => {
+        const screens = await getTemplateScreensById(
+          store,
+          template.templateId
+        );
+        setScreenList(screens);
+        setTemplateSize({ col: template.col, row: template.row });
+        setTemplateName(template.templateName);
+      })();
     }
   }, [template, modalOpen]);
 

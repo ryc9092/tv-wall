@@ -32,11 +32,9 @@ const SettingTemplateModal = () => {
   const changeDefaultTemplate = (record) => {
     let tempTemplates = templates.slice();
     templates.forEach((template, idx) => {
-      if (template.templateId === record.templateId) tempTemplates[idx].isDefault = true;
-      else if (
-        template.col === record.col &&
-        template.row === record.row
-      )
+      if (template.templateId === record.templateId)
+        tempTemplates[idx].isDefault = true;
+      else if (template.col === record.col && template.row === record.row)
         tempTemplates[idx].isDefault = false;
     });
     setTemplates(tempTemplates);
@@ -73,9 +71,7 @@ const SettingTemplateModal = () => {
       title: "維度",
       dataIndex: ["col", "row"],
       key: "dimension",
-      render: (text, record) => (
-        <span>{`${record.col} X ${record.row}`}</span>
-      ),
+      render: (text, record) => <span>{`${record.col} X ${record.row}`}</span>,
     },
     {
       title: "操作",

@@ -226,7 +226,7 @@ export const FAKE_WALLS = [
   },
 ];
 
-const FAKE_SCREEN_LIST3 = [
+export const FAKE_TEMPLATE_SCREEN_LIST3 = [
   {
     num: 1,
     block: "1",
@@ -277,7 +277,7 @@ const FAKE_SCREEN_LIST3 = [
   },
 ];
 
-const FAKE_SCREEN_LIST4 = [
+export const FAKE_TEMPLATE_SCREEN_LIST4 = [
   {
     num: 1,
     block: "1",
@@ -316,7 +316,7 @@ const FAKE_SCREEN_LIST4 = [
   },
 ];
 
-const FAKE_SCREEN_LIST5 = [
+export const FAKE_TEMPLATE_SCREEN_LIST5 = [
   {
     num: 1,
     block: "1",
@@ -373,7 +373,6 @@ export const FAKE_TEMPLATES = [
     templateName: "fake_template1",
     col: 4,
     row: 3,
-    screens: FAKE_SCREEN_LIST5,
     isDefault: false,
   },
   {
@@ -381,7 +380,6 @@ export const FAKE_TEMPLATES = [
     templateName: "fake_template2",
     col: 4,
     row: 3,
-    screens: FAKE_SCREEN_LIST3,
     isDefault: true,
   },
   {
@@ -389,7 +387,6 @@ export const FAKE_TEMPLATES = [
     templateName: "fake_template3",
     col: 3,
     row: 3,
-    screens: FAKE_SCREEN_LIST4,
     isDefault: true,
   },
 ];

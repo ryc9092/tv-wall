@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { StoreContext } from "../../components/store/store";
 import { Button } from "antd";
+import { getTemplateScreensById } from "../../api/API";
 import "../../App.scss";
 
 const TvWall = ({ selectedWall, selectedTemplate }) => {
+  const [store] = useContext(StoreContext);
   const [tvWallScreens, setTvWallScreens] = useState([]);
   const [tvWallSize, setTvWallSize] = useState({ col: 0, row: 0 });
   const [tvWallTemplate, setTvWallTemplate] = useState(null);
@@ -19,16 +22,22 @@ const TvWall = ({ selectedWall, selectedTemplate }) => {
       selectedWall.col === selectedTemplate.col &&
       selectedWall.row === selectedTemplate.row
     ) {
-      selectedWall.screens.forEach((screen, idx) => {
-        let tempScreen = screen;
-        tempScreen.block = parseInt(selectedTemplate.screens[idx].block);
-        tempScreens.push(tempScreen);
-      });
-      setTvWallScreens(tempScreens);
-      setTvWallSize({
-        col: selectedWall.col,
-        row: selectedWall.row,
-      });
+      (async () => {
+        const templateScreens = await getTemplateScreensById(
+          store,
+          selectedTemplate.templateId
+        );
+        selectedWall.screens.forEach((screen, idx) => {
+          let tempScreen = screen;
+          tempScreen.block = parseInt(templateScreens[idx].block);
+          tempScreens.push(tempScreen);
+        });
+        setTvWallScreens(tempScreens);
+        setTvWallSize({
+          col: selectedWall.col,
+          row: selectedWall.row,
+        });
+      })();
     }
   }, [selectedWall, selectedTemplate]);
 
