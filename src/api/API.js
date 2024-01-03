@@ -222,8 +222,45 @@ export const getEncoders = async (store) => {
       pid: "0x0",
       groupId: "",
       groupName: "",
+      // previewUrl:
+      //   "http://192.168.0.70:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0",
       previewUrl:
-        "http://192.168.0.70:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0",
+        "https://www.youtube.com/embed/XqZsoesa55w?si=OFk60QitCvmaXLGn",
+    },
+    {
+      nickName: "天線寶寶",
+      mac: "0:1c:d5:1:2d:dc",
+      model: "ZyperUHD60",
+      type: "encoder",
+      virtualType: "none",
+      name: "test",
+      state: "Up",
+      productCode: "ZUHDENC60V2",
+      productDescription: "Copper Encoder - HDMI 2.0",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
+      // previewUrl:
+      //   "http://192.168.0.70:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0",
+      previewUrl:
+        "https://www.youtube.com/embed/KoRmxIwnTwI?si=XFHEKMDhl2wvlh36",
+    },
+    {
+      nickName: "empty",
+      mac: "0:1c:d5:1:2d:dc",
+      model: "ZyperUHD60",
+      type: "encoder",
+      virtualType: "none",
+      name: "empty",
+      state: "Up",
+      productCode: "ZUHDENC60V2",
+      productDescription: "Copper Encoder - HDMI 2.0",
+      pid: "0x0",
+      groupId: "",
+      groupName: "",
+      // previewUrl:
+      //   "http://192.168.0.70:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0",
+      previewUrl: "",
     },
     {
       nickName: "",

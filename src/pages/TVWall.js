@@ -31,7 +31,11 @@ const TVWall = () => {
   const [searchFilter, setSearchFilter] = useState("");
   const [encoderElementsNormal, setEncoderElementsNormal] = useState([]);
   const [encoderElementsAbnormal, setEncoderElementsAbnormal] = useState([]);
-  const [selectedEncoder, setSelectedEncoder] = useState(null);
+  const [tvWallKey, setTvWallKey] = useState(null);
+  const [selectedEncoder, setSelectedEncoder] = useState({
+    name: "",
+    previewUrl: "",
+  });
 
   // The elements size would be changed according to width
   useEffect(() => {
@@ -107,6 +111,7 @@ const TVWall = () => {
             <Button
               key={encoder.name}
               id={encoder.name}
+              value={encoder.previewUrl}
               type="text"
               size="small"
               style={{ cursor: "pointer" }}
@@ -149,6 +154,10 @@ const TVWall = () => {
     })();
   }, [searchFilter]);
 
+  useEffect(() => {
+    setTvWallKey(Math.random);
+  }, [selectedWall, selectedTemplate, selectedEncoder]);
+
   const changeWallSelected = (wall) => {
     setWallDimension({ col: wall.col, row: wall.row });
     setSelectedWall(wall);
@@ -171,7 +180,11 @@ const TVWall = () => {
   };
 
   const handleChooseEncoder = (event) => {
-    console.log(event.currentTarget.id);
+    console.log(event.currentTarget.id, event.currentTarget.value);
+    setSelectedEncoder({
+      name: event.currentTarget.id,
+      previewUrl: event.currentTarget.value,
+    });
   };
 
   const encoderBlock = (
@@ -268,6 +281,7 @@ const TVWall = () => {
             </Col>
             <Col style={{ marginTop: 8, margin: "auto" }}>
               <TvWall
+                key={tvWallKey}
                 selectedWall={selectedWall}
                 selectedTemplate={selectedTemplate}
                 selectedEncoder={selectedEncoder}
@@ -278,10 +292,24 @@ const TVWall = () => {
         <div style={{ height: "50%" }} className="tvwall-video-layout ">
           {encoderBlock}
           <div style={{ width: "40%" }}>
-            <video controls style={{ width: "100%", height: "100%" }}>
-              <source src={""} type="video/mp4" />
-              Sorry, your browser doesn't support embedded videos.
-            </video>
+            {selectedEncoder.previewUrl ? (
+              <embed
+                style={{ width: "100%", height: "100%" }}
+                src={selectedEncoder.previewUrl}
+                title="Video player"
+              />
+            ) : (
+              <div
+                style={{
+                  position: "relative",
+                  top: "50%",
+                  left: "95%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                畫面預覽
+              </div>
+            )}
           </div>
         </div>
       </div>

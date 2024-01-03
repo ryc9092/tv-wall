@@ -1,17 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../components/store/store";
-import { Button } from "antd";
 import { getTemplateScreensById, getWallScreensById } from "../../api/API";
 import "../../App.scss";
 
-const TvWall = ({ selectedWall, selectedTemplate }) => {
+const TvWall = ({ selectedWall, selectedTemplate, selectedEncoder }) => {
   const [store] = useContext(StoreContext);
   const [tvWallScreens, setTvWallScreens] = useState([]);
   const [tvWallSize, setTvWallSize] = useState({ col: 0, row: 0 });
   const [tvWallTemplate, setTvWallTemplate] = useState(null);
   const [blocks, setBlocks] = useState([]);
   const [blocksWithPosition, setBlocksWithPosition] = useState([]);
-  const [needUpdateBlocks, setNeedUpdateBlocks] = useState(null);
   const screenSizeUnit =
     tvWallSize.col * tvWallSize.row >= 25
       ? { horizontal: 60, straight: 45 }
@@ -138,6 +136,7 @@ const TvWall = ({ selectedWall, selectedTemplate }) => {
   useEffect(() => {
     let wall = [];
     let currentAppearedRow = 0;
+    console.log(blocksWithPosition, "================");
     blocksWithPosition.forEach((block, index) => {
       wall.push(
         <div
@@ -150,47 +149,50 @@ const TvWall = ({ selectedWall, selectedTemplate }) => {
             border: "1px dashed black",
           }}
         >
-          <Button
+          <div
             key={index}
-            style={{ width: "100%", height: "100%" }}
+            style={{ width: "100%", height: "100%", cursor: "pointer" }}
             onClick={() => {
-              setEncoder(index);
+              onBlockClick(index);
             }}
           >
-            <img
+            {block.encoder?.previewUrl}
+            <embed
               style={{ width: "100%", height: "100%" }}
-              src={block.encoder?.video}
-              alt={block.block}
+              src={block.encoder?.previewUrl}
+              title="Video player"
             />
-          </Button>
+          </div>
         </div>
       );
 
       currentAppearedRow = currentAppearedRow + block.row;
     });
     setTvWallTemplate(<div>{wall}</div>);
-  }, [blocksWithPosition, needUpdateBlocks]);
+  }, [blocksWithPosition]);
 
-  const setEncoder = (blockIdx, encoder) => {
+  const onBlockClick = (blockIdx) => {
     // let video = "https://www.gstatic.com/webp/gallery3/2.png"; // encoder.video;
-    encoder = { video: "https://www.gstatic.com/webp/gallery3/2.png" };
-
+    // encoder = { video: "https://www.gstatic.com/webp/gallery3/2.png" };
+    console.log(blockIdx, selectedEncoder, "set encoder");
     // add video to block
-    let tempBlocks = blocksWithPosition;
-    tempBlocks[blockIdx].encoder = encoder;
+    let tempBlocks = blocksWithPosition.slice();
+    tempBlocks[blockIdx].encoder = selectedEncoder;
     setBlocks(tempBlocks);
+    setBlocksWithPosition(tempBlocks);
+    console.log(tempBlocks, selectedEncoder);
 
     // add video to screens
     let tempScreens = tvWallScreens;
     tempScreens.forEach((screen, idx) => {
       if (screen.block === tempBlocks[blockIdx].block) {
-        tempScreens[idx].encoder = encoder;
+        tempScreens[idx].encoder = selectedEncoder;
       }
     });
     setTvWallScreens(tempScreens);
 
     // re-render wall
-    setNeedUpdateBlocks(Math.random);
+    // setNeedUpdateBlocks(Math.random);
   };
 
   return <div>{tvWallTemplate}</div>;
