@@ -31,7 +31,7 @@ const TVWall = () => {
   const [searchFilter, setSearchFilter] = useState("");
   const [encoderElementsNormal, setEncoderElementsNormal] = useState([]);
   const [encoderElementsAbnormal, setEncoderElementsAbnormal] = useState([]);
-  const [tvWallKey, setTvWallKey] = useState(null);
+  const [clearTvWall, setClearTvWall] = useState(null);
   const [selectedEncoder, setSelectedEncoder] = useState({
     name: "",
     previewUrl: "",
@@ -154,10 +154,6 @@ const TVWall = () => {
     })();
   }, [searchFilter]);
 
-  useEffect(() => {
-    setTvWallKey(Math.random);
-  }, [selectedWall, selectedTemplate, selectedEncoder]);
-
   const changeWallSelected = (wall) => {
     setWallDimension({ col: wall.col, row: wall.row });
     setSelectedWall(wall);
@@ -180,7 +176,6 @@ const TVWall = () => {
   };
 
   const handleChooseEncoder = (event) => {
-    console.log(event.currentTarget.id, event.currentTarget.value);
     setSelectedEncoder({
       name: event.currentTarget.id,
       previewUrl: event.currentTarget.value,
@@ -251,7 +246,12 @@ const TVWall = () => {
                   }}
                   style={{ minWidth: 130 }}
                 />
-                <Button style={{ marginLeft: 8, color: "#f5222d" }}>
+                <Button
+                  onClick={() => {
+                    setClearTvWall(Math.random);
+                  }}
+                  style={{ marginLeft: 8, color: "#f5222d" }}
+                >
                   清除牆面連接
                 </Button>
               </Row>
@@ -281,10 +281,10 @@ const TVWall = () => {
             </Col>
             <Col style={{ marginTop: 8, margin: "auto" }}>
               <TvWall
-                key={tvWallKey}
                 selectedWall={selectedWall}
                 selectedTemplate={selectedTemplate}
                 selectedEncoder={selectedEncoder}
+                clearTvWall={clearTvWall}
               />
             </Col>
           </Row>
