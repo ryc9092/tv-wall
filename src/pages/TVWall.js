@@ -303,7 +303,7 @@ const TVWall = () => {
                 style={{
                   position: "relative",
                   top: "50%",
-                  left: "95%",
+                  marginLeft: "62%",
                   transform: "translate(-50%, -50%)",
                 }}
               >
