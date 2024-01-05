@@ -24,3 +24,29 @@ export default function useWindowDimensions() {
 
   return windowDimensions;
 }
+
+function getDocumentDimensions() {
+  const { scrollWidth, offsetWidth, scrollHeight, offsetHeight } =
+    document.body;
+  return {
+    width: Math.max(scrollWidth, offsetWidth),
+    height: Math.max(scrollHeight, offsetHeight),
+  };
+}
+
+export function useDocumentDimensions() {
+  const [documentDimensions, setDocumentDimensions] = useState(
+    getDocumentDimensions()
+  );
+
+  useEffect(() => {
+    function handleResize() {
+      setDocumentDimensions(getDocumentDimensions());
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return documentDimensions;
+}

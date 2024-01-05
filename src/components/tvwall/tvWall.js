@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Button } from "antd";
 import { StoreContext } from "../../components/store/store";
 import { getTemplateScreensById, getWallScreensById } from "../../api/API";
+import { useDocumentDimensions } from "../../utils/WindowDimension";
 import "../../App.scss";
 
 const TvWall = ({
@@ -11,18 +12,13 @@ const TvWall = ({
   clearTvWall,
 }) => {
   const [store] = useContext(StoreContext);
+  const { width, height } = useDocumentDimensions();
   const [tvWallScreens, setTvWallScreens] = useState([]);
   const [tvWallSize, setTvWallSize] = useState({ col: 0, row: 0 });
   const [tvWallTemplate, setTvWallTemplate] = useState(null);
   const [blocks, setBlocks] = useState([]);
   const [blocksWithPosition, setBlocksWithPosition] = useState([]);
   const [needUpdateBlocks, setNeedUpdateBlocks] = useState(null);
-  const screenSizeUnit =
-    tvWallSize.col * tvWallSize.row >= 25
-      ? { horizontal: 60, straight: 45 }
-      : tvWallSize.col * tvWallSize.row >= 16
-      ? { horizontal: 80, straight: 60 }
-      : { horizontal: 120, straight: 90 };
 
   useEffect(() => {
     let tempScreens = [];
@@ -144,15 +140,17 @@ const TvWall = ({
     let wall = [];
     let currentAppearedRow = 0;
     blocksWithPosition.forEach((block, index) => {
+      console.log(block);
       wall.push(
         <div
           key={index}
           style={{
-            width: screenSizeUnit.horizontal * block.col,
-            height: screenSizeUnit.straight * block.row,
-            marginLeft: screenSizeUnit.horizontal * block.marginLeft,
-            marginTop: screenSizeUnit.straight * block.marginTop,
-            border: "1px dashed black",
+            width: ((width * 0.34) / tvWallSize.col) * block.col,
+            height: (((height - 105) * 0.5) / tvWallSize.row) * block.row,
+            marginLeft: ((width * 0.34) / tvWallSize.col) * block.marginLeft,
+            marginTop:
+              (((height - 105) * 0.5) / tvWallSize.row) * block.marginTop,
+            border: "1px solid black",
           }}
         >
           <div
@@ -178,14 +176,20 @@ const TvWall = ({
                   style={{
                     position: "absolute",
                     zIndex: 1,
-                    left: screenSizeUnit.horizontal * block.marginLeft,
+                    left: ((width * 0.34) / tvWallSize.col) * block.marginLeft,
                     opacity: "0.8",
                   }}
                 >
                   置換影像
                 </Button>
               </>
-            ) : null}
+            ) : (
+              <>
+                區塊: {block.block}
+                <br></br>
+                維度: {block.col} X {block.row}
+              </>
+            )}
           </div>
         </div>
       );
@@ -193,7 +197,7 @@ const TvWall = ({
       currentAppearedRow = currentAppearedRow + block.row;
     });
     setTvWallTemplate(<div>{wall}</div>);
-  }, [blocksWithPosition, selectedEncoder, needUpdateBlocks]);
+  }, [blocksWithPosition, selectedEncoder, needUpdateBlocks, width, height]);
 
   const onBlockClick = (blockIdx) => {
     // add video to block
