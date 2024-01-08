@@ -19,6 +19,10 @@ const TvWall = ({
   const [blocks, setBlocks] = useState([]);
   const [blocksWithPosition, setBlocksWithPosition] = useState([]);
   const [needUpdateBlocks, setNeedUpdateBlocks] = useState(null);
+  const [clearBlock, setClearBlock] = useState({
+    needClear: false,
+    blockIdx: null,
+  });
 
   useEffect(() => {
     let tempScreens = [];
@@ -140,7 +144,6 @@ const TvWall = ({
     let wall = [];
     let currentAppearedRow = 0;
     blocksWithPosition.forEach((block, index) => {
-      console.log(block);
       wall.push(
         <div
           key={index}
@@ -170,17 +173,17 @@ const TvWall = ({
                 <Button
                   key={index}
                   onClick={() => {
-                    onBlockClick(index);
+                    setClearBlock({ needClear: true, blockIdx: index });
                   }}
                   size="small"
                   style={{
                     position: "absolute",
                     zIndex: 1,
                     left: ((width * 0.34) / tvWallSize.col) * block.marginLeft,
-                    opacity: "0.8",
+                    opacity: "0",
                   }}
                 >
-                  置換影像
+                  清除此區塊
                 </Button>
               </>
             ) : (
@@ -198,6 +201,32 @@ const TvWall = ({
     });
     setTvWallTemplate(<div>{wall}</div>);
   }, [blocksWithPosition, selectedEncoder, needUpdateBlocks, width, height]);
+
+  // setClearBlock take effect after onBlockClick event
+  useEffect(() => {
+    if (clearBlock.needClear === true && clearBlock.blockIdx != null) {
+      // add video to block
+      let tempBlocks = blocksWithPosition.slice();
+      tempBlocks[clearBlock.blockIdx].encoder = { name: "", previewUrl: "" };
+      setBlocks(tempBlocks);
+      setBlocksWithPosition(tempBlocks);
+
+      // add video to screens
+      let tempScreens = tvWallScreens;
+      tempScreens.forEach((screen, idx) => {
+        if (screen.block === tempBlocks[clearBlock.blockIdx].block) {
+          tempScreens[idx].encoder = { name: "", previewUrl: "" };
+        }
+      });
+      setTvWallScreens(tempScreens);
+
+      // re-render wall
+      setNeedUpdateBlocks(Math.random);
+
+      // reset
+      setClearBlock({ needClear: false, blockIdx: null });
+    }
+  }, [clearBlock]);
 
   const onBlockClick = (blockIdx) => {
     // add video to block
