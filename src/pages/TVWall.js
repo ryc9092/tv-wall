@@ -279,7 +279,7 @@ const TVWall = () => {
               </Radio.Group>
               <br />
             </Col>
-            <Col style={{ marginTop: 2, margin: "auto" }}>
+            <Col style={{ margin: "auto", marginTop: 1 }}>
               <TvWall
                 selectedWall={selectedWall}
                 selectedTemplate={selectedTemplate}

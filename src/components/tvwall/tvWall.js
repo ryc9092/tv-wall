@@ -188,9 +188,12 @@ const TvWall = ({
               </>
             ) : (
               <>
-                區塊: {block.block}
-                <br></br>
-                維度: {block.col} X {block.row}
+                <div style={{ position: "absolute" }}>
+                  區塊: {block.block}
+                  <br></br>
+                  維度: {block.col} X {block.row}
+                </div>
+                {generateBlockTable(block.col, block.row)}
               </>
             )}
           </div>
@@ -246,6 +249,50 @@ const TvWall = ({
 
     // re-render wall
     setNeedUpdateBlocks(Math.random);
+  };
+
+  const generateBlockTable = (col, row) => {
+    const tempRows = [];
+    for (let r = 0; r < row; r++) {
+      let tempRow = [];
+      for (let c = 0; c < col; c++) {
+        tempRow.push(
+          <td
+            key={r.toString() + c.toString()}
+            style={{
+              width: (width * 0.34) / tvWallSize.col,
+              border: "1px dashed #D7DBDD",
+              borderStyle:
+                c === 0 ? "none none none none" : "none none none dashed",
+            }}
+          />
+        );
+      }
+      tempRows.push(
+        <tr
+          key={r.toString()}
+          style={{
+            height: ((height - 105) * 0.5) / tvWallSize.row,
+            border: "1px dashed #D7DBDD",
+            borderStyle:
+              r === 0 ? "none none none none" : "dashed none none none",
+          }}
+        >
+          {tempRow}
+        </tr>
+      );
+    }
+    return (
+      <table
+        style={{
+          borderCollapse: "collapse",
+          marginTop: -1,
+          marginLeft: -1,
+        }}
+      >
+        <tbody>{tempRows}</tbody>
+      </table>
+    );
   };
 
   return <div>{tvWallTemplate}</div>;
