@@ -180,7 +180,7 @@ const TvWall = ({
                     position: "absolute",
                     zIndex: 1,
                     left: ((width * 0.34) / tvWallSize.col) * block.marginLeft,
-                    opacity: "0",
+                    opacity: "0.8",
                   }}
                 >
                   清除此區塊
