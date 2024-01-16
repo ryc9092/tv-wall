@@ -1,29 +1,114 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Col, Input, Radio, Row, Typography } from "antd";
+import { Button, Col, Input, Radio, Row, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import useWindowDimensions from "../utils/WindowDimension";
-import { ENCODER_TYPERS, FAKE_ENCODERS } from "../utils/Constant";
+import { ENCODER_TYPERS } from "../utils/Constant";
+import { getDecoders, getEncoders } from "../api/API";
 import "../App.scss";
 import "./USB.scss";
 
 const USB = () => {
-  const { height } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [encoderType, setEncoderType] = useState("1");
-
-  let encoderElement = [];
-  FAKE_ENCODERS.forEach((encoder) => {
-    encoderElement.push(
-      <div key={encoder} style={{ marginTop: "10px" }}>
-        <span className="encoder-normal-dot" />
-        {encoder}
-      </div>
-    );
-  });
+  const [searchFilter, setSearchFilter] = useState("");
+  const [decoderElements, setDecoderElements] = useState([]);
+  const [encoderElements, setEncoderElements] = useState([]);
 
   const changeEncoderType = ({ target: { value } }) => {
     setEncoderType(value);
+  };
+
+  // Set "decoder list" when search filter is changed
+  useEffect(() => {
+    (async () => {
+      let tempDecoders = [];
+
+      const decoders = await getDecoders(store);
+      decoders.forEach((decoder) => {
+        if (
+          decoder.name.includes(searchFilter) ||
+          decoder.nickName.includes(searchFilter)
+        )
+          tempDecoders.push(decoder);
+      });
+
+      let tempDecoderElements = [];
+      tempDecoders.forEach((decoder) => {
+        tempDecoderElements.push(
+          <Row key={decoder.name} style={{ marginTop: "6px" }}>
+            <Button
+              key={decoder.name}
+              id={decoder.name}
+              type="text"
+              size="small"
+              style={{ cursor: "pointer" }}
+              className="tvwall-encoder"
+            >
+              <span
+                className={
+                  decoder.state === "Up"
+                    ? "encoder-normal-dot"
+                    : decoder.state === "Down"
+                    ? "encoder-down-dot"
+                    : "encoder-abnormal-dot"
+                }
+              />
+              {decoder.name}
+            </Button>
+          </Row>
+        );
+      });
+
+      setDecoderElements(tempDecoderElements);
+    })();
+  }, [searchFilter]);
+
+  // Set "encoder list" when search filter is changed
+  useEffect(() => {
+    (async () => {
+      let tempEncoders = [];
+      const encoders = await getEncoders(store);
+      encoders.forEach((encoder) => {
+        tempEncoders.push(encoder);
+      });
+
+      let tempEncoderElements = [];
+      tempEncoders.forEach((encoder) => {
+        tempEncoderElements.push(
+          <Row key={encoder.name} style={{ marginTop: "6px" }}>
+            <Button
+              key={encoder.name}
+              id={encoder.name}
+              value={encoder.previewUrl}
+              type="text"
+              size="small"
+              style={{ cursor: "pointer" }}
+              className="tvwall-encoder"
+              onClick={encoder.state === "Up" ? handleChooseEncoder : null}
+            >
+              <span
+                className={
+                  encoder.state === "Up"
+                    ? "encoder-normal-dot"
+                    : encoder.state === "Down"
+                    ? "encoder-down-dot"
+                    : "encoder-abnormal-dot"
+                }
+              />
+              {encoder.name}
+            </Button>
+          </Row>
+        );
+      });
+
+      setEncoderElements(tempEncoderElements);
+    })();
+  }, []);
+
+  const handleChooseEncoder = (e) => {
+    console.log(e.currentTarget.id);
   };
 
   return (
@@ -49,7 +134,12 @@ const USB = () => {
               </Typography.Text>
             </Col>
             <Col>
-              <Input prefix={<SearchOutlined />} />
+              <Input
+                onChange={(e) => {
+                  setSearchFilter(e.target.value);
+                }}
+                prefix={<SearchOutlined />}
+              />
             </Col>
           </Row>
           <Row style={{ height: "14%" }}>
@@ -62,7 +152,7 @@ const USB = () => {
               style={{ marginTop: 12 }}
             />
           </Row>
-          <div className="encoder-block">{encoderElement}</div>
+          <div className="decoder-block">{decoderElements}</div>
         </div>
         <div
           className="usb-col-layout"
@@ -73,8 +163,23 @@ const USB = () => {
             marginTop: "12px",
           }}
         >
-          <div style={{ borderRight: "1px solid gray" }}>USB連接狀態</div>
-          <div>USB來源選擇</div>
+          <div
+            style={{
+              borderRight: "1px solid gray",
+              height: height * 0.39,
+            }}
+          >
+            USB連接狀態
+          </div>
+          <div>
+            <Row>
+              <Col span={width > 1060 ? 20 : 17}>USB來源選擇</Col>
+              <Col>清除所有連結</Col>
+            </Row>
+            <div className="encoder-block" style={{ height: height * 0.334 }}>
+              {encoderElements}
+            </div>
+          </div>
         </div>
       </div>
     </div>

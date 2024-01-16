@@ -18,7 +18,7 @@
     grid-template-columns: 45fr 55fr;
 }
 
-.encoder-block {
+.decoder-block {
     display: flex;
     flex-flow: column wrap;
     height: 72%;
@@ -26,7 +26,19 @@
     margin: 12px 0px 12px 0px;
 }
 
-.encoder-block div {
+.decoder-block div {
     height: 30px;
     width: 220px;
+}
+
+.encoder-block {
+    display: flex;
+    flex-flow: column wrap;
+    overflow-x: auto;
+    margin: 12px 0px 12px 0px;
+}
+
+.encoder-block div {
+    height: 28px;
+    width: 160px;
 }
