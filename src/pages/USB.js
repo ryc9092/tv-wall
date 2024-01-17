@@ -16,6 +16,7 @@ const USB = () => {
   const [decoderElements, setDecoderElements] = useState([]);
   const [encoderElements, setEncoderElements] = useState([]);
   const [choosedDecoderList, setChoosedDecoderList] = useState([]);
+  const [choosedEncoder, setChoosedEncoder] = useState(null);
 
   const choosedDecoderListRef = useRef();
   choosedDecoderListRef.current = choosedDecoderList;
@@ -97,9 +98,16 @@ const USB = () => {
               value={encoder.previewUrl}
               type="text"
               size="small"
-              style={{ cursor: "pointer" }}
+              style={{
+                cursor: "pointer",
+                backgroundColor:
+                  choosedEncoder === encoder.name ? "#BFE0E4" : null,
+              }}
               className="tvwall-encoder"
-              onClick={encoder.state === "Up" ? handleChooseEncoder : null}
+              onClick={(event) => {
+                const encoderName = event.currentTarget.id;
+                if (encoder.state === "Up") handleChooseEncoder(encoderName);
+              }}
             >
               <span
                 className={
@@ -118,26 +126,26 @@ const USB = () => {
 
       setEncoderElements(tempEncoderElements);
     })();
-  }, []);
+  }, [choosedEncoder]);
 
-  const handleChooseDecoder = (decoderId) => {
+  const handleChooseDecoder = (decoderName) => {
     const decoderList = choosedDecoderListRef.current;
-    if (decoderList.includes(decoderId)) {
+    if (decoderList.includes(decoderName)) {
       // remove decoder from list
       setChoosedDecoderList((choosedDecoderList) => {
-        return choosedDecoderList.filter((decoder) => decoder !== decoderId);
+        return choosedDecoderList.filter((decoder) => decoder !== decoderName);
       });
     } else {
       // add decoder to list
       setChoosedDecoderList((choosedDecoderList) => [
         ...choosedDecoderList,
-        decoderId,
+        decoderName,
       ]);
     }
   };
 
-  const handleChooseEncoder = (e) => {
-    console.log(e.currentTarget.id);
+  const handleChooseEncoder = (encoderName) => {
+    setChoosedEncoder(encoderName);
   };
 
   return (
