@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { StoreContext } from "../components/store/store";
 import { Button, Col, Input, Radio, Row, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
@@ -15,6 +15,10 @@ const USB = () => {
   const [searchFilter, setSearchFilter] = useState("");
   const [decoderElements, setDecoderElements] = useState([]);
   const [encoderElements, setEncoderElements] = useState([]);
+  const [choosedDecoderList, setChoosedDecoderList] = useState([]);
+
+  const choosedDecoderListRef = useRef();
+  choosedDecoderListRef.current = choosedDecoderList;
 
   const changeEncoderType = ({ target: { value } }) => {
     setEncoderType(value);
@@ -43,8 +47,17 @@ const USB = () => {
               id={decoder.name}
               type="text"
               size="small"
-              style={{ cursor: "pointer" }}
+              style={{
+                cursor: "pointer",
+                backgroundColor: choosedDecoderList.includes(decoder.name)
+                  ? "#BFE0E4"
+                  : null,
+              }}
               className="tvwall-encoder"
+              onClick={(event) => {
+                if (decoder.state === "Up")
+                  handleChooseDecoder(event.currentTarget.id);
+              }}
             >
               <span
                 className={
@@ -63,7 +76,7 @@ const USB = () => {
 
       setDecoderElements(tempDecoderElements);
     })();
-  }, [searchFilter]);
+  }, [searchFilter, choosedDecoderList]);
 
   // Set "encoder list" when search filter is changed
   useEffect(() => {
@@ -106,6 +119,22 @@ const USB = () => {
       setEncoderElements(tempEncoderElements);
     })();
   }, []);
+
+  const handleChooseDecoder = (decoderId) => {
+    const decoderList = choosedDecoderListRef.current;
+    if (decoderList.includes(decoderId)) {
+      // remove decoder from list
+      setChoosedDecoderList((choosedDecoderList) => {
+        return choosedDecoderList.filter((decoder) => decoder !== decoderId);
+      });
+    } else {
+      // add decoder to list
+      setChoosedDecoderList((choosedDecoderList) => [
+        ...choosedDecoderList,
+        decoderId,
+      ]);
+    }
+  };
 
   const handleChooseEncoder = (e) => {
     console.log(e.currentTarget.id);
