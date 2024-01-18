@@ -28,6 +28,46 @@ export default defineMessages({
   },
 
   // Side bar
+  Text_Sidebar_DeviceStatus: {
+    id: "Text-Sidebar-DeviceStatus",
+    defaultMessage: "設備即時狀態",
+  },
+  Text_Sidebar_TVWallManagement: {
+    id: "Text-Sidebar-TVWallManagement",
+    defaultMessage: "電視牆影音管理",
+  },
+  Text_Sidebar_SingleScreenManagement: {
+    id: "Text-Sidebar-SingleScreenManagement",
+    defaultMessage: "單畫面影音管理",
+  },
+  Text_Sidebar_USBManagement: {
+    id: "Text-Sidebar-USBManagement",
+    defaultMessage: "USB管理",
+  },
+  Text_Sidebar_RS232Management: {
+    id: "Text-Sidebar-RS232Management",
+    defaultMessage: "RS232管理",
+  },
+  Text_Sidebar_ScheduleManagement: {
+    id: "Text-Sidebar-ScheduleManagement",
+    defaultMessage: "影音排程管理",
+  },
+  Text_Sidebar_SituationManagement: {
+    id: "Text-Sidebar-SituationManagement",
+    defaultMessage: "情境管理",
+  },
+  Text_Sidebar_EventAndAlarm: {
+    id: "Text-Sidebar-EventAndAlarm",
+    defaultMessage: "事件及告警",
+  },
+  Text_Sidebar_SystemSetting: {
+    id: "Text-Sidebar-SystemSetting",
+    defaultMessage: "系統設定",
+  },
+  Text_Sidebar_Language: {
+    id: "Text-Sidebar-Language",
+    defaultMessage: "語言",
+  },
   Text_Sidebar_Chinese: {
     id: "Text-Sidebar-Chinese",
     defaultMessage: "中文",
@@ -35,6 +75,10 @@ export default defineMessages({
   Text_Sidebar_English: {
     id: "Text-Sidebar-English",
     defaultMessage: "英文",
+  },
+  Text_Sidebar_Logout: {
+    id: "Text-Sidebar-Logout",
+    defaultMessage: "登出",
   },
 
   // TV wall management

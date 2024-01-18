@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Actions } from "../store/reducer";
 import { StoreContext } from "../store/store";
 import Logo from "../../assets/ipec.png";
-import { useIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
 import "./sidebar.scss";
 
@@ -17,22 +17,88 @@ const MenuItem = ({ item }) => {
     </div>
   );
 };
-const items = [
-  { key: "equipment-status", label: <MenuItem item={"設備即時狀態"} /> },
-  { key: "tv-wall", label: <MenuItem item={"電視牆影音管理"} /> },
-  { key: "single-screen", label: <MenuItem item={"單畫面影音管理"} /> },
-  { key: "usb", label: <MenuItem item={"USB管理"} /> },
-  { key: "rs232", label: <MenuItem item={"RS232管理"} /> },
-  { key: "schedule", label: <MenuItem item={"影音排程管理"} /> },
-  { key: "situation", label: <MenuItem item={"情境管理"} /> },
-  { key: "event", label: <MenuItem item={"事件及告警"} /> },
-  { key: "setting", label: <MenuItem item={"系統設定"} /> },
-];
 
 const Sidebar = ({ setLocale }) => {
   const intl = useIntl();
   const navigate = useNavigate();
   const [store, dispatch] = useContext(StoreContext);
+
+  const items = [
+    {
+      key: "equipment-status",
+      label: (
+        <MenuItem
+          item={intl.formatMessage(Messages.Text_Sidebar_DeviceStatus)}
+        />
+      ),
+    },
+    {
+      key: "tv-wall",
+      label: (
+        <MenuItem
+          item={intl.formatMessage(Messages.Text_Sidebar_TVWallManagement)}
+        />
+      ),
+    },
+    {
+      key: "single-screen",
+      label: (
+        <MenuItem
+          item={intl.formatMessage(
+            Messages.Text_Sidebar_SingleScreenManagement
+          )}
+        />
+      ),
+    },
+    {
+      key: "usb",
+      label: (
+        <MenuItem
+          item={intl.formatMessage(Messages.Text_Sidebar_USBManagement)}
+        />
+      ),
+    },
+    {
+      key: "rs232",
+      label: (
+        <MenuItem
+          item={intl.formatMessage(Messages.Text_Sidebar_RS232Management)}
+        />
+      ),
+    },
+    {
+      key: "schedule",
+      label: (
+        <MenuItem
+          item={intl.formatMessage(Messages.Text_Sidebar_ScheduleManagement)}
+        />
+      ),
+    },
+    {
+      key: "situation",
+      label: (
+        <MenuItem
+          item={intl.formatMessage(Messages.Text_Sidebar_SituationManagement)}
+        />
+      ),
+    },
+    {
+      key: "event",
+      label: (
+        <MenuItem
+          item={intl.formatMessage(Messages.Text_Sidebar_EventAndAlarm)}
+        />
+      ),
+    },
+    {
+      key: "setting",
+      label: (
+        <MenuItem
+          item={intl.formatMessage(Messages.Text_Sidebar_SystemSetting)}
+        />
+      ),
+    },
+  ];
 
   const onLogout = () => {
     dispatch({ type: Actions.Logout, payload: null });
@@ -74,7 +140,10 @@ const Sidebar = ({ setLocale }) => {
         className="logout-btn"
       >
         <Typography.Text style={{ fontSize: 16 }}>
-          <span style={{ marginRight: 10 }}>{bulletPoint} 語言</span>
+          <span style={{ marginRight: 10 }}>
+            {bulletPoint}{" "}
+            <FormattedMessage {...Messages.Text_Sidebar_Language} />
+          </span>
           <Select
             style={{ width: 100 }}
             options={languageOptions}
@@ -86,7 +155,7 @@ const Sidebar = ({ setLocale }) => {
         <Typography.Text style={{ fontSize: 16 }}>
           {bulletPoint} {store.account}
           <Button type="text" style={{ fontSize: 16 }} onClick={onLogout}>
-            登出
+            <FormattedMessage {...Messages.Text_Sidebar_Logout} />
           </Button>
         </Typography.Text>
       </div>
