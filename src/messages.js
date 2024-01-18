@@ -26,4 +26,20 @@ export default defineMessages({
     id: "Text-Login-FailMsg",
     defaultMessage: "登入失敗",
   },
+
+  // Side bar
+  Text_Sidebar_Chinese: {
+    id: "Text-Sidebar-Chinese",
+    defaultMessage: "中文",
+  },
+  Text_Sidebar_English: {
+    id: "Text-Sidebar-English",
+    defaultMessage: "英文",
+  },
+
+  // TV wall management
+  Text_TVWall_Source: {
+    id: "Text-TVWall-Source",
+    defaultMessage: "影像來源",
+  },
 });

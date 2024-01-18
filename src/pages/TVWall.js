@@ -15,6 +15,8 @@ import TvWall from "../components/tvwall/tvWall";
 import useWindowDimensions from "../utils/WindowDimension";
 import { ENCODER_TYPERS } from "../utils/Constant";
 import { getWalls, getTemplates, getEncoders } from "../api/API";
+import { FormattedMessage } from "react-intl";
+import Messages from "../messages";
 import "../App.scss";
 import "./TVWall.scss";
 
@@ -189,7 +191,7 @@ const TVWall = () => {
       <Row style={{ margin: "8px 0px 0px 8px", height: "11%" }}>
         <Col>
           <Typography.Text style={{ fontSize: "20px", marginRight: "10px" }}>
-            影像來源
+            <FormattedMessage {...Messages.Text_TVWall_Source} />
           </Typography.Text>
         </Col>
         <Col>

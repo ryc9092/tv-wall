@@ -4,5 +4,10 @@
   "Text-Login-EnterAccount": "Enter Account",
   "Text-Login-EnterPassword": "Enter Password",
   "Text-Login-ButtonLogin": "Login",
-  "Text-Login-FailMsg": "Login failed"
+  "Text-Login-FailMsg": "Login failed",
+
+  "Text-Sidebar-Chinese": "Chinese",
+  "Text-Sidebar-English": "English",
+
+  "Text-TVWall-Source": "video source"
 }

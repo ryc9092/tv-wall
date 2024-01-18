@@ -4,5 +4,10 @@
   "Text-Login-EnterAccount": "請輸入帳號",
   "Text-Login-EnterPassword": "請輸入密碼",
   "Text-Login-ButtonLogin": "登入",
-  "Text-Login-FailMsg": "登入失敗"
+  "Text-Login-FailMsg": "登入失敗",
+
+  "Text-Sidebar-Chinese": "中文",
+  "Text-Sidebar-English": "英文",
+
+  "Text-TVWall-Source": "影像來源"
 }

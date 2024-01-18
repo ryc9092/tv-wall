@@ -1,10 +1,12 @@
-import { Button, Menu, Typography } from "antd";
+import { Button, Menu, Select, Typography } from "antd";
 import { useContext } from "react";
 import { SIDEBAR_WIDTH } from "../../layouts/responsiveLayout";
 import { useNavigate } from "react-router-dom";
 import { Actions } from "../store/reducer";
 import { StoreContext } from "../store/store";
 import Logo from "../../assets/ipec.png";
+import { useIntl } from "react-intl";
+import Messages from "../../messages";
 import "./sidebar.scss";
 
 const bulletPoint = "\u25CF";
@@ -27,7 +29,8 @@ const items = [
   { key: "setting", label: <MenuItem item={"系統設定"} /> },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ setLocale }) => {
+  const intl = useIntl();
   const navigate = useNavigate();
   const [store, dispatch] = useContext(StoreContext);
 
@@ -40,6 +43,17 @@ const Sidebar = () => {
     const path = e.key;
     navigate(`/${path}`);
   };
+
+  const languageOptions = [
+    {
+      value: "zh-TW",
+      label: intl.formatMessage(Messages.Text_Sidebar_Chinese),
+    },
+    {
+      value: "en-US",
+      label: intl.formatMessage(Messages.Text_Sidebar_English),
+    },
+  ];
 
   return (
     <div style={{ width: SIDEBAR_WIDTH }}>
@@ -59,6 +73,16 @@ const Sidebar = () => {
         style={{ position: store.siderCollapse ? "relative" : "absolute" }}
         className="logout-btn"
       >
+        <Typography.Text style={{ fontSize: 16 }}>
+          <span style={{ marginRight: 10 }}>{bulletPoint} 語言</span>
+          <Select
+            style={{ width: 100 }}
+            options={languageOptions}
+            value={intl.locale}
+            onChange={setLocale}
+          ></Select>
+        </Typography.Text>
+        <br />
         <Typography.Text style={{ fontSize: 16 }}>
           {bulletPoint} {store.account}
           <Button type="text" style={{ fontSize: 16 }} onClick={onLogout}>

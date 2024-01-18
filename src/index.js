@@ -1,32 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
-import Store from "./components/store/store";
-import VarsProvider from "./components/vars/varsProvider";
 import reportWebVitals from "./reportWebVitals";
-import { IntlProvider } from "react-intl";
-import translations from "./i18n/locales";
+import ProviderApp from "./ProviderApp";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-let locale = navigator.language;
-locale = window.location.search.replace("?locale=", "") || locale;
-const messages = translations[locale];
 
 root.render(
   <React.StrictMode>
-    <Store>
-      <IntlProvider
-        locale={locale}
-        key={locale}
-        messages={messages}
-        defaultLocale="en"
-      >
-        <VarsProvider>
-          <App />
-        </VarsProvider>
-      </IntlProvider>
-    </Store>
+    <ProviderApp />
   </React.StrictMode>
 );
 

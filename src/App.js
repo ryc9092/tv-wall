@@ -16,7 +16,7 @@ const Situation = loadable(() => import("./pages/Situation"));
 const Event = loadable(() => import("./pages/Event"));
 const Setting = loadable(() => import("./pages/Setting"));
 
-function App() {
+function App({ setLocale }) {
   return (
     <BrowserRouter>
       <Routes>
@@ -25,7 +25,10 @@ function App() {
           path="/equipment-status"
           element={
             <PrivateRoute>
-              <ResponsiveLayout sidebar={<Sidebar />} main={<Status />} />
+              <ResponsiveLayout
+                sidebar={<Sidebar setLocale={setLocale} />}
+                main={<Status />}
+              />
             </PrivateRoute>
           }
         />
@@ -33,7 +36,10 @@ function App() {
           path="/tv-wall"
           element={
             <PrivateRoute>
-              <ResponsiveLayout sidebar={<Sidebar />} main={<TVWall />} />
+              <ResponsiveLayout
+                sidebar={<Sidebar setLocale={setLocale} />}
+                main={<TVWall />}
+              />
             </PrivateRoute>
           }
         />
@@ -41,7 +47,10 @@ function App() {
           path="/single-screen"
           element={
             <PrivateRoute>
-              <ResponsiveLayout sidebar={<Sidebar />} main={<SingleScreen />} />
+              <ResponsiveLayout
+                sidebar={<Sidebar setLocale={setLocale} />}
+                main={<SingleScreen />}
+              />
             </PrivateRoute>
           }
         />
@@ -49,7 +58,10 @@ function App() {
           path="/usb"
           element={
             <PrivateRoute>
-              <ResponsiveLayout sidebar={<Sidebar />} main={<USB />} />
+              <ResponsiveLayout
+                sidebar={<Sidebar setLocale={setLocale} />}
+                main={<USB />}
+              />
             </PrivateRoute>
           }
         />
@@ -57,7 +69,10 @@ function App() {
           path="/rs232"
           element={
             <PrivateRoute>
-              <ResponsiveLayout sidebar={<Sidebar />} main={<RS232 />} />
+              <ResponsiveLayout
+                sidebar={<Sidebar setLocale={setLocale} />}
+                main={<RS232 />}
+              />
             </PrivateRoute>
           }
         />
@@ -65,7 +80,10 @@ function App() {
           path="/schedule"
           element={
             <PrivateRoute>
-              <ResponsiveLayout sidebar={<Sidebar />} main={<Schedule />} />
+              <ResponsiveLayout
+                sidebar={<Sidebar setLocale={setLocale} />}
+                main={<Schedule />}
+              />
             </PrivateRoute>
           }
         />
@@ -73,7 +91,10 @@ function App() {
           path="/situation"
           element={
             <PrivateRoute>
-              <ResponsiveLayout sidebar={<Sidebar />} main={<Situation />} />
+              <ResponsiveLayout
+                sidebar={<Sidebar setLocale={setLocale} />}
+                main={<Situation />}
+              />
             </PrivateRoute>
           }
         />
@@ -81,7 +102,10 @@ function App() {
           path="/event"
           element={
             <PrivateRoute>
-              <ResponsiveLayout sidebar={<Sidebar />} main={<Event />} />
+              <ResponsiveLayout
+                sidebar={<Sidebar setLocale={setLocale} />}
+                main={<Event />}
+              />
             </PrivateRoute>
           }
         />
@@ -89,7 +113,10 @@ function App() {
           path="/setting"
           element={
             <PrivateRoute>
-              <ResponsiveLayout sidebar={<Sidebar />} main={<Setting />} />
+              <ResponsiveLayout
+                sidebar={<Sidebar setLocale={setLocale} />}
+                main={<Setting />}
+              />
             </PrivateRoute>
           }
         />
