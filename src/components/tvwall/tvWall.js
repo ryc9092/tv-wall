@@ -3,6 +3,8 @@ import { Button } from "antd";
 import { StoreContext } from "../../components/store/store";
 import { getTemplateScreensById, getWallScreensById } from "../../api/API";
 import { useDocumentDimensions } from "../../utils/WindowDimension";
+import { FormattedMessage } from "react-intl";
+import Messages from "../../messages";
 import "../../App.scss";
 
 const TvWall = ({
@@ -183,15 +185,17 @@ const TvWall = ({
                     opacity: "0.8",
                   }}
                 >
-                  清除此區塊
+                  <FormattedMessage {...Messages.Text_TVWall_ClearBlock} />
                 </Button>
               </>
             ) : (
               <>
                 <div style={{ position: "absolute" }}>
-                  區塊: {block.block}
+                  <FormattedMessage {...Messages.Text_TVWall_Block} />:{" "}
+                  {block.block}
                   <br></br>
-                  維度: {block.col} X {block.row}
+                  <FormattedMessage {...Messages.Text_TVWall_Dimension} />:{" "}
+                  {block.col} X {block.row}
                 </div>
                 {generateBlockTable(block.col, block.row)}
               </>

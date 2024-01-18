@@ -38,8 +38,32 @@ export default defineMessages({
   },
 
   // TV wall management
-  Text_TVWall_Source: {
-    id: "Text-TVWall-Source",
+  Text_TVWall_TVWallManagement: {
+    id: "Text-TVWall-TVWallManagement",
+    defaultMessage: "電視牆影音管理",
+  },
+  Text_TVWall_ClearWallConnection: {
+    id: "Text-TVWall-ClearWallConnection",
+    defaultMessage: "清除牆面連接",
+  },
+  Text_TVWall_VideoSource: {
+    id: "Text-TVWall-VideoSource",
     defaultMessage: "影像來源",
+  },
+  Text_TVWall_Preview: {
+    id: "Text-TVWall-Preview",
+    defaultMessage: "畫面預覽",
+  },
+  Text_TVWall_Block: {
+    id: "Text-TVWall-Block",
+    defaultMessage: "區塊",
+  },
+  Text_TVWall_Dimension: {
+    id: "Text-TVWall-Dimension",
+    defaultMessage: "維度",
+  },
+  Text_TVWall_ClearBlock: {
+    id: "Text-TVWall-ClearBlock",
+    defaultMessage: "清除此區塊",
   },
 });

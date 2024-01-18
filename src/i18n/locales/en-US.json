@@ -9,5 +9,11 @@
   "Text-Sidebar-Chinese": "Chinese",
   "Text-Sidebar-English": "English",
 
-  "Text-TVWall-Source": "video source"
+  "Text-TVWall-TVWallManagement": "TV Wall Management",
+  "Text-TVWall-ClearWallConnection": "clear wall connection",
+  "Text-TVWall-VideoSource": "video source",
+  "Text-TVWall-Preview": "preview",
+  "Text-TVWall-Block": "block",
+  "Text-TVWall-Dimension": "dimension",
+  "Text-TVWall-ClearBlock": "clear block"
 }

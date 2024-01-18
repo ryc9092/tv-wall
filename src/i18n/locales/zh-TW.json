@@ -9,5 +9,11 @@
   "Text-Sidebar-Chinese": "中文",
   "Text-Sidebar-English": "英文",
 
-  "Text-TVWall-Source": "影像來源"
+  "Text-TVWall-TVWallManagement": "電視牆影音管理",
+  "Text-TVWall-ClearWallConnection": "清除牆面連接",
+  "Text-TVWall-VideoSource": "影像來源",
+  "Text-TVWall-Preview": "畫面預覽",
+  "Text-TVWall-Block": "區塊",
+  "Text-TVWall-Dimension": "維度",
+  "Text-TVWall-ClearBlock": "清除此區塊"
 }

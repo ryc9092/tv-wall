@@ -191,7 +191,7 @@ const TVWall = () => {
       <Row style={{ margin: "8px 0px 0px 8px", height: "11%" }}>
         <Col>
           <Typography.Text style={{ fontSize: "20px", marginRight: "10px" }}>
-            <FormattedMessage {...Messages.Text_TVWall_Source} />
+            <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
           </Typography.Text>
         </Col>
         <Col>
@@ -231,14 +231,16 @@ const TVWall = () => {
   return (
     <div>
       {store.siderCollapse ? (
-        <div className="page-title">電視牆影音管理</div>
+        <div className="page-title">
+          <FormattedMessage {...Messages.Text_TVWall_TVWallManagement} />
+        </div>
       ) : (
         <div style={{ marginTop: 60 }} />
       )}
       <div className="container-border container-height container-width">
         <div style={{ borderBottom: "1px solid gray", height: "50%" }}>
           <Row>
-            <Col style={{ width: 270, margin: 8 }}>
+            <Col style={{ width: 300, margin: 8 }}>
               <Row>
                 <Select
                   options={wallOptions}
@@ -254,7 +256,9 @@ const TVWall = () => {
                   }}
                   style={{ marginLeft: 8, color: "#f5222d" }}
                 >
-                  清除牆面連接
+                  <FormattedMessage
+                    {...Messages.Text_TVWall_ClearWallConnection}
+                  />
                 </Button>
               </Row>
               <Radio.Group
@@ -309,7 +313,7 @@ const TVWall = () => {
                   transform: "translate(-50%, -50%)",
                 }}
               >
-                畫面預覽
+                <FormattedMessage {...Messages.Text_TVWall_Preview} />
               </div>
             )}
           </div>
