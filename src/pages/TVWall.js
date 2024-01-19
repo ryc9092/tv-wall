@@ -237,7 +237,10 @@ const TVWall = () => {
       ) : (
         <div style={{ marginTop: 60 }} />
       )}
-      <div className="container-border container-height container-width">
+      <div
+        className="container-border container-height container-width"
+        style={{ marginTop: 10 }}
+      >
         <div style={{ borderBottom: "1px solid gray", height: "50%" }}>
           <Row>
             <Col style={{ width: 300, margin: 8 }}>
