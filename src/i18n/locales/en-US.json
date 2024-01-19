@@ -20,6 +20,18 @@
   "Text-Sidebar-English": "English",
   "Text-Sidebar-Logout": "Logout",
 
+  "Text-DeviceStatus-Type": "Type",
+  "Text-DeviceStatus-Name": "Name",
+  "Text-DeviceStatus-Alias": "Alias",
+  "Text-DeviceStatus-State": "State",
+  "Text-DeviceStatus-Detail": "Details",
+  "Text-DeviceStatus-Encoder": "encoder",
+  "Text-DeviceStatus-Decoder": "decoder",
+  "Text-DeviceStatus-Content": "content",
+  "Text-DeviceStatus-Model": "model",
+  "Text-DeviceStatus-ProductCode": "product code",
+  "Text-DeviceStatus-ProductDesc": "product description",
+
   "Text-TVWall-TVWallManagement": "TV Wall Management",
   "Text-TVWall-ClearWallConnection": "clear wall connection",
   "Text-TVWall-VideoSource": "video source",

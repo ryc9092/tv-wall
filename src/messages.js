@@ -81,6 +81,52 @@ export default defineMessages({
     defaultMessage: "登出",
   },
 
+  // Device status
+  Text_DeviceStatus_Type: {
+    id: "Text-DeviceStatus-Type",
+    defaultMessage: "類型",
+  },
+  Text_DeviceStatus_Name: {
+    id: "Text-DeviceStatus-Name",
+    defaultMessage: "名稱",
+  },
+  Text_DeviceStatus_Alias: {
+    id: "Text-DeviceStatus-Alias",
+    defaultMessage: "別名",
+  },
+  Text_DeviceStatus_State: {
+    id: "Text-DeviceStatus-State",
+    defaultMessage: "狀態",
+  },
+  Text_DeviceStatus_Detail: {
+    id: "Text-DeviceStatus-Detail",
+    defaultMessage: "詳細資訊",
+  },
+  Text_DeviceStatus_Encoder: {
+    id: "Text-DeviceStatus-Encoder",
+    defaultMessage: "編碼器",
+  },
+  Text_DeviceStatus_Decoder: {
+    id: "Text-DeviceStatus-Decoder",
+    defaultMessage: "解碼器",
+  },
+  Text_DeviceStatus_Content: {
+    id: "Text-DeviceStatus-Content",
+    defaultMessage: "內容",
+  },
+  Text_DeviceStatus_Model: {
+    id: "Text-DeviceStatus-Model",
+    defaultMessage: "模型",
+  },
+  Text_DeviceStatus_ProductCode: {
+    id: "Text-DeviceStatus-ProductCode",
+    defaultMessage: "產品編號",
+  },
+  Text_DeviceStatus_ProductDesc: {
+    id: "Text-DeviceStatus-ProductDesc",
+    defaultMessage: "產品描述",
+  },
+
   // TV wall management
   Text_TVWall_TVWallManagement: {
     id: "Text-TVWall-TVWallManagement",

@@ -20,6 +20,18 @@
   "Text-Sidebar-English": "英文",
   "Text-Sidebar-Logout": "登出",
 
+  "Text-DeviceStatus-Type": "類型",
+  "Text-DeviceStatus-Name": "名稱",
+  "Text-DeviceStatus-Alias": "別名",
+  "Text-DeviceStatus-State": "狀態",
+  "Text-DeviceStatus-Detail": "詳細資訊",
+  "Text-DeviceStatus-Encoder": "編碼器",
+  "Text-DeviceStatus-Decoder": "解碼器",
+  "Text-DeviceStatus-Content": "內容",
+  "Text-DeviceStatus-Model": "模型",
+  "Text-DeviceStatus-ProductCode": "產品編號",
+  "Text-DeviceStatus-ProductDesc": "產品描述",
+
   "Text-TVWall-TVWallManagement": "電視牆影音管理",
   "Text-TVWall-ClearWallConnection": "清除牆面連接",
   "Text-TVWall-VideoSource": "影像來源",

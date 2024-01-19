@@ -2,9 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
 import { Button, Modal, Table, Tag } from "antd";
 import { getEncoders, getDecoders } from "../api/API";
+import { FormattedMessage, useIntl } from "react-intl";
+import Messages from "../messages";
 import "./Status.scss";
 
 const Status = () => {
+  const intl = useIntl();
   const [store] = useContext(StoreContext);
   const [devices, setDevices] = useState([]);
   const [details, setDetails] = useState(null);
@@ -32,29 +35,35 @@ const Status = () => {
 
   const columns = [
     {
-      title: "類型",
+      title: intl.formatMessage(Messages.Text_DeviceStatus_Type),
       dataIndex: "type",
       key: "type",
       filters: [
-        { text: "編碼器", value: "encoder" },
-        { text: "解碼器", value: "decoder" },
+        {
+          text: intl.formatMessage(Messages.Text_DeviceStatus_Encoder),
+          value: "encoder",
+        },
+        {
+          text: intl.formatMessage(Messages.Text_DeviceStatus_Decoder),
+          value: "decoder",
+        },
       ],
       onFilter: (value, data) => data.type.indexOf(value) === 0,
     },
     {
-      title: "名稱",
+      title: intl.formatMessage(Messages.Text_DeviceStatus_Name),
       dataIndex: "name",
       key: "name",
       render: (text) => <span>{text}</span>,
     },
     {
-      title: "別名",
+      title: intl.formatMessage(Messages.Text_DeviceStatus_Alias),
       dataIndex: "nickName",
       key: "nickName",
       render: (text) => <span>{text}</span>,
     },
     {
-      title: "狀態",
+      title: intl.formatMessage(Messages.Text_DeviceStatus_State),
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
@@ -77,7 +86,7 @@ const Status = () => {
       ),
     },
     {
-      title: "詳細資訊",
+      title: intl.formatMessage(Messages.Text_DeviceStatus_Detail),
       dataIndex: ["name", "mac", "model", "productCode", "productDescription"],
       key: "details",
       render: (text, record) => (
@@ -92,7 +101,7 @@ const Status = () => {
             );
           }}
         >
-          內容
+          <FormattedMessage {...Messages.Text_DeviceStatus_Content} />
         </Button>
       ),
     },
@@ -107,15 +116,25 @@ const Status = () => {
   ) => {
     const tempDetails = (
       <>
-        <span>名稱: {name}</span>
+        <span>
+          <FormattedMessage {...Messages.Text_DeviceStatus_Name} />: {name}
+        </span>
         <br />
         <span>MAC: {mac}</span>
         <br />
-        <span>模型: {model}</span>
+        <span>
+          <FormattedMessage {...Messages.Text_DeviceStatus_Model} />: {model}
+        </span>
         <br />
-        <span>產品編號: {productCode}</span>
+        <span>
+          <FormattedMessage {...Messages.Text_DeviceStatus_ProductCode} />:{" "}
+          {productCode}
+        </span>
         <br />
-        <span>產品描述: {productDescription}</span>
+        <span>
+          <FormattedMessage {...Messages.Text_DeviceStatus_ProductDesc} />:{" "}
+          {productDescription}
+        </span>
       </>
     );
     setDetails(tempDetails);
