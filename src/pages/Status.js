@@ -145,7 +145,7 @@ const Status = () => {
     <div>
       {store.siderCollapse ? (
         <div className="page-title" style={{ marginTop: 20, marginBottom: 20 }}>
-          設備即時狀態
+          <FormattedMessage {...Messages.Text_DeviceStatus_CurrentStatus} />
         </div>
       ) : (
         <div style={{ marginTop: 60, marginBottom: 20 }} />

@@ -82,6 +82,10 @@ export default defineMessages({
   },
 
   // Device status
+  Text_DeviceStatus_CurrentStatus: {
+    id: "Text-DeviceStatus-CurrentStatus",
+    defaultMessage: "設備即時狀態",
+  },
   Text_DeviceStatus_Type: {
     id: "Text-DeviceStatus-Type",
     defaultMessage: "類型",
