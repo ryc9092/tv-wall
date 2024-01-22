@@ -17,9 +17,12 @@ import {
   showWarningNotification,
   showSuccessNotificationByMsg,
 } from "../../../utils/Utils";
+import { FormattedMessage, useIntl } from "react-intl";
+import Messages from "../../../messages";
 import "../../../App.scss";
 
 const CreateTemplate = ({ setReload }) => {
+  const intl = useIntl();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [templateId, setTemplateId] = useState(null);
   const [templateName, setTemplateName] = useState(null);
@@ -65,7 +68,8 @@ const CreateTemplate = ({ setReload }) => {
               borderRadius: "6px",
             }}
           >
-            區塊 {block}
+            <FormattedMessage {...Messages.Text_TemplateManagement_Block} />{" "}
+            {block}
           </Radio>
         );
       })}
@@ -125,20 +129,31 @@ const CreateTemplate = ({ setReload }) => {
     (async () => {
       const result = await createTemplate();
       if (result) {
-        showSuccessNotificationByMsg("版型建立成功");
+        showSuccessNotificationByMsg(
+          intl.formatMessage(Messages.Text_TemplateManagement_CreateSuccess)
+        );
         setReload(Math.random);
         setIsModalOpen(false);
-      } else showWarningNotification("版型建立失敗");
+      } else
+        showWarningNotification(
+          intl.formatMessage(Messages.Text_TemplateManagement_CreateFail)
+        );
     })();
   };
 
   return (
     <div>
       <Button onClick={() => setIsModalOpen(true)}>
-        <Typography.Text>建立新版型</Typography.Text>
+        <Typography.Text>
+          <FormattedMessage
+            {...Messages.Text_TemplateManagement_CreateTemplate}
+          />
+        </Typography.Text>
       </Button>
       <Modal
-        title={"建立電視牆版型"}
+        title={intl.formatMessage(
+          Messages.Text_TemplateManagement_CreateWallTemplate
+        )}
         className="modal-title"
         width={568}
         open={isModalOpen}
@@ -149,7 +164,12 @@ const CreateTemplate = ({ setReload }) => {
         }}
       >
         <Row style={{ marginTop: "20px" }}>
-          <Col style={{ marginRight: "22px" }}>{"版型 ID:"}</Col>
+          <Col style={{ marginRight: "22px" }}>
+            <FormattedMessage
+              {...Messages.Text_TemplateManagement_TemplateId}
+            />
+            {":"}
+          </Col>
           <Col style={{ marginRight: "16px" }}>
             <Input
               value={templateId}
@@ -162,7 +182,12 @@ const CreateTemplate = ({ setReload }) => {
           </Col>
         </Row>
         <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "12px" }}>{"版型名稱:"}</Col>
+          <Col style={{ marginRight: "12px" }}>
+            <FormattedMessage
+              {...Messages.Text_TemplateManagement_TemplateName}
+            />
+            {":"}
+          </Col>
           <Col style={{ marginRight: "16px" }}>
             <Input
               value={templateName}
@@ -175,7 +200,10 @@ const CreateTemplate = ({ setReload }) => {
           </Col>
         </Row>
         <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "40px" }}>{"維度:"}</Col>
+          <Col style={{ marginRight: "40px" }}>
+            <FormattedMessage {...Messages.Text_TemplateManagement_Dimension} />
+            {":"}
+          </Col>
           <Col style={{ marginRight: "6px" }}>
             <InputNumber
               value={templateSize.col}
@@ -204,7 +232,11 @@ const CreateTemplate = ({ setReload }) => {
         </Row>
         <Row style={{ marginTop: "16px" }}>
           <Col style={{ marginRight: "12px" }}>
-            <div style={{ marginBottom: "5px" }}>畫面編號</div>
+            <div style={{ marginBottom: "5px" }}>
+              <FormattedMessage
+                {...Messages.Text_TemplateManagement_ScreenNumber}
+              />
+            </div>
             <div
               style={{
                 width: "279px",
@@ -219,7 +251,9 @@ const CreateTemplate = ({ setReload }) => {
           </Col>
           <Col>
             <Row style={{ marginBottom: "3px" }}>
-              <div style={{ marginRight: "6px" }}>區塊</div>
+              <div style={{ marginRight: "6px" }}>
+                <FormattedMessage {...Messages.Text_TemplateManagement_Block} />
+              </div>
               <div>
                 <Button
                   size="small"
@@ -228,7 +262,9 @@ const CreateTemplate = ({ setReload }) => {
                     if (blockNum <= 7) setBlocks(blockNum);
                   }}
                 >
-                  新增區塊
+                  <FormattedMessage
+                    {...Messages.Text_TemplateManagement_AddBlock}
+                  />
                 </Button>
               </div>{" "}
             </Row>
@@ -253,9 +289,13 @@ const CreateTemplate = ({ setReload }) => {
         </Row>
         <Row style={{ marginTop: "16px" }}>
           <Button onClick={resetTemplate} style={{ marginRight: "16px" }}>
-            重置版型
+            <FormattedMessage
+              {...Messages.Text_TemplateManagement_ResetTemplate}
+            />
           </Button>
-          <Button onClick={saveWall}>儲存</Button>
+          <Button onClick={saveWall}>
+            <FormattedMessage {...Messages.Text_Button_Save} />
+          </Button>
         </Row>
       </Modal>
     </div>

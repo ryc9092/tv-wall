@@ -3,6 +3,8 @@ import { EditOutlined } from "@ant-design/icons";
 import SettingTemplateModal from "../components/setting/template/templateModal";
 import SettingWallModal from "../components/setting/tvWall/wallModal";
 import SettingDeviceModal from "../components/setting/device/deviceModal";
+import { FormattedMessage } from "react-intl";
+import Messages from "../messages";
 import "../App.scss";
 import "./Setting.scss";
 
@@ -29,7 +31,7 @@ const Setting = () => {
   return (
     <div>
       <div className="page-title" style={{ margin: " 24px 0px 48px 0px" }}>
-        系統設定
+        <FormattedMessage {...Messages.Text_SystemSetting_Title} />
       </div>
       <SettingTemplateModal />
       <SettingWallModal />

@@ -1,4 +1,8 @@
 {
+  "Text-Button-Save": "儲存",
+  "Text-Button-View": "檢視",
+  "Text-Button-Delete": "刪除",
+
   "Text-Login-Account": "帳號",
   "Text-Login-Password": "密碼",
   "Text-Login-EnterAccount": "請輸入帳號",
@@ -39,5 +43,27 @@
   "Text-TVWall-Preview": "畫面預覽",
   "Text-TVWall-Block": "區塊",
   "Text-TVWall-Dimension": "維度",
-  "Text-TVWall-ClearBlock": "清除此區塊"
+  "Text-TVWall-ClearBlock": "清除此區塊",
+
+  "Text-SystemSetting-Title": "系統設定",
+
+  "Text-TemplateManagement-TemplateSetting": "電視牆版型設定",
+  "Text-TemplateManagement-TemplateManagement": "版型管理",
+  "Text-TemplateManagement-Default": "預設",
+  "Text-TemplateManagement-Name": "名稱",
+  "Text-TemplateManagement-Dimension": "維度",
+  "Text-TemplateManagement-Operation": "操作",
+  "Text-TemplateManagement-DeleteSuccess": "版型移除成功",
+  "Text-TemplateManagement-DeleteFail": "版型移除失敗",
+  "Text-TemplateManagement-Template": "版型",
+  "Text-TemplateManagement-TemplateName": "版型名稱",
+  "Text-TemplateManagement-CreateTemplate": "建立新版型",
+  "Text-TemplateManagement-CreateWallTemplate": "建立電視牆版型",
+  "Text-TemplateManagement-TemplateId": "版型 ID",
+  "Text-TemplateManagement-ScreenNumber": "畫面編號",
+  "Text-TemplateManagement-Block": "區塊",
+  "Text-TemplateManagement-AddBlock": "新增區塊",
+  "Text-TemplateManagement-ResetTemplate": "重置版型",
+  "Text-TemplateManagement-CreateSuccess": "版型建立成功",
+  "Text-TemplateManagement-CreateFail": "版型建立失敗"
 }

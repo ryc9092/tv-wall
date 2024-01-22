@@ -8,9 +8,12 @@ import {
   showWarningNotification,
   showSuccessNotificationByMsg,
 } from "../../../utils/Utils";
+import { FormattedMessage, useIntl } from "react-intl";
+import Messages from "../../../messages";
 import "../../../App.scss";
 
 const SettingTemplateModal = () => {
+  const intl = useIntl();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openViewTemplateModal, setOpenViewTemplateModal] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
@@ -42,7 +45,7 @@ const SettingTemplateModal = () => {
 
   const columns = [
     {
-      title: "預設",
+      title: intl.formatMessage(Messages.Text_TemplateManagement_Default),
       dataIndex: ["isDefault", "templateId", "col", "row"],
       key: "default",
       render: (text, record) => (
@@ -62,19 +65,19 @@ const SettingTemplateModal = () => {
       render: (text) => <span>{text}</span>,
     },
     {
-      title: "名稱",
+      title: intl.formatMessage(Messages.Text_TemplateManagement_Name),
       dataIndex: "templateName",
       key: "templateName",
       render: (text) => <span>{text}</span>,
     },
     {
-      title: "維度",
+      title: intl.formatMessage(Messages.Text_TemplateManagement_Dimension),
       dataIndex: ["col", "row"],
       key: "dimension",
       render: (text, record) => <span>{`${record.col} X ${record.row}`}</span>,
     },
     {
-      title: "操作",
+      title: intl.formatMessage(Messages.Text_TemplateManagement_Operation),
       dataIndex: "templateId",
       key: "action",
       render: (text) => (
@@ -85,10 +88,10 @@ const SettingTemplateModal = () => {
             onClick={viewTemplate}
             style={{ marginRight: 6 }}
           >
-            檢視
+            <FormattedMessage {...Messages.Text_Button_View} />
           </Button>
           <Button key={`${text}-delete`} id={text} onClick={removeTemplate}>
-            刪除
+            <FormattedMessage {...Messages.Text_Button_Delete} />
           </Button>
         </div>
       ),
@@ -101,9 +104,14 @@ const SettingTemplateModal = () => {
     (async () => {
       const result = await deleteTemplate();
       if (result) {
-        showSuccessNotificationByMsg("版型移除成功");
+        showSuccessNotificationByMsg(
+          intl.formatMessage(Messages.Text_TemplateManagement_DeleteSuccess)
+        );
         setReload(Math.random);
-      } else showWarningNotification("版型移除失敗");
+      } else
+        showWarningNotification(
+          intl.formatMessage(Messages.Text_TemplateManagement_DeleteFail)
+        );
     })();
   };
 
@@ -124,13 +132,17 @@ const SettingTemplateModal = () => {
         className="setting-option-button"
       >
         <Typography.Text className="setting-option-text">
-          電視牆版型設定
+          <FormattedMessage
+            {...Messages.Text_TemplateManagement_TemplateSetting}
+          />
         </Typography.Text>
         <></>
         <EditOutlined className="setting-option-icon" />
       </Button>
       <Modal
-        title={`版型管理`}
+        title={intl.formatMessage(
+          Messages.Text_TemplateManagement_TemplateManagement
+        )}
         className="modal-title"
         width={680}
         open={isModalOpen}

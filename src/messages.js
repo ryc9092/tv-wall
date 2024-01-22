@@ -1,6 +1,20 @@
 import { defineMessages } from "react-intl";
 
 export default defineMessages({
+  // Common
+  Text_Button_Save: {
+    id: "Text-Button-Save",
+    defaultMessage: "儲存",
+  },
+  Text_Button_View: {
+    id: "Text-Button-View",
+    defaultMessage: "檢視",
+  },
+  Text_Button_Delete: {
+    id: "Text-Button-Delete",
+    defaultMessage: "刪除",
+  },
+
   // Login
   Text_Login_Account: {
     id: "Text-Login-Account",
@@ -159,5 +173,89 @@ export default defineMessages({
   Text_TVWall_ClearBlock: {
     id: "Text-TVWall-ClearBlock",
     defaultMessage: "清除此區塊",
+  },
+
+  // System setting
+  Text_SystemSetting_Title: {
+    id: "Text-SystemSetting-Title",
+    defaultMessage: "系統設定",
+  },
+
+  // System setting - templage management
+  Text_TemplateManagement_TemplateSetting: {
+    id: "Text-TemplateManagement-TemplateSetting",
+    defaultMessage: "電視牆版型設定",
+  },
+  Text_TemplateManagement_TemplateManagement: {
+    id: "Text-TemplateManagement-TemplateManagement",
+    defaultMessage: "版型管理",
+  },
+  Text_TemplateManagement_Default: {
+    id: "Text-TemplateManagement-Default",
+    defaultMessage: "預設",
+  },
+  Text_TemplateManagement_Name: {
+    id: "Text-TemplateManagement-Name",
+    defaultMessage: "名稱",
+  },
+  Text_TemplateManagement_Dimension: {
+    id: "Text-TemplateManagement-Dimension",
+    defaultMessage: "維度",
+  },
+  Text_TemplateManagement_Operation: {
+    id: "Text-TemplateManagement-Operation",
+    defaultMessage: "操作",
+  },
+  Text_TemplateManagement_DeleteSuccess: {
+    id: "Text-TemplateManagement-DeleteSuccess",
+    defaultMessage: "版型移除成功",
+  },
+  Text_TemplateManagement_DeleteFail: {
+    id: "Text-TemplateManagement-DeleteFail",
+    defaultMessage: "版型移除失敗",
+  },
+  Text_TemplateManagement_Template: {
+    id: "Text-TemplateManagement-Template",
+    defaultMessage: "版型",
+  },
+  Text_TemplateManagement_TemplateName: {
+    id: "Text-TemplateManagement-TemplateName",
+    defaultMessage: "版型名稱",
+  },
+  Text_TemplateManagement_CreateTemplate: {
+    id: "Text-TemplateManagement-CreateTemplate",
+    defaultMessage: "建立新版型",
+  },
+  Text_TemplateManagement_CreateWallTemplate: {
+    id: "Text-TemplateManagement-CreateWallTemplate",
+    defaultMessage: "建立電視牆版型",
+  },
+  Text_TemplateManagement_TemplateId: {
+    id: "Text-TemplateManagement-TemplateId",
+    defaultMessage: "版型 ID",
+  },
+  Text_TemplateManagement_ScreenNumber: {
+    id: "Text-TemplateManagement-ScreenNumber",
+    defaultMessage: "畫面編號",
+  },
+  Text_TemplateManagement_Block: {
+    id: "Text-TemplateManagement-Block",
+    defaultMessage: "區塊",
+  },
+  Text_TemplateManagement_AddBlock: {
+    id: "Text-TemplateManagement-AddBlock",
+    defaultMessage: "新增區塊",
+  },
+  Text_TemplateManagement_ResetTemplate: {
+    id: "Text-TemplateManagement-ResetTemplate",
+    defaultMessage: "重置版型",
+  },
+  Text_TemplateManagement_CreateSuccess: {
+    id: "Text-TemplateManagement-CreateSuccess",
+    defaultMessage: "版型建立成功",
+  },
+  Text_TemplateManagement_CreateFail: {
+    id: "Text-TemplateManagement-CreateFail",
+    defaultMessage: "版型建立失敗",
   },
 });

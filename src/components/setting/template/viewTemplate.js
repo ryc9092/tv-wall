@@ -3,9 +3,12 @@ import { StoreContext } from "../../../components/store/store";
 import { Button, Col, Input, InputNumber, Modal, Row } from "antd";
 import { blockColorList } from "../../../utils/Constant";
 import { getTemplateScreensById } from "../../../api/API";
+import { FormattedMessage, useIntl } from "react-intl";
+import Messages from "../../../messages";
 import "../../../App.scss";
 
 const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
+  const intl = useIntl();
   const [store] = useContext(StoreContext);
   const [templateName, setTemplateName] = useState(null);
   const [templateSize, setTemplateSize] = useState({ col: 1, row: 1 });
@@ -65,7 +68,7 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
   return (
     <div>
       <Modal
-        title={"版型"}
+        title={intl.formatMessage(Messages.Text_TemplateManagement_Template)}
         className="modal-title"
         width={428}
         open={modalOpen}
@@ -76,7 +79,12 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
         }}
       >
         <Row style={{ marginTop: "20px" }}>
-          <Col style={{ marginRight: "4px" }}>{"版型名稱:"}</Col>
+          <Col style={{ marginRight: "6px" }}>
+            <FormattedMessage
+              {...Messages.Text_TemplateManagement_TemplateName}
+            />
+            {":"}
+          </Col>
           <Col style={{ marginRight: "16px" }}>
             <Input
               value={templateName}
@@ -87,7 +95,10 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
           </Col>
         </Row>
         <Row style={{ marginTop: "12px" }}>
-          <Col style={{ marginRight: "32px" }}>{"維度:"}</Col>
+          <Col style={{ marginRight: "6px" }}>
+            <FormattedMessage {...Messages.Text_TemplateManagement_Dimension} />
+            {":"}
+          </Col>
           <Col style={{ marginRight: "6px" }}>
             <InputNumber
               value={templateSize.col}

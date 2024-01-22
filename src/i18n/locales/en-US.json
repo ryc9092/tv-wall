@@ -1,4 +1,8 @@
 {
+  "Text-Button-Save": "save",
+  "Text-Button-View": "view",
+  "Text-Button-Delete": "delete",
+
   "Text-Login-Account": "Account",
   "Text-Login-Password": "Password",
   "Text-Login-EnterAccount": "Enter Account",
@@ -39,5 +43,27 @@
   "Text-TVWall-Preview": "preview",
   "Text-TVWall-Block": "block",
   "Text-TVWall-Dimension": "dimension",
-  "Text-TVWall-ClearBlock": "clear block"
+  "Text-TVWall-ClearBlock": "clear block",
+
+  "Text-SystemSetting-Title": "System setting",
+
+  "Text-TemplateManagement-TemplateSetting": "Template setting",
+  "Text-TemplateManagement-TemplateManagement": "Template management",
+  "Text-TemplateManagement-Default": "default",
+  "Text-TemplateManagement-Name": "name",
+  "Text-TemplateManagement-Dimension": "dimension",
+  "Text-TemplateManagement-Operation": "operation",
+  "Text-TemplateManagement-DeleteSuccess": "Deleted template successfully.",
+  "Text-TemplateManagement-DeleteFail": "Deleted template failed.",
+  "Text-TemplateManagement-Template": "Template",
+  "Text-TemplateManagement-TemplateName": "template name",
+  "Text-TemplateManagement-CreateTemplate": "Create template",
+  "Text-TemplateManagement-CreateWallTemplate": "Create wall template",
+  "Text-TemplateManagement-TemplateId": "template ID",
+  "Text-TemplateManagement-ScreenNumber": "screen number",
+  "Text-TemplateManagement-Block": "block",
+  "Text-TemplateManagement-AddBlock": "add block",
+  "Text-TemplateManagement-ResetTemplate": "reset template",
+  "Text-TemplateManagement-CreateSuccess": "Create template successfully.",
+  "Text-TemplateManagement-CreateFail": "Create template failed."
 }
