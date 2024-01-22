@@ -68,7 +68,7 @@ const CreateTemplate = ({ setReload }) => {
               borderRadius: "6px",
             }}
           >
-            <FormattedMessage {...Messages.Text_TemplateManagement_Block} />{" "}
+            <FormattedMessage {...Messages.Text_TemplateSetting_Block} />{" "}
             {block}
           </Radio>
         );
@@ -130,13 +130,13 @@ const CreateTemplate = ({ setReload }) => {
       const result = await createTemplate();
       if (result) {
         showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_TemplateManagement_CreateSuccess)
+          intl.formatMessage(Messages.Text_TemplateSetting_CreateSuccess)
         );
         setReload(Math.random);
         setIsModalOpen(false);
       } else
         showWarningNotification(
-          intl.formatMessage(Messages.Text_TemplateManagement_CreateFail)
+          intl.formatMessage(Messages.Text_TemplateSetting_CreateFail)
         );
     })();
   };
@@ -145,14 +145,12 @@ const CreateTemplate = ({ setReload }) => {
     <div>
       <Button onClick={() => setIsModalOpen(true)}>
         <Typography.Text>
-          <FormattedMessage
-            {...Messages.Text_TemplateManagement_CreateTemplate}
-          />
+          <FormattedMessage {...Messages.Text_TemplateSetting_CreateTemplate} />
         </Typography.Text>
       </Button>
       <Modal
         title={intl.formatMessage(
-          Messages.Text_TemplateManagement_CreateWallTemplate
+          Messages.Text_TemplateSetting_CreateWallTemplate
         )}
         className="modal-title"
         width={568}
@@ -165,9 +163,7 @@ const CreateTemplate = ({ setReload }) => {
       >
         <Row style={{ marginTop: "20px" }}>
           <Col style={{ marginRight: "22px" }}>
-            <FormattedMessage
-              {...Messages.Text_TemplateManagement_TemplateId}
-            />
+            <FormattedMessage {...Messages.Text_TemplateSetting_TemplateId} />
             {":"}
           </Col>
           <Col style={{ marginRight: "16px" }}>
@@ -183,9 +179,7 @@ const CreateTemplate = ({ setReload }) => {
         </Row>
         <Row style={{ marginTop: "16px" }}>
           <Col style={{ marginRight: "12px" }}>
-            <FormattedMessage
-              {...Messages.Text_TemplateManagement_TemplateName}
-            />
+            <FormattedMessage {...Messages.Text_TemplateSetting_TemplateName} />
             {":"}
           </Col>
           <Col style={{ marginRight: "16px" }}>
@@ -201,7 +195,7 @@ const CreateTemplate = ({ setReload }) => {
         </Row>
         <Row style={{ marginTop: "16px" }}>
           <Col style={{ marginRight: "40px" }}>
-            <FormattedMessage {...Messages.Text_TemplateManagement_Dimension} />
+            <FormattedMessage {...Messages.Text_TemplateSetting_Dimension} />
             {":"}
           </Col>
           <Col style={{ marginRight: "6px" }}>
@@ -234,7 +228,7 @@ const CreateTemplate = ({ setReload }) => {
           <Col style={{ marginRight: "12px" }}>
             <div style={{ marginBottom: "5px" }}>
               <FormattedMessage
-                {...Messages.Text_TemplateManagement_ScreenNumber}
+                {...Messages.Text_TemplateSetting_ScreenNumber}
               />
             </div>
             <div
@@ -252,7 +246,7 @@ const CreateTemplate = ({ setReload }) => {
           <Col>
             <Row style={{ marginBottom: "3px" }}>
               <div style={{ marginRight: "6px" }}>
-                <FormattedMessage {...Messages.Text_TemplateManagement_Block} />
+                <FormattedMessage {...Messages.Text_TemplateSetting_Block} />
               </div>
               <div>
                 <Button
@@ -263,7 +257,7 @@ const CreateTemplate = ({ setReload }) => {
                   }}
                 >
                   <FormattedMessage
-                    {...Messages.Text_TemplateManagement_AddBlock}
+                    {...Messages.Text_TemplateSetting_AddBlock}
                   />
                 </Button>
               </div>{" "}
@@ -290,7 +284,7 @@ const CreateTemplate = ({ setReload }) => {
         <Row style={{ marginTop: "16px" }}>
           <Button onClick={resetTemplate} style={{ marginRight: "16px" }}>
             <FormattedMessage
-              {...Messages.Text_TemplateManagement_ResetTemplate}
+              {...Messages.Text_TemplateSetting_ResetTemplate}
             />
           </Button>
           <Button onClick={saveWall}>

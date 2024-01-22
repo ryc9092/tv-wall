@@ -181,81 +181,83 @@ export default defineMessages({
     defaultMessage: "系統設定",
   },
 
-  // System setting - templage management
-  Text_TemplateManagement_TemplateSetting: {
-    id: "Text-TemplateManagement-TemplateSetting",
+  // System setting - template setting
+  Text_TemplateSetting_TemplateSetting: {
+    id: "Text-TemplateSetting-TemplateSetting",
     defaultMessage: "電視牆版型設定",
   },
-  Text_TemplateManagement_TemplateManagement: {
-    id: "Text-TemplateManagement-TemplateManagement",
+  Text_TemplateSetting_TemplateManagement: {
+    id: "Text-TemplateSetting-TemplateManagement",
     defaultMessage: "版型管理",
   },
-  Text_TemplateManagement_Default: {
-    id: "Text-TemplateManagement-Default",
+  Text_TemplateSetting_Default: {
+    id: "Text-TemplateSetting-Default",
     defaultMessage: "預設",
   },
-  Text_TemplateManagement_Name: {
-    id: "Text-TemplateManagement-Name",
+  Text_TemplateSetting_Name: {
+    id: "Text-TemplateSetting-Name",
     defaultMessage: "名稱",
   },
-  Text_TemplateManagement_Dimension: {
-    id: "Text-TemplateManagement-Dimension",
+  Text_TemplateSetting_Dimension: {
+    id: "Text-TemplateSetting-Dimension",
     defaultMessage: "維度",
   },
-  Text_TemplateManagement_Operation: {
-    id: "Text-TemplateManagement-Operation",
+  Text_TemplateSetting_Operation: {
+    id: "Text-TemplateSetting-Operation",
     defaultMessage: "操作",
   },
-  Text_TemplateManagement_DeleteSuccess: {
-    id: "Text-TemplateManagement-DeleteSuccess",
+  Text_TemplateSetting_DeleteSuccess: {
+    id: "Text-TemplateSetting-DeleteSuccess",
     defaultMessage: "版型移除成功",
   },
-  Text_TemplateManagement_DeleteFail: {
-    id: "Text-TemplateManagement-DeleteFail",
+  Text_TemplateSetting_DeleteFail: {
+    id: "Text-TemplateSetting-DeleteFail",
     defaultMessage: "版型移除失敗",
   },
-  Text_TemplateManagement_Template: {
-    id: "Text-TemplateManagement-Template",
+  Text_TemplateSetting_Template: {
+    id: "Text-TemplateSetting-Template",
     defaultMessage: "版型",
   },
-  Text_TemplateManagement_TemplateName: {
-    id: "Text-TemplateManagement-TemplateName",
+  Text_TemplateSetting_TemplateName: {
+    id: "Text-TemplateSetting-TemplateName",
     defaultMessage: "版型名稱",
   },
-  Text_TemplateManagement_CreateTemplate: {
-    id: "Text-TemplateManagement-CreateTemplate",
+  Text_TemplateSetting_CreateTemplate: {
+    id: "Text-TemplateSetting-CreateTemplate",
     defaultMessage: "建立新版型",
   },
-  Text_TemplateManagement_CreateWallTemplate: {
-    id: "Text-TemplateManagement-CreateWallTemplate",
+  Text_TemplateSetting_CreateWallTemplate: {
+    id: "Text-TemplateSetting-CreateWallTemplate",
     defaultMessage: "建立電視牆版型",
   },
-  Text_TemplateManagement_TemplateId: {
-    id: "Text-TemplateManagement-TemplateId",
+  Text_TemplateSetting_TemplateId: {
+    id: "Text-TemplateSetting-TemplateId",
     defaultMessage: "版型 ID",
   },
-  Text_TemplateManagement_ScreenNumber: {
-    id: "Text-TemplateManagement-ScreenNumber",
+  Text_TemplateSetting_ScreenNumber: {
+    id: "Text-TemplateSetting-ScreenNumber",
     defaultMessage: "畫面編號",
   },
-  Text_TemplateManagement_Block: {
-    id: "Text-TemplateManagement-Block",
+  Text_TemplateSetting_Block: {
+    id: "Text-TemplateSetting-Block",
     defaultMessage: "區塊",
   },
-  Text_TemplateManagement_AddBlock: {
-    id: "Text-TemplateManagement-AddBlock",
+  Text_TemplateSetting_AddBlock: {
+    id: "Text-TemplateSetting-AddBlock",
     defaultMessage: "新增區塊",
   },
-  Text_TemplateManagement_ResetTemplate: {
-    id: "Text-TemplateManagement-ResetTemplate",
+  Text_TemplateSetting_ResetTemplate: {
+    id: "Text-TemplateSetting-ResetTemplate",
     defaultMessage: "重置版型",
   },
-  Text_TemplateManagement_CreateSuccess: {
-    id: "Text-TemplateManagement-CreateSuccess",
+  Text_TemplateSetting_CreateSuccess: {
+    id: "Text-TemplateSetting-CreateSuccess",
     defaultMessage: "版型建立成功",
   },
-  Text_TemplateManagement_CreateFail: {
-    id: "Text-TemplateManagement-CreateFail",
+  Text_TemplateSetting_CreateFail: {
+    id: "Text-TemplateSetting-CreateFail",
     defaultMessage: "版型建立失敗",
   },
+
+  // System setting - wall setting
 });

@@ -45,7 +45,7 @@ const SettingTemplateModal = () => {
 
   const columns = [
     {
-      title: intl.formatMessage(Messages.Text_TemplateManagement_Default),
+      title: intl.formatMessage(Messages.Text_TemplateSetting_Default),
       dataIndex: ["isDefault", "templateId", "col", "row"],
       key: "default",
       render: (text, record) => (
@@ -65,19 +65,19 @@ const SettingTemplateModal = () => {
       render: (text) => <span>{text}</span>,
     },
     {
-      title: intl.formatMessage(Messages.Text_TemplateManagement_Name),
+      title: intl.formatMessage(Messages.Text_TemplateSetting_Name),
       dataIndex: "templateName",
       key: "templateName",
       render: (text) => <span>{text}</span>,
     },
     {
-      title: intl.formatMessage(Messages.Text_TemplateManagement_Dimension),
+      title: intl.formatMessage(Messages.Text_TemplateSetting_Dimension),
       dataIndex: ["col", "row"],
       key: "dimension",
       render: (text, record) => <span>{`${record.col} X ${record.row}`}</span>,
     },
     {
-      title: intl.formatMessage(Messages.Text_TemplateManagement_Operation),
+      title: intl.formatMessage(Messages.Text_TemplateSetting_Operation),
       dataIndex: "templateId",
       key: "action",
       render: (text) => (
@@ -105,12 +105,12 @@ const SettingTemplateModal = () => {
       const result = await deleteTemplate();
       if (result) {
         showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_TemplateManagement_DeleteSuccess)
+          intl.formatMessage(Messages.Text_TemplateSetting_DeleteSuccess)
         );
         setReload(Math.random);
       } else
         showWarningNotification(
-          intl.formatMessage(Messages.Text_TemplateManagement_DeleteFail)
+          intl.formatMessage(Messages.Text_TemplateSetting_DeleteFail)
         );
     })();
   };
@@ -133,7 +133,7 @@ const SettingTemplateModal = () => {
       >
         <Typography.Text className="setting-option-text">
           <FormattedMessage
-            {...Messages.Text_TemplateManagement_TemplateSetting}
+            {...Messages.Text_TemplateSetting_TemplateSetting}
           />
         </Typography.Text>
         <></>
@@ -141,7 +141,7 @@ const SettingTemplateModal = () => {
       </Button>
       <Modal
         title={intl.formatMessage(
-          Messages.Text_TemplateManagement_TemplateManagement
+          Messages.Text_TemplateSetting_TemplateManagement
         )}
         className="modal-title"
         width={680}

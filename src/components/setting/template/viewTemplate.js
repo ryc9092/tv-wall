@@ -68,7 +68,7 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
   return (
     <div>
       <Modal
-        title={intl.formatMessage(Messages.Text_TemplateManagement_Template)}
+        title={intl.formatMessage(Messages.Text_TemplateSetting_Template)}
         className="modal-title"
         width={428}
         open={modalOpen}
@@ -80,9 +80,7 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
       >
         <Row style={{ marginTop: "20px" }}>
           <Col style={{ marginRight: "6px" }}>
-            <FormattedMessage
-              {...Messages.Text_TemplateManagement_TemplateName}
-            />
+            <FormattedMessage {...Messages.Text_TemplateSetting_TemplateName} />
             {":"}
           </Col>
           <Col style={{ marginRight: "16px" }}>
@@ -96,7 +94,7 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
         </Row>
         <Row style={{ marginTop: "12px" }}>
           <Col style={{ marginRight: "6px" }}>
-            <FormattedMessage {...Messages.Text_TemplateManagement_Dimension} />
+            <FormattedMessage {...Messages.Text_TemplateSetting_Dimension} />
             {":"}
           </Col>
           <Col style={{ marginRight: "6px" }}>
