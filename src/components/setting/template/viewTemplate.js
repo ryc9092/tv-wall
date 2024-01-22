@@ -94,7 +94,7 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
         </Row>
         <Row style={{ marginTop: "12px" }}>
           <Col style={{ marginRight: "6px" }}>
-            <FormattedMessage {...Messages.Text_TemplateSetting_Dimension} />
+            <FormattedMessage {...Messages.Text_Common_Dimension} />
             {":"}
           </Col>
           <Col style={{ marginRight: "6px" }}>

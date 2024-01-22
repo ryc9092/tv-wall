@@ -191,10 +191,10 @@ const TvWall = ({
             ) : (
               <>
                 <div style={{ position: "absolute" }}>
-                  <FormattedMessage {...Messages.Text_TVWall_Block} />:{" "}
+                  <FormattedMessage {...Messages.Text_Common_Block} />:{" "}
                   {block.block}
                   <br></br>
-                  <FormattedMessage {...Messages.Text_TVWall_Dimension} />:{" "}
+                  <FormattedMessage {...Messages.Text_Common_Dimension} />:{" "}
                   {block.col} X {block.row}
                 </div>
                 {generateBlockTable(block.col, block.row)}

@@ -2,6 +2,12 @@ import { defineMessages } from "react-intl";
 
 export default defineMessages({
   // Common
+  Text_Common_Name: { id: "Text-Common-Name", defaultMessage: "名稱" },
+  Text_Common_Block: { id: "Text-Common-Block", defaultMessage: "區塊" },
+  Text_Common_Dimension: {
+    id: "Text-Common-Dimension",
+    defaultMessage: "維度",
+  },
   Text_Button_Save: {
     id: "Text-Button-Save",
     defaultMessage: "儲存",
@@ -104,10 +110,6 @@ export default defineMessages({
     id: "Text-DeviceStatus-Type",
     defaultMessage: "類型",
   },
-  Text_DeviceStatus_Name: {
-    id: "Text-DeviceStatus-Name",
-    defaultMessage: "名稱",
-  },
   Text_DeviceStatus_Alias: {
     id: "Text-DeviceStatus-Alias",
     defaultMessage: "別名",
@@ -162,14 +164,6 @@ export default defineMessages({
     id: "Text-TVWall-Preview",
     defaultMessage: "畫面預覽",
   },
-  Text_TVWall_Block: {
-    id: "Text-TVWall-Block",
-    defaultMessage: "區塊",
-  },
-  Text_TVWall_Dimension: {
-    id: "Text-TVWall-Dimension",
-    defaultMessage: "維度",
-  },
   Text_TVWall_ClearBlock: {
     id: "Text-TVWall-ClearBlock",
     defaultMessage: "清除此區塊",
@@ -193,14 +187,6 @@ export default defineMessages({
   Text_TemplateSetting_Default: {
     id: "Text-TemplateSetting-Default",
     defaultMessage: "預設",
-  },
-  Text_TemplateSetting_Name: {
-    id: "Text-TemplateSetting-Name",
-    defaultMessage: "名稱",
-  },
-  Text_TemplateSetting_Dimension: {
-    id: "Text-TemplateSetting-Dimension",
-    defaultMessage: "維度",
   },
   Text_TemplateSetting_Operation: {
     id: "Text-TemplateSetting-Operation",
@@ -237,10 +223,6 @@ export default defineMessages({
   Text_TemplateSetting_ScreenNumber: {
     id: "Text-TemplateSetting-ScreenNumber",
     defaultMessage: "畫面編號",
-  },
-  Text_TemplateSetting_Block: {
-    id: "Text-TemplateSetting-Block",
-    defaultMessage: "區塊",
   },
   Text_TemplateSetting_AddBlock: {
     id: "Text-TemplateSetting-AddBlock",

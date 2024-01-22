@@ -8,6 +8,8 @@ import {
   showWarningNotification,
   showSuccessNotificationByMsg,
 } from "../../../utils/Utils";
+import { FormattedMessage, useIntl } from "react-intl";
+import Messages from "../../../messages";
 import "../../../App.scss";
 
 const SettingWallModal = () => {
@@ -52,9 +54,7 @@ const SettingWallModal = () => {
       title: "維度",
       dataIndex: ["col", "row"],
       key: "dimension",
-      render: (text, record) => (
-        <span>{`${record.col} X ${record.row}`}</span>
-      ),
+      render: (text, record) => <span>{`${record.col} X ${record.row}`}</span>,
     },
     {
       title: "操作",

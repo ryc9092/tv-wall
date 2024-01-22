@@ -65,13 +65,13 @@ const SettingTemplateModal = () => {
       render: (text) => <span>{text}</span>,
     },
     {
-      title: intl.formatMessage(Messages.Text_TemplateSetting_Name),
+      title: intl.formatMessage(Messages.Text_Common_Name),
       dataIndex: "templateName",
       key: "templateName",
       render: (text) => <span>{text}</span>,
     },
     {
-      title: intl.formatMessage(Messages.Text_TemplateSetting_Dimension),
+      title: intl.formatMessage(Messages.Text_Common_Dimension),
       dataIndex: ["col", "row"],
       key: "dimension",
       render: (text, record) => <span>{`${record.col} X ${record.row}`}</span>,

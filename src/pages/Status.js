@@ -51,7 +51,7 @@ const Status = () => {
       onFilter: (value, data) => data.type.indexOf(value) === 0,
     },
     {
-      title: intl.formatMessage(Messages.Text_DeviceStatus_Name),
+      title: intl.formatMessage(Messages.Text_Common_Name),
       dataIndex: "name",
       key: "name",
       render: (text) => <span>{text}</span>,
@@ -117,7 +117,7 @@ const Status = () => {
     const tempDetails = (
       <>
         <span>
-          <FormattedMessage {...Messages.Text_DeviceStatus_Name} />: {name}
+          <FormattedMessage {...Messages.Text_Common_Name} />: {name}
         </span>
         <br />
         <span>MAC: {mac}</span>

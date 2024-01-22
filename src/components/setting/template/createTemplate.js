@@ -68,8 +68,7 @@ const CreateTemplate = ({ setReload }) => {
               borderRadius: "6px",
             }}
           >
-            <FormattedMessage {...Messages.Text_TemplateSetting_Block} />{" "}
-            {block}
+            <FormattedMessage {...Messages.Text_Common_Block} /> {block}
           </Radio>
         );
       })}
@@ -195,7 +194,7 @@ const CreateTemplate = ({ setReload }) => {
         </Row>
         <Row style={{ marginTop: "16px" }}>
           <Col style={{ marginRight: "40px" }}>
-            <FormattedMessage {...Messages.Text_TemplateSetting_Dimension} />
+            <FormattedMessage {...Messages.Text_Common_Dimension} />
             {":"}
           </Col>
           <Col style={{ marginRight: "6px" }}>
@@ -246,7 +245,7 @@ const CreateTemplate = ({ setReload }) => {
           <Col>
             <Row style={{ marginBottom: "3px" }}>
               <div style={{ marginRight: "6px" }}>
-                <FormattedMessage {...Messages.Text_TemplateSetting_Block} />
+                <FormattedMessage {...Messages.Text_Common_Block} />
               </div>
               <div>
                 <Button
