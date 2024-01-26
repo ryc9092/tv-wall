@@ -1,7 +1,12 @@
 {
+  "Text-Common-Name": "name",
+  "Text-Common-Block": "block",
+  "Text-Common-Screen": "screen",
+  "Text-Common-Dimension": "dimension",
   "Text-Button-Save": "save",
   "Text-Button-View": "view",
   "Text-Button-Delete": "delete",
+  "Text-Button-Operation": "operation",
 
   "Text-Login-Account": "Account",
   "Text-Login-Password": "Password",
@@ -26,7 +31,6 @@
 
   "Text-DeviceStatus-CurrentStatus": "Device status",
   "Text-DeviceStatus-Type": "Type",
-  "Text-DeviceStatus-Name": "Name",
   "Text-DeviceStatus-Alias": "Alias",
   "Text-DeviceStatus-State": "State",
   "Text-DeviceStatus-Detail": "Details",
@@ -41,8 +45,6 @@
   "Text-TVWall-ClearWallConnection": "clear wall connection",
   "Text-TVWall-VideoSource": "video source",
   "Text-TVWall-Preview": "preview",
-  "Text-TVWall-Block": "block",
-  "Text-TVWall-Dimension": "dimension",
   "Text-TVWall-ClearBlock": "clear block",
 
   "Text-SystemSetting-Title": "System setting",
@@ -50,9 +52,6 @@
   "Text-TemplateSetting-TemplateSetting": "Template setting",
   "Text-TemplateSetting-TemplateManagement": "Template management",
   "Text-TemplateSetting-Default": "default",
-  "Text-TemplateSetting-Name": "name",
-  "Text-TemplateSetting-Dimension": "dimension",
-  "Text-TemplateSetting-Operation": "operation",
   "Text-TemplateSetting-DeleteSuccess": "Deleted template successfully.",
   "Text-TemplateSetting-DeleteFail": "Deleted template failed.",
   "Text-TemplateSetting-Template": "Template",
@@ -61,9 +60,20 @@
   "Text-TemplateSetting-CreateWallTemplate": "Create wall template",
   "Text-TemplateSetting-TemplateId": "template ID",
   "Text-TemplateSetting-ScreenNumber": "screen number",
-  "Text-TemplateSetting-Block": "block",
   "Text-TemplateSetting-AddBlock": "add block",
   "Text-TemplateSetting-ResetTemplate": "reset template",
   "Text-TemplateSetting-CreateSuccess": "Create template successfully.",
-  "Text-TemplateSetting-CreateFail": "Create template failed."
+  "Text-TemplateSetting-CreateFail": "Create template failed.",
+
+  "Text-WallSetting-WallSetting": "Wall setting",
+  "Text-WallSetting-DeleteSuccess": "Deleted wall successfully.",
+  "Text-WallSetting-DeleteFail": "Deleted wall failed.",
+  "Text-WallSetting-Wall": "Wall",
+  "Text-WallSetting-WallName": "wall name",
+  "Text-WallSetting-ScreenNumber": "screen number",
+  "Text-WallSetting-ScreenDecoderPair": "screen,decoder pair",
+  "Text-WallSetting-CreateWall": "Create wall",
+  "Text-WallSetting-ResetWall": "reset wall",
+  "Text-WallSetting-CreateSuccess": "Create wall successfully.",
+  "Text-WallSetting-CreateFail": "Create wall failed."
 }

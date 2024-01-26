@@ -13,6 +13,7 @@ import Messages from "../../../messages";
 import "../../../App.scss";
 
 const SettingWallModal = () => {
+  const intl = useIntl();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedWall, setSelectedWall] = useState(null);
   const [openViewWallModal, setOpenViewWallModal] = useState(false);
@@ -46,18 +47,18 @@ const SettingWallModal = () => {
       render: (text) => <span>{text}</span>,
     },
     {
-      title: "名稱",
+      title: intl.formatMessage(Messages.Text_Common_Name),
       dataIndex: "wallName",
       key: "wallName",
     },
     {
-      title: "維度",
+      title: intl.formatMessage(Messages.Text_Common_Dimension),
       dataIndex: ["col", "row"],
       key: "dimension",
       render: (text, record) => <span>{`${record.col} X ${record.row}`}</span>,
     },
     {
-      title: "操作",
+      title: intl.formatMessage(Messages.Text_Button_Operation),
       dataIndex: "wallId",
       key: "action",
       render: (text) => (
@@ -68,10 +69,10 @@ const SettingWallModal = () => {
             onClick={viewWall}
             style={{ marginRight: 6 }}
           >
-            檢視
+            <FormattedMessage {...Messages.Text_Button_View} />
           </Button>
           <Button key={`${text}-delete`} id={text} onClick={removeWall}>
-            刪除
+            <FormattedMessage {...Messages.Text_Button_Delete} />
           </Button>
         </div>
       ),
@@ -83,9 +84,14 @@ const SettingWallModal = () => {
     (async () => {
       const result = await deleteWall();
       if (result) {
-        showSuccessNotificationByMsg("電視牆移除成功");
+        showSuccessNotificationByMsg(
+          intl.formatMessage(Messages.Text_WallSetting_DeleteSuccess)
+        );
         setReload(Math.random);
-      } else showWarningNotification("電視牆移除失敗");
+      } else
+        showWarningNotification(
+          intl.formatMessage(Messages.Text_WallSetting_DeleteFail)
+        );
     })();
   };
 
@@ -106,13 +112,13 @@ const SettingWallModal = () => {
         className="setting-option-button"
       >
         <Typography.Text className="setting-option-text">
-          電視牆設定
+          <FormattedMessage {...Messages.Text_WallSetting_WallSetting} />
         </Typography.Text>
         <></>
         <EditOutlined className="setting-option-icon" />
       </Button>
       <Modal
-        title={"電視牆設定"}
+        title={intl.formatMessage(Messages.Text_WallSetting_WallSetting)}
         className="modal-title"
         width={658}
         open={isModalOpen}

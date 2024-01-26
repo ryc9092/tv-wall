@@ -1,7 +1,12 @@
 {
+  "Text-Common-Name": "名稱",
+  "Text-Common-Block": "區塊",
+  "Text-Common-Screen": "畫面",
+  "Text-Common-Dimension": "維度",
   "Text-Button-Save": "儲存",
   "Text-Button-View": "檢視",
   "Text-Button-Delete": "刪除",
+  "Text-Button-Operation": "操作",
 
   "Text-Login-Account": "帳號",
   "Text-Login-Password": "密碼",
@@ -26,7 +31,6 @@
 
   "Text-DeviceStatus-CurrentStatus": "設備即時狀態",
   "Text-DeviceStatus-Type": "類型",
-  "Text-DeviceStatus-Name": "名稱",
   "Text-DeviceStatus-Alias": "別名",
   "Text-DeviceStatus-State": "狀態",
   "Text-DeviceStatus-Detail": "詳細資訊",
@@ -41,8 +45,6 @@
   "Text-TVWall-ClearWallConnection": "清除牆面連接",
   "Text-TVWall-VideoSource": "影像來源",
   "Text-TVWall-Preview": "畫面預覽",
-  "Text-TVWall-Block": "區塊",
-  "Text-TVWall-Dimension": "維度",
   "Text-TVWall-ClearBlock": "清除此區塊",
 
   "Text-SystemSetting-Title": "系統設定",
@@ -50,9 +52,6 @@
   "Text-TemplateSetting-TemplateSetting": "電視牆版型設定",
   "Text-TemplateSetting-TemplateManagement": "版型管理",
   "Text-TemplateSetting-Default": "預設",
-  "Text-TemplateSetting-Name": "名稱",
-  "Text-TemplateSetting-Dimension": "維度",
-  "Text-TemplateSetting-Operation": "操作",
   "Text-TemplateSetting-DeleteSuccess": "版型移除成功",
   "Text-TemplateSetting-DeleteFail": "版型移除失敗",
   "Text-TemplateSetting-Template": "版型",
@@ -61,9 +60,20 @@
   "Text-TemplateSetting-CreateWallTemplate": "建立電視牆版型",
   "Text-TemplateSetting-TemplateId": "版型 ID",
   "Text-TemplateSetting-ScreenNumber": "畫面編號",
-  "Text-TemplateSetting-Block": "區塊",
   "Text-TemplateSetting-AddBlock": "新增區塊",
   "Text-TemplateSetting-ResetTemplate": "重置版型",
   "Text-TemplateSetting-CreateSuccess": "版型建立成功",
-  "Text-TemplateSetting-CreateFail": "版型建立失敗"
+  "Text-TemplateSetting-CreateFail": "版型建立失敗",
+
+  "Text-WallSetting-WallSetting": "電視牆設定",
+  "Text-WallSetting-DeleteSuccess": "電視牆移除成功",
+  "Text-WallSetting-DeleteFail": "電視牆移除失敗",
+  "Text-WallSetting-Wall": "電視牆",
+  "Text-WallSetting-WallName": "電視牆名稱",
+  "Text-WallSetting-ScreenNumber": "畫面編號",
+  "Text-WallSetting-ScreenDecoderPair": "解碼器對應",
+  "Text-WallSetting-CreateWall": "建立電視牆",
+  "Text-WallSetting-ResetWall": "重置電視牆",
+  "Text-WallSetting-CreateSuccess": "電視牆建立成功",
+  "Text-WallSetting-CreateFail": "電視牆建立失敗"
 }

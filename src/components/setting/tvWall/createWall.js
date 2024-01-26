@@ -14,9 +14,12 @@ import {
   showWarningNotification,
   showSuccessNotificationByMsg,
 } from "../../../utils/Utils";
+import { FormattedMessage, useIntl } from "react-intl";
+import Messages from "../../../messages";
 import "../../../App.scss";
 
 const CreateWall = ({ setReload }) => {
+  const intl = useIntl();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [wallId, setWallId] = useState(null);
   const [wallName, setWallName] = useState(null);
@@ -94,20 +97,27 @@ const CreateWall = ({ setReload }) => {
     (async () => {
       const result = await createWall();
       if (result) {
-        showSuccessNotificationByMsg("電視牆建立成功");
+        showSuccessNotificationByMsg(
+          intl.formatMessage(Messages.Text_WallSetting_CreateSuccess)
+        );
         setReload(Math.random);
         setIsModalOpen(false);
-      } else showWarningNotification("電視牆建立失敗");
+      } else
+        showWarningNotification(
+          intl.formatMessage(Messages.Text_WallSetting_CreateFail)
+        );
     })();
   };
 
   return (
     <div>
       <Button onClick={() => setIsModalOpen(true)}>
-        <Typography.Text>建立電視牆</Typography.Text>
+        <Typography.Text>
+          <FormattedMessage {...Messages.Text_WallSetting_CreateWall} />
+        </Typography.Text>
       </Button>
       <Modal
-        title={"建立電視牆"}
+        title={intl.formatMessage(Messages.Text_WallSetting_CreateWall)}
         className="modal-title"
         width={568}
         open={isModalOpen}
@@ -118,7 +128,10 @@ const CreateWall = ({ setReload }) => {
         }}
       >
         <Row style={{ marginTop: "20px" }}>
-          <Col style={{ marginRight: "16px" }}>{"電視牆 ID:"}</Col>
+          <Col style={{ marginRight: "16px" }}>
+            <FormattedMessage {...Messages.Text_WallSetting_Wall} />
+            {" ID:"}
+          </Col>
           <Col style={{ marginRight: "16px" }}>
             <Input
               value={wallId}
@@ -131,7 +144,10 @@ const CreateWall = ({ setReload }) => {
           </Col>
         </Row>
         <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "6px" }}>{"電視牆名稱:"}</Col>
+          <Col style={{ marginRight: "6px" }}>
+            <FormattedMessage {...Messages.Text_WallSetting_WallName} />
+            {":"}
+          </Col>
           <Col style={{ marginRight: "16px" }}>
             <Input
               value={wallName}
@@ -144,7 +160,10 @@ const CreateWall = ({ setReload }) => {
           </Col>
         </Row>
         <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "48px" }}>{"維度:"}</Col>
+          <Col style={{ marginRight: "16px" }}>
+            <FormattedMessage {...Messages.Text_Common_Dimension} />
+            {":"}
+          </Col>
           <Col style={{ marginRight: "6px" }}>
             <InputNumber
               value={wallSize.col}
@@ -169,7 +188,9 @@ const CreateWall = ({ setReload }) => {
         </Row>
         <Row style={{ marginTop: "16px" }}>
           <Col style={{ marginRight: "12px" }}>
-            <div style={{ marginBottom: "2px" }}>畫面編號</div>
+            <div style={{ marginBottom: "2px" }}>
+              <FormattedMessage {...Messages.Text_WallSetting_ScreenNumber} />
+            </div>
             <div
               style={{
                 width: "279px",
@@ -183,7 +204,13 @@ const CreateWall = ({ setReload }) => {
             </div>
           </Col>
           <Col>
-            <div style={{ marginBottom: "2px" }}>解碼器對應</div>
+            <div style={{ marginBottom: "2px" }}>
+              {
+                <FormattedMessage
+                  {...Messages.Text_WallSetting_ScreenDecoderPair}
+                />
+              }
+            </div>
             <div
               style={{
                 width: "225px",
@@ -198,7 +225,8 @@ const CreateWall = ({ setReload }) => {
                     <Typography.Text
                       style={{ fontSize: "14px", margin: "4px" }}
                     >
-                      畫面{screen.num}:
+                      <FormattedMessage {...Messages.Text_Common_Screen} />
+                      {screen.num}:
                     </Typography.Text>
                     <Select
                       options={decoderOptions}
@@ -219,9 +247,11 @@ const CreateWall = ({ setReload }) => {
         </Row>
         <Row style={{ marginTop: "16px" }}>
           <Button onClick={resetWall} style={{ marginRight: "16px" }}>
-            重置電視牆
+            <FormattedMessage {...Messages.Text_WallSetting_ResetWall} />
           </Button>
-          <Button onClick={saveWall}>儲存</Button>
+          <Button onClick={saveWall}>
+            <FormattedMessage {...Messages.Text_Button_Save} />
+          </Button>
         </Row>
       </Modal>
     </div>

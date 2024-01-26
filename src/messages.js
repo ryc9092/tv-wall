@@ -4,6 +4,7 @@ export default defineMessages({
   // Common
   Text_Common_Name: { id: "Text-Common-Name", defaultMessage: "名稱" },
   Text_Common_Block: { id: "Text-Common-Block", defaultMessage: "區塊" },
+  Text_Common_Screen: { id: "Text-Common-Screen", defaultMessage: "畫面" },
   Text_Common_Dimension: {
     id: "Text-Common-Dimension",
     defaultMessage: "維度",
@@ -19,6 +20,10 @@ export default defineMessages({
   Text_Button_Delete: {
     id: "Text-Button-Delete",
     defaultMessage: "刪除",
+  },
+  Text_Button_Operation: {
+    id: "Text-Button-Operation",
+    defaultMessage: "操作",
   },
 
   // Login
@@ -188,10 +193,6 @@ export default defineMessages({
     id: "Text-TemplateSetting-Default",
     defaultMessage: "預設",
   },
-  Text_TemplateSetting_Operation: {
-    id: "Text-TemplateSetting-Operation",
-    defaultMessage: "操作",
-  },
   Text_TemplateSetting_DeleteSuccess: {
     id: "Text-TemplateSetting-DeleteSuccess",
     defaultMessage: "版型移除成功",
@@ -242,4 +243,48 @@ export default defineMessages({
   },
 
   // System setting - wall setting
+  Text_WallSetting_WallSetting: {
+    id: "Text-WallSetting-WallSetting",
+    defaultMessage: "電視牆設定",
+  },
+  Text_WallSetting_DeleteSuccess: {
+    id: "Text-WallSetting-DeleteSuccess",
+    defaultMessage: "電視牆移除成功",
+  },
+  Text_WallSetting_DeleteFail: {
+    id: "Text-WallSetting-DeleteFail",
+    defaultMessage: "電視牆移除失敗",
+  },
+  Text_WallSetting_Wall: {
+    id: "Text-WallSetting-Wall",
+    defaultMessage: "電視牆",
+  },
+  Text_WallSetting_WallName: {
+    id: "Text-WallSetting-WallName",
+    defaultMessage: "電視牆名稱",
+  },
+  Text_WallSetting_ScreenNumber: {
+    id: "Text-WallSetting-ScreenNumber",
+    defaultMessage: "畫面編號",
+  },
+  Text_WallSetting_ScreenDecoderPair: {
+    id: "Text-WallSetting-ScreenDecoderPair",
+    defaultMessage: "解碼器對應",
+  },
+  Text_WallSetting_CreateWall: {
+    id: "Text-WallSetting-CreateWall",
+    defaultMessage: "建立電視牆",
+  },
+  Text_WallSetting_ResetWall: {
+    id: "Text-WallSetting-ResetWall",
+    defaultMessage: "重置電視牆",
+  },
+  Text_WallSetting_CreateSuccess: {
+    id: "Text-WallSetting-CreateSuccess",
+    defaultMessage: "電視牆建立成功",
+  },
+  Text_WallSetting_CreateFail: {
+    id: "Text-WallSetting-CreateFail",
+    defaultMessage: "電視牆建立失敗",
+  },
 });

@@ -2,9 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../../components/store/store";
 import { Col, Input, InputNumber, Modal, Row, Select, Typography } from "antd";
 import { getWallScreensById } from "../../../api/API";
+import { FormattedMessage, useIntl } from "react-intl";
+import Messages from "../../../messages";
 import "../../../App.scss";
 
 const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
+  const intl = useIntl();
   const [store] = useContext(StoreContext);
   const [wallName, setWallName] = useState(null);
   const [wallSize, setWallSize] = useState({ col: 1, row: 1 });
@@ -50,7 +53,7 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
   return (
     <div>
       <Modal
-        title={"電視牆"}
+        title={intl.formatMessage(Messages.Text_WallSetting_Wall)}
         className="modal-title"
         width={568}
         open={modalOpen}
@@ -61,7 +64,10 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
         }}
       >
         <Row style={{ marginTop: "20px" }}>
-          <Col style={{ marginRight: "6px" }}>{"電視牆名稱:"}</Col>
+          <Col style={{ marginRight: "6px" }}>
+            <FormattedMessage {...Messages.Text_WallSetting_WallName} />
+            {":"}
+          </Col>
           <Col style={{ marginRight: "16px" }}>
             <Input
               value={wallName}
@@ -70,7 +76,10 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
               disabled
             />
           </Col>
-          <Col style={{ marginRight: "6px" }}>{"維度:"}</Col>
+          <Col style={{ marginRight: "6px" }}>
+            <FormattedMessage {...Messages.Text_Common_Dimension} />
+            {":"}
+          </Col>
           <Col style={{ marginRight: "6px" }}>
             <InputNumber
               value={wallSize.col}
@@ -95,7 +104,9 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
         </Row>
         <Row style={{ marginTop: "16px" }}>
           <Col style={{ marginRight: "12px" }}>
-            <div style={{ marginBottom: "2px" }}>畫面編號</div>
+            <div style={{ marginBottom: "2px" }}>
+              <FormattedMessage {...Messages.Text_WallSetting_ScreenNumber} />
+            </div>
             <div
               style={{
                 width: "279px",
@@ -109,7 +120,11 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
             </div>
           </Col>
           <Col>
-            <div style={{ marginBottom: "2px" }}>解碼器對應</div>
+            <div style={{ marginBottom: "2px" }}>
+              <FormattedMessage
+                {...Messages.Text_WallSetting_ScreenDecoderPair}
+              />
+            </div>
             <div
               style={{
                 width: "225px",
@@ -124,7 +139,8 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
                     <Typography.Text
                       style={{ fontSize: "14px", margin: "4px" }}
                     >
-                      畫面{screen.num}:
+                      <FormattedMessage {...Messages.Text_Common_Screen} />
+                      {screen.num}:
                     </Typography.Text>
                     <Select
                       size="small"

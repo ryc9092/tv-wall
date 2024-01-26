@@ -77,7 +77,7 @@ const SettingTemplateModal = () => {
       render: (text, record) => <span>{`${record.col} X ${record.row}`}</span>,
     },
     {
-      title: intl.formatMessage(Messages.Text_TemplateSetting_Operation),
+      title: intl.formatMessage(Messages.Text_Button_Operation),
       dataIndex: "templateId",
       key: "action",
       render: (text) => (
