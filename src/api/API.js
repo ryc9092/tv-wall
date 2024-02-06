@@ -53,17 +53,16 @@ const apiGET = async ({
 }) => {
   if (setError) setError(null);
   let result;
-  const API_BASE = `https://${vars.ApiServer.Hostname}:${vars.ApiServer.Port}`;
-
+  const API_BASE = `http://${vars.ApiServer.Hostname}:${vars.ApiServer.Port}`;
   const paramsUri = params === undefined ? "" : `?${params}`;
-  const jwt = sessionStorage.getItem("token");
+  // const jwt = sessionStorage.getItem("token");
   const response = await fetch(`${API_BASE}${apiPath}${paramsUri}`, {
     method: "GET",
     mode: "cors",
     cache: "no-cache",
     credentials: "omit",
     headers: {
-      Authorization: `Bearer ${jwt}`,
+      // Authorization: `Bearer ${jwt}`,
       "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
     },
     redirect: "follow",
@@ -105,16 +104,16 @@ const apiPOST = async ({
   const contentType = form
     ? "application/json"
     : "application/x-www-form-urlencoded; charset=UTF-8";
-  const API_BASE = `https://${vars.SCStation.Hostname}:${vars.SCStation.Port}`;
+  const API_BASE = `http://${vars.ApiServer.Hostname}:${vars.ApiServer.Port}`;
   const paramsUri = params === undefined ? "" : `?${params}`;
-  const jwt = sessionStorage.getItem("token");
+  // const jwt = sessionStorage.getItem("token");
   const response = await fetch(`${API_BASE}${apiPath}${paramsUri}`, {
     method: httpMethod,
     mode: "cors",
     cache: "no-cache",
     credentials: "omit",
     headers: {
-      Authorization: `Bearer ${jwt}`,
+      // Authorization: `Bearer ${jwt}`,
       "Content-Type": `${contentType}`,
     },
     redirect: "follow",
@@ -136,166 +135,19 @@ const apiPOST = async ({
 // Device ========================================================
 
 export const getDecoders = async (store) => {
-  const apiPath = `/device/decoders`;
-  // return await apiGET({
-  //   apiPath,
-  //   store,
-  // });
-  const result = [
-    {
-      nickName: "1DD",
-      mac: "0:1c:d5:1:11:cb",
-      model: "ZyperUHD60",
-      type: "decoder",
-      virtualType: "none",
-      name: "1D",
-      state: "Up",
-      productCode: "ZUHDDEC60",
-      productDescription: "Copper Decoder - HDMI 2.0",
-      pid: "0x0",
-      groupId: "",
-      groupName: "",
-    },
-    {
-      nickName: "",
-      mac: "0:1c:d5:1:11:e4",
-      model: "ZyperUHD60",
-      type: "decoder",
-      virtualType: "none",
-      name: "3D",
-      state: "Down",
-      productCode: "ZUHDDEC60",
-      productDescription: "Copper Decoder - HDMI 2.0",
-      pid: "0x0",
-      groupId: "",
-      groupName: "",
-    },
-    {
-      nickName: "",
-      mac: "0:1c:d5:1:11:f0",
-      model: "ZyperUHD60",
-      type: "decoder",
-      virtualType: "none",
-      name: "2D",
-      state: "Up",
-      productCode: "ZUHDDEC60",
-      productDescription: "Copper Decoder - HDMI 2.0",
-      pid: "0x0",
-      groupId: "",
-      groupName: "",
-    },
-    {
-      nickName: "",
-      mac: "0:1c:d5:1:13:e2",
-      model: "ZyperUHD60",
-      type: "decoder",
-      virtualType: "none",
-      name: "4D",
-      state: "Down",
-      productCode: "ZUHDDEC60A",
-      productDescription: "Copper Decoder - HDMI 2.0 Dante",
-      pid: "0x0",
-      groupId: "",
-      groupName: "",
-    },
-  ];
-  return result;
+  const apiPath = `/devices/decoders`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
 };
 
 export const getEncoders = async (store) => {
-  const apiPath = `/device/encoders`;
-  // return await apiGET({
-  //   apiPath,
-  //   store,
-  // });
-  const result = [
-    {
-      nickName: "",
-      mac: "0:1c:d5:1:2d:dc",
-      model: "ZyperUHD60",
-      type: "encoder",
-      virtualType: "none",
-      name: "1E",
-      state: "Up",
-      productCode: "ZUHDENC60V2",
-      productDescription: "Copper Encoder - HDMI 2.0",
-      pid: "0x0",
-      groupId: "",
-      groupName: "",
-      // previewUrl:
-      //   "http://192.168.0.70:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0",
-      previewUrl:
-        "https://www.youtube.com/embed/XqZsoesa55w?si=OFk60QitCvmaXLGn",
-    },
-    {
-      nickName: "天線寶寶",
-      mac: "0:1c:d5:1:2d:dc",
-      model: "ZyperUHD60",
-      type: "encoder",
-      virtualType: "none",
-      name: "test",
-      state: "Up",
-      productCode: "ZUHDENC60V2",
-      productDescription: "Copper Encoder - HDMI 2.0",
-      pid: "0x0",
-      groupId: "",
-      groupName: "",
-      // previewUrl:
-      //   "http://192.168.0.70:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0",
-      previewUrl:
-        "https://www.youtube.com/embed/KoRmxIwnTwI?si=XFHEKMDhl2wvlh36",
-    },
-    {
-      nickName: "empty",
-      mac: "0:1c:d5:1:2d:dc",
-      model: "ZyperUHD60",
-      type: "encoder",
-      virtualType: "none",
-      name: "empty",
-      state: "Up",
-      productCode: "ZUHDENC60V2",
-      productDescription: "Copper Encoder - HDMI 2.0",
-      pid: "0x0",
-      groupId: "",
-      groupName: "",
-      // previewUrl:
-      //   "http://192.168.0.70:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0",
-      previewUrl: "",
-    },
-    {
-      nickName: "",
-      mac: "0:1c:d5:1:2f:7e",
-      model: "ZyperUHD60",
-      type: "encoder",
-      virtualType: "none",
-      name: "EN1-PC1",
-      state: "Down",
-      productCode: "ZUHDENC60V2",
-      productDescription: "Copper Encoder - HDMI 2.0",
-      pid: "0x0",
-      groupId: "",
-      groupName: "",
-      previewUrl:
-        "http://172.16.1.11:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0",
-    },
-    {
-      nickName: "2EE",
-      mac: "0:1c:d5:1:2f:89",
-      model: "ZyperUHD60",
-      type: "encoder",
-      virtualType: "none",
-      name: "2E",
-      state: "Down",
-      productCode: "ZUHDENC60V2",
-      productDescription: "Copper Encoder - HDMI 2.0",
-      pid: "0x0",
-      groupId: "",
-      groupName: "",
-      previewUrl:
-        "http://192.168.0.71:8080/?action=stream&w=1280&h=720&fps=15&bw=5000&as=0",
-    },
-  ];
-  return result;
+  const apiPath = `/devices/encoders`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
 };
 
 // Template ========================================================
