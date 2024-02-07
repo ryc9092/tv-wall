@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { StoreContext } from "../../../components/store/store";
 import {
   Button,
   Col,
@@ -23,6 +24,7 @@ import "../../../App.scss";
 
 const CreateTemplate = ({ setReload }) => {
   const intl = useIntl();
+  const [store] = useContext(StoreContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [templateId, setTemplateId] = useState(null);
   const [templateName, setTemplateName] = useState(null);
@@ -126,7 +128,15 @@ const CreateTemplate = ({ setReload }) => {
       )}, screen list: ${JSON.stringify(screenList)}`
     );
     (async () => {
-      const result = await createTemplate();
+      const result = await createTemplate(
+        store,
+        templateId,
+        templateName,
+        templateSize.col,
+        templateSize.row,
+        0, // TODO: isDefault = false? 如果送出 1 (true), api是否會將其他相同dimension的isDefault設為0
+        screenList
+      );
       if (result) {
         showSuccessNotificationByMsg(
           intl.formatMessage(Messages.Text_TemplateSetting_CreateSuccess)

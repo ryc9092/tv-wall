@@ -43,12 +43,14 @@ const TvWall = ({
           store,
           selectedWall.wallId
         );
-        wallScreens.forEach((screen, idx) => {
-          let tempScreen = screen;
-          tempScreen.encoder = "";
-          tempScreen.block = parseInt(templateScreens[idx].block);
-          tempScreens.push(tempScreen);
-        });
+        if (wallScreens && templateScreens) {
+          wallScreens.forEach((screen, idx) => {
+            let tempScreen = screen;
+            tempScreen.encoder = "";
+            tempScreen.block = parseInt(templateScreens[idx].block);
+            tempScreens.push(tempScreen);
+          });
+        }
         setTvWallScreens(tempScreens);
         setTvWallSize({
           col: selectedWall.col,

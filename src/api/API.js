@@ -160,14 +160,29 @@ export const getTemplates = async (store) => {
   });
 };
 
-export const createTemplate = async (store) => {
-  const apiPath = `/template`;
-  // return await apiGET({
-  //   apiPath,
-  //   store,
-  // });
-  const result = true;
-  return result;
+export const createTemplate = async (
+  store,
+  templateId,
+  templateName,
+  col,
+  row,
+  isDefault,
+  screens
+) => {
+  const apiPath = `/tvwalls/templates`;
+  const form = JSON.stringify({
+    templateId: templateId,
+    templateName: templateName,
+    col: col,
+    row: row,
+    isDefault: isDefault,
+    screens: screens,
+  });
+  return await apiPOST({
+    apiPath,
+    form,
+    store,
+  });
 };
 
 export const deleteTemplate = async (store) => {
