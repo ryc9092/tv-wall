@@ -70,7 +70,7 @@ const TVWall = () => {
   useEffect(() => {
     (async () => {
       let tempTemplateOptions = [];
-      const result = await getTemplates();
+      const result = await getTemplates(store);
       result.forEach((template) => {
         if (
           template.col === wallDimension.col &&

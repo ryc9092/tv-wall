@@ -153,13 +153,11 @@ export const getEncoders = async (store) => {
 // Template ========================================================
 
 export const getTemplates = async (store) => {
-  const apiPath = `/templates`;
-  // return await apiGET({
-  //   apiPath,
-  //   store,
-  // });
-  const result = FAKE_TEMPLATES;
-  return result;
+  const apiPath = `/tvwalls/templates`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
 };
 
 export const createTemplate = async (store) => {

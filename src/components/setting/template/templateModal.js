@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { StoreContext } from "../../../components/store/store";
 import { Button, Checkbox, Modal, Row, Table, Typography } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import CreateTemplate from "./createTemplate";
@@ -14,6 +15,7 @@ import "../../../App.scss";
 
 const SettingTemplateModal = () => {
   const intl = useIntl();
+  const [store] = useContext(StoreContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openViewTemplateModal, setOpenViewTemplateModal] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
@@ -23,7 +25,7 @@ const SettingTemplateModal = () => {
   useEffect(() => {
     (async () => {
       let tempTemplates = [];
-      const result = await getTemplates();
+      const result = await getTemplates(store);
       result.forEach((template) => {
         template.key = template.templateId;
         tempTemplates.push(template);

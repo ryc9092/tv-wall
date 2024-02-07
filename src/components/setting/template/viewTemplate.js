@@ -37,31 +37,33 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
     // create template table
     let tempRow = [];
     let tempTemplate = [];
-    screenList.forEach((screen) => {
-      tempRow.push(
-        <td
-          style={{ width: "40px", height: "40px", textAlign: "center" }}
-          key={screen.num}
-        >
-          <Button
-            style={{
-              width: "42px",
-              height: "42px",
-              border: "0px",
-              backgroundColor: blockColorList[screen.block - 1],
-            }}
+    if (screenList) {
+      screenList.forEach((screen) => {
+        tempRow.push(
+          <td
+            style={{ width: "40px", height: "40px", textAlign: "center" }}
             key={screen.num}
-            value={screen.num}
           >
-            {screen.num}
-          </Button>
-        </td>
-      );
-      if (tempRow.length === templateSize.col) {
-        tempTemplate.push(<tr key={screen.num}>{tempRow}</tr>);
-        tempRow = []; // clear row
-      }
-    });
+            <Button
+              style={{
+                width: "42px",
+                height: "42px",
+                border: "0px",
+                backgroundColor: blockColorList[screen.block - 1],
+              }}
+              key={screen.num}
+              value={screen.num}
+            >
+              {screen.num}
+            </Button>
+          </td>
+        );
+        if (tempRow.length === templateSize.col) {
+          tempTemplate.push(<tr key={screen.num}>{tempRow}</tr>);
+          tempRow = []; // clear row
+        }
+      });
+    }
     setWallTemplate(tempTemplate);
   }, [screenList]);
 
