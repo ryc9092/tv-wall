@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { StoreContext } from "../../../components/store/store";
 import {
   Button,
   Col,
@@ -20,6 +21,7 @@ import "../../../App.scss";
 
 const CreateWall = ({ setReload }) => {
   const intl = useIntl();
+  const [store] = useContext(StoreContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [wallId, setWallId] = useState(null);
   const [wallName, setWallName] = useState(null);
@@ -33,7 +35,7 @@ const CreateWall = ({ setReload }) => {
     let tempDecoders = [];
     let tempDecoderOptions = [];
     (async () => {
-      const decoders = await getDecoders();
+      const decoders = await getDecoders(store);
       if (decoders) tempDecoders = decoders;
       tempDecoders.forEach((decoder) => {
         tempDecoderOptions.push({ value: decoder.name, label: decoder.name });

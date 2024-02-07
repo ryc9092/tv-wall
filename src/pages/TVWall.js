@@ -49,7 +49,7 @@ const TVWall = () => {
   useEffect(() => {
     (async () => {
       let tempWallOptions = [];
-      const result = await getWalls();
+      const result = await getWalls(store);
       result.forEach((wall) => {
         tempWallOptions.push({
           value: wall.wallName,

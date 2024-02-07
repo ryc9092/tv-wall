@@ -197,13 +197,11 @@ export const getTemplateScreensById = async (store, id) => {
 // Wall ========================================================
 
 export const getWalls = async (store) => {
-  const apiPath = `/walls`;
-  // return await apiGET({
-  //   apiPath,
-  //   store,
-  // });
-  const result = FAKE_WALLS;
-  return result;
+  const apiPath = `/tvwalls`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
 };
 
 export const deleteWall = async (store) => {
@@ -227,17 +225,13 @@ export const createWall = async (store) => {
 };
 
 export const getWallScreensById = async (store, id) => {
-  const apiPath = `/wall`;
-  // return await apiGET({
-  //   apiPath,
-  //   store,
-  // });
-  const result = {
-    area01: FAKE_WALL_SCREEN_LIST1,
-    fake_wall1: FAKE_WALL_SCREEN_LIST1,
-    fake_wall2: FAKE_WALL_SCREEN_LIST2,
-  };
-  return result[id];
+  const params = `wallId=${id}`;
+  const apiPath = `/tvwalls/wallscreens/query`;
+  return await apiGET({
+    apiPath,
+    params,
+    store,
+  });
 };
 
 export const wallVideoAssociate = async (store) => {

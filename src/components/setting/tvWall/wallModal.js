@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { StoreContext } from "../../../components/store/store";
 import { Button, Modal, Row, Select, Table, Typography } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import CreateWall from "./createWall";
@@ -14,6 +15,7 @@ import "../../../App.scss";
 
 const SettingWallModal = () => {
   const intl = useIntl();
+  const [store] = useContext(StoreContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedWall, setSelectedWall] = useState(null);
   const [openViewWallModal, setOpenViewWallModal] = useState(false);
@@ -23,11 +25,13 @@ const SettingWallModal = () => {
   useEffect(() => {
     (async () => {
       let tempWalls = [];
-      const result = await getWalls();
-      result.forEach((wall) => {
-        wall.key = wall.wallId;
-        tempWalls.push(wall);
-      });
+      const result = await getWalls(store);
+      if (result) {
+        result.forEach((wall) => {
+          wall.key = wall.wallId;
+          tempWalls.push(wall);
+        });
+      }
       setWalls(tempWalls);
     })();
   }, [reload]);
