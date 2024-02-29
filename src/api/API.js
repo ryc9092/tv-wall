@@ -196,17 +196,13 @@ export const deleteTemplate = async (store) => {
 };
 
 export const getTemplateScreensById = async (store, id) => {
-  const apiPath = `/template`;
-  // return await apiGET({
-  //   apiPath,
-  //   store,
-  // });
-  const result = {
-    ft1: FAKE_TEMPLATE_SCREEN_LIST5,
-    ft2: FAKE_TEMPLATE_SCREEN_LIST3,
-    ft3: FAKE_TEMPLATE_SCREEN_LIST4,
-  };
-  return result[id];
+  const params = `templateId=${id}`;
+  const apiPath = `/tvwalls/templates/Screens/query`;
+  return await apiGET({
+    apiPath,
+    params,
+    store,
+  });
 };
 
 // Wall ========================================================
