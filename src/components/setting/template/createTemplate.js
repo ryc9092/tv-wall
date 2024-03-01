@@ -35,6 +35,7 @@ const CreateTemplate = ({ setReload }) => {
   const [currentBlock, setCurrentBlock] = useState(1);
 
   const resetTemplate = () => {
+    setTemplateId(null);
     setScreenList([]);
     setTemplateName(null);
     setTemplateSize({ col: 1, row: 1 });

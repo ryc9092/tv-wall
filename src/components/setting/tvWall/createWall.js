@@ -45,6 +45,7 @@ const CreateWall = ({ setReload }) => {
   }, []);
 
   const resetWall = () => {
+    setWallId(null);
     setWallName(null);
     setWallSize({ col: 1, row: 1 });
     setScreenList([]);
