@@ -270,14 +270,27 @@ export const deleteWall = async (store) => {
   return result;
 };
 
-export const createWall = async (store) => {
-  const apiPath = `/wall`;
-  // return await apiGET({
-  //   apiPath,
-  //   store,
-  // });
-  const result = true;
-  return result;
+export const createWall = async (
+  store,
+  wallId,
+  wallName,
+  col,
+  row,
+  screens
+) => {
+  const apiPath = `/tvwalls`;
+  const form = JSON.stringify({
+    wallId: wallId,
+    wallName: wallName,
+    col: col,
+    row: row,
+    screens: screens,
+  });
+  return await apiPOST({
+    apiPath,
+    form,
+    store,
+  });
 };
 
 export const getWallScreensById = async (store, id) => {

@@ -38,7 +38,7 @@ const CreateWall = ({ setReload }) => {
       const decoders = await getDecoders(store);
       if (decoders) tempDecoders = decoders;
       tempDecoders.forEach((decoder) => {
-        tempDecoderOptions.push({ value: decoder.name, label: decoder.name });
+        tempDecoderOptions.push({ value: decoder.mac, label: decoder.name });
       });
       setDecoderOptions(tempDecoderOptions);
     })();
@@ -97,7 +97,14 @@ const CreateWall = ({ setReload }) => {
       )}, screen list: ${JSON.stringify(screenList)}`
     );
     (async () => {
-      const result = await createWall();
+      const result = await createWall(
+        store,
+        wallId,
+        wallName,
+        wallSize.col,
+        wallSize.row,
+        screenList
+      );
       if (result) {
         showSuccessNotificationByMsg(
           intl.formatMessage(Messages.Text_WallSetting_CreateSuccess)
