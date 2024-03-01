@@ -1,13 +1,4 @@
 import { Actions } from "../components/store/reducer";
-import {
-  FAKE_TEMPLATES,
-  FAKE_TEMPLATE_SCREEN_LIST3,
-  FAKE_TEMPLATE_SCREEN_LIST4,
-  FAKE_TEMPLATE_SCREEN_LIST5,
-  FAKE_WALLS,
-  FAKE_WALL_SCREEN_LIST1,
-  FAKE_WALL_SCREEN_LIST2,
-} from "../utils/Constant";
 
 // Login API ========================================================
 
@@ -132,6 +123,58 @@ const apiPOST = async ({
   }
 };
 
+// Other API Method
+
+const apiCall = async ({
+  httpMethod,
+  apiPath,
+  params,
+  form,
+  store: { vars },
+  dispatch,
+  setError,
+}) => {
+  if (setError) setError(null);
+  let result;
+  // format parameters
+  const postParams = new URLSearchParams();
+  if (form !== undefined && form) {
+    for (const [key, value] of Object.entries(form)) {
+      postParams.append(key, value);
+    }
+  }
+
+  const contentType = form
+    ? "application/json"
+    : "application/x-www-form-urlencoded; charset=UTF-8";
+  const API_BASE = `http://${vars.ApiServer.Hostname}:${vars.ApiServer.Port}`;
+  const paramsUri = params === undefined ? "" : `?${params}`;
+  // const jwt = sessionStorage.getItem("token");
+  const response = await fetch(`${API_BASE}${apiPath}${paramsUri}`, {
+    method: httpMethod,
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "omit",
+    headers: {
+      // Authorization: `Bearer ${jwt}`,
+      "Content-Type": `${contentType}`,
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: form ? form : postParams,
+  });
+  try {
+    const json = await response.json();
+    if (json.code !== 0) throw new Error(json.code);
+    result = json.data;
+    return result ? result : true;
+  } catch (error) {
+    if (response.status === 401)
+      dispatch({ type: Actions.Logout, payload: null });
+    if (setError) setError(error.message);
+  }
+};
+
 // Device ========================================================
 
 export const getDecoders = async (store) => {
@@ -185,18 +228,20 @@ export const createTemplate = async (
   });
 };
 
-export const deleteTemplate = async (store) => {
-  const apiPath = `/template`;
-  // return await apiGET({
-  //   apiPath,
-  //   store,
-  // });
-  const result = true;
-  return result;
+export const deleteTemplate = async (store, templateId) => {
+  const httpMethod = `DELETE`;
+  const params = `templateId=${templateId}`;
+  const apiPath = `/tvwalls/templates`;
+  return await apiCall({
+    httpMethod,
+    apiPath,
+    params,
+    store,
+  });
 };
 
-export const getTemplateScreensById = async (store, id) => {
-  const params = `templateId=${id}`;
+export const getTemplateScreensById = async (store, templateId) => {
+  const params = `templateId=${templateId}`;
   const apiPath = `/tvwalls/templates/Screens/query`;
   return await apiGET({
     apiPath,

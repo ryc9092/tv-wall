@@ -101,10 +101,10 @@ const SettingTemplateModal = () => {
   ];
 
   const removeTemplate = (e) => {
-    const templateName = e.currentTarget.id;
-    console.log(`remove template: ${templateName}`);
+    const templateId = e.currentTarget.id;
+    console.log(`remove template: ${templateId}`);
     (async () => {
-      const result = await deleteTemplate();
+      const result = await deleteTemplate(store, templateId);
       if (result) {
         showSuccessNotificationByMsg(
           intl.formatMessage(Messages.Text_TemplateSetting_DeleteSuccess)
