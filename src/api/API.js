@@ -193,6 +193,16 @@ export const getEncoders = async (store) => {
   });
 };
 
+export const editDevice = async (store, macAddr) => {
+  const httpMethod = `PATCH`;
+  const apiPath = `/devices/${macAddr}`;
+  return await apiCall({
+    httpMethod,
+    apiPath,
+    store,
+  });
+};
+
 // Template ========================================================
 
 export const getTemplates = async (store) => {

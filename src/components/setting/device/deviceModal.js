@@ -1,18 +1,53 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../../components/store/store";
-import { Button, Modal, Table, Tag, Typography } from "antd";
+import { Button, Input, Modal, Table, Tag, Typography } from "antd";
 import { EditOutlined } from "@ant-design/icons";
-import { getEncoders, getDecoders } from "../../../api/API";
+import { editDevice, getEncoders, getDecoders } from "../../../api/API";
 import "../../../App.scss";
 import "./deviceModal.scss";
+
+const EditableCell = ({ editing, dataIndex, setNickName, children }) => {
+  return (
+    <td>
+      {editing ? (
+        <div
+          name={dataIndex}
+          style={{
+            margin: 0,
+          }}
+        >
+          <Input onChange={(e) => setNickName(e.target.value)} />
+        </div>
+      ) : (
+        children
+      )}
+    </td>
+  );
+};
 
 const SettingDeviceModal = () => {
   const [store] = useContext(StoreContext);
   const [devices, setDevices] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingKey, setEditingKey] = useState("");
+  const [editedNickName, setEditedNickName] = useState("");
 
-  const editDevice = (e) => {
-    console.log(e.currentTarget.id, "!!!");
+  const isEditing = (record) => record.key === editingKey;
+
+  const edit = (record) => {
+    setEditingKey(record.key);
+  };
+
+  const cancel = () => {
+    setEditingKey("");
+  };
+
+  const save = async (key) => {
+    const index = devices.findIndex((item) => key === item.key);
+    console.log(devices[index], editedNickName);
+    // call edit device api to update nickname
+    setEditingKey("");
+    setEditedNickName("");
   };
 
   useEffect(() => {
@@ -56,6 +91,7 @@ const SettingDeviceModal = () => {
       title: "別名",
       dataIndex: "nickName",
       key: "nickName",
+      editable: true,
       render: (text) => <span>{text}</span>,
     },
     {
@@ -85,13 +121,42 @@ const SettingDeviceModal = () => {
       title: "編輯",
       key: "edit",
       dataIndex: "id",
-      render: (_, { id }) => (
-        <div key={id} id={id} onClick={editDevice}>
-          <EditOutlined className="device-edit" />
-        </div>
-      ),
+      render: (_, record) => {
+        const editable = isEditing(record);
+        return editable ? (
+          <span>
+            <Typography.Link
+              onClick={() => save(record.key)}
+              style={{
+                marginRight: 8,
+              }}
+            >
+              Save
+            </Typography.Link>
+            <Typography.Link onClick={cancel}>Cancel</Typography.Link>
+          </span>
+        ) : (
+          <div key={record} id={record} onClick={() => edit(record)}>
+            <EditOutlined className="device-edit" />
+          </div>
+        );
+      },
     },
   ];
+  const mergedColumns = columns.map((col) => {
+    if (!col.editable) {
+      return col;
+    }
+    return {
+      ...col,
+      onCell: (record) => ({
+        record,
+        title: col.title,
+        editing: isEditing(record),
+        setNickName: setEditedNickName,
+      }),
+    };
+  });
 
   return (
     <div>
@@ -108,7 +173,7 @@ const SettingDeviceModal = () => {
       <Modal
         title={`設備進階設定`}
         className="modal-title"
-        width={660}
+        width={700}
         open={isModalOpen}
         footer={null}
         onCancel={() => {
@@ -116,7 +181,12 @@ const SettingDeviceModal = () => {
         }}
       >
         <Table
-          columns={columns}
+          components={{
+            body: {
+              cell: EditableCell,
+            },
+          }}
+          columns={mergedColumns}
           dataSource={devices}
           style={{ width: "95%", marginTop: 20 }}
         />
