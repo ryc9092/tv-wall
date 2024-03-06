@@ -157,6 +157,10 @@ export default defineMessages({
     id: "Text-TVWall-TVWallManagement",
     defaultMessage: "電視牆影音管理",
   },
+  Text_TVWall_ActivateWall: {
+    id: "Text-TVWall-ActivateWall",
+    defaultMessage: "啟用牆面",
+  },
   Text_TVWall_ClearWallConnection: {
     id: "Text-TVWall-ClearWallConnection",
     defaultMessage: "清除牆面連接",

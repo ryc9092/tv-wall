@@ -121,7 +121,7 @@ const TVWall = () => {
               onClick={handleChooseEncoder}
             >
               <span className="encoder-normal-dot" />
-              {encoder.name}
+              {encoder.nickName}
             </Button>
           </Row>
         );
@@ -145,7 +145,7 @@ const TVWall = () => {
                     : "encoder-abnormal-dot"
                 }
               />
-              {encoder.name}
+              {encoder.nickName}
             </Button>
           </Row>
         );
@@ -243,7 +243,7 @@ const TVWall = () => {
       >
         <div style={{ borderBottom: "1px solid gray", height: "50%" }}>
           <Row>
-            <Col style={{ width: 300, margin: 8 }}>
+            <Col style={{ width: 415, margin: 8 }}>
               <Row>
                 <Select
                   options={wallOptions}
@@ -253,6 +253,15 @@ const TVWall = () => {
                   }}
                   style={{ minWidth: 130 }}
                 />
+                <Button
+                  onClick={() => {
+                    console.log("activate wall connection");
+                  }}
+                  type="primary"
+                  style={{ marginLeft: 8 }}
+                >
+                  <FormattedMessage {...Messages.Text_TVWall_ActivateWall} />
+                </Button>
                 <Button
                   onClick={() => {
                     setClearTvWall(Math.random);
