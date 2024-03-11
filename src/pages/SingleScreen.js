@@ -4,6 +4,9 @@ import { Button, Col, Input, Radio, Row, Switch, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import useWindowDimensions from "../utils/WindowDimension";
 import { ENCODER_TYPERS, FAKE_ENCODERS } from "../utils/Constant";
+import { getEncoders } from "../api/API";
+import { FormattedMessage } from "react-intl";
+import Messages from "../messages";
 import "../App.scss";
 import "./SingleScreen.scss";
 
@@ -11,6 +14,13 @@ const SingleScreen = () => {
   const { height, width } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [encoderType, setEncoderType] = useState("1");
+  const [searchFilter, setSearchFilter] = useState("");
+  const [encoderElementsNormal, setEncoderElementsNormal] = useState([]);
+  const [encoderElementsAbnormal, setEncoderElementsAbnormal] = useState([]);
+  const [selectedEncoder, setSelectedEncoder] = useState({
+    name: "",
+    previewUrl: "",
+  });
   const [isSmallElement, setIsSmallElement] = useState(false);
 
   // The elements size would be changed according to width
@@ -29,6 +39,80 @@ const SingleScreen = () => {
     );
   });
 
+  // Set "normal/abnormal encoder list" when search filter is changed
+  useEffect(() => {
+    (async () => {
+      let tempNormalEncoders = [];
+      let tempAbnormalEncoders = [];
+      const encoders = await getEncoders(store);
+      encoders.forEach((encoder) => {
+        if (
+          encoder.name.includes(searchFilter) ||
+          encoder.nickName.includes(searchFilter) ||
+          encoder.nickName.includes(searchFilter)
+        ) {
+          if (encoder.state === "Up") tempNormalEncoders.push(encoder);
+          else tempAbnormalEncoders.push(encoder);
+        }
+      });
+
+      let tempNormalEncoderElements = [];
+      tempNormalEncoders.forEach((encoder) => {
+        tempNormalEncoderElements.push(
+          <Row key={encoder.name} style={{ marginTop: "6px" }}>
+            <Button
+              key={encoder.name}
+              id={encoder.name}
+              value={encoder.previewUrl}
+              type="text"
+              size="small"
+              style={{ cursor: "pointer" }}
+              className="tvwall-encoder"
+              onClick={handleChooseEncoder}
+            >
+              <span className="encoder-normal-dot" />
+              {encoder.nickName}
+            </Button>
+          </Row>
+        );
+      });
+
+      let tempAbnormalEncoderElements = [];
+      tempAbnormalEncoders.forEach((encoder) => {
+        tempAbnormalEncoderElements.push(
+          <Row key={encoder.name} style={{ marginTop: "6px" }}>
+            <Button
+              key={encoder.name}
+              id={encoder.name}
+              type="text"
+              size="small"
+              style={{ cursor: "pointer" }}
+            >
+              <span
+                className={
+                  encoder.state === "Down"
+                    ? "encoder-down-dot"
+                    : "encoder-abnormal-dot"
+                }
+              />
+              {encoder.nickName}
+            </Button>
+          </Row>
+        );
+      });
+
+      setEncoderElementsNormal(tempNormalEncoderElements);
+      setEncoderElementsAbnormal(tempAbnormalEncoderElements);
+    })();
+  }, [searchFilter]);
+
+  const handleChooseEncoder = (event) => {
+    setSelectedEncoder({
+      name: event.currentTarget.id,
+      previewUrl: event.currentTarget.value,
+    });
+  };
+
   const changeEncoderType = ({ target: { value } }) => {
     setEncoderType(value);
   };
@@ -42,7 +126,12 @@ const SingleScreen = () => {
           </Typography.Text>
         </Col>
         <Col>
-          <Input prefix={<SearchOutlined />} />
+          <Input
+            onChange={(e) => {
+              setSearchFilter(e.target.value);
+            }}
+            prefix={<SearchOutlined />}
+          />
         </Col>
       </Row>
       <Row style={{ height: "15%" }}>
@@ -64,7 +153,7 @@ const SingleScreen = () => {
             overflowY: "auto",
           }}
         >
-          {encoderElement}
+          {encoderElementsNormal}
         </div>
         <div
           style={{
@@ -73,7 +162,7 @@ const SingleScreen = () => {
             overflowY: "auto",
           }}
         >
-          {encoderElement}
+          {encoderElementsAbnormal}
         </div>
       </div>
     </div>
@@ -122,39 +211,44 @@ const SingleScreen = () => {
         <div style={{ borderRight: "1px solid gray", width: "50%" }}>
           {encoderBlock}
           <div style={{ height: "39%" }}>
-            <video controls width="100%" height="100%">
-              <source src={""} type="video/mp4" />
-              Sorry, your browser doesn't support embedded videos.
-            </video>
+            {selectedEncoder.previewUrl ? (
+              <embed
+                style={{ width: "100%", height: "99%" }}
+                src={selectedEncoder.previewUrl}
+                title="Video player"
+              />
+            ) : (
+              <div
+                style={{
+                  position: "relative",
+                  top: "50%",
+                  marginLeft: "62%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                <FormattedMessage {...Messages.Text_TVWall_Preview} />
+              </div>
+            )}
           </div>
         </div>
         <div style={{ margin: "8px 0px 0px 8px", width: "50%" }}>
-          <div style={{ height: height < "750" ? "25%" : "20%" }}>
-            <Row style={{ height: "30%" }}>
+          <Row style={{ height: "30px" }}>
+            <Col>
               <Typography.Text
                 style={{ fontSize: "20px", marginRight: "20px" }}
               >
                 顯示終端
               </Typography.Text>
-              <Typography.Text style={{ fontSize: "20px" }}>
-                區域名稱
-              </Typography.Text>
-            </Row>
-            <Row style={{ marginTop: "10px", height: "30%" }}>
-              <Button style={{ width: "87px", marginRight: "6px" }}>
-                群組
-              </Button>
-              <Button style={{ width: "87px" }}>單顯示器</Button>
-            </Row>
-            <Row style={{ width: "180px", marginTop: "10px" }}>
+            </Col>
+            <Col>
               <Input prefix={<SearchOutlined />} />
-            </Row>
-          </div>
+            </Col>
+          </Row>
           <Row
             style={{
               marginTop: "8px",
               overflowY: "auto",
-              height: height < "750" ? "72%" : "78%",
+              height: height < "750" ? "92%" : "95%",
             }}
           >
             {encoderScreen}
