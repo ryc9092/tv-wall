@@ -9,8 +9,9 @@ const Login = loadable(() => import("./pages/Login"));
 const Status = loadable(() => import("./pages/Status"));
 const TVWall = loadable(() => import("./pages/TVWall"));
 const SingleScreen = loadable(() => import("./pages/SingleScreen"));
+const Audio = loadable(() => import("./pages/Audio"));
 const USB = loadable(() => import("./pages/USB"));
-const RS232 = loadable(() => import("./pages/RS232"));
+// const RS232 = loadable(() => import("./pages/RS232"));
 const Schedule = loadable(() => import("./pages/Schedule"));
 const Situation = loadable(() => import("./pages/Situation"));
 const Event = loadable(() => import("./pages/Event"));
@@ -55,6 +56,17 @@ function App({ setLocale }) {
           }
         />
         <Route
+          path="/audio"
+          element={
+            <PrivateRoute>
+              <ResponsiveLayout
+                sidebar={<Sidebar setLocale={setLocale} />}
+                main={<Audio />}
+              />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/usb"
           element={
             <PrivateRoute>
@@ -65,7 +77,7 @@ function App({ setLocale }) {
             </PrivateRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/rs232"
           element={
             <PrivateRoute>
@@ -75,7 +87,7 @@ function App({ setLocale }) {
               />
             </PrivateRoute>
           }
-        />
+        /> */}
         <Route
           path="/schedule"
           element={

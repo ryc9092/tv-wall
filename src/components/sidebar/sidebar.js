@@ -51,6 +51,14 @@ const Sidebar = ({ setLocale }) => {
       ),
     },
     {
+      key: "audio",
+      label: (
+        <MenuItem
+          item={intl.formatMessage(Messages.Text_Sidebar_AudioManagement)}
+        />
+      ),
+    },
+    {
       key: "usb",
       label: (
         <MenuItem
@@ -58,14 +66,14 @@ const Sidebar = ({ setLocale }) => {
         />
       ),
     },
-    {
-      key: "rs232",
-      label: (
-        <MenuItem
-          item={intl.formatMessage(Messages.Text_Sidebar_RS232Management)}
-        />
-      ),
-    },
+    // {
+    //   key: "rs232",
+    //   label: (
+    //     <MenuItem
+    //       item={intl.formatMessage(Messages.Text_Sidebar_RS232Management)}
+    //     />
+    //   ),
+    // },
     {
       key: "schedule",
       label: (

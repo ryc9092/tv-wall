@@ -77,6 +77,10 @@ export default defineMessages({
     id: "Text-Sidebar-SingleScreenManagement",
     defaultMessage: "單畫面影音管理",
   },
+  Text_Sidebar_AudioManagement: {
+    id: "Text-Sidebar-AudioManagement",
+    defaultMessage: "音頻管理",
+  },
   Text_Sidebar_USBManagement: {
     id: "Text-Sidebar-USBManagement",
     defaultMessage: "USB管理",
@@ -213,6 +217,40 @@ export default defineMessages({
   },
   Text_USB_ClearConnection: {
     id: "Text-USB-ClearConnection",
+    defaultMessage: "清除連結",
+  },
+
+  // Audio management
+  Text_Audio_AudioMgmt: {
+    id: "Text-Audio-AudioMgmt",
+    defaultMessage: "Audio管理",
+  },
+  Text_Audio_Source: {
+    id: "Text-Audio-Source",
+    defaultMessage: "Audio來源",
+  },
+  Text_Audio_ConnectionStatus: {
+    id: "Text-Audio-ConnectionStatus",
+    defaultMessage: "Audio連接狀態",
+  },
+  Text_Audio_Connect: {
+    id: "Text-Audio-Connect",
+    defaultMessage: "Audio連接",
+  },
+  Text_Audio_AnalogConnect: {
+    id: "Text-Audio-AnalogConnect",
+    defaultMessage: "Analog連接",
+  },
+  Text_Audio_HdmiConnect: {
+    id: "Text-Audio-HdmiConnect",
+    defaultMessage: "Hdmi連接",
+  },
+  Text_Audio_TerminalChoose: {
+    id: "Text-Audio-TerminalChoose",
+    defaultMessage: "Audio終端選擇",
+  },
+  Text_Audio_ClearConnection: {
+    id: "Text-Audio-ClearConnection",
     defaultMessage: "清除連結",
   },
 

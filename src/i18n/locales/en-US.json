@@ -21,6 +21,7 @@
   "Text-Sidebar-DeviceStatus": "Device status",
   "Text-Sidebar-TVWallManagement": "TV wall management",
   "Text-Sidebar-SingleScreenManagement": "Single screen management",
+  "Text-Sidebar-AudioManagement": "Audio management",
   "Text-Sidebar-USBManagement": "USB management",
   "Text-Sidebar-RS232Management": "RS232 management",
   "Text-Sidebar-ScheduleManagement": "Schedule management",
@@ -57,6 +58,15 @@
   "Text-USB-Connect": "USB connect",
   "Text-USB-TerminalChoose": "USB terminal choose",
   "Text-USB-ClearConnection": "clear connection",
+
+  "Text-Audio-AudioMgmt": "Audio management",
+  "Text-Audio-Source": "Audio source",
+  "Text-Audio-ConnectionStatus": "Audio connection status",
+  "Text-Audio-Connect": "Audio connect",
+  "Text-Audio-AnalogConnect": "Analog connect",
+  "Text-Audio-HdmiConnect": "Hdmi connect",
+  "Text-Audio-TerminalChoose": "Audio terminal choose",
+  "Text-Audio-ClearConnection": "clear connection",
 
   "Text-SystemSetting-Title": "System setting",
 

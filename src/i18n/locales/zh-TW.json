@@ -21,6 +21,7 @@
   "Text-Sidebar-DeviceStatus": "設備即時狀態",
   "Text-Sidebar-TVWallManagement": "電視牆影音管理",
   "Text-Sidebar-SingleScreenManagement": "單畫面影音管理",
+  "Text-Sidebar-AudioManagement": "音頻管理",
   "Text-Sidebar-USBManagement": "USB管理",
   "Text-Sidebar-RS232Management": "RS232管理",
   "Text-Sidebar-ScheduleManagement": "影音排程管理",
@@ -57,6 +58,15 @@
   "Text-USB-Connect": "USB連接",
   "Text-USB-TerminalChoose": "USB終端選擇",
   "Text-USB-ClearConnection": "清除連結",
+
+  "Text-Audio-AudioMgmt": "Audio管理",
+  "Text-Audio-Source": "Audio來源",
+  "Text-Audio-ConnectionStatus": "Audio連接狀態",
+  "Text-Audio-Connect": "Audio連接",
+  "Text-Audio-AnalogConnect": "Analog連接",
+  "Text-Audio-HdmiConnect": "Hdmi連接",
+  "Text-Audio-TerminalChoose": "Audio端選擇",
+  "Text-Audio-ClearConnection": "清除連結",
 
   "Text-SystemSetting-Title": "系統設定",
 

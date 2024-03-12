@@ -1,0 +1,44 @@
+.audio-layout {
+    height: 87vh;
+}
+
+.container-width {
+    width: 98%;
+}
+
+@media(max-width: 685px) {
+    .container-width {
+        width: 558px;
+    }
+}
+
+.audio-col-layout {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 45fr 55fr;
+}
+
+.decoder-block {
+    display: flex;
+    flex-flow: column wrap;
+    height: 72%;
+    overflow-x: auto;
+    margin: 12px 0px 12px 0px;
+}
+
+.decoder-block div {
+    height: 30px;
+    width: 220px;
+}
+
+.encoder-block {
+    display: flex;
+    flex-flow: column wrap;
+    overflow-x: auto;
+    margin: 12px 0px 12px 0px;
+}
+
+.encoder-block div {
+    height: 28px;
+    width: 160px;
+}
