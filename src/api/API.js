@@ -203,6 +203,43 @@ export const editDevice = async (store, macAddr) => {
   });
 };
 
+export const createDeviceLink = async ({
+  store,
+  id,
+  linkType,
+  encoder,
+  remark,
+  decoders,
+}) => {
+  const apiPath = `/devicelinks`;
+  const form = JSON.stringify({
+    id: id,
+    linkType: linkType,
+    encoder: encoder,
+    remark: remark,
+    deviceLinkDetails: decoders,
+  });
+  return await apiPOST({
+    apiPath,
+    form,
+    store,
+  });
+};
+
+export const getDeviceLinkByEncoderType = async ({
+  store,
+  linkType,
+  encoder,
+}) => {
+  const params = `linktype=${linkType}&encoder=${encoder}`;
+  const apiPath = `/devicelinks/query`;
+  return await apiGET({
+    apiPath,
+    params,
+    store,
+  });
+};
+
 // Template ========================================================
 
 export const getTemplates = async (store) => {
