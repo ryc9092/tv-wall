@@ -9,6 +9,14 @@ export default defineMessages({
     id: "Text-Common-Dimension",
     defaultMessage: "維度",
   },
+  Text_Common_Encoder: {
+    id: "Text-Common-Encoder",
+    defaultMessage: "編碼器",
+  },
+  Text_Common_Decoder: {
+    id: "Text-Common-Decoder",
+    defaultMessage: "解碼器",
+  },
   Text_Button_Save: {
     id: "Text-Button-Save",
     defaultMessage: "儲存",
@@ -20,6 +28,10 @@ export default defineMessages({
   Text_Button_Delete: {
     id: "Text-Button-Delete",
     defaultMessage: "刪除",
+  },
+  Text_Button_Cancel: {
+    id: "Text-Button-Cancel",
+    defaultMessage: "取消",
   },
   Text_Button_Operation: {
     id: "Text-Button-Operation",
@@ -176,6 +188,32 @@ export default defineMessages({
   Text_TVWall_ClearBlock: {
     id: "Text-TVWall-ClearBlock",
     defaultMessage: "清除此區塊",
+  },
+
+  // USB management
+  Text_USB_USBMgmt: {
+    id: "Text-USB-USBMgmt",
+    defaultMessage: "USB管理",
+  },
+  Text_USB_Source: {
+    id: "Text-USB-Source",
+    defaultMessage: "USB來源",
+  },
+  Text_USB_ConnectionStatus: {
+    id: "Text-USB-ConnectionStatus",
+    defaultMessage: "USB連接狀態",
+  },
+  Text_USB_Connect: {
+    id: "Text-USB-Connect",
+    defaultMessage: "USB連接",
+  },
+  Text_USB_TerminalChoose: {
+    id: "Text-USB-TerminalChoose",
+    defaultMessage: "USB終端選擇",
+  },
+  Text_USB_ClearConnection: {
+    id: "Text-USB-ClearConnection",
+    defaultMessage: "清除連結",
   },
 
   // System setting

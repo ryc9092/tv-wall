@@ -10,6 +10,8 @@ import {
   getDecoders,
   getEncoders,
 } from "../api/API";
+import { FormattedMessage } from "react-intl";
+import Messages from "../messages";
 import "../App.scss";
 import "./USB.scss";
 
@@ -213,7 +215,9 @@ const USB = () => {
   return (
     <div>
       {store.siderCollapse ? (
-        <div className="page-title">USB管理</div>
+        <div className="page-title">
+          <FormattedMessage {...Messages.Text_USB_USBMgmt} />
+        </div>
       ) : (
         <div style={{ marginTop: 60 }} />
       )}
@@ -229,7 +233,7 @@ const USB = () => {
               <Typography.Text
                 style={{ fontSize: "20px", marginRight: "10px" }}
               >
-                USB終端
+                <FormattedMessage {...Messages.Text_USB_Source} />
               </Typography.Text>
             </Col>
             <Col>
@@ -268,28 +272,38 @@ const USB = () => {
               height: height * 0.39,
             }}
           >
-            <Row>USB連接狀態</Row>
+            <Row>
+              <FormattedMessage {...Messages.Text_USB_ConnectionStatus} />
+            </Row>
             <Row style={{ marginTop: 24, marginLeft: 6 }}>
               <Col span={8}>
-                <Row>編碼器</Row>
+                <Row>
+                  <FormattedMessage {...Messages.Text_Common_Encoder} />
+                </Row>
                 <Row style={{ marginTop: 6 }}>{choosedEncoder}</Row>
               </Col>
               <Col span={8}>
-                <Row style={{ marginLeft: 14 }}>USB連接</Row>
+                <Row style={{ marginLeft: 14 }}>
+                  <FormattedMessage {...Messages.Text_USB_Connect} />
+                </Row>
                 <Row>{"<------------>"}</Row>
               </Col>
               <Col span={8}>
-                <Row>解碼器</Row>
+                <Row>
+                  <FormattedMessage {...Messages.Text_Common_Decoder} />
+                </Row>
                 {choosedDecoderElements}
               </Col>
             </Row>
           </div>
           <div>
             <Row>
-              <Col span={width > 1060 ? 19 : 16}>USB來源選擇</Col>
+              <Col span={width > 1060 ? 19 : 16}>
+                <FormattedMessage {...Messages.Text_USB_TerminalChoose} />
+              </Col>
               <Col>
                 <Button size="small" onClick={handleClearConnection}>
-                  清除連結
+                  <FormattedMessage {...Messages.Text_USB_ClearConnection} />
                 </Button>
               </Col>
             </Row>
@@ -306,10 +320,14 @@ const USB = () => {
             />
             <Row>
               <Col offset={2}>
-                <Button onClick={handleClearConnection}>cancel</Button>
+                <Button onClick={handleClearConnection}>
+                  <FormattedMessage {...Messages.Text_Button_Cancel} />
+                </Button>
               </Col>
               <Col offset={14}>
-                <Button onClick={handleCreateConnection}>Submit</Button>
+                <Button onClick={handleCreateConnection}>
+                  <FormattedMessage {...Messages.Text_Button_Save} />
+                </Button>
               </Col>
             </Row>
           </div>

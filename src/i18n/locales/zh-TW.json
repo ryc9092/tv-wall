@@ -3,9 +3,12 @@
   "Text-Common-Block": "區塊",
   "Text-Common-Screen": "畫面",
   "Text-Common-Dimension": "維度",
+  "Text-Common-Encoder": "編碼器",
+  "Text-Common-Decoder": "解碼器",
   "Text-Button-Save": "儲存",
   "Text-Button-View": "檢視",
   "Text-Button-Delete": "刪除",
+  "Text-Button-Cancel": "取消",
   "Text-Button-Operation": "操作",
 
   "Text-Login-Account": "帳號",
@@ -47,6 +50,13 @@
   "Text-TVWall-VideoSource": "影像來源",
   "Text-TVWall-Preview": "畫面預覽",
   "Text-TVWall-ClearBlock": "清除此區塊",
+
+  "Text-USB-USBMgmt": "USB管理",
+  "Text-USB-Source": "USB來源",
+  "Text-USB-ConnectionStatus": "USB連接狀態",
+  "Text-USB-Connect": "USB連接",
+  "Text-USB-TerminalChoose": "USB終端選擇",
+  "Text-USB-ClearConnection": "清除連結",
 
   "Text-SystemSetting-Title": "系統設定",
 
