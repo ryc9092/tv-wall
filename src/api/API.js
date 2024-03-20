@@ -193,12 +193,18 @@ export const getEncoders = async (store) => {
   });
 };
 
-export const editDevice = async (store, macAddr) => {
+export const editDevice = async (store, macAddr, nickName, model, type) => {
   const httpMethod = `PATCH`;
   const apiPath = `/devices/${macAddr}`;
+  const form = JSON.stringify({
+    nickName: nickName,
+    model: model,
+    type: type,
+  });
   return await apiCall({
     httpMethod,
     apiPath,
+    form,
     store,
   });
 };
@@ -348,8 +354,4 @@ export const getWallScreensById = async (store, id) => {
     params,
     store,
   });
-};
-
-export const wallVideoAssociate = async (store) => {
-  return true;
 };

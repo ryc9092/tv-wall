@@ -3,6 +3,12 @@ import { StoreContext } from "../../../components/store/store";
 import { Button, Input, Modal, Table, Tag, Typography } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { editDevice, getEncoders, getDecoders } from "../../../api/API";
+import {
+  showWarningNotification,
+  showSuccessNotificationByMsg,
+} from "../../../utils/Utils";
+import { FormattedMessage, useIntl } from "react-intl";
+import Messages from "../../../messages";
 import "../../../App.scss";
 import "./deviceModal.scss";
 
@@ -26,11 +32,13 @@ const EditableCell = ({ editing, dataIndex, setNickName, children }) => {
 };
 
 const SettingDeviceModal = () => {
+  const intl = useIntl();
   const [store] = useContext(StoreContext);
   const [devices, setDevices] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingKey, setEditingKey] = useState("");
   const [editedNickName, setEditedNickName] = useState("");
+  const [reload, setReload] = useState(null);
 
   const isEditing = (record) => record.key === editingKey;
 
@@ -44,8 +52,24 @@ const SettingDeviceModal = () => {
 
   const save = async (key) => {
     const index = devices.findIndex((item) => key === item.key);
-    console.log(devices[index], editedNickName);
-    // call edit device api to update nickname
+    const { ...device } = { ...devices[index] };
+    const result = await editDevice(
+      store,
+      device.mac,
+      editedNickName,
+      device.model,
+      device.type
+    );
+    if (result) {
+      // showSuccessNotificationByMsg(
+      //   intl.formatMessage(Messages.Text_WallSetting_DeleteSuccess)
+      // );
+      setReload(Math.random);
+    } else {
+      // showWarningNotification(
+      //   intl.formatMessage(Messages.Text_WallSetting_DeleteFail)
+      // );
+    }
     setEditingKey("");
     setEditedNickName("");
   };
@@ -65,10 +89,9 @@ const SettingDeviceModal = () => {
         decoder.key = decoder.name;
         tempDevices.push(decoder);
       });
-      console.log(tempDevices);
       setDevices(tempDevices);
     })();
-  }, []);
+  }, [reload]);
 
   const columns = [
     {
