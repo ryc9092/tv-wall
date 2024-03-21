@@ -47,10 +47,15 @@
 
   "Text-TVWall-TVWallManagement": "電視牆影音管理",
   "Text-TVWall-ActivateWall": "啟用牆面",
+  "Text-TVWall-DeactivateWall": "停用牆面",
   "Text-TVWall-ClearWallConnection": "清除牆面連接",
   "Text-TVWall-VideoSource": "影像來源",
   "Text-TVWall-Preview": "畫面預覽",
   "Text-TVWall-ClearBlock": "清除此區塊",
+  "Text-TVWall-ActiveSuccess": "啟用電視牆成功",
+  "Text-TVWall-ActiveFail": "啟用電視牆失敗, 請確認樣板、編碼器設定無誤",
+  "Text-TVWall-DeactiveSuccess": "停用電視牆成功",
+  "Text-TVWall-DeactiveFail": "停用電視牆失敗",
 
   "Text-USB-USBMgmt": "USB管理",
   "Text-USB-Source": "USB來源",

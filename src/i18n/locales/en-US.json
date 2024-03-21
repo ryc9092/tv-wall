@@ -47,10 +47,15 @@
 
   "Text-TVWall-TVWallManagement": "TV Wall Management",
   "Text-TVWall-ActivateWall": "activate wall",
+  "Text-TVWall-DeactivateWall": "deactivate wall",
   "Text-TVWall-ClearWallConnection": "clear wall connection",
   "Text-TVWall-VideoSource": "video source",
   "Text-TVWall-Preview": "preview",
   "Text-TVWall-ClearBlock": "clear block",
+  "Text-TVWall-ActiveSuccess": "activate tv wall success",
+  "Text-TVWall-ActiveFail": "activate tv wall fail",
+  "Text-TVWall-DeactiveSuccess": "deactivate tv wall success",
+  "Text-TVWall-DeactiveFail": "deactivate tv wall fail",
 
   "Text-USB-USBMgmt": "USB management",
   "Text-USB-Source": "USB source",

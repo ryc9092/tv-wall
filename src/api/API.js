@@ -355,3 +355,44 @@ export const getWallScreensById = async (store, id) => {
     store,
   });
 };
+
+export const activeWall = async ({
+  store,
+  activeId,
+  wallId,
+  wallType,
+  templateId,
+  blocks,
+}) => {
+  const apiPath = `/tvwalls/active`;
+  const form = JSON.stringify({
+    actvieId: activeId,
+    wallId: wallId,
+    templateId: templateId,
+    wallType: wallType,
+    blocks: blocks,
+  });
+  return await apiPOST({
+    apiPath,
+    form,
+    store,
+  });
+};
+
+export const deactiveWall = async ({ store, activeId }) => {
+  const httpMethod = "DELETE";
+  const apiPath = `/tvwalls/active/${activeId}`;
+  return await apiCall({
+    httpMethod,
+    apiPath,
+    store,
+  });
+};
+
+export const getActivedWall = async ({ store, activeId }) => {
+  const apiPath = `/tvwalls/active/${activeId}`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};

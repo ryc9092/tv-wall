@@ -14,13 +14,25 @@ import { SearchOutlined } from "@ant-design/icons";
 import TvWall from "../components/tvwall/tvWall";
 import useWindowDimensions from "../utils/WindowDimension";
 import { ENCODER_TYPERS } from "../utils/Constant";
-import { getWalls, getTemplates, getEncoders } from "../api/API";
-import { FormattedMessage } from "react-intl";
+import {
+  activeWall,
+  deactiveWall,
+  getActivedWall,
+  getWalls,
+  getTemplates,
+  getEncoders,
+} from "../api/API";
+import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
+import {
+  showWarningNotification,
+  showSuccessNotificationByMsg,
+} from "../utils/Utils";
 import "../App.scss";
 import "./TVWall.scss";
 
 const TVWall = () => {
+  const intl = useIntl();
   const { width } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [isSmallElement, setIsSmallElement] = useState(false);
@@ -31,13 +43,17 @@ const TVWall = () => {
   const [templateOptions, setTemplateOptions] = useState([]);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [searchFilter, setSearchFilter] = useState("");
+  const [encoders, setEncoders] = useState([]);
   const [encoderElementsNormal, setEncoderElementsNormal] = useState([]);
   const [encoderElementsAbnormal, setEncoderElementsAbnormal] = useState([]);
   const [clearTvWall, setClearTvWall] = useState(null);
   const [selectedEncoder, setSelectedEncoder] = useState({
-    name: "",
+    mac: "",
     previewUrl: "",
   });
+  const [blocks, setBlocks] = useState([]);
+  const [isActivedWall, setIsActivedWall] = useState(false);
+  const [blockEncoderMapping, setBlockEncoderMapping] = useState({});
 
   // The elements size would be changed according to width
   useEffect(() => {
@@ -51,11 +67,14 @@ const TVWall = () => {
       let tempWallOptions = [];
       const result = await getWalls(store);
       result.forEach((wall) => {
-        tempWallOptions.push({
-          value: wall.wallName,
-          label: wall.wallName,
-          ...wall,
-        });
+        // TODO: remove after test
+        if (wall.wallId !== "area01") {
+          tempWallOptions.push({
+            value: wall.wallName,
+            label: wall.wallName,
+            ...wall,
+          });
+        }
       });
       setWallOptions(tempWallOptions);
       setWallDimension({
@@ -64,7 +83,49 @@ const TVWall = () => {
       });
       setSelectedWall(tempWallOptions[0]);
     })();
-  }, []);
+  }, [store]);
+
+  // Show wall active status when selected wall changed and there is no selected template
+  useEffect(() => {
+    (async () => {
+      const activedWall = await getActivedWall({
+        store: store,
+        activeId: selectedWall.wallId,
+      });
+      if (
+        Object.keys(selectedWall).length !== 0 &&
+        encoders.length !== 0 &&
+        activedWall && // has actived Wall
+        templateOptions.length !== 0 && // has template
+        (!selectedTemplate || // no selected template
+          selectedTemplate?.templateId === activedWall?.templateId) // or selected template is actived wall template
+      ) {
+        // Set selected template
+        templateOptions.forEach((templateOption) => {
+          if (activedWall.templateId === templateOption.templateId) {
+            setSelectedTemplate(templateOption);
+          }
+        });
+        // Set map of block and encoder => blockNum: {mac: xxx, previewUrl: xxx}
+        let tempMap = {};
+        activedWall.blocks.forEach((block) => {
+          encoders.forEach((encoder) => {
+            if (block.encoder === encoder.mac) {
+              tempMap[block.block] = {
+                mac: encoder.mac,
+                previewUrl: encoder.previewUrl,
+              };
+            }
+          });
+        });
+        setIsActivedWall(true);
+        setBlockEncoderMapping(tempMap);
+      } else {
+        setIsActivedWall(false);
+        setBlocks([]);
+      }
+    })();
+  }, [selectedWall, templateOptions]);
 
   // Set "template radios" when dimension is changed
   useEffect(() => {
@@ -83,12 +144,20 @@ const TVWall = () => {
           });
         }
       });
+      let hasDefaultTemplate = false;
       tempTemplateOptions.forEach((template) => {
-        if (template.isDefault === true) setSelectedTemplate(template);
+        if (template.isDefault === true) {
+          hasDefaultTemplate = true;
+          setSelectedTemplate(template);
+        }
       });
+      if (!hasDefaultTemplate) {
+        setSelectedTemplate(null);
+        setBlocks([]);
+      }
       setTemplateOptions(tempTemplateOptions);
     })();
-  }, [wallDimension]);
+  }, [wallDimension, selectedWall]);
 
   // Set "normal/abnormal encoder list" when search filter is changed
   useEffect(() => {
@@ -96,9 +165,10 @@ const TVWall = () => {
       let tempNormalEncoders = [];
       let tempAbnormalEncoders = [];
       const encoders = await getEncoders(store);
+      setEncoders(encoders);
       encoders.forEach((encoder) => {
         if (
-          encoder.name.includes(searchFilter) ||
+          encoder.mac.includes(searchFilter) ||
           encoder.nickName.includes(searchFilter)
         ) {
           if (encoder.state === "Up") tempNormalEncoders.push(encoder);
@@ -109,10 +179,10 @@ const TVWall = () => {
       let tempNormalEncoderElements = [];
       tempNormalEncoders.forEach((encoder) => {
         tempNormalEncoderElements.push(
-          <Row key={encoder.name} style={{ marginTop: "6px" }}>
+          <Row key={encoder.mac} style={{ marginTop: "6px" }}>
             <Button
-              key={encoder.name}
-              id={encoder.name}
+              key={encoder.mac}
+              id={encoder.mac}
               value={encoder.previewUrl}
               type="text"
               size="small"
@@ -130,10 +200,10 @@ const TVWall = () => {
       let tempAbnormalEncoderElements = [];
       tempAbnormalEncoders.forEach((encoder) => {
         tempAbnormalEncoderElements.push(
-          <Row key={encoder.name} style={{ marginTop: "6px" }}>
+          <Row key={encoder.mac} style={{ marginTop: "6px" }}>
             <Button
-              key={encoder.name}
-              id={encoder.name}
+              key={encoder.mac}
+              id={encoder.mac}
               type="text"
               size="small"
               style={{ cursor: "pointer" }}
@@ -179,9 +249,62 @@ const TVWall = () => {
 
   const handleChooseEncoder = (event) => {
     setSelectedEncoder({
-      name: event.currentTarget.id,
+      mac: event.currentTarget.id,
       previewUrl: event.currentTarget.value,
     });
+  };
+
+  const handleActiveWall = async () => {
+    try {
+      let outputBlocks = [];
+
+      blocks.forEach((block, idx) => {
+        outputBlocks[idx] = {
+          block: block.block,
+          row: block.row,
+          col: block.col,
+          encoder: block.encoder.mac,
+          marginLeft: block.marginLeft,
+          marginTop: block.marginTop,
+          decoder: block.decoder,
+        };
+      });
+      const result = await activeWall({
+        activeId: selectedWall.wallId,
+        wallId: selectedWall.wallId,
+        wallType: "normal",
+        templateId: selectedTemplate.templateId,
+        blocks: outputBlocks,
+        store: store,
+      });
+      if (!result) throw new Error("call api failed");
+      showSuccessNotificationByMsg(
+        intl.formatMessage(Messages.Text_TVWall_ActiveSuccess)
+      );
+    } catch (error) {
+      showWarningNotification(
+        intl.formatMessage(Messages.Text_TVWall_ActiveFail)
+      );
+    }
+  };
+
+  const handleDeactiveWall = async () => {
+    try {
+      const result = await deactiveWall({
+        activeId: selectedWall.wallId,
+        store: store,
+      });
+      if (!result) throw new Error("call api failed");
+      setSelectedTemplate(null);
+      setBlocks([]);
+      showSuccessNotificationByMsg(
+        intl.formatMessage(Messages.Text_TVWall_DeactiveSuccess)
+      );
+    } catch (error) {
+      showWarningNotification(
+        intl.formatMessage(Messages.Text_TVWall_DeactiveFail)
+      );
+    }
   };
 
   const encoderBlock = (
@@ -254,15 +377,19 @@ const TVWall = () => {
                   style={{ minWidth: 130 }}
                 />
                 <Button
-                  onClick={() => {
-                    console.log("activate wall connection");
-                  }}
+                  onClick={handleActiveWall}
                   type="primary"
                   style={{ marginLeft: 8 }}
                 >
                   <FormattedMessage {...Messages.Text_TVWall_ActivateWall} />
                 </Button>
                 <Button
+                  onClick={handleDeactiveWall}
+                  style={{ marginLeft: 8, color: "#f5222d" }}
+                >
+                  <FormattedMessage {...Messages.Text_TVWall_DeactivateWall} />
+                </Button>
+                {/* <Button
                   onClick={() => {
                     setClearTvWall(Math.random);
                   }}
@@ -271,7 +398,7 @@ const TVWall = () => {
                   <FormattedMessage
                     {...Messages.Text_TVWall_ClearWallConnection}
                   />
-                </Button>
+                </Button> */}
               </Row>
               <Radio.Group
                 onChange={(e) => {
@@ -302,7 +429,13 @@ const TVWall = () => {
                 selectedWall={selectedWall}
                 selectedTemplate={selectedTemplate}
                 selectedEncoder={selectedEncoder}
+                encoders={encoders}
                 clearTvWall={clearTvWall}
+                blocks={blocks}
+                setBlocks={setBlocks}
+                isActivedWall={isActivedWall}
+                blockEncoderMapping={blockEncoderMapping}
+                setBlockEncoderMapping={setBlockEncoderMapping}
               />
             </Col>
           </Row>

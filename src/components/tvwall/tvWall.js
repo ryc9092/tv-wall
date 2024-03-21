@@ -12,13 +12,17 @@ const TvWall = ({
   selectedTemplate,
   selectedEncoder,
   clearTvWall,
+  blocks,
+  setBlocks,
+  isActivedWall,
+  blockEncoderMapping,
+  setBlockEncoderMapping,
 }) => {
   const [store] = useContext(StoreContext);
   const { width, height } = useDocumentDimensions();
   const [tvWallScreens, setTvWallScreens] = useState([]);
   const [tvWallSize, setTvWallSize] = useState({ col: 0, row: 0 });
   const [tvWallTemplate, setTvWallTemplate] = useState(null);
-  const [blocks, setBlocks] = useState([]);
   const [blocksWithPosition, setBlocksWithPosition] = useState([]);
   const [needUpdateBlocks, setNeedUpdateBlocks] = useState(null);
   const [clearBlock, setClearBlock] = useState({
@@ -43,6 +47,9 @@ const TvWall = ({
           store,
           selectedWall.wallId
         );
+        wallScreens.sort(function (wall1, wall2) {
+          return wall1.num - wall2.num;
+        });
         if (wallScreens && templateScreens) {
           wallScreens.forEach((screen, idx) => {
             let tempScreen = screen;
@@ -67,7 +74,8 @@ const TvWall = ({
   };
 
   const getLeftScreen = (screen) => {
-    if (screen.num % tvWallSize.col === 1) return { block: "" };
+    if (screen.num === 1 || screen.num % tvWallSize.col === 1)
+      return { block: "" };
     else return tvWallScreens[screen.num - 2];
   };
 
@@ -141,6 +149,13 @@ const TvWall = ({
         }
       }
     });
+
+    // set encoder info to block to active tv wall at first time
+    if (isActivedWall) {
+      tempBlocks.forEach((block) => {
+        block.encoder = blockEncoderMapping[block.block];
+      });
+    }
     setBlocksWithPosition(tempBlocks);
   }, [blocks]);
 
@@ -216,15 +231,19 @@ const TvWall = ({
     if (clearBlock.needClear === true && clearBlock.blockIdx != null) {
       // add video to block
       let tempBlocks = blocksWithPosition.slice();
-      tempBlocks[clearBlock.blockIdx].encoder = { name: "", previewUrl: "" };
+      tempBlocks[clearBlock.blockIdx].encoder = { mac: "", previewUrl: "" };
       setBlocks(tempBlocks);
       setBlocksWithPosition(tempBlocks);
+      setBlockEncoderMapping({
+        ...blockEncoderMapping,
+        [blocks[clearBlock.blockIdx].block]: "",
+      });
 
       // add video to screens
       let tempScreens = tvWallScreens;
       tempScreens.forEach((screen, idx) => {
         if (screen.block === tempBlocks[clearBlock.blockIdx].block) {
-          tempScreens[idx].encoder = { name: "", previewUrl: "" };
+          tempScreens[idx].encoder = { mac: "", previewUrl: "" };
         }
       });
       setTvWallScreens(tempScreens);
@@ -243,6 +262,10 @@ const TvWall = ({
     tempBlocks[blockIdx].encoder = selectedEncoder;
     setBlocks(tempBlocks);
     setBlocksWithPosition(tempBlocks);
+    setBlockEncoderMapping({
+      ...blockEncoderMapping,
+      [blocks[blockIdx].block]: selectedEncoder,
+    });
 
     // add video to screens
     let tempScreens = tvWallScreens;

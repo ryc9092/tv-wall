@@ -177,6 +177,10 @@ export default defineMessages({
     id: "Text-TVWall-ActivateWall",
     defaultMessage: "啟用牆面",
   },
+  Text_TVWall_DeactivateWall: {
+    id: "Text-TVWall-DeactivateWall",
+    defaultMessage: "停用牆面",
+  },
   Text_TVWall_ClearWallConnection: {
     id: "Text-TVWall-ClearWallConnection",
     defaultMessage: "清除牆面連接",
@@ -192,6 +196,22 @@ export default defineMessages({
   Text_TVWall_ClearBlock: {
     id: "Text-TVWall-ClearBlock",
     defaultMessage: "清除此區塊",
+  },
+  Text_TVWall_ActiveSuccess: {
+    id: "Text-TVWall-ActiveSuccess",
+    defaultMessage: "啟用電視牆成功",
+  },
+  Text_TVWall_ActiveFail: {
+    id: "Text-TVWall-ActiveFail",
+    defaultMessage: "啟用電視牆失敗, 請確認樣板、編碼器設定無誤",
+  },
+  Text_TVWall_DeactiveSuccess: {
+    id: "Text-TVWall-DeactiveSuccess",
+    defaultMessage: "停用電視牆成功",
+  },
+  Text_TVWall_DeactiveFail: {
+    id: "Text-TVWall-DeactiveFail",
+    defaultMessage: "停用電視牆失敗",
   },
 
   // USB management
