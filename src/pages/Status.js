@@ -14,24 +14,32 @@ const Status = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      let tempDevices = [];
-
-      const encoders = await getEncoders(store);
-      encoders.forEach((encoder) => {
-        encoder.key = encoder.name;
-        tempDevices.push(encoder);
-      });
-
-      const decoders = await getDecoders(store);
-      decoders.forEach((decoder) => {
-        decoder.key = decoder.name;
-        tempDevices.push(decoder);
-      });
-
-      setDevices(tempDevices);
-    })();
+    retriveDevices();
   }, []);
+
+  const retriveDevices = async () => {
+    let tempDevices = [];
+
+    const encoders = await getEncoders(store);
+    encoders.forEach((encoder) => {
+      encoder.key = encoder.name;
+      tempDevices.push(encoder);
+    });
+
+    const decoders = await getDecoders(store);
+    decoders.forEach((decoder) => {
+      decoder.key = decoder.name;
+      tempDevices.push(decoder);
+    });
+
+    setDevices(tempDevices);
+  };
+
+  // Clear interval before set
+  window.clearInterval(window.retriveDevicesTimer);
+
+  // Set interval to update devices
+  window.retriveDevicesTimer = setInterval(retriveDevices, 10000);
 
   const columns = [
     {
