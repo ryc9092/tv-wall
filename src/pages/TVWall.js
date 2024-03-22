@@ -66,22 +66,24 @@ const TVWall = () => {
     (async () => {
       let tempWallOptions = [];
       const result = await getWalls(store);
-      result.forEach((wall) => {
-        // TODO: remove after test
-        if (wall.wallId !== "area01") {
-          tempWallOptions.push({
-            value: wall.wallName,
-            label: wall.wallName,
-            ...wall,
-          });
-        }
-      });
-      setWallOptions(tempWallOptions);
-      setWallDimension({
-        col: tempWallOptions[0].col,
-        row: tempWallOptions[0].row,
-      });
-      setSelectedWall(tempWallOptions[0]);
+      if (result) {
+        result.forEach((wall) => {
+          // TODO: remove after test
+          if (wall.wallId !== "area01") {
+            tempWallOptions.push({
+              value: wall.wallName,
+              label: wall.wallName,
+              ...wall,
+            });
+          }
+        });
+        setWallOptions(tempWallOptions);
+        setWallDimension({
+          col: tempWallOptions[0].col,
+          row: tempWallOptions[0].row,
+        });
+        setSelectedWall(tempWallOptions[0]);
+      }
     })();
   }, [store]);
 
@@ -132,30 +134,32 @@ const TVWall = () => {
     (async () => {
       let tempTemplateOptions = [];
       const result = await getTemplates(store);
-      result.forEach((template) => {
-        if (
-          template.col === wallDimension.col &&
-          template.row === wallDimension.row
-        ) {
-          tempTemplateOptions.push({
-            value: template.templateName,
-            label: template.templateName,
-            ...template,
-          });
+      if (result) {
+        result.forEach((template) => {
+          if (
+            template.col === wallDimension.col &&
+            template.row === wallDimension.row
+          ) {
+            tempTemplateOptions.push({
+              value: template.templateName,
+              label: template.templateName,
+              ...template,
+            });
+          }
+        });
+        let hasDefaultTemplate = false;
+        tempTemplateOptions.forEach((template) => {
+          if (template.isDefault === true) {
+            hasDefaultTemplate = true;
+            setSelectedTemplate(template);
+          }
+        });
+        if (!hasDefaultTemplate) {
+          setSelectedTemplate(null);
+          setBlocks([]);
         }
-      });
-      let hasDefaultTemplate = false;
-      tempTemplateOptions.forEach((template) => {
-        if (template.isDefault === true) {
-          hasDefaultTemplate = true;
-          setSelectedTemplate(template);
-        }
-      });
-      if (!hasDefaultTemplate) {
-        setSelectedTemplate(null);
-        setBlocks([]);
+        setTemplateOptions(tempTemplateOptions);
       }
-      setTemplateOptions(tempTemplateOptions);
     })();
   }, [wallDimension, selectedWall]);
 
