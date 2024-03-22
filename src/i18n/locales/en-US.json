@@ -81,6 +81,8 @@
   "Text-Audio-ClearConnectionSuccess": "clear audio connection success",
   "Text-Audio-ClearConnectionFail": "clear audio connection fail",
 
+  "Text-Situation-Title": "Situation operation",
+
   "Text-SystemSetting-Title": "System setting",
 
   "Text-TemplateSetting-TemplateSetting": "Template setting",

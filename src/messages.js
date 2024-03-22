@@ -306,6 +306,12 @@ export default defineMessages({
     defaultMessage: "清除audio連結失敗",
   },
 
+  // Situation
+  Text_Situation_Title: {
+    id: "Text-Situation-Title",
+    defaultMessage: "情境操作",
+  },
+
   // System setting
   Text_SystemSetting_Title: {
     id: "Text-SystemSetting-Title",
