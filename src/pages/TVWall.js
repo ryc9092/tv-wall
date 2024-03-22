@@ -279,6 +279,7 @@ const TVWall = () => {
         wallType: "normal",
         templateId: selectedTemplate.templateId,
         blocks: outputBlocks,
+        isPreset: "N",
         store: store,
       });
       if (!result) throw new Error("call api failed");

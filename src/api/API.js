@@ -363,6 +363,7 @@ export const activeWall = async ({
   wallType,
   templateId,
   blocks,
+  isPreset,
 }) => {
   const apiPath = `/tvwalls/active`;
   const form = JSON.stringify({
@@ -371,6 +372,7 @@ export const activeWall = async ({
     templateId: templateId,
     wallType: wallType,
     blocks: blocks,
+    isPreset: isPreset,
   });
   return await apiPOST({
     apiPath,
