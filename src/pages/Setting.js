@@ -36,7 +36,7 @@ const Setting = () => {
       <SettingTemplateModal />
       <SettingWallModal />
       <SettingDeviceModal />
-      {optionsObject}
+      {/* {optionsObject} */}
     </div>
   );
 };
