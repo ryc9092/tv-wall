@@ -61,8 +61,12 @@
   "Text-USB-Source": "USB來源",
   "Text-USB-ConnectionStatus": "USB連接狀態",
   "Text-USB-Connect": "USB連接",
+  "Text-USB-CreateConnectionSuccess": "建立連結成功",
+  "Text-USB-CreateConnectionFail": "建立連結失敗",
   "Text-USB-TerminalChoose": "USB終端選擇",
   "Text-USB-ClearConnection": "清除連結",
+  "Text-USB-ClearConnectionSuccess": "清除連結成功",
+  "Text-USB-ClearConnectionFail": "清除連結失敗",
 
   "Text-Audio-AudioMgmt": "Audio管理",
   "Text-Audio-Source": "Audio來源",

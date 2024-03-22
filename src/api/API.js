@@ -216,6 +216,7 @@ export const createDeviceLink = async ({
   encoder,
   remark,
   decoders,
+  isPreset,
 }) => {
   const apiPath = `/devicelinks`;
   const form = JSON.stringify({
@@ -224,6 +225,7 @@ export const createDeviceLink = async ({
     encoder: encoder,
     remark: remark,
     deviceLinkDetails: decoders,
+    isPreset: isPreset,
   });
   return await apiPOST({
     apiPath,
@@ -232,16 +234,20 @@ export const createDeviceLink = async ({
   });
 };
 
-export const getDeviceLinkByEncoderType = async ({
-  store,
-  linkType,
-  encoder,
-}) => {
-  const params = `linktype=${linkType}&encoder=${encoder}`;
-  const apiPath = `/devicelinks/query`;
+export const removeDeviceLink = async ({ store, linkId }) => {
+  const httpMethod = "DELETE";
+  const apiPath = `/devicelinks/${linkId}`;
+  return await apiCall({
+    httpMethod,
+    apiPath,
+    store,
+  });
+};
+
+export const getDeviceLinkByEncoder = async ({ store, linkId }) => {
+  const apiPath = `/deviceLinkDetails/linkId/${linkId}`;
   return await apiGET({
     apiPath,
-    params,
     store,
   });
 };

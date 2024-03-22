@@ -6,20 +6,26 @@ import useWindowDimensions from "../utils/WindowDimension";
 import { ENCODER_TYPERS } from "../utils/Constant";
 import {
   createDeviceLink,
-  getDeviceLinkByEncoderType,
+  removeDeviceLink,
+  getDeviceLinkByEncoder,
   getDecoders,
   getEncoders,
 } from "../api/API";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
+import {
+  showWarningNotification,
+  showSuccessNotificationByMsg,
+} from "../utils/Utils";
 import "../App.scss";
 import "./USB.scss";
 
 const USB = () => {
+  const intl = useIntl();
   const { width, height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [encoderType, setEncoderType] = useState("1");
-  const [decoderDict, setDecoderDict] = useState({});
+  const [decoderDict, setDecoderDict] = useState({}); // { $mac: { nickName: $nickName, mac: $mac... } }
   const [encoderDict, setEncoderDict] = useState({});
   const [searchFilter, setSearchFilter] = useState("");
   const [decoderElements, setDecoderElements] = useState([]);
@@ -113,13 +119,40 @@ const USB = () => {
       // get link of clicked encoders
       if (choosedEncoder === encoder.mac) {
         (async () => {
-          const result = await getDeviceLinkByEncoderType({
+          let result = await getDeviceLinkByEncoder({
             store: store,
-            linkType: "usb",
-            encoder: choosedEncoder,
+            linkId: `usb.` + choosedEncoder,
           });
-          setChoosedDecoderList(["0:1c:d5:1:11:b5", "0:1c:d5:1:12:d"]); // TODO: change to real result
-          console.log(result);
+          // todo: api wrong format, change to real result
+          result = {
+            details: [
+              {
+                key: "usb.0:1c:d5:1:2e:aa_0:1c:d5:1:11:b5",
+                linkId: "usb.0:1c:d5:1:2e:aa",
+                decoder: "0:1c:d5:1:11:b5",
+                value1: "",
+                value2: "",
+                value3: "",
+                value4: "",
+              },
+              {
+                key: "usb.0:1c:d5:1:2e:aa_0:1c:d5:1:12:d",
+                linkId: "usb.0:1c:d5:1:2e:aa",
+                decoder: "0:1c:d5:1:12:d",
+                value1: "",
+                value2: "",
+                value3: "",
+                value4: "",
+              },
+            ],
+          };
+          let tempDecoderList = [];
+          if (result?.details) {
+            result.details.forEach((detail) => {
+              tempDecoderList.push(detail.decoder);
+            });
+          }
+          setChoosedDecoderList(tempDecoderList);
         })();
       }
 
@@ -192,23 +225,46 @@ const USB = () => {
     setChoosedDecoderElements(tempChoosedDecoderElements);
   }, [choosedDecoderList]);
 
-  const handleClearConnection = () => {
-    setChoosedDecoderList([]);
-    setChoosedEncoder();
+  const handleClearConnection = async () => {
+    if (choosedEncoder) {
+      const result = await removeDeviceLink({
+        store: store,
+        linkId: `usb.` + choosedEncoder,
+      });
+      if (result) {
+        setChoosedDecoderList([]);
+        setChoosedEncoder();
+        showSuccessNotificationByMsg(
+          intl.formatMessage(Messages.Text_USB_ClearConnectionSuccess)
+        );
+      } else {
+        showWarningNotification(
+          intl.formatMessage(Messages.Text_USB_ClearConnectionFail)
+        );
+      }
+    }
   };
 
   const handleCreateConnection = async () => {
-    console.log(choosedDecoderList, choosedEncoder);
     if (choosedDecoderList.length > 0 && choosedEncoder) {
       const result = await createDeviceLink({
         store: store,
-        id: choosedEncoder,
+        id: `usb.` + choosedEncoder,
         linkType: "usb",
         encoder: choosedEncoder,
         decoders: choosedDecoderList,
         remark: "",
+        isPreset: "N",
       });
-      console.log(result, "!!!");
+      if (result) {
+        showSuccessNotificationByMsg(
+          intl.formatMessage(Messages.Text_USB_CreateConnectionSuccess)
+        );
+      } else {
+        showWarningNotification(
+          intl.formatMessage(Messages.Text_USB_CreateConnectionFail)
+        );
+      }
     }
   };
 

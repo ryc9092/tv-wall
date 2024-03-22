@@ -61,8 +61,12 @@
   "Text-USB-Source": "USB source",
   "Text-USB-ConnectionStatus": "USB connection status",
   "Text-USB-Connect": "USB connect",
+  "Text-USB-CreateConnectionSuccess": "create connection success",
+  "Text-USB-CreateConnectionFail": "create connection fail",
   "Text-USB-TerminalChoose": "USB terminal choose",
   "Text-USB-ClearConnection": "clear connection",
+  "Text-USB-ClearConnectionSuccess": "clear connection success",
+  "Text-USB-ClearConnectionFail": "clear connection fail",
 
   "Text-Audio-AudioMgmt": "Audio management",
   "Text-Audio-Source": "Audio source",

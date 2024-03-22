@@ -231,6 +231,14 @@ export default defineMessages({
     id: "Text-USB-Connect",
     defaultMessage: "USB連接",
   },
+  Text_USB_CreateConnectionSuccess: {
+    id: "Text-USB-CreateConnectionSuccess",
+    defaultMessage: "建立連結成功",
+  },
+  Text_USB_CreateConnectionFail: {
+    id: "Text-USB-CreateConnectionFail",
+    defaultMessage: "建立連結失敗",
+  },
   Text_USB_TerminalChoose: {
     id: "Text-USB-TerminalChoose",
     defaultMessage: "USB終端選擇",
@@ -238,6 +246,14 @@ export default defineMessages({
   Text_USB_ClearConnection: {
     id: "Text-USB-ClearConnection",
     defaultMessage: "清除連結",
+  },
+  Text_USB_ClearConnectionSuccess: {
+    id: "Text-USB-ClearConnectionSuccess",
+    defaultMessage: "清除連結成功",
+  },
+  Text_USB_ClearConnectionFail: {
+    id: "Text-USB-ClearConnectionFail",
+    defaultMessage: "清除連結失敗",
   },
 
   // Audio management
