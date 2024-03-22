@@ -373,7 +373,9 @@ const Audio = () => {
                 <Row>
                   <FormattedMessage {...Messages.Text_Common_Encoder} />
                 </Row>
-                <Row style={{ marginTop: 6 }}>{choosedEncoder}</Row>
+                <Row style={{ marginTop: 6 }}>
+                  {encoderDict[choosedEncoder]?.nickName}
+                </Row>
               </Col>
               <Col span={8}>
                 <Row style={{ marginLeft: 10 }}>
