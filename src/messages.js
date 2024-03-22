@@ -233,11 +233,11 @@ export default defineMessages({
   },
   Text_USB_CreateConnectionSuccess: {
     id: "Text-USB-CreateConnectionSuccess",
-    defaultMessage: "建立連結成功",
+    defaultMessage: "建立USB連結成功",
   },
   Text_USB_CreateConnectionFail: {
     id: "Text-USB-CreateConnectionFail",
-    defaultMessage: "建立連結失敗",
+    defaultMessage: "建立USB連結失敗",
   },
   Text_USB_TerminalChoose: {
     id: "Text-USB-TerminalChoose",
@@ -249,11 +249,11 @@ export default defineMessages({
   },
   Text_USB_ClearConnectionSuccess: {
     id: "Text-USB-ClearConnectionSuccess",
-    defaultMessage: "清除連結成功",
+    defaultMessage: "清除USB連結成功",
   },
   Text_USB_ClearConnectionFail: {
     id: "Text-USB-ClearConnectionFail",
-    defaultMessage: "清除連結失敗",
+    defaultMessage: "清除USB連結失敗",
   },
 
   // Audio management
@@ -273,6 +273,14 @@ export default defineMessages({
     id: "Text-Audio-Connect",
     defaultMessage: "Audio連接",
   },
+  Text_Audio_CreateConnectionSuccess: {
+    id: "Text-Audio-CreateConnectionSuccess",
+    defaultMessage: "建立audio連結成功",
+  },
+  Text_Audio_CreateConnectionFail: {
+    id: "Text-Audio-CreateConnectionFail",
+    defaultMessage: "建立audio連結失敗",
+  },
   Text_Audio_AnalogConnect: {
     id: "Text-Audio-AnalogConnect",
     defaultMessage: "Analog連接",
@@ -288,6 +296,14 @@ export default defineMessages({
   Text_Audio_ClearConnection: {
     id: "Text-Audio-ClearConnection",
     defaultMessage: "清除連結",
+  },
+  Text_Audio_ClearConnectionSuccess: {
+    id: "Text-Audio-ClearConnectionSuccess",
+    defaultMessage: "清除audio連結成功",
+  },
+  Text_Audio_ClearConnectionFail: {
+    id: "Text-Audio-ClearConnectionFail",
+    defaultMessage: "清除audio連結失敗",
   },
 
   // System setting

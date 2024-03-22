@@ -6,16 +6,22 @@ import useWindowDimensions from "../utils/WindowDimension";
 import { ENCODER_TYPERS } from "../utils/Constant";
 import {
   createDeviceLink,
-  getDeviceLinkByEncoderType,
+  removeDeviceLink,
+  getDeviceLinkByEncoder,
   getDecoders,
   getEncoders,
 } from "../api/API";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
+import {
+  showWarningNotification,
+  showSuccessNotificationByMsg,
+} from "../utils/Utils";
 import "../App.scss";
 import "./Audio.scss";
 
 const Audio = () => {
+  const intl = useIntl();
   const { width, height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [encoderType, setEncoderType] = useState("1");
@@ -27,6 +33,7 @@ const Audio = () => {
   const [choosedDecoderList, setChoosedDecoderList] = useState([]);
   const [choosedDecoderElements, setChoosedDecoderElements] = useState(null);
   const [choosedEncoder, setChoosedEncoder] = useState(null);
+  const [chooseAudioType, setChooseAudioType] = useState("analogAudio");
 
   const choosedDecoderListRef = useRef();
   choosedDecoderListRef.current = choosedDecoderList;
@@ -113,13 +120,58 @@ const Audio = () => {
       // get link of clicked encoders
       if (choosedEncoder === encoder.mac) {
         (async () => {
-          const result = await getDeviceLinkByEncoderType({
+          let result = await getDeviceLinkByEncoder({
             store: store,
-            linkType: "audio",
-            encoder: choosedEncoder,
+            linkId: `${chooseAudioType}.` + choosedEncoder,
           });
-          setChoosedDecoderList(["0:1c:d5:1:11:b5", "0:1c:d5:1:12:d"]); // TODO: change to real result
-          console.log(result);
+          // todo: api wrong format, change to real result
+          result = {
+            details: [
+              {
+                key: "analogAudio.0:1c:d5:1:2f:91_0:1c:d5:1:11:b5",
+                linkId: "analogAudio.0:1c:d5:1:2f:91",
+                decoder: "0:1c:d5:1:11:b5",
+                value1: "",
+                value2: "",
+                value3: "",
+                value4: "",
+              },
+              {
+                key: "analogAudio.0:1c:d5:1:2f:91_0:1c:d5:1:12:d",
+                linkId: "analogAudio.0:1c:d5:1:2f:91",
+                decoder: "0:1c:d5:1:12:d",
+                value1: "",
+                value2: "",
+                value3: "",
+                value4: "",
+              },
+              {
+                key: "analogAudio.0:1c:d5:1:2f:91_0:1c:d5:1:11:5a",
+                linkId: "analogAudio.0:1c:d5:1:2f:91",
+                decoder: "0:1c:d5:1:11:5a",
+                value1: "",
+                value2: "",
+                value3: "",
+                value4: "",
+              },
+              {
+                key: "analogAudio.0:1c:d5:1:2f:91_0:1c:d5:1:11:e8",
+                linkId: "analogAudio.0:1c:d5:1:2f:91",
+                decoder: "0:1c:d5:1:11:e8",
+                value1: "",
+                value2: "",
+                value3: "",
+                value4: "",
+              },
+            ],
+          };
+          let tempDecoderList = [];
+          if (result?.details) {
+            result.details.forEach((detail) => {
+              tempDecoderList.push(detail.decoder);
+            });
+          }
+          setChoosedDecoderList(tempDecoderList);
         })();
       }
 
@@ -158,7 +210,7 @@ const Audio = () => {
       );
     });
     setEncoderElements(tempEncoderElements);
-  }, [choosedEncoder, encoderDict, searchFilter]);
+  }, [choosedEncoder, encoderDict, searchFilter, chooseAudioType]);
 
   const handleChooseDecoder = (decoderMac, decoderNickName) => {
     const decoderList = choosedDecoderListRef.current;
@@ -192,9 +244,24 @@ const Audio = () => {
     setChoosedDecoderElements(tempChoosedDecoderElements);
   }, [choosedDecoderList]);
 
-  const handleClearConnection = () => {
-    setChoosedDecoderList([]);
-    setChoosedEncoder();
+  const handleClearConnection = async () => {
+    if (choosedEncoder) {
+      const result = await removeDeviceLink({
+        store: store,
+        linkId: `${chooseAudioType}.` + choosedEncoder,
+      });
+      if (result) {
+        setChoosedDecoderList([]);
+        setChoosedEncoder();
+        showSuccessNotificationByMsg(
+          intl.formatMessage(Messages.Text_Audio_ClearConnectionSuccess)
+        );
+      } else {
+        showWarningNotification(
+          intl.formatMessage(Messages.Text_Audio_ClearConnectionFail)
+        );
+      }
+    }
   };
 
   const handleCreateConnection = async () => {
@@ -202,14 +269,28 @@ const Audio = () => {
     if (choosedDecoderList.length > 0 && choosedEncoder) {
       const result = await createDeviceLink({
         store: store,
-        id: choosedEncoder,
-        linkType: "audio",
+        id: `${chooseAudioType}.` + choosedEncoder,
+        linkType: chooseAudioType,
         encoder: choosedEncoder,
         decoders: choosedDecoderList,
         remark: "",
+        isPreset: "N",
       });
-      console.log(result, "!!!");
+      if (result) {
+        showSuccessNotificationByMsg(
+          intl.formatMessage(Messages.Text_Audio_CreateConnectionSuccess)
+        );
+      } else {
+        showWarningNotification(
+          intl.formatMessage(Messages.Text_Audio_CreateConnectionFail)
+        );
+      }
     }
+  };
+
+  const handleChooseAudioType = (e) => {
+    const audioType = e.target.value;
+    setChooseAudioType(audioType);
   };
 
   return (
@@ -273,9 +354,21 @@ const Audio = () => {
             }}
           >
             <Row>
-              <FormattedMessage {...Messages.Text_Audio_ConnectionStatus} />
+              <span style={{ marginLeft: 2, marginTop: 3 }}>
+                <FormattedMessage {...Messages.Text_Audio_ConnectionStatus} />
+              </span>
+              <Radio.Group
+                defaultValue="analogAudio"
+                size="small"
+                buttonStyle="solid"
+                style={{ marginLeft: 6, marginTop: 1 }}
+                onChange={handleChooseAudioType}
+              >
+                <Radio.Button value="analogAudio">analog</Radio.Button>
+                <Radio.Button value="hdmiAudio">hdmi</Radio.Button>
+              </Radio.Group>
             </Row>
-            <Row style={{ marginTop: 16, marginLeft: 6 }}>
+            <Row style={{ marginTop: 24, marginLeft: 6 }}>
               <Col span={8}>
                 <Row>
                   <FormattedMessage {...Messages.Text_Common_Encoder} />
@@ -284,33 +377,11 @@ const Audio = () => {
               </Col>
               <Col span={8}>
                 <Row style={{ marginLeft: 10 }}>
-                  <FormattedMessage {...Messages.Text_Audio_AnalogConnect} />
-                </Row>
-                <Row>{"<------------>"}</Row>
-              </Col>
-              <Col span={8}>
-                <Row>
-                  <FormattedMessage {...Messages.Text_Common_Decoder} />
-                </Row>
-                {choosedDecoderElements}
-              </Col>
-            </Row>
-            <Divider
-              style={{
-                marginTop: 12,
-                marginBottom: 12,
-              }}
-            />
-            <Row style={{ marginTop: 16, marginLeft: 6 }}>
-              <Col span={8}>
-                <Row>
-                  <FormattedMessage {...Messages.Text_Common_Encoder} />
-                </Row>
-                <Row style={{ marginTop: 6 }}>{choosedEncoder}</Row>
-              </Col>
-              <Col span={8}>
-                <Row style={{ marginLeft: 14 }}>
-                  <FormattedMessage {...Messages.Text_Audio_HdmiConnect} />
+                  {chooseAudioType === "analogAudio" ? (
+                    <FormattedMessage {...Messages.Text_Audio_AnalogConnect} />
+                  ) : (
+                    <FormattedMessage {...Messages.Text_Audio_HdmiConnect} />
+                  )}
                 </Row>
                 <Row>{"<------------>"}</Row>
               </Col>
