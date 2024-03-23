@@ -216,6 +216,7 @@ export const createDeviceLink = async ({
   encoder,
   remark,
   decoders,
+  value1,
   isPreset,
 }) => {
   const apiPath = `/devicelinks`;
@@ -225,6 +226,7 @@ export const createDeviceLink = async ({
     encoder: encoder,
     remark: remark,
     deviceLinkDetails: decoders,
+    value1: value1,
     isPreset: isPreset,
   });
   return await apiPOST({

@@ -273,6 +273,7 @@ const Audio = () => {
         linkType: chooseAudioType,
         encoder: choosedEncoder,
         decoders: choosedDecoderList,
+        value1: chooseAudioType,
         remark: "",
         isPreset: "N",
       });
