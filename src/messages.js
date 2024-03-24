@@ -311,6 +311,22 @@ export default defineMessages({
     id: "Text-Situation-Title",
     defaultMessage: "情境操作",
   },
+  Text_Situation_CreateSituation: {
+    id: "Text-Situation-CreateSituation",
+    defaultMessage: "新增情境",
+  },
+  Text_Situation_SituationName: {
+    id: "Text-Situation-SituationName",
+    defaultMessage: "情境名稱",
+  },
+  Text_Situation_InputSituationName: {
+    id: "Text-Situation-InputSituationName",
+    defaultMessage: "請輸入情境名稱",
+  },
+  Text_Situation_SituationDescription: {
+    id: "Text-Situation-SituationDescription",
+    defaultMessage: "情境描述",
+  },
 
   // System setting
   Text_SystemSetting_Title: {

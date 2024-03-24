@@ -82,6 +82,10 @@
   "Text-Audio-ClearConnectionFail": "clear audio connection fail",
 
   "Text-Situation-Title": "Situation operation",
+  "Text-Situation-CreateSituation": "add situation",
+  "Text-Situation-SituationName": "situation name",
+  "Text-Situation-InputSituationName": "please input situation name",
+  "Text-Situation-SituationDescription": "situation description",
 
   "Text-SystemSetting-Title": "System setting",
 

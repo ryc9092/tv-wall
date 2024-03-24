@@ -82,6 +82,10 @@
   "Text-Audio-ClearConnectionFail": "清除audio連結失敗",
 
   "Text-Situation-Title": "情境操作",
+  "Text-Situation-CreateSituation": "新增情境",
+  "Text-Situation-SituationName": "情境名稱",
+  "Text-Situation-InputSituationName": "請輸入情境名稱",
+  "Text-Situation-SituationDescription": "情境描述",
 
   "Text-SystemSetting-Title": "系統設定",
 
