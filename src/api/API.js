@@ -406,3 +406,19 @@ export const getActivedWall = async ({ store, activeId }) => {
     store,
   });
 };
+
+// Situation
+
+export const createSituation = async ({ id, description, store }) => {
+  const apiPath = `/presets`;
+  const form = JSON.stringify({
+    id: id,
+    remark: description,
+    preSetPostDetails: [],
+  });
+  return await apiPOST({
+    apiPath,
+    form,
+    store,
+  });
+};

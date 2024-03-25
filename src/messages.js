@@ -315,6 +315,14 @@ export default defineMessages({
     id: "Text-Situation-CreateSituation",
     defaultMessage: "新增情境",
   },
+  Text_Situation_CreateSituationSuccess: {
+    id: "Text-Situation-CreateSituationSuccess",
+    defaultMessage: "新增情境成功",
+  },
+  Text_Situation_CreateSituationFail: {
+    id: "Text-Situation-CreateSituationFail",
+    defaultMessage: "新增情境失敗",
+  },
   Text_Situation_SituationName: {
     id: "Text-Situation-SituationName",
     defaultMessage: "情境名稱",
