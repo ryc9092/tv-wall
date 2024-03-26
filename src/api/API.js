@@ -409,16 +409,35 @@ export const getActivedWall = async ({ store, activeId }) => {
 
 // Situation
 
-export const createSituation = async ({ id, description, store }) => {
+export const createSituation = async ({ id, name, description, store }) => {
   const apiPath = `/presets`;
   const form = JSON.stringify({
     id: id,
+    name: name,
     remark: description,
     preSetPostDetails: [],
   });
   return await apiPOST({
     apiPath,
     form,
+    store,
+  });
+};
+
+export const getSituations = async (store) => {
+  const apiPath = `/presets`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
+export const removeSituation = async (id, store) => {
+  const httpMethod = "DELETE";
+  const apiPath = `/presets/${id}`;
+  return await apiCall({
+    httpMethod,
+    apiPath,
     store,
   });
 };

@@ -20,6 +20,7 @@ const CreateSituationModal = ({ setReload }) => {
   const onFinish = async (values) => {
     const result = await createSituation({
       id: `preset.${uuid()}`,
+      name: values.name,
       description: values.description,
       store: store,
     });
@@ -59,8 +60,8 @@ const CreateSituationModal = ({ setReload }) => {
       >
         <Form form={form} onFinish={onFinish}>
           <Form.Item
-            label={intl.formatMessage(Messages.Text_Situation_CreateSituation)}
-            name="situation"
+            label={intl.formatMessage(Messages.Text_Situation_SituationName)}
+            name="name"
             rules={[
               {
                 required: true,
