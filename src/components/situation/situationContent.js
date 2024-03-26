@@ -1,14 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { Button, Form, Input, Modal, Table, Typography } from "antd";
+import { Button, Modal, Table, Typography } from "antd";
+import AddSituationContentModal from "./addSituationContent";
 import "./createSituation.scss";
 
-const SituationContentModal = ({ desc }) => {
+const SituationContentModal = ({ id, name, desc }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const onFinish = async () => {
-    // todo: integrate with create situation api
-    setIsModalOpen(false);
-  };
 
   const data = [];
 
@@ -45,7 +41,7 @@ const SituationContentModal = ({ desc }) => {
         <Typography.Text>edit</Typography.Text>
       </Button>
       <Modal
-        title="situation content"
+        title={name}
         className="modal-title"
         width={700}
         open={isModalOpen}
@@ -54,6 +50,7 @@ const SituationContentModal = ({ desc }) => {
           setIsModalOpen(false);
         }}
       >
+        <AddSituationContentModal id={id} />
         <Table columns={columns} dataSource={data} />
       </Modal>
     </div>

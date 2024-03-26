@@ -1,0 +1,28 @@
+.situation-options-border {
+    border: 1px black solid;
+    border-radius: 12px;
+    height: 300px;
+    width: 600px;
+    margin: 24px 24px 0px 0px;
+}
+
+.situation-option-block {
+    border-radius: 12px;
+    background-color: #D5DADB;
+    width: 165px;
+    height: 115px;
+    margin: 24px 0 0 26px;
+}
+
+.situation-option-icon {
+    position: absolute;
+    margin-left: 60px;
+    margin-top: 28px;
+}
+
+.situation-option-button {
+    width: 135px;
+    position: absolute;
+    margin-left: 12px;
+    bottom: 8px;
+}
