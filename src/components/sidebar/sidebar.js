@@ -74,14 +74,14 @@ const Sidebar = ({ setLocale }) => {
     //     />
     //   ),
     // },
-    {
-      key: "schedule",
-      label: (
-        <MenuItem
-          item={intl.formatMessage(Messages.Text_Sidebar_ScheduleManagement)}
-        />
-      ),
-    },
+    // {
+    //   key: "schedule",
+    //   label: (
+    //     <MenuItem
+    //       item={intl.formatMessage(Messages.Text_Sidebar_ScheduleManagement)}
+    //     />
+    //   ),
+    // },
     {
       key: "situation",
       label: (
