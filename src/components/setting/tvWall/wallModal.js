@@ -84,9 +84,9 @@ const SettingWallModal = () => {
   ];
 
   const removeWall = (e) => {
-    console.log("remove wall: ", e.currentTarget.id);
+    const wallId = e.currentTarget.id;
     (async () => {
-      const result = await deleteWall();
+      const result = await deleteWall(wallId, store);
       if (result) {
         showSuccessNotificationByMsg(
           intl.formatMessage(Messages.Text_WallSetting_DeleteSuccess)

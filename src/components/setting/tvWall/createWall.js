@@ -92,11 +92,6 @@ const CreateWall = ({ setReload }) => {
   };
 
   const saveWall = () => {
-    console.log(
-      `wall id: ${wallId}, wall name: ${wallName}, wall size: ${JSON.stringify(
-        wallSize
-      )}, screen list: ${JSON.stringify(screenList)}`
-    );
     (async () => {
       const result = await createWall(
         store,

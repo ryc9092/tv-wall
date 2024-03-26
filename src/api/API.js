@@ -321,14 +321,14 @@ export const getWalls = async (store) => {
   });
 };
 
-export const deleteWall = async (store) => {
-  const apiPath = `/wall`;
-  // return await apiGET({
-  //   apiPath,
-  //   store,
-  // });
-  const result = true;
-  return result;
+export const deleteWall = async (id, store) => {
+  const httpMethod = "DELETE";
+  const apiPath = `/tvwalls/${id}`;
+  return await apiCall({
+    httpMethod,
+    apiPath,
+    store,
+  });
 };
 
 export const createWall = async (
