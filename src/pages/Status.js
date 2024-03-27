@@ -158,7 +158,13 @@ const Status = () => {
       ) : (
         <div style={{ marginTop: 60, marginBottom: 20 }} />
       )}
-      <Table columns={columns} dataSource={devices} style={{ width: "95%" }} />
+      <Table
+        columns={columns}
+        dataSource={devices}
+        pagination={{ pageSize: 10 }}
+        size={"small"}
+        style={{ width: "95%" }}
+      />
       <Modal
         open={isModalOpen}
         onCancel={() => {
