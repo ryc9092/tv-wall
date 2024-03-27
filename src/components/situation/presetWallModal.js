@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Button, Modal } from "antd";
+import SituationTVWall from "../../pages/SituationTVWall";
 import "./addSituationContent.scss";
 
-const PresetWallModal = ({ id }) => {
+const PresetWallModal = ({ id, openParentModal }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -10,19 +11,25 @@ const PresetWallModal = ({ id }) => {
       <Button
         id={id}
         className="situation-option-button"
-        onClick={() => setIsModalOpen(true)}
+        onClick={() => {
+          openParentModal(false);
+          setIsModalOpen(true);
+        }}
       >
         電視牆面影音管理
       </Button>
       <Modal
         title="wall"
-        width={700}
+        width={1200}
         open={isModalOpen}
         footer={null}
+        style={{ marginTop: -90 }}
         onCancel={() => {
           setIsModalOpen(false);
         }}
-      ></Modal>
+      >
+        <SituationTVWall />
+      </Modal>
     </div>
   );
 };

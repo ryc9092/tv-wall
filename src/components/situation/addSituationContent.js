@@ -8,7 +8,7 @@ const AddSituationContentModal = ({ id }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const itemList = [
-    <PresetWallModal situationId={id} />,
+    <PresetWallModal situationId={id} openParentModal={setIsModalOpen} />,
     "單畫面影音管理",
     "音頻管理",
     "USB管理",
