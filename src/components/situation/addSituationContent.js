@@ -2,6 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { Button, Col, Form, Input, Modal, Row, Table, Typography } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import PresetWallModal from "./presetWallModal";
+import PresetSingleScreenModal from "./presetSingleScreenModal";
+import PresetAudioModal from "./presetAudioModal";
+import PresetUSBModal from "./presetUSBModal";
 import "./addSituationContent.scss";
 
 const AddSituationContentModal = ({ id }) => {
@@ -9,9 +12,12 @@ const AddSituationContentModal = ({ id }) => {
 
   const itemList = [
     <PresetWallModal situationId={id} openParentModal={setIsModalOpen} />,
-    "單畫面影音管理",
-    "音頻管理",
-    "USB管理",
+    <PresetSingleScreenModal
+      situationId={id}
+      openParentModal={setIsModalOpen}
+    />,
+    <PresetAudioModal situationId={id} openParentModal={setIsModalOpen} />,
+    <PresetUSBModal situationId={id} openParentModal={setIsModalOpen} />,
   ];
 
   let functionItems = [];
