@@ -31,7 +31,11 @@ import {
 import "../App.scss";
 import "./TVWall.scss";
 
-const SituationTVWall = () => {
+const SituationTVWall = ({
+  situationId,
+  openParentModal,
+  setReloadPresetDetails,
+}) => {
   const intl = useIntl();
   const { width } = useWindowDimensions();
   const [store] = useContext(StoreContext);
@@ -273,41 +277,24 @@ const SituationTVWall = () => {
           decoder: block.decoder,
         };
       });
-      const result = await activeWall({
-        activeId: selectedWall.wallId,
-        wallId: selectedWall.wallId,
-        wallType: "normal",
-        templateId: selectedTemplate.templateId,
-        blocks: outputBlocks,
-        isPreset: "N",
-        store: store,
-      });
-      if (!result) throw new Error("call api failed");
+      openParentModal(false);
+      setReloadPresetDetails(Math.random());
+      // const result = await activeWall({
+      //   activeId: selectedWall.wallId,
+      //   wallId: selectedWall.wallId,
+      //   wallType: "normal",
+      //   templateId: selectedTemplate.templateId,
+      //   blocks: outputBlocks,
+      //   isPreset: "N",
+      //   store: store,
+      // });
+      // if (!result) throw new Error("call api failed");
       showSuccessNotificationByMsg(
         intl.formatMessage(Messages.Text_TVWall_ActiveSuccess)
       );
     } catch (error) {
       showWarningNotification(
         intl.formatMessage(Messages.Text_TVWall_ActiveFail)
-      );
-    }
-  };
-
-  const handleDeactiveWall = async () => {
-    try {
-      const result = await deactiveWall({
-        activeId: selectedWall.wallId,
-        store: store,
-      });
-      if (!result) throw new Error("call api failed");
-      setSelectedTemplate(null);
-      setBlocks([]);
-      showSuccessNotificationByMsg(
-        intl.formatMessage(Messages.Text_TVWall_DeactiveSuccess)
-      );
-    } catch (error) {
-      showWarningNotification(
-        intl.formatMessage(Messages.Text_TVWall_DeactiveFail)
       );
     }
   };

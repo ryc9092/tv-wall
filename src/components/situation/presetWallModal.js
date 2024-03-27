@@ -3,7 +3,7 @@ import { Button, Modal } from "antd";
 import SituationTVWall from "../../pages/SituationTVWall";
 import "./addSituationContent.scss";
 
-const PresetWallModal = ({ id, openParentModal }) => {
+const PresetWallModal = ({ id, openParentModal, setReloadPresetDetails }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -28,7 +28,11 @@ const PresetWallModal = ({ id, openParentModal }) => {
           setIsModalOpen(false);
         }}
       >
-        <SituationTVWall />
+        <SituationTVWall
+          situationId={id}
+          openParentModal={setIsModalOpen}
+          setReloadPresetDetails={setReloadPresetDetails}
+        />
       </Modal>
     </div>
   );

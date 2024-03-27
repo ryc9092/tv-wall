@@ -7,17 +7,30 @@ import PresetAudioModal from "./presetAudioModal";
 import PresetUSBModal from "./presetUSBModal";
 import "./addSituationContent.scss";
 
-const AddSituationContentModal = ({ id }) => {
+const AddSituationContentModal = ({ id, setReloadPresetDetails }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const itemList = [
-    <PresetWallModal situationId={id} openParentModal={setIsModalOpen} />,
+    <PresetWallModal
+      situationId={id}
+      openParentModal={setIsModalOpen}
+      setReloadPresetDetails={setReloadPresetDetails}
+    />,
     <PresetSingleScreenModal
       situationId={id}
       openParentModal={setIsModalOpen}
+      setReloadPresetDetails={setReloadPresetDetails}
     />,
-    <PresetAudioModal situationId={id} openParentModal={setIsModalOpen} />,
-    <PresetUSBModal situationId={id} openParentModal={setIsModalOpen} />,
+    <PresetAudioModal
+      situationId={id}
+      openParentModal={setIsModalOpen}
+      setReloadPresetDetails={setReloadPresetDetails}
+    />,
+    <PresetUSBModal
+      situationId={id}
+      openParentModal={setIsModalOpen}
+      setReloadPresetDetails={setReloadPresetDetails}
+    />,
   ];
 
   let functionItems = [];

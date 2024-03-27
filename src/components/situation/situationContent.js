@@ -87,35 +87,49 @@ const Row = ({ children, ...props }) => {
 
 const SituationContentModal = ({ id, name, desc }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [dataSource, setDataSource] = useState([
-    {
-      key: "1",
-      order: "1",
-      type: "John Brown",
-      operation: 32,
-      desc: "Long text Long text Long text Long text Long text Long text Long text Long ",
-    },
-    {
-      key: "2",
-      order: "2",
-      type: "Jim Green",
-      operation: 42,
-      desc: "London No. 1 Lake Park",
-    },
-    {
-      key: "3",
-      order: "3",
-      type: "Joe Black",
-      operation: 32,
-      desc: "Sidney No. 1 Lake Park",
-    },
-  ]);
+  const [dataSource, setDataSource] = useState([]);
+  const [orderChange, setOrderChange] = useState(null);
+  const [reloadPresetDetails, setReloadPresetDetails] = useState(null);
 
+  // Get preset data by preset id
   useEffect(() => {
-    console.log(dataSource);
-  }, [dataSource]);
+    if (isModalOpen) {
+      console.log("load preset data");
+      // todo: get from api
+      setDataSource([
+        {
+          key: "1",
+          order: "1",
+          type: "John Brown",
+          operation: 32,
+          desc: "Long text Long text Long text Long text Long text Long text Long text Long ",
+        },
+        {
+          key: "2",
+          order: "2",
+          type: "Jim Green",
+          operation: 42,
+          desc: "London No. 1 Lake Park",
+        },
+        {
+          key: "3",
+          order: "3",
+          type: "Joe Black",
+          operation: 32,
+          desc: "Sidney No. 1 Lake Park",
+        },
+      ]);
+    }
+  }, [isModalOpen, reloadPresetDetails]);
+
+  // save new order of preset details
+  useEffect(() => {
+    // todo: save new order by api
+    console.log("order changed!", dataSource);
+  }, [orderChange]);
 
   const onDragEnd = ({ active, over }) => {
+    setOrderChange(Math.random());
     if (active.id !== over?.id) {
       setDataSource((previous) => {
         const activeIndex = previous.findIndex((i) => i.key === active.id);
@@ -144,7 +158,10 @@ const SituationContentModal = ({ id, name, desc }) => {
           setIsModalOpen(false);
         }}
       >
-        <AddSituationContentModal id={id} />
+        <AddSituationContentModal
+          id={id}
+          setReloadPresetDetails={setReloadPresetDetails}
+        />
         <DndContext modifiers={[restrictToVerticalAxis]} onDragEnd={onDragEnd}>
           <SortableContext
             // rowKey array
