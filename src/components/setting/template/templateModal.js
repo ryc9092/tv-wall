@@ -4,7 +4,11 @@ import { Button, Checkbox, Modal, Row, Table, Typography } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import CreateTemplate from "./createTemplate";
 import ViewTemplate from "./viewTemplate";
-import { getTemplates, deleteTemplate } from "../../../api/API";
+import {
+  getTemplates,
+  deleteTemplate,
+  setDefaultTemplate,
+} from "../../../api/API";
 import {
   showWarningNotification,
   showSuccessNotificationByMsg,
@@ -34,15 +38,23 @@ const SettingTemplateModal = () => {
     })();
   }, [reload]);
 
-  const changeDefaultTemplate = (record) => {
-    let tempTemplates = templates.slice();
-    templates.forEach((template, idx) => {
-      if (template.templateId === record.templateId)
-        tempTemplates[idx].isDefault = true;
-      else if (template.col === record.col && template.row === record.row)
-        tempTemplates[idx].isDefault = false;
-    });
-    setTemplates(tempTemplates);
+  const changeDefaultTemplate = async (record) => {
+    const result = await setDefaultTemplate(
+      store,
+      record.templateId,
+      record.col,
+      record.row
+    );
+    if (result) {
+      let tempTemplates = templates.slice();
+      templates.forEach((template, idx) => {
+        if (template.templateId === record.templateId)
+          tempTemplates[idx].isDefault = true;
+        else if (template.col === record.col && template.row === record.row)
+          tempTemplates[idx].isDefault = false;
+      });
+      setTemplates(tempTemplates);
+    }
   };
 
   const columns = [
@@ -102,7 +114,6 @@ const SettingTemplateModal = () => {
 
   const removeTemplate = (e) => {
     const templateId = e.currentTarget.id;
-    console.log(`remove template: ${templateId}`);
     (async () => {
       const result = await deleteTemplate(store, templateId);
       if (result) {

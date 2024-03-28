@@ -123,11 +123,6 @@ const CreateTemplate = ({ setReload }) => {
   };
 
   const saveWall = () => {
-    console.log(
-      `template id: ${templateId}, template name: ${templateName}, template size: ${JSON.stringify(
-        templateSize
-      )}, screen list: ${JSON.stringify(screenList)}`
-    );
     (async () => {
       const result = await createTemplate(
         store,
@@ -135,7 +130,7 @@ const CreateTemplate = ({ setReload }) => {
         templateName,
         templateSize.col,
         templateSize.row,
-        0, // TODO: 建立版型isDefault都設為false，後續再從版型管理設定預設版型
+        0,
         screenList
       );
       if (result) {

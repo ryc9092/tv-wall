@@ -289,6 +289,21 @@ export const createTemplate = async (
   });
 };
 
+export const setDefaultTemplate = async (store, templateId, col, row) => {
+  const httpMethod = "PATCH";
+  const apiPath = `/tvwalls/templates/setDefault/${templateId}`;
+  const form = JSON.stringify({
+    col: col,
+    row: row,
+  });
+  return await apiCall({
+    httpMethod,
+    apiPath,
+    form,
+    store,
+  });
+};
+
 export const deleteTemplate = async (store, templateId) => {
   const httpMethod = `DELETE`;
   const params = `templateId=${templateId}`;
