@@ -14,13 +14,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import TvWall from "../components/tvwall/tvWall";
 import useWindowDimensions from "../utils/WindowDimension";
 import { ENCODER_TYPERS } from "../utils/Constant";
-import {
-  presetWall,
-  getActivedWall,
-  getWalls,
-  getTemplates,
-  getEncoders,
-} from "../api/API";
+import { presetWall, getWalls, getTemplates, getEncoders } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
 import {
@@ -57,7 +51,6 @@ const SituationTVWall = ({
     previewUrl: "",
   });
   const [blocks, setBlocks] = useState([]);
-  const [isActivedWall, setIsActivedWall] = useState(false);
   const [blockEncoderMapping, setBlockEncoderMapping] = useState({});
 
   // clear selected items
@@ -97,51 +90,6 @@ const SituationTVWall = ({
       }
     })();
   }, [store, reload]);
-
-  // Show wall active status when selected wall changed and there is no selected template
-  useEffect(() => {
-    (async () => {
-      let activedWall;
-      if (selectedWall.wallId) {
-        activedWall = await getActivedWall({
-          store: store,
-          activeId: selectedWall.wallId,
-        });
-      }
-      if (
-        Object.keys(selectedWall).length !== 0 &&
-        encoders.length !== 0 &&
-        activedWall && // has actived Wall
-        templateOptions.length !== 0 && // has template
-        (!selectedTemplate || // no selected template
-          selectedTemplate?.templateId === activedWall?.templateId) // or selected template is actived wall template
-      ) {
-        // Set selected template
-        templateOptions.forEach((templateOption) => {
-          if (activedWall.templateId === templateOption.templateId) {
-            setSelectedTemplate(templateOption);
-          }
-        });
-        // Set map of block and encoder => blockNum: {mac: xxx, previewUrl: xxx}
-        let tempMap = {};
-        activedWall.blocks.forEach((block) => {
-          encoders.forEach((encoder) => {
-            if (block.encoder === encoder.mac) {
-              tempMap[block.block] = {
-                mac: encoder.mac,
-                previewUrl: encoder.previewUrl,
-              };
-            }
-          });
-        });
-        setIsActivedWall(true);
-        setBlockEncoderMapping(tempMap);
-      } else {
-        setIsActivedWall(false);
-        setBlocks([]);
-      }
-    })();
-  }, [selectedWall, templateOptions]);
 
   // Set "template radios" when dimension is changed
   useEffect(() => {
@@ -407,7 +355,6 @@ const SituationTVWall = ({
               clearTvWall={clearTvWall}
               blocks={blocks}
               setBlocks={setBlocks}
-              isActivedWall={isActivedWall}
               blockEncoderMapping={blockEncoderMapping}
               setBlockEncoderMapping={setBlockEncoderMapping}
             />
