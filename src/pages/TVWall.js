@@ -93,6 +93,11 @@ const TVWall = () => {
           store: store,
           activeId: selectedWall.wallId,
         });
+        if (activedWall?.templateId !== selectedTemplate?.value) {
+          activedWall = null;
+          setIsActivedWall(false);
+          setBlocks([]);
+        }
       }
       if (
         Object.keys(selectedWall).length !== 0 &&
@@ -100,8 +105,7 @@ const TVWall = () => {
         activedWall && // has actived Wall
         templateOptions.length !== 0 && // has template
         (!selectedTemplate || // no selected template
-          selectedTemplate?.templateId === activedWall?.templateId || // or selected template is actived wall template
-          !isActivedWall)
+          selectedTemplate?.templateId === activedWall?.templateId) // or selected template is actived wall template
       ) {
         // Set selected template
         templateOptions.forEach((templateOption) => {
@@ -123,9 +127,6 @@ const TVWall = () => {
         });
         setIsActivedWall(true);
         setBlockEncoderMapping(tempMap);
-      } else {
-        setIsActivedWall(false);
-        setBlocks([]);
       }
     })();
   }, [selectedWall, templateOptions]);
