@@ -12,21 +12,25 @@ const AddSituationContentModal = ({ id, setReloadPresetDetails }) => {
 
   const itemList = [
     <PresetWallModal
+      key="wall"
       situationId={id}
       openParentModal={setIsModalOpen}
       setReloadPresetDetails={setReloadPresetDetails}
     />,
     <PresetSingleScreenModal
+      key="screen"
       situationId={id}
       openParentModal={setIsModalOpen}
       setReloadPresetDetails={setReloadPresetDetails}
     />,
     <PresetAudioModal
+      key="audio"
       situationId={id}
       openParentModal={setIsModalOpen}
       setReloadPresetDetails={setReloadPresetDetails}
     />,
     <PresetUSBModal
+      key="usb"
       situationId={id}
       openParentModal={setIsModalOpen}
       setReloadPresetDetails={setReloadPresetDetails}
@@ -36,8 +40,10 @@ const AddSituationContentModal = ({ id, setReloadPresetDetails }) => {
   let functionItems = [];
   itemList.forEach((item) => {
     functionItems.push(
-      <Col className="situation-option-block">
-        <div className="situation-option-icon">ICON</div>
+      <Col key={item.key} className="situation-option-block">
+        <div key={item.key} className="situation-option-icon">
+          ICON
+        </div>
         {item}
       </Col>
     );
