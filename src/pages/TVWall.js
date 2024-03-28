@@ -68,14 +68,11 @@ const TVWall = () => {
       const result = await getWalls(store);
       if (result) {
         result.forEach((wall) => {
-          // TODO: remove after test
-          if (wall.wallId !== "area01") {
-            tempWallOptions.push({
-              value: wall.wallName,
-              label: wall.wallName,
-              ...wall,
-            });
-          }
+          tempWallOptions.push({
+            value: wall.wallName,
+            label: wall.wallName,
+            ...wall,
+          });
         });
         setWallOptions(tempWallOptions);
         setWallDimension({
@@ -90,10 +87,13 @@ const TVWall = () => {
   // Show wall active status when selected wall changed and there is no selected template
   useEffect(() => {
     (async () => {
-      const activedWall = await getActivedWall({
-        store: store,
-        activeId: selectedWall.wallId,
-      });
+      let activedWall;
+      if (selectedWall.wallId) {
+        activedWall = await getActivedWall({
+          store: store,
+          activeId: selectedWall.wallId,
+        });
+      }
       if (
         Object.keys(selectedWall).length !== 0 &&
         encoders.length !== 0 &&
@@ -149,7 +149,7 @@ const TVWall = () => {
         });
         let hasDefaultTemplate = false;
         tempTemplateOptions.forEach((template) => {
-          if (template.isDefault === true) {
+          if (template.isDefault === 1) {
             hasDefaultTemplate = true;
             setSelectedTemplate(template);
           }

@@ -35,6 +35,7 @@ const SituationTVWall = ({
   openParentModal,
   setReloadPresetDetails,
   detailsNum,
+  reload,
 }) => {
   const intl = useIntl();
   const { width } = useWindowDimensions();
@@ -59,6 +60,15 @@ const SituationTVWall = ({
   const [isActivedWall, setIsActivedWall] = useState(false);
   const [blockEncoderMapping, setBlockEncoderMapping] = useState({});
 
+  // clear selected items
+  useEffect(() => {
+    setSelectedWall({});
+    setTemplateOptions([]);
+    setSelectedTemplate(null);
+    setSelectedEncoder({ mac: "", previewUrl: "" });
+    setBlocks([]);
+  }, [reload]);
+
   // The elements size would be changed according to width
   useEffect(() => {
     if (width > 824 && isSmallElement) setIsSmallElement(false);
@@ -72,14 +82,11 @@ const SituationTVWall = ({
       const result = await getWalls(store);
       if (result) {
         result.forEach((wall) => {
-          // TODO: remove after test
-          if (wall.wallId !== "area01") {
-            tempWallOptions.push({
-              value: wall.wallName,
-              label: wall.wallName,
-              ...wall,
-            });
-          }
+          tempWallOptions.push({
+            value: wall.wallName,
+            label: wall.wallName,
+            ...wall,
+          });
         });
         setWallOptions(tempWallOptions);
         setWallDimension({
@@ -89,15 +96,18 @@ const SituationTVWall = ({
         setSelectedWall(tempWallOptions[0]);
       }
     })();
-  }, [store]);
+  }, [store, reload]);
 
   // Show wall active status when selected wall changed and there is no selected template
   useEffect(() => {
     (async () => {
-      const activedWall = await getActivedWall({
-        store: store,
-        activeId: selectedWall.wallId,
-      });
+      let activedWall;
+      if (selectedWall.wallId) {
+        activedWall = await getActivedWall({
+          store: store,
+          activeId: selectedWall.wallId,
+        });
+      }
       if (
         Object.keys(selectedWall).length !== 0 &&
         encoders.length !== 0 &&
@@ -153,7 +163,7 @@ const SituationTVWall = ({
         });
         let hasDefaultTemplate = false;
         tempTemplateOptions.forEach((template) => {
-          if (template.isDefault === true) {
+          if (template.isDefault === 1) {
             hasDefaultTemplate = true;
             setSelectedTemplate(template);
           }

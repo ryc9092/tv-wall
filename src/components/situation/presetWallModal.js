@@ -10,6 +10,7 @@ const PresetWallModal = ({
   detailsNum,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [reload, setReload] = useState(null);
   return (
     <div>
       <Button
@@ -29,6 +30,7 @@ const PresetWallModal = ({
         footer={null}
         style={{ marginTop: -90 }}
         onCancel={() => {
+          setReload(Math.random());
           setIsModalOpen(false);
         }}
       >
@@ -37,6 +39,7 @@ const PresetWallModal = ({
           openParentModal={setIsModalOpen}
           setReloadPresetDetails={setReloadPresetDetails}
           detailsNum={detailsNum}
+          reload={reload}
         />
       </Modal>
     </div>
