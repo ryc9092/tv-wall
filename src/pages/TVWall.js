@@ -100,7 +100,8 @@ const TVWall = () => {
         activedWall && // has actived Wall
         templateOptions.length !== 0 && // has template
         (!selectedTemplate || // no selected template
-          selectedTemplate?.templateId === activedWall?.templateId) // or selected template is actived wall template
+          selectedTemplate?.templateId === activedWall?.templateId || // or selected template is actived wall template
+          !isActivedWall)
       ) {
         // Set selected template
         templateOptions.forEach((templateOption) => {
