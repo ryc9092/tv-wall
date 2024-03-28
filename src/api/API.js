@@ -456,3 +456,25 @@ export const removeSituation = async (id, store) => {
     store,
   });
 };
+
+export const getSituationDetails = async (store, id) => {
+  const apiPath = `/presets/${id}/details`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
+export const setSituationDetailsOrder = async (store, orderedDetails) => {
+  const httpMethod = "PATCH";
+  const apiPath = `/presets/details/setorder`;
+  const form = JSON.stringify({
+    detailsOrder: orderedDetails,
+  });
+  return await apiCall({
+    httpMethod,
+    apiPath,
+    form,
+    store,
+  });
+};

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { StoreContext } from "../store/store";
 import { Button, Modal, Table, Typography } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import { DndContext } from "@dnd-kit/core";
@@ -11,6 +12,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import AddSituationContentModal from "./addSituationContent";
+import { getSituationDetails, setSituationDetailsOrder } from "../../api/API";
 import "./createSituation.scss";
 
 const columns = [
@@ -18,17 +20,17 @@ const columns = [
     key: "sort",
   },
   {
-    title: "order",
-    dataIndex: "order",
-  },
-  {
     title: "type",
-    dataIndex: "type",
+    dataIndex: "set_type",
   },
-  {
-    title: "desc",
-    dataIndex: "desc",
-  },
+  // {
+  //   title: "type",
+  //   dataIndex: "type",
+  // },
+  // {
+  //   title: "desc",
+  //   dataIndex: "desc",
+  // },
   {
     title: "operation",
     dataIndex: "operation",
@@ -86,6 +88,7 @@ const Row = ({ children, ...props }) => {
 };
 
 const SituationContentModal = ({ id, name, desc }) => {
+  const [store] = useContext(StoreContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   const [orderChange, setOrderChange] = useState(null);
@@ -94,38 +97,32 @@ const SituationContentModal = ({ id, name, desc }) => {
   // Get preset data by preset id
   useEffect(() => {
     if (isModalOpen) {
-      console.log("load preset data");
-      // todo: get from api
-      setDataSource([
-        {
-          key: "1",
-          order: "1",
-          type: "John Brown",
-          operation: 32,
-          desc: "Long text Long text Long text Long text Long text Long text Long text Long ",
-        },
-        {
-          key: "2",
-          order: "2",
-          type: "Jim Green",
-          operation: 42,
-          desc: "London No. 1 Lake Park",
-        },
-        {
-          key: "3",
-          order: "3",
-          type: "Joe Black",
-          operation: 32,
-          desc: "Sidney No. 1 Lake Park",
-        },
-      ]);
+      (async () => {
+        const result = await getSituationDetails(store, id);
+        if (result) {
+          let data = [];
+          result.forEach((detail) => {
+            data.push({ ...detail, key: detail.orderNum });
+          });
+          setDataSource(data);
+        }
+      })();
     }
   }, [isModalOpen, reloadPresetDetails]);
 
   // save new order of preset details
   useEffect(() => {
-    // todo: save new order by api
-    console.log("order changed!", dataSource);
+    (async () => {
+      let orderedDetails = [];
+      dataSource.forEach((detail, idx) => {
+        detail.orderNum = idx + 1;
+        orderedDetails.push({
+          id: detail.id,
+          orderNum: detail.orderNum,
+        });
+      });
+      await setSituationDetailsOrder(store, orderedDetails);
+    })();
   }, [orderChange]);
 
   const onDragEnd = ({ active, over }) => {
