@@ -15,8 +15,7 @@ import TvWall from "../components/tvwall/tvWall";
 import useWindowDimensions from "../utils/WindowDimension";
 import { ENCODER_TYPERS } from "../utils/Constant";
 import {
-  activeWall,
-  deactiveWall,
+  presetWall,
   getActivedWall,
   getWalls,
   getTemplates,
@@ -35,6 +34,7 @@ const SituationTVWall = ({
   situationId,
   openParentModal,
   setReloadPresetDetails,
+  detailsNum,
 }) => {
   const intl = useIntl();
   const { width } = useWindowDimensions();
@@ -277,18 +277,17 @@ const SituationTVWall = ({
           decoder: block.decoder,
         };
       });
+      const result = await presetWall({
+        activeId: `preset.${selectedWall.wallId}`,
+        wallId: selectedWall.wallId,
+        templateId: selectedTemplate.templateId,
+        blocks: outputBlocks,
+        presetPostDetail: { preSetId: situationId, orderNum: detailsNum + 1 },
+        store: store,
+      });
+      if (!result) throw new Error("call api failed");
       openParentModal(false);
       setReloadPresetDetails(Math.random());
-      // const result = await activeWall({
-      //   activeId: selectedWall.wallId,
-      //   wallId: selectedWall.wallId,
-      //   wallType: "normal",
-      //   templateId: selectedTemplate.templateId,
-      //   blocks: outputBlocks,
-      //   isPreset: "N",
-      //   store: store,
-      // });
-      // if (!result) throw new Error("call api failed");
       showSuccessNotificationByMsg(
         intl.formatMessage(Messages.Text_TVWall_ActiveSuccess)
       );

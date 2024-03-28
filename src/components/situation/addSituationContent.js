@@ -7,7 +7,11 @@ import PresetAudioModal from "./presetAudioModal";
 import PresetUSBModal from "./presetUSBModal";
 import "./addSituationContent.scss";
 
-const AddSituationContentModal = ({ id, setReloadPresetDetails }) => {
+const AddSituationContentModal = ({
+  id,
+  detailsNum,
+  setReloadPresetDetails,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const itemList = [
@@ -16,32 +20,36 @@ const AddSituationContentModal = ({ id, setReloadPresetDetails }) => {
       situationId={id}
       openParentModal={setIsModalOpen}
       setReloadPresetDetails={setReloadPresetDetails}
+      detailsNum={detailsNum}
     />,
     <PresetSingleScreenModal
       key="screen"
       situationId={id}
       openParentModal={setIsModalOpen}
       setReloadPresetDetails={setReloadPresetDetails}
+      detailsNum={detailsNum}
     />,
     <PresetAudioModal
       key="audio"
       situationId={id}
       openParentModal={setIsModalOpen}
       setReloadPresetDetails={setReloadPresetDetails}
+      detailsNum={detailsNum}
     />,
     <PresetUSBModal
       key="usb"
       situationId={id}
       openParentModal={setIsModalOpen}
       setReloadPresetDetails={setReloadPresetDetails}
+      detailsNum={detailsNum}
     />,
   ];
 
   let functionItems = [];
   itemList.forEach((item) => {
     functionItems.push(
-      <Col key={item.key} className="situation-option-block">
-        <div key={item.key} className="situation-option-icon">
+      <Col key={`col.${item.key}`} className="situation-option-block">
+        <div key={`div.${item.key}`} className="situation-option-icon">
           ICON
         </div>
         {item}

@@ -12,30 +12,13 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import AddSituationContentModal from "./addSituationContent";
-import { getSituationDetails, setSituationDetailsOrder } from "../../api/API";
+import {
+  getSituationDetails,
+  setSituationDetailsOrder,
+  removeSituationDetail,
+} from "../../api/API";
 import "./createSituation.scss";
 
-const columns = [
-  {
-    key: "sort",
-  },
-  {
-    title: "type",
-    dataIndex: "set_type",
-  },
-  // {
-  //   title: "type",
-  //   dataIndex: "type",
-  // },
-  // {
-  //   title: "desc",
-  //   dataIndex: "desc",
-  // },
-  {
-    title: "operation",
-    dataIndex: "operation",
-  },
-];
 const Row = ({ children, ...props }) => {
   const {
     attributes,
@@ -94,6 +77,27 @@ const SituationContentModal = ({ id, name, desc }) => {
   const [orderChange, setOrderChange] = useState(null);
   const [reloadPresetDetails, setReloadPresetDetails] = useState(null);
 
+  const columns = [
+    {
+      key: "sort",
+    },
+    {
+      title: "type",
+      dataIndex: "set_type",
+    },
+    {
+      title: "operation",
+      dataIndex: "id",
+      render: (id) => (
+        <div key={`${id}-action`}>
+          <Button key={`${id}-delete`} id={id} onClick={removeDetail}>
+            delete
+          </Button>
+        </div>
+      ),
+    },
+  ];
+
   // Get preset data by preset id
   useEffect(() => {
     if (isModalOpen) {
@@ -136,6 +140,12 @@ const SituationContentModal = ({ id, name, desc }) => {
     }
   };
 
+  const removeDetail = async (event) => {
+    const detailId = event.currentTarget.id;
+    await removeSituationDetail(detailId, store);
+    setReloadPresetDetails(Math.random());
+  };
+
   return (
     <div>
       <span>{desc}</span>
@@ -157,6 +167,7 @@ const SituationContentModal = ({ id, name, desc }) => {
       >
         <AddSituationContentModal
           id={id}
+          detailsNum={dataSource.length}
           setReloadPresetDetails={setReloadPresetDetails}
         />
         <DndContext modifiers={[restrictToVerticalAxis]} onDragEnd={onDragEnd}>

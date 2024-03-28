@@ -457,6 +457,16 @@ export const removeSituation = async (id, store) => {
   });
 };
 
+export const removeSituationDetail = async (id, store) => {
+  const httpMethod = "DELETE";
+  const apiPath = `/presets/details/${id}`;
+  return await apiCall({
+    httpMethod,
+    apiPath,
+    store,
+  });
+};
+
 export const getSituationDetails = async (store, id) => {
   const apiPath = `/presets/${id}/details`;
   return await apiGET({
@@ -473,6 +483,29 @@ export const setSituationDetailsOrder = async (store, orderedDetails) => {
   });
   return await apiCall({
     httpMethod,
+    apiPath,
+    form,
+    store,
+  });
+};
+
+export const presetWall = async ({
+  store,
+  activeId,
+  wallId,
+  templateId,
+  blocks,
+  presetPostDetail,
+}) => {
+  const apiPath = `/tvwalls/preset`;
+  const form = JSON.stringify({
+    actvieId: activeId,
+    wallId: wallId,
+    templateId: templateId,
+    blocks: blocks,
+    presetPostDetail: presetPostDetail,
+  });
+  return await apiPOST({
     apiPath,
     form,
     store,
