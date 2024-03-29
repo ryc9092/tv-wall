@@ -124,50 +124,10 @@ const Audio = () => {
             store: store,
             linkId: `${chooseAudioType}.` + choosedEncoder,
           });
-          // todo: api wrong format, change to real result
-          result = {
-            details: [
-              {
-                key: "analogAudio.0:1c:d5:1:2f:91_0:1c:d5:1:11:b5",
-                linkId: "analogAudio.0:1c:d5:1:2f:91",
-                decoder: "0:1c:d5:1:11:b5",
-                value1: "",
-                value2: "",
-                value3: "",
-                value4: "",
-              },
-              {
-                key: "analogAudio.0:1c:d5:1:2f:91_0:1c:d5:1:12:d",
-                linkId: "analogAudio.0:1c:d5:1:2f:91",
-                decoder: "0:1c:d5:1:12:d",
-                value1: "",
-                value2: "",
-                value3: "",
-                value4: "",
-              },
-              {
-                key: "analogAudio.0:1c:d5:1:2f:91_0:1c:d5:1:11:5a",
-                linkId: "analogAudio.0:1c:d5:1:2f:91",
-                decoder: "0:1c:d5:1:11:5a",
-                value1: "",
-                value2: "",
-                value3: "",
-                value4: "",
-              },
-              {
-                key: "analogAudio.0:1c:d5:1:2f:91_0:1c:d5:1:11:e8",
-                linkId: "analogAudio.0:1c:d5:1:2f:91",
-                decoder: "0:1c:d5:1:11:e8",
-                value1: "",
-                value2: "",
-                value3: "",
-                value4: "",
-              },
-            ],
-          };
+
           let tempDecoderList = [];
-          if (result?.details) {
-            result.details.forEach((detail) => {
+          if (result) {
+            result.forEach((detail) => {
               tempDecoderList.push(detail.decoder);
             });
           }
@@ -365,8 +325,16 @@ const Audio = () => {
                 style={{ marginLeft: 6, marginTop: 1 }}
                 onChange={handleChooseAudioType}
               >
-                <Radio.Button value="analogAudio">analog</Radio.Button>
-                <Radio.Button value="hdmiAudio">hdmi</Radio.Button>
+                <Radio.Button value="analogAudio">
+                  {choosedEncoder && encoderDict[choosedEncoder].audioAnalogy
+                    ? encoderDict[choosedEncoder].audioAnalogy
+                    : "analog"}
+                </Radio.Button>
+                <Radio.Button value="hdmiAudio">
+                  {choosedEncoder && encoderDict[choosedEncoder].audioHdmi
+                    ? encoderDict[choosedEncoder].audioHdmi
+                    : "hdmi"}
+                </Radio.Button>
               </Radio.Group>
             </Row>
             <Row style={{ marginTop: 24, marginLeft: 6 }}>

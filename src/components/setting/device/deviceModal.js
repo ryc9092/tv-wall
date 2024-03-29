@@ -12,7 +12,7 @@ import Messages from "../../../messages";
 import "../../../App.scss";
 import "./deviceModal.scss";
 
-const EditableCell = ({ editing, dataIndex, setNickName, children }) => {
+const EditableCell = ({ editing, dataIndex, setCol, children }) => {
   return (
     <td>
       {editing ? (
@@ -22,7 +22,7 @@ const EditableCell = ({ editing, dataIndex, setNickName, children }) => {
             margin: 0,
           }}
         >
-          <Input onChange={(e) => setNickName(e.target.value)} />
+          <Input onChange={(e) => setCol(e.target.value)} />
         </div>
       ) : (
         children
@@ -38,6 +38,9 @@ const SettingDeviceModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingKey, setEditingKey] = useState("");
   const [editedNickName, setEditedNickName] = useState("");
+  const [editedAudioAnalog, setEditedAudioAnalog] = useState("");
+  const [editedAudioHdmi, setEditedAudioHdmi] = useState("");
+  const [editedIP, setEditedIP] = useState("");
   const [reload, setReload] = useState(null);
 
   const isEditing = (record) => record.key === editingKey;
@@ -57,6 +60,9 @@ const SettingDeviceModal = () => {
       store,
       device.mac,
       editedNickName,
+      editedAudioAnalog,
+      editedAudioHdmi,
+      editedIP,
       device.model,
       device.type
     );
@@ -72,6 +78,9 @@ const SettingDeviceModal = () => {
     }
     setEditingKey("");
     setEditedNickName("");
+    setEditedAudioAnalog("");
+    setEditedAudioHdmi("");
+    setEditedIP("");
   };
 
   useEffect(() => {
@@ -114,6 +123,27 @@ const SettingDeviceModal = () => {
       title: "別名",
       dataIndex: "nickName",
       key: "nickName",
+      editable: true,
+      render: (text) => <span>{text}</span>,
+    },
+    {
+      title: "analog",
+      dataIndex: "audioAnalogy",
+      key: "audioAnalogy",
+      editable: true,
+      render: (text) => <span>{text}</span>,
+    },
+    {
+      title: "hdmi",
+      dataIndex: "audioHdmi",
+      key: "audioHdmi",
+      editable: true,
+      render: (text) => <span>{text}</span>,
+    },
+    {
+      title: "ip",
+      dataIndex: "additionalDeviceIp",
+      key: "additionalDeviceIp",
       editable: true,
       render: (text) => <span>{text}</span>,
     },
@@ -169,16 +199,47 @@ const SettingDeviceModal = () => {
   const mergedColumns = columns.map((col) => {
     if (!col.editable) {
       return col;
+    } else if (col.key === "nickName") {
+      return {
+        ...col,
+        onCell: (record) => ({
+          record,
+          title: col.title,
+          editing: isEditing(record),
+          setCol: setEditedNickName,
+        }),
+      };
+    } else if (col.key === "audioAnalogy") {
+      return {
+        ...col,
+        onCell: (record) => ({
+          record,
+          title: col.title,
+          editing: isEditing(record),
+          setCol: setEditedAudioAnalog,
+        }),
+      };
+    } else if (col.key === "audioHdmi") {
+      return {
+        ...col,
+        onCell: (record) => ({
+          record,
+          title: col.title,
+          editing: isEditing(record),
+          setCol: setEditedAudioHdmi,
+        }),
+      };
+    } else {
+      return {
+        ...col,
+        onCell: (record) => ({
+          record,
+          title: col.title,
+          editing: isEditing(record),
+          setCol: setEditedIP,
+        }),
+      };
     }
-    return {
-      ...col,
-      onCell: (record) => ({
-        record,
-        title: col.title,
-        editing: isEditing(record),
-        setNickName: setEditedNickName,
-      }),
-    };
   });
 
   return (
@@ -196,7 +257,7 @@ const SettingDeviceModal = () => {
       <Modal
         title={`設備進階設定`}
         className="modal-title"
-        width={700}
+        width={950}
         open={isModalOpen}
         footer={null}
         onCancel={() => {

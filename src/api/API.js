@@ -193,11 +193,23 @@ export const getEncoders = async (store) => {
   });
 };
 
-export const editDevice = async (store, macAddr, nickName, model, type) => {
+export const editDevice = async (
+  store,
+  macAddr,
+  nickName,
+  audioAnalog,
+  audioHdmi,
+  ip,
+  model,
+  type
+) => {
   const httpMethod = `PATCH`;
   const apiPath = `/devices/${macAddr}`;
   const form = JSON.stringify({
     nickName: nickName,
+    audioAnalogy: audioAnalog,
+    audioHdmi: audioHdmi,
+    additionalDeviceIp: ip,
     model: model,
     type: type,
   });
