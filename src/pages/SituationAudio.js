@@ -4,13 +4,7 @@ import { Button, Col, Divider, Input, Radio, Row, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import useWindowDimensions from "../utils/WindowDimension";
 import { ENCODER_TYPERS } from "../utils/Constant";
-import {
-  createDeviceLink,
-  removeDeviceLink,
-  getDeviceLinkByEncoder,
-  getDecoders,
-  getEncoders,
-} from "../api/API";
+import { presetDeviceLink, getDecoders, getEncoders } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
 import {
@@ -20,7 +14,13 @@ import {
 import "../App.scss";
 import "./Audio.scss";
 
-const Audio = () => {
+const SituationAudio = ({
+  situationId,
+  openParentModal,
+  setReloadPresetDetails,
+  detailsNum,
+  reload,
+}) => {
   const intl = useIntl();
   const { width, height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
@@ -49,6 +49,12 @@ const Audio = () => {
     });
     setState(tempDeviceDict);
   };
+
+  // clear selected items
+  useEffect(() => {
+    setChoosedEncoder([]);
+    setChoosedDecoderList([]);
+  }, [reload]);
 
   // set devices dict state
   useEffect(() => {
@@ -117,24 +123,6 @@ const Audio = () => {
 
     let tempEncoderElements = [];
     filterEncoders.forEach((encoder) => {
-      // get link of clicked encoders
-      if (choosedEncoder === encoder.mac) {
-        (async () => {
-          let result = await getDeviceLinkByEncoder({
-            store: store,
-            linkId: `${chooseAudioType}.` + choosedEncoder,
-          });
-
-          let tempDecoderList = [];
-          if (result) {
-            result.forEach((detail) => {
-              tempDecoderList.push(detail.decoder);
-            });
-          }
-          setChoosedDecoderList(tempDecoderList);
-        })();
-      }
-
       // display encoders & change background of encoder if clicked
       tempEncoderElements.push(
         <Row key={encoder.mac} style={{ marginTop: "6px" }}>
@@ -209,40 +197,22 @@ const Audio = () => {
     setChoosedEncoder();
   };
 
-  const handleClearConnection = async () => {
-    if (choosedEncoder) {
-      const result = await removeDeviceLink({
-        store: store,
-        linkId: `${chooseAudioType}.` + choosedEncoder,
-      });
-      if (result) {
-        setChoosedDecoderList([]);
-        setChoosedEncoder();
-        showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_Audio_ClearConnectionSuccess)
-        );
-      } else {
-        showWarningNotification(
-          intl.formatMessage(Messages.Text_Audio_ClearConnectionFail)
-        );
-      }
-    }
-  };
-
   const handleCreateConnection = async () => {
-    console.log(choosedDecoderList, choosedEncoder);
     if (choosedDecoderList.length > 0 && choosedEncoder) {
-      const result = await createDeviceLink({
+      const result = await presetDeviceLink({
         store: store,
-        id: `${chooseAudioType}.` + choosedEncoder,
+        presetDetailId: `preset.${chooseAudioType}.` + choosedEncoder,
         linkType: chooseAudioType,
         encoder: choosedEncoder,
         decoders: choosedDecoderList,
         value1: chooseAudioType,
         remark: "",
-        isPreset: "N",
+        presetPostDetail: { preSetId: situationId, orderNum: detailsNum + 1 },
       });
+      console.log({ preSetId: situationId, orderNum: detailsNum + 1 });
       if (result) {
+        openParentModal(false);
+        setReloadPresetDetails(Math.random());
         showSuccessNotificationByMsg(
           intl.formatMessage(Messages.Text_Audio_CreateConnectionSuccess)
         );
@@ -260,154 +230,138 @@ const Audio = () => {
   };
 
   return (
-    <div>
-      {store.siderCollapse ? (
-        <div className="page-title">
-          <FormattedMessage {...Messages.Text_Audio_AudioMgmt} />
-        </div>
-      ) : (
-        <div style={{ marginTop: 60 }} />
-      )}
+    <div
+      className="audio-layout container-width"
+      style={{ margin: "16px 16px 0px 0px" }}
+    >
       <div
-        className="audio-layout container-width"
-        style={{ margin: "16px 16px 0px 0px" }}
+        style={{ height: height < "750" ? "50%" : "55%", minHeight: "250px" }}
+      >
+        <Row style={{ height: "13%" }}>
+          <Col>
+            <Typography.Text style={{ fontSize: "20px", marginRight: "10px" }}>
+              <FormattedMessage {...Messages.Text_Audio_Source} />
+            </Typography.Text>
+          </Col>
+          <Col>
+            <Input
+              onChange={(e) => {
+                setSearchFilter(e.target.value);
+              }}
+              prefix={<SearchOutlined />}
+            />
+          </Col>
+        </Row>
+        <Row style={{ height: "14%" }}>
+          <Radio.Group
+            options={ENCODER_TYPERS}
+            onChange={changeEncoderType}
+            value={encoderType}
+            optionType="button"
+            buttonStyle="solid"
+            style={{ marginTop: 12 }}
+          />
+        </Row>
+        <div className="decoder-block">{encoderElements}</div>
+      </div>
+      <div
+        className="audio-col-layout"
+        style={{
+          border: "1px solid gray",
+          height: "45%",
+          minHeight: "220px",
+          marginTop: "12px",
+        }}
       >
         <div
-          style={{ height: height < "750" ? "50%" : "55%", minHeight: "250px" }}
-        >
-          <Row style={{ height: "13%" }}>
-            <Col>
-              <Typography.Text
-                style={{ fontSize: "20px", marginRight: "10px" }}
-              >
-                <FormattedMessage {...Messages.Text_Audio_Source} />
-              </Typography.Text>
-            </Col>
-            <Col>
-              <Input
-                onChange={(e) => {
-                  setSearchFilter(e.target.value);
-                }}
-                prefix={<SearchOutlined />}
-              />
-            </Col>
-          </Row>
-          <Row style={{ height: "14%" }}>
-            <Radio.Group
-              options={ENCODER_TYPERS}
-              onChange={changeEncoderType}
-              value={encoderType}
-              optionType="button"
-              buttonStyle="solid"
-              style={{ marginTop: 12 }}
-            />
-          </Row>
-          <div className="decoder-block">{encoderElements}</div>
-        </div>
-        <div
-          className="audio-col-layout"
           style={{
-            border: "1px solid gray",
-            height: "45%",
-            minHeight: "220px",
-            marginTop: "12px",
+            borderRight: "1px solid gray",
+            height: height * 0.39,
           }}
         >
-          <div
+          <Row>
+            <span style={{ marginLeft: 2, marginTop: 3 }}>
+              <FormattedMessage {...Messages.Text_Audio_ConnectionStatus} />
+            </span>
+            <Radio.Group
+              defaultValue="analogAudio"
+              size="small"
+              buttonStyle="solid"
+              style={{ marginLeft: 6, marginTop: 1 }}
+              onChange={handleChooseAudioType}
+            >
+              <Radio.Button value="analogAudio">
+                {choosedEncoder && encoderDict[choosedEncoder]?.audioAnalogy
+                  ? encoderDict[choosedEncoder]?.audioAnalogy
+                  : "analog"}
+              </Radio.Button>
+              <Radio.Button value="hdmiAudio">
+                {choosedEncoder && encoderDict[choosedEncoder]?.audioHdmi
+                  ? encoderDict[choosedEncoder]?.audioHdmi
+                  : "hdmi"}
+              </Radio.Button>
+            </Radio.Group>
+          </Row>
+          <Row style={{ marginTop: 24, marginLeft: 6 }}>
+            <Col span={8}>
+              <Row>
+                <FormattedMessage {...Messages.Text_Common_Encoder} />
+              </Row>
+              <Row style={{ marginTop: 6 }}>
+                {encoderDict[choosedEncoder]?.nickName}
+              </Row>
+            </Col>
+            <Col span={8}>
+              <Row style={{ marginLeft: 10 }}>
+                {chooseAudioType === "analogAudio" ? (
+                  <FormattedMessage {...Messages.Text_Audio_AnalogConnect} />
+                ) : (
+                  <FormattedMessage {...Messages.Text_Audio_HdmiConnect} />
+                )}
+              </Row>
+              <Row>{"<------------>"}</Row>
+            </Col>
+            <Col span={8}>
+              <Row>
+                <FormattedMessage {...Messages.Text_Common_Decoder} />
+              </Row>
+              {choosedDecoderElements}
+            </Col>
+          </Row>
+        </div>
+        <div>
+          <Row>
+            <Col span={width > 1060 ? 19 : 16}>
+              <FormattedMessage {...Messages.Text_Audio_TerminalChoose} />
+            </Col>
+          </Row>
+          <Row>
+            <div className="encoder-block" style={{ height: height * 0.26 }}>
+              {decoderElements}
+            </div>
+          </Row>
+          <Divider
             style={{
-              borderRight: "1px solid gray",
-              height: height * 0.39,
+              marginTop: -12,
+              marginBottom: 10,
             }}
-          >
-            <Row>
-              <span style={{ marginLeft: 2, marginTop: 3 }}>
-                <FormattedMessage {...Messages.Text_Audio_ConnectionStatus} />
-              </span>
-              <Radio.Group
-                defaultValue="analogAudio"
-                size="small"
-                buttonStyle="solid"
-                style={{ marginLeft: 6, marginTop: 1 }}
-                onChange={handleChooseAudioType}
-              >
-                <Radio.Button value="analogAudio">
-                  {choosedEncoder && encoderDict[choosedEncoder].audioAnalogy
-                    ? encoderDict[choosedEncoder].audioAnalogy
-                    : "analog"}
-                </Radio.Button>
-                <Radio.Button value="hdmiAudio">
-                  {choosedEncoder && encoderDict[choosedEncoder].audioHdmi
-                    ? encoderDict[choosedEncoder].audioHdmi
-                    : "hdmi"}
-                </Radio.Button>
-              </Radio.Group>
-            </Row>
-            <Row style={{ marginTop: 24, marginLeft: 6 }}>
-              <Col span={8}>
-                <Row>
-                  <FormattedMessage {...Messages.Text_Common_Encoder} />
-                </Row>
-                <Row style={{ marginTop: 6 }}>
-                  {encoderDict[choosedEncoder]?.nickName}
-                </Row>
-              </Col>
-              <Col span={8}>
-                <Row style={{ marginLeft: 10 }}>
-                  {chooseAudioType === "analogAudio" ? (
-                    <FormattedMessage {...Messages.Text_Audio_AnalogConnect} />
-                  ) : (
-                    <FormattedMessage {...Messages.Text_Audio_HdmiConnect} />
-                  )}
-                </Row>
-                <Row>{"<------------>"}</Row>
-              </Col>
-              <Col span={8}>
-                <Row>
-                  <FormattedMessage {...Messages.Text_Common_Decoder} />
-                </Row>
-                {choosedDecoderElements}
-              </Col>
-            </Row>
-          </div>
-          <div>
-            <Row>
-              <Col span={width > 1060 ? 19 : 16}>
-                <FormattedMessage {...Messages.Text_Audio_TerminalChoose} />
-              </Col>
-              <Col>
-                <Button size="small" onClick={handleClearConnection}>
-                  <FormattedMessage {...Messages.Text_Audio_ClearConnection} />
-                </Button>
-              </Col>
-            </Row>
-            <Row>
-              <div className="encoder-block" style={{ height: height * 0.26 }}>
-                {decoderElements}
-              </div>
-            </Row>
-            <Divider
-              style={{
-                marginTop: -12,
-                marginBottom: 10,
-              }}
-            />
-            <Row>
-              <Col offset={2}>
-                <Button onClick={handleCancel}>
-                  <FormattedMessage {...Messages.Text_Button_Cancel} />
-                </Button>
-              </Col>
-              <Col offset={14}>
-                <Button onClick={handleCreateConnection}>
-                  <FormattedMessage {...Messages.Text_Button_Save} />
-                </Button>
-              </Col>
-            </Row>
-          </div>
+          />
+          <Row>
+            <Col offset={2}>
+              <Button onClick={handleCancel}>
+                <FormattedMessage {...Messages.Text_Button_Cancel} />
+              </Button>
+            </Col>
+            <Col offset={14}>
+              <Button onClick={handleCreateConnection}>
+                <FormattedMessage {...Messages.Text_Button_Save} />
+              </Button>
+            </Col>
+          </Row>
         </div>
       </div>
     </div>
   );
 };
 
-export default Audio;
+export default SituationAudio;

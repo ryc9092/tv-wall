@@ -1,16 +1,24 @@
 import { useState } from "react";
 import { Button, Modal } from "antd";
+import SituationAudio from "../../pages/SituationAudio";
 import "./addSituationContent.scss";
 
-const PresetAudioModal = ({ id, openParentModal }) => {
+const PresetAudioModal = ({
+  situationId,
+  openParentModal,
+  setReloadPresetDetails,
+  detailsNum,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [reload, setReload] = useState(null);
 
   return (
     <div>
       <Button
-        id={id}
+        situationId={situationId}
         className="situation-option-button"
         onClick={() => {
+          setReload(Math.random());
           openParentModal(false);
           setIsModalOpen(true);
         }}
@@ -24,9 +32,18 @@ const PresetAudioModal = ({ id, openParentModal }) => {
         footer={null}
         style={{ marginTop: -90 }}
         onCancel={() => {
+          setReload(Math.random());
           setIsModalOpen(false);
         }}
-      ></Modal>
+      >
+        <SituationAudio
+          situationId={situationId}
+          openParentModal={setIsModalOpen}
+          setReloadPresetDetails={setReloadPresetDetails}
+          detailsNum={detailsNum}
+          reload={reload}
+        />
+      </Modal>
     </div>
   );
 };
