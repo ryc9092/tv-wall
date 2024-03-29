@@ -489,6 +489,31 @@ export const setSituationDetailsOrder = async (store, orderedDetails) => {
   });
 };
 
+export const presetDeviceLink = async ({
+  store,
+  presetDetailId,
+  linkType,
+  encoder,
+  remark,
+  decoders,
+  presetPostDetail,
+}) => {
+  const apiPath = `/devicelinks/preset`;
+  const form = JSON.stringify({
+    id: presetDetailId,
+    linkType: linkType,
+    encoder: encoder,
+    remark: remark,
+    deviceLinkDetails: decoders,
+    presetPostDetail: presetPostDetail,
+  });
+  return await apiPOST({
+    apiPath,
+    form,
+    store,
+  });
+};
+
 export const presetWall = async ({
   store,
   activeId,

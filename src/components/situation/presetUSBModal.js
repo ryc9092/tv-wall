@@ -1,16 +1,24 @@
 import { useState } from "react";
 import { Button, Modal } from "antd";
+import SituationUSB from "../../pages/SituationUSB";
 import "./addSituationContent.scss";
 
-const PresetUSBModal = ({ id, openParentModal }) => {
+const PresetUSBModal = ({
+  situationId,
+  openParentModal,
+  setReloadPresetDetails,
+  detailsNum,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [reload, setReload] = useState(null);
 
   return (
     <div>
       <Button
-        id={id}
+        situationId={situationId}
         className="situation-option-button"
         onClick={() => {
+          setReload(Math.random());
           openParentModal(false);
           setIsModalOpen(true);
         }}
@@ -22,11 +30,20 @@ const PresetUSBModal = ({ id, openParentModal }) => {
         width={1200}
         open={isModalOpen}
         footer={null}
-        style={{ marginTop: -90 }}
+        style={{ marginTop: -95 }}
         onCancel={() => {
+          setReload(Math.random());
           setIsModalOpen(false);
         }}
-      ></Modal>
+      >
+        <SituationUSB
+          situationId={situationId}
+          openParentModal={setIsModalOpen}
+          setReloadPresetDetails={setReloadPresetDetails}
+          detailsNum={detailsNum}
+          reload={reload}
+        />
+      </Modal>
     </div>
   );
 };
