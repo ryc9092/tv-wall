@@ -84,54 +84,7 @@ const TVWall = () => {
     })();
   }, [store]);
 
-  // Show wall active status when selected wall changed and there is no selected template
-  useEffect(() => {
-    (async () => {
-      let activedWall;
-      if (selectedWall.wallId) {
-        activedWall = await getActivedWall({
-          store: store,
-          activeId: selectedWall.wallId,
-        });
-        if (activedWall?.templateId !== selectedTemplate?.value) {
-          activedWall = null;
-          setIsActivedWall(false);
-          setBlocks([]);
-        }
-      }
-      if (
-        Object.keys(selectedWall).length !== 0 &&
-        encoders.length !== 0 &&
-        activedWall && // has actived Wall
-        templateOptions.length !== 0 && // has template
-        (!selectedTemplate || // no selected template
-          selectedTemplate?.templateId === activedWall?.templateId) // or selected template is actived wall template
-      ) {
-        // Set selected template
-        templateOptions.forEach((templateOption) => {
-          if (activedWall.templateId === templateOption.templateId) {
-            setSelectedTemplate(templateOption);
-          }
-        });
-        // Set map of block and encoder => blockNum: {mac: xxx, previewUrl: xxx}
-        let tempMap = {};
-        activedWall.blocks.forEach((block) => {
-          encoders.forEach((encoder) => {
-            if (block.encoder === encoder.mac) {
-              tempMap[block.block] = {
-                mac: encoder.mac,
-                previewUrl: encoder.previewUrl,
-              };
-            }
-          });
-        });
-        setIsActivedWall(true);
-        setBlockEncoderMapping(tempMap);
-      }
-    })();
-  }, [selectedWall, templateOptions]);
-
-  // Set "template radios" when dimension is changed
+  // Set "template radios" when selected wall is changed
   useEffect(() => {
     (async () => {
       let tempTemplateOptions = [];
@@ -145,25 +98,72 @@ const TVWall = () => {
             tempTemplateOptions.push({
               value: template.templateName,
               label: template.templateName,
+              id: template.templateId,
               ...template,
             });
           }
         });
-        let hasDefaultTemplate = false;
-        tempTemplateOptions.forEach((template) => {
-          if (template.isDefault === 1) {
-            hasDefaultTemplate = true;
-            setSelectedTemplate(template);
-          }
+        const activedWall = await getActivedWall({
+          store: store,
+          activeId: selectedWall.wallId,
         });
-        if (!hasDefaultTemplate) {
-          setSelectedTemplate(null);
-          setBlocks([]);
+        // has actived wall
+        if (activedWall) {
+          tempTemplateOptions.forEach((option) => {
+            if (option.templateId === activedWall.templateId) {
+              setSelectedTemplate(option);
+            }
+          });
+        } else {
+          // no actived wall
+          let hasDefaultTemplate = false;
+          tempTemplateOptions.forEach((template) => {
+            if (template.isDefault === 1) {
+              hasDefaultTemplate = true;
+              setSelectedTemplate(template);
+            }
+          });
+          if (!hasDefaultTemplate) {
+            setSelectedTemplate(null);
+            setBlocks([]);
+          }
         }
         setTemplateOptions(tempTemplateOptions);
       }
     })();
-  }, [wallDimension, selectedWall]);
+  }, [selectedWall]);
+
+  // Show wall active status when selected wall changed and there is no selected template
+  useEffect(() => {
+    (async () => {
+      if (selectedWall.wallId) {
+        const activedWall = await getActivedWall({
+          store: store,
+          activeId: selectedWall.wallId,
+        });
+        if (activedWall && activedWall.templateId === selectedTemplate?.value) {
+          // has actived wall, and select template is the same
+          let tempMap = {};
+          activedWall.blocks.forEach((block) => {
+            encoders.forEach((encoder) => {
+              if (block.encoder === encoder.mac) {
+                tempMap[block.block] = {
+                  mac: encoder.mac,
+                  previewUrl: encoder.previewUrl,
+                };
+              }
+            });
+          });
+          setIsActivedWall(true);
+          setBlockEncoderMapping(tempMap);
+        } else {
+          // has actived wall, but select the other template OR doesn't has actived wall
+          setIsActivedWall(false);
+          setBlocks([]);
+        }
+      }
+    })();
+  }, [selectedTemplate]);
 
   // Set "normal/abnormal encoder list" when search filter is changed
   useEffect(() => {
@@ -238,15 +238,11 @@ const TVWall = () => {
   };
 
   const changeTemplateSelected = (template) => {
-    let tempTemplateOptions = templateOptions.slice();
     templateOptions.forEach((option, idx) => {
       if (option.templateId === template.value) {
-        tempTemplateOptions[idx].isDefault = true;
-        template.templateId = template.value;
-        setSelectedTemplate(template);
-      } else tempTemplateOptions[idx].isDefault = false;
+        setSelectedTemplate(option);
+      }
     });
-    setTemplateOptions(tempTemplateOptions);
   };
 
   const changeEncoderType = ({ target: { value } }) => {
@@ -411,7 +407,7 @@ const TVWall = () => {
                 onChange={(e) => {
                   changeTemplateSelected(e.target);
                 }}
-                value={selectedTemplate?.templateId}
+                value={selectedTemplate?.id}
                 style={{ margin: "10px 0px 0px 0px" }}
                 size={isSmallElement ? "small" : "middle"}
               >
@@ -420,6 +416,7 @@ const TVWall = () => {
                     <Radio
                       key={template?.templateName}
                       value={template.templateId}
+                      id={template.templateId}
                       style={{ marginTop: 5 }}
                       col={template?.col}
                       row={template?.row}
