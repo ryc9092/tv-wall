@@ -86,6 +86,10 @@ const SituationContentModal = ({ id, name, desc }) => {
       dataIndex: "set_type",
     },
     {
+      title: "description",
+      dataIndex: "remark",
+    },
+    {
       title: "operation",
       dataIndex: "id",
       render: (id) => (

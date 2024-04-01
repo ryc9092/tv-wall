@@ -5,6 +5,8 @@ import PresetWallModal from "./presetWallModal";
 import PresetSingleScreenModal from "./presetSingleScreenModal";
 import PresetAudioModal from "./presetAudioModal";
 import PresetUSBModal from "./presetUSBModal";
+import { FormattedMessage, useIntl } from "react-intl";
+import Messages from "../../messages";
 import "./addSituationContent.scss";
 
 const AddSituationContentModal = ({
@@ -12,6 +14,7 @@ const AddSituationContentModal = ({
   detailsNum,
   setReloadPresetDetails,
 }) => {
+  const intl = useIntl();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const itemList = [
@@ -65,7 +68,7 @@ const AddSituationContentModal = ({
         onClick={() => setIsModalOpen(true)}
       >
         <PlusOutlined />
-        新增情境項目
+        <FormattedMessage {...Messages.Text_Situation_AddSituationItem} />
       </Button>
       <Modal
         title={"項目選擇"}

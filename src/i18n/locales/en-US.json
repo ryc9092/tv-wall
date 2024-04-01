@@ -88,6 +88,7 @@
   "Text-Situation-SituationName": "situation name",
   "Text-Situation-InputSituationName": "please input situation name",
   "Text-Situation-SituationDescription": "situation description",
+  "Text-Situation-AddSituationItem": "add situation item",
 
   "Text-SystemSetting-Title": "System setting",
 
@@ -117,5 +118,10 @@
   "Text-WallSetting-CreateWall": "Create wall",
   "Text-WallSetting-ResetWall": "reset wall",
   "Text-WallSetting-CreateSuccess": "Create wall successfully.",
-  "Text-WallSetting-CreateFail": "Create wall failed."
+  "Text-WallSetting-CreateFail": "Create wall failed.",
+
+  "Text-DeviceSetting-AdvanceSetting": "Advanced device setting",
+  "Text-DeviceSetting-Type": "type",
+  "Text-DeviceSetting-Alias": "alias",
+  "Text-DeviceSetting-Edit": "edit"
 }

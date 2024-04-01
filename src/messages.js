@@ -335,6 +335,10 @@ export default defineMessages({
     id: "Text-Situation-SituationDescription",
     defaultMessage: "情境描述",
   },
+  Text_Situation_AddSituationItem: {
+    id: "Text-Situation-AddSituationItem",
+    defaultMessage: "新增情境項目",
+  },
 
   // System setting
   Text_SystemSetting_Title: {
@@ -448,5 +452,23 @@ export default defineMessages({
   Text_WallSetting_CreateFail: {
     id: "Text-WallSetting-CreateFail",
     defaultMessage: "電視牆建立失敗",
+  },
+
+  // System setting - device setting
+  Text_DeviceSetting_AdvanceSetting: {
+    id: "Text-DeviceSetting-AdvanceSetting",
+    defaultMessage: "設備進階設定",
+  },
+  Text_DeviceSetting_Type: {
+    id: "Text-DeviceSetting-Type",
+    defaultMessage: "類型",
+  },
+  Text_DeviceSetting_Alias: {
+    id: "Text-DeviceSetting-Alias",
+    defaultMessage: "別名",
+  },
+  Text_DeviceSetting_Edit: {
+    id: "Text-DeviceSetting-Edit",
+    defaultMessage: "編輯",
   },
 });

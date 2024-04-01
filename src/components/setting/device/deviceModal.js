@@ -12,7 +12,25 @@ import Messages from "../../../messages";
 import "../../../App.scss";
 import "./deviceModal.scss";
 
-const EditableCell = ({ editing, dataIndex, setCol, children }) => {
+const EditableCell = ({
+  editing,
+  dataIndex,
+  setCol,
+  children,
+  record,
+  dataIndexValueMap,
+  isEdited,
+  setIsEdited,
+  setEditedNickName,
+  setEditedAudioAnalog,
+  setEditedAudioHdmi,
+}) => {
+  if (record && editing === true && isEdited === false) {
+    setIsEdited(true);
+    setEditedNickName(record.nickName);
+    setEditedAudioAnalog(record.audioAnalogy);
+    setEditedAudioHdmi(record.audioHdmi);
+  }
   return (
     <td>
       {editing ? (
@@ -22,7 +40,12 @@ const EditableCell = ({ editing, dataIndex, setCol, children }) => {
             margin: 0,
           }}
         >
-          <Input onChange={(e) => setCol(e.target.value)} />
+          <Input
+            value={dataIndexValueMap[dataIndex]}
+            onChange={(e) => {
+              setCol(e.target.value);
+            }}
+          />
         </div>
       ) : (
         children
@@ -36,6 +59,7 @@ const SettingDeviceModal = () => {
   const [store] = useContext(StoreContext);
   const [devices, setDevices] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEdited, setIsEdited] = useState(false);
   const [editingKey, setEditingKey] = useState("");
   const [editedNickName, setEditedNickName] = useState("");
   const [editedAudioAnalog, setEditedAudioAnalog] = useState("");
@@ -76,11 +100,12 @@ const SettingDeviceModal = () => {
       //   intl.formatMessage(Messages.Text_WallSetting_DeleteFail)
       // );
     }
+    setIsEdited(false);
     setEditingKey("");
     setEditedNickName("");
     setEditedAudioAnalog("");
     setEditedAudioHdmi("");
-    setEditedIP("");
+    // setEditedIP("");
   };
 
   useEffect(() => {
@@ -104,23 +129,29 @@ const SettingDeviceModal = () => {
 
   const columns = [
     {
-      title: "類型",
+      title: intl.formatMessage(Messages.Text_DeviceSetting_Type),
       dataIndex: "type",
       key: "type",
       filters: [
-        { text: "編碼器", value: "encoder" },
-        { text: "解碼器", value: "decoder" },
+        {
+          text: intl.formatMessage(Messages.Text_DeviceStatus_Encoder),
+          value: "encoder",
+        },
+        {
+          text: intl.formatMessage(Messages.Text_DeviceStatus_Decoder),
+          value: "decoder",
+        },
       ],
       onFilter: (value, data) => data.type.indexOf(value) === 0,
     },
     {
-      title: "名稱",
+      title: intl.formatMessage(Messages.Text_Common_Name),
       dataIndex: "name",
       key: "name",
       render: (text) => <span>{text}</span>,
     },
     {
-      title: "別名",
+      title: intl.formatMessage(Messages.Text_DeviceSetting_Alias),
       dataIndex: "nickName",
       key: "nickName",
       editable: true,
@@ -140,38 +171,15 @@ const SettingDeviceModal = () => {
       editable: true,
       render: (text) => <span>{text}</span>,
     },
+    // {
+    //   title: "ip",
+    //   dataIndex: "additionalDeviceIp",
+    //   key: "additionalDeviceIp",
+    //   editable: true,
+    //   render: (text) => <span>{text}</span>,
+    // },
     {
-      title: "ip",
-      dataIndex: "additionalDeviceIp",
-      key: "additionalDeviceIp",
-      editable: true,
-      render: (text) => <span>{text}</span>,
-    },
-    {
-      title: "狀態",
-      key: "state",
-      dataIndex: "state",
-      sorter: (a, b) => a.state.length - b.state.length,
-      render: (_, { state }) => (
-        <>
-          {state === "Up" ? (
-            <Tag color={"green"} key={state}>
-              {state}
-            </Tag>
-          ) : state === "Down" ? (
-            <Tag color={"yellow"} key={state}>
-              {state}
-            </Tag>
-          ) : (
-            <Tag color={"red"} key={state}>
-              {state}
-            </Tag>
-          )}
-        </>
-      ),
-    },
-    {
-      title: "編輯",
+      title: intl.formatMessage(Messages.Text_DeviceSetting_Edit),
       key: "edit",
       dataIndex: "id",
       render: (_, record) => {
@@ -181,12 +189,14 @@ const SettingDeviceModal = () => {
             <Typography.Link
               onClick={() => save(record.key)}
               style={{
-                marginRight: 8,
+                marginRight: 12,
               }}
             >
-              Save
+              <FormattedMessage {...Messages.Text_Button_Save} />
             </Typography.Link>
-            <Typography.Link onClick={cancel}>Cancel</Typography.Link>
+            <Typography.Link onClick={cancel}>
+              <FormattedMessage {...Messages.Text_Button_Cancel} />
+            </Typography.Link>
           </span>
         ) : (
           <div key={record} id={record} onClick={() => edit(record)}>
@@ -197,6 +207,11 @@ const SettingDeviceModal = () => {
     },
   ];
   const mergedColumns = columns.map((col) => {
+    const dataIndexValueMap = {
+      nickName: editedNickName,
+      audioAnalogy: editedAudioAnalog,
+      audioHdmi: editedAudioHdmi,
+    };
     if (!col.editable) {
       return col;
     } else if (col.key === "nickName") {
@@ -204,9 +219,15 @@ const SettingDeviceModal = () => {
         ...col,
         onCell: (record) => ({
           record,
-          title: col.title,
+          dataIndex: col.dataIndex,
           editing: isEditing(record),
           setCol: setEditedNickName,
+          dataIndexValueMap,
+          isEdited,
+          setIsEdited,
+          setEditedNickName,
+          setEditedAudioAnalog,
+          setEditedAudioHdmi,
         }),
       };
     } else if (col.key === "audioAnalogy") {
@@ -214,32 +235,46 @@ const SettingDeviceModal = () => {
         ...col,
         onCell: (record) => ({
           record,
-          title: col.title,
+          dataIndex: col.dataIndex,
           editing: isEditing(record),
           setCol: setEditedAudioAnalog,
-        }),
-      };
-    } else if (col.key === "audioHdmi") {
-      return {
-        ...col,
-        onCell: (record) => ({
-          record,
-          title: col.title,
-          editing: isEditing(record),
-          setCol: setEditedAudioHdmi,
+          dataIndexValueMap,
+          isEdited,
+          setIsEdited,
+          setEditedNickName,
+          setEditedAudioAnalog,
+          setEditedAudioHdmi,
         }),
       };
     } else {
+      // if (col.key === "audioHdmi") {
       return {
         ...col,
         onCell: (record) => ({
           record,
-          title: col.title,
+          dataIndex: col.dataIndex,
           editing: isEditing(record),
-          setCol: setEditedIP,
+          setCol: setEditedAudioHdmi,
+          dataIndexValueMap,
+          isEdited,
+          setIsEdited,
+          setEditedNickName,
+          setEditedAudioAnalog,
+          setEditedAudioHdmi,
         }),
       };
     }
+    // else {
+    //   return {
+    //     ...col,
+    //     onCell: (record) => ({
+    //       record,
+    //       dataIndex: col.dataIndex,
+    //       editing: isEditing(record),
+    //       setCol: setEditedIP,
+    //     }),
+    //   };
+    // }
   });
 
   return (
@@ -249,15 +284,16 @@ const SettingDeviceModal = () => {
         className="setting-option-button"
       >
         <Typography.Text className="setting-option-text">
-          設備進階設定
+          <FormattedMessage {...Messages.Text_DeviceSetting_AdvanceSetting} />
         </Typography.Text>
         <></>
         <EditOutlined className="setting-option-icon" />
       </Button>
       <Modal
-        title={`設備進階設定`}
+        title={intl.formatMessage(Messages.Text_DeviceSetting_AdvanceSetting)}
         className="modal-title"
-        width={950}
+        style={{ marginTop: -80 }}
+        width={1160}
         open={isModalOpen}
         footer={null}
         onCancel={() => {

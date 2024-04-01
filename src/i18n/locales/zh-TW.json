@@ -88,6 +88,7 @@
   "Text-Situation-SituationName": "情境名稱",
   "Text-Situation-InputSituationName": "請輸入情境名稱",
   "Text-Situation-SituationDescription": "情境描述",
+  "Text-Situation-AddSituationItem": "新增情境項目",
 
   "Text-SystemSetting-Title": "系統設定",
 
@@ -117,5 +118,10 @@
   "Text-WallSetting-CreateWall": "建立電視牆",
   "Text-WallSetting-ResetWall": "重置電視牆",
   "Text-WallSetting-CreateSuccess": "電視牆建立成功",
-  "Text-WallSetting-CreateFail": "電視牆建立失敗"
+  "Text-WallSetting-CreateFail": "電視牆建立失敗",
+
+  "Text-DeviceSetting-AdvanceSetting": "設備進階設定",
+  "Text-DeviceSetting-Type": "類型",
+  "Text-DeviceSetting-Alias": "別名",
+  "Text-DeviceSetting-Edit": "編輯"
 }
