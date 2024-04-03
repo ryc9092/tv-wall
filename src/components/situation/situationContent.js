@@ -17,6 +17,8 @@ import {
   setSituationDetailsOrder,
   removeSituationDetail,
 } from "../../api/API";
+import { FormattedMessage, useIntl } from "react-intl";
+import Messages from "../../messages";
 import "./createSituation.scss";
 
 const Row = ({ children, ...props }) => {
@@ -71,6 +73,7 @@ const Row = ({ children, ...props }) => {
 };
 
 const SituationContentModal = ({ id, name, desc }) => {
+  const intl = useIntl();
   const [store] = useContext(StoreContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dataSource, setDataSource] = useState([]);
@@ -82,20 +85,20 @@ const SituationContentModal = ({ id, name, desc }) => {
       key: "sort",
     },
     {
-      title: "type",
+      title: intl.formatMessage(Messages.Text_Situation_Type),
       dataIndex: "set_type",
     },
     {
-      title: "description",
+      title: intl.formatMessage(Messages.Text_Situation_Description),
       dataIndex: "remark",
     },
     {
-      title: "operation",
+      title: intl.formatMessage(Messages.Text_Situation_Operation),
       dataIndex: "id",
       render: (id) => (
         <div key={`${id}-action`}>
           <Button key={`${id}-delete`} id={id} onClick={removeDetail}>
-            delete
+            <FormattedMessage {...Messages.Text_Button_Delete} />
           </Button>
         </div>
       ),

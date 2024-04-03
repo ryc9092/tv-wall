@@ -71,7 +71,7 @@ const AddSituationContentModal = ({
         <FormattedMessage {...Messages.Text_Situation_AddSituationItem} />
       </Button>
       <Modal
-        title={"項目選擇"}
+        title={intl.formatMessage(Messages.Text_Situation_ChooseItem)}
         className="modal-title"
         width={650}
         open={isModalOpen}

@@ -26,10 +26,13 @@ import "./TVWall.scss";
 
 const SituationTVWall = ({
   situationId,
+  description,
   openParentModal,
   setReloadPresetDetails,
   detailsNum,
+  isModalOpen,
   reload,
+  setDescription,
 }) => {
   const intl = useIntl();
   const { width } = useWindowDimensions();
@@ -53,14 +56,19 @@ const SituationTVWall = ({
   const [blocks, setBlocks] = useState([]);
   const [blockEncoderMapping, setBlockEncoderMapping] = useState({});
 
-  // clear selected items
-  useEffect(() => {
+  const clear = () => {
+    setDescription(null);
     setSelectedWall({});
     setTemplateOptions([]);
     setSelectedTemplate(null);
     setSelectedEncoder({ mac: "", previewUrl: "" });
     setBlocks([]);
-  }, [reload]);
+  };
+
+  // clear selected items
+  useEffect(() => {
+    clear();
+  }, [reload, isModalOpen]);
 
   // The elements size would be changed according to width
   useEffect(() => {
@@ -236,14 +244,19 @@ const SituationTVWall = ({
         };
       });
       const result = await presetWall({
-        activeId: `preset.${selectedWall.wallId}`,
+        activeId: `preset.${situationId}.${selectedWall.wallId}`,
         wallId: selectedWall.wallId,
         templateId: selectedTemplate.templateId,
         blocks: outputBlocks,
-        presetPostDetail: { preSetId: situationId, orderNum: detailsNum + 1 },
+        presetPostDetail: {
+          preSetId: situationId,
+          orderNum: detailsNum + 1,
+          remark: description,
+        },
         store: store,
       });
       if (!result) throw new Error("call api failed");
+      clear();
       openParentModal(false);
       setReloadPresetDetails(Math.random());
       showSuccessNotificationByMsg(

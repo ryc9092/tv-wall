@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Button, Modal } from "antd";
+import { FormattedMessage } from "react-intl";
+import Messages from "../../messages";
 import "./addSituationContent.scss";
 
 const PresetSingleScreenModal = ({ id, openParentModal }) => {
@@ -15,7 +17,7 @@ const PresetSingleScreenModal = ({ id, openParentModal }) => {
           setIsModalOpen(true);
         }}
       >
-        單畫面影音管理
+        <FormattedMessage {...Messages.Text_Situation_SingleScreenManagement} />
       </Button>
       <Modal
         title="單畫面影音管理"

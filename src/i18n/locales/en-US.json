@@ -5,6 +5,7 @@
   "Text-Common-Dimension": "dimension",
   "Text-Common-Encoder": "encoder",
   "Text-Common-Decoder": "decoder",
+  "Text-Common-Description": "description",
   "Text-Button-Save": "save",
   "Text-Button-View": "view",
   "Text-Button-Delete": "delete",
@@ -88,7 +89,13 @@
   "Text-Situation-SituationName": "situation name",
   "Text-Situation-InputSituationName": "please input situation name",
   "Text-Situation-SituationDescription": "situation description",
+  "Text-Situation-Type": "type",
+  "Text-Situation-Description": "description",
+  "Text-Situation-Operation": "operation",
   "Text-Situation-AddSituationItem": "add situation item",
+  "Text-Situation-ChooseItem": "Choose item",
+  "Text-Situation-TVWallManagement": "tv wall MGMT",
+  "Text-Situation-SingleScreenManagement": "single screen MGMT",
 
   "Text-SystemSetting-Title": "System setting",
 

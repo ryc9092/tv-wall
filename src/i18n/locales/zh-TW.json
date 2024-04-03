@@ -5,6 +5,7 @@
   "Text-Common-Dimension": "維度",
   "Text-Common-Encoder": "編碼器",
   "Text-Common-Decoder": "解碼器",
+  "Text-Common-Description": "描述",
   "Text-Button-Save": "儲存",
   "Text-Button-View": "檢視",
   "Text-Button-Delete": "刪除",
@@ -88,7 +89,13 @@
   "Text-Situation-SituationName": "情境名稱",
   "Text-Situation-InputSituationName": "請輸入情境名稱",
   "Text-Situation-SituationDescription": "情境描述",
+  "Text-Situation-Type": "類型",
+  "Text-Situation-Description": "描述",
+  "Text-Situation-Operation": "操作",
   "Text-Situation-AddSituationItem": "新增情境項目",
+  "Text-Situation-ChooseItem": "項目選擇",
+  "Text-Situation-TVWallManagement": "電視牆影音管理",
+  "Text-Situation-SingleScreenManagement": "單畫面影音管理",
 
   "Text-SystemSetting-Title": "系統設定",
 

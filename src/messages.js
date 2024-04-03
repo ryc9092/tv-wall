@@ -17,6 +17,10 @@ export default defineMessages({
     id: "Text-Common-Decoder",
     defaultMessage: "解碼器",
   },
+  Text_Common_Description: {
+    id: "Text-Common-Description",
+    defaultMessage: "描述",
+  },
   Text_Button_Save: {
     id: "Text-Button-Save",
     defaultMessage: "儲存",
@@ -335,9 +339,33 @@ export default defineMessages({
     id: "Text-Situation-SituationDescription",
     defaultMessage: "情境描述",
   },
+  Text_Situation_Type: {
+    id: "Text-Situation-Type",
+    defaultMessage: "類型",
+  },
+  Text_Situation_Description: {
+    id: "Text-Situation-Description",
+    defaultMessage: "描述",
+  },
+  Text_Situation_Operation: {
+    id: "Text-Situation-Operation",
+    defaultMessage: "操作",
+  },
   Text_Situation_AddSituationItem: {
     id: "Text-Situation-AddSituationItem",
     defaultMessage: "新增情境項目",
+  },
+  Text_Situation_ChooseItem: {
+    id: "Text-Situation-ChooseItem",
+    defaultMessage: "項目選擇",
+  },
+  Text_Situation_TVWallManagement: {
+    id: "Text-Situation-TVWallManagement",
+    defaultMessage: "電視牆影音管理",
+  },
+  Text_Situation_SingleScreenManagement: {
+    id: "Text-Situation-SingleScreenManagement",
+    defaultMessage: "單畫面影音管理",
   },
 
   // System setting
