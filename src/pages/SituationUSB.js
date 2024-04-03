@@ -20,6 +20,8 @@ const SituationUSB = ({
   setReloadPresetDetails,
   detailsNum,
   reload,
+  description,
+  setDescription,
 }) => {
   const intl = useIntl();
   const { width, height } = useWindowDimensions();
@@ -49,10 +51,15 @@ const SituationUSB = ({
     setState(tempDeviceDict);
   };
 
-  // clear selected items
-  useEffect(() => {
+  const clear = () => {
+    setDescription(null);
     setChoosedEncoder([]);
     setChoosedDecoderList([]);
+  };
+
+  // clear selected items
+  useEffect(() => {
+    clear();
   }, [reload]);
 
   // set devices dict state
@@ -200,14 +207,19 @@ const SituationUSB = ({
     if (choosedDecoderList.length > 0 && choosedEncoder) {
       const result = await presetDeviceLink({
         store: store,
-        presetDetailId: `preset.usb.` + choosedEncoder,
+        presetDetailId: `preset.usb.${situationId}.${choosedEncoder}`,
         linkType: "usb",
         encoder: choosedEncoder,
         decoders: choosedDecoderList,
-        remark: "",
-        presetPostDetail: { preSetId: situationId, orderNum: detailsNum + 1 },
+        remark: description,
+        presetPostDetail: {
+          preSetId: situationId,
+          orderNum: detailsNum + 1,
+          remark: description,
+        },
       });
       if (result) {
+        clear();
         openParentModal(false);
         setReloadPresetDetails(Math.random());
         showSuccessNotificationByMsg(

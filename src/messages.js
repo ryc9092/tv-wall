@@ -367,6 +367,10 @@ export default defineMessages({
     id: "Text-Situation-SingleScreenManagement",
     defaultMessage: "單畫面影音管理",
   },
+  Text_Situation_USBManagement: {
+    id: "Text-Situation-USBManagement",
+    defaultMessage: "USB管理",
+  },
 
   // System setting
   Text_SystemSetting_Title: {
