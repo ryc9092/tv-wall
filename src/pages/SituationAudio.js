@@ -20,6 +20,8 @@ const SituationAudio = ({
   setReloadPresetDetails,
   detailsNum,
   reload,
+  description,
+  setDescription,
 }) => {
   const intl = useIntl();
   const { width, height } = useWindowDimensions();
@@ -50,10 +52,15 @@ const SituationAudio = ({
     setState(tempDeviceDict);
   };
 
-  // clear selected items
-  useEffect(() => {
+  const clear = () => {
+    setDescription(null);
     setChoosedEncoder([]);
     setChoosedDecoderList([]);
+  };
+
+  // clear selected items
+  useEffect(() => {
+    clear();
   }, [reload]);
 
   // set devices dict state
@@ -201,16 +208,21 @@ const SituationAudio = ({
     if (choosedDecoderList.length > 0 && choosedEncoder) {
       const result = await presetDeviceLink({
         store: store,
-        presetDetailId: `preset.${chooseAudioType}.` + choosedEncoder,
+        presetDetailId: `preset.${chooseAudioType}.${situationId}.${choosedEncoder}`,
         linkType: chooseAudioType,
         encoder: choosedEncoder,
         decoders: choosedDecoderList,
         value1: chooseAudioType,
-        remark: "",
-        presetPostDetail: { preSetId: situationId, orderNum: detailsNum + 1 },
+        remark: description,
+        presetPostDetail: {
+          preSetId: situationId,
+          orderNum: detailsNum + 1,
+          remark: description,
+        },
       });
       console.log({ preSetId: situationId, orderNum: detailsNum + 1 });
       if (result) {
+        clear();
         openParentModal(false);
         setReloadPresetDetails(Math.random());
         showSuccessNotificationByMsg(

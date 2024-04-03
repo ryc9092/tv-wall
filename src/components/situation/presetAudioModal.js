@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Button, Modal } from "antd";
+import { Button, Modal, Input } from "antd";
 import SituationAudio from "../../pages/SituationAudio";
+import { FormattedMessage } from "react-intl";
+import Messages from "../../messages";
 import "./addSituationContent.scss";
 
 const PresetAudioModal = ({
@@ -10,6 +12,7 @@ const PresetAudioModal = ({
   detailsNum,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [description, setDescription] = useState(null);
   const [reload, setReload] = useState(null);
 
   return (
@@ -23,10 +26,23 @@ const PresetAudioModal = ({
           setIsModalOpen(true);
         }}
       >
-        音頻管理
+        <FormattedMessage {...Messages.Text_Situation_AudioManagement} />
       </Button>
       <Modal
-        title="音頻管理"
+        title={
+          <div>
+            <span style={{ marginRight: 12 }}>
+              <FormattedMessage {...Messages.Text_Common_Description} />:
+            </span>
+            <Input
+              style={{ width: 200 }}
+              value={description}
+              onChange={(e) => {
+                setDescription(e.currentTarget.value);
+              }}
+            />
+          </div>
+        }
         width={1200}
         open={isModalOpen}
         footer={null}
@@ -38,10 +54,13 @@ const PresetAudioModal = ({
       >
         <SituationAudio
           situationId={situationId}
+          description={description}
           openParentModal={setIsModalOpen}
           setReloadPresetDetails={setReloadPresetDetails}
           detailsNum={detailsNum}
+          isModalOpen={isModalOpen}
           reload={reload}
+          setDescription={setDescription}
         />
       </Modal>
     </div>
