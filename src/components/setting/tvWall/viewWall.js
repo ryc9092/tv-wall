@@ -144,7 +144,7 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
                     </Typography.Text>
                     <Select
                       size="small"
-                      value={screen.decoder}
+                      value={screen.nickName}
                       style={{ width: "135px", margin: "4px 4px 4px 8px" }}
                       disabled
                     />

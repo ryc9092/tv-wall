@@ -38,7 +38,10 @@ const CreateWall = ({ setReload }) => {
       const decoders = await getDecoders(store);
       if (decoders) tempDecoders = decoders;
       tempDecoders.forEach((decoder) => {
-        tempDecoderOptions.push({ value: decoder.mac, label: decoder.name });
+        tempDecoderOptions.push({
+          value: decoder.mac,
+          label: decoder.nickName,
+        });
       });
       setDecoderOptions(tempDecoderOptions);
     })();
