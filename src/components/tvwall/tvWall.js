@@ -204,6 +204,17 @@ const TvWall = ({
                 >
                   <FormattedMessage {...Messages.Text_TVWall_ClearBlock} />
                 </Button>
+                <span
+                  style={{
+                    position: "absolute",
+                    zIndex: 1,
+                    left: ((width * 0.34) / tvWallSize.col) * block.marginLeft,
+                    margin: "25px 0px 0px 2px",
+                    opacity: "0.8",
+                  }}
+                >
+                  {block.encoder?.nickName}
+                </span>
               </>
             ) : (
               <>
@@ -231,7 +242,11 @@ const TvWall = ({
     if (clearBlock.needClear === true && clearBlock.blockIdx != null) {
       // add video to block
       let tempBlocks = blocksWithPosition.slice();
-      tempBlocks[clearBlock.blockIdx].encoder = { mac: "", previewUrl: "" };
+      tempBlocks[clearBlock.blockIdx].encoder = {
+        mac: "",
+        previewUrl: "",
+        nickName: "",
+      };
       setBlocks(tempBlocks);
       setBlocksWithPosition(tempBlocks);
       setBlockEncoderMapping({
@@ -243,7 +258,7 @@ const TvWall = ({
       let tempScreens = tvWallScreens;
       tempScreens.forEach((screen, idx) => {
         if (screen.block === tempBlocks[clearBlock.blockIdx].block) {
-          tempScreens[idx].encoder = { mac: "", previewUrl: "" };
+          tempScreens[idx].encoder = { mac: "", previewUrl: "", nickName: "" };
         }
       });
       setTvWallScreens(tempScreens);

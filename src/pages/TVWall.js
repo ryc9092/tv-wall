@@ -50,6 +50,7 @@ const TVWall = () => {
   const [selectedEncoder, setSelectedEncoder] = useState({
     mac: "",
     previewUrl: "",
+    nickName: "",
   });
   const [blocks, setBlocks] = useState([]);
   const [isActivedWall, setIsActivedWall] = useState(false);
@@ -197,7 +198,7 @@ const TVWall = () => {
               onClick={handleChooseEncoder}
             >
               <span className="encoder-normal-dot" />
-              {encoder.nickName}
+              <span id={encoder.nickName}>{encoder.nickName}</span>
             </Button>
           </Row>
         );
@@ -221,7 +222,7 @@ const TVWall = () => {
                     : "encoder-abnormal-dot"
                 }
               />
-              {encoder.nickName}
+              <span id={encoder.nickName}>{encoder.nickName}</span>
             </Button>
           </Row>
         );
@@ -253,6 +254,7 @@ const TVWall = () => {
     setSelectedEncoder({
       mac: event.currentTarget.id,
       previewUrl: event.currentTarget.value,
+      nickName: event.currentTarget.children[1].id,
     });
   };
 
