@@ -142,7 +142,7 @@ const TVWall = () => {
           store: store,
           activeId: selectedWall.wallId,
         });
-        if (activedWall && activedWall.templateId === selectedTemplate?.value) {
+        if (activedWall && activedWall.templateId === selectedTemplate?.id) {
           // has actived wall, and select template is the same
           let tempMap = {};
           activedWall.blocks.forEach((block) => {
@@ -151,6 +151,7 @@ const TVWall = () => {
                 tempMap[block.block] = {
                   mac: encoder.mac,
                   previewUrl: encoder.previewUrl,
+                  nickName: encoder.nickName,
                 };
               }
             });
