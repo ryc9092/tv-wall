@@ -171,6 +171,22 @@ export default defineMessages({
     id: "Text-DeviceStatus-ProductDesc",
     defaultMessage: "產品描述",
   },
+  Text_DeviceStatus_Operate: {
+    id: "Text-DeviceStatus-Operate",
+    defaultMessage: "操作",
+  },
+  Text_DeviceStatus_Reboot: {
+    id: "Text-DeviceStatus-Reboot",
+    defaultMessage: "重啟",
+  },
+  Text_DeviceStatus_RebootSuccess: {
+    id: "Text-DeviceStatus-RebootSuccess",
+    defaultMessage: "重啟成功",
+  },
+  Text_DeviceStatus_RebootFail: {
+    id: "Text-DeviceStatus-RebootFail",
+    defaultMessage: "重啟失敗",
+  },
 
   // TV wall management
   Text_TVWall_TVWallManagement: {

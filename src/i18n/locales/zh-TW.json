@@ -45,6 +45,10 @@
   "Text-DeviceStatus-Model": "模型",
   "Text-DeviceStatus-ProductCode": "產品編號",
   "Text-DeviceStatus-ProductDesc": "產品描述",
+  "Text-DeviceStatus-Operate": "操作",
+  "Text-DeviceStatus-Reboot": "重啟",
+  "Text-DeviceStatus-RebootSuccess": "重啟成功",
+  "Text-DeviceStatus-RebootFail": "重啟失敗",
 
   "Text-TVWall-TVWallManagement": "電視牆影音管理",
   "Text-TVWall-ActivateWall": "啟用牆面",

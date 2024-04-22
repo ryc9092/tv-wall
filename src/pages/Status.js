@@ -4,6 +4,10 @@ import { Button, Modal, Table, Tag } from "antd";
 import { getEncoders, getDecoders } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
+import {
+  showWarningNotification,
+  showSuccessNotificationByMsg,
+} from "../utils/Utils";
 import "./Status.scss";
 
 const Status = () => {
@@ -40,6 +44,26 @@ const Status = () => {
 
   // Set interval to update devices
   window.retriveDevicesTimer = setInterval(retriveDevices, 10000);
+
+  const reboot = async (mac, nickName) => {
+    // TODO: integrate with api
+    console.log("reboot.... ", mac, nickName);
+    // const result = await rebootAPI(mac)
+    const result = true;
+    if (result) {
+      showSuccessNotificationByMsg(
+        `${nickName} ${intl.formatMessage(
+          Messages.Text_DeviceStatus_RebootSuccess
+        )}`
+      );
+    } else {
+      showWarningNotification(
+        `${nickName} ${intl.formatMessage(
+          Messages.Text_DeviceStatus_RebootFail
+        )}`
+      );
+    }
+  };
 
   const columns = [
     {
@@ -94,23 +118,33 @@ const Status = () => {
       ),
     },
     {
-      title: intl.formatMessage(Messages.Text_DeviceStatus_Detail),
+      title: intl.formatMessage(Messages.Text_DeviceStatus_Operate),
       dataIndex: ["name", "mac", "model", "productCode", "productDescription"],
-      key: "details",
+      key: "operate",
+      width: 200,
       render: (text, record) => (
-        <Button
-          onClick={() => {
-            openDetailsModal(
-              record.name,
-              record.mac,
-              record.model,
-              record.productCode,
-              record.productDescription
-            );
-          }}
-        >
-          <FormattedMessage {...Messages.Text_DeviceStatus_Content} />
-        </Button>
+        <div>
+          <Button
+            onClick={() => {
+              openDetailsModal(
+                record.name,
+                record.mac,
+                record.model,
+                record.productCode,
+                record.productDescription
+              );
+            }}
+            style={{ marginRight: 10 }}
+          >
+            <FormattedMessage {...Messages.Text_DeviceStatus_Detail} />
+          </Button>
+          <Button
+            key={`reboot.${record.mac}`}
+            onClick={() => reboot(record.mac, record.nickName)}
+          >
+            <FormattedMessage {...Messages.Text_DeviceStatus_Reboot} />
+          </Button>
+        </div>
       ),
     },
   ];
