@@ -108,6 +108,28 @@ const SettingDeviceModal = () => {
     // setEditedIP("");
   };
 
+  const reboot = async (record) => {
+    const index = devices.findIndex((item) => record.key === item.key);
+    const { ...device } = { ...devices[index] };
+    console.log(device.mac, " reboot...");
+    // TODO: integrate with api
+    // const result = await rebootAPI()
+    const result = true;
+    if (result) {
+      showSuccessNotificationByMsg(
+        `${device.nickName} ${intl.formatMessage(
+          Messages.Text_DeviceSetting_RebootSuccess
+        )}`
+      );
+    } else {
+      showWarningNotification(
+        `${device.nickName} ${intl.formatMessage(
+          Messages.Text_DeviceSetting_RebootFail
+        )}`
+      );
+    }
+  };
+
   useEffect(() => {
     (async () => {
       let tempDevices = [];
@@ -179,7 +201,8 @@ const SettingDeviceModal = () => {
     //   render: (text) => <span>{text}</span>,
     // },
     {
-      title: intl.formatMessage(Messages.Text_DeviceSetting_Edit),
+      title: intl.formatMessage(Messages.Text_DeviceSetting_Operate),
+      width: 180,
       key: "edit",
       dataIndex: "id",
       render: (_, record) => {
@@ -199,8 +222,17 @@ const SettingDeviceModal = () => {
             </Typography.Link>
           </span>
         ) : (
-          <div key={record} id={record} onClick={() => edit(record)}>
-            <EditOutlined className="device-edit" />
+          <div>
+            <Button
+              key={`edit.${record}`}
+              style={{ marginRight: 10 }}
+              onClick={() => edit(record)}
+            >
+              <FormattedMessage {...Messages.Text_DeviceSetting_Edit} />
+            </Button>
+            <Button key={`reboot.${record}`} onClick={() => reboot(record)}>
+              <FormattedMessage {...Messages.Text_DeviceSetting_Reboot} />
+            </Button>
           </div>
         );
       },

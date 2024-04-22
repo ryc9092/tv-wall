@@ -503,8 +503,24 @@ export default defineMessages({
     id: "Text-DeviceSetting-Alias",
     defaultMessage: "別名",
   },
+  Text_DeviceSetting_Operate: {
+    id: "Text-DeviceSetting-Operate",
+    defaultMessage: "操作",
+  },
   Text_DeviceSetting_Edit: {
     id: "Text-DeviceSetting-Edit",
     defaultMessage: "編輯",
+  },
+  Text_DeviceSetting_Reboot: {
+    id: "Text-DeviceSetting-Reboot",
+    defaultMessage: "重啟",
+  },
+  Text_DeviceSetting_RebootSuccess: {
+    id: "Text-DeviceSetting-RebootSuccess",
+    defaultMessage: "重啟成功",
+  },
+  Text_DeviceSetting_RebootFail: {
+    id: "Text-DeviceSetting-RebootFail",
+    defaultMessage: "重啟失敗",
   },
 });

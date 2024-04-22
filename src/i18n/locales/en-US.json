@@ -132,5 +132,9 @@
   "Text-DeviceSetting-AdvanceSetting": "Advanced device setting",
   "Text-DeviceSetting-Type": "type",
   "Text-DeviceSetting-Alias": "alias",
-  "Text-DeviceSetting-Edit": "edit"
+  "Text-DeviceSetting-Operate": "operate",
+  "Text-DeviceSetting-Edit": "edit",
+  "Text-DeviceSetting-Reboot": "reboot",
+  "Text-DeviceSetting-RebootSuccess": "reboot success",
+  "Text-DeviceSetting-RebootFail": "reboot fail"
 }

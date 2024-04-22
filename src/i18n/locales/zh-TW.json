@@ -132,5 +132,9 @@
   "Text-DeviceSetting-AdvanceSetting": "設備進階設定",
   "Text-DeviceSetting-Type": "類型",
   "Text-DeviceSetting-Alias": "別名",
-  "Text-DeviceSetting-Edit": "編輯"
+  "Text-DeviceSetting-Operate": "操作",
+  "Text-DeviceSetting-Edit": "編輯",
+  "Text-DeviceSetting-Reboot": "重啟",
+  "Text-DeviceSetting-RebootSuccess": "重啟成功",
+  "Text-DeviceSetting-RebootFail": "重啟失敗"
 }
