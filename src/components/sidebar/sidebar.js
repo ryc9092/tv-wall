@@ -1,5 +1,5 @@
 import { Button, Menu, Select, Typography } from "antd";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SIDEBAR_WIDTH } from "../../layouts/responsiveLayout";
 import { useNavigate } from "react-router-dom";
 import { Actions } from "../store/reducer";
@@ -21,7 +21,11 @@ const MenuItem = ({ item }) => {
 const Sidebar = ({ setLocale }) => {
   const intl = useIntl();
   const navigate = useNavigate();
+  const currentPath = window.location.pathname.substring(1);
   const [store, dispatch] = useContext(StoreContext);
+  const [sideBarMenuKey, setSideBarMenuKey] = useState(
+    currentPath === "tv-wall" ? "tv-wall" : currentPath
+  );
 
   const items = [
     {
@@ -115,6 +119,7 @@ const Sidebar = ({ setLocale }) => {
 
   const onNavigate = (e) => {
     const path = e.key;
+    setSideBarMenuKey(path);
     navigate(`/${path}`);
   };
 
@@ -136,7 +141,7 @@ const Sidebar = ({ setLocale }) => {
       </div>
       <div style={{ marginTop: 120, marginLeft: -15 }}>
         <Menu
-          defaultSelectedKeys={["tv-wall"]}
+          selectedKeys={[sideBarMenuKey]}
           mode="inline"
           items={items}
           style={{ border: "0 solid white" }}
