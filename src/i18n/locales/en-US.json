@@ -88,6 +88,7 @@
 
   "Text-Situation-Title": "Situation operation",
   "Text-Situation-CreateSituation": "add situation",
+  "Text-Situation-Activate": "activate",
   "Text-Situation-CreateSituationSuccess": "add situation success",
   "Text-Situation-CreateSituationFail": "add situation fail",
   "Text-Situation-SituationName": "situation name",

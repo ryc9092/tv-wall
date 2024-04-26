@@ -335,6 +335,10 @@ export default defineMessages({
     id: "Text-Situation-CreateSituation",
     defaultMessage: "新增情境",
   },
+  Text_Situation_Activate: {
+    id: "Text-Situation-Activate",
+    defaultMessage: "啟用",
+  },
   Text_Situation_CreateSituationSuccess: {
     id: "Text-Situation-CreateSituationSuccess",
     defaultMessage: "新增情境成功",

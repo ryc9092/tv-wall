@@ -459,6 +459,15 @@ export const getSituations = async (store) => {
   });
 };
 
+export const activateSituation = async (id, store) => {
+  const apiPath = `/presets/active/${id}`;
+  await new Promise((t) => setTimeout(t, 500));
+  return await apiPOST({
+    apiPath,
+    store,
+  });
+};
+
 export const removeSituation = async (id, store) => {
   const httpMethod = "DELETE";
   const apiPath = `/presets/${id}`;

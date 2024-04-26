@@ -6,7 +6,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
 import CreateSituationModal from "../components/situation/createSituation";
 import SituationContentModal from "../components/situation/situationContent";
-import { getSituations, removeSituation } from "../api/API";
+import { getSituations, removeSituation, activateSituation } from "../api/API";
 import "../App.scss";
 import "./Situation.scss";
 
@@ -14,7 +14,19 @@ const Situation = () => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
   const [situationCards, setSituationCards] = useState([]);
+  const [situationActivated, setSituationActivated] = useState([]);
   const [reload, setReload] = useState(null);
+
+  const startSituation = async (situationId) => {
+    activateSituation(situationId, store).then(() => {
+      setSituationActivated(
+        situationActivated.filter((situation) => situation !== situationId)
+      );
+      setReload(Math.random());
+    });
+    setSituationActivated([situationId, ...situationActivated]);
+    setReload(Math.random());
+  };
 
   // get situations on reload
   useEffect(() => {
@@ -25,7 +37,17 @@ const Situation = () => {
         situations.forEach((situation) => {
           cards.push(
             <Card
-              title={situation.name}
+              title={
+                <>
+                  <span style={{ marginRight: 10 }}>{situation.name}</span>{" "}
+                  <Button
+                    disabled={situationActivated.includes(situation.id)}
+                    onClick={() => startSituation(situation.id)}
+                  >
+                    <FormattedMessage {...Messages.Text_Situation_Activate} />
+                  </Button>
+                </>
+              }
               key={situation.id}
               className="situation-card"
               extra={

@@ -88,6 +88,7 @@
 
   "Text-Situation-Title": "情境操作",
   "Text-Situation-CreateSituation": "新增情境",
+  "Text-Situation-Activate": "啟用",
   "Text-Situation-CreateSituationSuccess": "新增情境成功",
   "Text-Situation-CreateSituationFail": "新增情境失敗",
   "Text-Situation-SituationName": "情境名稱",
