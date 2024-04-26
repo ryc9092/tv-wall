@@ -2,7 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../../components/store/store";
 import { Button, Input, Modal, Table, Tag, Typography } from "antd";
 import { EditOutlined } from "@ant-design/icons";
-import { editDevice, getEncoders, getDecoders } from "../../../api/API";
+import {
+  editDevice,
+  getEncoders,
+  getDecoders,
+  rebootDevice,
+} from "../../../api/API";
 import {
   showWarningNotification,
   showSuccessNotificationByMsg,
@@ -111,10 +116,7 @@ const SettingDeviceModal = () => {
   const reboot = async (record) => {
     const index = devices.findIndex((item) => record.key === item.key);
     const { ...device } = { ...devices[index] };
-    console.log(device.mac, " reboot...");
-    // TODO: integrate with api
-    // const result = await rebootAPI()
-    const result = true;
+    const result = await rebootDevice(device.mac, store);
     if (result) {
       showSuccessNotificationByMsg(
         `${device.nickName} ${intl.formatMessage(

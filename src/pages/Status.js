@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
 import { Button, Modal, Table, Tag } from "antd";
-import { getEncoders, getDecoders } from "../api/API";
+import { getEncoders, getDecoders, rebootDevice } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
 import {
@@ -46,10 +46,7 @@ const Status = () => {
   window.retriveDevicesTimer = setInterval(retriveDevices, 10000);
 
   const reboot = async (mac, nickName) => {
-    // TODO: integrate with api
-    console.log("reboot.... ", mac, nickName);
-    // const result = await rebootAPI(mac)
-    const result = true;
+    const result = await rebootDevice(mac, store);
     if (result) {
       showSuccessNotificationByMsg(
         `${nickName} ${intl.formatMessage(

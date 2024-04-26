@@ -221,6 +221,18 @@ export const editDevice = async (
   });
 };
 
+export const rebootDevice = async (deviceId, store) => {
+  const apiPath = `/devices/reboot`;
+  const form = JSON.stringify({
+    deviceIds: [deviceId],
+  });
+  return await apiPOST({
+    apiPath,
+    form,
+    store,
+  });
+};
+
 export const createDeviceLink = async ({
   store,
   id,
