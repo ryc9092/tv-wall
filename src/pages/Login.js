@@ -6,8 +6,9 @@ import { Actions } from "../components/store/reducer";
 import { StoreContext } from "../components/store/store";
 import Messages from "../messages";
 import { loginAPI } from "../api/API";
-import LoginAnime from "../assets/loginAnime.mp4";
-import LoginBackground from "../assets/login.png";
+import BeforeLoginAnime from "../assets/logoAnimeForward.mp4";
+import AfterLoginAnime from "../assets/logoAnimeReverse.mp4";
+import loginBackground from "../assets/login.png";
 import "./Login.scss";
 
 const { Text } = Typography;
@@ -18,13 +19,21 @@ const Login = () => {
   const location = useLocation();
   const [store, dispatch] = useContext(StoreContext);
   const [error, setError] = useState(null);
-  const [showAnime, setShowAnime] = useState(true);
+  const [anime, setAnime] = useState(null);
+  const [playAnime, setPlayAnime] = useState(false);
 
-  // Show login anime on first 2 seconds
+  async function playAnimePeriod(anime, ms = 2000) {
+    setAnime(anime);
+    setPlayAnime(true);
+    await new Promise((r) => setTimeout(r, ms));
+  }
+
+  // play before login anime
   useEffect(() => {
-    setTimeout(function () {
-      setShowAnime(false);
-    }, 2000);
+    (async () => {
+      await playAnimePeriod(BeforeLoginAnime);
+      setPlayAnime(false);
+    })();
   }, []);
 
   useEffect(() => {
@@ -38,6 +47,7 @@ const Login = () => {
   const onLogin = async ({ account, password }) => {
     const token = await loginAPI(account, password, store);
     if (token) {
+      await playAnimePeriod(AfterLoginAnime);
       sessionStorage.setItem("token", token);
       sessionStorage.setItem("account", account);
       dispatch({ type: Actions.SetAccount, payload: account });
@@ -48,10 +58,10 @@ const Login = () => {
   };
   return (
     <div>
-      {showAnime ? (
+      {playAnime ? (
         <div style={{ overflow: "hidden", lineHeight: 0 }}>
           <video autoPlay muted className="login-anime">
-            <source src={LoginAnime} type="video/mp4" />
+            <source src={anime} type="video/mp4" />
           </video>
         </div>
       ) : (
