@@ -53,11 +53,19 @@ export default defineMessages({
   },
   Text_Login_EnterAccount: {
     id: "Text-Login-EnterAccount",
-    defaultMessage: "請輸入帳號",
+    defaultMessage: "輸入帳號",
   },
   Text_Login_EnterPassword: {
     id: "Text-Login-EnterPassword",
-    defaultMessage: "請輸入密碼",
+    defaultMessage: "輸入密碼",
+  },
+  Text_Login_RequiredAccount: {
+    id: "Text-Login-RequiredAccount",
+    defaultMessage: "帳號不可空白",
+  },
+  Text_Login_RequiredPassword: {
+    id: "Text-Login-RequiredPassword",
+    defaultMessage: "密碼不可空白",
   },
   Text_Login_ButtonLogin: {
     id: "Text-Login-ButtonLogin",

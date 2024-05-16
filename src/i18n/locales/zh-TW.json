@@ -14,8 +14,10 @@
 
   "Text-Login-Account": "帳號",
   "Text-Login-Password": "密碼",
-  "Text-Login-EnterAccount": "請輸入帳號",
-  "Text-Login-EnterPassword": "請輸入密碼",
+  "Text-Login-EnterAccount": "輸入帳號",
+  "Text-Login-EnterPassword": "輸入密碼",
+  "Text-Login-RequiredAccount": "帳號不可空白",
+  "Text-Login-RequiredPassword": "密碼不可空白",
   "Text-Login-ButtonLogin": "登入",
   "Text-Login-FailMsg": "登入失敗",
 

@@ -16,6 +16,8 @@
   "Text-Login-Password": "Password",
   "Text-Login-EnterAccount": "Enter Account",
   "Text-Login-EnterPassword": "Enter Password",
+  "Text-Login-RequiredAccount": "Account is required",
+  "Text-Login-RequiredPassword": "Account is required",
   "Text-Login-ButtonLogin": "Login",
   "Text-Login-FailMsg": "Login failed",
 

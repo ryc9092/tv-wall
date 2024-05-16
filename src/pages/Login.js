@@ -56,6 +56,23 @@ const Login = () => {
       setError(intl.formatMessage(Messages.Text_Login_FailMsg));
     }
   };
+
+  let logoLetters = [
+    { letter: "I", fontSize: "92px", color: "#ebdd2d", marginRight: "10px" },
+    { letter: "P", fontSize: "60px", color: "#595757", marginRight: "10px" },
+    { letter: "E", fontSize: "60px", color: "#898989", marginRight: "10px" },
+    { letter: "C", fontSize: "60px", color: "#b5b5b6", marginRight: "10px" },
+  ];
+  let logo = (
+    <div className="login-logo-container">
+      {logoLetters.map((letter) => (
+        <span className="login-logo" style={{ ...letter }}>
+          {letter.letter}
+        </span>
+      ))}
+    </div>
+  );
+
   return (
     <div>
       {playAnime ? (
@@ -65,46 +82,76 @@ const Login = () => {
           </video>
         </div>
       ) : (
-        <div className="login-main">
-          <Form
-            name="login"
-            onFinish={(values) =>
-              onLogin({ account: values.account, password: values.password })
-            }
-          >
-            <Text className="login-form-text">
-              <FormattedMessage {...Messages.Text_Login_Account} />
-            </Text>
-            <Form.Item name="account" rules={[{ required: true }]}>
-              <Input
-                placeholder={intl.formatMessage(
-                  Messages.Text_Login_EnterAccount
-                )}
-                className="login-form-input"
-              />
-            </Form.Item>
-            <Text className="login-form-text">
-              <FormattedMessage {...Messages.Text_Login_Password} />
-            </Text>
-            <Form.Item name="password" rules={[{ required: true }]}>
-              <Input.Password
-                placeholder={intl.formatMessage(
-                  Messages.Text_Login_EnterPassword
-                )}
-                className="login-form-input"
-              />
-            </Form.Item>
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
+        <div className="container">
+          <div className="left-column"></div>
+          <div className="right-column">
+            <div className="right-column-container">
+              {logo}
+              <Form
+                className="login-form"
+                name="login"
+                onFinish={(values) =>
+                  onLogin({
+                    account: values.account,
+                    password: values.password,
+                  })
+                }
               >
-                {intl.formatMessage(Messages.Text_Login_ButtonLogin)}
-              </Button>
-            </Form.Item>
-          </Form>
-          {error ? <Alert message={error} type="error" /> : null}
+                <Text className="login-form-text">
+                  <FormattedMessage {...Messages.Text_Login_Account} />
+                </Text>
+                <Form.Item
+                  name="account"
+                  rules={[
+                    {
+                      required: true,
+                      message: intl.formatMessage(
+                        Messages.Text_Login_RequiredAccount
+                      ),
+                    },
+                  ]}
+                >
+                  <Input
+                    placeholder={intl.formatMessage(
+                      Messages.Text_Login_EnterAccount
+                    )}
+                    className="login-form-input"
+                  />
+                </Form.Item>
+                <Text className="login-form-text">
+                  <FormattedMessage {...Messages.Text_Login_Password} />
+                </Text>
+                <Form.Item
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: intl.formatMessage(
+                        Messages.Text_Login_RequiredPassword
+                      ),
+                    },
+                  ]}
+                >
+                  <Input.Password
+                    placeholder={intl.formatMessage(
+                      Messages.Text_Login_EnterPassword
+                    )}
+                    className="login-form-input"
+                  />
+                </Form.Item>
+                <Form.Item>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="login-form-button"
+                  >
+                    {intl.formatMessage(Messages.Text_Login_ButtonLogin)}
+                  </Button>
+                </Form.Item>
+              </Form>
+              {error ? <Alert message={error} type="error" /> : null}
+            </div>
+          </div>
         </div>
       )}
     </div>

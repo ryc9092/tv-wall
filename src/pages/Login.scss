@@ -1,11 +1,45 @@
-.login-main {
-    width: 368px;
-    margin: 10% auto;
+.container {
+    display: flex;
+}
+
+.left-column {
+    position: relative;
+    float: left;
+    width: 54%;
+    height: 100vh;
+}
+
+.right-column {
+    position: relative;
+    float: left;
+    width: 46%;
+    height: 100vh;
+    background-color: #151311;
+}
+
+.right-column-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.login-logo-container {
+    margin-bottom: 10%;
+    text-align: center;
+    pointer-events: none;
+}
+
+.login-logo {
+    text-align: center;
+    font-weight: 1000;
 }
 
 .login-form-text {
     font-family: Gotham;
     font-size: 16px;
+    color: white;
 }
 
 .login-form-input {
@@ -18,8 +52,12 @@
 .login-form-button {
     width: 416px;
     height: 40px;
-    margin-top: 40px;
+    color: #363330;
+    margin-top: 32px;
+    font-size: 16px;
+    font-family: PingFangTC;
     border-radius: 8px;
+    background-color: #e9dc2c;
 }
 
 .login-anime {
