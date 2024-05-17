@@ -4,21 +4,23 @@ import { SIDEBAR_WIDTH } from "../../layouts/responsiveLayout";
 import { useNavigate } from "react-router-dom";
 import { Actions } from "../store/reducer";
 import { StoreContext } from "../store/store";
-import Logo from "../../assets/ipec.png";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
+import TVWallIcon from "../../assets/tvWall.png";
+import SingleScreenIcon from "../../assets/screen.png";
+import USBIcon from "../../assets/usb.png";
+import AudioIcon from "../../assets/audio.png";
+import SituationIcon from "../../assets/situation.png";
+import StatusIcon from "../../assets/status.png";
+import SettingIcon from "../../assets/setting.png";
 import "./sidebar.scss";
 
 const bulletPoint = "\u25CF";
 const MenuItem = ({ item }) => {
-  return (
-    <div style={{ fontSize: 16 }}>
-      {bulletPoint} {item}
-    </div>
-  );
+  return <div style={{ fontSize: 16 }}>{item}</div>;
 };
 
-const Sidebar = ({ setLocale }) => {
+const Sidebar = ({ setLocale, siderCollapse }) => {
   const intl = useIntl();
   const navigate = useNavigate();
   const currentPath = window.location.pathname.substring(1);
@@ -29,46 +31,39 @@ const Sidebar = ({ setLocale }) => {
 
   const items = [
     {
-      key: "equipment-status",
-      label: (
-        <MenuItem
-          item={intl.formatMessage(Messages.Text_Sidebar_DeviceStatus)}
-        />
-      ),
-    },
-    {
       key: "tv-wall",
       label: (
         <MenuItem
-          item={intl.formatMessage(Messages.Text_Sidebar_TVWallManagement)}
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Sidebar_TVWallManagement)}
+          </span>
         />
       ),
+      icon: <img src={TVWallIcon} alt="tvwall" className="menu-icon" />,
     },
     {
       key: "single-screen",
       label: (
         <MenuItem
-          item={intl.formatMessage(
-            Messages.Text_Sidebar_SingleScreenManagement
-          )}
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Sidebar_SingleScreenManagement)}
+          </span>
         />
       ),
-    },
-    {
-      key: "audio",
-      label: (
-        <MenuItem
-          item={intl.formatMessage(Messages.Text_Sidebar_AudioManagement)}
-        />
+      icon: (
+        <img src={SingleScreenIcon} alt="singlescreen" className="menu-icon" />
       ),
     },
     {
       key: "usb",
       label: (
         <MenuItem
-          item={intl.formatMessage(Messages.Text_Sidebar_USBManagement)}
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Sidebar_USBManagement)}
+          </span>
         />
       ),
+      icon: <img src={USBIcon} alt="usb" className="menu-icon" />,
     },
     // {
     //   key: "rs232",
@@ -78,6 +73,28 @@ const Sidebar = ({ setLocale }) => {
     //     />
     //   ),
     // },
+    {
+      key: "audio",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Sidebar_AudioManagement)}
+          </span>
+        />
+      ),
+      icon: <img src={AudioIcon} alt="audio" className="menu-icon" />,
+    },
+    {
+      key: "situation",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Sidebar_SituationManagement)}
+          </span>
+        />
+      ),
+      icon: <img src={SituationIcon} alt="situation" className="menu-icon" />,
+    },
     // {
     //   key: "schedule",
     //   label: (
@@ -87,28 +104,35 @@ const Sidebar = ({ setLocale }) => {
     //   ),
     // },
     {
-      key: "situation",
+      key: "equipment-status",
       label: (
         <MenuItem
-          item={intl.formatMessage(Messages.Text_Sidebar_SituationManagement)}
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Sidebar_DeviceStatus)}
+          </span>
         />
       ),
+      icon: <img src={StatusIcon} alt="status" className="menu-icon" />,
     },
-    {
-      key: "event",
-      label: (
-        <MenuItem
-          item={intl.formatMessage(Messages.Text_Sidebar_EventAndAlarm)}
-        />
-      ),
-    },
+    // {
+    //   key: "event",
+    //   label: (
+    //     <MenuItem
+    //       item={intl.formatMessage(Messages.Text_Sidebar_EventAndAlarm)}
+    //     />
+    //   ),
+    //   icon: <img src={TVWallIcon} alt="tvwall" className="menu-icon" />,
+    // },
     {
       key: "setting",
       label: (
         <MenuItem
-          item={intl.formatMessage(Messages.Text_Sidebar_SystemSetting)}
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Sidebar_SystemSetting)}
+          </span>
         />
       ),
+      icon: <img src={SettingIcon} alt="setting" className="menu-icon" />,
     },
   ];
 
@@ -135,20 +159,17 @@ const Sidebar = ({ setLocale }) => {
   ];
 
   return (
-    <div style={{ width: SIDEBAR_WIDTH }}>
-      <div style={{ top: 6, left: 6, position: "absolute" }}>
-        <img src={Logo} style={{ cursor: "pointer" }} alt="IPEC" width={100} />
-      </div>
-      <div style={{ marginTop: 120, marginLeft: -15 }}>
+    <div>
+      <div style={{ marginTop: 10 }}>
         <Menu
           selectedKeys={[sideBarMenuKey]}
           mode="inline"
           items={items}
-          style={{ border: "0 solid white" }}
+          style={{ border: "0 solid white", backgroundColor: "#e7e7e7" }}
           onClick={onNavigate}
         />
       </div>
-      <div
+      {/* <div
         style={{ position: store.siderCollapse ? "relative" : "absolute" }}
         className="logout-btn"
       >
@@ -171,7 +192,7 @@ const Sidebar = ({ setLocale }) => {
             <FormattedMessage {...Messages.Text_Sidebar_Logout} />
           </Button>
         </Typography.Text>
-      </div>
+      </div> */}
     </div>
   );
 };

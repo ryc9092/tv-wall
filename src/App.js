@@ -2,6 +2,7 @@ import loadable from "@loadable/component";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./utils/PrivateRoute";
 import ResponsiveLayout from "./layouts/responsiveLayout";
+import Topbar from "./components/topbar/topbar";
 import Sidebar from "./components/sidebar/sidebar";
 import "./App.css";
 
@@ -27,6 +28,7 @@ function App({ setLocale }) {
           element={
             <PrivateRoute>
               <ResponsiveLayout
+                topbar={<Topbar />}
                 sidebar={<Sidebar setLocale={setLocale} />}
                 main={<Status />}
               />
@@ -38,6 +40,7 @@ function App({ setLocale }) {
           element={
             <PrivateRoute>
               <ResponsiveLayout
+                topbar={<Topbar />}
                 sidebar={<Sidebar setLocale={setLocale} />}
                 main={<TVWall />}
               />
@@ -49,6 +52,7 @@ function App({ setLocale }) {
           element={
             <PrivateRoute>
               <ResponsiveLayout
+                topbar={<Topbar />}
                 sidebar={<Sidebar setLocale={setLocale} />}
                 main={<SingleScreen />}
               />
@@ -60,6 +64,7 @@ function App({ setLocale }) {
           element={
             <PrivateRoute>
               <ResponsiveLayout
+                topbar={<Topbar />}
                 sidebar={<Sidebar setLocale={setLocale} />}
                 main={<Audio />}
               />
@@ -71,6 +76,7 @@ function App({ setLocale }) {
           element={
             <PrivateRoute>
               <ResponsiveLayout
+                topbar={<Topbar />}
                 sidebar={<Sidebar setLocale={setLocale} />}
                 main={<USB />}
               />
@@ -93,6 +99,7 @@ function App({ setLocale }) {
           element={
             <PrivateRoute>
               <ResponsiveLayout
+                topbar={<Topbar />}
                 sidebar={<Sidebar setLocale={setLocale} />}
                 main={<Schedule />}
               />
@@ -104,6 +111,7 @@ function App({ setLocale }) {
           element={
             <PrivateRoute>
               <ResponsiveLayout
+                topbar={<Topbar />}
                 sidebar={<Sidebar setLocale={setLocale} />}
                 main={<Situation />}
               />
@@ -115,6 +123,7 @@ function App({ setLocale }) {
           element={
             <PrivateRoute>
               <ResponsiveLayout
+                topbar={<Topbar />}
                 sidebar={<Sidebar setLocale={setLocale} />}
                 main={<Event />}
               />
@@ -126,6 +135,7 @@ function App({ setLocale }) {
           element={
             <PrivateRoute>
               <ResponsiveLayout
+                topbar={<Topbar />}
                 sidebar={<Sidebar setLocale={setLocale} />}
                 main={<Setting />}
               />

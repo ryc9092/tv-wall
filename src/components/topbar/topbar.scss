@@ -1,0 +1,39 @@
+
+.ant-layout-header {
+    padding: 0;
+    height: 56px;
+}
+
+.topbar-fixed {
+    height: 56px;
+    background-color: #363330;
+    position: relative;
+}
+
+.topbar-container {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.topbar-list-icon {
+    width: 30px;
+    height: 34px;
+    padding-top: 8px;
+    margin: 0px 18px -1px 26px;
+    cursor: pointer;
+}
+
+.topbar-logo-letter {
+    pointer-events: none;
+    margin-left: 2px;
+    font-weight: 900;
+}
+
+.topbar-function-icon {
+    width: 28px;
+    height: 28px;
+    margin-right: 28px;
+    cursor: pointer;
+}
