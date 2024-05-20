@@ -1,3 +1,7 @@
+.ant-menu-item {
+    height: 56px !important;
+}
+
 .ant-menu-item.ant-menu-item-selected {
     background-color: #c6c6c6;
 }
@@ -5,12 +9,17 @@
 .menu-icon {
     width: 20px;
     height: 20px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .menu-text {
     color: #45413e;
     font-size: 16px;
     font-family: PingFangTC;
+    margin-left: 20px;
 }
 
 .logout-btn {

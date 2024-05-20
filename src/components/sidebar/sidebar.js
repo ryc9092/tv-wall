@@ -130,7 +130,7 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div style={{ marginTop: 10 }}>
+      <div style={{ marginTop: 16 }}>
         <Menu
           selectedKeys={[sideBarMenuKey]}
           mode="inline"
