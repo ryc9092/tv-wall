@@ -1,3 +1,8 @@
+export const LANGUAGE_LOCALE_MAP = {
+  english: "en",
+  chinese: "zh",
+};
+
 export const ENCODER_TYPERS = [
   {
     label: "ZyperUHD60",

@@ -1,10 +1,7 @@
-import { Button, Menu, Select, Typography } from "antd";
-import { useContext, useState } from "react";
-import { SIDEBAR_WIDTH } from "../../layouts/responsiveLayout";
+import { Menu } from "antd";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Actions } from "../store/reducer";
-import { StoreContext } from "../store/store";
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 import Messages from "../../messages";
 import TVWallIcon from "../../assets/tvWall.png";
 import SingleScreenIcon from "../../assets/screen.png";
@@ -15,16 +12,14 @@ import StatusIcon from "../../assets/status.png";
 import SettingIcon from "../../assets/setting.png";
 import "./sidebar.scss";
 
-const bulletPoint = "\u25CF";
 const MenuItem = ({ item }) => {
   return <div style={{ fontSize: 16 }}>{item}</div>;
 };
 
-const Sidebar = ({ setLocale, siderCollapse }) => {
+const Sidebar = () => {
   const intl = useIntl();
   const navigate = useNavigate();
   const currentPath = window.location.pathname.substring(1);
-  const [store, dispatch] = useContext(StoreContext);
   const [sideBarMenuKey, setSideBarMenuKey] = useState(
     currentPath === "tv-wall" ? "tv-wall" : currentPath
   );
@@ -114,15 +109,6 @@ const Sidebar = ({ setLocale, siderCollapse }) => {
       ),
       icon: <img src={StatusIcon} alt="status" className="menu-icon" />,
     },
-    // {
-    //   key: "event",
-    //   label: (
-    //     <MenuItem
-    //       item={intl.formatMessage(Messages.Text_Sidebar_EventAndAlarm)}
-    //     />
-    //   ),
-    //   icon: <img src={TVWallIcon} alt="tvwall" className="menu-icon" />,
-    // },
     {
       key: "setting",
       label: (
@@ -136,27 +122,11 @@ const Sidebar = ({ setLocale, siderCollapse }) => {
     },
   ];
 
-  const onLogout = () => {
-    dispatch({ type: Actions.Logout, payload: null });
-    navigate("/login");
-  };
-
   const onNavigate = (e) => {
     const path = e.key;
     setSideBarMenuKey(path);
     navigate(`/${path}`);
   };
-
-  const languageOptions = [
-    {
-      value: "zh-TW",
-      label: intl.formatMessage(Messages.Text_Sidebar_Chinese),
-    },
-    {
-      value: "en-US",
-      label: intl.formatMessage(Messages.Text_Sidebar_English),
-    },
-  ];
 
   return (
     <div>
@@ -169,30 +139,6 @@ const Sidebar = ({ setLocale, siderCollapse }) => {
           onClick={onNavigate}
         />
       </div>
-      {/* <div
-        style={{ position: store.siderCollapse ? "relative" : "absolute" }}
-        className="logout-btn"
-      >
-        <Typography.Text style={{ fontSize: 16 }}>
-          <span style={{ marginRight: 10 }}>
-            {bulletPoint}{" "}
-            <FormattedMessage {...Messages.Text_Sidebar_Language} />
-          </span>
-          <Select
-            style={{ width: 100 }}
-            options={languageOptions}
-            value={intl.locale}
-            onChange={setLocale}
-          ></Select>
-        </Typography.Text>
-        <br />
-        <Typography.Text style={{ fontSize: 16 }}>
-          {bulletPoint} {store.account}
-          <Button type="text" style={{ fontSize: 16 }} onClick={onLogout}>
-            <FormattedMessage {...Messages.Text_Sidebar_Logout} />
-          </Button>
-        </Typography.Text>
-      </div> */}
     </div>
   );
 };

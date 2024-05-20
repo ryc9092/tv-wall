@@ -37,3 +37,30 @@
     margin-right: 28px;
     cursor: pointer;
 }
+
+.ant-dropdown {
+    width: 160px;
+}
+
+.topbar-user-menu-icon {
+    width: 48px;
+    height: 48px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 16px;
+}
+
+.topbar-user-menu-account {
+    text-align: center;
+    color: #45413e;
+    font-size: 22px;
+    font-family: PingFangTC;
+    margin-bottom: 6px;
+}
+
+.topbar-user-menu-text {
+    font-size: 16px;
+    font-family: PingFangTC;
+    color: #363330;
+}
