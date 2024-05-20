@@ -83,7 +83,18 @@ const Login = () => {
         </div>
       ) : (
         <div className="container">
-          <div className="left-column"></div>
+          <div className="left-column" style={{ lineHeight: 0 }}>
+            <img
+              alt="login"
+              src={loginBackground}
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "left top",
+              }}
+            />
+          </div>
           <div className="right-column">
             <div className="right-column-container">
               {logo}
