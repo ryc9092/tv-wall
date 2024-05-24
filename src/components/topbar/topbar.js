@@ -37,7 +37,11 @@ function TopBar({ setLocale }) {
   let logo = (
     <span>
       {logoLetters.map((letter) => (
-        <span className="topbar-logo-letter " style={{ ...letter }}>
+        <span
+          className="topbar-logo-letter "
+          key={letter.letter}
+          style={{ ...letter }}
+        >
           {letter.letter}
         </span>
       ))}

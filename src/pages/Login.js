@@ -66,7 +66,7 @@ const Login = () => {
   let logo = (
     <div className="login-logo-container">
       {logoLetters.map((letter) => (
-        <span className="login-logo" style={{ ...letter }}>
+        <span className="login-logo" style={{ ...letter }} key={letter.letter}>
           {letter.letter}
         </span>
       ))}
