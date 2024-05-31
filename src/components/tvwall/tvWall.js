@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import { Button } from "antd";
 import { StoreContext } from "../../components/store/store";
 import { getTemplateScreensById, getWallScreensById } from "../../api/API";
-import { useDocumentDimensions } from "../../utils/WindowDimension";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
+import "./tvWall.scss";
 import "../../App.scss";
 
 const TvWall = ({
+  wallWidth,
+  wallHeight,
   selectedWall,
   selectedTemplate,
   selectedEncoder,
@@ -17,9 +18,11 @@ const TvWall = ({
   isActivedWall,
   blockEncoderMapping,
   setBlockEncoderMapping,
+  setReloadWall,
+  reloadWall,
 }) => {
+  const intl = useIntl();
   const [store] = useContext(StoreContext);
-  const { width, height } = useDocumentDimensions();
   const [tvWallScreens, setTvWallScreens] = useState([]);
   const [tvWallSize, setTvWallSize] = useState({ col: 0, row: 0 });
   const [tvWallTemplate, setTvWallTemplate] = useState(null);
@@ -29,6 +32,16 @@ const TvWall = ({
     needClear: false,
     blockIdx: null,
   });
+  const [currentBlock, setCurrentBlock] = useState(null);
+
+  const handleBlockMouseEnter = (event) => {
+    const itemId = event.target.id;
+    setCurrentBlock(itemId);
+  };
+
+  const handleBlockMouseLeave = () => {
+    setCurrentBlock(null);
+  };
 
   useEffect(() => {
     let tempScreens = [];
@@ -167,75 +180,133 @@ const TvWall = ({
         <div
           key={index}
           style={{
-            width: ((width * 0.34) / tvWallSize.col) * block.col,
-            height: (((height - 105) * 0.5) / tvWallSize.row) * block.row,
-            marginLeft: ((width * 0.34) / tvWallSize.col) * block.marginLeft,
-            marginTop:
-              (((height - 105) * 0.5) / tvWallSize.row) * block.marginTop,
+            width: `${(100 / selectedWall.col) * block.col}%`,
+            height: `${(100 / tvWallSize.row) * block.row}%`,
+            marginLeft: `${(100 / selectedWall.col) * block.marginLeft}%`,
+            marginTop: `${
+              (document.getElementById("wallScreens").clientHeight /
+                tvWallSize.row) *
+              block.marginTop
+            }px`,
             border: "1px solid black",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            onBlockClick(index);
           }}
         >
           <div
-            key={index}
-            style={{ width: "100%", height: "100%", cursor: "pointer" }}
-            onClick={() => {
-              onBlockClick(index);
-            }}
+            id={`screen-${block.block}`}
+            style={{ width: "100%", height: "100%" }}
+            onMouseEnter={handleBlockMouseEnter}
+            onMouseLeave={handleBlockMouseLeave}
           >
-            {block.encoder?.previewUrl ? (
-              <>
-                <embed
-                  style={{ width: "100%", height: "100%" }}
-                  src={block.encoder?.previewUrl}
-                  title="Video player"
-                />
-                <Button
-                  key={index}
-                  onClick={() => {
-                    setClearBlock({ needClear: true, blockIdx: index });
-                  }}
-                  size="small"
-                  style={{
-                    position: "absolute",
-                    zIndex: 1,
-                    left: ((width * 0.34) / tvWallSize.col) * block.marginLeft,
-                    opacity: "0.8",
-                  }}
-                >
-                  <FormattedMessage {...Messages.Text_TVWall_ClearBlock} />
-                </Button>
+            <embed
+              style={{
+                width: document.getElementById(`screen-${block.block}`)
+                  ?.clientWidth,
+                height: document.getElementById(`screen-${block.block}`)
+                  ?.clientHeight,
+                position: "absolute",
+                overflow: "hidden",
+              }}
+              src={block.encoder?.previewUrl}
+              title="Video player"
+            />
+            <div
+              style={{
+                width: document.getElementById(`screen-${block.block}`)
+                  ?.clientWidth,
+                height: document.getElementById(`screen-${block.block}`)
+                  ?.clientHeight,
+                position: "absolute",
+              }}
+            >
+              <div
+                id={`screen-cover-${block.block}`}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  position: "absolute",
+                  padding: "12px",
+                  zIndex: 10,
+                  opacity: 0.8,
+                  backgroundColor:
+                    currentBlock === `screen-cover-${block.block}`
+                      ? "gray"
+                      : null,
+                }}
+              >
                 <span
-                  style={{
-                    position: "absolute",
-                    zIndex: 1,
-                    left: ((width * 0.34) / tvWallSize.col) * block.marginLeft,
-                    margin: "25px 0px 0px 2px",
-                    opacity: "0.8",
-                  }}
+                  style={
+                    currentBlock === `screen-cover-${block.block}`
+                      ? { color: "white" }
+                      : {}
+                  }
+                  className="wall-block-title"
                 >
-                  {block.encoder?.nickName}
-                </span>
-              </>
-            ) : (
-              <>
-                <div style={{ position: "absolute" }}>
-                  <FormattedMessage {...Messages.Text_Common_Block} />:{" "}
+                  <FormattedMessage {...Messages.Text_Common_Block} />{" "}
                   {block.block}
-                  <br></br>
-                  <FormattedMessage {...Messages.Text_Common_Dimension} />:{" "}
+                </span>
+                <br />
+                <br />
+                <span
+                  className="wall-block-text"
+                  style={
+                    currentBlock === `screen-cover-${block.block}`
+                      ? { color: "white" }
+                      : { display: "none" }
+                  }
+                >
+                  <FormattedMessage {...Messages.Text_Common_Dimension} /> :{" "}
                   {block.col} X {block.row}
-                </div>
-                {generateBlockTable(block.col, block.row)}
-              </>
-            )}
+                </span>
+                <br />
+                <span
+                  className="wall-block-text"
+                  style={
+                    currentBlock === `screen-cover-${block.block}`
+                      ? { color: "white" }
+                      : { display: "none" }
+                  }
+                >
+                  <FormattedMessage {...Messages.Text_TVWall_VideoSource} /> :{" "}
+                  {block.encoder?.previewUrl
+                    ? block.encoder.nickName
+                    : intl.formatMessage(Messages.Text_Common_None)}
+                </span>
+              </div>
+              {generateBlockTable(block.col, block.row, block.block)}
+            </div>
           </div>
         </div>
       );
 
       currentAppearedRow = currentAppearedRow + block.row;
     });
-    setTvWallTemplate(<div>{wall}</div>);
-  }, [blocksWithPosition, selectedEncoder, needUpdateBlocks, width, height]);
+    setTvWallTemplate(
+      <div id="wallScreens" style={{ width: "100%", height: "100%" }}>
+        {wall}
+      </div>
+    );
+  }, [
+    blocksWithPosition,
+    selectedEncoder,
+    needUpdateBlocks,
+    wallWidth,
+    wallHeight,
+    currentBlock,
+    reloadWall,
+  ]);
+
+  // for temp fix bug: wall screen text show vertical
+  useEffect(() => {
+    (async () => {
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      await sleep(500);
+      setReloadWall("reload");
+    })();
+  }, [tvWallTemplate, blocksWithPosition, setReloadWall]);
 
   // setClearBlock take effect after onBlockClick event
   useEffect(() => {
@@ -264,7 +335,7 @@ const TvWall = ({
       setTvWallScreens(tempScreens);
 
       // re-render wall
-      setNeedUpdateBlocks(Math.random);
+      setNeedUpdateBlocks(Math.random());
 
       // reset
       setClearBlock({ needClear: false, blockIdx: null });
@@ -272,39 +343,42 @@ const TvWall = ({
   }, [clearBlock]);
 
   const onBlockClick = (blockIdx) => {
-    // add video to block
-    let tempBlocks = blocksWithPosition.slice();
-    tempBlocks[blockIdx].encoder = selectedEncoder;
-    setBlocks(tempBlocks);
-    setBlocksWithPosition(tempBlocks);
-    setBlockEncoderMapping({
-      ...blockEncoderMapping,
-      [blocks[blockIdx].block]: selectedEncoder,
-    });
+    if (selectedEncoder.previewUrl) {
+      // add video to block
+      let tempBlocks = blocksWithPosition.slice();
+      tempBlocks[blockIdx].encoder = selectedEncoder;
+      setBlocks(tempBlocks);
+      setBlocksWithPosition(tempBlocks);
+      setBlockEncoderMapping({
+        ...blockEncoderMapping,
+        [blocks[blockIdx].block]: selectedEncoder,
+      });
 
-    // add video to screens
-    let tempScreens = tvWallScreens;
-    tempScreens.forEach((screen, idx) => {
-      if (screen.block === tempBlocks[blockIdx].block) {
-        tempScreens[idx].encoder = selectedEncoder;
-      }
-    });
-    setTvWallScreens(tempScreens);
+      // add video to screens
+      let tempScreens = tvWallScreens;
+      tempScreens.forEach((screen, idx) => {
+        if (screen.block === tempBlocks[blockIdx].block) {
+          tempScreens[idx].encoder = selectedEncoder;
+        }
+      });
+      setTvWallScreens(tempScreens);
 
-    // re-render wall
-    setNeedUpdateBlocks(Math.random);
+      // re-render wall
+      setNeedUpdateBlocks(Math.random());
+    }
   };
 
-  const generateBlockTable = (col, row) => {
+  const generateBlockTable = (col, row, block) => {
     const tempRows = [];
     for (let r = 0; r < row; r++) {
       let tempRow = [];
       for (let c = 0; c < col; c++) {
         tempRow.push(
           <td
+            id={block}
             key={r.toString() + c.toString()}
             style={{
-              width: (width * 0.34) / tvWallSize.col,
+              width: `${100 / tvWallSize.col}%`,
               border: "1px dashed #D7DBDD",
               borderStyle:
                 c === 0 ? "none none none none" : "none none none dashed",
@@ -316,7 +390,7 @@ const TvWall = ({
         <tr
           key={r.toString()}
           style={{
-            height: ((height - 105) * 0.5) / tvWallSize.row,
+            height: `${100 / tvWallSize.row}%`,
             border: "1px dashed #D7DBDD",
             borderStyle:
               r === 0 ? "none none none none" : "dashed none none none",
@@ -329,17 +403,19 @@ const TvWall = ({
     return (
       <table
         style={{
+          width: "100%",
+          height: "100%",
           borderCollapse: "collapse",
           marginTop: -1,
           marginLeft: -1,
         }}
       >
-        <tbody>{tempRows}</tbody>
+        <tbody style={{ width: "100%", height: "100%" }}>{tempRows}</tbody>
       </table>
     );
   };
 
-  return <div>{tvWallTemplate}</div>;
+  return <div style={{ width: "100%", height: "100%" }}>{tvWallTemplate}</div>;
 };
 
 export default TvWall;

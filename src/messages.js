@@ -5,6 +5,10 @@ export default defineMessages({
   Text_Common_Name: { id: "Text-Common-Name", defaultMessage: "名稱" },
   Text_Common_Block: { id: "Text-Common-Block", defaultMessage: "區塊" },
   Text_Common_Screen: { id: "Text-Common-Screen", defaultMessage: "畫面" },
+  Text_Common_Model: { id: "Text-Common-Model", defaultMessage: "產品型號" },
+  Text_Common_Up: { id: "Text-Common-Up", defaultMessage: "上線" },
+  Text_Common_Down: { id: "Text-Common-Down", defaultMessage: "離線" },
+  Text_Common_None: { id: "Text-Common-None", defaultMessage: "無" },
   Text_Common_Dimension: {
     id: "Text-Common-Dimension",
     defaultMessage: "維度",
@@ -201,9 +205,17 @@ export default defineMessages({
     id: "Text-TVWall-TVWallManagement",
     defaultMessage: "電視牆影音管理",
   },
+  Text_TVWall_WallName: {
+    id: "Text-TVWall-WallName",
+    defaultMessage: "電視牆名稱",
+  },
+  Text_TVWall_Template: {
+    id: "Text-TVWall-Template",
+    defaultMessage: "電視牆適用版型",
+  },
   Text_TVWall_ActivateWall: {
     id: "Text-TVWall-ActivateWall",
-    defaultMessage: "啟用牆面",
+    defaultMessage: "投放影像",
   },
   Text_TVWall_DeactivateWall: {
     id: "Text-TVWall-DeactivateWall",
@@ -211,15 +223,23 @@ export default defineMessages({
   },
   Text_TVWall_ClearWallConnection: {
     id: "Text-TVWall-ClearWallConnection",
-    defaultMessage: "清除牆面連接",
+    defaultMessage: "清除影像連接",
   },
   Text_TVWall_VideoSource: {
     id: "Text-TVWall-VideoSource",
     defaultMessage: "影像來源",
   },
+  Text_TVWall_VideoSourceDesc: {
+    id: "Text-TVWall-VideoSourceDesc",
+    defaultMessage: "選擇下方編碼器後，點選區塊以連結",
+  },
   Text_TVWall_Preview: {
     id: "Text-TVWall-Preview",
     defaultMessage: "畫面預覽",
+  },
+  Text_TVWall_InputEncoder: {
+    id: "Text-TVWall-InputEncoder",
+    defaultMessage: "輸入編碼器名稱",
   },
   Text_TVWall_ClearBlock: {
     id: "Text-TVWall-ClearBlock",

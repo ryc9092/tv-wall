@@ -1,6 +1,22 @@
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 16px;
+    background: rgba(198, 198, 198, 0.8)
+}
+
+.page-layout-column {
+    display: grid;
+    grid-template-columns: 21fr 7fr;
+    margin-top: 48px;
+    margin-left: 56px;
+}
+
 .page-title {
     font-size: 32px;
-    text-align: center;
+    text-align: left;
 }
 
 .modal-title .ant-modal-title {

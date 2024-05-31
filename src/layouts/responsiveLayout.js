@@ -15,6 +15,7 @@ const ResponsiveLayout = ({ topbar, sidebar, main }) => {
       <Layout>
         <Sider
           collapsible
+          collapsedWidth={72}
           collapsed={store.siderCollapse}
           zeroWidthTriggerStyle={{ display: "none" }}
           style={{ backgroundColor: "#e7e7e7" }}

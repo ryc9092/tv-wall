@@ -1,3 +1,5 @@
+@import '../App.scss';
+
 .container-border {
     border: 1px solid gray;
 }
@@ -48,4 +50,169 @@
         color: #598DDE !important;
         border-color: #598DDE !important;
     }
+}
+
+.tvwall-wall-container {
+    display: flex;
+    flex-direction: column;
+    margin-right: 24px;
+}
+
+.tvwall-option-row {
+    display: grid;
+    flex-wrap: wrap;
+    grid-template-columns: 60fr 40fr;
+    margin-top: 24px;
+}
+
+.tvwall-option-row-select {
+    display: grid;
+    flex-wrap: wrap;
+    grid-template-columns: 50fr 50fr;
+}
+
+.tvwall-option-select-desc {
+    color: #45413e;
+    line-height: 1.5;
+    font-family: PingFangTC;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.tvwall-option-select {
+    width: 100%;
+}
+
+.tvwall-option-row-button {
+    flex-wrap: wrap;
+    align-items: end;
+    display: grid;
+    grid-template-columns: 10fr 45fr 45fr;
+}
+
+.tvwall-option-trash-btn {
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+.tvwall-option-trash-icon {
+    width: 18px;
+    margin-right: 3px;
+}
+
+.tvwall-option-trash-text {
+    color: #898989;
+    font-family: PingFangTC;
+    font-size: 14px;
+    font-weight: 600;
+    position: absolute;
+}
+
+.tvwall-option-play-btn {
+    cursor: pointer;
+    border-radius: 24px;
+    background-color: #262320;
+    color: #e7e7e7;
+}
+
+.tvwall-option-play-icon {
+    width: 18px;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-left: 7px;
+}
+
+.tvwall-option-play-text {
+    color: #e7e7e7;
+    font-family: PingFangTC;
+    font-size: 16px;
+    font-weight: 600;
+    position: absolute;
+    margin-top: 1px;
+}
+
+.tvwall-screen-container {
+    height: 50%;
+    margin-top: 24px;
+    margin-bottom: 36px;
+    // border: 1px dashed #262320;
+    flex-grow: 1;
+}
+
+.tvwall-card-container {
+    min-width: 350px;
+    padding-left: 12px;
+    padding-right: 24px;
+}
+
+.tvwall-card-right {
+    height: 100%;
+    border-radius: 24px;
+}
+
+.tvwall-card-right-title {
+    color: #45413e;
+    font-size: 22px;
+    font-family: PingFangTC;
+    font-weight: 600;
+}
+
+.tvwall-card-right-desc {
+    color: #a5a5a5;
+    font-size: 16px;
+    font-family: PingFangTC;
+    font-weight: normal;
+}
+
+.tvwall-card-right-preview {
+    width: 100%;
+    min-height: 205px;
+    border-radius: 8px;
+    border: 1px solid gray;
+    position: relative;
+    margin-top: 16px;
+}
+
+.tvwall-card-right-preview-video {
+    width: 100%;
+    max-width: 100%;
+    min-height: 201px;
+    margin-bottom: -6px;
+    border-radius: 8px;
+    position: absolute;
+}
+
+.tvwall-card-right-preview-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.tvwall-card-right-search {
+    margin-top: 16px;
+    font-size: 16px;
+    background-color: #e7e7e7;
+}
+
+.tvwall-input .ant-input {
+    background-color: #e7e7e7;
+}
+
+.tvwall-card-right-encoder-container {
+    margin-top: 16px;
+    overflow-y: scroll;
+}
+
+.ant-table-thead > tr > th {
+    border: none;
+}
+
+.ant-table-tbody > tr > td {
+    border: none
+}
+
+.ant-card-body {
+    padding-bottom: 0px !important;
 }
