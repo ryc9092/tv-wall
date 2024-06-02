@@ -262,6 +262,20 @@ export default defineMessages({
     defaultMessage: "停用電視牆失敗",
   },
 
+    // Single screen management
+    Text_SingleScreen_Management: {
+      id: "Text-SingleScreen-Management",
+      defaultMessage: "電視牆影音管理",
+    },
+    Text_SingleScreen_InputDecoder: {
+      id: "Text-SingleScreen-InputDecoder",
+      defaultMessage: "輸入解碼器或群組名稱",
+    },
+    Text_SingleScreen_ConnectType: {
+      id: "Text-SingleScreen-ConnectType",
+      defaultMessage: "連接選項",
+    },
+
   // USB management
   Text_USB_USBMgmt: {
     id: "Text-USB-USBMgmt",

@@ -31,3 +31,137 @@
 .single-screen-layout {
     display: flex;
 }
+
+.single-screen-container {
+    display: flex;
+    flex-direction: column;
+    margin-right: 24px;
+}
+
+.single-screen-title-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.single-screen-title-input {
+    width: 270px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 16px;
+    background-color: #e7e7e7;
+}
+
+.singlescreen-card-container {
+    min-width: 350px;
+    padding-left: 12px;
+    padding-right: 24px;
+}
+
+.singlescreen-card-right {
+    height: 100%;
+    border-radius: 24px;
+}
+
+.singlescreen-card-right-title {
+    color: #45413e;
+    font-size: 22px;
+    font-family: PingFangTC;
+    font-weight: 600;
+}
+
+.singlescreen-card-right-desc {
+    color: #a5a5a5;
+    font-size: 16px;
+    font-family: PingFangTC;
+    font-weight: normal;
+}
+
+.singlescreen-card-right-preview {
+    width: 100%;
+    min-height: 205px;
+    border-radius: 8px;
+    border: 1px solid gray;
+    position: relative;
+    margin-top: 16px;
+}
+
+.singlescreen-card-right-preview-video {
+    width: 100%;
+    max-width: 100%;
+    min-height: 201px;
+    margin-bottom: -6px;
+    border-radius: 8px;
+    position: absolute;
+}
+
+.singlescreen-card-right-preview-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.singlescreen-card-right-search {
+    margin-top: 16px;
+    font-size: 16px;
+    background-color: #e7e7e7;
+}
+
+.singlescreen-input .ant-input {
+    background-color: #e7e7e7;
+}
+
+.singlescreen-card-right-encoder-container {
+    margin-top: 16px;
+    overflow-y: scroll;
+}
+
+.singlescreen-card-right-bottom {
+    height: 96px;
+    border-radius: 0 0 8px 8px;
+    margin: 0px -24px 0px -24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: #c6c6c6;
+}
+
+.singlescreen-card-right-bottom-text {
+    padding-top: 8px;
+    height: 36px;
+    color: #45413e;
+    font-family: PingFangTC;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.singlescreen-card-right-bottom-select {
+    width: 100%;
+}
+
+.ant-table-thead > tr > th {
+    border: none;
+}
+
+.ant-table-tbody > tr > td {
+    border: none
+}
+
+.ant-card-body {
+    padding-bottom: 0px !important;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #262320 !important;
+    width: 160px;
+    text-align: center;
+    font-family: PingFangTC;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.ant-tabs-ink-bar {
+    position: absolute;
+    background: #262320 !important;
+    pointer-events: none;
+}

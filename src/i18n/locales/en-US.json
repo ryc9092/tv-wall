@@ -72,6 +72,10 @@
   "Text-TVWall-DeactiveSuccess": "deactivate tv wall success",
   "Text-TVWall-DeactiveFail": "deactivate tv wall fail",
 
+  "Text-SingleScreen-Management": "Single Screen Management",
+  "Text-SingleScreen-InputDecoder": "Input decoder or group name",
+  "Text-SingleScreen-ConnectType": "Connection type",
+
   "Text-USB-USBMgmt": "USB management",
   "Text-USB-Source": "USB source",
   "Text-USB-ConnectionStatus": "USB connection status",
