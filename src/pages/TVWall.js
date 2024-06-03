@@ -44,7 +44,6 @@ const TVWall = () => {
   const [blocks, setBlocks] = useState([]);
   const [isActivedWall, setIsActivedWall] = useState(false);
   const [blockEncoderMapping, setBlockEncoderMapping] = useState({});
-  const [reloadWall, setReloadWall] = useState(null);
 
   // Set "wall options"
   useEffect(() => {
@@ -367,8 +366,6 @@ const TVWall = () => {
             isActivedWall={isActivedWall}
             blockEncoderMapping={blockEncoderMapping}
             setBlockEncoderMapping={setBlockEncoderMapping}
-            setReloadWall={setReloadWall}
-            reloadWall={reloadWall}
           />
         </div>
         {/* <div

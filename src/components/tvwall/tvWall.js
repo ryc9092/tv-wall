@@ -18,11 +18,11 @@ const TvWall = ({
   isActivedWall,
   blockEncoderMapping,
   setBlockEncoderMapping,
-  setReloadWall,
-  reloadWall,
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
+  const [reloadWall, setReloadWall] = useState(null);
+  const [wallReloaded, setWallReloaded] = useState(null);
   const [tvWallScreens, setTvWallScreens] = useState([]);
   const [tvWallSize, setTvWallSize] = useState({ col: 0, row: 0 });
   const [tvWallTemplate, setTvWallTemplate] = useState(null);
@@ -76,6 +76,7 @@ const TvWall = ({
           col: selectedWall.col,
           row: selectedWall.row,
         });
+        setWallReloaded(false);
       })();
     }
   }, [selectedWall, selectedTemplate, clearTvWall]);
@@ -184,7 +185,7 @@ const TvWall = ({
             height: `${(100 / tvWallSize.row) * block.row}%`,
             marginLeft: `${(100 / selectedWall.col) * block.marginLeft}%`,
             marginTop: `${
-              (document.getElementById("wallScreens").clientHeight /
+              (document.getElementById("tv-wall-container").clientHeight /
                 tvWallSize.row) *
               block.marginTop
             }px`,
@@ -201,18 +202,20 @@ const TvWall = ({
             onMouseEnter={handleBlockMouseEnter}
             onMouseLeave={handleBlockMouseLeave}
           >
-            <embed
-              style={{
-                width: document.getElementById(`screen-${block.block}`)
-                  ?.clientWidth,
-                height: document.getElementById(`screen-${block.block}`)
-                  ?.clientHeight,
-                position: "absolute",
-                overflow: "hidden",
-              }}
-              src={block.encoder?.previewUrl}
-              title="Video player"
-            />
+            {block.encoder?.previewUrl ? (
+              <embed
+                style={{
+                  width: document.getElementById(`screen-${block.block}`)
+                    ?.clientWidth,
+                  height: document.getElementById(`screen-${block.block}`)
+                    ?.clientHeight,
+                  position: "absolute",
+                  overflow: "hidden",
+                }}
+                src={block.encoder?.previewUrl}
+                title="Video player"
+              />
+            ) : null}
             <div
               style={{
                 width: document.getElementById(`screen-${block.block}`)
@@ -299,14 +302,17 @@ const TvWall = ({
     reloadWall,
   ]);
 
-  // for temp fix bug: wall screen text show vertical
+  // for temp fix bug: wall screen text show vertical, because document.getElementById(`screen-${block.block}`)?.clientWidth is undefined
   useEffect(() => {
-    (async () => {
-      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-      await sleep(500);
-      setReloadWall("reload");
-    })();
-  }, [tvWallTemplate, blocksWithPosition, setReloadWall]);
+    if (!wallReloaded) {
+      setWallReloaded(true);
+      (async () => {
+        const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+        await sleep(1000);
+        setReloadWall(Math.random());
+      })();
+    }
+  }, [tvWallTemplate, selectedTemplate]);
 
   // setClearBlock take effect after onBlockClick event
   useEffect(() => {
@@ -415,7 +421,11 @@ const TvWall = ({
     );
   };
 
-  return <div style={{ width: "100%", height: "100%" }}>{tvWallTemplate}</div>;
+  return (
+    <div id="tv-wall-container" style={{ width: "100%", height: "100%" }}>
+      {tvWallTemplate}
+    </div>
+  );
 };
 
 export default TvWall;
