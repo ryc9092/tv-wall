@@ -159,7 +159,7 @@ const TVWall = () => {
 
       encoders.forEach((encoder) => {
         if (encoder.nickName.includes(searchFilter))
-          tempFilteredEncoders.push(encoder);
+          tempFilteredEncoders.push({ key: encoder.mac, ...encoder });
       });
       setFilteredEncoders(tempFilteredEncoders);
     })();
@@ -241,7 +241,19 @@ const TVWall = () => {
       title: intl.formatMessage(Messages.Text_Common_Name),
       dataIndex: "nickName",
       key: "nickName",
-      render: (text) => text,
+      render: (text) => {
+        return (
+          <span
+            style={
+              selectedEncoder.nickName === text
+                ? { backgroundColor: "#FDEBD0" }
+                : null
+            }
+          >
+            {text}
+          </span>
+        );
+      },
     },
     {
       title: intl.formatMessage(Messages.Text_Common_Model),
@@ -478,7 +490,7 @@ const TVWall = () => {
       </div>
       <div
         className="tvwall-card-container"
-        style={{ minHeight: `${height - 124}px` }} // deduct topbar & padding
+        style={{ minHeight: `${height - 104}px` }} // deduct topbar & padding
       >
         <Card className="tvwall-card-right">
           <div className="tvwall-card-right-title">
@@ -518,13 +530,11 @@ const TVWall = () => {
               dataSource={filteredEncoders}
               pagination={false}
               size={"small"}
-              onRow={(record) => {
-                return {
-                  onClick: () => {
-                    handleChooseEncoder(record);
-                  },
-                };
-              }}
+              onRow={(record) => ({
+                onClick: () => {
+                  handleChooseEncoder(record);
+                },
+              })}
               style={{ maxHeight: `${height - 510}px`, marginBottom: 0 }}
             />
           </div>
