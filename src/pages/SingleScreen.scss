@@ -51,10 +51,32 @@
     background-color: #e7e7e7;
 }
 
+.single-screen-card {
+    // min-width: 294px;
+    height: 220px;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.single-screen-card-title-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.single-screen-card-title {
+    width: 100%;
+    color: #45413e;
+    font-family: PingFangTC;
+    font-size: 22px;
+    font-weight: 600;
+}
+
 .singlescreen-card-container {
     min-width: 350px;
     padding-left: 12px;
     padding-right: 24px;
+    padding-bottom: 24px;
 }
 
 .singlescreen-card-right {
@@ -118,8 +140,8 @@
 }
 
 .singlescreen-card-right-bottom {
-    height: 96px;
-    border-radius: 0 0 8px 8px;
+    height: 104px;
+    border-radius: 0 0 24px 24px;
     margin: 0px -24px 0px -24px;
     padding-left: 24px;
     padding-right: 24px;
