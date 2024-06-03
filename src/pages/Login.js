@@ -76,7 +76,13 @@ const Login = () => {
   return (
     <div>
       {playAnime ? (
-        <div style={{ overflow: "hidden", lineHeight: 0 }}>
+        <div
+          style={{
+            overflow: "hidden",
+            lineHeight: 0,
+            backgroundColor: "#262320",
+          }}
+        >
           <video autoPlay muted className="login-anime">
             <source src={anime} type="video/mp4" />
           </video>
