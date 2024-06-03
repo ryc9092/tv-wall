@@ -13,7 +13,7 @@ export const login = async ({ username, password, store }) => {
     pwd: password,
   });
   try {
-    const API_BASE = `https://${store.vars.ApiServer.Hostname}`;
+    const API_BASE = `${store.vars.ApiServer.Hostname}`;
     const response = await fetch(`${API_BASE}${apiPath}`, {
       method: "POST",
       mode: "cors",
@@ -44,7 +44,7 @@ const apiGET = async ({
 }) => {
   if (setError) setError(null);
   let result;
-  const API_BASE = `http://${vars.ApiServer.Hostname}`;
+  const API_BASE = `${vars.ApiServer.Hostname}`;
   const paramsUri = params === undefined ? "" : `?${params}`;
   // const jwt = sessionStorage.getItem("token");
   const response = await fetch(`${API_BASE}${apiPath}${paramsUri}`, {
@@ -95,7 +95,7 @@ const apiPOST = async ({
   const contentType = form
     ? "application/json"
     : "application/x-www-form-urlencoded; charset=UTF-8";
-  const API_BASE = `http://${vars.ApiServer.Hostname}`;
+  const API_BASE = `${vars.ApiServer.Hostname}`;
   const paramsUri = params === undefined ? "" : `?${params}`;
   // const jwt = sessionStorage.getItem("token");
   const response = await fetch(`${API_BASE}${apiPath}${paramsUri}`, {
@@ -147,7 +147,7 @@ const apiCall = async ({
   const contentType = form
     ? "application/json"
     : "application/x-www-form-urlencoded; charset=UTF-8";
-  const API_BASE = `http://${vars.ApiServer.Hostname}`;
+  const API_BASE = `${vars.ApiServer.Hostname}`;
   const paramsUri = params === undefined ? "" : `?${params}`;
   // const jwt = sessionStorage.getItem("token");
   const response = await fetch(`${API_BASE}${apiPath}${paramsUri}`, {
