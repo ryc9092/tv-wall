@@ -69,7 +69,7 @@
   "Text-TVWall-ClearBlock": "清除此區塊",
   "Text-TVWall-ActiveSuccess": "啟用電視牆成功",
   "Text-TVWall-ActiveFail": "啟用電視牆失敗, 請確認樣板、編碼器設定無誤",
-  "Text-TVWall-DeactiveSuccess": "停用電視牆成功",
+  "Text-TVWall-DeactiveSuccess": "停用電視牆",
   "Text-TVWall-DeactiveFail": "停用電視牆失敗",
 
   "Text-SingleScreen-Management": "單畫面影音管理",

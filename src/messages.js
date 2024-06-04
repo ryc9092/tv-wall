@@ -255,26 +255,26 @@ export default defineMessages({
   },
   Text_TVWall_DeactiveSuccess: {
     id: "Text-TVWall-DeactiveSuccess",
-    defaultMessage: "停用電視牆成功",
+    defaultMessage: "停用電視牆",
   },
   Text_TVWall_DeactiveFail: {
     id: "Text-TVWall-DeactiveFail",
     defaultMessage: "停用電視牆失敗",
   },
 
-    // Single screen management
-    Text_SingleScreen_Management: {
-      id: "Text-SingleScreen-Management",
-      defaultMessage: "電視牆影音管理",
-    },
-    Text_SingleScreen_InputDecoder: {
-      id: "Text-SingleScreen-InputDecoder",
-      defaultMessage: "輸入解碼器或群組名稱",
-    },
-    Text_SingleScreen_ConnectType: {
-      id: "Text-SingleScreen-ConnectType",
-      defaultMessage: "連接選項",
-    },
+  // Single screen management
+  Text_SingleScreen_Management: {
+    id: "Text-SingleScreen-Management",
+    defaultMessage: "電視牆影音管理",
+  },
+  Text_SingleScreen_InputDecoder: {
+    id: "Text-SingleScreen-InputDecoder",
+    defaultMessage: "輸入解碼器或群組名稱",
+  },
+  Text_SingleScreen_ConnectType: {
+    id: "Text-SingleScreen-ConnectType",
+    defaultMessage: "連接選項",
+  },
 
   // USB management
   Text_USB_USBMgmt: {
