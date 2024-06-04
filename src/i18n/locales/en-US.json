@@ -69,7 +69,7 @@
   "Text-TVWall-ClearBlock": "clear block",
   "Text-TVWall-ActiveSuccess": "activate tv wall success",
   "Text-TVWall-ActiveFail": "activate tv wall fail",
-  "Text-TVWall-DeactiveSuccess": "deactivate tv wall success",
+  "Text-TVWall-DeactiveSuccess": "deactivate tv wall",
   "Text-TVWall-DeactiveFail": "deactivate tv wall fail",
 
   "Text-SingleScreen-Management": "Single Screen Management",
