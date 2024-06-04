@@ -3,7 +3,7 @@ import { StoreContext } from "../components/store/store";
 import { Card, Col, Input, Row, Tabs, Tag, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import useWindowDimensions from "../utils/WindowDimension";
-import { getDecoders, getEncoders } from "../api/API";
+import { createDeviceLink, getDecoders, getEncoders } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
 import "../App.scss";
@@ -25,6 +25,41 @@ const SingleScreen = () => {
     name: "",
     previewUrl: "",
   });
+  const [currentScreen, setCurrentScreen] = useState(null);
+
+  const handleScreenMouseEnter = (event) => {
+    const itemId = event.target.id;
+    console.log(itemId);
+    setCurrentScreen(itemId);
+  };
+
+  const handleScreenMouseLeave = () => {
+    setCurrentScreen(null);
+  };
+
+  const onScreenClick = (event) => {
+    if (selectedEncoder.previewUrl) {
+      let tempDecoders = [];
+      const decoderMac = event.target.id.split("-")[1];
+      console.log(decoderMac);
+      console.log(decoders);
+      decoders.forEach((decoder) => {
+        if (decoder.mac === decoderMac) {
+          tempDecoders.push({
+            ...decoder,
+            previewUrl: selectedEncoder.previewUrl,
+            encoder: {
+              mac: selectedEncoder.mac,
+              nickName: selectedEncoder.nickName,
+            },
+          });
+        } else {
+          tempDecoders.push(decoder);
+        }
+      });
+      setDecoders(tempDecoders);
+    }
+  };
 
   const tabItems = [
     {
@@ -60,65 +95,163 @@ const SingleScreen = () => {
     });
   };
 
+  useEffect(() => {
+    (async () => {
+      const decoders = await getDecoders(store);
+      setDecoders(decoders);
+    })();
+  }, []);
+
   // Set "normal/abnormal encoder list" when search filter is changed
   useEffect(() => {
     (async () => {
       let tempFilteredDecoders = [];
-      const decoders = await getDecoders(store);
-      setDecoders(decoders);
       decoders.forEach((decoder) => {
         if (decoder.nickName.includes(searchDecoderFilter))
           tempFilteredDecoders.push(decoder);
       });
       setFilteredDecoders(tempFilteredDecoders);
     })();
-  }, [searchDecoderFilter]);
+  }, [searchDecoderFilter, decoders]);
+
+  const modifyVideoSize = (previewUrl, width, height) => {
+    const test = previewUrl.replace(/h.*&/, `h=${width}`);
+    console.log(previewUrl, test);
+    return "http://172.16.1.13:8080/?action=stream&w=174&h=221&fps=15&bw=5000&as=0";
+  };
 
   useEffect(() => {
     let tempDecoderCards = [];
     filteredDecoders.forEach((decoder) => {
       tempDecoderCards.push(
-        <Col span={6}>
-          <Card className="single-screen-card">
-            <div className="single-screen-card-title-row">
-              <span className="single-screen-card-title">
-                {decoder.nickName}
-              </span>
-              <span style={{ marginTop: "6px" }}>
-                {decoder.state === "Up" ? (
-                  <Tag
-                    color={"#eef9b4"}
-                    key={`${decoder.name}.${decoder.state}`}
-                  >
-                    <span style={{ color: "#a0b628" }}>
-                      <FormattedMessage {...Messages.Text_Common_Up} />
-                    </span>
-                  </Tag>
-                ) : decoder.state === "Down" ? (
-                  <Tag
-                    color={"#ffe6e5"}
-                    key={`${decoder.name}.${decoder.state}`}
-                  >
-                    <span style={{ color: "#d55959" }}>
-                      <FormattedMessage {...Messages.Text_Common_Down} />
-                    </span>
-                  </Tag>
-                ) : (
-                  <Tag
-                    color={"yellow"}
-                    key={`${decoder.name}.${decoder.state}`}
-                  >
-                    {decoder.state}
-                  </Tag>
-                )}
-              </span>
+        <Col span={6} id={`card-${decoder.mac}`}>
+          <div
+            className="single-screen-card"
+            style={{
+              backgroundColor:
+                currentScreen === `card-${decoder.mac}` ? "gray" : "white",
+            }}
+            onMouseOver={handleScreenMouseEnter}
+            onMouseLeave={handleScreenMouseLeave}
+            onClick={onScreenClick}
+          >
+            {decoder.previewUrl ? (
+              <embed
+                style={{
+                  width: document.getElementById(`card-${decoder.mac}`)
+                    ?.clientWidth,
+                  height: document.getElementById(`card-${decoder.mac}`)
+                    ?.clientHeight,
+                  position: "absolute",
+                  overflow: "hidden",
+                  paddingRight: 10,
+                  paddingBottom: 12,
+                }}
+                // src={modifyVideoSize(
+                //   decoder.previewUrl,
+                //   document.getElementById(`card-${decoder.mac}`)?.clientWidth,
+                //   document.getElementById(`card-${decoder.mac}`)?.clientHeight
+                // )}
+                src={decoder.previewUrl}
+                title="Video player"
+              />
+            ) : null}
+            <div
+              id={`card-${decoder.mac}`}
+              className="single-screen-card"
+              style={{
+                width: `${
+                  document.getElementById(`card-${decoder.mac}`)?.clientWidth -
+                  10
+                }px`,
+                height: `${
+                  document.getElementById(`card-${decoder.mac}`)?.clientHeight -
+                  11
+                }px`,
+                position: "absolute",
+                zIndex: 100,
+                opacity: 0.8,
+                marginRight: 12,
+                backgroundColor:
+                  currentScreen === `card-${decoder.mac}` ? "gray" : null,
+              }}
+            >
+              <div className="single-screen-card-title-row">
+                <span
+                  id={`card-${decoder.mac}`}
+                  className="single-screen-card-title"
+                  style={{
+                    color:
+                      currentScreen === `card-${decoder.mac}`
+                        ? "white"
+                        : "#45413e",
+                  }}
+                >
+                  {decoder.nickName}
+                </span>
+                <span id={`card-${decoder.mac}`} style={{ marginTop: "2px" }}>
+                  {decoder.state === "Up" ? (
+                    <Tag
+                      id={`card-${decoder.mac}`}
+                      color={"#eef9b4"}
+                      key={`${decoder.name}.${decoder.state}`}
+                    >
+                      <span
+                        id={`card-${decoder.mac}`}
+                        style={{ color: "#a0b628" }}
+                      >
+                        <FormattedMessage {...Messages.Text_Common_Up} />
+                      </span>
+                    </Tag>
+                  ) : decoder.state === "Down" ? (
+                    <Tag
+                      id={`card-${decoder.mac}`}
+                      color={"#ffe6e5"}
+                      key={`${decoder.name}.${decoder.state}`}
+                    >
+                      <span
+                        id={`card-${decoder.mac}`}
+                        style={{ color: "#d55959" }}
+                      >
+                        <FormattedMessage {...Messages.Text_Common_Down} />
+                      </span>
+                    </Tag>
+                  ) : (
+                    <Tag
+                      id={`card-${decoder.mac}`}
+                      color={"yellow"}
+                      key={`${decoder.name}.${decoder.state}`}
+                    >
+                      {decoder.state}
+                    </Tag>
+                  )}
+                </span>
+              </div>
+              {/* todo !!!! wait for finish */}
+              {currentScreen === `card-${decoder.mac}` ? (
+                <div
+                  id={`card-${decoder.mac}`}
+                  className="single-screen-card-desc"
+                >
+                  <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
+                  {" : "} {decoder.encoder?.nickName}
+                </div>
+              ) : (
+                <div
+                  id={`card-${decoder.mac}`}
+                  className="single-screen-card-desc"
+                >
+                  <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
+                  {" : "} <FormattedMessage {...Messages.Text_Common_None} />
+                </div>
+              )}
             </div>
-          </Card>
+          </div>
         </Col>
       );
     });
     setDecoderCards(tempDecoderCards);
-  }, [filteredDecoders]);
+  }, [filteredDecoders, currentScreen]);
 
   const columns = [
     {

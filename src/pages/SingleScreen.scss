@@ -52,13 +52,16 @@
 }
 
 .single-screen-card {
+    // width: 100%;
     // min-width: 294px;
     height: 220px;
+    border-radius: 12px;
     margin-bottom: 12px;
     cursor: pointer;
 }
 
 .single-screen-card-title-row {
+    padding: 14px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -70,6 +73,13 @@
     font-family: PingFangTC;
     font-size: 22px;
     font-weight: 600;
+}
+
+.single-screen-card-desc {
+    padding: 2px 0px 0px 14px;
+    font-family: PingFangTC;
+    font-size: 16px;
+    font-weight: normal;
 }
 
 .singlescreen-card-container {
