@@ -80,7 +80,7 @@ const Login = () => {
           style={{
             overflow: "hidden",
             lineHeight: 0,
-            backgroundColor: "#262320",
+            backgroundColor: "black",
           }}
         >
           <video autoPlay muted className="login-anime">
