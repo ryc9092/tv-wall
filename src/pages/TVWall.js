@@ -224,8 +224,19 @@ const TVWall = () => {
         store: store,
       });
       if (!result) throw new Error("call api failed");
-      setSelectedTemplate(null);
-      setBlocks([]);
+      // clean encoder info in block
+      let tempblocks = [];
+      blocks.forEach((block) => {
+        tempblocks.push({
+          ...block,
+          encoder: {
+            mac: "",
+            previewUrl: "",
+            nickName: "",
+          },
+        });
+      });
+      setBlocks(tempblocks);
       showSuccessNotificationByMsg(
         intl.formatMessage(Messages.Text_TVWall_DeactiveSuccess)
       );
