@@ -87,11 +87,11 @@ export default defineMessages({
   },
   Text_Sidebar_TVWallManagement: {
     id: "Text-Sidebar-TVWallManagement",
-    defaultMessage: "電視牆影音管理",
+    defaultMessage: "電視牆影像管理",
   },
   Text_Sidebar_SingleScreenManagement: {
     id: "Text-Sidebar-SingleScreenManagement",
-    defaultMessage: "單畫面影音管理",
+    defaultMessage: "單畫面影像管理",
   },
   Text_Sidebar_AudioManagement: {
     id: "Text-Sidebar-AudioManagement",
@@ -203,7 +203,7 @@ export default defineMessages({
   // TV wall management
   Text_TVWall_TVWallManagement: {
     id: "Text-TVWall-TVWallManagement",
-    defaultMessage: "電視牆影音管理",
+    defaultMessage: "電視牆影像管理",
   },
   Text_TVWall_WallName: {
     id: "Text-TVWall-WallName",
@@ -265,7 +265,7 @@ export default defineMessages({
   // Single screen management
   Text_SingleScreen_Management: {
     id: "Text-SingleScreen-Management",
-    defaultMessage: "電視牆影音管理",
+    defaultMessage: "電視牆影像管理",
   },
   Text_SingleScreen_InputDecoder: {
     id: "Text-SingleScreen-InputDecoder",
@@ -423,11 +423,11 @@ export default defineMessages({
   },
   Text_Situation_TVWallManagement: {
     id: "Text-Situation-TVWallManagement",
-    defaultMessage: "電視牆影音管理",
+    defaultMessage: "電視牆影像管理",
   },
   Text_Situation_SingleScreenManagement: {
     id: "Text-Situation-SingleScreenManagement",
-    defaultMessage: "單畫面影音管理",
+    defaultMessage: "單畫面影像管理",
   },
   Text_Situation_AudioManagement: {
     id: "Text-Situation-AudioManagement",
