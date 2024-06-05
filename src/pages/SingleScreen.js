@@ -110,7 +110,7 @@ const SingleScreen = () => {
       let tempFilteredEncoders = [];
       encoders.forEach((encoder) => {
         if (encoder.nickName.includes(searchEncoderFilter))
-          tempFilteredEncoders.push(encoder);
+          tempFilteredEncoders.push({ key: encoder.mac, ...encoder });
       });
       setFilteredEncoders(tempFilteredEncoders);
     })();
@@ -234,6 +234,7 @@ const SingleScreen = () => {
     filteredDecoders.forEach((decoder) => {
       tempDecoderCards.push(
         <Col
+          key={`col-${decoder.mac}`}
           id={`card-${decoder.mac}`}
           onMouseOver={handleScreenMouseEnter}
           onMouseLeave={handleScreenMouseLeave}
