@@ -267,6 +267,10 @@ export default defineMessages({
     id: "Text-SingleScreen-Management",
     defaultMessage: "電視牆影像管理",
   },
+  Text_SingleScreen_TabSingleScreen: {
+    id: "Text-SingleScreen-TabSingleScreen",
+    defaultMessage: "單顯示器",
+  },
   Text_SingleScreen_InputDecoder: {
     id: "Text-SingleScreen-InputDecoder",
     defaultMessage: "輸入解碼器或群組名稱",
@@ -274,6 +278,26 @@ export default defineMessages({
   Text_SingleScreen_ConnectType: {
     id: "Text-SingleScreen-ConnectType",
     defaultMessage: "連接選項",
+  },
+  Text_SingleScreen_PlayVideo: {
+    id: "Text-SingleScreen-PlayVideo",
+    defaultMessage: "投放",
+  },
+  Text_SingleScreen_VideoPlaySuccess: {
+    id: "Text-SingleScreen-VideoPlaySuccess",
+    defaultMessage: "影像投放成功",
+  },
+  Text_SingleScreen_VideoPlayFail: {
+    id: "Text-SingleScreen-VideoPlayFail",
+    defaultMessage: "影像投放失敗",
+  },
+  Text_SingleScreen_VideoClearSuccess: {
+    id: "Text-SingleScreen-VideoClearSuccess",
+    defaultMessage: "影像清除成功",
+  },
+  Text_SingleScreen_VideoClearFail: {
+    id: "Text-SingleScreen-VideoClearFail",
+    defaultMessage: "影像清除失敗",
   },
 
   // USB management

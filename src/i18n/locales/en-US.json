@@ -73,8 +73,14 @@
   "Text-TVWall-DeactiveFail": "deactivate tv wall fail",
 
   "Text-SingleScreen-Management": "Single Screen Management",
+  "Text-SingleScreen-TabSingleScreen": "Single Screen",
   "Text-SingleScreen-InputDecoder": "Input decoder or group name",
   "Text-SingleScreen-ConnectType": "Connection type",
+  "Text-SingleScreen-PlayVideo": "Play",
+  "Text-SingleScreen-VideoPlaySuccess": "Video play success",
+  "Text-SingleScreen-VideoPlayFail": "Video play fail",
+  "Text-SingleScreen-VideoClearSuccess": "Video clear success",
+  "Text-SingleScreen-VideoClearFail": "Video clear fail",
 
   "Text-USB-USBMgmt": "USB management",
   "Text-USB-Source": "USB source",

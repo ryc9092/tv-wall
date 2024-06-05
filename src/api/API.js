@@ -270,6 +270,16 @@ export const removeDeviceLink = async ({ store, linkId }) => {
   });
 };
 
+export const getDeviceLinks = async ({ store, linkType, isPreset }) => {
+  const params = `linkType=${linkType}&isPreset=${isPreset}`;
+  const apiPath = `/devicelinks/query`;
+  return await apiGET({
+    apiPath,
+    params,
+    store,
+  });
+};
+
 export const getDeviceLinkByEncoder = async ({ store, linkId }) => {
   const apiPath = `/deviceLinkDetails/linkId/${linkId}`;
   return await apiGET({

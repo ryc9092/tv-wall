@@ -53,7 +53,7 @@
 
 .single-screen-card {
     // width: 100%;
-    // min-width: 294px;
+    min-width: 294px;
     height: 220px;
     border-radius: 12px;
     margin-bottom: 12px;
@@ -80,6 +80,18 @@
     font-family: PingFangTC;
     font-size: 16px;
     font-weight: normal;
+    color: white;
+}
+
+.single-screen-trash-btn {
+    width: 18px;
+    background-color: black;
+}
+
+.single-screen-btn-text {
+    font-family: PingFangTC;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .singlescreen-card-container {

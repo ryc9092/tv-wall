@@ -73,8 +73,14 @@
   "Text-TVWall-DeactiveFail": "停用電視牆失敗",
 
   "Text-SingleScreen-Management": "單畫面影音管理",
+  "Text-SingleScreen-TabSingleScreen": "單顯示器",
   "Text-SingleScreen-InputDecoder": "輸入解碼器或群組名稱",
   "Text-SingleScreen-ConnectType": "連接選項",
+  "Text-SingleScreen-PlayVideo": "投放",
+  "Text-SingleScreen-VideoPlaySuccess": "影像投放成功",
+  "Text-SingleScreen-VideoPlayFail": "影像投放失敗",
+  "Text-SingleScreen-VideoClearSuccess": "影像清除成功",
+  "Text-SingleScreen-VideoClearFail": "影像清除失敗",
 
   "Text-USB-USBMgmt": "USB管理",
   "Text-USB-Source": "USB來源",
