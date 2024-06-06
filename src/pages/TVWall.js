@@ -513,7 +513,7 @@ const TVWall = () => {
           <div className="tvwall-card-right-preview">
             {selectedEncoder.previewUrl ? (
               <div>
-                <embed
+                <iframe
                   className="tvwall-card-right-preview-video"
                   src={selectedEncoder.previewUrl}
                   title="Video player"

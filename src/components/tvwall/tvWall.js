@@ -173,6 +173,12 @@ const TvWall = ({
     setBlocksWithPosition(tempBlocks);
   }, [blocks]);
 
+  const modifyVideoSize = (previewUrl, width, height) => {
+    const hostname = previewUrl.split("?")[0];
+    const modifiedUrl = `${hostname}?action=stream&w=${width}&h=${height}&fps=15&bw=5000&as=0`;
+    return modifiedUrl;
+  };
+
   useEffect(() => {
     let wall = [];
     let currentAppearedRow = 0;
@@ -203,7 +209,7 @@ const TvWall = ({
             onMouseLeave={handleBlockMouseLeave}
           >
             {block.encoder?.previewUrl ? (
-              <embed
+              <iframe
                 style={{
                   width: document.getElementById(`screen-${block.block}`)
                     ?.clientWidth,
@@ -211,7 +217,13 @@ const TvWall = ({
                     ?.clientHeight,
                   position: "absolute",
                   overflow: "hidden",
+                  border: 0,
                 }}
+                // src={modifyVideoSize(
+                //   block.encoder?.previewUrl,
+                //   document.getElementById(`screen-${block.block}`)?.clientWidth,
+                //   document.getElementById(`screen-${block.block}`)?.clientHeight
+                // )}
                 src={block.encoder?.previewUrl}
                 title="Video player"
               />
