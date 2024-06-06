@@ -60,6 +60,15 @@
     cursor: pointer;
 }
 
+.single-screen-card-video {
+    width: 100%;
+    max-width: 100%;
+    position: absolute;
+    padding-right: 10px;
+    padding-bottom: 12px;
+    border-radius: 12px !important;
+}
+
 .single-screen-card-title-row {
     padding: 14px;
     width: 100%;

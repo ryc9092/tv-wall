@@ -69,14 +69,20 @@ const SingleScreen = () => {
         isPreset: "N",
       });
 
-      let tempDecoders = [];
+      let linkedDecoders = [];
       deviceLinks.forEach((deviceLink) => {
-        const encoderMac = deviceLink.encoder;
         const decoderMac = deviceLink.id.split(".")[1];
-        decoders.forEach((decoder) => {
-          if (decoder.mac === decoderMac) {
+        linkedDecoders.push(decoderMac);
+      });
+
+      let tempDecoders = []; // for set decoders
+      decoders.forEach((decoder) => {
+        if (linkedDecoders.includes(decoder.mac)) {
+          deviceLinks.forEach((deviceLink) => {
+            const encoderMac = deviceLink.encoder;
+            const decoderMac = deviceLink.id.split(".")[1];
             encoders.forEach((encoder) => {
-              if (encoder.mac === encoderMac) {
+              if (encoder.mac === encoderMac && decoder.mac === decoderMac) {
                 tempDecoders.push({
                   ...decoder,
                   previewUrl: encoder.previewUrl,
@@ -87,18 +93,18 @@ const SingleScreen = () => {
                 });
               }
             });
-          } else {
-            tempDecoders.push({
-              ...decoder,
-              previewUrl: "",
-              encoder: {
-                mac: "",
-                nickName: "",
-              },
-            });
-          }
-        });
-      }, []);
+          });
+        } else {
+          tempDecoders.push({
+            ...decoder,
+            previewUrl: "",
+            encoder: {
+              mac: "",
+              nickName: "",
+            },
+          });
+        }
+      });
       setEncoders(encoders);
       setDecoders(tempDecoders.length > 0 ? tempDecoders : decoders);
     })();
@@ -137,9 +143,11 @@ const SingleScreen = () => {
   }, [decoders, searchDecoderFilter]);
 
   const modifyVideoSize = (previewUrl, width, height) => {
-    const test = previewUrl.replace(/h.*&/, `h=${width}`);
-    console.log(previewUrl, test);
-    return "http://172.16.1.13:8080/?action=stream&w=174&h=221&fps=15&bw=5000&as=0";
+    const hostname = previewUrl.split("?")[0];
+    const modifiedUrl = `${hostname}?action=stream&w=${width - 12}&h=${
+      height - 12
+    }&fps=15&bw=5000&as=0`;
+    return modifiedUrl;
   };
 
   const onScreenClick = (event) => {
@@ -202,7 +210,7 @@ const SingleScreen = () => {
       if (
         decoder.mac === decoderMac &&
         decoder.encoder &&
-        decoder.encoder !== "" &&
+        decoder.encoder.mac !== "" &&
         createdLink === false
       ) {
         createdLink = true;
@@ -252,15 +260,12 @@ const SingleScreen = () => {
           >
             {decoder.previewUrl ? (
               <embed
+                className="single-screen-card-video"
                 style={{
                   width: document.getElementById(`card-${decoder.mac}`)
                     ?.clientWidth,
                   height: document.getElementById(`card-${decoder.mac}`)
                     ?.clientHeight,
-                  position: "absolute",
-                  overflow: "hidden",
-                  paddingRight: 10,
-                  paddingBottom: 12,
                 }}
                 // src={modifyVideoSize(
                 //   decoder.previewUrl,
