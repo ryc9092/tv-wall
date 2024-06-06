@@ -1,33 +1,3 @@
-.container-border {
-    border: 1px solid gray;
-}
-
-.container-height {
-    height: 90vh;
-}
-
-@media(max-height: 768px) {
-    .container-height {
-        height: 86vh;
-    }
-}
-
-@media(max-height: 576px) {
-    .container-height {
-        height: 468px;
-    }
-}
-
-.container-width {
-    width: 98%;
-}
-
-@media(max-width: 828px) {
-    .container-width {
-        width: 698px;
-    }
-}
-
 .single-screen-layout {
     display: flex;
 }
