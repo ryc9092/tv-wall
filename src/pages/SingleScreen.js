@@ -144,8 +144,8 @@ const SingleScreen = () => {
 
   const modifyVideoSize = (previewUrl, width, height) => {
     const hostname = previewUrl.split("?")[0];
-    const modifiedUrl = `${hostname}?action=stream&w=${width - 12}&h=${
-      height - 12
+    const modifiedUrl = `${hostname}?action=stream&w=${width - 10}&h=${
+      height - 11
     }&fps=15&bw=5000&as=0`;
     return modifiedUrl;
   };
@@ -247,7 +247,13 @@ const SingleScreen = () => {
           onMouseOver={handleScreenMouseEnter}
           onMouseLeave={handleScreenMouseLeave}
         >
-          {/* <Col span={6} id={`card-${decoder.mac}`}> */}
+          {/* <Col
+          span={6}
+          key={`col-${decoder.mac}`}
+          id={`card-${decoder.mac}`}
+          onMouseOver={handleScreenMouseEnter}
+          onMouseLeave={handleScreenMouseLeave}
+        > */}
           <div
             className="single-screen-card"
             style={{
@@ -259,20 +265,23 @@ const SingleScreen = () => {
             onClick={onScreenClick}
           >
             {decoder.previewUrl ? (
-              <embed
+              <iframe
                 className="single-screen-card-video"
                 style={{
-                  width: document.getElementById(`card-${decoder.mac}`)
-                    ?.clientWidth,
-                  height: document.getElementById(`card-${decoder.mac}`)
-                    ?.clientHeight,
+                  width:
+                    document.getElementById(`card-${decoder.mac}`)
+                      ?.clientWidth - 10,
+                  height:
+                    document.getElementById(`card-${decoder.mac}`)
+                      ?.clientHeight - 11,
+                  border: 0,
                 }}
-                // src={modifyVideoSize(
-                //   decoder.previewUrl,
-                //   document.getElementById(`card-${decoder.mac}`)?.clientWidth,
-                //   document.getElementById(`card-${decoder.mac}`)?.clientHeight
-                // )}
-                src={decoder.previewUrl}
+                src={modifyVideoSize(
+                  decoder.previewUrl,
+                  document.getElementById(`card-${decoder.mac}`)?.clientWidth,
+                  document.getElementById(`card-${decoder.mac}`)?.clientHeight
+                )}
+                // src={decoder.previewUrl}
                 title="Video player"
               />
             ) : null}
@@ -291,7 +300,6 @@ const SingleScreen = () => {
                 position: "absolute",
                 zIndex: 100,
                 opacity: 0.8,
-                marginRight: 12,
                 backgroundColor:
                   currentScreen && currentScreen.includes(decoder.mac)
                     ? "gray"
@@ -524,7 +532,7 @@ const SingleScreen = () => {
           <div className="singlescreen-card-right-preview">
             {selectedEncoder.previewUrl ? (
               <div>
-                <embed
+                <iframe
                   className="singlescreen-card-right-preview-video"
                   src={selectedEncoder.previewUrl}
                   title="Video player"
