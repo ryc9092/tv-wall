@@ -144,9 +144,7 @@ const SingleScreen = () => {
 
   const modifyVideoSize = (previewUrl, width, height) => {
     const hostname = previewUrl.split("?")[0];
-    const modifiedUrl = `${hostname}?action=stream&w=${width - 10}&h=${
-      height - 11
-    }&fps=15&bw=5000&as=0`;
+    const modifiedUrl = `${hostname}?action=stream&w=${width}&h=${height}&fps=15&bw=5000&as=0`;
     return modifiedUrl;
   };
 
@@ -278,8 +276,10 @@ const SingleScreen = () => {
                 }}
                 src={modifyVideoSize(
                   decoder.previewUrl,
-                  document.getElementById(`card-${decoder.mac}`)?.clientWidth,
-                  document.getElementById(`card-${decoder.mac}`)?.clientHeight
+                  document.getElementById(`card-${decoder.mac}`)?.clientWidth -
+                    10,
+                  document.getElementById(`card-${decoder.mac}`)?.clientHeight -
+                    11
                 )}
                 // src={decoder.previewUrl}
                 title="Video player"
