@@ -129,17 +129,17 @@ const Sidebar = () => {
   };
 
   return (
-    <div>
-      <div style={{ marginTop: 16 }}>
-        <Menu
-          selectedKeys={[sideBarMenuKey]}
-          mode="inline"
-          items={items}
-          style={{ border: "0 solid white", backgroundColor: "#e7e7e7" }}
-          onClick={onNavigate}
-        />
-      </div>
-    </div>
+    <Menu
+      selectedKeys={[sideBarMenuKey]}
+      mode="inline"
+      items={items}
+      style={{
+        padding: "16px 8px 0px 8px",
+        border: "0 solid white",
+        backgroundColor: "#e7e7e7",
+      }}
+      onClick={onNavigate}
+    />
   );
 };
 

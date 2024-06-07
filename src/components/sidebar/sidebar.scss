@@ -1,18 +1,18 @@
 .ant-menu-item {
-    height: 56px !important;
+    height: 52px !important;
 }
 
 .ant-menu-item.ant-menu-item-selected {
     background-color: #c6c6c6;
+
 }
 
 .menu-icon {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    left: 12px;
+    top: 15px;
 }
 
 .menu-text {

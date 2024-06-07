@@ -10,19 +10,19 @@ const ResponsiveLayout = ({ topbar, sidebar, main }) => {
   const [store] = useContext(StoreContext);
 
   return (
-    <Layout style={{ height: "fit-content" }}>
-      <Header>{topbar}</Header>
-      <Layout>
+    <Layout style={{ width: 1920, height: 1080 }}>
+      <Header style={{ width: 1920, height: 56 }}>{topbar}</Header>
+      <Layout style={{ width: 1920, height: 1024 }}>
         <Sider
           collapsible
           collapsedWidth={72}
           collapsed={store.siderCollapse}
           zeroWidthTriggerStyle={{ display: "none" }}
-          style={{ backgroundColor: "#e7e7e7" }}
+          style={{ width: 224, height: 1024, backgroundColor: "#e7e7e7" }}
         >
           {sidebar}
         </Sider>
-        <Content>{main}</Content>
+        <Content style={{ width: 856, height: 1024 }}>{main}</Content>
       </Layout>
     </Layout>
   );

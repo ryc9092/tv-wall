@@ -6,6 +6,7 @@ import Messages from "../../messages";
 import { Actions } from "../store/reducer";
 import { Button, Divider, Dropdown, theme } from "antd";
 import { LANGUAGE_LOCALE_MAP } from "../../utils/Constant";
+import Logo from "../../assets/IPEC-Logo.png";
 import ListIcon from "../../assets/list.png";
 import UserIcon from "../../assets/user.png";
 import BellIcon from "../../assets/bell.png";
@@ -27,26 +28,6 @@ function TopBar({ setLocale }) {
     borderRadius: token.borderRadiusLG,
     boxShadow: token.boxShadowSecondary,
   };
-
-  let logoLetters = [
-    { letter: "I", fontSize: "38px", color: "#ebdd2d" },
-    { letter: "P", fontSize: "26px", color: "#595757" },
-    { letter: "E", fontSize: "26px", color: "#898989" },
-    { letter: "C", fontSize: "26px", color: "#b5b5b6" },
-  ];
-  let logo = (
-    <span>
-      {logoLetters.map((letter) => (
-        <span
-          className="topbar-logo-letter "
-          key={letter.letter}
-          style={{ ...letter }}
-        >
-          {letter.letter}
-        </span>
-      ))}
-    </span>
-  );
 
   const setLanguage = async (event) => {
     setLocale(LANGUAGE_LOCALE_MAP[event.key]);
@@ -95,65 +76,63 @@ function TopBar({ setLocale }) {
   };
 
   return (
-    <div>
-      <div className="topbar-fixed">
-        <span className="topbar-container">
-          <img
-            src={ListIcon}
-            alt="list"
-            className="topbar-list-icon"
-            onClick={onSiderCollapse}
-          />
-          {logo}
-        </span>
-        <span style={{ position: "absolute", right: 0, top: 4 }}>
-          <img src={BellIcon} alt="bell" className="topbar-function-icon" />
-          <Dropdown
-            menu={{ items }}
-            trigger={["click"]}
-            dropdownRender={(menu) => (
-              <div style={contentStyle}>
-                <div className="topbar-user-menu-account">
-                  <img
-                    alt="user"
-                    src={UserImage}
-                    className="topbar-user-menu-icon"
-                  />
-                  {store.account}
-                </div>
-                <Divider
-                  style={{
-                    margin: 0,
-                  }}
+    <div className="topbar-fixed">
+      <span className="topbar-container">
+        <img
+          src={ListIcon}
+          alt="list"
+          className="topbar-list-icon"
+          onClick={onSiderCollapse}
+        />
+        <img src={Logo} alt="logo" className="topbar-logo" />
+      </span>
+      <span style={{ position: "absolute", right: 0 }}>
+        <img src={BellIcon} alt="bell" className="topbar-function-icon" />
+        <Dropdown
+          menu={{ items }}
+          trigger={["click"]}
+          dropdownRender={(menu) => (
+            <div style={contentStyle}>
+              <div className="topbar-user-menu-account">
+                <img
+                  alt="user"
+                  src={UserImage}
+                  className="topbar-user-menu-icon"
                 />
-                {React.cloneElement(menu, {
-                  style: menuStyle,
-                })}
-                <Divider
-                  style={{
-                    margin: 0,
-                  }}
-                />
-                <Button
-                  danger
-                  type="text"
-                  style={{
-                    fontSize: 16,
-                    margin: "2px 6px 6px 4px",
-                    width: 150,
-                    textAlign: "left",
-                  }}
-                  onClick={onLogout}
-                >
-                  <FormattedMessage {...Messages.Text_Sidebar_Logout} />
-                </Button>
+                {store.account}
               </div>
-            )}
-          >
-            <img src={UserIcon} alt="user" className="topbar-function-icon" />
-          </Dropdown>
-        </span>
-      </div>
+              <Divider
+                style={{
+                  margin: 0,
+                }}
+              />
+              {React.cloneElement(menu, {
+                style: menuStyle,
+              })}
+              <Divider
+                style={{
+                  margin: 0,
+                }}
+              />
+              <Button
+                danger
+                type="text"
+                style={{
+                  fontSize: 16,
+                  margin: "2px 6px 6px 4px",
+                  width: 150,
+                  textAlign: "left",
+                }}
+                onClick={onLogout}
+              >
+                <FormattedMessage {...Messages.Text_Sidebar_Logout} />
+              </Button>
+            </div>
+          )}
+        >
+          <img src={UserIcon} alt="user" className="topbar-function-icon" />
+        </Dropdown>
+      </span>
     </div>
   );
 }
