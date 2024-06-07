@@ -331,7 +331,7 @@ const SingleScreen = () => {
                     >
                       <span
                         id={`card-${decoder.mac}`}
-                        style={{ color: "#a0b628" }}
+                        style={{ color: "#a0b628", fontFamily: "PingFangTC" }}
                       >
                         <FormattedMessage {...Messages.Text_Common_Up} />
                       </span>
@@ -344,7 +344,7 @@ const SingleScreen = () => {
                     >
                       <span
                         id={`card-${decoder.mac}`}
-                        style={{ color: "#d55959" }}
+                        style={{ color: "#d55959", fontFamily: "PingFangTC" }}
                       >
                         <FormattedMessage {...Messages.Text_Common_Down} />
                       </span>
@@ -355,7 +355,12 @@ const SingleScreen = () => {
                       color={"yellow"}
                       key={`${decoder.name}.${decoder.state}`}
                     >
-                      {decoder.state}
+                      <span
+                        id={`card-${decoder.mac}`}
+                        style={{ color: "#d55959", fontFamily: "PingFangTC" }}
+                      >
+                        {decoder.state}
+                      </span>
                     </Tag>
                   )}
                 </span>
@@ -425,7 +430,11 @@ const SingleScreen = () => {
 
   const columns = [
     {
-      title: intl.formatMessage(Messages.Text_Common_Name),
+      title: (
+        <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
+          {intl.formatMessage(Messages.Text_Common_Name)}
+        </span>
+      ),
       dataIndex: "nickName",
       key: "nickName",
       render: (text) => {
@@ -433,8 +442,8 @@ const SingleScreen = () => {
           <span
             style={
               selectedEncoder.nickName === text
-                ? { backgroundColor: "#FDEBD0" }
-                : null
+                ? { backgroundColor: "#FDEBD0", fontSize: "16px" }
+                : { fontSize: "16px" }
             }
           >
             {text}
@@ -443,7 +452,11 @@ const SingleScreen = () => {
       },
     },
     {
-      title: intl.formatMessage(Messages.Text_Common_Model),
+      title: (
+        <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
+          {intl.formatMessage(Messages.Text_Common_Model)}
+        </span>
+      ),
       dataIndex: "model",
       key: "model",
       filters: [
@@ -457,9 +470,16 @@ const SingleScreen = () => {
         },
       ],
       onFilter: (value, data) => data.model.indexOf(value) === 0,
+      render: (text) => {
+        return <span style={{ fontSize: "16px" }}>{text}</span>;
+      },
     },
     {
-      title: intl.formatMessage(Messages.Text_DeviceStatus_State),
+      title: (
+        <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
+          {intl.formatMessage(Messages.Text_DeviceStatus_State)}
+        </span>
+      ),
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
@@ -565,7 +585,10 @@ const SingleScreen = () => {
                   handleChooseEncoder(record);
                 },
               })}
-              style={{ maxHeight: `${height - 510}px`, marginBottom: 0 }}
+              style={{
+                maxHeight: `${height - 510}px`,
+                marginBottom: 0,
+              }}
             />
           </div>
           {/* <div className="singlescreen-card-right-bottom">

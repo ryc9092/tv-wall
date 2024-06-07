@@ -249,7 +249,11 @@ const TVWall = () => {
 
   const columns = [
     {
-      title: intl.formatMessage(Messages.Text_Common_Name),
+      title: (
+        <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
+          {intl.formatMessage(Messages.Text_Common_Name)}
+        </span>
+      ),
       dataIndex: "nickName",
       key: "nickName",
       render: (text) => {
@@ -257,8 +261,8 @@ const TVWall = () => {
           <span
             style={
               selectedEncoder.nickName === text
-                ? { backgroundColor: "#FDEBD0" }
-                : null
+                ? { backgroundColor: "#FDEBD0", fontSize: "16px" }
+                : { fontSize: "16px" }
             }
           >
             {text}
@@ -267,7 +271,11 @@ const TVWall = () => {
       },
     },
     {
-      title: intl.formatMessage(Messages.Text_Common_Model),
+      title: (
+        <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
+          {intl.formatMessage(Messages.Text_Common_Model)}
+        </span>
+      ),
       dataIndex: "model",
       key: "model",
       filters: [
@@ -281,9 +289,16 @@ const TVWall = () => {
         },
       ],
       onFilter: (value, data) => data.model.indexOf(value) === 0,
+      render: (text) => {
+        return <span style={{ fontSize: "16px" }}>{text}</span>;
+      },
     },
     {
-      title: intl.formatMessage(Messages.Text_DeviceStatus_State),
+      title: (
+        <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
+          {intl.formatMessage(Messages.Text_DeviceStatus_State)}
+        </span>
+      ),
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
