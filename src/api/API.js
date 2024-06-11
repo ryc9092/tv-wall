@@ -280,6 +280,14 @@ export const getDeviceLinks = async ({ store, linkType, isPreset }) => {
   });
 };
 
+export const getDeviceLinkDetails = async ({ store, linkId }) => {
+  const apiPath = `/deviceLinkDetails/linkId/${linkId}`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
 export const getDeviceLinkByEncoder = async ({ store, linkId }) => {
   const apiPath = `/deviceLinkDetails/linkId/${linkId}`;
   return await apiGET({

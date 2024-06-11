@@ -305,13 +305,29 @@ export default defineMessages({
     id: "Text-USB-USBMgmt",
     defaultMessage: "USB管理",
   },
-  Text_USB_Source: {
-    id: "Text-USB-Source",
-    defaultMessage: "USB來源",
+  Text_USB_InputUSBSource: {
+    id: "Text-USB-InputUSBSource",
+    defaultMessage: "輸入USB來源名稱",
   },
   Text_USB_ConnectionStatus: {
     id: "Text-USB-ConnectionStatus",
-    defaultMessage: "USB連接狀態",
+    defaultMessage: "連接狀態",
+  },
+  Text_USB_Source: {
+    id: "Text-USB-Source",
+    defaultMessage: "來源名稱",
+  },
+  Text_USB_Destination: {
+    id: "Text-USB-Destination",
+    defaultMessage: "終端名稱",
+  },
+  Text_USB_Status: {
+    id: "Text-USB-Status",
+    defaultMessage: "狀態",
+  },
+  Text_USB_Operation: {
+    id: "Text-USB-Operation",
+    defaultMessage: "操作",
   },
   Text_USB_Connect: {
     id: "Text-USB-Connect",

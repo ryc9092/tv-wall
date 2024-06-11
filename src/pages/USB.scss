@@ -42,3 +42,85 @@
     height: 28px;
     width: 160px;
 }
+
+.usb-title-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.usb-title-input {
+    width: 270px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 16px;
+    background-color: #e7e7e7;
+}
+
+.usb-input .ant-input {
+    background-color: #e7e7e7;
+}
+
+.usb-content-container {
+    // width: 1200px;
+    // height: 875px;
+    margin-top: 40px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    border-radius: 24px;
+    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+    background-color: white;
+    padding: 40px;
+}
+
+.usb-content-title-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.usb-content-title {
+    font-family: PingFangTC;
+    font-size: 22px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.27;
+    letter-spacing: normal;
+    text-align: left;
+    color: var(--neutral-30);
+}
+
+.usb-content-create-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 36px;
+    margin-top: -6px;
+    cursor: pointer;
+}
+
+.usb-content-create-button-icon {
+    width: 16px;
+    margin-left: 11px;
+}
+
+.usb-content-table-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.usb-content-table-head {
+    font-family: PingFangTC;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    color: #a5a5a5;
+    min-width: 160px;
+}

@@ -11,7 +11,14 @@
     display: grid;
     grid-template-columns: 21fr 7fr;
     margin-top: 48px;
-    margin-left: 56px;
+    margin-left: 80px;
+}
+
+.page-layout-column-collapse {
+    display: grid;
+    grid-template-columns: 21fr 7fr;
+    margin-top: 48px;
+    margin-left: 120px;
 }
 
 .page-title {
