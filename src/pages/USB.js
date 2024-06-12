@@ -28,6 +28,8 @@ import {
   showSuccessNotificationByMsg,
 } from "../utils/Utils";
 import PlusIcon from "../assets/plus.png";
+import PencilIcon from "../assets/pencil.png";
+import TrashIcon from "../assets/trash.png";
 import "../App.scss";
 import "./USB.scss";
 
@@ -61,49 +63,40 @@ const USB = () => {
       setDecoders(decoders);
       setEncoders(encoders);
       setDeviceLinks(deviceLinks);
-      console.log(deviceLinks);
     })();
   }, []);
 
   useEffect(() => {
-    (async () => {
-      let tempLinkData = [];
-      await deviceLinks.forEach(async (deviceLink) => {
-        let encoderName;
-        encoders.some((encoder) => {
-          if (encoder.mac === deviceLink.encoder) {
-            encoderName = encoder.nickName;
+    setLinkData([]);
+    let tempLinkData = [];
+    deviceLinks.forEach(async (deviceLink, index) => {
+      let encoderName;
+      encoders.some((encoder) => {
+        if (encoder.mac === deviceLink.encoder) {
+          encoderName = encoder.nickName;
+          return true;
+        } else return false;
+      });
+      let linkDetail = await getDeviceLinkDetails({
+        store: store,
+        linkId: deviceLink.id,
+      });
+      linkDetail.forEach((link) => {
+        decoders.some((decoder) => {
+          if (decoder.mac === link.decoder) {
+            tempLinkData.push({
+              encoderMac: deviceLink.encoder,
+              encoderName: encoderName,
+              decoderMac: link.decoder,
+              decoderName: decoder.nickName,
+            });
+            setLinkData(linkData.concat(tempLinkData));
             return true;
           } else return false;
         });
-        let linkDetail = await getDeviceLinkDetails({
-          store: store,
-          linkId: deviceLink.id,
-        });
-        linkDetail.forEach((link) => {
-          console.log("dddd", link.decoder);
-          decoders.some((decoder) => {
-            if (decoder.mac === link.decoder) {
-              tempLinkData.push({
-                encoderMac: deviceLink.encoder,
-                encoderName: encoderName,
-                decoderMac: link.decoder,
-                decoderName: decoder.nickName,
-              });
-              console.log(tempLinkData);
-              return true;
-            } else return false;
-          });
-        });
       });
-      console.log("-----");
-      // setLinkData(tempLinkData);
-    })();
+    });
   }, [deviceLinks]);
-
-  useEffect(() => {
-    console.log(linkData, "lfsdjfdsfh");
-  }, [linkData]);
 
   const columns = [
     {
@@ -126,20 +119,47 @@ const USB = () => {
       ),
       dataIndex: "decoderName",
       key: "decoderName",
-      // render: (text) => {
-      //   return <span style={{ fontSize: "16px" }}>{text}</span>;
-      // },
+      render: (text) => {
+        return <span style={{ fontSize: "16px" }}>{text}</span>;
+      },
     },
+    // {
+    //   title: (
+    //     <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
+    //       {intl.formatMessage(Messages.Text_DeviceStatus_State)}
+    //     </span>
+    //   ),
+    //   key: "state",
+    //   dataIndex: "state",
+    //   sorter: (a, b) => a.state.length - b.state.length,
+    //   render: (_, { state, name }) => <></>,
+    // },
     {
       title: (
-        <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
-          {intl.formatMessage(Messages.Text_DeviceStatus_State)}
+        <span className="usb-content-table-head">
+          {intl.formatMessage(Messages.Text_USB_Operation)}
         </span>
       ),
-      key: "state",
+      key: "operate",
       dataIndex: "state",
-      sorter: (a, b) => a.state.length - b.state.length,
-      render: (_, { state, name }) => <></>,
+      render: (text, record) => (
+        <div>
+          <Button type="text">
+            <img
+              alt="edit"
+              src={PencilIcon}
+              className="usb-content-table-icon"
+            />
+          </Button>
+          <Button type="text" key={`reboot.${record.mac}`}>
+            <img
+              alt="remove"
+              src={TrashIcon}
+              className="usb-content-table-icon"
+            />
+          </Button>
+        </div>
+      ),
     },
   ];
 
@@ -395,7 +415,7 @@ const USB = () => {
               />
             </Button>
           </div>
-          <div className="usb-content-table-row ">
+          {/* <div className="usb-content-table-row ">
             <span className="usb-content-table-head">
               <FormattedMessage {...Messages.Text_USB_Source} />
             </span>
@@ -409,7 +429,7 @@ const USB = () => {
               <FormattedMessage {...Messages.Text_USB_Operation} />
             </span>
           </div>
-          <Divider style={{ marginTop: 8 }} />
+          <Divider style={{ marginTop: 8 }} /> */}
           <Table
             columns={columns}
             dataSource={linkData}
