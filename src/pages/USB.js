@@ -5,6 +5,7 @@ import {
   Col,
   Divider,
   Input,
+  Modal,
   Radio,
   Row,
   Table,
@@ -28,6 +29,7 @@ import {
   showSuccessNotificationByMsg,
 } from "../utils/Utils";
 import PlusIcon from "../assets/plus.png";
+import CaretLeftIcon from "../assets/caret-left.png";
 import PencilIcon from "../assets/pencil.png";
 import TrashIcon from "../assets/trash.png";
 import "../App.scss";
@@ -36,10 +38,12 @@ import "./USB.scss";
 const USB = () => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
+  const [pageType, setPageType] = useState("CONN_STATE"); // CONN_STATE, ADD_LINK, EDIT_LINK
   const [decoders, setDecoders] = useState([]);
   const [encoders, setEncoders] = useState([]);
   const [deviceLinks, setDeviceLinks] = useState([]);
   const [linkData, setLinkData] = useState([]);
+  const [reload, setReload] = useState(null);
 
   const [encoderType, setEncoderType] = useState("1");
   const [decoderDict, setDecoderDict] = useState({}); // { $mac: { nickName: $nickName, mac: $mac... } }
@@ -60,19 +64,28 @@ const USB = () => {
         linkType: "usb",
         isPreset: "N",
       });
+      // let filteredEncoder = [];
+      // encoders.forEach((encoder) => {
+      //   if (encoder.nickName.includes(searchFilter))
+      //     filteredEncoder.push(encoder);
+      // });
       setDecoders(decoders);
       setEncoders(encoders);
       setDeviceLinks(deviceLinks);
+      setLinkData([]);
     })();
-  }, []);
+  }, [reload]);
 
   useEffect(() => {
     setLinkData([]);
     let tempLinkData = [];
-    deviceLinks.forEach(async (deviceLink, index) => {
+    deviceLinks.forEach(async (deviceLink) => {
       let encoderName;
       encoders.some((encoder) => {
-        if (encoder.mac === deviceLink.encoder) {
+        if (
+          encoder.mac === deviceLink.encoder &&
+          encoder.nickName.includes(searchFilter)
+        ) {
           encoderName = encoder.nickName;
           return true;
         } else return false;
@@ -83,20 +96,56 @@ const USB = () => {
       });
       linkDetail.forEach((link) => {
         decoders.some((decoder) => {
-          if (decoder.mac === link.decoder) {
+          if (encoderName && decoder.mac === link.decoder) {
             tempLinkData.push({
               encoderMac: deviceLink.encoder,
               encoderName: encoderName,
               decoderMac: link.decoder,
               decoderName: decoder.nickName,
             });
-            setLinkData(linkData.concat(tempLinkData));
+            setLinkData(tempLinkData);
             return true;
           } else return false;
         });
       });
     });
-  }, [deviceLinks]);
+  }, [deviceLinks, searchFilter]);
+
+  const handleRemoveLink = async (encoderMac, decoderMac) => {
+    let linkId;
+    deviceLinks.some((link) => {
+      if (link.encoder === encoderMac) {
+        linkId = link.id;
+        return true;
+      } else return false;
+    });
+    if (linkId) {
+      let linkDetail = await getDeviceLinkDetails({
+        store: store,
+        linkId: linkId,
+      });
+      let linkDecoders = [];
+      linkDetail.forEach((link) => {
+        if (decoderMac !== link.decoder) linkDecoders.push(link.decoder);
+      });
+      await removeDeviceLink({
+        store: store,
+        linkId: linkId,
+      });
+      if (linkDecoders)
+        await createDeviceLink({
+          store: store,
+          id: `usb.${encoderMac}`,
+          linkType: "usb",
+          encoder: encoderMac,
+          decoders: linkDecoders,
+          value1: "usb",
+          remark: "",
+          isPreset: "N",
+        });
+      setReload(Math.random());
+    }
+  };
 
   const columns = [
     {
@@ -151,7 +200,13 @@ const USB = () => {
               className="usb-content-table-icon"
             />
           </Button>
-          <Button type="text" key={`reboot.${record.mac}`}>
+          <Button
+            type="text"
+            key={`remove.${record.decoderMac}`}
+            onClick={() =>
+              handleRemoveLink(record.encoderMac, record.decoderMac)
+            }
+          >
             <img
               alt="remove"
               src={TrashIcon}
@@ -402,20 +457,25 @@ const USB = () => {
             placeholder={intl.formatMessage(Messages.Text_USB_InputUSBSource)}
           />
         </div>
-        <div className="usb-content-container">
-          <div className="usb-content-title-row">
-            <span className="usb-content-title">
-              <FormattedMessage {...Messages.Text_USB_ConnectionStatus} />
-            </span>
-            <Button shape="circle" className="usb-content-create-button">
-              <img
-                alt="create"
-                src={PlusIcon}
-                className="usb-content-create-button-icon"
-              />
-            </Button>
-          </div>
-          {/* <div className="usb-content-table-row ">
+        {pageType === "CONN_STATE" ? (
+          <div className="usb-content-container">
+            <div className="usb-content-title-row">
+              <span className="usb-content-title">
+                <FormattedMessage {...Messages.Text_USB_ConnectionStatus} />
+              </span>
+              <Button
+                shape="circle"
+                className="usb-content-create-button"
+                onClick={() => setPageType("ADD_LINK")}
+              >
+                <img
+                  alt="create"
+                  src={PlusIcon}
+                  className="usb-content-create-button-icon"
+                />
+              </Button>
+            </div>
+            {/* <div className="usb-content-table-row ">
             <span className="usb-content-table-head">
               <FormattedMessage {...Messages.Text_USB_Source} />
             </span>
@@ -428,135 +488,40 @@ const USB = () => {
             <span className="usb-content-table-head">
               <FormattedMessage {...Messages.Text_USB_Operation} />
             </span>
+            </div>
+            <Divider style={{ marginTop: 8 }} /> */}
+            <Table
+              columns={columns}
+              dataSource={linkData}
+              pagination={false}
+              size={"small"}
+              onRow={(record) => ({
+                onClick: () => {
+                  handleChooseEncoder(record);
+                },
+              })}
+            />
           </div>
-          <Divider style={{ marginTop: 8 }} /> */}
-          <Table
-            columns={columns}
-            dataSource={linkData}
-            pagination={false}
-            size={"small"}
-            onRow={(record) => ({
-              onClick: () => {
-                handleChooseEncoder(record);
-              },
-            })}
-          />
-          {/* <div
-            style={{
-              height: height < "750" ? "50%" : "55%",
-              minHeight: "250px",
-            }}
-          >
-            <Row style={{ height: "13%" }}>
-              <Col>
-                <Typography.Text
-                  style={{ fontSize: "20px", marginRight: "10px" }}
-                >
-                  <FormattedMessage {...Messages.Text_USB_Source} />
-                </Typography.Text>
-              </Col>
-              <Col>
-                <Input
-                  onChange={(e) => {
-                    setSearchFilter(e.target.value);
-                  }}
-                  prefix={<SearchOutlined />}
+        ) : pageType === "ADD_LINK" ? (
+          <div className="usb-content-container">
+            <div className="usb-add-title-row">
+              <Button
+                shape="circle"
+                className="usb-add-link-button"
+                onClick={() => setPageType("CONN_STATE")}
+              >
+                <img
+                  alt="return"
+                  src={CaretLeftIcon}
+                  className="usb-add-link-icon"
                 />
-              </Col>
-            </Row>
-            <Row style={{ height: "14%" }}>
-              <Radio.Group
-                options={ENCODER_TYPERS}
-                onChange={changeEncoderType}
-                value={encoderType}
-                optionType="button"
-                buttonStyle="solid"
-                style={{ marginTop: 12 }}
-              />
-            </Row>
-            <div className="decoder-block">{encoderElements}</div>
-          </div>
-          <div
-            className="usb-col-layout"
-            style={{
-              border: "1px solid gray",
-              height: "45%",
-              minHeight: "220px",
-              marginTop: "12px",
-            }}
-          >
-            <div
-              style={{
-                borderRight: "1px solid gray",
-                height: height * 0.39,
-              }}
-            >
-              <Row>
+              </Button>
+              <span className="usb-content-title">
                 <FormattedMessage {...Messages.Text_USB_ConnectionStatus} />
-              </Row>
-              <Row style={{ marginTop: 24, marginLeft: 6 }}>
-                <Col span={8}>
-                  <Row>
-                    <FormattedMessage {...Messages.Text_Common_Encoder} />
-                  </Row>
-                  <Row style={{ marginTop: 6 }}>
-                    {encoderDict[choosedEncoder]?.nickName}
-                  </Row>
-                </Col>
-                <Col span={8}>
-                  <Row style={{ marginLeft: 14 }}>
-                    <FormattedMessage {...Messages.Text_USB_Connect} />
-                  </Row>
-                  <Row>{"<------------>"}</Row>
-                </Col>
-                <Col span={8}>
-                  <Row>
-                    <FormattedMessage {...Messages.Text_Common_Decoder} />
-                  </Row>
-                  {choosedDecoderElements}
-                </Col>
-              </Row>
+              </span>
             </div>
-            <div>
-              <Row>
-                <Col span={width > 1060 ? 19 : 16}>
-                  <FormattedMessage {...Messages.Text_USB_TerminalChoose} />
-                </Col>
-                <Col>
-                  <Button size="small" onClick={handleClearConnection}>
-                    <FormattedMessage {...Messages.Text_USB_ClearConnection} />
-                  </Button>
-                </Col>
-              </Row>
-              <Row>
-                <div
-                  className="encoder-block"
-                  style={{ height: height * 0.26 }}
-                >
-                  {decoderElements}
-                </div>
-              </Row>
-              <Divider
-                style={{
-                  marginTop: -12,
-                  marginBottom: 10,
-                }}
-              />
-              <Row>
-                <Col offset={2}>
-                  <Button onClick={handleCancel}>
-                    <FormattedMessage {...Messages.Text_Button_Cancel} />
-                  </Button>
-                </Col>
-                <Col offset={14}>
-                  <Button onClick={handleCreateConnection}>
-                    <FormattedMessage {...Messages.Text_Button_Save} />
-                  </Button>
-                </Col>
-              </Row>
-            </div>
-          </div> */}
-        </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
