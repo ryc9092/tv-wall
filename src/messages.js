@@ -6,12 +6,17 @@ export default defineMessages({
   Text_Common_Block: { id: "Text-Common-Block", defaultMessage: "區塊" },
   Text_Common_Screen: { id: "Text-Common-Screen", defaultMessage: "畫面" },
   Text_Common_Model: { id: "Text-Common-Model", defaultMessage: "產品型號" },
+  Text_Common_State: { id: "Text-Common-State", defaultMessage: "狀態" },
   Text_Common_Up: { id: "Text-Common-Up", defaultMessage: "上線" },
   Text_Common_Down: { id: "Text-Common-Down", defaultMessage: "離線" },
   Text_Common_None: { id: "Text-Common-None", defaultMessage: "無" },
   Text_Common_Dimension: {
     id: "Text-Common-Dimension",
     defaultMessage: "維度",
+  },
+  Text_Common_EncoderName: {
+    id: "Text-Common-EncoderName",
+    defaultMessage: "編碼器名稱",
   },
   Text_Common_Encoder: {
     id: "Text-Common-Encoder",
@@ -40,6 +45,10 @@ export default defineMessages({
   Text_Button_Cancel: {
     id: "Text-Button-Cancel",
     defaultMessage: "取消",
+  },
+  Text_Button_Remove: {
+    id: "Text-Button-Remove",
+    defaultMessage: "移除",
   },
   Text_Button_Operation: {
     id: "Text-Button-Operation",
@@ -83,7 +92,7 @@ export default defineMessages({
   // Side bar
   Text_Sidebar_DeviceStatus: {
     id: "Text-Sidebar-DeviceStatus",
-    defaultMessage: "設備即時狀態",
+    defaultMessage: "設備狀態",
   },
   Text_Sidebar_TVWallManagement: {
     id: "Text-Sidebar-TVWallManagement",
@@ -99,11 +108,11 @@ export default defineMessages({
   },
   Text_Sidebar_USBManagement: {
     id: "Text-Sidebar-USBManagement",
-    defaultMessage: "USB管理",
+    defaultMessage: "USB 管理",
   },
   Text_Sidebar_RS232Management: {
     id: "Text-Sidebar-RS232Management",
-    defaultMessage: "RS232管理",
+    defaultMessage: "RS232 管理",
   },
   Text_Sidebar_ScheduleManagement: {
     id: "Text-Sidebar-ScheduleManagement",
@@ -113,29 +122,109 @@ export default defineMessages({
     id: "Text-Sidebar-SituationManagement",
     defaultMessage: "情境管理",
   },
-  Text_Sidebar_EventAndAlarm: {
-    id: "Text-Sidebar-EventAndAlarm",
-    defaultMessage: "事件及告警",
-  },
   Text_Sidebar_SystemSetting: {
     id: "Text-Sidebar-SystemSetting",
     defaultMessage: "系統設定",
   },
-  Text_Sidebar_Language: {
-    id: "Text-Sidebar-Language",
+  Text_Sidebar_TVWallBarcode: {
+    id: "Text-Sidebar-TVWallBarcode",
+    defaultMessage: "TV Wall條碼",
+  },
+
+  // Top bar
+  Text_Topbar_Language: {
+    id: "Text-Topbar-Language",
     defaultMessage: "語言",
   },
-  Text_Sidebar_Chinese: {
-    id: "Text-Sidebar-Chinese",
+  Text_Topbar_Chinese: {
+    id: "Text-Topbar-Chinese",
     defaultMessage: "中文",
   },
-  Text_Sidebar_English: {
-    id: "Text-Sidebar-English",
+  Text_Topbar_English: {
+    id: "Text-Topbar-English",
     defaultMessage: "英文",
   },
-  Text_Sidebar_Logout: {
-    id: "Text-Sidebar-Logout",
+  Text_Topbar_Thai: {
+    id: "Text-Topbar-Thai",
+    defaultMessage: "泰文",
+  },
+  Text_Topbar_Logout: {
+    id: "Text-Topbar-Logout",
     defaultMessage: "登出",
+  },
+  Text_Topbar_EventAndAlarm: {
+    id: "Text-Topbar-EventAndAlarm",
+    defaultMessage: "事件及告警",
+  },
+  Text_Topbar_EventName: {
+    id: "Text-Topbar-EventName",
+    defaultMessage: "事件名稱",
+  },
+  Text_Topbar_OccuredTime: {
+    id: "Text-Topbar-OccuredTime",
+    defaultMessage: "發生時間",
+  },
+  Text_Topbar_EventDescription: {
+    id: "Text-Topbar-EventDescription",
+    defaultMessage: "事件描述",
+  },
+
+  // TV wall management
+  Text_TVWall_TVWallManagement: {
+    id: "Text-TVWall-TVWallManagement",
+    defaultMessage: "電視牆影像管理",
+  },
+  Text_TVWall_WallName: {
+    id: "Text-TVWall-WallName",
+    defaultMessage: "電視牆名稱",
+  },
+  Text_TVWall_Template: {
+    id: "Text-TVWall-Template",
+    defaultMessage: "電視牆適用版型",
+  },
+  Text_TVWall_ActivateWall: {
+    id: "Text-TVWall-ActivateWall",
+    defaultMessage: "投放影像",
+  },
+  Text_TVWall_ClearWallConnection: {
+    id: "Text-TVWall-ClearWallConnection",
+    defaultMessage: "清除影像連接",
+  },
+  Text_TVWall_ClearWallConnectionDesc: {
+    id: "Text-TVWall-ClearWallConnectionDesc",
+    defaultMessage: "確定要移除所有區塊的影像連結?",
+  },
+  Text_TVWall_VideoSource: {
+    id: "Text-TVWall-VideoSource",
+    defaultMessage: "影像來源",
+  },
+  Text_TVWall_VideoSourceDesc: {
+    id: "Text-TVWall-VideoSourceDesc",
+    defaultMessage: "選擇下方編碼器後，點選區塊以連結",
+  },
+  Text_TVWall_Preview: {
+    id: "Text-TVWall-Preview",
+    defaultMessage: "畫面預覽",
+  },
+  Text_TVWall_InputEncoder: {
+    id: "Text-TVWall-InputEncoder",
+    defaultMessage: "輸入編碼器名稱",
+  },
+  Text_TVWall_ActiveSuccess: {
+    id: "Text-TVWall-ActiveSuccess",
+    defaultMessage: "投放影像成功",
+  },
+  Text_TVWall_ActiveFail: {
+    id: "Text-TVWall-ActiveFail",
+    defaultMessage: "投放影像失敗, 請確認樣板、編碼器設定無誤",
+  },
+  Text_TVWall_DeactiveSuccess: {
+    id: "Text-TVWall-DeactiveSuccess",
+    defaultMessage: "清除影像連結成功",
+  },
+  Text_TVWall_DeactiveFail: {
+    id: "Text-TVWall-DeactiveFail",
+    defaultMessage: "清除影像連結失敗",
   },
 
   // Device status
@@ -198,68 +287,6 @@ export default defineMessages({
   Text_DeviceStatus_RebootFail: {
     id: "Text-DeviceStatus-RebootFail",
     defaultMessage: "重啟失敗",
-  },
-
-  // TV wall management
-  Text_TVWall_TVWallManagement: {
-    id: "Text-TVWall-TVWallManagement",
-    defaultMessage: "電視牆影像管理",
-  },
-  Text_TVWall_WallName: {
-    id: "Text-TVWall-WallName",
-    defaultMessage: "電視牆名稱",
-  },
-  Text_TVWall_Template: {
-    id: "Text-TVWall-Template",
-    defaultMessage: "電視牆適用版型",
-  },
-  Text_TVWall_ActivateWall: {
-    id: "Text-TVWall-ActivateWall",
-    defaultMessage: "投放影像",
-  },
-  Text_TVWall_DeactivateWall: {
-    id: "Text-TVWall-DeactivateWall",
-    defaultMessage: "停用牆面",
-  },
-  Text_TVWall_ClearWallConnection: {
-    id: "Text-TVWall-ClearWallConnection",
-    defaultMessage: "清除影像連接",
-  },
-  Text_TVWall_VideoSource: {
-    id: "Text-TVWall-VideoSource",
-    defaultMessage: "影像來源",
-  },
-  Text_TVWall_VideoSourceDesc: {
-    id: "Text-TVWall-VideoSourceDesc",
-    defaultMessage: "選擇下方編碼器後，點選區塊以連結",
-  },
-  Text_TVWall_Preview: {
-    id: "Text-TVWall-Preview",
-    defaultMessage: "畫面預覽",
-  },
-  Text_TVWall_InputEncoder: {
-    id: "Text-TVWall-InputEncoder",
-    defaultMessage: "輸入編碼器名稱",
-  },
-  Text_TVWall_ClearBlock: {
-    id: "Text-TVWall-ClearBlock",
-    defaultMessage: "清除此區塊",
-  },
-  Text_TVWall_ActiveSuccess: {
-    id: "Text-TVWall-ActiveSuccess",
-    defaultMessage: "啟用電視牆成功",
-  },
-  Text_TVWall_ActiveFail: {
-    id: "Text-TVWall-ActiveFail",
-    defaultMessage: "啟用電視牆失敗, 請確認樣板、編碼器設定無誤",
-  },
-  Text_TVWall_DeactiveSuccess: {
-    id: "Text-TVWall-DeactiveSuccess",
-    defaultMessage: "停用電視牆",
-  },
-  Text_TVWall_DeactiveFail: {
-    id: "Text-TVWall-DeactiveFail",
-    defaultMessage: "停用電視牆失敗",
   },
 
   // Single screen management

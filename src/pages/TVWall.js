@@ -251,7 +251,7 @@ const TVWall = () => {
     {
       title: (
         <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
-          {intl.formatMessage(Messages.Text_Common_Name)}
+          {intl.formatMessage(Messages.Text_Common_EncoderName)}
         </span>
       ),
       dataIndex: "nickName",
@@ -296,7 +296,7 @@ const TVWall = () => {
     {
       title: (
         <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
-          {intl.formatMessage(Messages.Text_DeviceStatus_State)}
+          {intl.formatMessage(Messages.Text_Common_State)}
         </span>
       ),
       key: "state",

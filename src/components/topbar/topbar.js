@@ -39,7 +39,7 @@ function TopBar({ setLocale }) {
       type: "group",
       label: (
         <span style={{ fontSize: "14px" }}>
-          {intl.formatMessage(Messages.Text_Sidebar_Language)}
+          {intl.formatMessage(Messages.Text_Topbar_Language)}
         </span>
       ),
       children: [
@@ -47,7 +47,7 @@ function TopBar({ setLocale }) {
           key: "chinese",
           label: (
             <span className="topbar-user-menu-text">
-              {intl.formatMessage(Messages.Text_Sidebar_Chinese)}
+              {intl.formatMessage(Messages.Text_Topbar_Chinese)}
             </span>
           ),
           onClick: setLanguage,
@@ -57,7 +57,7 @@ function TopBar({ setLocale }) {
           value: "en-US",
           label: (
             <span className="topbar-user-menu-text">
-              {intl.formatMessage(Messages.Text_Sidebar_English)}
+              {intl.formatMessage(Messages.Text_Topbar_English)}
             </span>
           ),
           onClick: setLanguage,
@@ -125,7 +125,7 @@ function TopBar({ setLocale }) {
                 }}
                 onClick={onLogout}
               >
-                <FormattedMessage {...Messages.Text_Sidebar_Logout} />
+                <FormattedMessage {...Messages.Text_Topbar_Logout} />
               </Button>
             </div>
           )}
