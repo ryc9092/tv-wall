@@ -10,7 +10,7 @@ const ResponsiveLayout = ({ topbar, sidebar, main }) => {
   const [store] = useContext(StoreContext);
 
   return (
-    <Layout>
+    <Layout style={{ minWidth: 1920 }}>
       <Header>{topbar}</Header>
       <Layout>
         <Sider

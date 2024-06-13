@@ -32,8 +32,10 @@ import PlusIcon from "../assets/plus.png";
 import CaretLeftIcon from "../assets/caret-left.png";
 import PencilIcon from "../assets/pencil.png";
 import TrashIcon from "../assets/trash.png";
+import SearchIcon from "../assets/magnifying-glass.png";
 import "../App.scss";
 import "./USB.scss";
+import { render } from "@testing-library/react";
 
 const USB = () => {
   const intl = useIntl();
@@ -42,13 +44,13 @@ const USB = () => {
   const [decoders, setDecoders] = useState([]);
   const [encoders, setEncoders] = useState([]);
   const [deviceLinks, setDeviceLinks] = useState([]);
+  const [searchFilter, setSearchFilter] = useState("");
   const [linkData, setLinkData] = useState([]);
   const [reload, setReload] = useState(null);
 
   const [encoderType, setEncoderType] = useState("1");
   const [decoderDict, setDecoderDict] = useState({}); // { $mac: { nickName: $nickName, mac: $mac... } }
   const [encoderDict, setEncoderDict] = useState({});
-  const [searchFilter, setSearchFilter] = useState("");
   const [decoderElements, setDecoderElements] = useState([]);
   const [encoderElements, setEncoderElements] = useState([]);
   const [choosedDecoderList, setChoosedDecoderList] = useState([]);
@@ -64,13 +66,17 @@ const USB = () => {
         linkType: "usb",
         isPreset: "N",
       });
-      // let filteredEncoder = [];
-      // encoders.forEach((encoder) => {
-      //   if (encoder.nickName.includes(searchFilter))
-      //     filteredEncoder.push(encoder);
-      // });
+      console.log(deviceLinks, "ddd");
+      encoders.forEach((encoder) => {
+        encoder.key = encoder.mac;
+      });
+      decoders.forEach((decoder) => {
+        decoder.key = decoder.mac;
+      });
       setDecoders(decoders);
+      setFilteredDecoders(decoders);
       setEncoders(encoders);
+      setFilteredEncoders(encoders);
       setDeviceLinks(deviceLinks);
       setLinkData([]);
     })();
@@ -193,7 +199,19 @@ const USB = () => {
       dataIndex: "state",
       render: (text, record) => (
         <div>
-          <Button type="text">
+          <Button
+            type="text"
+            onClick={() => {
+              setPageType("EDIT_LINK");
+              setSelectedEncoder(record.encoderMac);
+              let linkedDecoders = [];
+              linkData.forEach((link) => {
+                if (link.encoderMac === record.encoderMac)
+                  linkedDecoders.push(link.decoderMac);
+              });
+              setSelectedDecoders(linkedDecoders);
+            }}
+          >
             <img
               alt="edit"
               src={PencilIcon}
@@ -434,6 +452,170 @@ const USB = () => {
     }
   };
 
+  const [selectedEncoder, setSelectedEncoder] = useState([]);
+  const [encoderFilter, setEncoderFilter] = useState("");
+  const [filteredEncoders, setFilteredEncoders] = useState([]);
+
+  const encoderSelectionColumns = [
+    {
+      title: (
+        <span className="usb-content-table-head">
+          {intl.formatMessage(Messages.Text_USB_Source)}
+        </span>
+      ),
+      dataIndex: "nickName",
+      key: "nickName",
+      render: (text) => {
+        return <span>{text}</span>;
+      },
+    },
+    {
+      title: (
+        <span className="usb-content-table-head">
+          {intl.formatMessage(Messages.Text_USB_Status)}
+        </span>
+      ),
+      key: "state",
+      dataIndex: "state",
+      sorter: (a, b) => a.state.length - b.state.length,
+      render: (_, { state, name }) => (
+        <>
+          {state === "Up" ? (
+            <Tag color={"#eef9b4"} key={`${name}.${state}`}>
+              <span style={{ color: "#a0b628" }}>
+                <FormattedMessage {...Messages.Text_Common_Up} />
+              </span>
+            </Tag>
+          ) : state === "Down" ? (
+            <Tag color={"#ffe6e5"} key={`${name}.${state}`}>
+              <span style={{ color: "#d55959" }}>
+                <FormattedMessage {...Messages.Text_Common_Down} />
+              </span>
+            </Tag>
+          ) : (
+            <Tag color={"yellow"} key={`${name}.${state}`}>
+              {state}
+            </Tag>
+          )}
+        </>
+      ),
+    },
+  ];
+
+  useEffect(() => {
+    let tempFilteredEncoders = [];
+    if (encoders.length !== 0) {
+      encoders.forEach((encoder) => {
+        if (encoder.nickName.includes(encoderFilter))
+          tempFilteredEncoders.push(encoder);
+      });
+    }
+    setFilteredEncoders(tempFilteredEncoders);
+  }, [encoderFilter]);
+
+  const encoderSelection = {
+    selectedRowKeys: [selectedEncoder],
+    onChange: (selectedRowKeys, selectedRows) => {
+      setSelectedEncoder(selectedRowKeys[0]);
+    },
+    // getCheckboxProps: (record) => {
+    //   let isConnected = false;
+    //   if (deviceLinks.length !== 0) {
+    //     deviceLinks.forEach((link) => {
+    //       if (`usb.${record.mac}` === link.id) isConnected = true;
+    //     });
+    //   }
+    //   return { disabled: isConnected, nickName: record.nickName };
+    // },
+  };
+
+  const [selectedDecoders, setSelectedDecoders] = useState([]);
+  const [decoderFilter, setDecoderFilter] = useState("");
+  const [filteredDecoders, setFilteredDecoders] = useState([]);
+
+  const decoderSelectionColumns = [
+    {
+      title: (
+        <span className="usb-content-table-head">
+          {intl.formatMessage(Messages.Text_USB_Destination)}
+        </span>
+      ),
+      dataIndex: "nickName",
+      key: "nickName",
+      render: (text) => {
+        return <span>{text}</span>;
+      },
+    },
+    {
+      title: (
+        <span className="usb-content-table-head">
+          {intl.formatMessage(Messages.Text_USB_Status)}
+        </span>
+      ),
+      key: "state",
+      dataIndex: "state",
+      sorter: (a, b) => a.state.length - b.state.length,
+      render: (_, { state, name }) => (
+        <>
+          {state === "Up" ? (
+            <Tag color={"#eef9b4"} key={`${name}.${state}`}>
+              <span style={{ color: "#a0b628" }}>
+                <FormattedMessage {...Messages.Text_Common_Up} />
+              </span>
+            </Tag>
+          ) : state === "Down" ? (
+            <Tag color={"#ffe6e5"} key={`${name}.${state}`}>
+              <span style={{ color: "#d55959" }}>
+                <FormattedMessage {...Messages.Text_Common_Down} />
+              </span>
+            </Tag>
+          ) : (
+            <Tag color={"yellow"} key={`${name}.${state}`}>
+              {state}
+            </Tag>
+          )}
+        </>
+      ),
+    },
+  ];
+
+  useEffect(() => {
+    let tempFilteredDecoders = [];
+    if (decoders.length !== 0) {
+      decoders.forEach((decoder) => {
+        if (decoder.nickName.includes(decoderFilter))
+          tempFilteredDecoders.push(decoder);
+      });
+    }
+    setFilteredEncoders(tempFilteredDecoders);
+  }, [decoderFilter]);
+
+  const decoderSelection = {
+    selectedRowKeys: selectedDecoders,
+    onChange: (selectedRowKeys, selectedRows) => {
+      setSelectedDecoders(selectedRowKeys);
+    },
+    getCheckboxProps: (record) => {
+      const hasSelectedEncoder = selectedEncoder !== null;
+      return { disabled: !hasSelectedEncoder };
+    },
+  };
+
+  const handleAddDeviceLink = async () => {
+    await createDeviceLink({
+      store: store,
+      id: `usb.${selectedEncoder}`,
+      linkType: "usb",
+      encoder: selectedEncoder,
+      decoders: selectedDecoders,
+      value1: "usb",
+      remark: "",
+      isPreset: "N",
+    });
+    setReload(Math.random());
+    setPageType("CONN_STATE");
+  };
+
   return (
     <div
       className={
@@ -447,15 +629,17 @@ const USB = () => {
           <span className="page-title">
             <FormattedMessage {...Messages.Text_USB_USBMgmt} />
           </span>
-          <Input
-            className="usb-title-input usb-input"
-            variant="filled"
-            onChange={(e) => {
-              setSearchFilter(e.target.value);
-            }}
-            prefix={<SearchOutlined />}
-            placeholder={intl.formatMessage(Messages.Text_USB_InputUSBSource)}
-          />
+          {pageType === "CONN_STATE" ? (
+            <Input
+              className="usb-title-input usb-input"
+              variant="filled"
+              onChange={(e) => {
+                setSearchFilter(e.target.value);
+              }}
+              prefix={<SearchOutlined />}
+              placeholder={intl.formatMessage(Messages.Text_USB_InputUSBSource)}
+            />
+          ) : null}
         </div>
         {pageType === "CONN_STATE" ? (
           <div className="usb-content-container">
@@ -466,7 +650,12 @@ const USB = () => {
               <Button
                 shape="circle"
                 className="usb-content-create-button"
-                onClick={() => setPageType("ADD_LINK")}
+                onClick={() => {
+                  setPageType("ADD_LINK");
+                  setSelectedEncoder(null);
+                  setSelectedDecoders([]);
+                  setReload(Math.random());
+                }}
               >
                 <img
                   alt="create"
@@ -502,7 +691,7 @@ const USB = () => {
               })}
             />
           </div>
-        ) : pageType === "ADD_LINK" ? (
+        ) : (
           <div className="usb-content-container">
             <div className="usb-add-title-row">
               <Button
@@ -517,11 +706,132 @@ const USB = () => {
                 />
               </Button>
               <span className="usb-content-title">
-                <FormattedMessage {...Messages.Text_USB_ConnectionStatus} />
+                {pageType === "ADD_LINK" ? (
+                  <FormattedMessage {...Messages.Text_USB_AddConnection} />
+                ) : (
+                  <FormattedMessage {...Messages.Text_USB_EditConnection} />
+                )}
               </span>
             </div>
+            <div className="usb-add-row">
+              <div id="encoder-selection">
+                <div className="usb-add-progress">
+                  <div className="usb-add-progress-circle">
+                    <span className="usb-add-progress-circle-text">1</span>
+                  </div>
+                  <div
+                    className={
+                      selectedEncoder
+                        ? "usb-add-progress-bar-finished"
+                        : "usb-add-progress-bar"
+                    }
+                  ></div>
+                </div>
+                <div className="usb-add-subtitle">
+                  <FormattedMessage {...Messages.Text_USB_ChooseSource} /> (
+                  <FormattedMessage {...Messages.Text_Common_Encoder} />)
+                </div>
+                <Input
+                  className="usb-add-input usb-input usb-add-input-placeholder"
+                  variant="filled"
+                  onChange={(e) => {
+                    setEncoderFilter(e.target.value);
+                  }}
+                  prefix={
+                    <img
+                      alt="search"
+                      src={SearchIcon}
+                      className="usb-add-input-prefix"
+                    />
+                  }
+                  placeholder={intl.formatMessage(
+                    Messages.Text_USB_InputEncoderName
+                  )}
+                />
+                <Table
+                  columns={encoderSelectionColumns}
+                  dataSource={filteredEncoders}
+                  rowSelection={{
+                    type: "radio",
+                    ...encoderSelection,
+                  }}
+                  pagination={false}
+                />
+              </div>
+              <div style={{ width: "100px" }}></div>
+              <div id="decoder-selection">
+                <div className="usb-add-progress">
+                  <div
+                    className={
+                      selectedEncoder
+                        ? "usb-add-progress-circle"
+                        : "usb-add-progress-circle-unstarted"
+                    }
+                  >
+                    <span className="usb-add-progress-circle-text">2</span>
+                  </div>
+                  <div
+                    className={
+                      selectedDecoders.length !== 0
+                        ? "usb-add-progress-bar-finished"
+                        : "usb-add-progress-bar"
+                    }
+                  ></div>
+                </div>
+                <div className="usb-add-subtitle">
+                  <FormattedMessage {...Messages.Text_USB_ChooseDestination} />{" "}
+                  (
+                  <FormattedMessage {...Messages.Text_Common_Decoder} />)
+                </div>
+                <Input
+                  className="usb-add-input usb-input usb-add-input-placeholder"
+                  variant="filled"
+                  onChange={(e) => {
+                    setDecoderFilter(e.target.value);
+                  }}
+                  prefix={
+                    <img
+                      alt="search"
+                      src={SearchIcon}
+                      className="usb-add-input-prefix"
+                    />
+                  }
+                  placeholder={intl.formatMessage(
+                    Messages.Text_USB_InputDecoderName
+                  )}
+                />
+                <Table
+                  columns={decoderSelectionColumns}
+                  dataSource={filteredDecoders}
+                  rowSelection={{
+                    type: "checkbox",
+                    ...decoderSelection,
+                  }}
+                  pagination={false}
+                />
+                <Button
+                  className="usb-add-btn"
+                  disabled={!selectedEncoder || selectedDecoders.length === 0}
+                  onClick={handleAddDeviceLink}
+                >
+                  <span className="usb-add-btn-text">
+                    {pageType === "ADD_LINK" ? (
+                      <FormattedMessage
+                        className="usb-add-btn-text"
+                        {...Messages.Text_Button_Add}
+                      />
+                    ) : (
+                      <FormattedMessage
+                        className="usb-add-btn-text"
+                        {...Messages.Text_Button_Edit}
+                      />
+                    )}
+                  </span>
+                </Button>
+              </div>
+            </div>
           </div>
-        ) : null}
+        )}
       </div>
     </div>
   );

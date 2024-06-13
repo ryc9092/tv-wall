@@ -38,6 +38,14 @@ export default defineMessages({
     id: "Text-Button-View",
     defaultMessage: "檢視",
   },
+  Text_Button_Add: {
+    id: "Text-Button-Add",
+    defaultMessage: "新增",
+  },
+  Text_Button_Edit: {
+    id: "Text-Button-Edit",
+    defaultMessage: "編輯",
+  },
   Text_Button_Delete: {
     id: "Text-Button-Delete",
     defaultMessage: "刪除",
@@ -336,13 +344,37 @@ export default defineMessages({
     id: "Text-USB-InputUSBSource",
     defaultMessage: "輸入USB來源名稱",
   },
+  Text_USB_InputEncoderName: {
+    id: "Text-USB-InputEncoderName",
+    defaultMessage: "輸入編碼器名稱",
+  },
+  Text_USB_InputDecoderName: {
+    id: "Text-USB-InputDecoderName",
+    defaultMessage: "輸入解碼器名稱",
+  },
   Text_USB_ConnectionStatus: {
     id: "Text-USB-ConnectionStatus",
     defaultMessage: "連接狀態",
   },
+  Text_USB_AddConnection: {
+    id: "Text-USB-AddConnection",
+    defaultMessage: "新增USB連接",
+  },
+  Text_USB_EditConnection: {
+    id: "Text-USB-EditConnection",
+    defaultMessage: "編輯USB連接",
+  },
+  Text_USB_ChooseSource: {
+    id: "Text-USB-ChooseSource",
+    defaultMessage: "選擇來源",
+  },
   Text_USB_Source: {
     id: "Text-USB-Source",
     defaultMessage: "來源名稱",
+  },
+  Text_USB_ChooseDestination: {
+    id: "Text-USB-ChooseDestination",
+    defaultMessage: "選擇終端",
   },
   Text_USB_Destination: {
     id: "Text-USB-Destination",
