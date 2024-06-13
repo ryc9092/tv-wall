@@ -66,6 +66,25 @@
   "Text-TVWall-DeactiveSuccess": "clear video connection success",
   "Text-TVWall-DeactiveFail": "clear video connection fail",
 
+  "Text-SingleScreen-Management": "Single Screen Management",
+  "Text-SingleScreen-TabSingleScreen": "Single Screen",
+  "Text-SingleScreen-Screen": "screen",
+  "Text-SingleScreen-Group": "Group",
+  "Text-SingleScreen-ClearVideoConnection": "clear video connection",
+  "Text-SingleScreen-SelectAll": "select all",
+  "Text-SingleScreen-CancelSelectAll": "cancel select all",
+  "Text-SingleScreen-ClearChoosedVideoConnection": "clear choosed video connection",
+  "Text-SingleScreen-ClearVideoConnectionDesc": "Are you sure to clear video connection of XXX?",
+  "Text-SingleScreen-ClearAllVideoConnectionDesc": "Are you sure to clear video connections of all the encoders?",
+  "Text-SingleScreen-InputDecoder": "Input decoder or group name",
+  "Text-SingleScreen-PlayVideo": "Play",
+  "Text-SingleScreen-PlayGroupVideo": "play group video",
+  "Text-SingleScreen-VideoPlaySuccess": "Video has been place to screen",
+  "Text-SingleScreen-GroupVideoPlaySuccess": "Group video has been place to screen",
+  "Text-SingleScreen-VideoPlayFail": "Video play fail",
+  "Text-SingleScreen-VideoClearSuccess": "Video clear success",
+  "Text-SingleScreen-VideoClearFail": "Video clear fail",
+
   "Text-DeviceStatus-CurrentStatus": "Device status",
   "Text-DeviceStatus-Type": "Type",
   "Text-DeviceStatus-Alias": "Alias",
@@ -81,16 +100,6 @@
   "Text-DeviceStatus-Reboot": "reboot",
   "Text-DeviceStatus-RebootSuccess": "reboot success",
   "Text-DeviceStatus-RebootFail": "reboot fail",
-
-  "Text-SingleScreen-Management": "Single Screen Management",
-  "Text-SingleScreen-TabSingleScreen": "Single Screen",
-  "Text-SingleScreen-InputDecoder": "Input decoder or group name",
-  "Text-SingleScreen-ConnectType": "Connection type",
-  "Text-SingleScreen-PlayVideo": "Play",
-  "Text-SingleScreen-VideoPlaySuccess": "Video play success",
-  "Text-SingleScreen-VideoPlayFail": "Video play fail",
-  "Text-SingleScreen-VideoClearSuccess": "Video clear success",
-  "Text-SingleScreen-VideoClearFail": "Video clear fail",
 
   "Text-USB-USBMgmt": "USB management",
   "Text-USB-InputUSBSource": "Input USB source name",
@@ -181,5 +190,9 @@
   "Text-DeviceSetting-Edit": "edit",
   "Text-DeviceSetting-Reboot": "reboot",
   "Text-DeviceSetting-RebootSuccess": "reboot success",
-  "Text-DeviceSetting-RebootFail": "reboot fail"
+  "Text-DeviceSetting-RebootFail": "reboot fail",
+
+  "Text-Barcode-Title": "Platform login barcode",
+  "Text-Barcode-Download": "Download",
+  "Text-Barcode-Share": "Share"
 }

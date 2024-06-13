@@ -66,6 +66,25 @@
   "Text-TVWall-DeactiveSuccess": "清除影像連結成功",
   "Text-TVWall-DeactiveFail": "清除影像連結失敗",
 
+  "Text-SingleScreen-Management": "單畫面影像管理",
+  "Text-SingleScreen-TabSingleScreen": "單顯示器",
+  "Text-SingleScreen-Screen": "顯示器",
+  "Text-SingleScreen-Group": "群組",
+  "Text-SingleScreen-ClearVideoConnection": "清除影像連結",
+  "Text-SingleScreen-SelectAll": "全選",
+  "Text-SingleScreen-CancelSelectAll": "取消全選",
+  "Text-SingleScreen-ClearChoosedVideoConnection": "清除選取之影像連結",
+  "Text-SingleScreen-ClearVideoConnectionDesc": "確定要移除XXX的影像連結?",
+  "Text-SingleScreen-ClearAllVideoConnectionDesc": "確定要移除所有解碼器的影像連結?",
+  "Text-SingleScreen-InputDecoder": "輸入解碼器或群組名稱",
+  "Text-SingleScreen-PlayVideo": "投放",
+  "Text-SingleScreen-PlayGroupVideo": "投放群組影像",
+  "Text-SingleScreen-VideoPlaySuccess": "影像已投放至顯示器",
+  "Text-SingleScreen-GroupVideoPlaySuccess": "群組之影像已投放顯示器",
+  "Text-SingleScreen-VideoPlayFail": "影像投放失敗",
+  "Text-SingleScreen-VideoClearSuccess": "影像清除成功",
+  "Text-SingleScreen-VideoClearFail": "影像清除失敗",
+
   "Text-DeviceStatus-CurrentStatus": "設備即時狀態",
   "Text-DeviceStatus-Type": "類型",
   "Text-DeviceStatus-Alias": "別名",
@@ -81,16 +100,6 @@
   "Text-DeviceStatus-Reboot": "重啟",
   "Text-DeviceStatus-RebootSuccess": "重啟成功",
   "Text-DeviceStatus-RebootFail": "重啟失敗",
-
-  "Text-SingleScreen-Management": "單畫面影音管理",
-  "Text-SingleScreen-TabSingleScreen": "單顯示器",
-  "Text-SingleScreen-InputDecoder": "輸入解碼器或群組名稱",
-  "Text-SingleScreen-ConnectType": "連接選項",
-  "Text-SingleScreen-PlayVideo": "投放",
-  "Text-SingleScreen-VideoPlaySuccess": "影像投放成功",
-  "Text-SingleScreen-VideoPlayFail": "影像投放失敗",
-  "Text-SingleScreen-VideoClearSuccess": "影像清除成功",
-  "Text-SingleScreen-VideoClearFail": "影像清除失敗",
 
   "Text-USB-USBMgmt": "USB管理",
   "Text-USB-InputUSBSource": "輸入USB來源名稱",
@@ -181,5 +190,9 @@
   "Text-DeviceSetting-Edit": "編輯",
   "Text-DeviceSetting-Reboot": "重啟",
   "Text-DeviceSetting-RebootSuccess": "重啟成功",
-  "Text-DeviceSetting-RebootFail": "重啟失敗"
+  "Text-DeviceSetting-RebootFail": "重啟失敗",
+
+  "Text-Barcode-Title": "平台登入條碼",
+  "Text-Barcode-Download": "下載",
+  "Text-Barcode-Share": "分享"
 }

@@ -477,7 +477,7 @@ const SingleScreen = () => {
     {
       title: (
         <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
-          {intl.formatMessage(Messages.Text_DeviceStatus_State)}
+          {intl.formatMessage(Messages.Text_Common_State)}
         </span>
       ),
       key: "state",

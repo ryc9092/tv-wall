@@ -235,6 +235,80 @@ export default defineMessages({
     defaultMessage: "清除影像連結失敗",
   },
 
+  // Single screen management
+  Text_SingleScreen_Management: {
+    id: "Text-SingleScreen-Management",
+    defaultMessage: "單畫面影像管理",
+  },
+  Text_SingleScreen_TabSingleScreen: {
+    id: "Text-SingleScreen-TabSingleScreen",
+    defaultMessage: "單顯示器",
+  },
+  Text_SingleScreen_Screen: {
+    id: "Text-SingleScreen-Screen",
+    defaultMessage: "顯示器",
+  },
+  Text_SingleScreen_Group: {
+    id: "Text-SingleScreen-Group",
+    defaultMessage: "群組",
+  },
+  Text_SingleScreen_ClearVideoConnection: {
+    id: "Text-SingleScreen-ClearVideoConnection",
+    defaultMessage: "清除影像連結",
+  },
+  Text_SingleScreen_SelectAll: {
+    id: "Text-SingleScreen-SelectAll",
+    defaultMessage: "全選",
+  },
+  Text_SingleScreen_CancelSelectAll: {
+    id: "Text-SingleScreen-CancelSelectAll",
+    defaultMessage: "取消全選",
+  },
+  Text_SingleScreen_ClearChoosedVideoConnection: {
+    id: "Text-SingleScreen-ClearChoosedVideoConnection",
+    defaultMessage: "清除選取之影像連結",
+  },
+  Text_SingleScreen_ClearVideoConnectionDesc: {
+    id: "Text-SingleScreen-ClearVideoConnectionDesc",
+    defaultMessage: "確定要移除XXX的影像連結?",
+  },
+  Text_SingleScreen_ClearAllVideoConnectionDesc: {
+    id: "Text-SingleScreen-ClearAllVideoConnectionDesc",
+    defaultMessage: "確定要移除所有解碼器的影像連結?",
+  },
+  Text_SingleScreen_InputDecoder: {
+    id: "Text-SingleScreen-InputDecoder",
+    defaultMessage: "輸入解碼器或群組名稱",
+  },
+  Text_SingleScreen_PlayVideo: {
+    id: "Text-SingleScreen-PlayVideo",
+    defaultMessage: "投放",
+  },
+  Text_SingleScreen_PlayGroupVideo: {
+    id: "Text-SingleScreen-PlayGroupVideo",
+    defaultMessage: "投放群組影像",
+  },
+  Text_SingleScreen_VideoPlaySuccess: {
+    id: "Text-SingleScreen-VideoPlaySuccess",
+    defaultMessage: "影像已投放至顯示器",
+  },
+  Text_SingleScreen_GroupVideoPlaySuccess: {
+    id: "Text-SingleScreen-GroupVideoPlaySuccess",
+    defaultMessage: "群組之影像已投放顯示器",
+  },
+  Text_SingleScreen_VideoPlayFail: {
+    id: "Text-SingleScreen-VideoPlayFail",
+    defaultMessage: "影像投放失敗",
+  },
+  Text_SingleScreen_VideoClearSuccess: {
+    id: "Text-SingleScreen-VideoClearSuccess",
+    defaultMessage: "影像清除成功",
+  },
+  Text_SingleScreen_VideoClearFail: {
+    id: "Text-SingleScreen-VideoClearFail",
+    defaultMessage: "影像清除失敗",
+  },
+
   // Device status
   Text_DeviceStatus_CurrentStatus: {
     id: "Text-DeviceStatus-CurrentStatus",
@@ -295,44 +369,6 @@ export default defineMessages({
   Text_DeviceStatus_RebootFail: {
     id: "Text-DeviceStatus-RebootFail",
     defaultMessage: "重啟失敗",
-  },
-
-  // Single screen management
-  Text_SingleScreen_Management: {
-    id: "Text-SingleScreen-Management",
-    defaultMessage: "電視牆影像管理",
-  },
-  Text_SingleScreen_TabSingleScreen: {
-    id: "Text-SingleScreen-TabSingleScreen",
-    defaultMessage: "單顯示器",
-  },
-  Text_SingleScreen_InputDecoder: {
-    id: "Text-SingleScreen-InputDecoder",
-    defaultMessage: "輸入解碼器或群組名稱",
-  },
-  Text_SingleScreen_ConnectType: {
-    id: "Text-SingleScreen-ConnectType",
-    defaultMessage: "連接選項",
-  },
-  Text_SingleScreen_PlayVideo: {
-    id: "Text-SingleScreen-PlayVideo",
-    defaultMessage: "投放",
-  },
-  Text_SingleScreen_VideoPlaySuccess: {
-    id: "Text-SingleScreen-VideoPlaySuccess",
-    defaultMessage: "影像投放成功",
-  },
-  Text_SingleScreen_VideoPlayFail: {
-    id: "Text-SingleScreen-VideoPlayFail",
-    defaultMessage: "影像投放失敗",
-  },
-  Text_SingleScreen_VideoClearSuccess: {
-    id: "Text-SingleScreen-VideoClearSuccess",
-    defaultMessage: "影像清除成功",
-  },
-  Text_SingleScreen_VideoClearFail: {
-    id: "Text-SingleScreen-VideoClearFail",
-    defaultMessage: "影像清除失敗",
   },
 
   // USB management
@@ -683,5 +719,19 @@ export default defineMessages({
   Text_DeviceSetting_RebootFail: {
     id: "Text-DeviceSetting-RebootFail",
     defaultMessage: "重啟失敗",
+  },
+
+  // Barcode
+  Text_Barcode_Title: {
+    id: "Text-Barcode-Title",
+    defaultMessage: "平台登入條碼",
+  },
+  Text_Barcode_Download: {
+    id: "Text-Barcode-Download",
+    defaultMessage: "下載",
+  },
+  Text_Barcode_Share: {
+    id: "Text-Barcode-Share",
+    defaultMessage: "分享",
   },
 });
