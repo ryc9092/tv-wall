@@ -371,6 +371,68 @@ export default defineMessages({
     defaultMessage: "確定要刪除此USB連結?",
   },
 
+  // Audio management
+  Text_Audio_AudioMgmt: {
+    id: "Text-Audio-AudioMgmt",
+    defaultMessage: "Audio管理",
+  },
+  Text_Audio_InputAudioMsg: {
+    id: "Text-Audio-InputAudioMsg",
+    defaultMessage: "輸入音頻連接來源或終端名稱",
+  },
+  Text_Audio_ConnectionStatus: {
+    id: "Text-Audio-ConnectionStatus",
+    defaultMessage: "連接狀態",
+  },
+  Text_Audio_Input: {
+    id: "Text-Audio-Input",
+    defaultMessage: "輸入",
+  },
+  Text_Audio_Output: {
+    id: "Text-Audio-Output",
+    defaultMessage: "輸出",
+  },
+  Text_Audio_Source: {
+    id: "Text-Audio-Source",
+    defaultMessage: "Audio來源",
+  },
+  Text_Audio_Connect: {
+    id: "Text-Audio-Connect",
+    defaultMessage: "Audio連接",
+  },
+  Text_Audio_CreateConnectionSuccess: {
+    id: "Text-Audio-CreateConnectionSuccess",
+    defaultMessage: "建立audio連結成功",
+  },
+  Text_Audio_CreateConnectionFail: {
+    id: "Text-Audio-CreateConnectionFail",
+    defaultMessage: "建立audio連結失敗",
+  },
+  Text_Audio_AnalogConnect: {
+    id: "Text-Audio-AnalogConnect",
+    defaultMessage: "Analog連接",
+  },
+  Text_Audio_HdmiConnect: {
+    id: "Text-Audio-HdmiConnect",
+    defaultMessage: "Hdmi連接",
+  },
+  Text_Audio_TerminalChoose: {
+    id: "Text-Audio-TerminalChoose",
+    defaultMessage: "Audio終端選擇",
+  },
+  Text_Audio_ClearConnection: {
+    id: "Text-Audio-ClearConnection",
+    defaultMessage: "清除連結",
+  },
+  Text_Audio_ClearConnectionSuccess: {
+    id: "Text-Audio-ClearConnectionSuccess",
+    defaultMessage: "清除audio連結成功",
+  },
+  Text_Audio_ClearConnectionFail: {
+    id: "Text-Audio-ClearConnectionFail",
+    defaultMessage: "清除audio連結失敗",
+  },
+
   // Device status
   Text_DeviceStatus_CurrentStatus: {
     id: "Text-DeviceStatus-CurrentStatus",
@@ -431,56 +493,6 @@ export default defineMessages({
   Text_DeviceStatus_RebootFail: {
     id: "Text-DeviceStatus-RebootFail",
     defaultMessage: "重啟失敗",
-  },
-
-  // Audio management
-  Text_Audio_AudioMgmt: {
-    id: "Text-Audio-AudioMgmt",
-    defaultMessage: "Audio管理",
-  },
-  Text_Audio_Source: {
-    id: "Text-Audio-Source",
-    defaultMessage: "Audio來源",
-  },
-  Text_Audio_ConnectionStatus: {
-    id: "Text-Audio-ConnectionStatus",
-    defaultMessage: "Audio連接狀態",
-  },
-  Text_Audio_Connect: {
-    id: "Text-Audio-Connect",
-    defaultMessage: "Audio連接",
-  },
-  Text_Audio_CreateConnectionSuccess: {
-    id: "Text-Audio-CreateConnectionSuccess",
-    defaultMessage: "建立audio連結成功",
-  },
-  Text_Audio_CreateConnectionFail: {
-    id: "Text-Audio-CreateConnectionFail",
-    defaultMessage: "建立audio連結失敗",
-  },
-  Text_Audio_AnalogConnect: {
-    id: "Text-Audio-AnalogConnect",
-    defaultMessage: "Analog連接",
-  },
-  Text_Audio_HdmiConnect: {
-    id: "Text-Audio-HdmiConnect",
-    defaultMessage: "Hdmi連接",
-  },
-  Text_Audio_TerminalChoose: {
-    id: "Text-Audio-TerminalChoose",
-    defaultMessage: "Audio終端選擇",
-  },
-  Text_Audio_ClearConnection: {
-    id: "Text-Audio-ClearConnection",
-    defaultMessage: "清除連結",
-  },
-  Text_Audio_ClearConnectionSuccess: {
-    id: "Text-Audio-ClearConnectionSuccess",
-    defaultMessage: "清除audio連結成功",
-  },
-  Text_Audio_ClearConnectionFail: {
-    id: "Text-Audio-ClearConnectionFail",
-    defaultMessage: "清除audio連結失敗",
   },
 
   // Situation

@@ -1,18 +1,30 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Button, Col, Divider, Input, Radio, Row, Typography } from "antd";
+import {
+  Button,
+  Col,
+  Divider,
+  Input,
+  Radio,
+  Row,
+  Table,
+  Typography,
+} from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import useWindowDimensions from "../utils/WindowDimension";
 import { ENCODER_TYPERS } from "../utils/Constant";
 import {
+  getDeviceLinks,
   createDeviceLink,
   removeDeviceLink,
+  getDeviceLinkDetails,
   getDeviceLinkByEncoder,
   getDecoders,
   getEncoders,
 } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
+import PlusIcon from "../assets/plus.png";
 import {
   showWarningNotification,
   showSuccessNotificationByMsg,
@@ -22,12 +34,26 @@ import "./Audio.scss";
 
 const Audio = () => {
   const intl = useIntl();
-  const { width, height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
+  const [pageType, setPageType] = useState("CONN_STATE"); // CONN_STATE, ADD_LINK, EDIT_LINK
+  const [decoders, setDecoders] = useState([]);
+  const [encoders, setEncoders] = useState([]);
+  const [deviceLinks, setDeviceLinks] = useState([]);
+  const [searchFilter, setSearchFilter] = useState("");
+  const [linkData, setLinkData] = useState([]);
+  const [reload, setReload] = useState(null);
+
+  const [selectedEncoder, setSelectedEncoder] = useState([]);
+  const [encoderFilter, setEncoderFilter] = useState("");
+  const [filteredEncoders, setFilteredEncoders] = useState([]);
+
+  const [selectedDecoders, setSelectedDecoders] = useState([]);
+  const [decoderFilter, setDecoderFilter] = useState("");
+  const [filteredDecoders, setFilteredDecoders] = useState([]);
+
   const [encoderType, setEncoderType] = useState("1");
   const [decoderDict, setDecoderDict] = useState({});
   const [encoderDict, setEncoderDict] = useState({});
-  const [searchFilter, setSearchFilter] = useState("");
   const [decoderElements, setDecoderElements] = useState([]);
   const [encoderElements, setEncoderElements] = useState([]);
   const [choosedDecoderList, setChoosedDecoderList] = useState([]);
@@ -35,12 +61,65 @@ const Audio = () => {
   const [choosedEncoder, setChoosedEncoder] = useState(null);
   const [chooseAudioType, setChooseAudioType] = useState("analogAudio");
 
-  const choosedDecoderListRef = useRef();
-  choosedDecoderListRef.current = choosedDecoderList;
+  useEffect(() => {
+    (async () => {
+      const encoders = await getEncoders(store);
+      const decoders = await getDecoders(store);
+      const deviceLinks = await getDeviceLinks({
+        store: store,
+        linkType: "audio",
+        isPreset: "N",
+      });
+      encoders.forEach((encoder) => {
+        encoder.key = encoder.mac;
+      });
+      decoders.forEach((decoder) => {
+        decoder.key = decoder.mac;
+      });
+      setDecoders(decoders);
+      setFilteredDecoders(decoders);
+      setEncoders(encoders);
+      setFilteredEncoders(encoders);
+      setDeviceLinks(deviceLinks);
+      setLinkData([]);
+    })();
+  }, [reload]);
 
-  const changeEncoderType = ({ target: { value } }) => {
-    setEncoderType(value);
-  };
+  useEffect(() => {
+    setLinkData([]);
+    let tempLinkData = [];
+    deviceLinks.forEach(async (deviceLink, index) => {
+      let encoderName;
+      encoders.some((encoder) => {
+        if (
+          encoder.mac === deviceLink.encoder &&
+          encoder.nickName.includes(searchFilter)
+        ) {
+          encoderName = encoder.nickName;
+          return true;
+        } else return false;
+      });
+      let linkDetail = await getDeviceLinkDetails({
+        store: store,
+        linkId: deviceLink.id,
+      });
+      linkDetail.forEach((link) => {
+        decoders.some((decoder) => {
+          if (encoderName && decoder.mac === link.decoder) {
+            tempLinkData.push({
+              key: `${deviceLink.encoder}.${link.decoder}`,
+              encoderMac: deviceLink.encoder,
+              encoderName: encoderName,
+              decoderMac: link.decoder,
+              decoderName: decoder.nickName,
+            });
+            return true;
+          } else return false;
+        });
+      });
+      if (index + 1 === deviceLinks.length) setLinkData(tempLinkData);
+    });
+  }, [deviceLinks, searchFilter]);
 
   const setDeviceState = (devices, setState) => {
     let tempDeviceDict = {};
@@ -59,50 +138,6 @@ const Audio = () => {
       setDeviceState(encoders, setEncoderDict);
     })();
   }, []);
-
-  // Set "decoder list" when search filter is changed
-  useEffect(() => {
-    let tempDecoderElements = [];
-    for (const [, decoder] of Object.entries(decoderDict)) {
-      tempDecoderElements.push(
-        <Row key={decoder.mac}>
-          <Button
-            key={decoder.mac}
-            id={decoder.mac}
-            nickname={decoder.nickName}
-            type="text"
-            size="small"
-            style={{
-              cursor: "pointer",
-              backgroundColor: choosedDecoderList.includes(decoder.mac)
-                ? "#BFE0E4"
-                : null,
-            }}
-            className="tvwall-encoder"
-            onClick={(event) => {
-              if (decoder.state === "Up") {
-                const mac = event.currentTarget.id;
-                const nickName = event.currentTarget.nickname;
-                handleChooseDecoder(mac, nickName);
-              }
-            }}
-          >
-            <span
-              className={
-                decoder.state === "Up"
-                  ? "encoder-normal-dot"
-                  : decoder.state === "Down"
-                  ? "encoder-down-dot"
-                  : "encoder-abnormal-dot"
-              }
-            />
-            {decoder.nickName}
-          </Button>
-        </Row>
-      );
-    }
-    setDecoderElements(tempDecoderElements);
-  }, [searchFilter, choosedDecoderList, decoderDict]);
 
   // Set "encoder list" when search filter is changed
   useEffect(() => {
@@ -172,22 +207,6 @@ const Audio = () => {
     setEncoderElements(tempEncoderElements);
   }, [choosedEncoder, encoderDict, searchFilter, chooseAudioType]);
 
-  const handleChooseDecoder = (decoderMac, decoderNickName) => {
-    const decoderList = choosedDecoderListRef.current;
-    if (decoderList.includes(decoderMac)) {
-      // remove decoder from list
-      setChoosedDecoderList((choosedDecoderList) => {
-        return choosedDecoderList.filter((decoder) => decoder !== decoderMac);
-      });
-    } else {
-      // add decoder to list
-      setChoosedDecoderList((choosedDecoderList) => [
-        ...choosedDecoderList,
-        decoderMac,
-      ]);
-    }
-  };
-
   const handleChooseEncoder = (encoderName) => {
     setChoosedEncoder(encoderName);
   };
@@ -254,21 +273,118 @@ const Audio = () => {
     }
   };
 
-  const handleChooseAudioType = (e) => {
-    const audioType = e.target.value;
-    setChooseAudioType(audioType);
-  };
+  const columns = [
+    {
+      title: (
+        <span className="audio-content-table-head">
+          {intl.formatMessage(Messages.Text_Common_Encoder)}
+        </span>
+      ),
+      dataIndex: "encoderName",
+      key: "encoderName",
+      render: (text) => {
+        return <span>{text}</span>;
+      },
+    },
+    {
+      title: (
+        <span className="audio-content-table-head">
+          {intl.formatMessage(Messages.Text_Audio_Input)}
+        </span>
+      ),
+      dataIndex: "encoderName",
+      key: "encoderName",
+      render: (text) => {
+        return <span>{text}</span>;
+      },
+    },
+    {
+      title: (
+        <span className="audio-content-table-head">
+          {intl.formatMessage(Messages.Text_Common_Decoder)}
+        </span>
+      ),
+      dataIndex: "decoderName",
+      key: "decoderName",
+      render: (text) => {
+        return <span style={{ fontSize: "16px" }}>{text}</span>;
+      },
+    },
+    {
+      title: (
+        <span className="audio-content-table-head">
+          {intl.formatMessage(Messages.Text_Audio_Output)}
+        </span>
+      ),
+      dataIndex: "encoderName",
+      key: "encoderName",
+      render: (text) => {
+        return <span>{text}</span>;
+      },
+    },
+  ];
 
   return (
-    <div>
-      {store.siderCollapse ? (
-        <div className="page-title">
-          <FormattedMessage {...Messages.Text_Audio_AudioMgmt} />
+    <div
+      className={
+        store.siderCollapse
+          ? `page-layout-column-collapse`
+          : `page-layout-column`
+      }
+    >
+      <div>
+        <div className="audio-title-row">
+          <span className="page-title">
+            <FormattedMessage {...Messages.Text_Audio_AudioMgmt} />
+          </span>
+          {pageType === "CONN_STATE" ? (
+            <Input
+              className="audio-title-input audio-input"
+              variant="filled"
+              onChange={(e) => {
+                setSearchFilter(e.target.value);
+              }}
+              prefix={<SearchOutlined />}
+              placeholder={intl.formatMessage(
+                Messages.Text_Audio_InputAudioMsg
+              )}
+            />
+          ) : null}
         </div>
-      ) : (
-        <div style={{ marginTop: 60 }} />
-      )}
-      <div
+        {pageType === "CONN_STATE" ? (
+          <div className="audio-content-container">
+            <div className="audio-content-title-row">
+              <span className="audio-content-title">
+                <FormattedMessage {...Messages.Text_USB_ConnectionStatus} />
+              </span>
+              <Button
+                shape="circle"
+                className="audio-content-create-button"
+                onClick={() => {
+                  setPageType("ADD_LINK");
+                  setSelectedEncoder(null);
+                  setSelectedDecoders([]);
+                  setReload(Math.random());
+                }}
+              >
+                <img
+                  alt="create"
+                  src={PlusIcon}
+                  className="audio-content-create-button-icon"
+                />
+              </Button>
+            </div>
+            <Table
+              columns={columns}
+              dataSource={linkData}
+              pagination={false}
+              size={"small"}
+            />
+          </div>
+        ) : null}
+      </div>
+
+      {/* <div
         className="audio-layout container-width"
         style={{ margin: "16px 16px 0px 0px" }}
       >
@@ -405,7 +521,7 @@ const Audio = () => {
             </Row>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
