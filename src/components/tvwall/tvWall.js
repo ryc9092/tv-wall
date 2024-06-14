@@ -195,7 +195,7 @@ const TvWall = ({
                 tvWallSize.row) *
               block.marginTop
             }px`,
-            border: "1px solid black",
+            border: "1px solid #a5a5a5",
             cursor: "pointer",
           }}
           onClick={() => {

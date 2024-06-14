@@ -251,7 +251,7 @@ const SingleScreen = () => {
           id={`card-${decoder.mac}`}
           onMouseOver={handleScreenMouseEnter}
           onMouseLeave={handleScreenMouseLeave}
-        > */}
+          > */}
           <div
             className="single-screen-card"
             style={{
@@ -268,10 +268,10 @@ const SingleScreen = () => {
                 style={{
                   width:
                     document.getElementById(`card-${decoder.mac}`)
-                      ?.clientWidth - 10,
+                      ?.clientWidth - 12,
                   height:
                     document.getElementById(`card-${decoder.mac}`)
-                      ?.clientHeight - 11,
+                      ?.clientHeight - 14,
                   border: 0,
                 }}
                 src={modifyVideoSize(
@@ -287,15 +287,15 @@ const SingleScreen = () => {
             ) : null}
             <div
               id={`card-${decoder.mac}`}
-              className="single-screen-card"
+              className="single-screen-card-top"
               style={{
                 width: `${
                   document.getElementById(`card-${decoder.mac}`)?.clientWidth -
-                  10
+                  12
                 }px`,
                 height: `${
                   document.getElementById(`card-${decoder.mac}`)?.clientHeight -
-                  11
+                  14
                 }px`,
                 position: "absolute",
                 zIndex: 100,
