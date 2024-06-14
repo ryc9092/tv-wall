@@ -1,22 +1,17 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Button, Input, Row, Table, Tag } from "antd";
+import { Button, Input, Table, Tag } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import {
   createDeviceLink,
   removeDeviceLink,
   getDeviceLinks,
   getDeviceLinkDetails,
-  getDeviceLinkByEncoder,
   getDecoders,
   getEncoders,
 } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
-import {
-  showWarningNotification,
-  showSuccessNotificationByMsg,
-} from "../utils/Utils";
 import PlusIcon from "../assets/plus.png";
 import CaretLeftIcon from "../assets/caret-left.png";
 import PencilIcon from "../assets/pencil.png";
@@ -35,15 +30,6 @@ const USB = () => {
   const [searchFilter, setSearchFilter] = useState("");
   const [linkData, setLinkData] = useState([]);
   const [reload, setReload] = useState(null);
-
-  const [encoderType, setEncoderType] = useState("1");
-  const [decoderDict, setDecoderDict] = useState({}); // { $mac: { nickName: $nickName, mac: $mac... } }
-  const [encoderDict, setEncoderDict] = useState({});
-  const [decoderElements, setDecoderElements] = useState([]);
-  const [encoderElements, setEncoderElements] = useState([]);
-  const [choosedDecoderList, setChoosedDecoderList] = useState([]);
-  const [choosedDecoderElements, setChoosedDecoderElements] = useState(null);
-  const [choosedEncoder, setChoosedEncoder] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -224,222 +210,6 @@ const USB = () => {
       ),
     },
   ];
-
-  const choosedDecoderListRef = useRef();
-  choosedDecoderListRef.current = choosedDecoderList;
-
-  const changeEncoderType = ({ target: { value } }) => {
-    setEncoderType(value);
-  };
-
-  const setDeviceState = (devices, setState) => {
-    let tempDeviceDict = {};
-    devices.forEach((device) => {
-      tempDeviceDict[device.mac] = device;
-    });
-    setState(tempDeviceDict);
-  };
-
-  // set devices dict state
-  useEffect(() => {
-    (async () => {
-      const decoders = await getDecoders(store);
-      setDeviceState(decoders, setDecoderDict);
-      const encoders = await getEncoders(store);
-      setDeviceState(encoders, setEncoderDict);
-    })();
-  }, []);
-
-  // Set "decoder list" when search filter is changed
-  useEffect(() => {
-    let tempDecoderElements = [];
-    for (const [, decoder] of Object.entries(decoderDict)) {
-      tempDecoderElements.push(
-        <Row key={decoder.mac}>
-          <Button
-            key={decoder.mac}
-            id={decoder.mac}
-            nickname={decoder.nickName}
-            type="text"
-            size="small"
-            style={{
-              cursor: "pointer",
-              backgroundColor: choosedDecoderList.includes(decoder.mac)
-                ? "#BFE0E4"
-                : null,
-            }}
-            className="tvwall-encoder"
-            onClick={(event) => {
-              if (decoder.state === "Up") {
-                const mac = event.currentTarget.id;
-                const nickName = event.currentTarget.nickname;
-                handleChooseDecoder(mac, nickName);
-              }
-            }}
-          >
-            <span
-              className={
-                decoder.state === "Up"
-                  ? "encoder-normal-dot"
-                  : decoder.state === "Down"
-                  ? "encoder-down-dot"
-                  : "encoder-abnormal-dot"
-              }
-            />
-            {decoder.nickName}
-          </Button>
-        </Row>
-      );
-    }
-    setDecoderElements(tempDecoderElements);
-  }, [searchFilter, choosedDecoderList, decoderDict]);
-
-  // Set "encoder list" when search filter is changed
-  useEffect(() => {
-    let filterEncoders = [];
-    for (const [, encoder] of Object.entries(encoderDict)) {
-      if (
-        encoder.mac.includes(searchFilter) ||
-        encoder.nickName.includes(searchFilter)
-      )
-        filterEncoders.push(encoder);
-    }
-
-    let tempEncoderElements = [];
-    filterEncoders.forEach((encoder) => {
-      // get link of clicked encoders
-      if (choosedEncoder === encoder.mac) {
-        (async () => {
-          let result = await getDeviceLinkByEncoder({
-            store: store,
-            linkId: `usb.` + choosedEncoder,
-          });
-          let tempDecoderList = [];
-          if (result) {
-            result.forEach((detail) => {
-              tempDecoderList.push(detail.decoder);
-            });
-          }
-          setChoosedDecoderList(tempDecoderList);
-        })();
-      }
-
-      // display encoders & change background of encoder if clicked
-      tempEncoderElements.push(
-        <Row key={encoder.mac} style={{ marginTop: "6px" }}>
-          <Button
-            key={encoder.mac}
-            id={encoder.mac}
-            value={encoder.previewUrl}
-            type="text"
-            size="small"
-            style={{
-              cursor: "pointer",
-              backgroundColor:
-                choosedEncoder === encoder.mac ? "#BFE0E4" : null,
-            }}
-            className="tvwall-encoder"
-            onClick={(event) => {
-              const encoderName = event.currentTarget.id;
-              if (encoder.state === "Up") handleChooseEncoder(encoderName);
-            }}
-          >
-            <span
-              className={
-                encoder.state === "Up"
-                  ? "encoder-normal-dot"
-                  : encoder.state === "Down"
-                  ? "encoder-down-dot"
-                  : "encoder-abnormal-dot"
-              }
-            />
-            {encoder.nickName}
-          </Button>
-        </Row>
-      );
-    });
-    setEncoderElements(tempEncoderElements);
-  }, [choosedEncoder, encoderDict, searchFilter]);
-
-  const handleChooseDecoder = (decoderMac, decoderNickName) => {
-    const decoderList = choosedDecoderListRef.current;
-    if (decoderList.includes(decoderMac)) {
-      // remove decoder from list
-      setChoosedDecoderList((choosedDecoderList) => {
-        return choosedDecoderList.filter((decoder) => decoder !== decoderMac);
-      });
-    } else {
-      // add decoder to list
-      setChoosedDecoderList((choosedDecoderList) => [
-        ...choosedDecoderList,
-        decoderMac,
-      ]);
-    }
-  };
-
-  const handleChooseEncoder = (encoderName) => {
-    setChoosedEncoder(encoderName);
-  };
-
-  useEffect(() => {
-    let tempChoosedDecoderElements = [];
-    choosedDecoderList.forEach((decoder) => {
-      tempChoosedDecoderElements.push(
-        <Row key={decoder} style={{ marginTop: "6px" }}>
-          <span key={decoder}>{decoderDict[decoder].nickName}</span>
-        </Row>
-      );
-    });
-    setChoosedDecoderElements(tempChoosedDecoderElements);
-  }, [choosedDecoderList]);
-
-  const handleCancel = () => {
-    setChoosedDecoderList([]);
-    setChoosedEncoder();
-  };
-
-  const handleClearConnection = async () => {
-    if (choosedEncoder) {
-      const result = await removeDeviceLink({
-        store: store,
-        linkId: `usb.` + choosedEncoder,
-      });
-      if (result) {
-        setChoosedDecoderList([]);
-        setChoosedEncoder();
-        showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_USB_ClearConnectionSuccess)
-        );
-      } else {
-        showWarningNotification(
-          intl.formatMessage(Messages.Text_USB_ClearConnectionFail)
-        );
-      }
-    }
-  };
-
-  const handleCreateConnection = async () => {
-    if (choosedDecoderList.length > 0 && choosedEncoder) {
-      const result = await createDeviceLink({
-        store: store,
-        id: `usb.` + choosedEncoder,
-        linkType: "usb",
-        encoder: choosedEncoder,
-        decoders: choosedDecoderList,
-        remark: "",
-        isPreset: "N",
-      });
-      if (result) {
-        showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_USB_CreateConnectionSuccess)
-        );
-      } else {
-        showWarningNotification(
-          intl.formatMessage(Messages.Text_USB_CreateConnectionFail)
-        );
-      }
-    }
-  };
 
   const [selectedEncoder, setSelectedEncoder] = useState([]);
   const [encoderFilter, setEncoderFilter] = useState("");
@@ -703,11 +473,6 @@ const USB = () => {
               dataSource={linkData}
               pagination={false}
               size={"small"}
-              onRow={(record) => ({
-                onClick: () => {
-                  handleChooseEncoder(record);
-                },
-              })}
             />
           </div>
         ) : (

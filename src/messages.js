@@ -309,6 +309,68 @@ export default defineMessages({
     defaultMessage: "影像清除失敗",
   },
 
+  // USB management
+  Text_USB_USBMgmt: {
+    id: "Text-USB-USBMgmt",
+    defaultMessage: "USB管理",
+  },
+  Text_USB_InputUSBSource: {
+    id: "Text-USB-InputUSBSource",
+    defaultMessage: "輸入USB來源名稱",
+  },
+  Text_USB_InputEncoderName: {
+    id: "Text-USB-InputEncoderName",
+    defaultMessage: "輸入編碼器名稱",
+  },
+  Text_USB_InputDecoderName: {
+    id: "Text-USB-InputDecoderName",
+    defaultMessage: "輸入解碼器名稱",
+  },
+  Text_USB_ConnectionStatus: {
+    id: "Text-USB-ConnectionStatus",
+    defaultMessage: "連接狀態",
+  },
+  Text_USB_AddConnection: {
+    id: "Text-USB-AddConnection",
+    defaultMessage: "新增USB連接",
+  },
+  Text_USB_EditConnection: {
+    id: "Text-USB-EditConnection",
+    defaultMessage: "編輯USB連接",
+  },
+  Text_USB_ChooseSource: {
+    id: "Text-USB-ChooseSource",
+    defaultMessage: "選擇來源",
+  },
+  Text_USB_Source: {
+    id: "Text-USB-Source",
+    defaultMessage: "來源名稱",
+  },
+  Text_USB_ChooseDestination: {
+    id: "Text-USB-ChooseDestination",
+    defaultMessage: "選擇終端",
+  },
+  Text_USB_Destination: {
+    id: "Text-USB-Destination",
+    defaultMessage: "終端名稱",
+  },
+  Text_USB_Status: {
+    id: "Text-USB-Status",
+    defaultMessage: "狀態",
+  },
+  Text_USB_Operation: {
+    id: "Text-USB-Operation",
+    defaultMessage: "操作",
+  },
+  Text_USB_RemoveConnection: {
+    id: "Text-USB-RemoveConnection",
+    defaultMessage: "刪除USB連結",
+  },
+  Text_USB_RemoveConnectionConfirm: {
+    id: "Text-USB-RemoveConnectionConfirm",
+    defaultMessage: "確定要刪除此USB連結?",
+  },
+
   // Device status
   Text_DeviceStatus_CurrentStatus: {
     id: "Text-DeviceStatus-CurrentStatus",
@@ -369,88 +431,6 @@ export default defineMessages({
   Text_DeviceStatus_RebootFail: {
     id: "Text-DeviceStatus-RebootFail",
     defaultMessage: "重啟失敗",
-  },
-
-  // USB management
-  Text_USB_USBMgmt: {
-    id: "Text-USB-USBMgmt",
-    defaultMessage: "USB管理",
-  },
-  Text_USB_InputUSBSource: {
-    id: "Text-USB-InputUSBSource",
-    defaultMessage: "輸入USB來源名稱",
-  },
-  Text_USB_InputEncoderName: {
-    id: "Text-USB-InputEncoderName",
-    defaultMessage: "輸入編碼器名稱",
-  },
-  Text_USB_InputDecoderName: {
-    id: "Text-USB-InputDecoderName",
-    defaultMessage: "輸入解碼器名稱",
-  },
-  Text_USB_ConnectionStatus: {
-    id: "Text-USB-ConnectionStatus",
-    defaultMessage: "連接狀態",
-  },
-  Text_USB_AddConnection: {
-    id: "Text-USB-AddConnection",
-    defaultMessage: "新增USB連接",
-  },
-  Text_USB_EditConnection: {
-    id: "Text-USB-EditConnection",
-    defaultMessage: "編輯USB連接",
-  },
-  Text_USB_ChooseSource: {
-    id: "Text-USB-ChooseSource",
-    defaultMessage: "選擇來源",
-  },
-  Text_USB_Source: {
-    id: "Text-USB-Source",
-    defaultMessage: "來源名稱",
-  },
-  Text_USB_ChooseDestination: {
-    id: "Text-USB-ChooseDestination",
-    defaultMessage: "選擇終端",
-  },
-  Text_USB_Destination: {
-    id: "Text-USB-Destination",
-    defaultMessage: "終端名稱",
-  },
-  Text_USB_Status: {
-    id: "Text-USB-Status",
-    defaultMessage: "狀態",
-  },
-  Text_USB_Operation: {
-    id: "Text-USB-Operation",
-    defaultMessage: "操作",
-  },
-  Text_USB_Connect: {
-    id: "Text-USB-Connect",
-    defaultMessage: "USB連接",
-  },
-  Text_USB_CreateConnectionSuccess: {
-    id: "Text-USB-CreateConnectionSuccess",
-    defaultMessage: "建立USB連結成功",
-  },
-  Text_USB_CreateConnectionFail: {
-    id: "Text-USB-CreateConnectionFail",
-    defaultMessage: "建立USB連結失敗",
-  },
-  Text_USB_TerminalChoose: {
-    id: "Text-USB-TerminalChoose",
-    defaultMessage: "USB終端選擇",
-  },
-  Text_USB_ClearConnection: {
-    id: "Text-USB-ClearConnection",
-    defaultMessage: "清除連結",
-  },
-  Text_USB_ClearConnectionSuccess: {
-    id: "Text-USB-ClearConnectionSuccess",
-    defaultMessage: "清除USB連結成功",
-  },
-  Text_USB_ClearConnectionFail: {
-    id: "Text-USB-ClearConnectionFail",
-    defaultMessage: "清除USB連結失敗",
   },
 
   // Audio management
