@@ -1,17 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import {
-  Button,
-  Col,
-  Divider,
-  Input,
-  Modal,
-  Radio,
-  Row,
-  Table,
-  Tag,
-  Typography,
-} from "antd";
+import { Button, Input, Row, Table, Tag } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import {
   createDeviceLink,
@@ -35,7 +24,6 @@ import TrashIcon from "../assets/trash.png";
 import SearchIcon from "../assets/magnifying-glass.png";
 import "../App.scss";
 import "./USB.scss";
-import { render } from "@testing-library/react";
 
 const USB = () => {
   const intl = useIntl();
@@ -66,7 +54,6 @@ const USB = () => {
         linkType: "usb",
         isPreset: "N",
       });
-      console.log(deviceLinks, "ddd");
       encoders.forEach((encoder) => {
         encoder.key = encoder.mac;
       });
@@ -85,7 +72,7 @@ const USB = () => {
   useEffect(() => {
     setLinkData([]);
     let tempLinkData = [];
-    deviceLinks.forEach(async (deviceLink) => {
+    deviceLinks.forEach(async (deviceLink, index) => {
       let encoderName;
       encoders.some((encoder) => {
         if (
@@ -104,16 +91,17 @@ const USB = () => {
         decoders.some((decoder) => {
           if (encoderName && decoder.mac === link.decoder) {
             tempLinkData.push({
+              key: `${deviceLink.encoder}.${link.decoder}`,
               encoderMac: deviceLink.encoder,
               encoderName: encoderName,
               decoderMac: link.decoder,
               decoderName: decoder.nickName,
             });
-            setLinkData(tempLinkData);
             return true;
           } else return false;
         });
       });
+      if (index + 1 === deviceLinks.length) setLinkData(tempLinkData);
     });
   }, [deviceLinks, searchFilter]);
 
@@ -138,7 +126,7 @@ const USB = () => {
         store: store,
         linkId: linkId,
       });
-      if (linkDecoders)
+      if (linkDecoders.length !== 0) {
         await createDeviceLink({
           store: store,
           id: `usb.${encoderMac}`,
@@ -149,6 +137,7 @@ const USB = () => {
           remark: "",
           isPreset: "N",
         });
+      }
       setReload(Math.random());
     }
   };
@@ -616,6 +605,36 @@ const USB = () => {
     setPageType("CONN_STATE");
   };
 
+  const handleEditDeviceLink = async () => {
+    let linkId;
+    deviceLinks.some((link) => {
+      if (link.encoder === selectedEncoder) {
+        linkId = link.id;
+        return true;
+      } else return false;
+    });
+    if (linkId) {
+      await removeDeviceLink({
+        store: store,
+        linkId: linkId,
+      });
+      if (selectedDecoders.length !== 0) {
+        await createDeviceLink({
+          store: store,
+          id: `usb.${selectedEncoder}`,
+          linkType: "usb",
+          encoder: selectedEncoder,
+          decoders: selectedDecoders,
+          value1: "usb",
+          remark: "",
+          isPreset: "N",
+        });
+      }
+      setReload(Math.random());
+      setPageType("CONN_STATE");
+    }
+  };
+
   return (
     <div
       className={
@@ -812,7 +831,11 @@ const USB = () => {
                 <Button
                   className="usb-add-btn"
                   disabled={!selectedEncoder || selectedDecoders.length === 0}
-                  onClick={handleAddDeviceLink}
+                  onClick={
+                    pageType === "ADD_LINK"
+                      ? handleAddDeviceLink
+                      : handleEditDeviceLink
+                  }
                 >
                   <span className="usb-add-btn-text">
                     {pageType === "ADD_LINK" ? (
