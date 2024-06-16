@@ -10,6 +10,7 @@ export default defineMessages({
   Text_Common_Up: { id: "Text-Common-Up", defaultMessage: "上線" },
   Text_Common_Down: { id: "Text-Common-Down", defaultMessage: "離線" },
   Text_Common_None: { id: "Text-Common-None", defaultMessage: "無" },
+  Text_Common_Type: { id: "Text-Common-Type", defaultMessage: "類型" },
   Text_Common_Dimension: {
     id: "Text-Common-Dimension",
     defaultMessage: "維度",
@@ -441,6 +442,130 @@ export default defineMessages({
     defaultMessage: "確定要刪除此音頻連結?",
   },
 
+  // Situation
+  Text_Situation_Title: {
+    id: "Text-Situation-Title",
+    defaultMessage: "情境管理",
+  },
+  Text_Situation_CreateSituation: {
+    id: "Text-Situation-CreateSituation",
+    defaultMessage: "新增情境",
+  },
+  Text_Situation_AddSituationItem: {
+    id: "Text-Situation-AddSituationItem",
+    defaultMessage: "新增情境項目",
+  },
+  Text_Situation_ExecutePrevStep: {
+    id: "Text-Situation-ExecutePrevStep",
+    defaultMessage: "執行上一步",
+  },
+  Text_Situation_TVWallConnection: {
+    id: "Text-Situation-TVWallConnection",
+    defaultMessage: "電視牆影音連接",
+  },
+  Text_Situation_SingleScreenConnection: {
+    id: "Text-Situation-SingleScreenConnection",
+    defaultMessage: "單畫面影音連接",
+  },
+  Text_Situation_USBConnection: {
+    id: "Text-Situation-USBConnection",
+    defaultMessage: "USB連接",
+  },
+  Text_Situation_RS232Connection: {
+    id: "Text-Situation-RS232Connection",
+    defaultMessage: "RS232連接",
+  },
+  Text_Situation_AudioConnection: {
+    id: "Text-Situation-AudioConnection",
+    defaultMessage: "音頻連接",
+  },
+  Text_Situation_MonitorManagement: {
+    id: "Text-Situation-MonitorManagement",
+    defaultMessage: "顯示器及布幕管理",
+  },
+  Text_Situation_RemoveItem: {
+    id: "Text-Situation-RemoveItem",
+    defaultMessage: "刪除情境項目",
+  },
+  Text_Situation_RemoveItemConfirm: {
+    id: "Text-Situation-RemoveItemConfirm",
+    defaultMessage: "是否要刪除XXX的以下項目?",
+  },
+  Text_Situation_RemoveSituation: {
+    id: "Text-Situation-RemoveSituation",
+    defaultMessage: "刪除情境",
+  },
+  Text_Situation_RemoveSituationConfirm: {
+    id: "Text-Situation-RemoveSituationConfirm",
+    defaultMessage: "確定要刪除XXX?",
+  },
+  Text_Situation_SituationName: {
+    id: "Text-Situation-SituationName",
+    defaultMessage: "情境名稱",
+  },
+  Text_Situation_InputName: {
+    id: "Text-Situation-InputName",
+    defaultMessage: "輸入名稱",
+  },
+  Text_Situation_InputDescription: {
+    id: "Text-Situation-InputDescription",
+    defaultMessage: "輸入情境相關內容",
+  },
+
+  // Situation legacy
+  Text_Situation_Activate: {
+    id: "Text-Situation-Activate",
+    defaultMessage: "啟用",
+  },
+  Text_Situation_CreateSituationSuccess: {
+    id: "Text-Situation-CreateSituationSuccess",
+    defaultMessage: "新增情境成功",
+  },
+  Text_Situation_CreateSituationFail: {
+    id: "Text-Situation-CreateSituationFail",
+    defaultMessage: "新增情境失敗",
+  },
+  Text_Situation_InputSituationName: {
+    id: "Text-Situation-InputSituationName",
+    defaultMessage: "請輸入情境名稱",
+  },
+  Text_Situation_SituationDescription: {
+    id: "Text-Situation-SituationDescription",
+    defaultMessage: "情境描述",
+  },
+  Text_Situation_Type: {
+    id: "Text-Situation-Type",
+    defaultMessage: "類型",
+  },
+  Text_Situation_Description: {
+    id: "Text-Situation-Description",
+    defaultMessage: "描述",
+  },
+  Text_Situation_Operation: {
+    id: "Text-Situation-Operation",
+    defaultMessage: "操作",
+  },
+  Text_Situation_ChooseItem: {
+    id: "Text-Situation-ChooseItem",
+    defaultMessage: "項目選擇",
+  },
+  Text_Situation_TVWallManagement: {
+    id: "Text-Situation-TVWallManagement",
+    defaultMessage: "電視牆影像管理",
+  },
+  Text_Situation_SingleScreenManagement: {
+    id: "Text-Situation-SingleScreenManagement",
+    defaultMessage: "單畫面影像管理",
+  },
+  Text_Situation_AudioManagement: {
+    id: "Text-Situation-AudioManagement",
+    defaultMessage: "Audio管理",
+  },
+  Text_Situation_USBManagement: {
+    id: "Text-Situation-USBManagement",
+    defaultMessage: "USB管理",
+  },
+
   // Device status
   Text_DeviceStatus_CurrentStatus: {
     id: "Text-DeviceStatus-CurrentStatus",
@@ -501,76 +626,6 @@ export default defineMessages({
   Text_DeviceStatus_RebootFail: {
     id: "Text-DeviceStatus-RebootFail",
     defaultMessage: "重啟失敗",
-  },
-
-  // Situation
-  Text_Situation_Title: {
-    id: "Text-Situation-Title",
-    defaultMessage: "情境操作",
-  },
-  Text_Situation_CreateSituation: {
-    id: "Text-Situation-CreateSituation",
-    defaultMessage: "新增情境",
-  },
-  Text_Situation_Activate: {
-    id: "Text-Situation-Activate",
-    defaultMessage: "啟用",
-  },
-  Text_Situation_CreateSituationSuccess: {
-    id: "Text-Situation-CreateSituationSuccess",
-    defaultMessage: "新增情境成功",
-  },
-  Text_Situation_CreateSituationFail: {
-    id: "Text-Situation-CreateSituationFail",
-    defaultMessage: "新增情境失敗",
-  },
-  Text_Situation_SituationName: {
-    id: "Text-Situation-SituationName",
-    defaultMessage: "情境名稱",
-  },
-  Text_Situation_InputSituationName: {
-    id: "Text-Situation-InputSituationName",
-    defaultMessage: "請輸入情境名稱",
-  },
-  Text_Situation_SituationDescription: {
-    id: "Text-Situation-SituationDescription",
-    defaultMessage: "情境描述",
-  },
-  Text_Situation_Type: {
-    id: "Text-Situation-Type",
-    defaultMessage: "類型",
-  },
-  Text_Situation_Description: {
-    id: "Text-Situation-Description",
-    defaultMessage: "描述",
-  },
-  Text_Situation_Operation: {
-    id: "Text-Situation-Operation",
-    defaultMessage: "操作",
-  },
-  Text_Situation_AddSituationItem: {
-    id: "Text-Situation-AddSituationItem",
-    defaultMessage: "新增情境項目",
-  },
-  Text_Situation_ChooseItem: {
-    id: "Text-Situation-ChooseItem",
-    defaultMessage: "項目選擇",
-  },
-  Text_Situation_TVWallManagement: {
-    id: "Text-Situation-TVWallManagement",
-    defaultMessage: "電視牆影像管理",
-  },
-  Text_Situation_SingleScreenManagement: {
-    id: "Text-Situation-SingleScreenManagement",
-    defaultMessage: "單畫面影像管理",
-  },
-  Text_Situation_AudioManagement: {
-    id: "Text-Situation-AudioManagement",
-    defaultMessage: "Audio管理",
-  },
-  Text_Situation_USBManagement: {
-    id: "Text-Situation-USBManagement",
-    defaultMessage: "USB管理",
   },
 
   // System setting
