@@ -3,6 +3,7 @@ import { defineMessages } from "react-intl";
 export default defineMessages({
   // Common
   Text_Common_Name: { id: "Text-Common-Name", defaultMessage: "名稱" },
+  Text_Common_Alias: { id: "Text-Common-Alias", defaultMessage: "別名" },
   Text_Common_Block: { id: "Text-Common-Block", defaultMessage: "區塊" },
   Text_Common_Screen: { id: "Text-Common-Screen", defaultMessage: "畫面" },
   Text_Common_Model: { id: "Text-Common-Model", defaultMessage: "產品型號" },
@@ -11,6 +12,7 @@ export default defineMessages({
   Text_Common_Down: { id: "Text-Common-Down", defaultMessage: "離線" },
   Text_Common_None: { id: "Text-Common-None", defaultMessage: "無" },
   Text_Common_Type: { id: "Text-Common-Type", defaultMessage: "類型" },
+  Text_Common_Detail: { id: "Text-Common-Detail", defaultMessage: "詳細資料" },
   Text_Common_Dimension: {
     id: "Text-Common-Dimension",
     defaultMessage: "維度",
@@ -30,6 +32,10 @@ export default defineMessages({
   Text_Common_Description: {
     id: "Text-Common-Description",
     defaultMessage: "描述",
+  },
+  Text_Common_SelectAll: {
+    id: "Text-Common-SelectAll",
+    defaultMessage: "全選",
   },
   Text_Button_Save: {
     id: "Text-Button-Save",
@@ -569,8 +575,26 @@ export default defineMessages({
   // Device status
   Text_DeviceStatus_CurrentStatus: {
     id: "Text-DeviceStatus-CurrentStatus",
-    defaultMessage: "設備即時狀態",
+    defaultMessage: "設備狀態",
   },
+  Text_DeviceStatus_MonitorSwitch: {
+    id: "Text-DeviceStatus-MonitorSwitch",
+    defaultMessage: "顯示器開關",
+  },
+  Text_DeviceStatus_Model: {
+    id: "Text-DeviceStatus-Model",
+    defaultMessage: "模型",
+  },
+  Text_DeviceStatus_ProductCode: {
+    id: "Text-DeviceStatus-ProductCode",
+    defaultMessage: "產品編號",
+  },
+  Text_DeviceStatus_ProductDesc: {
+    id: "Text-DeviceStatus-ProductDesc",
+    defaultMessage: "產品描述",
+  },
+
+  // Device status legacy
   Text_DeviceStatus_Type: {
     id: "Text-DeviceStatus-Type",
     defaultMessage: "類型",
@@ -598,18 +622,6 @@ export default defineMessages({
   Text_DeviceStatus_Content: {
     id: "Text-DeviceStatus-Content",
     defaultMessage: "內容",
-  },
-  Text_DeviceStatus_Model: {
-    id: "Text-DeviceStatus-Model",
-    defaultMessage: "模型",
-  },
-  Text_DeviceStatus_ProductCode: {
-    id: "Text-DeviceStatus-ProductCode",
-    defaultMessage: "產品編號",
-  },
-  Text_DeviceStatus_ProductDesc: {
-    id: "Text-DeviceStatus-ProductDesc",
-    defaultMessage: "產品描述",
   },
   Text_DeviceStatus_Operate: {
     id: "Text-DeviceStatus-Operate",
