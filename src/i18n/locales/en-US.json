@@ -188,5 +188,11 @@
 
   "Text-Barcode-Title": "Platform login barcode",
   "Text-Barcode-Download": "Download",
-  "Text-Barcode-Share": "Share"
+  "Text-Barcode-Share": "Share",
+
+  "Text-EventAndAlarm-Title": "Event and alarm",
+  "Text-EventAndAlarm-EventName": "Event name",
+  "Text-EventAndAlarm-OccurTime": "Occur time",
+  "Text-EventAndAlarm-EventDesc": "Event description",
+  "Text-EventAndAlarm-ViewAll": "View all"
 }

@@ -801,4 +801,26 @@ export default defineMessages({
     id: "Text-Barcode-Share",
     defaultMessage: "分享",
   },
+
+  // Event and alarm
+  Text_EventAndAlarm_Title: {
+    id: "Text-EventAndAlarm-Title",
+    defaultMessage: "事件及告警",
+  },
+  Text_EventAndAlarm_EventName: {
+    id: "Text-EventAndAlarm-EventName",
+    defaultMessage: "事件名稱",
+  },
+  Text_EventAndAlarm_OccurTime: {
+    id: "Text-EventAndAlarm-OccurTime",
+    defaultMessage: "發生時間",
+  },
+  Text_EventAndAlarm_EventDesc: {
+    id: "Text-EventAndAlarm-EventDesc",
+    defaultMessage: "事件描述",
+  },
+  Text_EventAndAlarm_ViewAll: {
+    id: "Text-EventAndAlarm-ViewAll",
+    defaultMessage: "檢視全部",
+  },
 });
