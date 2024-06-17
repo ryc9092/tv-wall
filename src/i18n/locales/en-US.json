@@ -203,6 +203,13 @@
   "Text-GroupSetting-MaintenancePersonnel": "Device maintenance personnel",
   "Text-GroupSetting-EditGroup": "Edit group",
 
+  "Text-AccountSetting-AccountSetting": "Account and permission setting",
+  "Text-AccountSetting-UseAccount": "Use account",
+  "Text-AccountSetting-UsePermission": "Use permission",
+  "Text-AccountSetting-RemoveAccount": "Remove account",
+  "Text-AccountSetting-RemoveAccountConfirm": "Are you sure to remove this account?",
+  "Text-AccountSetting-AddAccount": "Add use account",
+
   "Text-Barcode-Title": "Platform login barcode",
   "Text-Barcode-Download": "Download",
   "Text-Barcode-Share": "Share",

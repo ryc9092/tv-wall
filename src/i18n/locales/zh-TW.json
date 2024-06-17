@@ -203,6 +203,13 @@
   "Text-GroupSetting-MaintenancePersonnel": "設備維護人員",
   "Text-GroupSetting-EditGroup": "編輯群組",
 
+  "Text-AccountSetting-AccountSetting": "帳戶及權限設定",
+  "Text-AccountSetting-UseAccount": "使用帳號",
+  "Text-AccountSetting-UsePermission": "使用權限",
+  "Text-AccountSetting-RemoveAccount": "刪除帳號",
+  "Text-AccountSetting-RemoveAccountConfirm": "確定要刪除此帳號?",
+  "Text-AccountSetting-AddAccount": "新增使用帳號",
+
   "Text-Barcode-Title": "平台登入條碼",
   "Text-Barcode-Download": "下載",
   "Text-Barcode-Share": "分享",

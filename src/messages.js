@@ -938,6 +938,32 @@ export default defineMessages({
     defaultMessage: "編輯群組",
   },
 
+  // System setting - account setting
+  Text_AccountSetting_AccountSetting: {
+    id: "Text-AccountSetting-AccountSetting",
+    defaultMessage: "帳戶及權限設定",
+  },
+  Text_AccountSetting_UseAccount: {
+    id: "Text-AccountSetting-UseAccount",
+    defaultMessage: "使用帳號",
+  },
+  Text_AccountSetting_UsePermission: {
+    id: "Text-AccountSetting-UsePermission",
+    defaultMessage: "使用權限",
+  },
+  Text_AccountSetting_RemoveAccount: {
+    id: "Text-AccountSetting-RemoveAccount",
+    defaultMessage: "刪除帳號",
+  },
+  Text_AccountSetting_RemoveAccountConfirm: {
+    id: "Text-AccountSetting-RemoveAccountConfirm",
+    defaultMessage: "確定要刪除此帳號?",
+  },
+  Text_AccountSetting_AddAccount: {
+    id: "Text-AccountSetting-AddAccount",
+    defaultMessage: "新增使用帳號",
+  },
+
   // Barcode
   Text_Barcode_Title: {
     id: "Text-Barcode-Title",
