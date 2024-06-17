@@ -664,6 +664,48 @@ export default defineMessages({
     id: "Text-TemplateSetting-TemplateSetting",
     defaultMessage: "電視牆版型設定",
   },
+  Text_TemplateSetting_CreateTemplate: {
+    id: "Text-TemplateSetting-CreateTemplate",
+    defaultMessage: "建立版型",
+  },
+  Text_TemplateSetting_RemoveTemplate: {
+    id: "Text-TemplateSetting-RemoveTemplate",
+    defaultMessage: "刪除電視牆版型",
+  },
+  Text_TemplateSetting_RemoveTemplateConfirm: {
+    id: "Text-TemplateSetting-RemoveTemplateConfirm",
+    defaultMessage: "確定要刪除電視牆版型 : XXX?",
+  },
+  Text_TemplateSetting_CreateWallTemplate: {
+    id: "Text-TemplateSetting-CreateWallTemplate",
+    defaultMessage: "建立電視牆版型",
+  },
+  Text_TemplateSetting_TemplateId: {
+    id: "Text-TemplateSetting-TemplateId",
+    defaultMessage: "版型ID",
+  },
+  Text_TemplateSetting_TemplateName: {
+    id: "Text-TemplateSetting-TemplateName",
+    defaultMessage: "版型名稱",
+  },
+  Text_TemplateSetting_BlockSetting: {
+    id: "Text-TemplateSetting-BlockSetting",
+    defaultMessage: "區塊設定",
+  },
+  Text_TemplateSetting_BlockSettingDesc: {
+    id: "Text-TemplateSetting-BlockSettingDesc",
+    defaultMessage: "點選畫面後，選擇畫面對應的區塊或該範圍的區塊",
+  },
+  Text_TemplateSetting_SetToDefault: {
+    id: "Text-TemplateSetting-SetToDefault",
+    defaultMessage: "設為電視牆維度XXX的預設值",
+  },
+  Text_TemplateSetting_ViewTemplate: {
+    id: "Text-TemplateSetting-ViewTemplate",
+    defaultMessage: "檢視電視牆版型",
+  },
+
+  // System setting - template setting legacy
   Text_TemplateSetting_TemplateManagement: {
     id: "Text-TemplateSetting-TemplateManagement",
     defaultMessage: "版型管理",
@@ -683,22 +725,6 @@ export default defineMessages({
   Text_TemplateSetting_Template: {
     id: "Text-TemplateSetting-Template",
     defaultMessage: "版型",
-  },
-  Text_TemplateSetting_TemplateName: {
-    id: "Text-TemplateSetting-TemplateName",
-    defaultMessage: "版型名稱",
-  },
-  Text_TemplateSetting_CreateTemplate: {
-    id: "Text-TemplateSetting-CreateTemplate",
-    defaultMessage: "建立新版型",
-  },
-  Text_TemplateSetting_CreateWallTemplate: {
-    id: "Text-TemplateSetting-CreateWallTemplate",
-    defaultMessage: "建立電視牆版型",
-  },
-  Text_TemplateSetting_TemplateId: {
-    id: "Text-TemplateSetting-TemplateId",
-    defaultMessage: "版型 ID",
   },
   Text_TemplateSetting_ScreenNumber: {
     id: "Text-TemplateSetting-ScreenNumber",
