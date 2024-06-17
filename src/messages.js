@@ -14,6 +14,7 @@ export default defineMessages({
   Text_Common_Default: { id: "Text-Common-Default", defaultMessage: "預設" },
   Text_Common_Type: { id: "Text-Common-Type", defaultMessage: "類型" },
   Text_Common_Detail: { id: "Text-Common-Detail", defaultMessage: "詳細資料" },
+  Text_Common_Group: { id: "Text-Common-Group", defaultMessage: "群組" },
   Text_Common_Dimension: {
     id: "Text-Common-Dimension",
     defaultMessage: "維度",
@@ -832,6 +833,14 @@ export default defineMessages({
     id: "Text-DeviceSetting-AdvanceSetting",
     defaultMessage: "設備進階設定",
   },
+  Text_DeviceSetting_DeviceSetting: {
+    id: "Text-DeviceSetting-DeviceSetting",
+    defaultMessage: "裝置設定",
+  },
+  Text_DeviceSetting_IPSetting: {
+    id: "Text-DeviceSetting-IPSetting",
+    defaultMessage: "IP設定",
+  },
   Text_DeviceSetting_Type: {
     id: "Text-DeviceSetting-Type",
     defaultMessage: "類型",
@@ -844,6 +853,28 @@ export default defineMessages({
     id: "Text-DeviceSetting-Operate",
     defaultMessage: "操作",
   },
+  Text_DeviceSetting_OutputResolution: {
+    id: "Text-DeviceSetting-OutputResolution",
+    defaultMessage: "輸出解析度",
+  },
+  Text_DeviceSetting_TVIP: {
+    id: "Text-DeviceSetting-TVIP",
+    defaultMessage: "電視IP",
+  },
+  Text_DeviceSetting_TerminalIP: {
+    id: "Text-DeviceSetting-TerminalIP",
+    defaultMessage: "終端顯示設備IP",
+  },
+  Text_DeviceSetting_NetworkMask: {
+    id: "Text-DeviceSetting-NetworkMask",
+    defaultMessage: "網路遮罩",
+  },
+  Text_DeviceSetting_NetworkGate: {
+    id: "Text-DeviceSetting-NetworkGate",
+    defaultMessage: "網路閘道器",
+  },
+
+  // System setting - device setting legacy
   Text_DeviceSetting_Edit: {
     id: "Text-DeviceSetting-Edit",
     defaultMessage: "編輯",
