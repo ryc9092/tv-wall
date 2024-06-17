@@ -893,48 +893,48 @@ export default defineMessages({
   },
 
   // System setting - group setting
-  Text_DeviceSetting_GroupSetting: {
-    id: "Text-DeviceSetting-GroupSetting",
+  Text_GroupSetting_GroupSetting: {
+    id: "Text-GroupSetting-GroupSetting",
     defaultMessage: "顯示群組設定",
   },
-  Text_DeviceSetting_Screen: {
-    id: "Text-DeviceSetting-Screen",
+  Text_GroupSetting_Screen: {
+    id: "Text-GroupSetting-Screen",
     defaultMessage: "螢幕",
   },
-  Text_DeviceSetting_UsePermission: {
-    id: "Text-DeviceSetting-UsePermission",
+  Text_GroupSetting_UsePermission: {
+    id: "Text-GroupSetting-UsePermission",
     defaultMessage: "使用權限",
   },
-  Text_DeviceSetting_RemoveGroup: {
-    id: "Text-DeviceSetting-RemoveGroup",
+  Text_GroupSetting_RemoveGroup: {
+    id: "Text-GroupSetting-RemoveGroup",
     defaultMessage: "刪除群組",
   },
-  Text_DeviceSetting_RemoveGroupConfirm: {
-    id: "Text-DeviceSetting-RemoveGroupConfirm",
+  Text_GroupSetting_RemoveGroupConfirm: {
+    id: "Text-GroupSetting-RemoveGroupConfirm",
     defaultMessage: "確定要刪除群組 : XXX?",
   },
-  Text_DeviceSetting_AddGroup: {
-    id: "Text-DeviceSetting-AddGroup",
+  Text_GroupSetting_AddGroup: {
+    id: "Text-GroupSetting-AddGroup",
     defaultMessage: "新增群組",
   },
-  Text_DeviceSetting_GroupName: {
-    id: "Text-DeviceSetting-GroupName",
+  Text_GroupSetting_GroupName: {
+    id: "Text-GroupSetting-GroupName",
     defaultMessage: "群組名稱",
   },
-  Text_DeviceSetting_IncludeDevice: {
-    id: "Text-DeviceSetting-IncludeDevice",
+  Text_GroupSetting_IncludeDevice: {
+    id: "Text-GroupSetting-IncludeDevice",
     defaultMessage: "包含裝置",
   },
-  Text_DeviceSetting_FieldUser: {
-    id: "Text-DeviceSetting-FieldUser",
+  Text_GroupSetting_FieldUser: {
+    id: "Text-GroupSetting-FieldUser",
     defaultMessage: "場域使用者",
   },
-  Text_DeviceSetting_MaintenancePersonnel: {
-    id: "Text-DeviceSetting-MaintenancePersonnel",
+  Text_GroupSetting_MaintenancePersonnel: {
+    id: "Text-GroupSetting-MaintenancePersonnel",
     defaultMessage: "設備維護人員",
   },
-  Text_DeviceSetting_EditGroup: {
-    id: "Text-DeviceSetting-EditGroup",
+  Text_GroupSetting_EditGroup: {
+    id: "Text-GroupSetting-EditGroup",
     defaultMessage: "編輯群組",
   },
 
