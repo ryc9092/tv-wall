@@ -191,6 +191,18 @@
   "Text-DeviceSetting-NetworkMask": "network mask",
   "Text-DeviceSetting-NetworkGate": "network gateway",
 
+  "Text-DeviceSetting-GroupSetting": "Display group setting",
+  "Text-DeviceSetting-Screen": "screen",
+  "Text-DeviceSetting-UsePermission": "use permission",
+  "Text-DeviceSetting-RemoveGroup": "Remove group",
+  "Text-DeviceSetting-RemoveGroupConfirm": "Are you sure to remove group : XXX?",
+  "Text-DeviceSetting-AddGroup": "Add group",
+  "Text-DeviceSetting-GroupName": "Group name",
+  "Text-DeviceSetting-IncludeDevice": "Include device",
+  "Text-DeviceSetting-FieldUser": "Field user",
+  "Text-DeviceSetting-MaintenancePersonnel": "Device maintenance personnel",
+  "Text-DeviceSetting-EditGroup": "Edit group",
+
   "Text-Barcode-Title": "Platform login barcode",
   "Text-Barcode-Download": "Download",
   "Text-Barcode-Share": "Share",

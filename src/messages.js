@@ -892,6 +892,52 @@ export default defineMessages({
     defaultMessage: "重啟失敗",
   },
 
+  // System setting - group setting
+  Text_DeviceSetting_GroupSetting: {
+    id: "Text-DeviceSetting-GroupSetting",
+    defaultMessage: "顯示群組設定",
+  },
+  Text_DeviceSetting_Screen: {
+    id: "Text-DeviceSetting-Screen",
+    defaultMessage: "螢幕",
+  },
+  Text_DeviceSetting_UsePermission: {
+    id: "Text-DeviceSetting-UsePermission",
+    defaultMessage: "使用權限",
+  },
+  Text_DeviceSetting_RemoveGroup: {
+    id: "Text-DeviceSetting-RemoveGroup",
+    defaultMessage: "刪除群組",
+  },
+  Text_DeviceSetting_RemoveGroupConfirm: {
+    id: "Text-DeviceSetting-RemoveGroupConfirm",
+    defaultMessage: "確定要刪除群組 : XXX?",
+  },
+  Text_DeviceSetting_AddGroup: {
+    id: "Text-DeviceSetting-AddGroup",
+    defaultMessage: "新增群組",
+  },
+  Text_DeviceSetting_GroupName: {
+    id: "Text-DeviceSetting-GroupName",
+    defaultMessage: "群組名稱",
+  },
+  Text_DeviceSetting_IncludeDevice: {
+    id: "Text-DeviceSetting-IncludeDevice",
+    defaultMessage: "包含裝置",
+  },
+  Text_DeviceSetting_FieldUser: {
+    id: "Text-DeviceSetting-FieldUser",
+    defaultMessage: "場域使用者",
+  },
+  Text_DeviceSetting_MaintenancePersonnel: {
+    id: "Text-DeviceSetting-MaintenancePersonnel",
+    defaultMessage: "設備維護人員",
+  },
+  Text_DeviceSetting_EditGroup: {
+    id: "Text-DeviceSetting-EditGroup",
+    defaultMessage: "編輯群組",
+  },
+
   // Barcode
   Text_Barcode_Title: {
     id: "Text-Barcode-Title",
