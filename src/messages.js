@@ -11,6 +11,7 @@ export default defineMessages({
   Text_Common_Up: { id: "Text-Common-Up", defaultMessage: "上線" },
   Text_Common_Down: { id: "Text-Common-Down", defaultMessage: "離線" },
   Text_Common_None: { id: "Text-Common-None", defaultMessage: "無" },
+  Text_Common_Default: { id: "Text-Common-Default", defaultMessage: "預設" },
   Text_Common_Type: { id: "Text-Common-Type", defaultMessage: "類型" },
   Text_Common_Detail: { id: "Text-Common-Detail", defaultMessage: "詳細資料" },
   Text_Common_Dimension: {
@@ -33,6 +34,14 @@ export default defineMessages({
     id: "Text-Common-Description",
     defaultMessage: "描述",
   },
+  Text_Common_InputID: {
+    id: "Text-Common-InputID",
+    defaultMessage: "輸入ID",
+  },
+  Text_Common_InputName: {
+    id: "Text-Common-InputName",
+    defaultMessage: "輸入名稱",
+  },
   Text_Common_SelectAll: {
     id: "Text-Common-SelectAll",
     defaultMessage: "全選",
@@ -48,6 +57,10 @@ export default defineMessages({
   Text_Button_Add: {
     id: "Text-Button-Add",
     defaultMessage: "新增",
+  },
+  Text_Button_Create: {
+    id: "Text-Button-Create",
+    defaultMessage: "建立",
   },
   Text_Button_Edit: {
     id: "Text-Button-Edit",
@@ -713,6 +726,52 @@ export default defineMessages({
     id: "Text-WallSetting-WallSetting",
     defaultMessage: "電視牆設定",
   },
+  Text_WallSetting_RemoveWall: {
+    id: "Text-WallSetting-RemoveWall",
+    defaultMessage: "刪除電視牆",
+  },
+  Text_WallSetting_RemoveWallConfirm: {
+    id: "Text-WallSetting-RemoveWallConfirm",
+    defaultMessage: "確定要刪除電視牆 : XXX?",
+  },
+  Text_WallSetting_CreateWall: {
+    id: "Text-WallSetting-CreateWall",
+    defaultMessage: "建立電視牆",
+  },
+  Text_WallSetting_WallName: {
+    id: "Text-WallSetting-WallName",
+    defaultMessage: "電視牆名稱",
+  },
+  Text_WallSetting_WallDimension: {
+    id: "Text-WallSetting-WallDimension",
+    defaultMessage: "電視牆維度",
+  },
+  Text_WallSetting_ScreenDecoder: {
+    id: "Text-WallSetting-ScreenDecoder",
+    defaultMessage: "畫面與解碼器對應",
+  },
+  Text_WallSetting_ScreenDecoderDesc: {
+    id: "Text-WallSetting-ScreenDecoderDesc",
+    defaultMessage: "點選畫面後，選擇畫面對應的解碼器",
+  },
+  Text_WallSetting_InputDecoder: {
+    id: "Text-WallSetting-InputDecoder",
+    defaultMessage: "輸入解碼器名稱",
+  },
+  Text_WallSetting_ScreenNumber: {
+    id: "Text-WallSetting-ScreenNumber",
+    defaultMessage: "畫面編號",
+  },
+  Text_WallSetting_DestinationName: {
+    id: "Text-WallSetting-DestinationName",
+    defaultMessage: "終端名稱",
+  },
+  Text_WallSetting_ViewWall: {
+    id: "Text-WallSetting-ViewWall",
+    defaultMessage: "檢視電視牆",
+  },
+
+  // System setting - wall setting legacy
   Text_WallSetting_DeleteSuccess: {
     id: "Text-WallSetting-DeleteSuccess",
     defaultMessage: "電視牆移除成功",
@@ -725,21 +784,9 @@ export default defineMessages({
     id: "Text-WallSetting-Wall",
     defaultMessage: "電視牆",
   },
-  Text_WallSetting_WallName: {
-    id: "Text-WallSetting-WallName",
-    defaultMessage: "電視牆名稱",
-  },
-  Text_WallSetting_ScreenNumber: {
-    id: "Text-WallSetting-ScreenNumber",
-    defaultMessage: "畫面編號",
-  },
   Text_WallSetting_ScreenDecoderPair: {
     id: "Text-WallSetting-ScreenDecoderPair",
     defaultMessage: "解碼器對應",
-  },
-  Text_WallSetting_CreateWall: {
-    id: "Text-WallSetting-CreateWall",
-    defaultMessage: "建立電視牆",
   },
   Text_WallSetting_ResetWall: {
     id: "Text-WallSetting-ResetWall",
