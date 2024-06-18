@@ -155,7 +155,7 @@ const USB = () => {
     },
     // {
     //   title: (
-    //     <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
+    //     <span style={{ fontSize: "16px", fontFamily: "Noto Sans TC" }}>
     //       {intl.formatMessage(Messages.Text_DeviceStatus_State)}
     //     </span>
     //   ),
@@ -468,12 +468,7 @@ const USB = () => {
             </span>
             </div>
             <Divider style={{ marginTop: 8 }} /> */}
-            <Table
-              columns={columns}
-              dataSource={linkData}
-              pagination={false}
-              size={"small"}
-            />
+            <Table columns={columns} dataSource={linkData} />
           </div>
         ) : (
           <div className="usb-content-container">

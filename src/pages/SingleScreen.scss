@@ -1,14 +1,17 @@
-.single-screen-layout {
+.single-screen-layout-column {
     display: flex;
-}
-
-.single-screen-container {
-    display: flex;
-    flex-direction: column;
-    margin-right: 24px;
+    margin-top: 48px;
+    margin-left: 80px;
 }
 
 .single-screen-title-row {
+    width: 1138px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.single-screen-title-row-collapse {
+    width: 1288px;
     display: flex;
     justify-content: space-between;
 }
@@ -55,14 +58,14 @@
 .single-screen-card-title {
     width: 100%;
     color: #45413e;
-    font-family: PingFangTC;
+    font-family: Noto Sans TC;
     font-size: 22px;
     font-weight: 600;
 }
 
 .single-screen-card-desc {
     padding: 2px 0px 0px 14px;
-    font-family: PingFangTC;
+    font-family: Noto Sans TC;
     font-size: 16px;
     font-weight: normal;
     color: white;
@@ -74,7 +77,7 @@
 }
 
 .single-screen-btn-text {
-    font-family: PingFangTC;
+    font-family: Noto Sans TC;
     font-size: 16px;
     font-weight: 600;
 }
@@ -94,14 +97,14 @@
 .singlescreen-card-right-title {
     color: #45413e;
     font-size: 22px;
-    font-family: PingFangTC;
+    font-family: Noto Sans TC;
     font-weight: 600;
 }
 
 .singlescreen-card-right-desc {
     color: #a5a5a5;
     font-size: 16px;
-    font-family: PingFangTC;
+    font-family: Noto Sans TC;
     font-weight: normal;
 }
 
@@ -133,6 +136,7 @@
 }
 
 .singlescreen-card-right-search {
+    height: 48px;
     margin-top: 16px;
     font-size: 16px;
     background-color: #e7e7e7;
@@ -140,6 +144,7 @@
 
 .singlescreen-input .ant-input {
     background-color: #e7e7e7;
+    font-family: Noto Sans TC;
 }
 
 .singlescreen-card-right-encoder-container {
@@ -160,7 +165,7 @@
     padding-top: 8px;
     height: 36px;
     color: #45413e;
-    font-family: PingFangTC;
+    font-family: Noto Sans TC;
     font-size: 16px;
     font-weight: 600;
 }
@@ -185,7 +190,7 @@
     color: #262320 !important;
     width: 160px;
     text-align: center;
-    font-family: PingFangTC;
+    font-family: Noto Sans TC;
     font-size: 22px;
     font-weight: 600;
 }

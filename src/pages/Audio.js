@@ -374,12 +374,7 @@ const Audio = () => {
                 />
               </Button>
             </div>
-            <Table
-              columns={columns}
-              dataSource={linkData}
-              pagination={false}
-              size={"small"}
-            />
+            <Table columns={columns} dataSource={linkData} />
           </div>
         ) : null}
       </div>

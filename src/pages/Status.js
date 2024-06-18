@@ -187,7 +187,7 @@ const Status = () => {
           <Table
             columns={columns}
             dataSource={devices}
-            pagination={false}
+            pagination={{ pageSize: 11 }}
             size={"small"}
           />
         </div>

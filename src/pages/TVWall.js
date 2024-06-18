@@ -249,20 +249,17 @@ const TVWall = () => {
 
   const columns = [
     {
-      title: (
-        <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
-          {intl.formatMessage(Messages.Text_Common_EncoderName)}
-        </span>
-      ),
+      title: intl.formatMessage(Messages.Text_Common_EncoderName),
       dataIndex: "nickName",
       key: "nickName",
       render: (text) => {
         return (
           <span
+            className="table-content"
             style={
               selectedEncoder.nickName === text
-                ? { backgroundColor: "#FDEBD0", fontSize: "16px" }
-                : { fontSize: "16px" }
+                ? { backgroundColor: "#FDEBD0" }
+                : null
             }
           >
             {text}
@@ -271,11 +268,7 @@ const TVWall = () => {
       },
     },
     {
-      title: (
-        <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
-          {intl.formatMessage(Messages.Text_Common_Model)}
-        </span>
-      ),
+      title: intl.formatMessage(Messages.Text_Common_Model),
       dataIndex: "model",
       key: "model",
       filters: [
@@ -290,15 +283,11 @@ const TVWall = () => {
       ],
       onFilter: (value, data) => data.model.indexOf(value) === 0,
       render: (text) => {
-        return <span style={{ fontSize: "16px" }}>{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
-      title: (
-        <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
-          {intl.formatMessage(Messages.Text_Common_State)}
-        </span>
-      ),
+      title: intl.formatMessage(Messages.Text_Common_State),
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
@@ -306,19 +295,19 @@ const TVWall = () => {
         <>
           {state === "Up" ? (
             <Tag color={"#eef9b4"} key={`${name}.${state}`}>
-              <span style={{ color: "#a0b628" }}>
+              <span style={{ color: "#a0b628" }} className="tag-content">
                 <FormattedMessage {...Messages.Text_Common_Up} />
               </span>
             </Tag>
           ) : state === "Down" ? (
             <Tag color={"#ffe6e5"} key={`${name}.${state}`}>
-              <span style={{ color: "#d55959" }}>
+              <span style={{ color: "#d55959" }} className="tag-content">
                 <FormattedMessage {...Messages.Text_Common_Down} />
               </span>
             </Tag>
           ) : (
             <Tag color={"yellow"} key={`${name}.${state}`}>
-              {state}
+              <span className="tag-content">{state}</span>
             </Tag>
           )}
         </>
@@ -327,73 +316,89 @@ const TVWall = () => {
   ];
 
   return (
-    <div className="page-layout-column">
-      <div className="tvwall-wall-container">
+    <div className="tvwall-layout-column">
+      <div>
         <div className="page-title">
           <FormattedMessage {...Messages.Text_TVWall_TVWallManagement} />
         </div>
         <div className="tvwall-option-row">
-          <div className="tvwall-option-row-select ">
-            <div style={{ marginRight: "40px" }}>
-              <span className="tvwall-option-select-desc">
-                <FormattedMessage {...Messages.Text_TVWall_WallName} />
-              </span>
-              <Select
-                className="tvwall-option-select"
-                options={wallOptions}
-                value={selectedWall}
-                onChange={(value, option) => {
-                  changeWallSelected(option);
-                }}
-              />
-            </div>
-            <div style={{ marginRight: "40px" }}>
-              <span className="tvwall-option-select-desc">
-                <FormattedMessage {...Messages.Text_TVWall_Template} />
-              </span>
-              <Select
-                className="tvwall-option-select"
-                options={templateOptions}
-                value={selectedTemplate}
-                onChange={(value, option) => {
-                  changeTemplateSelected(option);
-                }}
-              />
-            </div>
+          <div
+            className={
+              store.siderCollapse
+                ? "tvwall-option-row-select-collapse"
+                : "tvwall-option-row-select"
+            }
+          >
+            <span className="tvwall-option-select-desc">
+              <FormattedMessage {...Messages.Text_TVWall_WallName} />
+            </span>
+            <Select
+              className="tvwall-option-select"
+              options={wallOptions}
+              value={selectedWall}
+              onChange={(value, option) => {
+                changeWallSelected(option);
+              }}
+            />
           </div>
-          <div className="tvwall-option-row-button">
-            <div />
-            <div
-              className="tvwall-option-trash-btn"
-              onClick={handleDeactiveWall}
-            >
-              <img
-                alt="trash"
-                src={TrashIcon}
-                className="tvwall-option-trash-icon"
-              />
-              <span className="tvwall-option-trash-text">
-                <FormattedMessage
-                  {...Messages.Text_TVWall_ClearWallConnection}
-                />
-              </span>
-            </div>
-            <div className="tvwall-option-play-btn" onClick={handleActiveWall}>
-              <img
-                alt="play"
-                src={PlayIcon}
-                className="tvwall-option-play-icon"
-              />
-              <span className="tvwall-option-play-text">
-                <FormattedMessage {...Messages.Text_TVWall_ActivateWall} />
-              </span>
-            </div>
+          <div
+            className={
+              store.siderCollapse
+                ? "tvwall-option-row-select-collapse"
+                : "tvwall-option-row-select"
+            }
+          >
+            <span className="tvwall-option-select-desc">
+              <FormattedMessage {...Messages.Text_TVWall_Template} />
+            </span>
+            <Select
+              className="tvwall-option-select"
+              options={templateOptions}
+              value={selectedTemplate}
+              onChange={(value, option) => {
+                changeTemplateSelected(option);
+              }}
+            />
+          </div>
+          <div
+            className={
+              store.siderCollapse
+                ? "tvwall-option-trash-btn-collapse"
+                : "tvwall-option-trash-btn"
+            }
+            onClick={handleDeactiveWall}
+          >
+            <img
+              alt="trash"
+              src={TrashIcon}
+              className="tvwall-option-trash-icon"
+            />
+            <span className="tvwall-option-trash-text">
+              <FormattedMessage {...Messages.Text_TVWall_ClearWallConnection} />
+            </span>
+          </div>
+          <div className="tvwall-option-play-btn" onClick={handleActiveWall}>
+            <img
+              alt="play"
+              src={PlayIcon}
+              className="tvwall-option-play-icon"
+            />
+            <span className="tvwall-option-play-text">
+              <FormattedMessage {...Messages.Text_TVWall_ActivateWall} />
+            </span>
           </div>
         </div>
-        <div id="wall-screen" className="tvwall-screen-container">
+        <div
+          id="wall-screen"
+          className={
+            store.siderCollapse
+              ? "tvwall-screen-container-collapse"
+              : "tvwall-screen-container"
+          }
+        >
           <TvWall
-            wallWidth={document.getElementById("wall-screen")?.clientWidth}
-            wallHeight={document.getElementById("wall-screen")?.clientHeight}
+            wallWidth={store.siderCollapse ? 1268 : 1118}
+            wallHeight={762}
             selectedWall={selectedWall}
             selectedTemplate={selectedTemplate}
             selectedEncoder={selectedEncoder}
@@ -408,8 +413,11 @@ const TVWall = () => {
         </div>
       </div>
       <div
-        className="tvwall-card-container"
-        style={{ minHeight: `${height - 104}px` }} // deduct topbar & padding
+        className={
+          store.siderCollapse
+            ? "tvwall-card-container-collapse"
+            : "tvwall-card-container"
+        }
       >
         <Card className="tvwall-card-right">
           <div className="tvwall-card-right-title">
@@ -447,14 +455,12 @@ const TVWall = () => {
             <Table
               columns={columns}
               dataSource={filteredEncoders}
-              pagination={false}
-              size={"small"}
+              pagination={{ pageSize: 7 }}
               onRow={(record) => ({
                 onClick: () => {
                   handleChooseEncoder(record);
                 },
               })}
-              style={{ maxHeight: `${height - 510}px`, marginBottom: 0 }}
             />
           </div>
         </Card>

@@ -331,7 +331,7 @@ const SingleScreen = () => {
                     >
                       <span
                         id={`card-${decoder.mac}`}
-                        style={{ color: "#a0b628", fontFamily: "PingFangTC" }}
+                        style={{ color: "#a0b628", fontFamily: "Noto Sans TC" }}
                       >
                         <FormattedMessage {...Messages.Text_Common_Up} />
                       </span>
@@ -344,7 +344,7 @@ const SingleScreen = () => {
                     >
                       <span
                         id={`card-${decoder.mac}`}
-                        style={{ color: "#d55959", fontFamily: "PingFangTC" }}
+                        style={{ color: "#d55959", fontFamily: "Noto Sans TC" }}
                       >
                         <FormattedMessage {...Messages.Text_Common_Down} />
                       </span>
@@ -357,7 +357,7 @@ const SingleScreen = () => {
                     >
                       <span
                         id={`card-${decoder.mac}`}
-                        style={{ color: "#d55959", fontFamily: "PingFangTC" }}
+                        style={{ color: "#d55959", fontFamily: "Noto Sans TC" }}
                       >
                         {decoder.state}
                       </span>
@@ -430,20 +430,17 @@ const SingleScreen = () => {
 
   const columns = [
     {
-      title: (
-        <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
-          {intl.formatMessage(Messages.Text_Common_Name)}
-        </span>
-      ),
+      title: intl.formatMessage(Messages.Text_Common_Name),
       dataIndex: "nickName",
       key: "nickName",
       render: (text) => {
         return (
           <span
+            className="table-content"
             style={
               selectedEncoder.nickName === text
-                ? { backgroundColor: "#FDEBD0", fontSize: "16px" }
-                : { fontSize: "16px" }
+                ? { backgroundColor: "#FDEBD0" }
+                : null
             }
           >
             {text}
@@ -452,11 +449,7 @@ const SingleScreen = () => {
       },
     },
     {
-      title: (
-        <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
-          {intl.formatMessage(Messages.Text_Common_Model)}
-        </span>
-      ),
+      title: intl.formatMessage(Messages.Text_Common_Model),
       dataIndex: "model",
       key: "model",
       filters: [
@@ -471,15 +464,11 @@ const SingleScreen = () => {
       ],
       onFilter: (value, data) => data.model.indexOf(value) === 0,
       render: (text) => {
-        return <span style={{ fontSize: "16px" }}>{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
-      title: (
-        <span style={{ fontSize: "16px", fontFamily: "PingFangTC" }}>
-          {intl.formatMessage(Messages.Text_Common_State)}
-        </span>
-      ),
+      title: intl.formatMessage(Messages.Text_Common_State),
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
@@ -487,19 +476,19 @@ const SingleScreen = () => {
         <>
           {state === "Up" ? (
             <Tag color={"#eef9b4"} key={`${name}.${state}`}>
-              <span style={{ color: "#a0b628" }}>
+              <span style={{ color: "#a0b628" }} className="tag-content">
                 <FormattedMessage {...Messages.Text_Common_Up} />
               </span>
             </Tag>
           ) : state === "Down" ? (
             <Tag color={"#ffe6e5"} key={`${name}.${state}`}>
-              <span style={{ color: "#d55959" }}>
+              <span style={{ color: "#d55959" }} className="tag-content">
                 <FormattedMessage {...Messages.Text_Common_Down} />
               </span>
             </Tag>
           ) : (
             <Tag color={"yellow"} key={`${name}.${state}`}>
-              {state}
+              <span className="tag-content">{state}</span>
             </Tag>
           )}
         </>
@@ -508,9 +497,15 @@ const SingleScreen = () => {
   ];
 
   return (
-    <div className="page-layout-column">
-      <div className="single-screen-container">
-        <div className="single-screen-title-row">
+    <div className="single-screen-layout-column">
+      <div>
+        <div
+          className={
+            store.siderCollapse
+              ? "single-screen-title-row-collapse"
+              : "single-screen-title-row"
+          }
+        >
           <span className="page-title">
             <FormattedMessage {...Messages.Text_SingleScreen_Management} />
           </span>
@@ -578,8 +573,7 @@ const SingleScreen = () => {
             <Table
               columns={columns}
               dataSource={filteredEncoders}
-              pagination={false}
-              size={"small"}
+              pagination={{ pageSize: 7 }}
               onRow={(record) => ({
                 onClick: () => {
                   handleChooseEncoder(record);

@@ -23,7 +23,7 @@
 
 .status-content-container {
     // width: 1200px;
-    // height: 875px;
+    height: 850px;
     margin-top: 40px;
     flex-grow: 0;
     display: flex;
@@ -52,19 +52,4 @@
     border-radius: 20px;
     cursor: pointer;
     background-color: rgb(231 231 231 / 40%);
-}
-
-.ant-table-thead > tr > th {
-    font-size: 14px;
-    font-family: Noto Sans TC;
-}
-
-.table-content {
-    font-size: 16px;
-    font-family: Noto Sans TC;
-}
-
-.tag-content {
-    font-size: 12px;
-    font-family: Noto Sans TC;
 }

@@ -27,16 +27,23 @@
     text-align: left;
 }
 
+.ant-table-thead > tr > th {
+    font-size: 14px;
+    font-family: Noto Sans TC;
+}
+
+.table-content {
+    font-size: 16px;
+    font-family: Noto Sans TC;
+}
+
+.tag-content {
+    font-size: 12px;
+    font-family: Noto Sans TC;
+}
+
 .modal-title .ant-modal-title {
     font-size: 24px;
-}
-
-td {
-    border: 1px solid #333;
-}
-
-th {
-    border: 1px solid #333;
 }
 
 .encoder-normal-dot {
