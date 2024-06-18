@@ -591,6 +591,10 @@ export default defineMessages({
     id: "Text-DeviceStatus-CurrentStatus",
     defaultMessage: "設備狀態",
   },
+  Text_DeviceStatus_InputDeviceName: {
+    id: "Text-DeviceStatus-InputDeviceName",
+    defaultMessage: "輸入設備名稱",
+  },
   Text_DeviceStatus_MonitorSwitch: {
     id: "Text-DeviceStatus-MonitorSwitch",
     defaultMessage: "顯示器開關",

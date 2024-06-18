@@ -147,6 +147,7 @@
   "Text-Situation-InputDescription": "Input situation description",
 
   "Text-DeviceStatus-CurrentStatus": "Device status",
+  "Text-DeviceStatus-InputDeviceName": "Input device name",
   "Text-DeviceStatus-MonitorSwitch": "Monitor switch",
   "Text-DeviceStatus-Model": "Model",
   "Text-DeviceStatus-ProductCode": "Product code",
