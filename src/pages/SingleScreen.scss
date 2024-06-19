@@ -1,11 +1,11 @@
 .single-screen-layout-column {
     display: flex;
     margin-top: 48px;
-    margin-left: 80px;
+    margin-left: 56px;
 }
 
 .single-screen-title-row {
-    width: 1138px;
+    width: 1168px;
     display: flex;
     justify-content: space-between;
 }
@@ -18,6 +18,7 @@
 
 .single-screen-title-input {
     width: 270px;
+    height: 48px;
     margin-top: 3px;
     margin-bottom: 3px;
     font-size: 16px;
@@ -25,9 +26,17 @@
 }
 
 .single-screen-card {
-    // width: 100%;
-    min-width: 294px;
-    height: 220px;
+    width: 280px;
+    height: 215px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    border: solid 1px #a5a5a5;
+}
+
+.single-screen-card-collapse {
+    width: 309px;
+    height: 239px;
     border-radius: 12px;
     margin-bottom: 12px;
     cursor: pointer;
@@ -35,22 +44,53 @@
 }
 
 .single-screen-card-top {
-    min-width: 294px;
+    width: 278px;
+    height: 213px;
     border-radius: 12px;
     margin-bottom: 12px;
     cursor: pointer;
+    position: absolute;
+    z-index: 100;
+    opacity: 0.8;
+}
+
+.single-screen-card-top-collapse {
+    width: 307px;
+    height: 237px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    position: absolute;
+    z-index: 100;
+    opacity: 0.8;
 }
 
 .single-screen-card-video {
-    width: 100%;
-    max-width: 100%;
+    width: 278px;
+    height: 213px;
     position: absolute;
+    border: 0;
+    border-radius: 12px !important;
+}
+
+.single-screen-card-video-collapse {
+    width: 307px;
+    height: 237px;
+    position: absolute;
+    border: 0;
     border-radius: 12px !important;
 }
 
 .single-screen-card-title-row {
     padding: 14px;
-    width: 100%;
+    width: 280px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.single-screen-card-title-row-collapse {
+    padding: 14px;
+    width: 309px;
     display: flex;
     justify-content: space-between;
 }
@@ -71,6 +111,16 @@
     color: white;
 }
 
+.single-screen-btn-position {
+    margin-top: 80px;
+    margin-left: 135px;
+}
+
+.single-screen-btn-position-collapse {
+    margin-top: 100px;
+    margin-left: 160px;
+}
+
 .single-screen-trash-btn {
     width: 18px;
     background-color: black;
@@ -83,10 +133,21 @@
 }
 
 .singlescreen-card-container {
-    min-width: 350px;
-    padding-left: 12px;
-    padding-right: 24px;
-    padding-bottom: 24px;
+    min-width: 408px;
+    height: 926px;
+    margin-bottom: 24px;
+    margin-left: 45px;
+    border-radius: 24px;
+    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+}
+
+.singlescreen-card-container-collapse {
+    min-width: 408px;
+    height: 926px;
+    margin-bottom: 24px;
+    margin-left: 56px;
+    border-radius: 24px;
+    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
 }
 
 .singlescreen-card-right {
@@ -120,7 +181,7 @@
 .singlescreen-card-right-preview-video {
     width: 100%;
     max-width: 100%;
-    min-height: 201px;
+    min-height: 203px;
     margin-bottom: -6px;
     border-radius: 8px;
     border: 0px;

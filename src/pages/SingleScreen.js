@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
 import { Button, Card, Col, Input, Row, Tabs, Tag, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import useWindowDimensions from "../utils/WindowDimension";
 import {
   createDeviceLink,
   removeDeviceLink,
@@ -22,7 +21,6 @@ import "./SingleScreen.scss";
 
 const SingleScreen = () => {
   const intl = useIntl();
-  const { height, width } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [tab, setTab] = useState("single-screen");
   const [decoders, setDecoders] = useState([]);
@@ -253,7 +251,11 @@ const SingleScreen = () => {
           onMouseLeave={handleScreenMouseLeave}
           > */}
           <div
-            className="single-screen-card"
+            className={
+              store.siderCollapse
+                ? "single-screen-card-collapse"
+                : "single-screen-card"
+            }
             style={{
               backgroundColor:
                 currentScreen && currentScreen.includes(decoder.mac)
@@ -264,42 +266,27 @@ const SingleScreen = () => {
           >
             {decoder.previewUrl ? (
               <iframe
-                className="single-screen-card-video"
-                style={{
-                  width:
-                    document.getElementById(`card-${decoder.mac}`)
-                      ?.clientWidth - 12,
-                  height:
-                    document.getElementById(`card-${decoder.mac}`)
-                      ?.clientHeight - 14,
-                  border: 0,
-                }}
+                className={
+                  store.siderCollapse
+                    ? "single-screen-card-video-collapse"
+                    : "single-screen-card-video"
+                }
                 src={modifyVideoSize(
                   decoder.previewUrl,
-                  document.getElementById(`card-${decoder.mac}`)?.clientWidth -
-                    10,
-                  document.getElementById(`card-${decoder.mac}`)?.clientHeight -
-                    11
+                  store.siderCollapse ? 307 : 278,
+                  store.siderCollapse ? 237 : 213
                 )}
-                // src={decoder.previewUrl}
                 title="Video player"
               />
             ) : null}
             <div
               id={`card-${decoder.mac}`}
-              className="single-screen-card-top"
+              className={
+                store.siderCollapse
+                  ? "single-screen-card-top-collapse"
+                  : "single-screen-card-top"
+              }
               style={{
-                width: `${
-                  document.getElementById(`card-${decoder.mac}`)?.clientWidth -
-                  12
-                }px`,
-                height: `${
-                  document.getElementById(`card-${decoder.mac}`)?.clientHeight -
-                  14
-                }px`,
-                position: "absolute",
-                zIndex: 100,
-                opacity: 0.8,
                 backgroundColor:
                   currentScreen && currentScreen.includes(decoder.mac)
                     ? "gray"
@@ -308,7 +295,11 @@ const SingleScreen = () => {
             >
               <div
                 id={`card-${decoder.mac}`}
-                className="single-screen-card-title-row"
+                className={
+                  store.siderCollapse
+                    ? "single-screen-card-title-row-collapse"
+                    : "single-screen-card-title-row"
+                }
               >
                 <span
                   id={`card-${decoder.mac}`}
@@ -331,7 +322,8 @@ const SingleScreen = () => {
                     >
                       <span
                         id={`card-${decoder.mac}`}
-                        style={{ color: "#a0b628", fontFamily: "Noto Sans TC" }}
+                        style={{ color: "#a0b628" }}
+                        className="tag-content"
                       >
                         <FormattedMessage {...Messages.Text_Common_Up} />
                       </span>
@@ -344,7 +336,8 @@ const SingleScreen = () => {
                     >
                       <span
                         id={`card-${decoder.mac}`}
-                        style={{ color: "#d55959", fontFamily: "Noto Sans TC" }}
+                        style={{ color: "#d55959" }}
+                        className="tag-content"
                       >
                         <FormattedMessage {...Messages.Text_Common_Down} />
                       </span>
@@ -357,7 +350,8 @@ const SingleScreen = () => {
                     >
                       <span
                         id={`card-${decoder.mac}`}
-                        style={{ color: "#d55959", fontFamily: "Noto Sans TC" }}
+                        style={{ color: "#d55959" }}
+                        className="tag-content"
                       >
                         {decoder.state}
                       </span>
@@ -379,7 +373,11 @@ const SingleScreen = () => {
                   </div>
                   <div
                     id={`card-${decoder.mac}`}
-                    style={{ marginTop: 100, marginLeft: 160 }}
+                    className={
+                      store.siderCollapse
+                        ? "single-screen-btn-position-collapse"
+                        : "single-screen-btn-position"
+                    }
                   >
                     <Button
                       id={`btn-${decoder.mac}`}
@@ -426,7 +424,7 @@ const SingleScreen = () => {
       );
     });
     setDecoderCards(tempDecoderCards);
-  }, [filteredDecoders, currentScreen]);
+  }, [filteredDecoders, currentScreen, store.siderCollapse]);
 
   const columns = [
     {
@@ -521,22 +519,33 @@ const SingleScreen = () => {
             )}
           />
         </div>
-        <div className="single-screen-title-row" style={{ marginTop: "16px" }}>
+        <div
+          className={
+            store.siderCollapse
+              ? "single-screen-title-row-collapse"
+              : "single-screen-title-row"
+          }
+          style={{ marginTop: "16px" }}
+        >
           <Tabs defaultActiveKey="1" items={tabItems} />
-          {/* <div>clear</div> */}
         </div>
-        <div>
-          <Row gutter={10}>{tab === "single-screen" ? decoderCards : null}</Row>
+        <div
+          className={
+            store.siderCollapse
+              ? "single-screen-title-row-collapse"
+              : "single-screen-title-row"
+          }
+        >
+          <Row gutter={15}>{tab === "single-screen" ? decoderCards : null}</Row>
         </div>
       </div>
       <div
-        className="tvwall-card-container"
-        style={{ minHeight: `${height - 104}px` }} // deduct topbar & padding
+        className={
+          store.siderCollapse
+            ? "singlescreen-card-container-collapse"
+            : "singlescreen-card-container"
+        }
       >
-        {/* <div
-        className="singlescreen-card-container"
-        style={{ height: "fit-content" }} // for connection type
-      > */}
         <Card className="singlescreen-card-right">
           <div className="singlescreen-card-right-title">
             <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
@@ -579,10 +588,6 @@ const SingleScreen = () => {
                   handleChooseEncoder(record);
                 },
               })}
-              style={{
-                maxHeight: `${height - 510}px`,
-                marginBottom: 0,
-              }}
             />
           </div>
           {/* <div className="singlescreen-card-right-bottom">
