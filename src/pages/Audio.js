@@ -1,18 +1,7 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import {
-  Button,
-  Col,
-  Divider,
-  Input,
-  Radio,
-  Row,
-  Table,
-  Typography,
-} from "antd";
+import { Button, Input, Radio, Space, Table, Tag } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import useWindowDimensions from "../utils/WindowDimension";
-import { ENCODER_TYPERS } from "../utils/Constant";
 import {
   getDeviceLinks,
   createDeviceLink,
@@ -25,10 +14,10 @@ import {
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
 import PlusIcon from "../assets/plus.png";
-import {
-  showWarningNotification,
-  showSuccessNotificationByMsg,
-} from "../utils/Utils";
+import CaretLeftIcon from "../assets/caret-left.png";
+import PencilIcon from "../assets/pencil.png";
+import TrashIcon from "../assets/trash.png";
+import SearchIcon from "../assets/magnifying-glass.png";
 import "../App.scss";
 import "./Audio.scss";
 
@@ -42,24 +31,6 @@ const Audio = () => {
   const [searchFilter, setSearchFilter] = useState("");
   const [linkData, setLinkData] = useState([]);
   const [reload, setReload] = useState(null);
-
-  const [selectedEncoder, setSelectedEncoder] = useState([]);
-  const [encoderFilter, setEncoderFilter] = useState("");
-  const [filteredEncoders, setFilteredEncoders] = useState([]);
-
-  const [selectedDecoders, setSelectedDecoders] = useState([]);
-  const [decoderFilter, setDecoderFilter] = useState("");
-  const [filteredDecoders, setFilteredDecoders] = useState([]);
-
-  const [encoderType, setEncoderType] = useState("1");
-  const [decoderDict, setDecoderDict] = useState({});
-  const [encoderDict, setEncoderDict] = useState({});
-  const [decoderElements, setDecoderElements] = useState([]);
-  const [encoderElements, setEncoderElements] = useState([]);
-  const [choosedDecoderList, setChoosedDecoderList] = useState([]);
-  const [choosedDecoderElements, setChoosedDecoderElements] = useState(null);
-  const [choosedEncoder, setChoosedEncoder] = useState(null);
-  const [chooseAudioType, setChooseAudioType] = useState("analogAudio");
 
   useEffect(() => {
     (async () => {
@@ -121,155 +92,40 @@ const Audio = () => {
     });
   }, [deviceLinks, searchFilter]);
 
-  const setDeviceState = (devices, setState) => {
-    let tempDeviceDict = {};
-    devices.forEach((device) => {
-      tempDeviceDict[device.mac] = device;
+  const handleRemoveLink = async (encoderMac, decoderMac, inputOutput) => {
+    let linkId;
+    deviceLinks.some((link) => {
+      if (link.encoder === encoderMac) {
+        linkId = link.id;
+        return true;
+      } else return false;
     });
-    setState(tempDeviceDict);
-  };
-
-  // set devices dict state
-  useEffect(() => {
-    (async () => {
-      const decoders = await getDecoders(store);
-      setDeviceState(decoders, setDecoderDict);
-      const encoders = await getEncoders(store);
-      setDeviceState(encoders, setEncoderDict);
-    })();
-  }, []);
-
-  // Set "encoder list" when search filter is changed
-  useEffect(() => {
-    let filterEncoders = [];
-    for (const [, encoder] of Object.entries(encoderDict)) {
-      if (
-        encoder.mac.includes(searchFilter) ||
-        encoder.nickName.includes(searchFilter)
-      )
-        filterEncoders.push(encoder);
-    }
-
-    let tempEncoderElements = [];
-    filterEncoders.forEach((encoder) => {
-      // get link of clicked encoders
-      if (choosedEncoder === encoder.mac) {
-        (async () => {
-          let result = await getDeviceLinkByEncoder({
-            store: store,
-            linkId: `${chooseAudioType}.` + choosedEncoder,
-          });
-
-          let tempDecoderList = [];
-          if (result) {
-            result.forEach((detail) => {
-              tempDecoderList.push(detail.decoder);
-            });
-          }
-          setChoosedDecoderList(tempDecoderList);
-        })();
-      }
-
-      // display encoders & change background of encoder if clicked
-      tempEncoderElements.push(
-        <Row key={encoder.mac} style={{ marginTop: "6px" }}>
-          <Button
-            key={encoder.mac}
-            id={encoder.mac}
-            value={encoder.previewUrl}
-            type="text"
-            size="small"
-            style={{
-              cursor: "pointer",
-              backgroundColor:
-                choosedEncoder === encoder.mac ? "#BFE0E4" : null,
-            }}
-            className="tvwall-encoder"
-            onClick={(event) => {
-              const encoderName = event.currentTarget.id;
-              if (encoder.state === "Up") handleChooseEncoder(encoderName);
-            }}
-          >
-            <span
-              className={
-                encoder.state === "Up"
-                  ? "encoder-normal-dot"
-                  : encoder.state === "Down"
-                  ? "encoder-down-dot"
-                  : "encoder-abnormal-dot"
-              }
-            />
-            {encoder.nickName}
-          </Button>
-        </Row>
-      );
-    });
-    setEncoderElements(tempEncoderElements);
-  }, [choosedEncoder, encoderDict, searchFilter, chooseAudioType]);
-
-  const handleChooseEncoder = (encoderName) => {
-    setChoosedEncoder(encoderName);
-  };
-
-  useEffect(() => {
-    let tempChoosedDecoderElements = [];
-    choosedDecoderList.forEach((decoder) => {
-      tempChoosedDecoderElements.push(
-        <Row key={decoder} style={{ marginTop: "6px" }}>
-          <span key={decoder}>{decoderDict[decoder].nickName}</span>
-        </Row>
-      );
-    });
-    setChoosedDecoderElements(tempChoosedDecoderElements);
-  }, [choosedDecoderList]);
-
-  const handleCancel = () => {
-    setChoosedDecoderList([]);
-    setChoosedEncoder();
-  };
-
-  const handleClearConnection = async () => {
-    if (choosedEncoder) {
-      const result = await removeDeviceLink({
+    if (linkId) {
+      let linkDetail = await getDeviceLinkDetails({
         store: store,
-        linkId: `${chooseAudioType}.` + choosedEncoder,
+        linkId: linkId,
       });
-      if (result) {
-        setChoosedDecoderList([]);
-        setChoosedEncoder();
-        showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_Audio_ClearConnectionSuccess)
-        );
-      } else {
-        showWarningNotification(
-          intl.formatMessage(Messages.Text_Audio_ClearConnectionFail)
-        );
-      }
-    }
-  };
-
-  const handleCreateConnection = async () => {
-    console.log(choosedDecoderList, choosedEncoder);
-    if (choosedDecoderList.length > 0 && choosedEncoder) {
-      const result = await createDeviceLink({
+      let linkDecoders = [];
+      linkDetail.forEach((link) => {
+        if (decoderMac !== link.decoder) linkDecoders.push(link.decoder);
+      });
+      await removeDeviceLink({
         store: store,
-        id: `${chooseAudioType}.` + choosedEncoder,
-        linkType: chooseAudioType,
-        encoder: choosedEncoder,
-        decoders: choosedDecoderList,
-        value1: chooseAudioType,
-        remark: "",
-        isPreset: "N",
+        linkId: linkId,
       });
-      if (result) {
-        showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_Audio_CreateConnectionSuccess)
-        );
-      } else {
-        showWarningNotification(
-          intl.formatMessage(Messages.Text_Audio_CreateConnectionFail)
-        );
+      if (linkDecoders.length !== 0) {
+        await createDeviceLink({
+          store: store,
+          id: `audio.${encoderMac}`,
+          linkType: "audio",
+          encoder: encoderMac,
+          decoders: linkDecoders,
+          value1: inputOutput,
+          remark: "",
+          isPreset: "N",
+        });
       }
+      setReload(Math.random());
     }
   };
 
@@ -283,19 +139,7 @@ const Audio = () => {
       dataIndex: "encoderName",
       key: "encoderName",
       render: (text) => {
-        return <span>{text}</span>;
-      },
-    },
-    {
-      title: (
-        <span className="audio-content-table-head">
-          {intl.formatMessage(Messages.Text_Audio_Input)}
-        </span>
-      ),
-      dataIndex: "encoderName",
-      key: "encoderName",
-      render: (text) => {
-        return <span>{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
@@ -307,22 +151,266 @@ const Audio = () => {
       dataIndex: "decoderName",
       key: "decoderName",
       render: (text) => {
-        return <span style={{ fontSize: "16px" }}>{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
       title: (
         <span className="audio-content-table-head">
+          {intl.formatMessage(Messages.Text_Audio_Input)}
           {intl.formatMessage(Messages.Text_Audio_Output)}
         </span>
       ),
-      dataIndex: "encoderName",
-      key: "encoderName",
+      dataIndex: "value1",
+      key: "inputOutput",
+      render: (text) => {
+        return <span className="table-content">{text}</span>;
+      },
+    },
+    {
+      title: (
+        <span className="audio-content-table-head">
+          {intl.formatMessage(Messages.Text_Button_Operation)}
+        </span>
+      ),
+      key: "operate",
+      dataIndex: "state",
+      render: (text, record) => (
+        <div>
+          <Button
+            type="text"
+            onClick={() => {
+              setPageType("EDIT_LINK");
+              setSelectedEncoder(record.encoderMac);
+              let linkedDecoders = [];
+              linkData.forEach((link) => {
+                if (link.encoderMac === record.encoderMac)
+                  linkedDecoders.push(link.decoderMac);
+              });
+              setSelectedDecoders(linkedDecoders);
+            }}
+            className="table-content"
+          >
+            <img
+              alt="edit"
+              src={PencilIcon}
+              className="audio-content-table-icon"
+            />
+          </Button>
+          <Button
+            type="text"
+            key={`remove.${record.decoderMac}`}
+            onClick={() =>
+              handleRemoveLink(record.encoderMac, record.decoderMac)
+            }
+            className="table-content"
+          >
+            <img
+              alt="remove"
+              src={TrashIcon}
+              className="audio-content-table-icon"
+            />
+          </Button>
+        </div>
+      ),
+    },
+  ];
+
+  const [selectedEncoder, setSelectedEncoder] = useState([]);
+  const [encoderFilter, setEncoderFilter] = useState("");
+  const [filteredEncoders, setFilteredEncoders] = useState([]);
+
+  const encoderSelectionColumns = [
+    {
+      title: (
+        <span className="audio-content-table-head">
+          {intl.formatMessage(Messages.Text_Audio_SourceName)}
+        </span>
+      ),
+      dataIndex: "nickName",
+      key: "nickName",
       render: (text) => {
         return <span>{text}</span>;
       },
     },
+    {
+      title: (
+        <span className="audio-content-table-head">
+          {intl.formatMessage(Messages.Text_Audio_State)}
+        </span>
+      ),
+      key: "state",
+      dataIndex: "state",
+      sorter: (a, b) => a.state.length - b.state.length,
+      render: (_, { state, name }) => (
+        <>
+          {state === "Up" ? (
+            <Tag color={"#eef9b4"} key={`${name}.${state}`}>
+              <span style={{ color: "#a0b628" }}>
+                <FormattedMessage {...Messages.Text_Common_Up} />
+              </span>
+            </Tag>
+          ) : state === "Down" ? (
+            <Tag color={"#ffe6e5"} key={`${name}.${state}`}>
+              <span style={{ color: "#d55959" }}>
+                <FormattedMessage {...Messages.Text_Common_Down} />
+              </span>
+            </Tag>
+          ) : (
+            <Tag color={"yellow"} key={`${name}.${state}`}>
+              {state}
+            </Tag>
+          )}
+        </>
+      ),
+    },
   ];
+
+  useEffect(() => {
+    let tempFilteredEncoders = [];
+    if (encoders.length !== 0) {
+      encoders.forEach((encoder) => {
+        if (encoder.nickName.includes(encoderFilter))
+          tempFilteredEncoders.push(encoder);
+      });
+    }
+    setFilteredEncoders(tempFilteredEncoders);
+  }, [encoderFilter]);
+
+  const encoderSelection = {
+    selectedRowKeys: [selectedEncoder],
+    onChange: (selectedRowKeys, selectedRows) => {
+      setSelectedEncoder(selectedRowKeys[0]);
+    },
+  };
+
+  const [selectedInOutputOption, setSelectedInOutputOption] = useState(); //////////
+  const handleSelectInOutputOption = () => {
+    setSelectedInOutputOption();
+  };
+  ////////
+  ////////
+  ////////
+  ////////
+  ////////
+  ////////
+
+  const [selectedDecoders, setSelectedDecoders] = useState([]);
+  const [decoderFilter, setDecoderFilter] = useState("");
+  const [filteredDecoders, setFilteredDecoders] = useState([]);
+
+  const decoderSelectionColumns = [
+    {
+      title: (
+        <span className="audio-content-table-head">
+          {intl.formatMessage(Messages.Text_Audio_DestinationName)}
+        </span>
+      ),
+      dataIndex: "nickName",
+      key: "nickName",
+      render: (text) => {
+        return <span>{text}</span>;
+      },
+    },
+    {
+      title: (
+        <span className="audio-content-table-head">
+          {intl.formatMessage(Messages.Text_Audio_State)}
+        </span>
+      ),
+      key: "state",
+      dataIndex: "state",
+      sorter: (a, b) => a.state.length - b.state.length,
+      render: (_, { state, name }) => (
+        <>
+          {state === "Up" ? (
+            <Tag color={"#eef9b4"} key={`${name}.${state}`}>
+              <span style={{ color: "#a0b628" }}>
+                <FormattedMessage {...Messages.Text_Common_Up} />
+              </span>
+            </Tag>
+          ) : state === "Down" ? (
+            <Tag color={"#ffe6e5"} key={`${name}.${state}`}>
+              <span style={{ color: "#d55959" }}>
+                <FormattedMessage {...Messages.Text_Common_Down} />
+              </span>
+            </Tag>
+          ) : (
+            <Tag color={"yellow"} key={`${name}.${state}`}>
+              {state}
+            </Tag>
+          )}
+        </>
+      ),
+    },
+  ];
+
+  useEffect(() => {
+    let tempFilteredDecoders = [];
+    if (decoders.length !== 0) {
+      decoders.forEach((decoder) => {
+        if (decoder.nickName.includes(decoderFilter))
+          tempFilteredDecoders.push(decoder);
+      });
+    }
+    setFilteredEncoders(tempFilteredDecoders);
+  }, [decoderFilter]);
+
+  const decoderSelection = {
+    selectedRowKeys: selectedDecoders,
+    onChange: (selectedRowKeys, selectedRows) => {
+      setSelectedDecoders(selectedRowKeys);
+    },
+    getCheckboxProps: (record) => {
+      const hasSelectedEncoder = selectedEncoder !== null;
+      return { disabled: !hasSelectedEncoder };
+    },
+  };
+
+  const handleAddDeviceLink = async (inputOutput) => {
+    await createDeviceLink({
+      store: store,
+      id: `audio.${selectedEncoder}`,
+      linkType: "audio",
+      encoder: selectedEncoder,
+      decoders: selectedDecoders,
+      value1: inputOutput,
+      remark: "",
+      isPreset: "N",
+    });
+    setReload(Math.random());
+    setPageType("CONN_STATE");
+  };
+
+  const handleEditDeviceLink = async (inputOutput) => {
+    let linkId;
+    deviceLinks.some((link) => {
+      if (link.encoder === selectedEncoder) {
+        linkId = link.id;
+        return true;
+      } else return false;
+    });
+    if (linkId) {
+      await removeDeviceLink({
+        store: store,
+        linkId: linkId,
+      });
+      if (selectedDecoders.length !== 0) {
+        await createDeviceLink({
+          store: store,
+          id: `audio.${selectedEncoder}`,
+          linkType: "audio",
+          encoder: selectedEncoder,
+          decoders: selectedDecoders,
+          value1: inputOutput,
+          remark: "",
+          isPreset: "N",
+        });
+      }
+      setReload(Math.random());
+      setPageType("CONN_STATE");
+    }
+  };
 
   return (
     <div
@@ -355,7 +443,7 @@ const Audio = () => {
           <div className="audio-content-container">
             <div className="audio-content-title-row">
               <span className="audio-content-title">
-                <FormattedMessage {...Messages.Text_USB_ConnectionStatus} />
+                <FormattedMessage {...Messages.Text_Audio_ConnectionStatus} />
               </span>
               <Button
                 shape="circle"
@@ -376,147 +464,185 @@ const Audio = () => {
             </div>
             <Table columns={columns} dataSource={linkData} />
           </div>
-        ) : null}
-      </div>
-
-      {/* <div
-        className="audio-layout container-width"
-        style={{ margin: "16px 16px 0px 0px" }}
-      >
-        <div
-          style={{ height: height < "750" ? "50%" : "55%", minHeight: "250px" }}
-        >
-          <Row style={{ height: "13%" }}>
-            <Col>
-              <Typography.Text
-                style={{ fontSize: "20px", marginRight: "10px" }}
+        ) : (
+          <div className="audio-content-container">
+            <div className="audio-add-title-row">
+              <Button
+                shape="circle"
+                className="audio-add-link-button"
+                onClick={() => setPageType("CONN_STATE")}
               >
-                <FormattedMessage {...Messages.Text_Audio_Source} />
-              </Typography.Text>
-            </Col>
-            <Col>
-              <Input
-                onChange={(e) => {
-                  setSearchFilter(e.target.value);
-                }}
-                prefix={<SearchOutlined />}
-              />
-            </Col>
-          </Row>
-          <Row style={{ height: "14%" }}>
-            <Radio.Group
-              options={ENCODER_TYPERS}
-              onChange={changeEncoderType}
-              value={encoderType}
-              optionType="button"
-              buttonStyle="solid"
-              style={{ marginTop: 12 }}
-            />
-          </Row>
-          <div className="decoder-block">{encoderElements}</div>
-        </div>
-        <div
-          className="audio-col-layout"
-          style={{
-            border: "1px solid gray",
-            height: "45%",
-            minHeight: "220px",
-            marginTop: "12px",
-          }}
-        >
-          <div
-            style={{
-              borderRight: "1px solid gray",
-              height: height * 0.39,
-            }}
-          >
-            <Row>
-              <span style={{ marginLeft: 2, marginTop: 3 }}>
-                <FormattedMessage {...Messages.Text_Audio_ConnectionStatus} />
+                <img
+                  alt="return"
+                  src={CaretLeftIcon}
+                  className="audio-add-link-icon"
+                />
+              </Button>
+              <span className="audio-content-title">
+                {pageType === "ADD_LINK" ? (
+                  <FormattedMessage {...Messages.Text_Audio_AddConnection} />
+                ) : (
+                  <FormattedMessage {...Messages.Text_Audio_EditConnection} />
+                )}
               </span>
-              <Radio.Group
-                defaultValue="analogAudio"
-                size="small"
-                buttonStyle="solid"
-                style={{ marginLeft: 6, marginTop: 1 }}
-                onChange={handleChooseAudioType}
-              >
-                <Radio.Button value="analogAudio">
-                  {choosedEncoder && encoderDict[choosedEncoder].audioAnalogy
-                    ? encoderDict[choosedEncoder].audioAnalogy
-                    : "analog"}
-                </Radio.Button>
-                <Radio.Button value="hdmiAudio">
-                  {choosedEncoder && encoderDict[choosedEncoder].audioHdmi
-                    ? encoderDict[choosedEncoder].audioHdmi
-                    : "hdmi"}
-                </Radio.Button>
-              </Radio.Group>
-            </Row>
-            <Row style={{ marginTop: 24, marginLeft: 6 }}>
-              <Col span={8}>
-                <Row>
-                  <FormattedMessage {...Messages.Text_Common_Encoder} />
-                </Row>
-                <Row style={{ marginTop: 6 }}>
-                  {encoderDict[choosedEncoder]?.nickName}
-                </Row>
-              </Col>
-              <Col span={8}>
-                <Row style={{ marginLeft: 10 }}>
-                  {chooseAudioType === "analogAudio" ? (
-                    <FormattedMessage {...Messages.Text_Audio_AnalogConnect} />
-                  ) : (
-                    <FormattedMessage {...Messages.Text_Audio_HdmiConnect} />
+            </div>
+            <div className="audio-add-row">
+              <div id="encoder-selection" className="audio-add-row-step">
+                <div className="audio-add-progress">
+                  <div className="audio-add-progress-circle">
+                    <span className="audio-add-progress-circle-text">1</span>
+                  </div>
+                  <div
+                    className={
+                      selectedEncoder
+                        ? "audio-add-progress-bar-finished"
+                        : "audio-add-progress-bar"
+                    }
+                  ></div>
+                </div>
+                <div className="audio-add-subtitle">
+                  <FormattedMessage {...Messages.Text_Audio_ChooseSource} /> (
+                  <FormattedMessage {...Messages.Text_Common_Encoder} />)
+                </div>
+                <Input
+                  className="audio-add-input audio-input audio-add-input-placeholder"
+                  variant="filled"
+                  onChange={(e) => {
+                    setEncoderFilter(e.target.value);
+                  }}
+                  prefix={
+                    <img
+                      alt="search"
+                      src={SearchIcon}
+                      className="audio-add-input-prefix"
+                    />
+                  }
+                  placeholder={intl.formatMessage(
+                    Messages.Text_Audio_InputEncoder
                   )}
-                </Row>
-                <Row>{"<------------>"}</Row>
-              </Col>
-              <Col span={8}>
-                <Row>
-                  <FormattedMessage {...Messages.Text_Common_Decoder} />
-                </Row>
-                {choosedDecoderElements}
-              </Col>
-            </Row>
-          </div>
-          <div>
-            <Row>
-              <Col span={width > 1060 ? 19 : 16}>
-                <FormattedMessage {...Messages.Text_Audio_TerminalChoose} />
-              </Col>
-              <Col>
-                <Button size="small" onClick={handleClearConnection}>
-                  <FormattedMessage {...Messages.Text_Audio_ClearConnection} />
-                </Button>
-              </Col>
-            </Row>
-            <Row>
-              <div className="encoder-block" style={{ height: height * 0.26 }}>
-                {decoderElements}
+                />
+                <Table
+                  columns={encoderSelectionColumns}
+                  dataSource={filteredEncoders}
+                  rowSelection={{
+                    type: "radio",
+                    ...encoderSelection,
+                  }}
+                  pagination={false}
+                />
               </div>
-            </Row>
-            <Divider
-              style={{
-                marginTop: -12,
-                marginBottom: 10,
-              }}
-            />
-            <Row>
-              <Col offset={2}>
-                <Button onClick={handleCancel}>
-                  <FormattedMessage {...Messages.Text_Button_Cancel} />
+              <div style={{ width: "60px" }}></div>
+              <div id="input-output-selection" className="audio-add-row-step">
+                <div className="audio-add-progress">
+                  <div className="audio-add-progress-circle">
+                    <span className="audio-add-progress-circle-text">1</span>
+                  </div>
+                  <div
+                    className={
+                      selectedEncoder
+                        ? "audio-add-progress-bar-finished"
+                        : "audio-add-progress-bar"
+                    }
+                  />
+                </div>
+                <div className="audio-add-subtitle">
+                  <FormattedMessage
+                    {...Messages.Text_Audio_ChooseInputOutput}
+                  />
+                </div>
+                {/* <Radio.Group
+                  onChange={(event) => {
+                    handleSelectInOutputOption();
+                  }}
+                  value={selectedInOutputOption}
+                >
+                  <Space direction="vertical">
+                    <Radio value={1}>Option A</Radio>
+                    <Radio value={2}>Option B</Radio>
+                  </Space>
+                </Radio.Group> */}
+              </div>
+              <div style={{ width: "60px" }}></div>
+              <div id="decoder-selection" className="audio-add-row-step">
+                <div className="audio-add-progress">
+                  <div
+                    className={
+                      selectedEncoder
+                        ? "audio-add-progress-circle"
+                        : "audio-add-progress-circle-unstarted"
+                    }
+                  >
+                    <span className="audio-add-progress-circle-text">2</span>
+                  </div>
+                  <div
+                    className={
+                      selectedDecoders.length !== 0
+                        ? "audio-add-progress-bar-finished"
+                        : "audio-add-progress-bar"
+                    }
+                  ></div>
+                </div>
+                <div className="audio-add-subtitle">
+                  <FormattedMessage
+                    {...Messages.Text_Audio_ChooseDestination}
+                  />{" "}
+                  (
+                  <FormattedMessage {...Messages.Text_Common_Decoder} />)
+                </div>
+                <Input
+                  className="audio-add-input audio-input audio-add-input-placeholder"
+                  variant="filled"
+                  onChange={(e) => {
+                    setDecoderFilter(e.target.value);
+                  }}
+                  prefix={
+                    <img
+                      alt="search"
+                      src={SearchIcon}
+                      className="audio-add-input-prefix"
+                    />
+                  }
+                  placeholder={intl.formatMessage(
+                    Messages.Text_Audio_InputDecoder
+                  )}
+                />
+                <Table
+                  columns={decoderSelectionColumns}
+                  dataSource={filteredDecoders}
+                  rowSelection={{
+                    type: "checkbox",
+                    ...decoderSelection,
+                  }}
+                  pagination={false}
+                />
+                <Button
+                  className="audio-add-btn"
+                  disabled={!selectedEncoder || selectedDecoders.length === 0}
+                  onClick={
+                    pageType === "ADD_LINK"
+                      ? handleAddDeviceLink
+                      : handleEditDeviceLink
+                  }
+                >
+                  <span className="audio-add-btn-text">
+                    {pageType === "ADD_LINK" ? (
+                      <FormattedMessage
+                        className="audio-add-btn-text"
+                        {...Messages.Text_Button_Add}
+                      />
+                    ) : (
+                      <FormattedMessage
+                        className="audio-add-btn-text"
+                        {...Messages.Text_Button_Edit}
+                      />
+                    )}
+                  </span>
                 </Button>
-              </Col>
-              <Col offset={14}>
-                <Button onClick={handleCreateConnection}>
-                  <FormattedMessage {...Messages.Text_Button_Save} />
-                </Button>
-              </Col>
-            </Row>
+              </div>
+            </div>
           </div>
-        </div>
-      </div> */}
+        )}
+      </div>
     </div>
   );
 };

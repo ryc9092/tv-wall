@@ -116,7 +116,7 @@ const Status = () => {
           onClick={() => {
             reboot(mac);
           }}
-          style={{ fontFamily: "Noto Sans TC" }}
+          className="table-content"
         >
           <FormattedMessage {...Messages.Text_DeviceStatus_Reboot} />
         </Button>

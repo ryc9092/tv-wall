@@ -421,6 +421,10 @@ export default defineMessages({
     id: "Text-Audio-ChooseSource",
     defaultMessage: "選擇來源",
   },
+  Text_Audio_ChooseInputOutput: {
+    id: "Text-Audio-ChooseInputOutput",
+    defaultMessage: "選擇輸入輸出選項",
+  },
   Text_Audio_ChooseInput: {
     id: "Text-Audio-ChooseInput",
     defaultMessage: "選擇輸入選項",
@@ -444,6 +448,10 @@ export default defineMessages({
   Text_Audio_SourceName: {
     id: "Text-Audio-SourceName",
     defaultMessage: "來源名稱",
+  },
+  Text_Audio_DestinationName: {
+    id: "Text-Audio-DestinationName",
+    defaultMessage: "終端名稱",
   },
   Text_Audio_State: {
     id: "Text-Audio-State",
