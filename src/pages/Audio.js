@@ -365,14 +365,14 @@ const Audio = () => {
     },
   };
 
-  const handleAddDeviceLink = async (inputOutput) => {
+  const handleAddDeviceLink = async () => {
     await createDeviceLink({
       store: store,
       id: `audio.${selectedEncoder}`,
       linkType: "audio",
       encoder: selectedEncoder,
       decoders: selectedDecoders,
-      value1: inputOutput,
+      value1: selectedInOutputOption,
       remark: "",
       isPreset: "N",
     });
@@ -380,7 +380,7 @@ const Audio = () => {
     setPageType("CONN_STATE");
   };
 
-  const handleEditDeviceLink = async (inputOutput) => {
+  const handleEditDeviceLink = async () => {
     let linkId;
     deviceLinks.some((link) => {
       if (link.encoder === selectedEncoder) {
@@ -400,7 +400,7 @@ const Audio = () => {
           linkType: "audio",
           encoder: selectedEncoder,
           decoders: selectedDecoders,
-          value1: inputOutput,
+          value1: selectedInOutputOption,
           remark: "",
           isPreset: "N",
         });
