@@ -1,0 +1,60 @@
+.setting-topbar {
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+    padding: 0 120px 0 52px;
+    border-bottom: solid 1px #e7e7e7;
+    background-color: #c6c6c6;
+}
+
+.setting-topbar-collapse {
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+    padding: 0 120px 0 28px;
+    border-bottom: solid 1px #e7e7e7;
+    background-color: #c6c6c6;
+}
+
+.setting-topbar-title {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #363330;
+    cursor: default;
+}
+
+.setting-topbar-line {
+    width: 1px;
+    height: 24px;
+    flex-grow: 0;
+    background-color: #363330;
+}
+
+.setting-topbar-option {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: #363330;
+    cursor: pointer;
+}

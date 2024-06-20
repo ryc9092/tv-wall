@@ -1,42 +1,70 @@
-import { Button, Typography } from "antd";
-import { EditOutlined } from "@ant-design/icons";
-import SettingTemplateModal from "../components/setting/template/templateModal";
+import { useContext, useState } from "react";
+import { StoreContext } from "../components/store/store";
 import SettingWallModal from "../components/setting/tvWall/wallModal";
 import SettingDeviceModal from "../components/setting/device/deviceModal";
+import TVWallSetting from "../components/setting/tvWall/tvWallSetting";
 import { FormattedMessage } from "react-intl";
 import Messages from "../messages";
 import "../App.scss";
 import "./Setting.scss";
 
 const Setting = () => {
-  const options = [
-    { title: "顯示器群組設定" },
-    { title: "RS232設定" },
-    { title: "帳號&權限設定" },
-  ];
+  const [store] = useContext(StoreContext);
+  const [page, setPage] = useState("tvwall");
 
-  let optionsObject = [];
-  options.forEach((option) => {
-    optionsObject.push(
-      <Button key={option.title} className="setting-option-button">
-        <Typography.Text className="setting-option-text">
-          {option.title}
-        </Typography.Text>
-        <></>
-        <EditOutlined className="setting-option-icon" />
-      </Button>
-    );
-  });
+  const pageContent = {
+    tvwall: <TVWallSetting />,
+    singlescreen: <SettingWallModal />,
+    devicesetting: <SettingDeviceModal />,
+  };
 
   return (
     <div>
-      <div className="page-title" style={{ margin: " 24px 0px 48px 0px" }}>
-        <FormattedMessage {...Messages.Text_SystemSetting_Title} />
+      <div
+        className={
+          store.siderCollapse ? `setting-topbar-collapse` : `setting-topbar`
+        }
+      >
+        <div className="setting-topbar-title">
+          <FormattedMessage {...Messages.Text_SystemSetting_Title} />
+        </div>
+        <div className="setting-topbar-line" />
+        <div
+          className="setting-topbar-option"
+          onClick={() => {
+            setPage("tvwall");
+          }}
+        >
+          <FormattedMessage {...Messages.Text_WallSetting_WallSetting} />
+        </div>
+        <div
+          className="setting-topbar-option"
+          onClick={() => {
+            setPage("singlescreen");
+          }}
+        >
+          <FormattedMessage
+            {...Messages.Text_TemplateSetting_TemplateSetting}
+          />
+        </div>
+        <div
+          className="setting-topbar-option"
+          onClick={() => {
+            setPage("devicesetting");
+          }}
+        >
+          <FormattedMessage {...Messages.Text_DeviceSetting_AdvanceSetting} />
+        </div>
       </div>
-      <SettingTemplateModal />
-      <SettingWallModal />
-      <SettingDeviceModal />
-      {/* {optionsObject} */}
+      <div
+        className={
+          store.siderCollapse
+            ? `page-layout-column-collapse`
+            : `page-layout-column`
+        }
+      >
+        {pageContent[page]}
+      </div>
     </div>
   );
 };
