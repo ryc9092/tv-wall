@@ -83,6 +83,7 @@ const Audio = () => {
               encoderName: encoderName,
               decoderMac: link.decoder,
               decoderName: decoder.nickName,
+              inputOutput: link.value1,
             });
             return true;
           } else return false;
@@ -181,6 +182,7 @@ const Audio = () => {
             type="text"
             onClick={() => {
               setPageType("EDIT_LINK");
+              setSelectedInOutputOption(record.inputOutput);
               setSelectedEncoder(record.encoderMac);
               let linkedDecoders = [];
               linkData.forEach((link) => {
@@ -284,16 +286,10 @@ const Audio = () => {
     },
   };
 
-  const [selectedInOutputOption, setSelectedInOutputOption] = useState(); //////////
-  const handleSelectInOutputOption = () => {
-    setSelectedInOutputOption();
+  const [selectedInOutputOption, setSelectedInOutputOption] = useState(null); //////////
+  const handleSelectInOutputOption = (option) => {
+    setSelectedInOutputOption(option);
   };
-  ////////
-  ////////
-  ////////
-  ////////
-  ////////
-  ////////
 
   const [selectedDecoders, setSelectedDecoders] = useState([]);
   const [decoderFilter, setDecoderFilter] = useState("");
@@ -362,8 +358,10 @@ const Audio = () => {
       setSelectedDecoders(selectedRowKeys);
     },
     getCheckboxProps: (record) => {
-      const hasSelectedEncoder = selectedEncoder !== null;
-      return { disabled: !hasSelectedEncoder };
+      // const hasSelectedEncoder = selectedEncoder !== null;
+      // return { disabled: !hasSelectedEncoder };
+      const hasSelectedInputOutputOption = selectedInOutputOption !== null;
+      return { disabled: !hasSelectedInputOutputOption };
     },
   };
 
@@ -450,6 +448,7 @@ const Audio = () => {
                 className="audio-content-create-button"
                 onClick={() => {
                   setPageType("ADD_LINK");
+                  setSelectedInOutputOption(null);
                   setSelectedEncoder(null);
                   setSelectedDecoders([]);
                   setReload(Math.random());
@@ -529,41 +528,11 @@ const Audio = () => {
                     ...encoderSelection,
                   }}
                   pagination={false}
+                  className="audio-add-table"
                 />
               </div>
               <div style={{ width: "60px" }}></div>
               <div id="input-output-selection" className="audio-add-row-step">
-                <div className="audio-add-progress">
-                  <div className="audio-add-progress-circle">
-                    <span className="audio-add-progress-circle-text">1</span>
-                  </div>
-                  <div
-                    className={
-                      selectedEncoder
-                        ? "audio-add-progress-bar-finished"
-                        : "audio-add-progress-bar"
-                    }
-                  />
-                </div>
-                <div className="audio-add-subtitle">
-                  <FormattedMessage
-                    {...Messages.Text_Audio_ChooseInputOutput}
-                  />
-                </div>
-                {/* <Radio.Group
-                  onChange={(event) => {
-                    handleSelectInOutputOption();
-                  }}
-                  value={selectedInOutputOption}
-                >
-                  <Space direction="vertical">
-                    <Radio value={1}>Option A</Radio>
-                    <Radio value={2}>Option B</Radio>
-                  </Space>
-                </Radio.Group> */}
-              </div>
-              <div style={{ width: "60px" }}></div>
-              <div id="decoder-selection" className="audio-add-row-step">
                 <div className="audio-add-progress">
                   <div
                     className={
@@ -576,11 +545,54 @@ const Audio = () => {
                   </div>
                   <div
                     className={
+                      selectedInOutputOption
+                        ? "audio-add-progress-bar-finished"
+                        : "audio-add-progress-bar"
+                    }
+                  />
+                </div>
+                <div className="audio-add-subtitle">
+                  <FormattedMessage
+                    {...Messages.Text_Audio_ChooseInputOutput}
+                  />
+                </div>
+                <Radio.Group
+                  onChange={(event) => {
+                    handleSelectInOutputOption(event.target.value);
+                  }}
+                  value={selectedInOutputOption}
+                  className="audio-add-radio-group"
+                  disabled={selectedEncoder === null}
+                >
+                  <Space direction="vertical">
+                    <Radio value={"analog"} className="audio-add-radio">
+                      <span className="audio-add-radio-text">Analog</span>
+                    </Radio>
+                    <Radio value={"hdmi"} className="audio-add-radio">
+                      <span className="audio-add-radio-text">HDMI</span>
+                    </Radio>
+                  </Space>
+                </Radio.Group>
+              </div>
+              <div style={{ width: "60px" }}></div>
+              <div id="decoder-selection" className="audio-add-row-step">
+                <div className="audio-add-progress">
+                  <div
+                    className={
+                      selectedInOutputOption
+                        ? "audio-add-progress-circle"
+                        : "audio-add-progress-circle-unstarted"
+                    }
+                  >
+                    <span className="audio-add-progress-circle-text">3</span>
+                  </div>
+                  <div
+                    className={
                       selectedDecoders.length !== 0
                         ? "audio-add-progress-bar-finished"
                         : "audio-add-progress-bar"
                     }
-                  ></div>
+                  />
                 </div>
                 <div className="audio-add-subtitle">
                   <FormattedMessage
@@ -614,10 +626,15 @@ const Audio = () => {
                     ...decoderSelection,
                   }}
                   pagination={false}
+                  className="audio-add-table"
                 />
                 <Button
                   className="audio-add-btn"
-                  disabled={!selectedEncoder || selectedDecoders.length === 0}
+                  disabled={
+                    !selectedEncoder ||
+                    !selectedInOutputOption ||
+                    selectedDecoders.length === 0
+                  }
                   onClick={
                     pageType === "ADD_LINK"
                       ? handleAddDeviceLink

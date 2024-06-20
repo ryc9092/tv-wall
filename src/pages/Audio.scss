@@ -250,6 +250,11 @@
     color: #45413e;
 }
 
+.audio-add-table {
+    height: 480px;
+    overflow: scroll;
+}
+
 .audio-add-input {
     height: 48px;
     margin-top: 16px;
@@ -303,8 +308,8 @@
 .audio-add-btn {
     width: 120px;
     height: 48px;
-    margin-top: 64px;
-    margin-left: 382px;
+    margin-top: 24px;
+    margin-left: 285px;
     flex-grow: 0;
     display: flex;
     flex-direction: row;
@@ -327,4 +332,32 @@
     letter-spacing: 0.1px;
     text-align: center;
     color: #e7e7e7;
+}
+
+.audio-add-radio-group {
+    margin-top: 24px;
+    margin-left: 8px;
+}
+
+.audio-add-radio {
+    height: 60px !important;
+}
+
+.ant-radio > .ant-radio-inner {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.audio-add-radio-text {
+    margin-left: 16px;
+    position: absolute;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    text-align: left;
+    color: #45413e;
 }
