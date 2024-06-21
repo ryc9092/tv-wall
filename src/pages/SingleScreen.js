@@ -67,19 +67,20 @@ const SingleScreen = () => {
         isPreset: "N",
       });
 
+      // set linked decoders list
       let linkedDecoders = [];
-      deviceLinks.forEach((deviceLink) => {
-        const decoderMac = deviceLink.id.split(".")[1];
+      deviceLinks?.forEach((deviceLink) => {
+        const decoderMac = deviceLink.detail[0].decoder;
         linkedDecoders.push(decoderMac);
       });
 
       let tempDecoders = []; // for set decoders
-      decoders.forEach((decoder) => {
+      decoders?.forEach((decoder) => {
         if (linkedDecoders.includes(decoder.mac)) {
-          deviceLinks.forEach((deviceLink) => {
+          deviceLinks?.forEach((deviceLink) => {
             const encoderMac = deviceLink.encoder;
-            const decoderMac = deviceLink.id.split(".")[1];
-            encoders.forEach((encoder) => {
+            const decoderMac = deviceLink.detail[0].decoder;
+            encoders?.forEach((encoder) => {
               if (encoder.mac === encoderMac && decoder.mac === decoderMac) {
                 tempDecoders.push({
                   ...decoder,
@@ -149,7 +150,7 @@ const SingleScreen = () => {
   const onScreenClick = (event) => {
     if (!event.target.id.includes("btn") && selectedEncoder.previewUrl) {
       let tempDecoders = [];
-      const decoderMac = event.target.id.split("-")[1];
+      const decoderMac = event.target.id.split("@")[1];
       decoders.forEach((decoder) => {
         if (decoder.mac === decoderMac) {
           tempDecoders.push({
@@ -169,7 +170,7 @@ const SingleScreen = () => {
   };
 
   const handleClearScreen = async (event) => {
-    const decoderMac = event.target.id.split("-")[1];
+    const decoderMac = event.target.id.split("@")[1];
     let tempDecoders = decoders;
     let clearedLink = false;
     tempDecoders.forEach(async (decoder) => {
@@ -199,7 +200,7 @@ const SingleScreen = () => {
   };
 
   const handleLinkScreen = (event) => {
-    const decoderMac = event.target.id.split("-")[1];
+    const decoderMac = event.target.id.split("@")[1];
     let tempDecoders = decoders;
     let createdLink = false;
     tempDecoders.forEach(async (decoder) => {
@@ -238,8 +239,8 @@ const SingleScreen = () => {
     filteredDecoders.forEach((decoder) => {
       tempDecoderCards.push(
         <Col
-          key={`col-${decoder.mac}`}
-          id={`card-${decoder.mac}`}
+          key={`col@${decoder.mac}`}
+          id={`card@${decoder.mac}`}
           onMouseOver={handleScreenMouseEnter}
           onMouseLeave={handleScreenMouseLeave}
         >
@@ -280,7 +281,7 @@ const SingleScreen = () => {
               />
             ) : null}
             <div
-              id={`card-${decoder.mac}`}
+              id={`card@${decoder.mac}`}
               className={
                 store.siderCollapse
                   ? "single-screen-card-top-collapse"
@@ -294,7 +295,7 @@ const SingleScreen = () => {
               }}
             >
               <div
-                id={`card-${decoder.mac}`}
+                id={`card@${decoder.mac}`}
                 className={
                   store.siderCollapse
                     ? "single-screen-card-title-row-collapse"
@@ -302,7 +303,7 @@ const SingleScreen = () => {
                 }
               >
                 <span
-                  id={`card-${decoder.mac}`}
+                  id={`card@${decoder.mac}`}
                   className="single-screen-card-title"
                   style={{
                     color:
@@ -313,15 +314,15 @@ const SingleScreen = () => {
                 >
                   {decoder.nickName}
                 </span>
-                <span id={`card-${decoder.mac}`} style={{ marginTop: "2px" }}>
+                <span id={`card@${decoder.mac}`} style={{ marginTop: "2px" }}>
                   {decoder.state === "Up" ? (
                     <Tag
-                      id={`card-${decoder.mac}`}
+                      id={`card@${decoder.mac}`}
                       color={"#eef9b4"}
                       key={`${decoder.name}.${decoder.state}`}
                     >
                       <span
-                        id={`card-${decoder.mac}`}
+                        id={`card@${decoder.mac}`}
                         style={{ color: "#a0b628" }}
                         className="tag-content"
                       >
@@ -330,12 +331,12 @@ const SingleScreen = () => {
                     </Tag>
                   ) : decoder.state === "Down" ? (
                     <Tag
-                      id={`card-${decoder.mac}`}
+                      id={`card@${decoder.mac}`}
                       color={"#ffe6e5"}
                       key={`${decoder.name}.${decoder.state}`}
                     >
                       <span
-                        id={`card-${decoder.mac}`}
+                        id={`card@${decoder.mac}`}
                         style={{ color: "#d55959" }}
                         className="tag-content"
                       >
@@ -344,12 +345,12 @@ const SingleScreen = () => {
                     </Tag>
                   ) : (
                     <Tag
-                      id={`card-${decoder.mac}`}
+                      id={`card@${decoder.mac}`}
                       color={"yellow"}
                       key={`${decoder.name}.${decoder.state}`}
                     >
                       <span
-                        id={`card-${decoder.mac}`}
+                        id={`card@${decoder.mac}`}
                         style={{ color: "#d55959" }}
                         className="tag-content"
                       >
@@ -360,9 +361,9 @@ const SingleScreen = () => {
                 </span>
               </div>
               {currentScreen && currentScreen.includes(decoder.mac) ? (
-                <div id={`card-${decoder.mac}`}>
+                <div id={`card@${decoder.mac}`}>
                   <div
-                    id={`card-${decoder.mac}`}
+                    id={`card@${decoder.mac}`}
                     className="single-screen-card-desc"
                   >
                     <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
@@ -372,7 +373,7 @@ const SingleScreen = () => {
                       : intl.formatMessage(Messages.Text_Common_None)}
                   </div>
                   <div
-                    id={`card-${decoder.mac}`}
+                    id={`card@${decoder.mac}`}
                     className={
                       store.siderCollapse
                         ? "single-screen-btn-position-collapse"
@@ -380,21 +381,21 @@ const SingleScreen = () => {
                     }
                   >
                     <Button
-                      id={`btn-${decoder.mac}`}
+                      id={`btn@${decoder.mac}`}
                       type="primary"
                       shape="circle"
                       style={{ background: "black", position: "absolute" }}
                       onClick={(event) => handleClearScreen(event)}
                     >
                       <img
-                        id={`btn-${decoder.mac}`}
+                        id={`btn@${decoder.mac}`}
                         alt="trash"
                         src={TrashIcon}
                         style={{ width: 18, height: 18, marginTop: 2 }}
                       />
                     </Button>
                     <Button
-                      id={`btn-${decoder.mac}`}
+                      id={`btn@${decoder.mac}`}
                       type="primary"
                       style={{
                         width: "80px",
@@ -407,7 +408,7 @@ const SingleScreen = () => {
                       onClick={(event) => handleLinkScreen(event)}
                     >
                       <span
-                        id={`btn-${decoder.mac}`}
+                        id={`btn@${decoder.mac}`}
                         className="single-screen-btn-text"
                       >
                         <FormattedMessage
