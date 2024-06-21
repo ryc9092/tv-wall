@@ -6,7 +6,6 @@ import {
   createDeviceLink,
   removeDeviceLink,
   getDeviceLinks,
-  getDeviceLinkDetails,
   getDecoders,
   getEncoders,
 } from "../api/API";
@@ -40,10 +39,10 @@ const USB = () => {
         linkType: "usb",
         isPreset: "N",
       });
-      encoders.forEach((encoder) => {
+      encoders?.forEach((encoder) => {
         encoder.key = encoder.mac;
       });
-      decoders.forEach((decoder) => {
+      decoders?.forEach((decoder) => {
         decoder.key = decoder.mac;
       });
       setDecoders(decoders);
@@ -58,9 +57,9 @@ const USB = () => {
   useEffect(() => {
     setLinkData([]);
     let tempLinkData = [];
-    deviceLinks.forEach(async (deviceLink, index) => {
+    deviceLinks?.forEach(async (deviceLink, index) => {
       let encoderName;
-      encoders.some((encoder) => {
+      encoders?.some((encoder) => {
         if (
           encoder.mac === deviceLink.encoder &&
           encoder.nickName.includes(searchFilter)
@@ -69,12 +68,8 @@ const USB = () => {
           return true;
         } else return false;
       });
-      let linkDetail = await getDeviceLinkDetails({
-        store: store,
-        linkId: deviceLink.id,
-      });
-      linkDetail.forEach((link) => {
-        decoders.some((decoder) => {
+      deviceLink?.detail?.forEach((link) => {
+        decoders?.some((decoder) => {
           if (encoderName && decoder.mac === link.decoder) {
             tempLinkData.push({
               key: `${deviceLink.encoder}.${link.decoder}`,
@@ -93,19 +88,17 @@ const USB = () => {
 
   const handleRemoveLink = async (encoderMac, decoderMac) => {
     let linkId;
-    deviceLinks.some((link) => {
+    let linkDetail;
+    deviceLinks?.some((link) => {
       if (link.encoder === encoderMac) {
         linkId = link.id;
+        linkDetail = link.detail;
         return true;
       } else return false;
     });
-    if (linkId) {
-      let linkDetail = await getDeviceLinkDetails({
-        store: store,
-        linkId: linkId,
-      });
+    if (linkId && linkDetail) {
       let linkDecoders = [];
-      linkDetail.forEach((link) => {
+      linkDetail?.forEach((link) => {
         if (decoderMac !== link.decoder) linkDecoders.push(link.decoder);
       });
       await removeDeviceLink({
@@ -180,7 +173,7 @@ const USB = () => {
               setPageType("EDIT_LINK");
               setSelectedEncoder(record.encoderMac);
               let linkedDecoders = [];
-              linkData.forEach((link) => {
+              linkData?.forEach((link) => {
                 if (link.encoderMac === record.encoderMac)
                   linkedDecoders.push(link.decoderMac);
               });
@@ -264,7 +257,7 @@ const USB = () => {
   useEffect(() => {
     let tempFilteredEncoders = [];
     if (encoders.length !== 0) {
-      encoders.forEach((encoder) => {
+      encoders?.forEach((encoder) => {
         if (encoder.nickName.includes(encoderFilter))
           tempFilteredEncoders.push(encoder);
       });
@@ -341,7 +334,7 @@ const USB = () => {
   useEffect(() => {
     let tempFilteredDecoders = [];
     if (decoders.length !== 0) {
-      decoders.forEach((decoder) => {
+      decoders?.forEach((decoder) => {
         if (decoder.nickName.includes(decoderFilter))
           tempFilteredDecoders.push(decoder);
       });
@@ -377,7 +370,7 @@ const USB = () => {
 
   const handleEditDeviceLink = async () => {
     let linkId;
-    deviceLinks.some((link) => {
+    deviceLinks?.some((link) => {
       if (link.encoder === selectedEncoder) {
         linkId = link.id;
         return true;
