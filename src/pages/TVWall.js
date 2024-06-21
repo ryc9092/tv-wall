@@ -157,10 +157,12 @@ const TVWall = () => {
       const encoders = await getEncoders(store);
       setEncoders(encoders);
 
-      encoders.forEach((encoder) => {
-        if (encoder.nickName.includes(searchFilter))
-          tempFilteredEncoders.push({ key: encoder.mac, ...encoder });
-      });
+      if (encoders) {
+        encoders.forEach((encoder) => {
+          if (encoder.nickName.includes(searchFilter))
+            tempFilteredEncoders.push({ key: encoder.mac, ...encoder });
+        });
+      }
       setFilteredEncoders(tempFilteredEncoders);
     })();
   }, [searchFilter]);
@@ -191,7 +193,7 @@ const TVWall = () => {
           block: block.block,
           row: block.row,
           col: block.col,
-          encoder: block.encoder.mac,
+          encoder: block.encoder.mac ? block.encoder.mac : "",
           marginLeft: block.marginLeft,
           marginTop: block.marginTop,
           decoder: block.decoder,
