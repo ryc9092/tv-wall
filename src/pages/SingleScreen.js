@@ -70,7 +70,7 @@ const SingleScreen = () => {
       // set linked decoders list
       let linkedDecoders = [];
       deviceLinks?.forEach((deviceLink) => {
-        const decoderMac = deviceLink.detail[0].decoder;
+        const decoderMac = deviceLink?.deviceLinkDetails[0].decoder;
         linkedDecoders.push(decoderMac);
       });
 
@@ -79,7 +79,7 @@ const SingleScreen = () => {
         if (linkedDecoders.includes(decoder.mac)) {
           deviceLinks?.forEach((deviceLink) => {
             const encoderMac = deviceLink.encoder;
-            const decoderMac = deviceLink.detail[0].decoder;
+            const decoderMac = deviceLink.deviceLinkDetails[0].decoder;
             encoders?.forEach((encoder) => {
               if (encoder.mac === encoderMac && decoder.mac === decoderMac) {
                 tempDecoders.push({
@@ -113,7 +113,7 @@ const SingleScreen = () => {
   useEffect(() => {
     (async () => {
       let tempFilteredEncoders = [];
-      encoders.forEach((encoder) => {
+      encoders?.forEach((encoder) => {
         if (encoder.nickName.includes(searchEncoderFilter))
           tempFilteredEncoders.push({ key: encoder.mac, ...encoder });
       });
@@ -133,7 +133,7 @@ const SingleScreen = () => {
   useEffect(() => {
     (async () => {
       let tempFilteredDecoders = [];
-      decoders.forEach((decoder) => {
+      decoders?.forEach((decoder) => {
         if (decoder.nickName.includes(searchDecoderFilter))
           tempFilteredDecoders.push(decoder);
       });
@@ -151,7 +151,7 @@ const SingleScreen = () => {
     if (!event.target.id.includes("btn") && selectedEncoder.previewUrl) {
       let tempDecoders = [];
       const decoderMac = event.target.id.split("@")[1];
-      decoders.forEach((decoder) => {
+      decoders?.forEach((decoder) => {
         if (decoder.mac === decoderMac) {
           tempDecoders.push({
             ...decoder,
@@ -173,7 +173,7 @@ const SingleScreen = () => {
     const decoderMac = event.target.id.split("@")[1];
     let tempDecoders = decoders;
     let clearedLink = false;
-    tempDecoders.forEach(async (decoder) => {
+    tempDecoders?.forEach(async (decoder) => {
       if (
         decoder.mac === decoderMac &&
         decoder.encoder !== "" &&
@@ -203,7 +203,7 @@ const SingleScreen = () => {
     const decoderMac = event.target.id.split("@")[1];
     let tempDecoders = decoders;
     let createdLink = false;
-    tempDecoders.forEach(async (decoder) => {
+    tempDecoders?.forEach(async (decoder) => {
       if (
         decoder.mac === decoderMac &&
         decoder.encoder &&
@@ -236,7 +236,7 @@ const SingleScreen = () => {
 
   useEffect(() => {
     let tempDecoderCards = [];
-    filteredDecoders.forEach((decoder) => {
+    filteredDecoders?.forEach((decoder) => {
       tempDecoderCards.push(
         <Col
           key={`col@${decoder.mac}`}

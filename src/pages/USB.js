@@ -68,7 +68,7 @@ const USB = () => {
           return true;
         } else return false;
       });
-      deviceLink?.detail?.forEach((link) => {
+      deviceLink?.deviceLinkDetails?.forEach((link) => {
         decoders?.some((decoder) => {
           if (encoderName && decoder.mac === link.decoder) {
             tempLinkData.push({
@@ -92,7 +92,7 @@ const USB = () => {
     deviceLinks?.some((link) => {
       if (link.encoder === encoderMac) {
         linkId = link.id;
-        linkDetail = link.detail;
+        linkDetail = link.deviceLinkDetails;
         return true;
       } else return false;
     });
