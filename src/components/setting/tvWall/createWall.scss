@@ -1,0 +1,187 @@
+.ant-modal-content {
+    padding: 56px !important;
+    height: 988px;
+}
+
+.ant-modal-close-icon {
+    margin-top: 50px;
+    margin-right: 72px;
+}
+
+.create-wall-modal {
+    width: 1115px !important;
+    margin-top: -40px;
+}
+
+.create-wall-modal-title {
+    height: 36px;
+    flex-grow: 1;
+    font-family: Noto Sans TC;
+    font-size: 28px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    text-align: left;
+    color: var(--neutral-30);
+}
+
+.input-option-row {
+    height: 80px;
+    margin-top: 28px;
+    display: flex;
+}
+
+.input-title {
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: left;
+    color: #45413e;
+}
+
+.input-object {
+    height: 48px;
+    font-size: 16px;
+    margin-top: 8px;
+    align-self: stretch;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    border-radius: 12px;
+    border: solid 1px #757371;
+    background-color: #ffffff;
+}
+
+.input-dimension-row {
+    display: flex;
+}
+
+.input-dimension {
+    width: 48px;
+}
+
+.input-dimension-multiply-icon {
+    width: 15px;
+    height: 15px;
+    margin: 24px 12px 0px 12px;
+}
+
+.divider {
+    height: 1px;
+    margin-top: 40px;
+    margin-bottom: 56px;
+    align-self: stretch;
+    flex-grow: 0;
+    background-color: #d4d4d4;
+}
+
+.screen-decoder-setting-title {
+    height: 32px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: 1.2px;
+    text-align: left;
+    color: #45413e;
+}
+
+.screen-decoder-setting-desc {
+    height: 24px;
+    flex-grow: 0;
+    margin-top: 8px;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    text-align: left;
+    color: #898989;
+}
+
+.screen-setting-row {
+    margin-top: 56px;
+    display: flex;
+}
+
+.screen-block-default {
+    width: 124px;
+    height: 115px;
+    gap: 10px;
+    padding: 0;
+    border: solid 1px #c6c6c6;
+    background-color: #f5f5f5;
+}
+
+.screen-block-text-default {
+    width: 40px;
+    height: 40px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 22px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    color: #45413e;
+    position: absolute;
+    margin: -58px 0px 0px 0px !important;
+    text-align: center;
+}
+
+.screen-block-handled {
+    width: 124px;
+    height: 115px;
+    gap: 10px;
+    padding: 0;
+    border: solid 3px #45413e;
+    background-color: rgba(38, 35, 32, 0.3);
+}
+
+.screen-block-text-handled {
+    width: 40px;
+    height: 40px;
+    background-color: #45413e;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 22px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.27;
+    letter-spacing: normal;
+    color: #ffffff;
+    position: absolute;
+    margin: -45px 0px 0px 15px !important;
+}
+
+.decoder-setting-container {
+    flex-grow: 0;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 0 24px;
+    border-radius: 16px;
+    background-color: #ffffff;
+    height: 480px;
+    overflow: scroll;
+    right: 56px;
+}

@@ -777,6 +777,10 @@ export default defineMessages({
     id: "Text-WallSetting-CreateWall",
     defaultMessage: "建立電視牆",
   },
+  Text_WallSetting_WallID: {
+    id: "Text-WallSetting-WallID",
+    defaultMessage: "電視牆ID",
+  },
   Text_WallSetting_WallName: {
     id: "Text-WallSetting-WallName",
     defaultMessage: "電視牆名稱",

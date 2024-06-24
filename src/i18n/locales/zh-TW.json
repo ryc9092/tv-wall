@@ -173,6 +173,7 @@
   "Text-WallSetting-RemoveWall": "刪除電視牆",
   "Text-WallSetting-RemoveWallConfirm": "確定要刪除電視牆 : XXX?",
   "Text-WallSetting-CreateWall": "建立電視牆",
+  "Text-WallSetting-WallID": "電視牆ID",
   "Text-WallSetting-WallName": "電視牆名稱",
   "Text-WallSetting-WallDimension": "電視牆維度",
   "Text-WallSetting-ScreenDecoder": "畫面與解碼器對應",

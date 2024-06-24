@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../../components/store/store";
 import {
   Button,
-  Col,
+  Divider,
   Input,
   InputNumber,
   Modal,
@@ -17,7 +17,10 @@ import {
 } from "../../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
+import PlusIcon from "../../../assets/plus-white.png";
+import XIcon from "../../../assets/X.png";
 import "../../../App.scss";
+import "./createWall.scss";
 
 const CreateWall = ({ setReload }) => {
   const intl = useIntl();
@@ -27,6 +30,7 @@ const CreateWall = ({ setReload }) => {
   const [wallName, setWallName] = useState(null);
   const [wallSize, setWallSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
+  const [handledScreenList, setHandledScreenList] = useState([]);
   const [decoderOptions, setDecoderOptions] = useState([]);
   const [wallObj, setWallObj] = useState(null);
 
@@ -73,11 +77,8 @@ const CreateWall = ({ setReload }) => {
     let tempWall = [];
     screenList.forEach((screen) => {
       tempRow.push(
-        <td
-          style={{ width: "40px", height: "40px", textAlign: "center" }}
-          key={screen.num}
-        >
-          {screen.num}
+        <td className="screen-block-default" key={screen.num}>
+          <span className="screen-block-text-default">{screen.num}</span>
         </td>
       );
       if (tempRow.length === wallSize.col) {
@@ -119,15 +120,17 @@ const CreateWall = ({ setReload }) => {
 
   return (
     <div>
-      <Button onClick={() => setIsModalOpen(true)}>
-        <Typography.Text>
+      <Button className="create-wall-btn" onClick={() => setIsModalOpen(true)}>
+        <img alt="create" src={PlusIcon} className="create-wall-btn-icon" />
+        <span className="create-wall-btn-text">
           <FormattedMessage {...Messages.Text_WallSetting_CreateWall} />
-        </Typography.Text>
+        </span>
       </Button>
       <Modal
-        title={intl.formatMessage(Messages.Text_WallSetting_CreateWall)}
-        className="modal-title"
-        width={568}
+        title=<span className="create-wall-modal-title">
+          {intl.formatMessage(Messages.Text_WallSetting_CreateWall)}
+        </span>
+        className="create-wall-modal modal-title"
         open={isModalOpen}
         footer={null}
         onCancel={() => {
@@ -135,7 +138,90 @@ const CreateWall = ({ setReload }) => {
           setIsModalOpen(false);
         }}
       >
-        <Row style={{ marginTop: "20px" }}>
+        <div className="input-option-row">
+          <div style={{ marginRight: 100 }}>
+            <span className="input-title">
+              <FormattedMessage {...Messages.Text_WallSetting_WallID} />
+            </span>
+            <Input
+              className="input-object"
+              placeholder={intl.formatMessage(Messages.Text_Common_InputID)}
+            />
+          </div>
+          <div style={{ marginRight: 100 }}>
+            <span className="input-title">
+              <FormattedMessage {...Messages.Text_WallSetting_WallName} />
+            </span>
+            <Input
+              className="input-object"
+              placeholder={intl.formatMessage(Messages.Text_Common_InputName)}
+            />
+          </div>
+          <div>
+            <span className="input-title">
+              <FormattedMessage {...Messages.Text_WallSetting_WallDimension} />
+            </span>
+            <div className="input-dimension-row">
+              <InputNumber
+                value={wallSize.col}
+                min={1}
+                max={5}
+                onChange={(value) => setWallSize({ ...wallSize, col: value })}
+                className="input-object input-dimension"
+              />
+              <img
+                alt="x"
+                src={XIcon}
+                className="input-dimension-multiply-icon"
+              />
+              <InputNumber
+                value={wallSize.row}
+                min={1}
+                max={4}
+                onChange={(value) => setWallSize({ ...wallSize, row: value })}
+                className="input-object input-dimension"
+              />
+            </div>
+          </div>
+        </div>
+        <Divider className="divider" />
+        <div className="screen-decoder-setting-title">
+          <FormattedMessage {...Messages.Text_WallSetting_ScreenDecoder} />
+        </div>
+        <div className="screen-decoder-setting-desc">
+          <FormattedMessage {...Messages.Text_WallSetting_ScreenDecoderDesc} />
+        </div>
+        <div className="screen-setting-row">
+          <div>
+            <table style={{ border: 0, borderCollapse: "collapse" }}>
+              <tbody>{wallObj}</tbody>
+            </table>
+          </div>
+          <div className="decoder-setting-container">
+            {screenList.map((screen, index) => {
+              return (
+                <Row key={screen.num}>
+                  <Typography.Text style={{ fontSize: "14px", margin: "4px" }}>
+                    <FormattedMessage {...Messages.Text_Common_Screen} />
+                    {screen.num}:
+                  </Typography.Text>
+                  <Select
+                    options={decoderOptions}
+                    size="small"
+                    style={{ width: "135px", margin: "4px 4px 4px 8px" }}
+                    onChange={(value, option) => {
+                      setScreenDecoder({
+                        screenNumber: screen.num,
+                        decoder: value,
+                      });
+                    }}
+                  />
+                </Row>
+              );
+            })}
+          </div>
+        </div>
+        {/* <Row style={{ marginTop: "20px" }}>
           <Col style={{ marginRight: "16px" }}>
             <FormattedMessage {...Messages.Text_WallSetting_Wall} />
             {" ID:"}
@@ -260,7 +346,7 @@ const CreateWall = ({ setReload }) => {
           <Button onClick={saveWall}>
             <FormattedMessage {...Messages.Text_Button_Save} />
           </Button>
-        </Row>
+        </Row> */}
       </Modal>
     </div>
   );

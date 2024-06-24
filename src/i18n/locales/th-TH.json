@@ -173,6 +173,7 @@
   "Text-WallSetting-RemoveWall": "Remove TV wall",
   "Text-WallSetting-RemoveWallConfirm": "Are you sure to remove TV wall : XXX?",
   "Text-WallSetting-CreateWall": "Create wall",
+  "Text-WallSetting-WallID": "wall ID",
   "Text-WallSetting-WallName": "wall name",
   "Text-WallSetting-WallDimension": "Wall dimension",
   "Text-WallSetting-ScreenDecoder": "Correspond of screen and decoder",
