@@ -28,9 +28,8 @@ const TVWallSetting = () => {
         });
       }
       setWalls(tempWalls);
-      console.log(tempWalls);
     })();
-  }, []);
+  }, [reload]);
 
   const columns = [
     {

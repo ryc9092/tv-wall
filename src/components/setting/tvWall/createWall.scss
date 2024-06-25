@@ -116,6 +116,7 @@
 
 .screen-setting-row {
     margin-top: 56px;
+    height: 468px;
     display: flex;
 }
 
@@ -167,7 +168,8 @@
     letter-spacing: normal;
     color: #ffffff;
     position: absolute;
-    margin: -45px 0px 0px 15px !important;
+    margin: -58px 0px 0px 0px !important;
+    text-align: center;
 }
 
 .decoder-setting-container {
@@ -178,10 +180,125 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 16px;
-    padding: 0 24px;
+    padding: 0 8px;
     border-radius: 16px;
     background-color: #ffffff;
     height: 480px;
+    right: 48px;
+}
+
+.decoder-setting-input {
+    width: 346px;
+    height: 48px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 16px;
+    background-color: #e7e7e7;
+}
+
+.setting-input .ant-input {
+    background-color: #e7e7e7;
+}
+
+.decoder-setting-table {
+    width: 346px;
+    height: 432px;
     overflow: scroll;
-    right: 56px;
+}
+
+.ant-table-tbody > tr > td {
+    border: none !important;
+  }
+
+.decoder-setting-table-head {
+    font-family: Noto Sans TC;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    color: #a5a5a5;
+}
+
+.ant-table-cell {
+    width: 148px;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    text-align: left;
+    color: #45413e;
+}
+
+.decoder-setting-table-select {
+    width: 200px;
+    height: 36px;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    text-align: left;
+    color: #45413e;
+}
+
+.screen-setting-submit-row {
+    margin-top: 36px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.screen-setting-clear-btn {
+    height: 40px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 47px;
+    padding: 0 12px;
+    border-radius: 26px; 
+}
+
+.screen-setting-clear-btn-text {
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 14px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #898989;
+}
+
+.screen-setting-create-btn {
+    width: 120px;
+    height: 48px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 47px;
+    padding: 0 24px;
+    border-radius: 24px;
+    background-color: #262320;
+}
+
+.screen-setting-create-btn-text {
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #e7e7e7;
 }

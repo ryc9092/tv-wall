@@ -71,6 +71,10 @@ export default defineMessages({
     id: "Text-Button-Delete",
     defaultMessage: "刪除",
   },
+  Text_Button_Clear: {
+    id: "Text-Button-Clear",
+    defaultMessage: "清除",
+  },
   Text_Button_Cancel: {
     id: "Text-Button-Cancel",
     defaultMessage: "取消",

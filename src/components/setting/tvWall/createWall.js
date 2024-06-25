@@ -6,15 +6,11 @@ import {
   Input,
   InputNumber,
   Modal,
-  Row,
   Select,
-  Typography,
+  Table,
 } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import { getDecoders, createWall } from "../../../api/API";
-import {
-  showWarningNotification,
-  showSuccessNotificationByMsg,
-} from "../../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
 import PlusIcon from "../../../assets/plus-white.png";
@@ -33,29 +29,30 @@ const CreateWall = ({ setReload }) => {
   const [handledScreenList, setHandledScreenList] = useState([]);
   const [decoderOptions, setDecoderOptions] = useState([]);
   const [wallObj, setWallObj] = useState(null);
+  const [searchFilter, setSearchFilter] = useState("");
 
   // get decoders
   useEffect(() => {
-    let tempDecoders = [];
     let tempDecoderOptions = [];
     (async () => {
       const decoders = await getDecoders(store);
-      if (decoders) tempDecoders = decoders;
-      tempDecoders.forEach((decoder) => {
-        tempDecoderOptions.push({
-          value: decoder.mac,
-          label: decoder.nickName,
-        });
+      decoders?.forEach((decoder) => {
+        if (decoder.nickName.includes(searchFilter))
+          tempDecoderOptions.push({
+            value: decoder.mac,
+            label: decoder.nickName,
+          });
       });
       setDecoderOptions(tempDecoderOptions);
     })();
-  }, []);
+  }, [searchFilter]);
 
   const resetWall = () => {
     setWallId(null);
     setWallName(null);
     setWallSize({ col: 1, row: 1 });
     setScreenList([]);
+    setHandledScreenList([]);
   };
 
   useEffect(() => {
@@ -77,8 +74,23 @@ const CreateWall = ({ setReload }) => {
     let tempWall = [];
     screenList.forEach((screen) => {
       tempRow.push(
-        <td className="screen-block-default" key={screen.num}>
-          <span className="screen-block-text-default">{screen.num}</span>
+        <td
+          className={
+            handledScreenList.includes(screen.num)
+              ? "screen-block-handled"
+              : "screen-block-default"
+          }
+          key={screen.num}
+        >
+          <span
+            className={
+              handledScreenList.includes(screen.num)
+                ? "screen-block-text-handled"
+                : "screen-block-text-default"
+            }
+          >
+            {screen.num}
+          </span>
         </td>
       );
       if (tempRow.length === wallSize.col) {
@@ -87,7 +99,7 @@ const CreateWall = ({ setReload }) => {
       }
     });
     setWallObj(tempWall);
-  }, [screenList]);
+  }, [screenList, handledScreenList]);
 
   const setScreenDecoder = ({ screenNumber, decoder }) => {
     let list = screenList;
@@ -106,17 +118,48 @@ const CreateWall = ({ setReload }) => {
         screenList
       );
       if (result) {
-        showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_WallSetting_CreateSuccess)
-        );
-        setReload(Math.random);
+        setReload(Math.random());
         setIsModalOpen(false);
-      } else
-        showWarningNotification(
-          intl.formatMessage(Messages.Text_WallSetting_CreateFail)
-        );
+      }
     })();
   };
+
+  const decoderTableColumns = [
+    {
+      title: (
+        <span className="decoder-setting-table-head">
+          {intl.formatMessage(Messages.Text_WallSetting_ScreenNumber)}
+        </span>
+      ),
+      dataIndex: "num",
+      key: "num",
+      render: (text) => {
+        return <span className="table-content">{text}</span>;
+      },
+    },
+    {
+      title: (
+        <span className="decoder-setting-table-head">
+          {intl.formatMessage(Messages.Text_WallSetting_DestinationName)}
+        </span>
+      ),
+      dataIndex: "num",
+      key: "select",
+      render: (text, record) => (
+        <Select
+          options={decoderOptions}
+          className="decoder-setting-table-select"
+          onChange={(value, option) => {
+            setScreenDecoder({
+              screenNumber: record.num,
+              decoder: value,
+            });
+            setHandledScreenList([...handledScreenList, record.num]);
+          }}
+        />
+      ),
+    },
+  ];
 
   return (
     <div>
@@ -144,8 +187,12 @@ const CreateWall = ({ setReload }) => {
               <FormattedMessage {...Messages.Text_WallSetting_WallID} />
             </span>
             <Input
+              value={wallId}
               className="input-object"
               placeholder={intl.formatMessage(Messages.Text_Common_InputID)}
+              onChange={(e) => {
+                setWallId(e.target.value);
+              }}
             />
           </div>
           <div style={{ marginRight: 100 }}>
@@ -153,8 +200,12 @@ const CreateWall = ({ setReload }) => {
               <FormattedMessage {...Messages.Text_WallSetting_WallName} />
             </span>
             <Input
+              value={wallName}
               className="input-object"
               placeholder={intl.formatMessage(Messages.Text_Common_InputName)}
+              onChange={(e) => {
+                setWallName(e.target.value);
+              }}
             />
           </div>
           <div>
@@ -198,155 +249,45 @@ const CreateWall = ({ setReload }) => {
             </table>
           </div>
           <div className="decoder-setting-container">
-            {screenList.map((screen, index) => {
-              return (
-                <Row key={screen.num}>
-                  <Typography.Text style={{ fontSize: "14px", margin: "4px" }}>
-                    <FormattedMessage {...Messages.Text_Common_Screen} />
-                    {screen.num}:
-                  </Typography.Text>
-                  <Select
-                    options={decoderOptions}
-                    size="small"
-                    style={{ width: "135px", margin: "4px 4px 4px 8px" }}
-                    onChange={(value, option) => {
-                      setScreenDecoder({
-                        screenNumber: screen.num,
-                        decoder: value,
-                      });
-                    }}
-                  />
-                </Row>
-              );
-            })}
+            <Input
+              className="decoder-setting-input setting-input"
+              variant="filled"
+              onChange={(e) => {
+                setSearchFilter(e.target.value);
+              }}
+              prefix={<SearchOutlined />}
+              placeholder={intl.formatMessage(
+                Messages.Text_WallSetting_InputDecoder
+              )}
+            />
+            <Table
+              className="decoder-setting-table"
+              columns={decoderTableColumns}
+              dataSource={screenList}
+              pagination={false}
+            />
           </div>
         </div>
-        {/* <Row style={{ marginTop: "20px" }}>
-          <Col style={{ marginRight: "16px" }}>
-            <FormattedMessage {...Messages.Text_WallSetting_Wall} />
-            {" ID:"}
-          </Col>
-          <Col style={{ marginRight: "16px" }}>
-            <Input
-              value={wallId}
-              size="small"
-              style={{ width: "120px" }}
-              onChange={(e) => {
-                setWallId(e.target.value);
-              }}
-            />
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "6px" }}>
-            <FormattedMessage {...Messages.Text_WallSetting_WallName} />
-            {":"}
-          </Col>
-          <Col style={{ marginRight: "16px" }}>
-            <Input
-              value={wallName}
-              size="small"
-              style={{ width: "120px" }}
-              onChange={(e) => {
-                setWallName(e.target.value);
-              }}
-            />
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "16px" }}>
-            <FormattedMessage {...Messages.Text_Common_Dimension} />
-            {":"}
-          </Col>
-          <Col style={{ marginRight: "6px" }}>
-            <InputNumber
-              value={wallSize.col}
-              min={1}
-              max={6}
-              size="small"
-              style={{ width: "48px" }}
-              onChange={(value) => setWallSize({ ...wallSize, col: value })}
-            />
-          </Col>
-          <Col style={{ marginRight: "6px" }}>{" X "}</Col>
-          <Col>
-            <InputNumber
-              value={wallSize.row}
-              min={1}
-              max={6}
-              size="small"
-              style={{ width: "48px" }}
-              onChange={(value) => setWallSize({ ...wallSize, row: value })}
-            />
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "12px" }}>
-            <div style={{ marginBottom: "2px" }}>
-              <FormattedMessage {...Messages.Text_WallSetting_ScreenNumber} />
-            </div>
-            <div
-              style={{
-                width: "279px",
-                height: "279px",
-                border: "1px solid black",
-              }}
+        <div className="screen-setting-submit-row">
+          <div>
+            <Button
+              type="text"
+              onClick={resetWall}
+              className="screen-setting-clear-btn"
             >
-              <table>
-                <tbody>{wallObj}</tbody>
-              </table>
-            </div>
-          </Col>
-          <Col>
-            <div style={{ marginBottom: "2px" }}>
-              {
-                <FormattedMessage
-                  {...Messages.Text_WallSetting_ScreenDecoderPair}
-                />
-              }
-            </div>
-            <div
-              style={{
-                width: "225px",
-                height: "279px",
-                border: "1px solid black",
-                overflowY: "scroll",
-              }}
-            >
-              {screenList.map((screen, index) => {
-                return (
-                  <Row key={screen.num}>
-                    <Typography.Text
-                      style={{ fontSize: "14px", margin: "4px" }}
-                    >
-                      <FormattedMessage {...Messages.Text_Common_Screen} />
-                      {screen.num}:
-                    </Typography.Text>
-                    <Select
-                      options={decoderOptions}
-                      size="small"
-                      style={{ width: "135px", margin: "4px 4px 4px 8px" }}
-                      onChange={(value, option) => {
-                        setScreenDecoder({
-                          screenNumber: screen.num,
-                          decoder: value,
-                        });
-                      }}
-                    />
-                  </Row>
-                );
-              })}
-            </div>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "16px" }}>
-          <Button onClick={resetWall} style={{ marginRight: "16px" }}>
-            <FormattedMessage {...Messages.Text_WallSetting_ResetWall} />
-          </Button>
-          <Button onClick={saveWall}>
-            <FormattedMessage {...Messages.Text_Button_Save} />
-          </Button>
-        </Row> */}
+              <span className="screen-setting-clear-btn-text">
+                <FormattedMessage {...Messages.Text_Button_Clear} />
+              </span>
+            </Button>
+          </div>
+          <div>
+            <Button onClick={saveWall} className="screen-setting-create-btn">
+              <span className="screen-setting-create-btn-text">
+                <FormattedMessage {...Messages.Text_Button_Create} />
+              </span>
+            </Button>
+          </div>
+        </div>
       </Modal>
     </div>
   );
