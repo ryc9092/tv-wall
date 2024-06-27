@@ -173,7 +173,7 @@ const CreateWall = ({ setReload }) => {
         title=<span className="create-wall-modal-title">
           {intl.formatMessage(Messages.Text_WallSetting_CreateWall)}
         </span>
-        className="create-wall-modal modal-title"
+        className="create-wall-modal create-wall-setting modal-title"
         open={isModalOpen}
         footer={null}
         onCancel={() => {

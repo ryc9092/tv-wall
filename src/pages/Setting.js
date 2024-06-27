@@ -40,7 +40,7 @@ const Setting = () => {
         <div
           className="setting-topbar-option"
           onClick={() => {
-            setPage("singlescreen");
+            // setPage("singlescreen");
           }}
         >
           <FormattedMessage
@@ -50,7 +50,7 @@ const Setting = () => {
         <div
           className="setting-topbar-option"
           onClick={() => {
-            setPage("devicesetting");
+            // setPage("devicesetting");
           }}
         >
           <FormattedMessage {...Messages.Text_DeviceSetting_AdvanceSetting} />

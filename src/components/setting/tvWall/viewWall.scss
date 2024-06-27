@@ -1,0 +1,53 @@
+.view-wall-setting .ant-modal-content {
+    padding: 56px !important;
+    height: 788px;
+}
+
+.view-wall-modal {
+    width: 1115px !important;
+    margin-top: -40px;
+}
+
+.view-wall-modal-title {
+    height: 36px;
+    flex-grow: 1;
+    font-family: Noto Sans TC;
+    font-size: 28px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    text-align: left;
+    color: #45413e;
+}
+
+.wall-info-block {
+    margin-top: 36px;
+}
+
+.wall-info-text {
+    height: 24px;
+    flex-grow: 0;
+    font-family: PingFangTC;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    text-align: left;
+    color: #45413e;
+}
+
+.screen-setting-row {
+    margin-top: 56px;
+    height: 468px;
+    display: flex;
+}
+
+.view-decoder-setting-table {
+    width: 346px;
+    height: 482px;
+    overflow: scroll;
+}

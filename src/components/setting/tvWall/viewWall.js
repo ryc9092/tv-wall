@@ -1,16 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../../components/store/store";
-import { Col, Input, InputNumber, Modal, Row, Select, Typography } from "antd";
+import { Button, Modal, Table, Select } from "antd";
 import { getWallScreensById } from "../../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
+import PencilIcon from "../../../assets/pencil.png";
 import "../../../App.scss";
+import "./tvWallSetting.scss";
+import "./viewWall.scss";
+import "./createWall.scss";
 
-const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
+const ViewWall = ({ wall }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
-  const [wallName, setWallName] = useState(null);
-  const [wallSize, setWallSize] = useState({ col: 1, row: 1 });
+  const [modalOpen, setModalOpen] = useState(false);
   const [screenList, setScreenList] = useState([]);
   const [wallObj, setWallObj] = useState(null);
 
@@ -19,8 +22,6 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
       (async () => {
         const screens = await getWallScreensById(store, wall.wallId);
         setScreenList(screens);
-        setWallSize({ col: wall.col, row: wall.row });
-        setWallName(wall.wallName);
       })();
     }
   }, [wall]);
@@ -33,16 +34,26 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
     // create wall table
     let tempRow = [];
     let tempWall = [];
-    screenList.forEach((screen) => {
+    screenList?.forEach((screen) => {
       tempRow.push(
         <td
-          style={{ width: "40px", height: "40px", textAlign: "center" }}
+          className={
+            screen.nickName ? "screen-block-handled" : "screen-block-default"
+          }
           key={screen.num}
         >
-          {screen.num}
+          <span
+            className={
+              screen.nickName
+                ? "screen-block-text-handled"
+                : "screen-block-text-default"
+            }
+          >
+            {screen.num}
+          </span>
         </td>
       );
-      if (tempRow.length === wallSize.col) {
+      if (tempRow.length === wall.col) {
         tempWall.push(<tr key={screen.num}>{tempRow}</tr>);
         tempRow = []; // clear row
       }
@@ -50,112 +61,90 @@ const ViewWall = ({ wall, modalOpen, setModalOpen }) => {
     setWallObj(tempWall);
   }, [screenList]);
 
+  const decoderTableColumns = [
+    {
+      title: (
+        <span className="decoder-setting-table-head">
+          {intl.formatMessage(Messages.Text_WallSetting_ScreenNumber)}
+        </span>
+      ),
+      dataIndex: "num",
+      key: "num",
+      render: (text) => {
+        return <span className="table-content">{text}</span>;
+      },
+    },
+    {
+      title: (
+        <span className="decoder-setting-table-head">
+          {intl.formatMessage(Messages.Text_WallSetting_DestinationName)}
+        </span>
+      ),
+      dataIndex: "num",
+      key: "select",
+      render: (text, record) => (
+        <Select
+          value={record.nickName}
+          className="decoder-setting-table-select"
+          disabled
+        />
+      ),
+    },
+  ];
+
   return (
-    <div>
+    <span>
+      <Button
+        key={`${wall.wallId}-edit`}
+        id={wall.wallId}
+        type="text"
+        onClick={() => setModalOpen(true)}
+        style={{ marginight: 6 }}
+        className="table-content"
+      >
+        <img alt="edit" src={PencilIcon} className="table-content-icon" />
+      </Button>
       <Modal
-        title={intl.formatMessage(Messages.Text_WallSetting_Wall)}
-        className="modal-title"
-        width={568}
+        title=<span className="view-wall-modal-title">
+          {intl.formatMessage(Messages.Text_WallSetting_ViewWall)}
+        </span>
+        className="view-wall-modal view-wall-setting modal-title"
         open={modalOpen}
         footer={null}
         onCancel={() => {
-          modalOpen = false;
           setModalOpen(false);
         }}
       >
-        <Row style={{ marginTop: "20px" }}>
-          <Col style={{ marginRight: "6px" }}>
-            <FormattedMessage {...Messages.Text_WallSetting_WallName} />
-            {":"}
-          </Col>
-          <Col style={{ marginRight: "16px" }}>
-            <Input
-              value={wallName}
-              size="small"
-              style={{ width: "120px" }}
-              disabled
-            />
-          </Col>
-          <Col style={{ marginRight: "6px" }}>
+        <div className="wall-info-block">
+          <div className="wall-info-text">ID : {wall.wallId}</div>
+          <div className="wall-info-text" style={{ marginTop: 8 }}>
+            <FormattedMessage {...Messages.Text_Common_Name} />
+            {" : "}
+            {wall.wallName}
+          </div>
+          <div className="wall-info-text" style={{ marginTop: 8 }}>
             <FormattedMessage {...Messages.Text_Common_Dimension} />
-            {":"}
-          </Col>
-          <Col style={{ marginRight: "6px" }}>
-            <InputNumber
-              value={wallSize.col}
-              min={1}
-              max={6}
-              size="small"
-              style={{ width: "48px" }}
-              disabled
-            ></InputNumber>
-          </Col>
-          <Col style={{ marginRight: "6px" }}>{" X "}</Col>
-          <Col>
-            <InputNumber
-              value={wallSize.row}
-              min={1}
-              max={6}
-              size="small"
-              style={{ width: "48px" }}
-              disabled
-            ></InputNumber>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "12px" }}>
-            <div style={{ marginBottom: "2px" }}>
-              <FormattedMessage {...Messages.Text_WallSetting_ScreenNumber} />
-            </div>
-            <div
-              style={{
-                width: "279px",
-                height: "279px",
-                border: "1px solid black",
-              }}
-            >
-              <table>
-                <tbody>{wallObj}</tbody>
-              </table>
-            </div>
-          </Col>
-          <Col>
-            <div style={{ marginBottom: "2px" }}>
-              <FormattedMessage
-                {...Messages.Text_WallSetting_ScreenDecoderPair}
-              />
-            </div>
-            <div
-              style={{
-                width: "225px",
-                height: "279px",
-                border: "1px solid black",
-                overflowY: "scroll",
-              }}
-            >
-              {screenList.map((screen, index) => {
-                return (
-                  <Row key={screen.num}>
-                    <Typography.Text
-                      style={{ fontSize: "14px", margin: "4px" }}
-                    >
-                      <FormattedMessage {...Messages.Text_Common_Screen} />
-                      {screen.num}:
-                    </Typography.Text>
-                    <Select
-                      size="small"
-                      value={screen.nickName}
-                      style={{ width: "135px", margin: "4px 4px 4px 8px" }}
-                      disabled
-                    />
-                  </Row>
-                );
-              })}
-            </div>
-          </Col>
-        </Row>
+            {" : "}
+            {wall.col} x {wall.row}
+          </div>
+        </div>
+        <div className="screen-setting-row">
+          <div>
+            <table style={{ border: 0, borderCollapse: "collapse" }}>
+              <tbody>{wallObj}</tbody>
+            </table>
+          </div>
+          <div className="decoder-setting-container">
+            <Table
+              className="view-decoder-setting-table"
+              columns={decoderTableColumns}
+              dataSource={screenList}
+              pagination={false}
+            />
+          </div>
+        </div>
       </Modal>
-    </div>
+    </span>
   );
 };
 

@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../store/store";
-import { Button, Modal, Row, Select, Table, Typography } from "antd";
+import { Button, Table } from "antd";
 import CreateWall from "./createWall";
+import ViewWall from "./viewWall";
 import { getWalls, deleteWall } from "../../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
-import PlusIcon from "../../../assets/plus-white.png";
-import PencilIcon from "../../../assets/pencil.png";
 import TrashIcon from "../../../assets/trash.png";
 import "./tvWallSetting.scss";
 import "../../../App.scss";
@@ -70,35 +69,39 @@ const TVWallSetting = () => {
       ),
       dataIndex: "wallId",
       key: "action",
-      render: (text) => (
-        <div key={`${text}-action`}>
-          <Button
-            key={`${text}-edit`}
-            id={text}
-            type="text"
-            onClick={editWall}
-            style={{ marginight: 6 }}
-            className="table-content"
-          >
-            <img alt="edit" src={PencilIcon} className="table-content-icon" />
-          </Button>
-          <Button
-            key={`${text}-delete`}
-            id={text}
-            type="text"
-            onClick={removeWall}
-            className="table-content"
-          >
-            <img alt="remove" src={TrashIcon} className="table-content-icon" />
-          </Button>
-        </div>
-      ),
+      render: (text, record) => {
+        return (
+          <div key={`${text}-action`}>
+            <ViewWall wall={record} />
+            <Button
+              key={`${text}-delete`}
+              id={text}
+              type="text"
+              onClick={() => {
+                removeWall(record);
+              }}
+              className="table-content"
+            >
+              <img
+                alt="remove"
+                src={TrashIcon}
+                className="table-content-icon"
+              />
+            </Button>
+          </div>
+        );
+      },
     },
   ];
 
-  const editWall = () => {};
-
-  const removeWall = () => {};
+  const removeWall = (wall) => {
+    (async () => {
+      const result = await deleteWall(wall.wallId, store);
+      if (result) {
+        setReload(Math.random());
+      }
+    })();
+  };
 
   return (
     <div className="content-container">
