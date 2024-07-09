@@ -21,7 +21,7 @@ const TVWallSetting = () => {
       let tempWalls = [];
       const result = await getWalls(store);
       if (result) {
-        result.forEach((wall) => {
+        result?.forEach((wall) => {
           wall.key = wall.wallId;
           tempWalls.push(wall);
         });

@@ -22,7 +22,7 @@ const Status = () => {
     let tempDevices = [];
 
     const encoders = await getEncoders(store);
-    encoders.forEach((encoder) => {
+    encoders?.forEach((encoder) => {
       if (encoder.nickName.includes(searchFilter)) {
         encoder.key = encoder.name;
         tempDevices.push(encoder);
@@ -30,7 +30,7 @@ const Status = () => {
     });
 
     const decoders = await getDecoders(store);
-    decoders.forEach((decoder) => {
+    decoders?.forEach((decoder) => {
       if (decoder.nickName.includes(searchFilter)) {
         decoder.key = decoder.name;
         tempDevices.push(decoder);
