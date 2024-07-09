@@ -87,38 +87,13 @@ const USB = () => {
   }, [deviceLinks, searchFilter]);
 
   const handleRemoveLink = async (encoderMac, decoderMac) => {
-    let linkId;
-    let linkDetail;
-    deviceLinks?.some((link) => {
-      if (link.encoder === encoderMac) {
-        linkId = link.id;
-        linkDetail = link.deviceLinkDetails;
-        return true;
-      } else return false;
+    await removeDeviceLink({
+      store: store,
+      linkType: `usb`,
+      encoder: encoderMac,
+      decoders: [decoderMac],
     });
-    if (linkId && linkDetail) {
-      let linkDecoders = [];
-      linkDetail?.forEach((link) => {
-        if (decoderMac !== link.decoder) linkDecoders.push(link.decoder);
-      });
-      await removeDeviceLink({
-        store: store,
-        linkId: linkId,
-      });
-      if (linkDecoders.length !== 0) {
-        await createDeviceLink({
-          store: store,
-          id: `usb.${encoderMac}`,
-          linkType: "usb",
-          encoder: encoderMac,
-          decoders: linkDecoders,
-          value1: "usb",
-          remark: "",
-          isPreset: "N",
-        });
-      }
-      setReload(Math.random());
-    }
+    setReload(Math.random());
   };
 
   const columns = [
@@ -369,33 +344,36 @@ const USB = () => {
   };
 
   const handleEditDeviceLink = async () => {
-    let linkId;
+    let linkedDecoders = [];
     deviceLinks?.some((link) => {
       if (link.encoder === selectedEncoder) {
-        linkId = link.id;
+        link.detail?.forEach((decoder) => {
+          linkedDecoders.push(decoder.decoder);
+        });
         return true;
       } else return false;
     });
-    if (linkId) {
-      await removeDeviceLink({
-        store: store,
-        linkId: linkId,
-      });
-      if (selectedDecoders.length !== 0) {
-        await createDeviceLink({
-          store: store,
-          id: `usb.${selectedEncoder}`,
-          linkType: "usb",
-          encoder: selectedEncoder,
-          decoders: selectedDecoders,
-          value1: "usb",
-          remark: "",
-          isPreset: "N",
-        });
-      }
-      setReload(Math.random());
-      setPageType("CONN_STATE");
-    }
+
+    await removeDeviceLink({
+      store: store,
+      linkType: `usb`,
+      encoder: selectedEncoder,
+      decoders: linkedDecoders,
+    });
+
+    await createDeviceLink({
+      store: store,
+      id: `usb.${selectedEncoder}`,
+      linkType: "usb",
+      encoder: selectedEncoder,
+      decoders: selectedDecoders,
+      value1: "",
+      remark: "",
+      isPreset: "N",
+    });
+
+    setReload(Math.random());
+    setPageType("CONN_STATE");
   };
 
   return (

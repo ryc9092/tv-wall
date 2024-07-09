@@ -172,17 +172,13 @@ const SingleScreen = () => {
   const handleClearScreen = async (event) => {
     const decoderMac = event.target.id.split("@")[1];
     let tempDecoders = decoders;
-    let clearedLink = false;
     tempDecoders?.forEach(async (decoder) => {
-      if (
-        decoder.mac === decoderMac &&
-        decoder.encoder !== "" &&
-        clearedLink === false
-      ) {
-        clearedLink = true;
+      if (decoder.mac === decoderMac && decoder.encoder !== "") {
         const result = await removeDeviceLink({
           store: store,
-          linkId: `video.` + decoder.mac,
+          linkType: `video`,
+          encoder: decoder.encoder,
+          decoders: [decoder.mac],
         });
         if (result) {
           showSuccessNotificationByMsg(
@@ -217,7 +213,7 @@ const SingleScreen = () => {
           linkType: "video",
           encoder: decoder.encoder.mac,
           decoders: [decoder.mac],
-          value1: "video",
+          value1: "",
           remark: "",
           isPreset: "N",
         });

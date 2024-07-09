@@ -88,38 +88,13 @@ const Audio = () => {
   }, [deviceLinks, searchFilter]);
 
   const handleRemoveLink = async (encoderMac, decoderMac, inputOutput) => {
-    let linkId;
-    let linkDetail;
-    deviceLinks?.some((link) => {
-      if (link.encoder === encoderMac) {
-        linkId = link.id;
-        linkDetail = link.deviceLinkDetails;
-        return true;
-      } else return false;
+    await removeDeviceLink({
+      store: store,
+      linkType: `audio`,
+      encoder: encoderMac,
+      decoders: [decoderMac],
     });
-    if (linkId && linkDetail) {
-      let linkDecoders = [];
-      linkDetail?.forEach((link) => {
-        if (decoderMac !== link.decoder) linkDecoders.push(link.decoder);
-      });
-      await removeDeviceLink({
-        store: store,
-        linkId: linkId,
-      });
-      if (linkDecoders.length !== 0) {
-        await createDeviceLink({
-          store: store,
-          id: `audio.${encoderMac}`,
-          linkType: "audio",
-          encoder: encoderMac,
-          decoders: linkDecoders,
-          value1: inputOutput,
-          remark: "",
-          isPreset: "N",
-        });
-      }
-      setReload(Math.random());
-    }
+    setReload(Math.random());
   };
 
   const columns = [
@@ -373,33 +348,35 @@ const Audio = () => {
   };
 
   const handleEditDeviceLink = async () => {
-    let linkId;
+    let linkedDecoders = [];
     deviceLinks?.some((link) => {
       if (link.encoder === selectedEncoder) {
-        linkId = link.id;
+        link.detail?.forEach((decoder) => {
+          linkedDecoders.push(decoder.decoder);
+        });
         return true;
       } else return false;
     });
-    if (linkId) {
-      await removeDeviceLink({
-        store: store,
-        linkId: linkId,
-      });
-      if (selectedDecoders.length !== 0) {
-        await createDeviceLink({
-          store: store,
-          id: `audio.${selectedEncoder}`,
-          linkType: "audio",
-          encoder: selectedEncoder,
-          decoders: selectedDecoders,
-          value1: selectedInOutputOption,
-          remark: "",
-          isPreset: "N",
-        });
-      }
-      setReload(Math.random());
-      setPageType("CONN_STATE");
-    }
+
+    await removeDeviceLink({
+      store: store,
+      linkType: `audio`,
+      encoder: selectedEncoder,
+      decoders: linkedDecoders,
+    });
+
+    await createDeviceLink({
+      store: store,
+      id: `audio.${selectedEncoder}`,
+      linkType: "audio",
+      encoder: selectedEncoder,
+      decoders: selectedDecoders,
+      value1: selectedInOutputOption,
+      remark: "",
+      isPreset: "N",
+    });
+    setReload(Math.random());
+    setPageType("CONN_STATE");
   };
 
   return (
@@ -557,10 +534,10 @@ const Audio = () => {
                   disabled={selectedEncoder === null}
                 >
                   <Space direction="vertical">
-                    <Radio value={"analog"} className="audio-add-radio">
+                    <Radio value={"analogAudio"} className="audio-add-radio">
                       <span className="audio-add-radio-text">Analog</span>
                     </Radio>
-                    <Radio value={"hdmi"} className="audio-add-radio">
+                    <Radio value={"hdmiAudio"} className="audio-add-radio">
                       <span className="audio-add-radio-text">HDMI</span>
                     </Radio>
                   </Space>
