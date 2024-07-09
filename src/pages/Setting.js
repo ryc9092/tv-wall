@@ -3,6 +3,7 @@ import { StoreContext } from "../components/store/store";
 import SettingWallModal from "../components/setting/tvWall/wallModal";
 import SettingDeviceModal from "../components/setting/device/deviceModal";
 import TVWallSetting from "../components/setting/tvWall/tvWallSetting";
+import TemplateSetting from "../components/setting/template/templateSetting";
 import { FormattedMessage } from "react-intl";
 import Messages from "../messages";
 import "../App.scss";
@@ -14,6 +15,7 @@ const Setting = () => {
 
   const pageContent = {
     tvwall: <TVWallSetting />,
+    template: <TemplateSetting />,
     singlescreen: <SettingWallModal />,
     devicesetting: <SettingDeviceModal />,
   };
@@ -40,7 +42,7 @@ const Setting = () => {
         <div
           className="setting-topbar-option"
           onClick={() => {
-            // setPage("singlescreen");
+            setPage("template");
           }}
         >
           <FormattedMessage
