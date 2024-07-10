@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../store/store";
 import { Button, Table } from "antd";
+import CreateTemplate from "./createTemplate";
 import { getTemplates, deleteTemplate } from "../../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
@@ -62,9 +63,7 @@ const TemplateSetting = () => {
             <span className="table-default-desc">
               {`  (${intl.formatMessage(Messages.Text_Common_Default)})`}
             </span>
-          ) : (
-            ""
-          )}
+          ) : null}
         </div>
       ),
     },
@@ -118,7 +117,7 @@ const TemplateSetting = () => {
             {...Messages.Text_TemplateSetting_TemplateSetting}
           />
         </div>
-        {/* <CreateWall setReload={setReload} /> */}
+        <CreateTemplate setReload={setReload} />
       </div>
       <div className="table-container ">
         <Table columns={columns} dataSource={templates} />

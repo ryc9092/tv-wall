@@ -1,18 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../../components/store/store";
-import {
-  Button,
-  Col,
-  Input,
-  InputNumber,
-  Modal,
-  Radio,
-  Row,
-  Space,
-  Tooltip,
-  Typography,
-} from "antd";
-import { blockColorList } from "../../../utils/Constant";
+import { Button, Checkbox, Divider, Input, InputNumber, Modal } from "antd";
 import { createTemplate } from "../../../api/API";
 import {
   showWarningNotification,
@@ -20,7 +8,11 @@ import {
 } from "../../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
+import PlusIcon from "../../../assets/plus-white.png";
+import PlusGrayIcon from "../../../assets/plus-gray.png";
+import XIcon from "../../../assets/X.png";
 import "../../../App.scss";
+import "./createTemplate.scss";
 
 const CreateTemplate = ({ setReload }) => {
   const intl = useIntl();
@@ -30,9 +22,14 @@ const CreateTemplate = ({ setReload }) => {
   const [templateName, setTemplateName] = useState(null);
   const [templateSize, setTemplateSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
-  const [wallTemplate, setWallTemplate] = useState(null);
   const [blocks, setBlocks] = useState(1);
-  const [currentBlock, setCurrentBlock] = useState(1);
+  const [handledScreenList, setHandledScreenList] = useState([]);
+  const [selectedScreenList, setSelectedScreenList] = useState([]);
+  const [screenBlockMap, setScreenBlockMap] = useState({});
+  const [templateObj, setTemplateObj] = useState(null);
+  const [templateIsDefault, setTemplateIsDefault] = useState(false);
+
+  const blockMap = { 1: "A", 2: "B", 3: "C", 4: "D", 5: "E", 6: "F", 7: "G" };
 
   const resetTemplate = () => {
     setTemplateId(null);
@@ -40,7 +37,11 @@ const CreateTemplate = ({ setReload }) => {
     setTemplateName(null);
     setTemplateSize({ col: 1, row: 1 });
     setBlocks(1);
-    setCurrentBlock(1);
+    setHandledScreenList([]);
+    setSelectedScreenList([]);
+    setScreenBlockMap({});
+    setTemplateObj(null);
+    setTemplateIsDefault(false);
   };
 
   useEffect(() => {
@@ -56,28 +57,6 @@ const CreateTemplate = ({ setReload }) => {
     );
   }, [templateSize]);
 
-  // initialize block radios by block number:
-  const blockNum = Array.from({ length: blocks }, (v, i) => i + 1); // make a block list [1, 2, 3, ...]
-  let blockRadios = (
-    <>
-      {blockNum.map((block) => {
-        return (
-          <Radio
-            key={block}
-            value={block}
-            style={{
-              margin: "4px",
-              backgroundColor: blockColorList[block - 1],
-              borderRadius: "6px",
-            }}
-          >
-            <FormattedMessage {...Messages.Text_Common_Block} /> {block}
-          </Radio>
-        );
-      })}
-    </>
-  );
-
   useEffect(() => {
     // create template table
     let tempRow = [];
@@ -85,26 +64,35 @@ const CreateTemplate = ({ setReload }) => {
     screenList.forEach((screen) => {
       tempRow.push(
         <td
-          style={{ width: "40px", height: "40px", textAlign: "center" }}
+          className={
+            selectedScreenList?.includes(screen.num)
+              ? "screen-block-selected"
+              : handledScreenList?.includes(screen.num)
+              ? "screen-block-handled"
+              : "screen-block-default"
+          }
           key={screen.num}
+          onClick={() => {
+            setSelectedScreenList([...selectedScreenList, screen.num]);
+          }}
         >
-          <Tooltip placement="topLeft" title={screen.decoder}>
-            <Button
-              style={{
-                width: "42px",
-                height: "42px",
-                border: "0px",
-                backgroundColor: blockColorList[screen.block - 1],
-              }}
-              key={screen.num}
-              value={screen.num}
-              onClick={(e) => {
-                clickWallScreen(e.target.value);
-              }}
-            >
-              {screen.num}
-            </Button>
-          </Tooltip>
+          <span
+            className={
+              selectedScreenList?.includes(screen.num)
+                ? "screen-block-text-selected"
+                : handledScreenList?.includes(screen.num)
+                ? "screen-block-text-handled"
+                : "screen-block-text-default"
+            }
+          >
+            {screen.num}
+          </span>
+
+          {screen.num in screenBlockMap ? (
+            <span className="screen-block-num screen-block-num-text">
+              {blockMap[screenBlockMap[screen.num]]}
+            </span>
+          ) : null}
         </td>
       );
       if (tempRow.length === templateSize.col) {
@@ -112,17 +100,49 @@ const CreateTemplate = ({ setReload }) => {
         tempRow = []; // clear row
       }
     });
-    setWallTemplate(tempTemplate);
-  }, [screenList, currentBlock]);
+    setTemplateObj(tempTemplate);
+  }, [screenList, selectedScreenList, handledScreenList, screenBlockMap]);
 
-  // set block number to clicked screen
-  const clickWallScreen = (num) => {
-    let tempScreenList = [...screenList];
-    tempScreenList[num - 1].block = currentBlock;
-    setScreenList(tempScreenList);
-  };
+  // initialize block radios by block number:
+  const blockNum = Array.from({ length: blocks }, (v, i) => i + 1); // make a block list [1, 2, 3, ...]
+  let blockOptions = (
+    <>
+      {blockNum.map((block) => {
+        return (
+          <div
+            key={block}
+            value={block}
+            className="block-option"
+            onClick={() => {
+              setHandledScreenList([
+                ...handledScreenList,
+                ...selectedScreenList,
+              ]);
+              setSelectedScreenList([]);
+              let tempMap = {};
+              selectedScreenList?.forEach((screen) => {
+                tempMap[screen] = block;
+              });
+              setScreenBlockMap({ ...screenBlockMap, ...tempMap });
+            }}
+          >
+            <FormattedMessage {...Messages.Text_Common_Block} />{" "}
+            {blockMap[block]}
+          </div>
+        );
+      })}
+    </>
+  );
 
   const saveWall = () => {
+    // set block info to screen list
+    let screenListWithBlock = [];
+    screenList?.forEach((screen) => {
+      screenListWithBlock.push({
+        num: screen.num,
+        block: screenBlockMap[screen.num],
+      });
+    });
     (async () => {
       const result = await createTemplate(
         store,
@@ -130,8 +150,8 @@ const CreateTemplate = ({ setReload }) => {
         templateName,
         templateSize.col,
         templateSize.row,
-        0,
-        screenList
+        templateIsDefault ? 1 : 0,
+        screenListWithBlock
       );
       if (result) {
         showSuccessNotificationByMsg(
@@ -148,17 +168,20 @@ const CreateTemplate = ({ setReload }) => {
 
   return (
     <div>
-      <Button onClick={() => setIsModalOpen(true)}>
-        <Typography.Text>
+      <Button
+        className="create-template-btn"
+        onClick={() => setIsModalOpen(true)}
+      >
+        <img alt="create" src={PlusIcon} className="create-template-btn-icon" />
+        <span className="create-template-btn-text">
           <FormattedMessage {...Messages.Text_TemplateSetting_CreateTemplate} />
-        </Typography.Text>
+        </span>
       </Button>
       <Modal
-        title={intl.formatMessage(
-          Messages.Text_TemplateSetting_CreateWallTemplate
-        )}
-        className="modal-title"
-        width={568}
+        title=<span className="create-template-modal-title">
+          {intl.formatMessage(Messages.Text_TemplateSetting_CreateWallTemplate)}
+        </span>
+        className="create-template-modal create-template-setting modal-title"
         open={isModalOpen}
         footer={null}
         onCancel={() => {
@@ -166,136 +189,140 @@ const CreateTemplate = ({ setReload }) => {
           setIsModalOpen(false);
         }}
       >
-        <Row style={{ marginTop: "20px" }}>
-          <Col style={{ marginRight: "22px" }}>
-            <FormattedMessage {...Messages.Text_TemplateSetting_TemplateId} />
-            {":"}
-          </Col>
-          <Col style={{ marginRight: "16px" }}>
+        <div className="input-option-row">
+          <div style={{ marginRight: 100 }}>
+            <span className="input-title">
+              <FormattedMessage {...Messages.Text_TemplateSetting_TemplateId} />
+            </span>
             <Input
               value={templateId}
-              size="small"
-              style={{ width: "120px" }}
+              className="input-object"
+              placeholder={intl.formatMessage(Messages.Text_Common_InputID)}
               onChange={(e) => {
                 setTemplateId(e.target.value);
               }}
             />
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "12px" }}>
-            <FormattedMessage {...Messages.Text_TemplateSetting_TemplateName} />
-            {":"}
-          </Col>
-          <Col style={{ marginRight: "16px" }}>
+          </div>
+          <div style={{ marginRight: 100 }}>
+            <span className="input-title">
+              <FormattedMessage
+                {...Messages.Text_TemplateSetting_TemplateName}
+              />
+            </span>
             <Input
               value={templateName}
-              size="small"
-              style={{ width: "120px" }}
+              className="input-object"
+              placeholder={intl.formatMessage(Messages.Text_Common_InputName)}
               onChange={(e) => {
                 setTemplateName(e.target.value);
               }}
             />
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "40px" }}>
-            <FormattedMessage {...Messages.Text_Common_Dimension} />
-            {":"}
-          </Col>
-          <Col style={{ marginRight: "6px" }}>
-            <InputNumber
-              value={templateSize.col}
-              min={1}
-              max={6}
-              size="small"
-              style={{ width: "48px" }}
-              onChange={(value) =>
-                setTemplateSize({ ...templateSize, col: value })
-              }
-            />
-          </Col>
-          <Col style={{ marginRight: "6px" }}>{" X "}</Col>
-          <Col>
-            <InputNumber
-              value={templateSize.row}
-              min={1}
-              max={6}
-              size="small"
-              style={{ width: "48px" }}
-              onChange={(value) =>
-                setTemplateSize({ ...templateSize, row: value })
-              }
-            />
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "12px" }}>
-            <div style={{ marginBottom: "5px" }}>
-              <FormattedMessage
-                {...Messages.Text_TemplateSetting_ScreenNumber}
+          </div>
+          <div>
+            <span className="input-title">
+              <FormattedMessage {...Messages.Text_WallSetting_WallDimension} />
+            </span>
+            <div className="input-dimension-row">
+              <InputNumber
+                value={templateSize.col}
+                min={1}
+                max={5}
+                className="input-object input-dimension"
+                onChange={(value) =>
+                  setTemplateSize({ ...templateSize, col: value })
+                }
+              />
+              <img
+                alt="x"
+                src={XIcon}
+                className="input-dimension-multiply-icon"
+              />
+              <InputNumber
+                value={templateSize.row}
+                min={1}
+                max={4}
+                className="input-object input-dimension"
+                onChange={(value) =>
+                  setTemplateSize({ ...templateSize, row: value })
+                }
               />
             </div>
-            <div
-              style={{
-                width: "279px",
-                height: "279px",
-                border: "1px solid black",
-              }}
-            >
-              <table>
-                <tbody>{wallTemplate}</tbody>
-              </table>
-            </div>
-          </Col>
-          <Col>
-            <Row style={{ marginBottom: "3px" }}>
-              <div style={{ marginRight: "6px" }}>
+          </div>
+        </div>
+        <Divider className="divider" />
+        <div className="create-template-second-title">
+          <FormattedMessage {...Messages.Text_TemplateSetting_BlockSetting} />
+        </div>
+        <div className="create-template-desc">
+          <FormattedMessage
+            {...Messages.Text_TemplateSetting_BlockSettingDesc}
+          />
+        </div>
+        <div className="screen-setting-row">
+          <div>
+            <table style={{ border: 0, borderCollapse: "collapse" }}>
+              <tbody>{templateObj}</tbody>
+            </table>
+          </div>
+          <div className="block-setting-container">
+            <div className="block-setting-container-row">
+              <div className="block-setting-container-title">
                 <FormattedMessage {...Messages.Text_Common_Block} />
               </div>
               <div>
                 <Button
-                  size="small"
+                  type="text"
                   onClick={() => {
                     let blockNum = parseInt(blocks) + 1;
                     if (blockNum <= 7) setBlocks(blockNum);
                   }}
+                  className="block-setting-add-block-button"
                 >
-                  <FormattedMessage
-                    {...Messages.Text_TemplateSetting_AddBlock}
+                  <img
+                    alt="add"
+                    src={PlusGrayIcon}
+                    className="block-setting-add-block-icon"
                   />
                 </Button>
-              </div>{" "}
-            </Row>
-            <div
-              style={{
-                width: "225px",
-                height: "279px",
-                border: "1px solid black",
-                overflowY: "scroll",
-              }}
-            >
-              <Radio.Group
-                value={currentBlock}
-                onChange={(e) => {
-                  setCurrentBlock(e.target.value);
-                }}
-              >
-                <Space direction="vertical">{blockRadios}</Space>
-              </Radio.Group>
+              </div>
             </div>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "16px" }}>
-          <Button onClick={resetTemplate} style={{ marginRight: "16px" }}>
-            <FormattedMessage
-              {...Messages.Text_TemplateSetting_ResetTemplate}
-            />
-          </Button>
-          <Button onClick={saveWall}>
-            <FormattedMessage {...Messages.Text_Button_Save} />
-          </Button>
-        </Row>
+            <Divider className="block-setting-divider" />
+            <div className="block-option-container">{blockOptions}</div>
+          </div>
+        </div>
+        <div className="is-default-ckbox-container">
+          <Checkbox
+            checked={templateIsDefault}
+            onChange={(e) => {
+              setTemplateIsDefault(e.target.checked);
+            }}
+          />
+          <span className="is-default-ckbox-text">
+            {intl
+              .formatMessage(Messages.Text_TemplateSetting_SetToDefault)
+              .replace("XXX", ` ${templateSize.col} X ${templateSize.row} `)}
+          </span>
+        </div>
+        <div className="screen-setting-submit-row">
+          <div>
+            <Button
+              type="text"
+              onClick={resetTemplate}
+              className="screen-setting-clear-btn"
+            >
+              <span className="screen-setting-clear-btn-text">
+                <FormattedMessage {...Messages.Text_Button_Clear} />
+              </span>
+            </Button>
+          </div>
+          <div>
+            <Button onClick={saveWall} className="screen-setting-create-btn">
+              <span className="screen-setting-create-btn-text">
+                <FormattedMessage {...Messages.Text_Button_Create} />
+              </span>
+            </Button>
+          </div>
+        </div>
       </Modal>
     </div>
   );
