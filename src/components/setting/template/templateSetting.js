@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../store/store";
 import { Button, Table } from "antd";
 import CreateTemplate from "./createTemplate";
+import ViewTemplate from "./viewTemplate";
 import { getTemplates, deleteTemplate } from "../../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
@@ -78,7 +79,7 @@ const TemplateSetting = () => {
       render: (text, record) => {
         return (
           <div key={`${text}-action`}>
-            {/* <ViewWall wall={record} /> */}
+            <ViewTemplate template={record} />
             <Button
               key={`${text}-delete`}
               id={text}

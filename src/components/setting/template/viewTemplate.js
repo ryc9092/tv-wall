@@ -1,19 +1,24 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../../components/store/store";
-import { Button, Col, Input, InputNumber, Modal, Row } from "antd";
-import { blockColorList } from "../../../utils/Constant";
+import { Button, Modal } from "antd";
 import { getTemplateScreensById } from "../../../api/API";
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 import Messages from "../../../messages";
+import ViewIcon from "../../../assets/magnifying-glass.png";
 import "../../../App.scss";
+import "./viewTemplate.scss";
 
-const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
+const ViewTemplate = ({ template }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
-  const [templateName, setTemplateName] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
   const [templateSize, setTemplateSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
-  const [wallTemplate, setWallTemplate] = useState(null);
+  const [handledScreenList, setHandledScreenList] = useState([]);
+  const [screenBlockMap, setScreenBlockMap] = useState({});
+  const [templateObj, setTemplateObj] = useState(null);
+
+  const blockMap = { 1: "A", 2: "B", 3: "C", 4: "D", 5: "E", 6: "F", 7: "G" };
 
   useEffect(() => {
     if (template && modalOpen) {
@@ -24,7 +29,15 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
         );
         setScreenList(screens);
         setTemplateSize({ col: template.col, row: template.row });
-        setTemplateName(template.templateName);
+
+        let tempHandledScreenList = [];
+        let tempScreenBlockMap = {}
+        screens?.forEach((screen) => {
+          tempHandledScreenList.push(screen.num);
+          tempScreenBlockMap = {...tempScreenBlockMap, [screen.num]:screen.block}
+        });
+        setHandledScreenList(tempHandledScreenList);
+        setScreenBlockMap(tempScreenBlockMap)
       })();
     }
   }, [template, modalOpen]);
@@ -37,107 +50,87 @@ const ViewTemplate = ({ template, modalOpen, setModalOpen }) => {
     // create template table
     let tempRow = [];
     let tempTemplate = [];
-    if (screenList) {
-      screenList.forEach((screen) => {
-        tempRow.push(
-          <td
-            style={{ width: "40px", height: "40px", textAlign: "center" }}
-            key={screen.num}
+    screenList.forEach((screen) => {
+      tempRow.push(
+        <td
+          className={
+            handledScreenList?.includes(screen.num)
+              ? "view-screen-block-handled"
+              : "view-screen-block-default"
+          }
+          key={screen.num}
+        >
+          <span
+            className={
+              handledScreenList?.includes(screen.num)
+                ? "view-screen-block-text-handled"
+                : "view-screen-block-text-default"
+            }
           >
-            <Button
-              style={{
-                width: "42px",
-                height: "42px",
-                border: "0px",
-                backgroundColor: blockColorList[screen.block - 1],
-              }}
-              key={screen.num}
-              value={screen.num}
-            >
-              {screen.num}
-            </Button>
-          </td>
-        );
-        if (tempRow.length === templateSize.col) {
-          tempTemplate.push(<tr key={screen.num}>{tempRow}</tr>);
-          tempRow = []; // clear row
-        }
-      });
-    }
-    setWallTemplate(tempTemplate);
+            {screen.num}
+          </span>
+
+          {screen.num in screenBlockMap ? (
+            <span className="view-screen-block-num view-screen-block-num-text">
+              {blockMap[screenBlockMap[screen.num]]}
+            </span>
+          ) : null}
+        </td>
+      );
+      if (tempRow.length === templateSize.col) {
+        tempTemplate.push(<tr key={screen.num}>{tempRow}</tr>);
+        tempRow = []; // clear row
+      }
+    });
+    setTemplateObj(tempTemplate);
   }, [screenList]);
 
   return (
-    <div>
+    <span>
+      <Button
+        key={`${template.templateId}-edit`}
+        id={template.wallId}
+        type="text"
+        onClick={() => setModalOpen(true)}
+        style={{ marginight: 6 }}
+        className="table-content"
+      >
+        <img alt="edit" src={ViewIcon} className="table-content-icon" />
+      </Button>
       <Modal
-        title={intl.formatMessage(Messages.Text_TemplateSetting_Template)}
-        className="modal-title"
-        width={428}
+        title={intl.formatMessage(Messages.Text_TemplateSetting_ViewTemplate)}
+        className="view-template-modal view-template-setting modal-title"
         open={modalOpen}
         footer={null}
         onCancel={() => {
-          modalOpen = false;
           setModalOpen(false);
         }}
       >
-        <Row style={{ marginTop: "20px" }}>
-          <Col style={{ marginRight: "6px" }}>
-            <FormattedMessage {...Messages.Text_TemplateSetting_TemplateName} />
-            {":"}
-          </Col>
-          <Col style={{ marginRight: "16px" }}>
-            <Input
-              value={templateName}
-              size="small"
-              style={{ width: "120px" }}
-              disabled
-            />
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "12px" }}>
-          <Col style={{ marginRight: "6px" }}>
-            <FormattedMessage {...Messages.Text_Common_Dimension} />
-            {":"}
-          </Col>
-          <Col style={{ marginRight: "6px" }}>
-            <InputNumber
-              value={templateSize.col}
-              min={1}
-              max={6}
-              size="small"
-              style={{ width: "48px" }}
-              disabled
-            ></InputNumber>
-          </Col>
-          <Col style={{ marginRight: "6px" }}>{" X "}</Col>
-          <Col>
-            <InputNumber
-              value={templateSize.row}
-              min={1}
-              max={6}
-              size="small"
-              style={{ width: "48px" }}
-              disabled
-            ></InputNumber>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "16px" }}>
-          <Col style={{ marginRight: "12px" }}>
-            <div
-              style={{
-                width: "279px",
-                height: "279px",
-                border: "1px solid black",
-              }}
-            >
-              <table>
-                <tbody>{wallTemplate}</tbody>
-              </table>
-            </div>
-          </Col>
-        </Row>
+        <div className="template-info" style={{ marginTop: "28px" }}>
+          <span>{"ID: "}</span>
+          <span>{template.templateId}</span>
+        </div>
+        <div className="template-info" style={{ marginTop: "8px" }}>
+          <span>
+            {intl.formatMessage(Messages.Text_Common_Name)}
+            {": "}
+          </span>
+          <span>{template.templateName}</span>
+        </div>
+        <div className="template-info" style={{ marginTop: "8px" }}>
+          <span>
+            {intl.formatMessage(Messages.Text_Common_Dimension)}
+            {": "}
+          </span>
+          <span>
+            {template.col}
+            {" X "}
+            {template.row}
+          </span>
+        </div>
+        <div style={{ marginTop: "40px" }}>{templateObj}</div>
       </Modal>
-    </div>
+    </span>
   );
 };
 

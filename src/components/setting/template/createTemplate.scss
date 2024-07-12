@@ -42,6 +42,10 @@
     margin-right: 72px;
 }
 
+.ant-modal-close-x {
+    background-color: #ffffff;
+}
+
 .create-template-modal {
     width: 1190px !important;
     margin-top: -40px;
@@ -212,6 +216,15 @@
     align-self: stretch;
     flex-grow: 0;
     background-color: #d4d4d4;
+}
+
+.screen-block-default {
+    width: 124px;
+    height: 115px;
+    gap: 10px;
+    padding: 0;
+    border: solid 1px #c6c6c6;
+    background-color: #f5f5f5;
 }
 
 .screen-block-text-default {
