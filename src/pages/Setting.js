@@ -49,14 +49,14 @@ const Setting = () => {
             {...Messages.Text_TemplateSetting_TemplateSetting}
           />
         </div>
-        <div
+        {/* <div
           className="setting-topbar-option"
           onClick={() => {
             // setPage("devicesetting");
           }}
         >
           <FormattedMessage {...Messages.Text_DeviceSetting_AdvanceSetting} />
-        </div>
+        </div> */}
       </div>
       <div
         className={
