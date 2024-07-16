@@ -1,14 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../components/store/store";
-import { Button, Form, Input, Modal, Typography } from "antd";
+import { Button, Divider, Form, Input, Modal, Table } from "antd";
 import { FormattedMessage, useIntl } from "react-intl";
 import { createSituation } from "../../api/API";
 import { uuid } from "../../utils/Utils";
 import Messages from "../../messages";
-import {
-  showWarningNotification,
-  showSuccessNotificationByMsg,
-} from "../../utils/Utils";
+import PlusIcon from "../../assets/plus-white.png";
+import TrashIcon from "../../assets/trash.png";
+import PlusYellowIcon from "../../assets/plus-yellow.png";
 import "./createSituation.scss";
 
 const CreateSituationModal = ({ setReload }) => {
@@ -17,73 +16,192 @@ const CreateSituationModal = ({ setReload }) => {
   const [store] = useContext(StoreContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const onFinish = async (values) => {
-    const result = await createSituation({
-      id: `preset.${uuid()}`,
-      name: values.name,
-      description: values.description,
-      store: store,
-    });
-    if (result) {
-      setReload(Math.random());
+  useEffect(() => {
+    form.resetFields();
+  }, [isModalOpen]);
+
+  const onCreateSituation = async (values) => {
+    if (values.name && values.description) {
+      await createSituation({
+        id: `preset.${uuid()}`,
+        name: values.name,
+        description: values.description,
+        store: store,
+      });
       form.resetFields();
+      setReload(Math.random());
       setIsModalOpen(false);
-      showSuccessNotificationByMsg(
-        intl.formatMessage(Messages.Text_Situation_CreateSituationSuccess)
-      );
-    } else {
-      showWarningNotification(
-        intl.formatMessage(Messages.Text_Situation_CreateSituationFail)
-      );
     }
   };
+
+  const situationItem = [
+    // { id: "test", remark: "testefsdlfkjsdflkj", set_type: "sdlkfjsdlfkj" },
+  ];
+
+  const columns = [
+    {
+      title: (
+        <span className="table-head">
+          {intl.formatMessage(Messages.Text_Situation_Type)}
+        </span>
+      ),
+      dataIndex: "set_type",
+      key: "type",
+      render: (text) => <span className="table-content">{text}</span>,
+    },
+    {
+      title: (
+        <span className="table-head">
+          {intl.formatMessage(Messages.Text_Common_Name)}
+        </span>
+      ),
+      dataIndex: "id",
+      key: "name",
+      render: (text) => {
+        return <span className="table-content">{text}</span>;
+      },
+    },
+    {
+      title: (
+        <span className="table-head">
+          {intl.formatMessage(Messages.Text_Common_Description)}
+        </span>
+      ),
+      dataIndex: "remark",
+      key: "description",
+      render: (text) => {
+        return <span className="table-content">{text}</span>;
+      },
+    },
+    {
+      title: (
+        <span className="table-head">
+          {intl.formatMessage(Messages.Text_Button_Operation)}
+        </span>
+      ),
+      dataIndex: "id",
+      key: "operate",
+      render: (text, record) => {
+        return (
+          <div key={`${text}-action`}>
+            <Button
+              key={`${text}-delete`}
+              id={text}
+              type="text"
+              onClick={() => {}}
+              className="table-content"
+            >
+              <img
+                alt="remove"
+                src={TrashIcon}
+                className="table-content-icon"
+              />
+            </Button>
+          </div>
+        );
+      },
+    },
+  ];
 
   return (
     <div>
       <Button
         onClick={() => setIsModalOpen(true)}
-        className="create-situation-button"
+        className="create-situation-btn"
       >
-        <Typography.Text>
+        <img
+          alt="create"
+          src={PlusIcon}
+          className="create-situation-btn-icon"
+        />
+        <span className="create-situation-btn-text">
           <FormattedMessage {...Messages.Text_Situation_CreateSituation} />
-        </Typography.Text>
+        </span>
       </Button>
       <Modal
-        title={intl.formatMessage(Messages.Text_Situation_CreateSituation)}
-        className="modal-title"
-        width={500}
+        title=<span className="create-situation-modal-title">
+          {intl.formatMessage(Messages.Text_Situation_CreateSituation)}
+        </span>
+        className="create-situation-modal create-situation modal-title"
         open={isModalOpen}
         footer={null}
         onCancel={() => {
           setIsModalOpen(false);
         }}
       >
-        <Form form={form} onFinish={onFinish}>
+        <Form
+          form={form}
+          onFinish={onCreateSituation}
+          style={{ marginTop: "28px" }}
+        >
           <Form.Item
-            label={intl.formatMessage(Messages.Text_Situation_SituationName)}
             name="name"
-            rules={[
-              {
-                required: true,
-                message: intl.formatMessage(
-                  Messages.Text_Situation_InputSituationName
-                ),
-              },
-            ]}
+            labelCol={{ span: 24 }}
+            label=<span className="create-situation-subtitle">
+              {intl.formatMessage(Messages.Text_Situation_SituationName)}
+            </span>
           >
-            <Input />
+            <Input
+              className="create-situation-input create-situation-placeholder"
+              placeholder={intl.formatMessage(Messages.Text_Common_InputName)}
+            />
           </Form.Item>
           <Form.Item
-            label={intl.formatMessage(
-              Messages.Text_Situation_SituationDescription
-            )}
             name="description"
+            labelCol={{ span: 24 }}
+            label=<span className="create-situation-subtitle">
+              {intl.formatMessage(Messages.Text_Situation_SituationDescription)}
+            </span>
           >
-            <Input />
+            <Input.TextArea
+              className="create-situation-textarea create-situation-placeholder"
+              placeholder={intl.formatMessage(
+                Messages.Text_Situation_InputDescription
+              )}
+            />
           </Form.Item>
-          <Button type="primary" htmlType="submit">
-            <FormattedMessage {...Messages.Text_Button_Save} />
-          </Button>
+          <Divider className="divider" />
+          <div>
+            <span className="create-situation-subtitle">
+              <FormattedMessage {...Messages.Text_Situation_AddSituationItem} />
+            </span>
+            <Table
+              columns={columns}
+              dataSource={situationItem}
+              pagination={false}
+              className={
+                situationItem.length === 0 ? "table table-no-item" : "table"
+              }
+            />
+            <Button
+              type="text"
+              className="add-situation-item-btn"
+              onClick={() => {}}
+            >
+              <img
+                alt="create"
+                src={PlusYellowIcon}
+                className="add-situation-item-btn-icon"
+              />
+              <span className="add-situation-item-btn-text">
+                <FormattedMessage
+                  {...Messages.Text_Situation_AddSituationItem}
+                />
+              </span>
+            </Button>
+          </div>
+          <div className="create-situation-btn-row">
+            <Button className="cancel-btn" style={{ marginRight: 16 }}>
+              <span className="cancel-btn-text">
+                <FormattedMessage {...Messages.Text_Button_Cancel} />
+              </span>
+            </Button>
+            <Button className="submit-btn" htmlType="submit">
+              <span className="submit-btn-text">
+                <FormattedMessage {...Messages.Text_Button_Add} />
+              </span>
+            </Button>
+          </div>
         </Form>
       </Modal>
     </div>

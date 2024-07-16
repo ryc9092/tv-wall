@@ -1,4 +1,241 @@
-.create-situation-button {
-    float: right;
-    margin-right: 64px;
+.create-situation-btn {
+    height: 48px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px 0 16px;
+    border-radius: 24px;
+    background-color: #262320;
+}
+
+.create-situation-btn-icon {
+    width: 18px;
+    height: 18px;
+    flex-grow: 0;
+    object-fit: contain;
+}
+
+.create-situation-btn-text {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #e7e7e7;
+}
+
+.create-situation .ant-modal-content {
+    padding: 40px !important;
+}
+
+.ant-modal-close-icon {
+    margin-top: 50px;
+    margin-right: 72px;
+}
+
+.create-situation-modal {
+    width: 820px !important;
+    margin-top: -40px;
+}
+
+.create-situation-modal-title {
+    height: 36px;
+    flex-grow: 1;
+    font-family: Noto Sans TC;
+    font-size: 28px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    text-align: left;
+    color: #45413e;
+}
+
+.create-situation-subtitle {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: left;
+    color: #45413e;
+}
+
+.create-situation-input {
+    height: 48px;
+    align-self: stretch;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: solid 1px #757371;
+    background-color: #ffffff;
+}
+
+.create-situation-textarea {
+    height: 120px !important;
+    align-self: stretch;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: solid 1px #757371;
+    background-color: #ffffff;
+}
+
+.create-situation-placeholder {
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: left;
+    color: #c6c6c6;
+}
+
+.divider {
+    height: 1px;
+    margin-top: 32px !important;
+    margin-bottom: 45px !important;
+    align-self: stretch;
+    flex-grow: 0;
+    background-color: #d4d4d4;
+}
+
+.table {
+    margin-top: 22px
+}
+
+.table-no-item .ant-table-content {
+    height: 65px !important;
+    overflow: hidden;
+}
+
+.table-head {
+    font-family: Noto Sans TC;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    color: #a5a5a5;
+}
+
+.table-content-icon {
+    width: 19px;
+}
+
+.add-situation-item-btn {
+    height: 40px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px 0 12px;
+    border-radius: 26px;
+}
+
+.add-situation-item-btn-icon {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.add-situation-item-btn-text {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #d2c409;
+}
+
+.create-situation-btn-row {
+    margin-top: 54px;
+    display: flex;
+}
+
+.cancel-btn {
+    height: 48px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 47px;
+    padding: 0 24px;
+    border-radius: 26px;
+    border: solid 1px #575452;
+    margin-left: 540px;
+}
+
+.cancel-btn-text {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #575452;
+}
+
+.submit-btn {
+    height: 48px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 47px;
+    padding: 0 24px;
+    border-radius: 24px;
+    background-color: #262320;
+}
+
+.submit-btn-text {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #e7e7e7;
 }

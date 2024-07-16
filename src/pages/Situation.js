@@ -4,7 +4,7 @@ import { StoreContext } from "../components/store/store";
 import { DeleteOutlined } from "@ant-design/icons";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
-import CreateSituationModal from "../components/situation/createSituation";
+import CreateSituation from "../components/situation/createSituation";
 import SituationContentModal from "../components/situation/situationContent";
 import { getSituations, removeSituation, activateSituation } from "../api/API";
 import "../App.scss";
@@ -79,13 +79,15 @@ const Situation = () => {
 
   return (
     <div>
-      <div className="page-title">
-        <FormattedMessage {...Messages.Text_Situation_Title} />
+      <div className="situation-layout-column">
+        <div className="situation-title-row">
+          <div className="page-title">
+            <FormattedMessage {...Messages.Text_Situation_Title} />
+          </div>
+          <CreateSituation setReload={setReload} />
+        </div>
       </div>
-      <div style={{ marginTop: 18 }}>
-        <CreateSituationModal setReload={setReload} />
-      </div>
-      <div style={{ marginTop: 68 }}>{situationCards}</div>
+      {/* <div style={{ marginTop: 68 }}>{situationCards}</div> */}
     </div>
   );
 };
