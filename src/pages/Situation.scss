@@ -56,15 +56,22 @@
   justify-content: flex-start;
   align-items: flex-start;
   gap: 16px;
-  margin: 16px 0px 0px 0;
+  margin: 16px 0px 0px 0px;
   padding: 40px;
   border-radius: 24px;
   box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
   background-color: #ffffff;
 }
 
-.situation-card-title-row {
+.situation-card-title-row-expanded {
   width: 672px;
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.situation-card-title-row-normal {
+  width: 572px;
   display: flex;
   flex-grow: 1;
   justify-content: space-between;
@@ -121,8 +128,12 @@
   margin-top: 8px;
 }
 
-.situation-card-content {
+.situation-card-content-expanded {
   width: 730px;
+}
+
+.situation-card-content-normal {
+  width: 560px;
 }
 
 .situation-description {
@@ -145,6 +156,9 @@
   overflow: hidden;
 }
 
+.table-content-icon {
+  width: 19px;
+}
 
 .add-situation-item-btn {
   height: 40px;
@@ -178,4 +192,32 @@
   letter-spacing: 0.1px;
   text-align: center;
   color: #d2c409;
+}
+
+.delete-situation-btn {
+  height: 40px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px 0 12px;
+  border-radius: 26px;
+  position: absolute;
+  bottom: 40px;
+}
+
+.delete-situation-btn-text {
+  height: 20px;
+  flex-grow: 0;
+  font-family: Noto Sans TC;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: 0.1px;
+  text-align: center;
+  color: #a5a5a5;
 }
