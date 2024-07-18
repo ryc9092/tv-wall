@@ -85,7 +85,7 @@ const SituationContentModal = ({ id, name, desc }) => {
       key: "sort",
     },
     {
-      title: intl.formatMessage(Messages.Text_Situation_Type),
+      title: intl.formatMessage(Messages.Text_Common_Type),
       dataIndex: "set_type",
     },
     {

@@ -561,14 +561,6 @@ export default defineMessages({
     id: "Text-Situation-InputSituationName",
     defaultMessage: "請輸入情境名稱",
   },
-  Text_Situation_SituationDescription: {
-    id: "Text-Situation-SituationDescription",
-    defaultMessage: "情境描述",
-  },
-  Text_Situation_Type: {
-    id: "Text-Situation-Type",
-    defaultMessage: "類型",
-  },
   Text_Situation_Description: {
     id: "Text-Situation-Description",
     defaultMessage: "描述",

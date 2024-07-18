@@ -42,7 +42,7 @@ const CreateSituationModal = ({ setReload }) => {
     {
       title: (
         <span className="table-head">
-          {intl.formatMessage(Messages.Text_Situation_Type)}
+          {intl.formatMessage(Messages.Text_Common_Type)}
         </span>
       ),
       dataIndex: "set_type",
@@ -150,7 +150,7 @@ const CreateSituationModal = ({ setReload }) => {
             name="description"
             labelCol={{ span: 24 }}
             label=<span className="create-situation-subtitle">
-              {intl.formatMessage(Messages.Text_Situation_SituationDescription)}
+              {intl.formatMessage(Messages.Text_Common_Description)}
             </span>
           >
             <Input.TextArea
