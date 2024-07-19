@@ -1,22 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Card, Table } from "antd";
+import { Button, Card, Dropdown, Table } from "antd";
 import { StoreContext } from "../components/store/store";
-import { DeleteOutlined } from "@ant-design/icons";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
 import CreateSituation from "../components/situation/createSituation";
-import SituationContentModal from "../components/situation/situationContent";
 import {
   getSituations,
   getSituationDetails,
   removeSituation,
   activateSituation,
 } from "../api/API";
+import TVWallModal from "../components/situation/tvWallModal";
 import PlayIcon from "../assets/play-black.png";
 import PauseIcon from "../assets/pause.png";
 import CaretIcon from "../assets/caret-down.png";
 import TrashIcon from "../assets/trash.png";
 import PlusYellowIcon from "../assets/plus-yellow.png";
+import TVWallIcon from "../assets/tvWall.png";
+import SingleScreenIcon from "../assets/screen.png";
+import USBIcon from "../assets/usb.png";
+import AudioIcon from "../assets/audio.png";
 import "../App.scss";
 import "./Situation.scss";
 
@@ -31,6 +34,8 @@ const Situation = () => {
   const [expandSituationCard, setExpandSituationCard] = useState(null);
   const [situationItems, setSituationItems] = useState([]);
   const [situationActivated, setSituationActivated] = useState([]);
+
+  const [isTVWallModalOpen, setIsTVWallModalOpen] = useState(false);
 
   const startSituation = async (situationId) => {
     activateSituation(situationId, store).then(() => {
@@ -180,6 +185,63 @@ const Situation = () => {
     },
   ];
 
+  const handleMenuClick = (event) => {
+    console.log(event, expandSituation);
+    if (event.key === "tvwall") setIsTVWallModalOpen(true);
+  };
+
+  const items = [
+    {
+      label: (
+        <span className="dropdown-menu-text">
+          {intl.formatMessage(Messages.Text_Situation_TVWallConnection)}
+        </span>
+      ),
+      key: "tvwall",
+      icon: (
+        <img src={TVWallIcon} alt="tvwall" className="dropdown-menu-icon" />
+      ),
+    },
+    {
+      label: (
+        <span className="dropdown-menu-text">
+          {intl.formatMessage(Messages.Text_Situation_SingleScreenConnection)}
+        </span>
+      ),
+      key: "singlescreen",
+      icon: (
+        <img
+          src={SingleScreenIcon}
+          alt="singlescreen"
+          className="dropdown-menu-icon"
+        />
+      ),
+    },
+    {
+      label: (
+        <span className="dropdown-menu-text">
+          {intl.formatMessage(Messages.Text_Situation_USBConnection)}
+        </span>
+      ),
+      key: "usb",
+      icon: <img src={USBIcon} alt="usb" className="dropdown-menu-icon" />,
+    },
+    {
+      label: (
+        <span className="dropdown-menu-text">
+          {intl.formatMessage(Messages.Text_Situation_AudioConnection)}
+        </span>
+      ),
+      key: "audio",
+      icon: <img src={AudioIcon} alt="audio" className="dropdown-menu-icon" />,
+    },
+  ];
+
+  const menuProps = {
+    items,
+    onClick: handleMenuClick,
+  };
+
   const getSituationCard = (
     situation,
     situationDetail,
@@ -241,11 +303,6 @@ const Situation = () => {
               ? "situation-card-expanded"
               : "situation-card-normal"
           }
-          // extra={
-          //   <Button type="text" id={situation.id} onClick={deleteSituation}>
-          //     <DeleteOutlined />
-          //   </Button>
-          // }
         >
           <div
             className={
@@ -265,22 +322,24 @@ const Situation = () => {
                   }
                   pagination={false}
                 />
-                <Button
-                  type="text"
-                  className="add-situation-item-btn"
-                  onClick={() => {}}
+                <Dropdown
+                  menu={menuProps}
+                  trigger={["click"]}
+                  className="dropdown-menu"
                 >
-                  <img
-                    alt="create"
-                    src={PlusYellowIcon}
-                    className="add-situation-item-btn-icon"
-                  />
-                  <span className="add-situation-item-btn-text">
-                    <FormattedMessage
-                      {...Messages.Text_Situation_AddSituationItem}
+                  <Button type="text" className="add-situation-item-btn">
+                    <img
+                      alt="create"
+                      src={PlusYellowIcon}
+                      className="add-situation-item-btn-icon"
                     />
-                  </span>
-                </Button>
+                    <span className="add-situation-item-btn-text">
+                      <FormattedMessage
+                        {...Messages.Text_Situation_AddSituationItem}
+                      />
+                    </span>
+                  </Button>
+                </Dropdown>
                 <Button
                   type="text"
                   id={situation.id}
@@ -319,8 +378,12 @@ const Situation = () => {
       <div className="situation-list-layout">
         <div>{expandSituationCard}</div>
         <div>{situationCards}</div>
-        {/* <div>{situationCards}</div> */}
       </div>
+      <TVWallModal
+        situation={expandSituation}
+        isModalOpen={isTVWallModalOpen}
+        setIsModalOpen={setIsTVWallModalOpen}
+      />
     </div>
   );
 };

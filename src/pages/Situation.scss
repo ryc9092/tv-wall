@@ -233,3 +233,32 @@
   text-align: center;
   color: #a5a5a5;
 }
+
+.ant-dropdown-menu-item {
+  height: 56px;
+}
+
+.dropdown-menu {
+  width: 204px;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.dropdown-menu-text {
+  height: 24px;
+  flex-grow: 0;
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  text-align: left;
+  color: #45413e;
+}
+
+.dropdown-menu-icon {
+  width: 24px;
+  height: 24px;
+}
