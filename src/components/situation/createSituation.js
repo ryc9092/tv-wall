@@ -1,23 +1,34 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../components/store/store";
-import { Button, Divider, Form, Input, Modal, Table } from "antd";
+import { Button, Divider, Dropdown, Form, Input, Modal, Table } from "antd";
 import { FormattedMessage, useIntl } from "react-intl";
 import { createSituation } from "../../api/API";
+import TVWallModal from "./tvWallModal";
 import { uuid } from "../../utils/Utils";
 import Messages from "../../messages";
 import PlusIcon from "../../assets/plus-white.png";
 import TrashIcon from "../../assets/trash.png";
 import PlusYellowIcon from "../../assets/plus-yellow.png";
+import TVWallIcon from "../../assets/tvWall.png";
+import SingleScreenIcon from "../../assets/screen.png";
+import USBIcon from "../../assets/usb.png";
+import AudioIcon from "../../assets/audio.png";
 import "./createSituation.scss";
+import "../../pages/Situation.scss";
 
 const CreateSituationModal = ({ setReload }) => {
   const intl = useIntl();
   const [form] = Form.useForm();
   const [store] = useContext(StoreContext);
+  const [isSituationCreated, setIsSituationCreated] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [isTVWallModalOpen, setIsTVWallModalOpen] = useState(false);
 
   useEffect(() => {
     form.resetFields();
+    setIsSituationCreated(false)
+    setReload(Math.random());
   }, [isModalOpen]);
 
   const onCreateSituation = async (values) => {
@@ -28,9 +39,10 @@ const CreateSituationModal = ({ setReload }) => {
         description: values.description,
         store: store,
       });
-      form.resetFields();
-      setReload(Math.random());
-      setIsModalOpen(false);
+      setIsSituationCreated(true)
+      // form.resetFields();
+      // setReload(Math.random());
+      // setIsModalOpen(false);
     }
   };
 
@@ -88,7 +100,7 @@ const CreateSituationModal = ({ setReload }) => {
               key={`${text}-delete`}
               id={text}
               type="text"
-              onClick={() => {}}
+              onClick={() => { }}
               className="table-content"
             >
               <img
@@ -102,6 +114,64 @@ const CreateSituationModal = ({ setReload }) => {
       },
     },
   ];
+
+  const handleMenuClick = (event) => {
+    // onCreateSituation()
+    console.log(form.getFieldsValue(), "!!!", event.key )
+    if (event.key === "tvwall") setIsTVWallModalOpen(true);
+  };
+
+  const items = [
+    {
+      label: (
+        <span className="dropdown-menu-text">
+          {intl.formatMessage(Messages.Text_Situation_TVWallConnection)}
+        </span>
+      ),
+      key: "tvwall",
+      icon: (
+        <img src={TVWallIcon} alt="tvwall" className="dropdown-menu-icon" />
+      ),
+    },
+    {
+      label: (
+        <span className="dropdown-menu-text">
+          {intl.formatMessage(Messages.Text_Situation_SingleScreenConnection)}
+        </span>
+      ),
+      key: "singlescreen",
+      icon: (
+        <img
+          src={SingleScreenIcon}
+          alt="singlescreen"
+          className="dropdown-menu-icon"
+        />
+      ),
+    },
+    {
+      label: (
+        <span className="dropdown-menu-text">
+          {intl.formatMessage(Messages.Text_Situation_USBConnection)}
+        </span>
+      ),
+      key: "usb",
+      icon: <img src={USBIcon} alt="usb" className="dropdown-menu-icon" />,
+    },
+    {
+      label: (
+        <span className="dropdown-menu-text">
+          {intl.formatMessage(Messages.Text_Situation_AudioConnection)}
+        </span>
+      ),
+      key: "audio",
+      icon: <img src={AudioIcon} alt="audio" className="dropdown-menu-icon" />,
+    },
+  ];
+
+  const menuProps = {
+    items,
+    onClick: handleMenuClick,
+  };
 
   return (
     <div>
@@ -173,22 +243,24 @@ const CreateSituationModal = ({ setReload }) => {
                 situationItem.length === 0 ? "table table-no-item" : "table"
               }
             />
-            <Button
-              type="text"
-              className="add-situation-item-btn"
-              onClick={() => {}}
+            <Dropdown
+              menu={menuProps}
+              trigger={["click"]}
+              className="dropdown-menu"
             >
-              <img
-                alt="create"
-                src={PlusYellowIcon}
-                className="add-situation-item-btn-icon"
-              />
-              <span className="add-situation-item-btn-text">
-                <FormattedMessage
-                  {...Messages.Text_Situation_AddSituationItem}
+              <Button type="text" className="add-situation-item-btn">
+                <img
+                  alt="create"
+                  src={PlusYellowIcon}
+                  className="add-situation-item-btn-icon"
                 />
-              </span>
-            </Button>
+                <span className="add-situation-item-btn-text">
+                  <FormattedMessage
+                    {...Messages.Text_Situation_AddSituationItem}
+                  />
+                </span>
+              </Button>
+            </Dropdown>
           </div>
           <div className="create-situation-btn-row">
             <Button className="cancel-btn" style={{ marginRight: 16 }}>
@@ -196,15 +268,20 @@ const CreateSituationModal = ({ setReload }) => {
                 <FormattedMessage {...Messages.Text_Button_Cancel} />
               </span>
             </Button>
-            <Button className="submit-btn" htmlType="submit">
+            <Button className="submit-btn" htmlType="submit" onClick={() => { setIsModalOpen(false) }}>
               <span className="submit-btn-text">
                 <FormattedMessage {...Messages.Text_Button_Add} />
               </span>
             </Button>
           </div>
         </Form>
+        <TVWallModal 
+        // situation={expandSituation}
+        isModalOpen={isTVWallModalOpen}
+        setIsModalOpen={setIsTVWallModalOpen}
+      />
       </Modal>
-    </div>
+    </div >
   );
 };
 
