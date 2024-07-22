@@ -8,7 +8,9 @@ import {
   getWalls,
   getTemplates,
   getEncoders,
+  presetWall,
 } from "../../api/API";
+import { uuid } from "../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
 import "./addSituationContent.scss";
@@ -232,6 +234,32 @@ const TVWallModal = ({
     setBlockEncoderMapping({});
   };
 
+  const handleCreateItem = async () => {
+    let tempBlocks = [];
+    Object.entries(blockEncoderMapping)?.forEach(([key, block]) => {
+      tempBlocks.push({
+        block: parseInt(key),
+        encoder: block.mac,
+        col: block.col,
+        row: block.row,
+      });
+    });
+    await presetWall({
+      store: store,
+      activeId: situation.id, // to-do: correct?
+      wallId: selectedWall.wallId,
+      templateId: selectedTemplate.templateId,
+      blocks: tempBlocks,
+      presetPostDetail: {
+        preSetId: situationItemName,
+        orderNum: 1,
+        remark: situationItemDesc,
+      },
+    });
+    handleReset();
+    setIsModalOpen(false);
+  };
+
   return (
     <div>
       <Modal
@@ -261,6 +289,7 @@ const TVWallModal = ({
                   <div>
                     <Input
                       className="situation-wall-input situation-wall-input-placeholder"
+                      value={situationItemName}
                       placeholder={intl.formatMessage(
                         Messages.Text_Common_InputName
                       )}
@@ -277,6 +306,7 @@ const TVWallModal = ({
                   <div>
                     <Input
                       className="situation-wall-input situation-wall-input-placeholder"
+                      value={situationItemDesc}
                       placeholder={intl.formatMessage(
                         Messages.Text_Situation_InputDescription
                       )}
@@ -412,13 +442,7 @@ const TVWallModal = ({
           <Button
             className="item-submit-btn"
             onClick={() => {
-              console.log(
-                situationItemName,
-                situationItemDesc,
-                selectedWall,
-                selectedTemplate,
-                blockEncoderMapping
-              );
+              handleCreateItem();
             }}
           >
             <span className="item-submit-btn-text">

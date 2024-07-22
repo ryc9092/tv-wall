@@ -368,7 +368,11 @@ const TvWall = ({
       setBlocksWithPosition(tempBlocks);
       setBlockEncoderMapping({
         ...blockEncoderMapping,
-        [blocks[blockIdx].block]: selectedEncoder,
+        [blocks[blockIdx].block]: {
+          ...selectedEncoder,
+          col: blocks[blockIdx].col,
+          row: blocks[blockIdx].row,
+        },
       });
 
       // add video to screens

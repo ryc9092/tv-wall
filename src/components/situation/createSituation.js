@@ -20,14 +20,14 @@ const CreateSituationModal = ({ setReload }) => {
   const intl = useIntl();
   const [form] = Form.useForm();
   const [store] = useContext(StoreContext);
-  const [isSituationCreated, setIsSituationCreated] = useState(false)
+  const [isSituationCreated, setIsSituationCreated] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [isTVWallModalOpen, setIsTVWallModalOpen] = useState(false);
 
   useEffect(() => {
     form.resetFields();
-    setIsSituationCreated(false)
+    setIsSituationCreated(false);
     setReload(Math.random());
   }, [isModalOpen]);
 
@@ -39,10 +39,10 @@ const CreateSituationModal = ({ setReload }) => {
         description: values.description,
         store: store,
       });
-      setIsSituationCreated(true)
-      // form.resetFields();
-      // setReload(Math.random());
-      // setIsModalOpen(false);
+      setIsSituationCreated(true);
+      form.resetFields();
+      setReload(Math.random());
+      setIsModalOpen(false);
     }
   };
 
@@ -100,7 +100,7 @@ const CreateSituationModal = ({ setReload }) => {
               key={`${text}-delete`}
               id={text}
               type="text"
-              onClick={() => { }}
+              onClick={() => {}}
               className="table-content"
             >
               <img
@@ -117,7 +117,7 @@ const CreateSituationModal = ({ setReload }) => {
 
   const handleMenuClick = (event) => {
     // onCreateSituation()
-    console.log(form.getFieldsValue(), "!!!", event.key )
+    console.log(form.getFieldsValue(), "!!!", event.key);
     if (event.key === "tvwall") setIsTVWallModalOpen(true);
   };
 
@@ -230,7 +230,7 @@ const CreateSituationModal = ({ setReload }) => {
               )}
             />
           </Form.Item>
-          <Divider className="divider" />
+          {/* <Divider className="divider" />
           <div>
             <span className="create-situation-subtitle">
               <FormattedMessage {...Messages.Text_Situation_AddSituationItem} />
@@ -261,27 +261,27 @@ const CreateSituationModal = ({ setReload }) => {
                 </span>
               </Button>
             </Dropdown>
-          </div>
+          </div> */}
           <div className="create-situation-btn-row">
             <Button className="cancel-btn" style={{ marginRight: 16 }}>
               <span className="cancel-btn-text">
                 <FormattedMessage {...Messages.Text_Button_Cancel} />
               </span>
             </Button>
-            <Button className="submit-btn" htmlType="submit" onClick={() => { setIsModalOpen(false) }}>
+            <Button className="submit-btn" htmlType="submit">
               <span className="submit-btn-text">
                 <FormattedMessage {...Messages.Text_Button_Add} />
               </span>
             </Button>
           </div>
         </Form>
-        <TVWallModal 
-        // situation={expandSituation}
-        isModalOpen={isTVWallModalOpen}
-        setIsModalOpen={setIsTVWallModalOpen}
-      />
+        {/* <TVWallModal
+          // situation={expandSituation}
+          isModalOpen={isTVWallModalOpen}
+          setIsModalOpen={setIsTVWallModalOpen}
+        /> */}
       </Modal>
-    </div >
+    </div>
   );
 };
 
