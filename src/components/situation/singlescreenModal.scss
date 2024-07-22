@@ -1,0 +1,240 @@
+.single-screen-content .ant-modal-content {
+    padding: 56px !important;
+    height: 1208px;
+}
+
+.ant-modal-close-icon {
+    margin-top: 50px;
+    margin-right: 72px;
+}
+
+.ant-modal-close-x {
+    background-color: #ffffff;
+}
+
+.single-screen-modal {
+    max-width: none !important;
+    width: 1307px !important;
+    margin-top: -40px;
+}
+
+.single-screen-modal-title {
+    height: 36px;
+    flex-grow: 1;
+    font-family: Noto Sans TC;
+    font-size: 28px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    text-align: left;
+    color: #45413e;
+}
+
+.situation-single-screen-layout-column {
+    display: flex;
+    margin-top: 24px !important;
+    margin-left: 0px !important;
+}
+
+.situation-single-screen-option-container {
+    width: 810px;
+    margin-top: 24px;
+    margin-right: 72px;
+}
+
+.situation-single-screen-option-row {
+    width: 715px;
+    display: flex;
+}
+
+.situation-single-screen-input-layout-column {
+    width: 715px;
+    // margin-right: 72px;
+}
+
+.situation-single-screen-input-text {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: left;
+    color: #45413e;
+}
+
+.situation-single-screen-input {
+    height: 48px;
+    margin-top: 8px;
+    align-self: stretch;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    border-radius: 12px;
+    background-color: #ffffff;
+}
+
+.situation-single-screen-input-placeholder {
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: left;
+    color: #d4d4d4;
+}
+
+.divider {
+    height: 1px;
+    margin-top: 24px;
+    margin-bottom: 31px;
+    align-self: stretch;
+    flex-grow: 0;
+    background-color: #d4d4d4;
+}
+
+.connection-title {
+    margin: 0px;
+    height: 32px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: 1.2px;
+    text-align: left;
+    color: #000;
+}
+
+.single-screen-search-input {
+    width: 715px;
+    height: 48px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 16px;
+    background-color: #e7e7e7;
+}
+
+.single-screen-container {
+    width: 732px;
+    height: 560px;
+    margin-top: 24px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.situation-single-screen-card {
+    width: 350px;
+    height: 268px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    border: solid 1px #a5a5a5;
+}
+
+.situation-single-screen-card-video {
+    width: 350px;
+    height: 268px;
+    position: absolute;
+    border: 0;
+    border-radius: 12px !important;
+}
+
+.situation-single-screen-card-top {
+    width: 350px;
+    height: 268px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    position: absolute;
+    z-index: 100;
+    opacity: 0.8;
+}
+
+.situation-single-screen-card-title-row {
+    padding: 14px;
+    width: 320px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.situation-single-screen-card-title {
+    width: 100%;
+    color: #45413e;
+    font-family: Noto Sans TC;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.add-situation-item-btn-row {
+    margin-top: 54px;
+    display: flex;
+}
+
+.item-cancel-btn {
+    height: 48px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 47px;
+    padding: 0 24px;
+    border-radius: 26px;
+    border: solid 1px #575452;
+    margin-left: 1004px;
+}
+
+.item-cancel-btn-text {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #575452;
+}
+
+.item-submit-btn {
+    height: 48px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 47px;
+    padding: 0 24px;
+    border-radius: 24px;
+    background-color: #262320;
+}
+
+.item-submit-btn-text {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #e7e7e7;
+}

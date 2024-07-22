@@ -556,16 +556,18 @@ export const presetDeviceLink = async ({
   linkType,
   encoder,
   remark,
-  decoders,
+  value1,
+  deviceLinkDetails,
   presetPostDetail,
 }) => {
   const apiPath = `/devicelinks/preset`;
   const form = JSON.stringify({
     id: presetDetailId,
     linkType: linkType,
+    value1: value1,
     encoder: encoder,
     remark: remark,
-    deviceLinkDetails: decoders,
+    deviceLinkDetails: deviceLinkDetails,
     presetPostDetail: presetPostDetail,
   });
   return await apiPOST({

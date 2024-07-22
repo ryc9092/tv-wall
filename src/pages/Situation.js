@@ -11,6 +11,7 @@ import {
   activateSituation,
 } from "../api/API";
 import TVWallModal from "../components/situation/tvWallModal";
+import SingleScreenModal from "../components/situation/singlescreenModal";
 import PlayIcon from "../assets/play-black.png";
 import PauseIcon from "../assets/pause.png";
 import CaretIcon from "../assets/caret-down.png";
@@ -36,6 +37,7 @@ const Situation = () => {
   const [situationActivated, setSituationActivated] = useState([]);
 
   const [isTVWallModalOpen, setIsTVWallModalOpen] = useState(false);
+  const [isSingleScreenModalOpen, setIsSingleScreenModalOpen] = useState(false);
 
   const startSituation = async (situationId) => {
     activateSituation(situationId, store).then(() => {
@@ -188,6 +190,7 @@ const Situation = () => {
   const handleMenuClick = (event) => {
     console.log(event, expandSituation);
     if (event.key === "tvwall") setIsTVWallModalOpen(true);
+    else if (event.key === "singlescreen") setIsSingleScreenModalOpen(true);
   };
 
   const items = [
@@ -383,6 +386,11 @@ const Situation = () => {
         situation={expandSituation}
         isModalOpen={isTVWallModalOpen}
         setIsModalOpen={setIsTVWallModalOpen}
+      />
+      <SingleScreenModal
+        situation={expandSituation}
+        isModalOpen={isSingleScreenModalOpen}
+        setIsModalOpen={setIsSingleScreenModalOpen}
       />
     </div>
   );
