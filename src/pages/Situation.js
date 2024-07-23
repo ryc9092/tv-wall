@@ -13,6 +13,7 @@ import {
 import TVWallModal from "../components/situation/tvWallModal";
 import SingleScreenModal from "../components/situation/singlescreenModal";
 import USBModal from "../components/situation/usbModal";
+import AudioModal from "../components/situation/audioModal";
 import PlayIcon from "../assets/play-black.png";
 import PauseIcon from "../assets/pause.png";
 import CaretIcon from "../assets/caret-down.png";
@@ -40,6 +41,7 @@ const Situation = () => {
   const [isTVWallModalOpen, setIsTVWallModalOpen] = useState(false);
   const [isSingleScreenModalOpen, setIsSingleScreenModalOpen] = useState(false);
   const [isUSBModalOpen, setIsUSBModalOpen] = useState(false);
+  const [isAudioModalOpen, setIsAudioModalOpen] = useState(false);
 
   const startSituation = async (situationId) => {
     activateSituation(situationId, store).then(() => {
@@ -190,10 +192,10 @@ const Situation = () => {
   ];
 
   const handleMenuClick = (event) => {
-    console.log(event, expandSituation);
     if (event.key === "tvwall") setIsTVWallModalOpen(true);
     else if (event.key === "singlescreen") setIsSingleScreenModalOpen(true);
     else if (event.key === "usb") setIsUSBModalOpen(true);
+    else if (event.key === "audio") setIsAudioModalOpen(true);
   };
 
   const items = [
@@ -399,6 +401,11 @@ const Situation = () => {
         situation={expandSituation}
         isModalOpen={isUSBModalOpen}
         setIsModalOpen={setIsUSBModalOpen}
+      />
+      <AudioModal
+        situation={expandSituation}
+        isModalOpen={isAudioModalOpen}
+        setIsModalOpen={setIsAudioModalOpen}
       />
     </div>
   );
