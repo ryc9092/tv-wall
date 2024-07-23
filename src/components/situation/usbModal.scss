@@ -1,0 +1,403 @@
+.usb-content .ant-modal-content {
+    padding: 56px !important;
+    height: 1244px;
+}
+
+.ant-modal-close-icon {
+    margin-top: 50px;
+    margin-right: 72px;
+}
+
+.ant-modal-close-x {
+    background-color: #ffffff;
+}
+
+.usb-modal {
+    max-width: none !important;
+    width: 968px !important;
+    margin-top: -40px;
+}
+
+.usb-modal-title {
+    height: 36px;
+    flex-grow: 1;
+    font-family: Noto Sans TC;
+    font-size: 28px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    text-align: left;
+    color: #45413e;
+}
+
+.situation-usb-layout-column {
+    display: flex;
+    margin-top: 24px !important;
+    margin-left: 0px !important;
+}
+
+.situation-usb-option-container {
+    width: 820px;
+    margin-top: 24px;
+    margin-right: 72px;
+}
+
+.situation-usb-option-row {
+    width: 856px;
+    display: flex;
+}
+
+.situation-usb-input-layout-column {
+    width: 856px;
+    // margin-right: 72px;
+}
+
+.situation-usb-input-text {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: left;
+    color: #45413e;
+}
+
+.situation-usb-input {
+    height: 48px;
+    margin-top: 8px;
+    align-self: stretch;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    border-radius: 12px;
+    background-color: #ffffff;
+}
+
+.situation-usb-input-placeholder {
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: left;
+    color: #d4d4d4;
+}
+
+.divider {
+    height: 1px;
+    margin-top: 24px;
+    margin-bottom: 31px;
+    align-self: stretch;
+    flex-grow: 0;
+    background-color: #d4d4d4;
+}
+
+.connection-title {
+    margin: 0px;
+    height: 32px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: 1.2px;
+    text-align: left;
+    color: #000;
+}
+
+.usb-search-input {
+    width: 856px;
+    height: 48px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 16px;
+    background-color: #e7e7e7;
+}
+
+.usb-container {
+    width: 856px;
+    // height: 560px;
+    margin-top: 24px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.add-situation-item-btn-row {
+    margin-top: 54px;
+    display: flex;
+}
+
+.item-cancel-btn {
+    height: 48px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 47px;
+    padding: 0 24px;
+    border-radius: 26px;
+    border: solid 1px #575452;
+    margin-left: 644px;
+}
+
+.item-cancel-btn-text {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #575452;
+}
+
+.item-submit-btn {
+    height: 48px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 47px;
+    padding: 0 24px;
+    border-radius: 24px;
+    background-color: #262320;
+}
+
+.item-submit-btn-text {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #e7e7e7;
+}
+
+
+.usb-add-title-row {
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.usb-add-link-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    border: 0px;
+    margin-top: -6px;
+    margin-right: 16px;
+    cursor: pointer;
+}
+
+.usb-add-link-button:hover {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    border: 0px;
+    margin-top: -6px;
+    margin-right: 16px;
+    cursor: pointer;
+    background-color: #FAF6F0;
+}
+
+.usb-add-link-icon {
+    width: 24px;
+    margin-left: 8px;
+}
+
+.usb-add-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.usb-add-progress {
+    display: flex;
+}
+
+.usb-add-progress-circle {
+    width: 8px;
+    height: 8px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 16px;
+    border-radius: 57px;
+    background-color: #45413e;
+}
+
+.usb-add-progress-circle-unstarted {
+    width: 8px;
+    height: 8px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 16px;
+    border-radius: 57px;
+    background-color: #a5a5a5;
+}
+
+.usb-add-progress-circle-text {
+    width: 10px;
+    height: 28px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 22px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.27;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+}
+
+.usb-add-progress-bar {
+    width: 342px;
+    height: 8px;
+    flex-grow: 0;
+    margin: 16px 0 0 8px;
+    border-radius: 5px;
+    background-color: #a5a5a5;
+}
+
+.usb-add-progress-bar-finished {
+    width: 342px;
+    height: 8px;
+    flex-grow: 0;
+    margin: 16px 0 0 8px;
+    border-radius: 5px;
+    background-color: #45413e;
+}
+
+.usb-input .ant-input {
+    background-color: #e7e7e7;
+}
+
+.usb-add-subtitle {
+    height: 24px;
+    margin-top: 24px;
+    align-self: stretch;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: left;
+    color: #45413e;
+}
+
+.usb-add-input {
+    height: 48px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    align-self: stretch;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    padding: 0 16px;
+    border-radius: 12px;
+    background-color: #e7e7e7;
+}
+
+.usb-add-input-prefix {
+    width: 20px;
+    height: 20px;
+}
+
+.usb-add-input-placeholder {
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: left;
+    color: #a5a5a5;
+}
+
+.ant-table-thead > tr > td {
+    border: 0px;
+}
+
+.ant-table-cell {
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    text-align: left;
+    color: #45413e;
+}
+
+.usb-add-btn {
+    width: 120px;
+    height: 48px;
+    margin-top: 48px;
+    margin-left: 382px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    border-radius: 24px;
+    background-color: #262320;
+}
+
+.usb-add-btn-text {
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #e7e7e7;
+}
