@@ -423,9 +423,9 @@ const AudioModal = ({ situation, isModalOpen, setIsModalOpen }) => {
             </div>
           </div>
         </div>
-        <div className="add-situation-item-btn-row">
+        <div className="situation-audio-item-btn-row">
           <Button
-            className="item-cancel-btn"
+            className="situation-audio-item-cancel-btn"
             style={{ marginRight: 16 }}
             onClick={() => {
               handleReset();

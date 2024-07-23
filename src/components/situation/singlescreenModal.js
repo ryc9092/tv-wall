@@ -454,9 +454,9 @@ const SingleScreenModal = ({
             </Card>
           </div>
         </div>
-        <div className="add-situation-item-btn-row">
+        <div className="situation-single-screen-item-btn-row">
           <Button
-            className="item-cancel-btn"
+            className="situation-single-screen-item-cancel-btn"
             style={{ marginRight: 16 }}
             onClick={() => {
               handleReset();

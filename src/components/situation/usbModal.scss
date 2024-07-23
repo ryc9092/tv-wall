@@ -1,6 +1,5 @@
 .usb-content .ant-modal-content {
     padding: 56px !important;
-    height: 1244px;
 }
 
 .ant-modal-close-icon {
@@ -136,12 +135,12 @@
     overflow-x: hidden;
 }
 
-.add-situation-item-btn-row {
-    margin-top: 54px;
+.situation-usb-item-btn-row {
+    margin-top: 54px !important;
     display: flex;
 }
 
-.item-cancel-btn {
+.situation-usb-item-cancel-btn {
     height: 48px;
     flex-grow: 0;
     display: flex;
@@ -152,7 +151,7 @@
     padding: 0 24px;
     border-radius: 26px;
     border: solid 1px #575452;
-    margin-left: 644px;
+    margin-left: 648px;
 }
 
 .item-cancel-btn-text {

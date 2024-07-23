@@ -376,9 +376,9 @@ const USBModal = ({
             </div>
           </div>
         </div>
-        <div className="add-situation-item-btn-row">
+        <div className="situation-usb-item-btn-row">
           <Button
-            className="item-cancel-btn"
+            className="situation-usb-item-cancel-btn"
             style={{ marginRight: 16 }}
             onClick={() => {
               handleReset();

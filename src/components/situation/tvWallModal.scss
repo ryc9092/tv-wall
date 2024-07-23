@@ -39,15 +39,24 @@
 }
 
 .situation-wall-option-container {
-    width: 947px;
+    width: 892px;
     margin-top: 24px;
-    margin-right: 92px;
+    margin-right: 147px;
 }
 
 .situation-wall-option-row {
     width: 1268px;
-    height: 76px;
+    height: 200px;
     display: flex;
+}
+
+.divider {
+    height: 1px;
+    margin-top: 24px;
+    margin-bottom: 31px;
+    align-self: stretch;
+    flex-grow: 0;
+    background-color: #d4d4d4;
 }
 
 .situation-wall-input-layout-column {
@@ -97,7 +106,7 @@
 }
 
 .connection-title {
-    margin: 161px 0px 56px 0px;
+    margin: 0px 0px 56px 0px !important;
     height: 32px;
     flex-grow: 0;
     font-family: Noto Sans TC;
@@ -111,12 +120,12 @@
     color: #000;
 }
 
-.add-situation-item-btn-row {
-    margin-top: 54px;
+.situation-wall-item-btn-row {
+    margin-top: 56px !important;
     display: flex;
 }
 
-.item-cancel-btn {
+.situation-wall-item-cancel-btn {
     height: 48px;
     flex-grow: 0;
     display: flex;
@@ -127,7 +136,7 @@
     padding: 0 24px;
     border-radius: 26px;
     border: solid 1px #575452;
-    margin-left: 1160px;
+    margin-left: 1168px;
 }
 
 .item-cancel-btn-text {

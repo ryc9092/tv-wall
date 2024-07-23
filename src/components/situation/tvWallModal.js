@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../components/store/store";
-import { Button, Card, Input, Modal, Select, Table, Tag } from "antd";
+import { Button, Card, Divider, Input, Modal, Select, Table, Tag } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import TvWall from "./tvWall";
 import {
@@ -352,6 +352,7 @@ const TVWallModal = ({
                 </div>
               </div>
             </div>
+            <Divider className="divider" />
             <div className="connection-title">
               <FormattedMessage {...Messages.Text_Situation_TVWallConnection} />
             </div>
@@ -426,9 +427,9 @@ const TVWallModal = ({
             </Card>
           </div>
         </div>
-        <div className="add-situation-item-btn-row">
+        <div className="situation-wall-item-btn-row">
           <Button
-            className="item-cancel-btn"
+            className="situation-wall-item-cancel-btn"
             style={{ marginRight: 16 }}
             onClick={() => {
               handleReset();
