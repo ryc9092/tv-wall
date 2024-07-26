@@ -246,12 +246,12 @@ const TVWallModal = ({
     });
     await presetWall({
       store: store,
-      activeId: situation.id, // to-do: correct?
+      activeId: `${situationItemName}@${uuid()}`,
       wallId: selectedWall.wallId,
       templateId: selectedTemplate.templateId,
       blocks: tempBlocks,
       presetPostDetail: {
-        preSetId: situationItemName,
+        preSetId: situation.id,
         orderNum: 1,
         remark: situationItemDesc,
       },

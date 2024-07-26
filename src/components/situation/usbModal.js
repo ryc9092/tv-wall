@@ -13,6 +13,7 @@ const USBModal = ({
   situation,
   isModalOpen,
   setIsModalOpen,
+  setReload
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
@@ -195,19 +196,20 @@ const USBModal = ({
     if (selectedEncoder && selectedDecoders?.length !== 0) {
       await presetDeviceLink({
         store: store,
-        presetDetailId: `${situation.id}-${uuid()}`,
+        presetDetailId: `${situationItemName}@${uuid()}`,
         linkType: "usb",
         value1: "",
         encoder: selectedEncoder,
         remark: situationItemDesc,
         deviceLinkDetails: selectedDecoders,
         presetPostDetail: {
-          preSetId: situationItemName,
+          preSetId: situation.id,
           orderNum: 1,
           remark: situationItemDesc,
         },
       });
       handleReset();
+      setReload(Math.random())
       setIsModalOpen(false);
     }
   };

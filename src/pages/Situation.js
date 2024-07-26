@@ -9,6 +9,7 @@ import {
   getSituationDetails,
   removeSituation,
   activateSituation,
+  removeSituationDetail,
 } from "../api/API";
 import TVWallModal from "../components/situation/tvWallModal";
 import SingleScreenModal from "../components/situation/singlescreenModal";
@@ -58,6 +59,11 @@ const Situation = () => {
   const deleteSituation = async (event) => {
     const situationId = event.currentTarget.id;
     await removeSituation(situationId, store);
+    setReload(Math.random());
+  };
+
+  const deleteSituationDetail = async (situationDetailId) => {
+    await removeSituationDetail(situationDetailId, store);
     setReload(Math.random());
   };
 
@@ -176,7 +182,9 @@ const Situation = () => {
               key={`${text}-delete`}
               id={text}
               type="text"
-              onClick={() => {}}
+              onClick={() => {
+                deleteSituationDetail(text);
+              }}
               className="table-content"
             >
               <img
@@ -401,6 +409,7 @@ const Situation = () => {
         situation={expandSituation}
         isModalOpen={isUSBModalOpen}
         setIsModalOpen={setIsUSBModalOpen}
+        setReload={setReload}
       />
       <AudioModal
         situation={expandSituation}

@@ -198,14 +198,14 @@ const AudioModal = ({ situation, isModalOpen, setIsModalOpen }) => {
     if (selectedEncoder && selectedDecoders?.length !== 0) {
       await presetDeviceLink({
         store: store,
-        presetDetailId: `${situation.id}-${uuid()}`,
+        presetDetailId: `${situationItemName}@${uuid()}`,
         linkType: "audio",
         value1: selectedInOutputOption,
         encoder: selectedEncoder,
         remark: situationItemDesc,
         deviceLinkDetails: selectedDecoders,
         presetPostDetail: {
-          preSetId: situationItemName,
+          preSetId: situation.id,
           orderNum: 1,
           remark: situationItemDesc,
         },

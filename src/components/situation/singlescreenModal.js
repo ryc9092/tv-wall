@@ -300,14 +300,14 @@ const SingleScreenModal = ({
     });
     await presetDeviceLink({
       store: store,
-      presetDetailId: `${situation.id}-${uuid()}`,
+      presetDetailId: `${situationItemName}@${uuid()}`,
       linkType: "video",
       value1: "",
       encoder: encoder.mac,
       remark: situationItemDesc,
       deviceLinkDetails: linkDecoders,
       presetPostDetail: {
-        preSetId: situationItemName,
+        preSetId: situation.id,
         orderNum: 1,
         remark: situationItemDesc,
       },
