@@ -10,7 +10,13 @@ import "./addSituationContent.scss";
 import "./audioModal.scss";
 import "../../pages/Audio.scss";
 
-const AudioModal = ({ situation, isModalOpen, setIsModalOpen }) => {
+const AudioModal = ({
+  situation,
+  situationItemLength,
+  isModalOpen,
+  setIsModalOpen,
+  setReload,
+}) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
   const [situationItemName, setSituationItemName] = useState(null);
@@ -206,11 +212,12 @@ const AudioModal = ({ situation, isModalOpen, setIsModalOpen }) => {
         deviceLinkDetails: selectedDecoders,
         presetPostDetail: {
           preSetId: situation.id,
-          orderNum: 1,
+          orderNum: situationItemLength + 1,
           remark: situationItemDesc,
         },
       });
       handleReset();
+      setReload(Math.random());
       setIsModalOpen(false);
     }
   };

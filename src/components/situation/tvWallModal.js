@@ -18,12 +18,11 @@ import "./tvWallModal.scss";
 import "../../pages/TVWall.scss";
 
 const TVWallModal = ({
-  situationId,
-  setReloadPresetDetails,
-  detailsNum,
   situation,
+  situationItemLength,
   isModalOpen,
   setIsModalOpen,
+  setReload,
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
@@ -252,11 +251,12 @@ const TVWallModal = ({
       blocks: tempBlocks,
       presetPostDetail: {
         preSetId: situation.id,
-        orderNum: 1,
+        orderNum: situationItemLength + 1,
         remark: situationItemDesc,
       },
     });
     handleReset();
+    setReload(Math.random());
     setIsModalOpen(false);
   };
 

@@ -37,6 +37,7 @@ const Situation = () => {
   const [expandSituation, setExpandSituation] = useState(null);
   const [expandSituationCard, setExpandSituationCard] = useState(null);
   const [situationItems, setSituationItems] = useState([]);
+  const [situationItemLength, setSituationItemLength] = useState(0);
   const [situationActivated, setSituationActivated] = useState([]);
 
   const [isTVWallModalOpen, setIsTVWallModalOpen] = useState(false);
@@ -105,6 +106,12 @@ const Situation = () => {
           expandedSituation.id
         );
         setSituationItems(situationDetail);
+        let biggestSituationDetailOrder = 0;
+        situationDetail?.forEach((detail) => {
+          if (detail.orderNum > biggestSituationDetailOrder)
+            biggestSituationDetailOrder = detail.orderNum;
+        });
+        setSituationItemLength(biggestSituationDetailOrder);
         let expandCard = getSituationCard(
           expandedSituation,
           situationDetail,
@@ -149,10 +156,10 @@ const Situation = () => {
           {intl.formatMessage(Messages.Text_Common_Name)}
         </span>
       ),
-      dataIndex: "id",
+      dataIndex: "relation_id",
       key: "name",
       render: (text) => {
-        return <span className="table-content">{text}</span>;
+        return <span className="table-content">{text.split("@")[0]}</span>;
       },
     },
     {
@@ -397,24 +404,31 @@ const Situation = () => {
       </div>
       <TVWallModal
         situation={expandSituation}
+        situationItemLength={situationItemLength}
         isModalOpen={isTVWallModalOpen}
         setIsModalOpen={setIsTVWallModalOpen}
+        setReload={setReload}
       />
       <SingleScreenModal
         situation={expandSituation}
+        situationItemLength={situationItemLength}
         isModalOpen={isSingleScreenModalOpen}
         setIsModalOpen={setIsSingleScreenModalOpen}
+        setReload={setReload}
       />
       <USBModal
         situation={expandSituation}
+        situationItemLength={situationItemLength}
         isModalOpen={isUSBModalOpen}
         setIsModalOpen={setIsUSBModalOpen}
         setReload={setReload}
       />
       <AudioModal
         situation={expandSituation}
+        situationItemLength={situationItemLength}
         isModalOpen={isAudioModalOpen}
         setIsModalOpen={setIsAudioModalOpen}
+        setReload={setReload}
       />
     </div>
   );

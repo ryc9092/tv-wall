@@ -11,9 +11,10 @@ import "./usbModal.scss";
 
 const USBModal = ({
   situation,
+  situationItemLength,
   isModalOpen,
   setIsModalOpen,
-  setReload
+  setReload,
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
@@ -204,12 +205,12 @@ const USBModal = ({
         deviceLinkDetails: selectedDecoders,
         presetPostDetail: {
           preSetId: situation.id,
-          orderNum: 1,
+          orderNum: situationItemLength + 1,
           remark: situationItemDesc,
         },
       });
       handleReset();
-      setReload(Math.random())
+      setReload(Math.random());
       setIsModalOpen(false);
     }
   };

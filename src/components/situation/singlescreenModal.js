@@ -22,12 +22,11 @@ import "./singlescreenModal.scss";
 import "../../pages/SingleScreen.scss";
 
 const SingleScreenModal = ({
-  situationId,
-  setReloadPresetDetails,
-  detailsNum,
   situation,
+  situationItemLength,
   isModalOpen,
   setIsModalOpen,
+  setReload,
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
@@ -124,10 +123,7 @@ const SingleScreenModal = ({
     let tempDecoderCards = [];
     filteredDecoders?.forEach((decoder) => {
       tempDecoderCards.push(
-        <Col
-          key={`col@${decoder.mac}`}
-          id={`card@${decoder.mac}`}
-        >
+        <Col key={`col@${decoder.mac}`} id={`card@${decoder.mac}`}>
           <div
             className="situation-single-screen-card"
             onClick={(event) => onScreenClick(event, selectedEncoder)}
@@ -139,7 +135,10 @@ const SingleScreenModal = ({
                 title="Video player"
               />
             ) : null}
-            <div id={`card@${decoder.mac}`} className="situation-single-screen-card-top">
+            <div
+              id={`card@${decoder.mac}`}
+              className="situation-single-screen-card-top"
+            >
               <div
                 id={`card@${decoder.mac}`}
                 className="situation-single-screen-card-title-row"
@@ -308,11 +307,12 @@ const SingleScreenModal = ({
       deviceLinkDetails: linkDecoders,
       presetPostDetail: {
         preSetId: situation.id,
-        orderNum: 1,
+        orderNum: situationItemLength + 1,
         remark: situationItemDesc,
       },
     });
     handleReset();
+    setReload(Math.random());
     setIsModalOpen(false);
   };
 
