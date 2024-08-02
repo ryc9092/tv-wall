@@ -153,18 +153,6 @@ const Situation = () => {
     {
       title: (
         <span className="table-head">
-          {intl.formatMessage(Messages.Text_Common_Name)}
-        </span>
-      ),
-      dataIndex: "relation_id",
-      key: "name",
-      render: (text) => {
-        return <span className="table-content">{text.split("@")[0]}</span>;
-      },
-    },
-    {
-      title: (
-        <span className="table-head">
           {intl.formatMessage(Messages.Text_Common_Description)}
         </span>
       ),

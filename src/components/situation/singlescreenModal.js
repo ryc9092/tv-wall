@@ -30,7 +30,6 @@ const SingleScreenModal = ({
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
-  const [situationItemName, setSituationItemName] = useState(null);
   const [situationItemDesc, setSituationItemDesc] = useState(null);
   const [selectedEncoder, setSelectedEncoder] = useState({
     mac: "",
@@ -280,7 +279,6 @@ const SingleScreenModal = ({
   };
 
   const handleReset = () => {
-    setSituationItemName(null);
     setSituationItemDesc(null);
     setSelectedEncoder({
       mac: "",
@@ -299,7 +297,7 @@ const SingleScreenModal = ({
     });
     await presetDeviceLink({
       store: store,
-      presetDetailId: `${situationItemName}@${uuid()}`,
+      presetDetailId: `video@${uuid()}`,
       linkType: "video",
       value1: "",
       encoder: encoder.mac,
@@ -341,23 +339,6 @@ const SingleScreenModal = ({
             <div className="situation-single-screen-option-row">
               <div className="situation-single-screen-input-layout-column">
                 <div>
-                  <div className="situation-single-screen-input-text">
-                    <FormattedMessage {...Messages.Text_Common_Name} />
-                  </div>
-                  <div>
-                    <Input
-                      className="situation-single-screen-input situation-single-screen-input-placeholder"
-                      value={situationItemName}
-                      placeholder={intl.formatMessage(
-                        Messages.Text_Common_InputName
-                      )}
-                      onChange={(e) => {
-                        setSituationItemName(e.target.value);
-                      }}
-                    />
-                  </div>
-                </div>
-                <div style={{ marginTop: 24 }}>
                   <div className="situation-single-screen-input-text">
                     <FormattedMessage {...Messages.Text_Common_Description} />
                   </div>

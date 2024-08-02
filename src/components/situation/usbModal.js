@@ -18,7 +18,6 @@ const USBModal = ({
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
-  const [situationItemName, setSituationItemName] = useState(null);
   const [situationItemDesc, setSituationItemDesc] = useState(null);
   const [decoders, setDecoders] = useState([]);
   const [encoders, setEncoders] = useState([]);
@@ -181,7 +180,6 @@ const USBModal = ({
   };
 
   const handleReset = () => {
-    setSituationItemName(null);
     setSituationItemDesc(null);
     setDecoders([]);
     setEncoders([]);
@@ -197,7 +195,7 @@ const USBModal = ({
     if (selectedEncoder && selectedDecoders?.length !== 0) {
       await presetDeviceLink({
         store: store,
-        presetDetailId: `${situationItemName}@${uuid()}`,
+        presetDetailId: `usb@${uuid()}`,
         linkType: "usb",
         value1: "",
         encoder: selectedEncoder,
@@ -238,23 +236,6 @@ const USBModal = ({
             <div className="situation-usb-option-row">
               <div className="situation-usb-input-layout-column">
                 <div>
-                  <div className="situation-usb-input-text">
-                    <FormattedMessage {...Messages.Text_Common_Name} />
-                  </div>
-                  <div>
-                    <Input
-                      className="situation-usb-input situation-usb-input-placeholder"
-                      value={situationItemName}
-                      placeholder={intl.formatMessage(
-                        Messages.Text_Common_InputName
-                      )}
-                      onChange={(e) => {
-                        setSituationItemName(e.target.value);
-                      }}
-                    />
-                  </div>
-                </div>
-                <div style={{ marginTop: 24 }}>
                   <div className="situation-usb-input-text">
                     <FormattedMessage {...Messages.Text_Common_Description} />
                   </div>

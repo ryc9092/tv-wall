@@ -19,7 +19,6 @@ const AudioModal = ({
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
-  const [situationItemName, setSituationItemName] = useState(null);
   const [situationItemDesc, setSituationItemDesc] = useState(null);
   const [decoders, setDecoders] = useState([]);
   const [encoders, setEncoders] = useState([]);
@@ -187,7 +186,6 @@ const AudioModal = ({
   };
 
   const handleReset = () => {
-    setSituationItemName(null);
     setSituationItemDesc(null);
     setDecoders([]);
     setEncoders([]);
@@ -204,7 +202,7 @@ const AudioModal = ({
     if (selectedEncoder && selectedDecoders?.length !== 0) {
       await presetDeviceLink({
         store: store,
-        presetDetailId: `${situationItemName}@${uuid()}`,
+        presetDetailId: `audio@${uuid()}`,
         linkType: "audio",
         value1: selectedInOutputOption,
         encoder: selectedEncoder,
@@ -245,23 +243,6 @@ const AudioModal = ({
             <div className="situation-audio-option-row">
               <div className="situation-audio-input-layout-column">
                 <div>
-                  <div className="situation-audio-input-text">
-                    <FormattedMessage {...Messages.Text_Common_Name} />
-                  </div>
-                  <div>
-                    <Input
-                      className="situation-audio-input situation-audio-input-placeholder"
-                      value={situationItemName}
-                      placeholder={intl.formatMessage(
-                        Messages.Text_Common_InputName
-                      )}
-                      onChange={(e) => {
-                        setSituationItemName(e.target.value);
-                      }}
-                    />
-                  </div>
-                </div>
-                <div style={{ marginTop: 24 }}>
                   <div className="situation-audio-input-text">
                     <FormattedMessage {...Messages.Text_Common_Description} />
                   </div>

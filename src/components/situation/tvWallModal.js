@@ -26,7 +26,6 @@ const TVWallModal = ({
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
-  const [situationItemName, setSituationItemName] = useState(null);
   const [situationItemDesc, setSituationItemDesc] = useState(null);
   const [wallOptions, setWallOptions] = useState([]);
   const [wallDimension, setWallDimension] = useState({ col: 0, row: 0 });
@@ -215,7 +214,6 @@ const TVWallModal = ({
   ];
 
   const handleReset = () => {
-    setSituationItemName(null);
     setSituationItemDesc(null);
     setWallOptions([]);
     setWallDimension({ col: 0, row: 0 });
@@ -245,7 +243,7 @@ const TVWallModal = ({
     });
     await presetWall({
       store: store,
-      activeId: `${situationItemName}@${uuid()}`,
+      activeId: `tvwall@${uuid()}`,
       wallId: selectedWall.wallId,
       templateId: selectedTemplate.templateId,
       blocks: tempBlocks,
@@ -283,23 +281,6 @@ const TVWallModal = ({
             <div className="situation-wall-option-row">
               <div className="situation-wall-input-layout-column">
                 <div>
-                  <div className="situation-wall-input-text">
-                    <FormattedMessage {...Messages.Text_Common_Name} />
-                  </div>
-                  <div>
-                    <Input
-                      className="situation-wall-input situation-wall-input-placeholder"
-                      value={situationItemName}
-                      placeholder={intl.formatMessage(
-                        Messages.Text_Common_InputName
-                      )}
-                      onChange={(e) => {
-                        setSituationItemName(e.target.value);
-                      }}
-                    />
-                  </div>
-                </div>
-                <div style={{ marginTop: 24 }}>
                   <div className="situation-wall-input-text">
                     <FormattedMessage {...Messages.Text_Common_Description} />
                   </div>
