@@ -10,6 +10,7 @@ import AudioIcon from "../../assets/audio.png";
 import SituationIcon from "../../assets/situation.png";
 import StatusIcon from "../../assets/status.png";
 import SettingIcon from "../../assets/setting.png";
+import SurveillanceIcon from "../../assets/surveillance.png";
 import "./sidebar.scss";
 
 const MenuItem = ({ item }) => {
@@ -119,6 +120,19 @@ const Sidebar = () => {
         />
       ),
       icon: <img src={SettingIcon} alt="setting" className="menu-icon" />,
+    },
+    {
+      key: "surveillance",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Surveillance_Title)}
+          </span>
+        />
+      ),
+      icon: (
+        <img src={SurveillanceIcon} alt="surveillance" className="menu-icon" />
+      ),
     },
   ];
 

@@ -1,0 +1,48 @@
+@import '../App.scss';
+
+.surveillance-layout {
+    margin-top: 48px;
+    margin-left: 80px;
+}
+
+.surveillance-container {
+    margin-top: 48px;
+}
+
+.surveillance-stream-card {
+    width: 380px;
+    height: 280px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+}
+
+.surveillance-stream-cover {
+    width: 380px;
+    height: 280px;
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+    padding: 6px;
+}
+
+.surveillance-stream-cover-text {
+    font-family: Noto Sans TC;
+    font-size: 14px;
+}
+
+.surveillance-stream-iframe {
+    width: 370px;
+    height: 270px;
+    padding: 2px;
+}
+
+.surveillance-modal-stream-iframe {
+    width: 1080px;
+    height: 830px;
+    margin: 45px 30px 30px 30px;
+    border: none;
+    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+}

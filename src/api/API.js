@@ -599,3 +599,11 @@ export const presetWall = async ({
     store,
   });
 };
+
+export const getStreams = async (store) => {
+  const apiPath = `/streams`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};

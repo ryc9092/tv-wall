@@ -976,6 +976,12 @@ export default defineMessages({
     defaultMessage: "新增使用帳號",
   },
 
+  // Surveillance
+  Text_Surveillance_Title: {
+    id: "Text-Surveillance-Title",
+    defaultMessage: "來源監看",
+  },
+
   // Barcode
   Text_Barcode_Title: {
     id: "Text-Barcode-Title",
