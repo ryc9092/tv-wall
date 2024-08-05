@@ -193,7 +193,8 @@ const TvWall = ({
             marginTop: `${
               (document.getElementById("tv-wall-container").clientHeight /
                 tvWallSize.row) *
-              block.marginTop
+                block.marginTop -
+              (index % selectedWall.col === 0 ? 0 : 2)
             }px`,
             border: "1px solid #a5a5a5",
             cursor: "pointer",
