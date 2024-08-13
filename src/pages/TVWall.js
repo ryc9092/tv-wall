@@ -128,8 +128,8 @@ const TVWall = () => {
         if (activedWall && activedWall.templateId === selectedTemplate?.id) {
           // has actived wall, and select template is the same
           let tempMap = {};
-          activedWall.blocks.forEach((block) => {
-            encoders.forEach((encoder) => {
+          activedWall.blocks?.forEach((block) => {
+            encoders?.forEach((encoder) => {
               if (block.encoder === encoder.mac) {
                 tempMap[block.block] = {
                   mac: encoder.mac,
@@ -428,7 +428,7 @@ const TVWall = () => {
           <div className="tvwall-card-right-desc">
             <FormattedMessage {...Messages.Text_TVWall_VideoSourceDesc} />
           </div>
-          <div className="tvwall-card-right-preview">
+          {/* <div className="tvwall-card-right-preview">
             {selectedEncoder.previewUrl ? (
               <div>
                 <iframe
@@ -443,7 +443,7 @@ const TVWall = () => {
                 <FormattedMessage {...Messages.Text_TVWall_Preview} />
               </div>
             )}
-          </div>
+          </div> */}
           <Input
             className="tvwall-card-right-search tvwall-input"
             variant="filled"
@@ -457,7 +457,7 @@ const TVWall = () => {
             <Table
               columns={columns}
               dataSource={filteredEncoders}
-              pagination={{ pageSize: 7 }}
+              pagination={{ pageSize: 11 }}
               onRow={(record) => ({
                 onClick: () => {
                   handleChooseEncoder(record);
