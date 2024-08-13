@@ -10,7 +10,6 @@
 
 # production
 /build
-vars.json
 
 # misc
 .DS_Store
