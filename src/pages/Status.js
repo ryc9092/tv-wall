@@ -41,10 +41,10 @@ const Status = () => {
   };
 
   // Clear interval before set
-  window.clearInterval(window.retriveDevicesTimer);
+  // window.clearInterval(window.retriveDevicesTimer);
 
   // Set interval to update devices
-  window.retriveDevicesTimer = setInterval(retriveDevices, 10000);
+  // window.retriveDevicesTimer = setInterval(retriveDevices, 10000);
 
   const reboot = async (mac) => {
     await rebootDevice(mac, store);
