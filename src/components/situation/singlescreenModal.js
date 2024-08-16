@@ -393,7 +393,7 @@ const SingleScreenModal = ({
               <div className="singlescreen-card-right-desc">
                 <FormattedMessage {...Messages.Text_TVWall_VideoSourceDesc} />
               </div>
-              <div className="singlescreen-card-right-preview">
+              {/* <div className="singlescreen-card-right-preview">
                 {selectedEncoder.previewUrl ? (
                   <div>
                     <iframe
@@ -408,7 +408,7 @@ const SingleScreenModal = ({
                     <FormattedMessage {...Messages.Text_TVWall_Preview} />
                   </div>
                 )}
-              </div>
+              </div> */}
               <Input
                 className="singlescreen-card-right-search singlescreen-input"
                 variant="filled"
@@ -424,7 +424,7 @@ const SingleScreenModal = ({
                 <Table
                   columns={columns}
                   dataSource={filteredEncoders}
-                  pagination={{ pageSize: 7 }}
+                  pagination={{ pageSize: 11 }}
                   onRow={(record) => ({
                     onClick: () => {
                       handleChooseEncoder(record);
