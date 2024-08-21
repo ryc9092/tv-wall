@@ -280,6 +280,14 @@ export const removeDeviceLink = async ({
   });
 };
 
+export const getDevices = async (store ) => {
+  const apiPath = `/devices/init`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
 export const getDeviceLinks = async ({ store, linkType, isPreset }) => {
   const params = `linkType=${linkType}`;
   const apiPath = `/devicelinks/query`;
