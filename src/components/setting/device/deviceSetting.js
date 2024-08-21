@@ -185,16 +185,16 @@ const TemplateSetting = () => {
         const editable = isEditing(record);
         return editable ? (
           <div style={{ display: "flex" }}>
-            <div className="device-setting-save-btn">
-              <span
-                onClick={() => save(record.key)}
-                className="device-setting-save-btn-text"
-              >
+            <div
+              className="device-setting-save-btn"
+              onClick={() => save(record.key)}
+            >
+              <span className="device-setting-save-btn-text">
                 <FormattedMessage {...Messages.Text_Button_Save} />
               </span>
             </div>
-            <div className="device-setting-cancel-btn">
-              <span onClick={cancel} className="device-setting-cancel-btn-text">
+            <div className="device-setting-cancel-btn" onClick={cancel}>
+              <span className="device-setting-cancel-btn-text">
                 <FormattedMessage {...Messages.Text_Button_Cancel} />
               </span>
             </div>
