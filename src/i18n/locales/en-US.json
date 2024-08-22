@@ -75,6 +75,7 @@
   "Text-TVWall-ActiveFail": "Execution failed",
   "Text-TVWall-DeactiveSuccess": "Clear all connections successfully",
   "Text-TVWall-DeactiveFail": "Fail to clear all connections",
+  "Text-TVWall-ConnectEncoder": "connect encoder",
 
   "Text-SingleScreen-Management": "Source and Display Management",
   "Text-SingleScreen-TabSingleScreen": "Single Display",

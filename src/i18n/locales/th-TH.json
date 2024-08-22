@@ -75,6 +75,7 @@
   "Text-TVWall-ActiveFail": "play video fail",
   "Text-TVWall-DeactiveSuccess": "clear video connection success",
   "Text-TVWall-DeactiveFail": "clear video connection fail",
+  "Text-TVWall-ConnectEncoder": "connect encoder",
 
   "Text-SingleScreen-Management": "Single Screen Management",
   "Text-SingleScreen-TabSingleScreen": "Single Screen",

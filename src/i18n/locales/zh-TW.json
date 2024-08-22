@@ -75,6 +75,7 @@
   "Text-TVWall-ActiveFail": "執行失敗, 請確認樣板、編碼器設定無誤",
   "Text-TVWall-DeactiveSuccess": "清除影像連結成功",
   "Text-TVWall-DeactiveFail": "清除影像連結失敗",
+  "Text-TVWall-ConnectEncoder": "連接編碼器",
 
   "Text-SingleScreen-Management": "單畫面影像管理",
   "Text-SingleScreen-TabSingleScreen": "單顯示器",

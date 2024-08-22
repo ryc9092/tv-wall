@@ -260,8 +260,18 @@ const TvWall = ({
                   }
                   className="wall-block-title"
                 >
-                  <FormattedMessage {...Messages.Text_Common_Block} />{" "}
-                  {block.block}
+                  {block.encoder?.previewUrl &&
+                  currentBlock === `screen-cover-${block.block}` ? (
+                    <span>
+                      <FormattedMessage {...Messages.Text_Common_Block} />{" "}
+                      {block.block}{" "}
+                    </span>
+                  ) : null}
+                  {block.encoder?.previewUrl ? null : (
+                    <FormattedMessage
+                      {...Messages.Text_TVWall_ConnectEncoder}
+                    />
+                  )}
                 </span>
                 <br />
                 <br />
@@ -434,7 +444,10 @@ const TvWall = ({
   };
 
   return (
-    <div id="tv-wall-container" style={{ width: "100%", height: "100%", border: "1px solid #a5a5a5" }}>
+    <div
+      id="tv-wall-container"
+      style={{ width: "100%", height: "100%", border: "1px solid #a5a5a5" }}
+    >
       {tvWallTemplate}
     </div>
   );
