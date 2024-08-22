@@ -5,7 +5,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Actions } from "../components/store/reducer";
 import { StoreContext } from "../components/store/store";
 import Messages from "../messages";
-import { loginAPI } from "../api/API";
+import { login } from "../api/API";
+import { showWarningNotification } from "../utils/Utils";
 import BeforeLoginAnime from "../assets/logoAnimeForward.mp4";
 import AfterLoginAnime from "../assets/logoAnimeReverse.mp4";
 import loginBackground from "../assets/login.png";
@@ -45,7 +46,7 @@ const Login = () => {
   }, [store.account, dispatch, location, navigate]);
 
   const onLogin = async ({ account, password }) => {
-    const token = await loginAPI(account, password, store);
+    const token = await login(account, password, store);
     if (token) {
       await playAnimePeriod(AfterLoginAnime);
       sessionStorage.setItem("token", token);
@@ -53,7 +54,7 @@ const Login = () => {
       dispatch({ type: Actions.SetAccount, payload: account });
       loginComplete(location, navigate);
     } else {
-      setError(intl.formatMessage(Messages.Text_Login_FailMsg));
+      showWarningNotification(intl.formatMessage(Messages.Text_Login_FailMsg));
     }
   };
 

@@ -2,35 +2,31 @@ import { Actions } from "../components/store/reducer";
 
 // Login API ========================================================
 
-export const loginAPI = async (userName, password) => {
-  return "JWT";
-};
-
-export const login = async ({ username, password, store }) => {
+export const login = async (username, password, store) => {
   const apiPath = "/auth/login";
   const body = JSON.stringify({
-    uId: username,
+    user: username,
     pwd: password,
   });
+  const API_BASE = `${store.vars.ApiServer.Hostname}`;
+  const response = await fetch(`${API_BASE}${apiPath}`, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "omit",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: body,
+  });
   try {
-    const API_BASE = `${store.vars.ApiServer.Hostname}`;
-    const response = await fetch(`${API_BASE}${apiPath}`, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "omit",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-      body: body,
-    });
-    const result = await response.json();
+    const json = await response.json();
+    if (json.code !== 0) throw new Error(json.msg);
+    let result = json.Data;
     return result;
-  } catch (error) {
-    console.log(error.message);
-  }
+  } catch (error) {}
 };
 
 // Get ========================================================
@@ -280,7 +276,7 @@ export const removeDeviceLink = async ({
   });
 };
 
-export const getDevices = async (store ) => {
+export const getDevices = async (store) => {
   const apiPath = `/devices/init`;
   return await apiGET({
     apiPath,
