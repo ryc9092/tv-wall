@@ -619,7 +619,7 @@ const Audio = () => {
                     ) : (
                       <FormattedMessage
                         className="audio-add-btn-text"
-                        {...Messages.Text_Button_Edit}
+                        {...Messages.Text_Common_Confirm}
                       />
                     )}
                   </span>
