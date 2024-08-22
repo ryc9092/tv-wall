@@ -13,6 +13,7 @@
   "Text-Common-Dimension": "牆面尺寸",
   "Text-Common-Detail": "詳細資料",
   "Text-Common-Group": "群組",
+  "Text-Common-Confirm": "確認",
   "Text-Common-EncoderName": "來源名稱",
   "Text-Common-Encoder": "輸入來源",
   "Text-Common-Decoder": "輸出終端",
@@ -150,7 +151,7 @@
 
   "Text-DeviceStatus-CurrentStatus": "設備狀態",
   "Text-DeviceStatus-InputDeviceName": "輸入設備名稱",
-  "Text-DeviceStatus-MonitorSwitch": "顯示器開關",
+  "Text-DeviceStatus-MonitorSwitch": "設備重啟",
   "Text-DeviceStatus-Model": "模型",
   "Text-DeviceStatus-ProductCode": "產品編號",
   "Text-DeviceStatus-ProductDesc": "產品描述",

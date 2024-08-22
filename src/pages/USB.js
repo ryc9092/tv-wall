@@ -577,7 +577,7 @@ const USB = () => {
                     ) : (
                       <FormattedMessage
                         className="usb-add-btn-text"
-                        {...Messages.Text_Button_Edit}
+                        {...Messages.Text_Common_Confirm}
                       />
                     )}
                   </span>

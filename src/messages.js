@@ -15,6 +15,7 @@ export default defineMessages({
   Text_Common_Type: { id: "Text-Common-Type", defaultMessage: "類型" },
   Text_Common_Detail: { id: "Text-Common-Detail", defaultMessage: "詳細資料" },
   Text_Common_Group: { id: "Text-Common-Group", defaultMessage: "群組" },
+  Text_Common_Confirm: { id: "Text-Common-Confirm", defaultMessage: "確認" },
   Text_Common_Dimension: {
     id: "Text-Common-Dimension",
     defaultMessage: "維度",
@@ -601,7 +602,7 @@ export default defineMessages({
   },
   Text_DeviceStatus_MonitorSwitch: {
     id: "Text-DeviceStatus-MonitorSwitch",
-    defaultMessage: "顯示器開關",
+    defaultMessage: "設備重啟",
   },
   Text_DeviceStatus_Model: {
     id: "Text-DeviceStatus-Model",
