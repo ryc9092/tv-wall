@@ -129,6 +129,8 @@ const Status = () => {
       render: (text, record) => {
         const content = (
           <div className="table-content">
+            IP : {record.ip}
+            <br />
             MAC : {record.mac}
             <br />
             <FormattedMessage {...Messages.Text_DeviceStatus_Model} />
