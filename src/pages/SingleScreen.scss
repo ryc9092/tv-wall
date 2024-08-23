@@ -27,7 +27,7 @@
 
 .single-screen-card {
     width: 280px;
-    height: 215px;
+    height: 269px;
     border-radius: 12px;
     margin-bottom: 12px;
     cursor: pointer;
@@ -36,7 +36,7 @@
 
 .single-screen-card-collapse {
     width: 309px;
-    height: 239px;
+    height: 293px;
     border-radius: 12px;
     margin-bottom: 12px;
     cursor: pointer;
@@ -45,7 +45,7 @@
 
 .single-screen-card-top {
     width: 278px;
-    height: 213px;
+    height: 268px;
     border-radius: 12px;
     margin-bottom: 12px;
     cursor: pointer;
@@ -56,7 +56,7 @@
 
 .single-screen-card-top-collapse {
     width: 307px;
-    height: 237px;
+    height: 292px;
     border-radius: 12px;
     margin-bottom: 12px;
     cursor: pointer;
@@ -68,17 +68,19 @@
 .single-screen-card-video {
     width: 278px;
     height: 213px;
+    margin-top: 55px;
     position: absolute;
     border: 0;
-    border-radius: 12px !important;
+    border-radius: 0px 0px 12px 12px !important;
 }
 
 .single-screen-card-video-collapse {
     width: 307px;
     height: 237px;
+    margin-top: 55px;
     position: absolute;
     border: 0;
-    border-radius: 12px !important;
+    border-radius: 0px 0px 12px 12px !important;
 }
 
 .single-screen-card-title-row {
@@ -112,13 +114,13 @@
 }
 
 .single-screen-btn-position {
-    margin-top: 80px;
-    margin-left: 135px;
+    margin-top: 135px;
+    margin-left: 140px;
 }
 
 .single-screen-btn-position-collapse {
-    margin-top: 100px;
-    margin-left: 160px;
+    margin-top: 155px;
+    margin-left: 165px;
 }
 
 .single-screen-trash-btn {
