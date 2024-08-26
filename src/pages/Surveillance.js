@@ -69,7 +69,7 @@ const Surveillance = () => {
       </div>
       <Modal
         className="surveillance-modal"
-        width={1320}
+        width={1260}
         open={isModalOpen}
         footer={null}
         onCancel={() => {
