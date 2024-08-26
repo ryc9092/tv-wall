@@ -42,14 +42,14 @@ const apiGET = async ({
   let result;
   const API_BASE = `${vars.ApiServer.Hostname}`;
   const paramsUri = params === undefined ? "" : `?${params}`;
-  // const jwt = sessionStorage.getItem("token");
+  const jwt = sessionStorage.getItem("token");
   const response = await fetch(`${API_BASE}${apiPath}${paramsUri}`, {
     method: "GET",
     mode: "cors",
     cache: "no-cache",
     credentials: "omit",
     headers: {
-      // Authorization: `Bearer ${jwt}`,
+      Authorization: `Bearer ${jwt}`,
       "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
     },
     redirect: "follow",
@@ -93,14 +93,14 @@ const apiPOST = async ({
     : "application/x-www-form-urlencoded; charset=UTF-8";
   const API_BASE = `${vars.ApiServer.Hostname}`;
   const paramsUri = params === undefined ? "" : `?${params}`;
-  // const jwt = sessionStorage.getItem("token");
+  const jwt = sessionStorage.getItem("token");
   const response = await fetch(`${API_BASE}${apiPath}${paramsUri}`, {
     method: httpMethod,
     mode: "cors",
     cache: "no-cache",
     credentials: "omit",
     headers: {
-      // Authorization: `Bearer ${jwt}`,
+      Authorization: `Bearer ${jwt}`,
       "Content-Type": `${contentType}`,
     },
     redirect: "follow",
@@ -145,14 +145,14 @@ const apiCall = async ({
     : "application/x-www-form-urlencoded; charset=UTF-8";
   const API_BASE = `${vars.ApiServer.Hostname}`;
   const paramsUri = params === undefined ? "" : `?${params}`;
-  // const jwt = sessionStorage.getItem("token");
+  const jwt = sessionStorage.getItem("token");
   const response = await fetch(`${API_BASE}${apiPath}${paramsUri}`, {
     method: httpMethod,
     mode: "cors",
     cache: "no-cache",
     credentials: "omit",
     headers: {
-      // Authorization: `Bearer ${jwt}`,
+      Authorization: `Bearer ${jwt}`,
       "Content-Type": `${contentType}`,
     },
     redirect: "follow",
