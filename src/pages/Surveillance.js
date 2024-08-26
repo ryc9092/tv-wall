@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { PlayCircleOutlined } from "@ant-design/icons";
 import { StoreContext } from "../components/store/store";
 import { Col, Modal, Row } from "antd";
 import { getStreams } from "../api/API";
@@ -11,35 +12,42 @@ const Surveillance = () => {
   const [store] = useContext(StoreContext);
   const [streamCards, setStreamCards] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedStream, setSelectedStream] = useState(null);
+  const [selectedStream, setSelectedStream] = useState({});
 
   useEffect(() => {
     (async () => {
       const result = await getStreams(store);
-      const streamList = result?.Urls;
+      const streamList = result?.RtElement;
       if (streamList) {
         let tempStreamCards = [];
         streamList?.forEach((stream) => {
           let streamCard = (
-            <Col key={stream} className="surveillance-stream-card">
+            <Col key={stream.Name} className="surveillance-stream-card">
               <div
                 className="surveillance-stream-cover"
                 onClick={() => {
-                  setIsModalOpen(true);
                   setSelectedStream(stream);
+                  const modal =
+                    document.getElementsByClassName("surveillance-modal");
+                  if (modal) {
+                    const iframe = document.getElementsByClassName(
+                      "surveillance-modal-stream-iframe"
+                    );
+                    iframe[0]?.setAttribute("src", stream.Url);
+                  }
+                  setIsModalOpen(true);
                 }}
               >
                 <span className="surveillance-stream-cover-text">
-                  <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
-                  {" : "}
-                  {stream}
+                  {stream.Name}
+                </span>
+                <span className="surveillance-stream-cover-text">
+                  {stream.Ip}
                 </span>
               </div>
-              <iframe
-                src={stream}
-                title="Video player"
-                className="surveillance-stream-card"
-              />
+              <div>
+                <PlayCircleOutlined className="surveillance-stream-play-icon"/>
+              </div>
             </Col>
           );
           tempStreamCards.push(streamCard);
@@ -61,15 +69,20 @@ const Surveillance = () => {
       </div>
       <Modal
         className="surveillance-modal"
-        width={1200}
+        width={1320}
         open={isModalOpen}
         footer={null}
         onCancel={() => {
+          setSelectedStream({});
+          const iframe = document.getElementsByClassName(
+            "surveillance-modal-stream-iframe"
+          );
+          iframe[0].src = "";
           setIsModalOpen(false);
         }}
       >
         <iframe
-          src={selectedStream}
+          src={selectedStream.Url}
           title="Video player"
           className="surveillance-modal-stream-iframe"
         />
