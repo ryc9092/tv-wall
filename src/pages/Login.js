@@ -180,6 +180,6 @@ export default Login;
 
 function loginComplete(location, navigate) {
   // redirect to previous state or root
-  const { from } = location.state || { from: { pathname: "/tv-wall" } };
+  const { from } = location.state || { from: { pathname: "/situation" } };
   navigate(from);
 }
