@@ -18,8 +18,8 @@ const Setting = () => {
     tvwall: <TVWallSetting />,
     template: <TemplateSetting />,
     device: <DeviceSetting />,
-    singlescreen: <SettingWallModal />,
-    devicesetting: <SettingDeviceModal />,
+    // singlescreen: <SettingWallModal />,
+    // devicesetting: <SettingDeviceModal />,
   };
 
   return (

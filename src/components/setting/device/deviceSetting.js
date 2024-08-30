@@ -66,7 +66,7 @@ const TemplateSetting = () => {
       let tempDevices = [];
       const devices = await getDevices(store);
       devices.forEach((device) => {
-        device.key = device.name;
+        device.key = device.name + Math.random();
         tempDevices.push(device);
       });
       setDevices(tempDevices);
@@ -77,6 +77,9 @@ const TemplateSetting = () => {
 
   const edit = (record) => {
     setEditingKey(record.key);
+    setEditedNickName(record.nickName);
+    setEditedAudioAnalog(record.audioAnalogy);
+    setEditedAudioHdmi(record.audioHdmi);
   };
 
   const cancel = () => {
@@ -133,9 +136,9 @@ const TemplateSetting = () => {
       render: (text, record) => (
         <div
           className={
-            record.isNew === false
+            record.isNew === true
               ? "table-content table-content-text-isnew"
-              : "table-content"
+              : "table-content table-content-text"
           }
         >
           {record.type}
