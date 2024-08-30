@@ -4,7 +4,7 @@ import { Button, Modal, Table, Select } from "antd";
 import { getWallScreensById } from "../../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
-import PencilIcon from "../../../assets/pencil.png";
+import SearchIcon from "../../../assets/magnifying-glass.png";
 import "../../../App.scss";
 import "./tvWallSetting.scss";
 import "./viewWall.scss";
@@ -102,7 +102,7 @@ const ViewWall = ({ wall }) => {
         style={{ marginight: 6 }}
         className="table-content"
       >
-        <img alt="edit" src={PencilIcon} className="table-content-icon" />
+        <img alt="edit" src={SearchIcon} className="table-content-icon" />
       </Button>
       <Modal
         title=<span className="view-wall-modal-title">
