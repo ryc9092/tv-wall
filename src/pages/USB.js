@@ -442,7 +442,7 @@ const USB = () => {
             <Table columns={columns} dataSource={linkData} />
           </div>
         ) : (
-          <div className="usb-content-container">
+          <div className="usb-content-container-add-connection">
             <div className="usb-add-title-row">
               <Button
                 shape="circle"

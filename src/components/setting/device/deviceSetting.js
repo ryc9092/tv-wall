@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../store/store";
-import { Button, Input, Table, Typography } from "antd";
+import { Button, Input, Table } from "antd";
 import { getDevices, editDevice } from "../../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
