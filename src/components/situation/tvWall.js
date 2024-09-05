@@ -438,7 +438,10 @@ const TvWall = ({
   };
 
   return (
-    <div id="tv-wall-container" style={{ width: "100%", height: "100%" }}>
+    <div
+      id="tv-wall-container"
+      style={{ width: "100%", height: "100%", border: "1px solid #a5a5a5" }}
+    >
       {tvWallTemplate}
     </div>
   );
