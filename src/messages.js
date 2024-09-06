@@ -260,9 +260,9 @@ export default defineMessages({
     id: "Text-TVWall-DeactiveFail",
     defaultMessage: "清除影像連結失敗",
   },
-  Text_TVWall_ConnectEncoder: {
-    id: "Text-TVWall-ConnectEncoder",
-    defaultMessage: "連接編碼器",
+  Text_TVWall_ConnectSource: {
+    id: "Text-TVWall-ConnectSource",
+    defaultMessage: "連接影像來源",
   },
 
   // Single screen management

@@ -260,8 +260,16 @@ const TvWall = ({
                   }
                   className="wall-block-title"
                 >
-                  <FormattedMessage {...Messages.Text_Common_Block} />{" "}
-                  {block.block}
+                  {block.encoder?.previewUrl &&
+                  currentBlock === `screen-cover-${block.block}` ? (
+                    <span>
+                      <FormattedMessage {...Messages.Text_Common_Block} />{" "}
+                      {block.block}{" "}
+                    </span>
+                  ) : null}
+                  {block.encoder?.previewUrl ? null : (
+                    <FormattedMessage {...Messages.Text_TVWall_ConnectSource} />
+                  )}
                 </span>
                 <br />
                 <br />

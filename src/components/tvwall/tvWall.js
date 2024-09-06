@@ -268,9 +268,7 @@ const TvWall = ({
                     </span>
                   ) : null}
                   {block.encoder?.previewUrl ? null : (
-                    <FormattedMessage
-                      {...Messages.Text_TVWall_ConnectEncoder}
-                    />
+                    <FormattedMessage {...Messages.Text_TVWall_ConnectSource} />
                   )}
                 </span>
                 <br />
