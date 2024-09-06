@@ -127,7 +127,7 @@
     background-color: #e7e7e7;
 }
 
-.usb-container {
+.situation-usb-container {
     width: 856px;
     // height: 560px;
     margin-top: 24px;
@@ -195,53 +195,17 @@
     color: #e7e7e7;
 }
 
-
-.usb-add-title-row {
-    display: flex;
-    margin-bottom: 16px;
-}
-
-.usb-add-link-button {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    position: relative;
-    align-items: center;
-    border: 0px;
-    margin-top: -6px;
-    margin-right: 16px;
-    cursor: pointer;
-}
-
-.usb-add-link-button:hover {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    position: relative;
-    align-items: center;
-    border: 0px;
-    margin-top: -6px;
-    margin-right: 16px;
-    cursor: pointer;
-    background-color: #FAF6F0;
-}
-
-.usb-add-link-icon {
-    width: 24px;
-    margin-left: 8px;
-}
-
-.usb-add-row {
+.situation-usb-add-row {
     display: flex;
     justify-content: space-between;
     padding: 16px;
 }
 
-.usb-add-progress {
+.situation-usb-add-progress {
     display: flex;
 }
 
-.usb-add-progress-circle {
+.situation-usb-add-progress-circle {
     width: 8px;
     height: 8px;
     flex-grow: 0;
@@ -255,7 +219,7 @@
     background-color: #45413e;
 }
 
-.usb-add-progress-circle-unstarted {
+.situation-usb-add-progress-circle-unstarted {
     width: 8px;
     height: 8px;
     flex-grow: 0;
@@ -269,7 +233,7 @@
     background-color: #a5a5a5;
 }
 
-.usb-add-progress-circle-text {
+.situation-usb-add-progress-circle-text {
     width: 10px;
     height: 28px;
     flex-grow: 0;
@@ -284,7 +248,7 @@
     color: #ffffff;
 }
 
-.usb-add-progress-bar {
+.situation-usb-add-progress-bar {
     width: 342px;
     height: 8px;
     flex-grow: 0;
@@ -293,7 +257,7 @@
     background-color: #a5a5a5;
 }
 
-.usb-add-progress-bar-finished {
+.situation-usb-add-progress-bar-finished {
     width: 342px;
     height: 8px;
     flex-grow: 0;
@@ -302,11 +266,11 @@
     background-color: #45413e;
 }
 
-.usb-input .ant-input {
+.situation-usb-input .ant-input {
     background-color: #e7e7e7;
 }
 
-.usb-add-subtitle {
+.situation-usb-add-subtitle {
     height: 24px;
     margin-top: 24px;
     align-self: stretch;
@@ -322,7 +286,7 @@
     color: #45413e;
 }
 
-.usb-add-input {
+.situation-usb-add-input {
     height: 48px;
     margin-top: 16px;
     margin-bottom: 16px;
@@ -338,12 +302,12 @@
     background-color: #e7e7e7;
 }
 
-.usb-add-input-prefix {
+.situation-usb-add-input-prefix {
     width: 20px;
     height: 20px;
 }
 
-.usb-add-input-placeholder {
+.situation-usb-add-input-placeholder {
     flex-grow: 0;
     font-family: Noto Sans TC;
     font-size: 16px;
@@ -372,7 +336,7 @@
     color: #45413e;
 }
 
-.usb-add-btn {
+.situation-usb-add-btn {
     width: 120px;
     height: 48px;
     margin-top: 48px;
@@ -388,7 +352,7 @@
     background-color: #262320;
 }
 
-.usb-add-btn-text {
+.situation-usb-add-btn-text {
     flex-grow: 0;
     font-family: Noto Sans TC;
     font-size: 16px;

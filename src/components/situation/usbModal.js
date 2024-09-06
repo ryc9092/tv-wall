@@ -255,27 +255,27 @@ const USBModal = ({
                 <Divider className="divider" />
               </div>
             </div>
-            <div className="usb-container">
-              <div className="usb-add-row">
+            <div className="situation-usb-container">
+              <div className="situation-usb-add-row">
                 <div id="encoder-selection">
-                  <div className="usb-add-progress">
-                    <div className="usb-add-progress-circle">
-                      <span className="usb-add-progress-circle-text">1</span>
+                  <div className="situation-usb-add-progress">
+                    <div className="situation-usb-add-progress-circle">
+                      <span className="situation-usb-add-progress-circle-text">1</span>
                     </div>
                     <div
                       className={
                         selectedEncoder
-                          ? "usb-add-progress-bar-finished"
-                          : "usb-add-progress-bar"
+                          ? "situation-usb-add-progress-bar-finished"
+                          : "situation-usb-add-progress-bar"
                       }
                     ></div>
                   </div>
-                  <div className="usb-add-subtitle">
+                  <div className="situation-usb-add-subtitle">
                     <FormattedMessage {...Messages.Text_USB_ChooseSource} /> (
                     <FormattedMessage {...Messages.Text_Common_Encoder} />)
                   </div>
                   <Input
-                    className="usb-add-input usb-input usb-add-input-placeholder"
+                    className="situation-usb-add-input situation-usb-input situation-usb-add-input-placeholder"
                     variant="filled"
                     value={encoderFilter}
                     onChange={(e) => {
@@ -285,7 +285,7 @@ const USBModal = ({
                       <img
                         alt="search"
                         src={SearchIcon}
-                        className="usb-add-input-prefix"
+                        className="situation-usb-add-input-prefix"
                       />
                     }
                     placeholder={intl.formatMessage(
@@ -303,25 +303,25 @@ const USBModal = ({
                   />
                 </div>
                 <div id="decoder-selection" style={{ marginLeft: 46 }}>
-                  <div className="usb-add-progress">
+                  <div className="situation-usb-add-progress">
                     <div
                       className={
                         selectedEncoder
-                          ? "usb-add-progress-circle"
-                          : "usb-add-progress-circle-unstarted"
+                          ? "situation-usb-add-progress-circle"
+                          : "situation-usb-add-progress-circle-unstarted"
                       }
                     >
-                      <span className="usb-add-progress-circle-text">2</span>
+                      <span className="situation-usb-add-progress-circle-text">2</span>
                     </div>
                     <div
                       className={
                         selectedDecoders.length !== 0
-                          ? "usb-add-progress-bar-finished"
-                          : "usb-add-progress-bar"
+                          ? "situation-usb-add-progress-bar-finished"
+                          : "situation-usb-add-progress-bar"
                       }
                     ></div>
                   </div>
-                  <div className="usb-add-subtitle">
+                  <div className="situation-usb-add-subtitle">
                     <FormattedMessage
                       {...Messages.Text_USB_ChooseDestination}
                     />{" "}
@@ -329,7 +329,7 @@ const USBModal = ({
                     <FormattedMessage {...Messages.Text_Common_Decoder} />)
                   </div>
                   <Input
-                    className="usb-add-input usb-input usb-add-input-placeholder"
+                    className="situation-usb-add-input situation-usb-input situation-usb-add-input-placeholder"
                     variant="filled"
                     value={decoderFilter}
                     onChange={(e) => {
@@ -339,7 +339,7 @@ const USBModal = ({
                       <img
                         alt="search"
                         src={SearchIcon}
-                        className="usb-add-input-prefix"
+                        className="situation-usb-add-input-prefix"
                       />
                     }
                     placeholder={intl.formatMessage(
