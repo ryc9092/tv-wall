@@ -220,12 +220,12 @@ const TvWall = ({
                   overflow: "hidden",
                   border: 0,
                 }}
-                // src={modifyVideoSize(
-                //   block.encoder?.previewUrl,
-                //   document.getElementById(`screen-${block.block}`)?.clientWidth,
-                //   document.getElementById(`screen-${block.block}`)?.clientHeight
-                // )}
-                src={block.encoder?.previewUrl}
+                src={modifyVideoSize(
+                  block.encoder?.previewUrl,
+                  document.getElementById(`screen-${block.block}`)?.clientWidth,
+                  document.getElementById(`screen-${block.block}`)?.clientHeight
+                )}
+                // src={block.encoder?.previewUrl}
                 title="Video player"
               />
             ) : null}
