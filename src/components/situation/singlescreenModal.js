@@ -130,7 +130,7 @@ const SingleScreenModal = ({
             {decoder.previewUrl ? (
               <iframe
                 className="situation-single-screen-card-video"
-                src={modifyVideoSize(decoder.previewUrl, 350, 268)}
+                src={modifyVideoSize(decoder.previewUrl, 350, 232)}
                 title="Video player"
               />
             ) : null}
