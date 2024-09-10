@@ -243,6 +243,7 @@ const SingleScreenModal = ({
     },
     {
       title: intl.formatMessage(Messages.Text_Common_State),
+      width: "25%",
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
