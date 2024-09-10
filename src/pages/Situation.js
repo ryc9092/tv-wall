@@ -168,6 +168,7 @@ const Situation = () => {
           {intl.formatMessage(Messages.Text_Button_Operation)}
         </span>
       ),
+      width: "25%",
       dataIndex: "id",
       key: "operate",
       render: (text, record) => {

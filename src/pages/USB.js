@@ -138,6 +138,7 @@ const USB = () => {
           {intl.formatMessage(Messages.Text_USB_Operation)}
         </span>
       ),
+      width: "25%",
       key: "operate",
       dataIndex: "state",
       render: (text, record) => (
@@ -202,6 +203,7 @@ const USB = () => {
           {intl.formatMessage(Messages.Text_USB_Status)}
         </span>
       ),
+      width: "30%",
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
@@ -279,6 +281,7 @@ const USB = () => {
           {intl.formatMessage(Messages.Text_USB_Status)}
         </span>
       ),
+      width: "30%",
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,

@@ -120,6 +120,7 @@ const TemplateSetting = () => {
   const columns = [
     {
       title: intl.formatMessage(Messages.Text_Common_Type),
+      width: "14%",
       dataIndex: ["type", "isNew"],
       key: "type",
       filters: [
@@ -160,6 +161,7 @@ const TemplateSetting = () => {
     },
     {
       title: "analog",
+      width: "14%",
       dataIndex: "audioAnalogy",
       key: "audioAnalogy",
       editable: true,
@@ -167,6 +169,7 @@ const TemplateSetting = () => {
     },
     {
       title: "hdmi",
+      width: "14%",
       dataIndex: "audioHdmi",
       key: "audioHdmi",
       editable: true,
@@ -181,7 +184,7 @@ const TemplateSetting = () => {
     // },
     {
       title: intl.formatMessage(Messages.Text_DeviceSetting_Operate),
-      width: 160,
+      width: "9%",
       key: "edit",
       dataIndex: "id",
       render: (_, record) => {

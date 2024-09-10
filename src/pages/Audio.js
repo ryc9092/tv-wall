@@ -141,6 +141,7 @@ const Audio = () => {
           {intl.formatMessage(Messages.Text_Button_Operation)}
         </span>
       ),
+      width: "20%",
       key: "operate",
       dataIndex: "state",
       render: (text, record) => (
@@ -208,6 +209,7 @@ const Audio = () => {
           {intl.formatMessage(Messages.Text_Audio_State)}
         </span>
       ),
+      width: "33%",
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
@@ -281,6 +283,7 @@ const Audio = () => {
           {intl.formatMessage(Messages.Text_Audio_State)}
         </span>
       ),
+      width: "33%",
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,

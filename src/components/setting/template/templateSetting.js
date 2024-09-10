@@ -55,6 +55,7 @@ const TemplateSetting = () => {
           {intl.formatMessage(Messages.Text_Common_Dimension)}
         </span>
       ),
+      width: "20%",
       dataIndex: ["col", "row", "isDefault"],
       key: "dimension",
       render: (text, record) => (
@@ -74,6 +75,7 @@ const TemplateSetting = () => {
           {intl.formatMessage(Messages.Text_Button_Operation)}
         </span>
       ),
+      width: "20%",
       dataIndex: "templateId",
       key: "action",
       render: (text, record) => {

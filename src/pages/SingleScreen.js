@@ -445,6 +445,7 @@ const SingleScreen = () => {
     },
     {
       title: intl.formatMessage(Messages.Text_Common_Model),
+      width: "35%",
       dataIndex: "model",
       key: "model",
       filters: [
@@ -464,6 +465,7 @@ const SingleScreen = () => {
     },
     {
       title: intl.formatMessage(Messages.Text_Common_State),
+      width: "20%",
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,

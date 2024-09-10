@@ -55,6 +55,7 @@ const TVWallSetting = () => {
           {intl.formatMessage(Messages.Text_Common_Dimension)}
         </span>
       ),
+      width: "20%",
       dataIndex: ["col", "row"],
       key: "dimension",
       render: (text, record) => (
@@ -67,6 +68,7 @@ const TVWallSetting = () => {
           {intl.formatMessage(Messages.Text_Button_Operation)}
         </span>
       ),
+      width: "20%",
       dataIndex: "wallId",
       key: "action",
       render: (text, record) => {
