@@ -97,7 +97,8 @@ const TemplateSetting = () => {
       editedAudioHdmi,
       editedIP,
       device.model,
-      device.type
+      device.type,
+      device.origName
     );
     if (result) {
       // showSuccessNotificationByMsg(

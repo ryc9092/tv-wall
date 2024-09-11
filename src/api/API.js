@@ -197,7 +197,8 @@ export const editDevice = async (
   audioHdmi,
   ip,
   model,
-  type
+  type,
+  origName
 ) => {
   const httpMethod = `PATCH`;
   const apiPath = `/devices/${macAddr}`;
@@ -208,6 +209,7 @@ export const editDevice = async (
     additionalDeviceIp: ip,
     model: model,
     type: type,
+    origName: origName,
   });
   return await apiCall({
     httpMethod,
