@@ -219,6 +219,19 @@ export const editDevice = async (
   });
 };
 
+export const removeDevice = async (
+  store,
+  macAddr,
+) => {
+  const httpMethod = `DELETE`;
+  const apiPath = `/devices/${macAddr}`;
+  return await apiCall({
+    httpMethod,
+    apiPath,
+    store,
+  });
+};
+
 export const rebootDevice = async (deviceId, store) => {
   const apiPath = `/devices/reboot`;
   const form = JSON.stringify({

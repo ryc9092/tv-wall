@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../store/store";
 import { Button, Input, Table } from "antd";
-import { getDevices, editDevice } from "../../../api/API";
+import { getDevices, editDevice, removeDevice } from "../../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
 import PencilIcon from "../../../assets/pencil.png";
+import TrashIcon from "../../../assets/trash.png";
 import "./deviceSetting.scss";
 
 const EditableCell = ({
@@ -69,6 +70,28 @@ const TemplateSetting = () => {
         device.key = device.name + Math.random();
         tempDevices.push(device);
       });
+      // tempDevices.push({
+      //   nickName: "123",
+      //   mac: "123",
+      //   model: "ZyperUHD60",
+      //   type: "decoder",
+      //   virtualType: "",
+      //   name: "234",
+      //   state: "Down",
+      //   productCode: "",
+      //   productDescription: "",
+      //   pid: "",
+      //   groupId: "-1",
+      //   groupName: "",
+      //   audioHdmi: "HDMI",
+      //   audioAnalogy: "Analogy",
+      //   additionalDeviceIp: "",
+      //   isNew: true,
+      //   previewUrl: "",
+      //   ip: "",
+      //   crtType: "",
+      //   origName: "",
+      // });
       setDevices(tempDevices);
     })();
   }, [reload]);
@@ -116,6 +139,22 @@ const TemplateSetting = () => {
     setEditedAudioAnalog("");
     setEditedAudioHdmi("");
     // setEditedIP("");
+  };
+
+  const remove = async (key) => {
+    const index = devices.findIndex((item) => key === item.key);
+    const { ...device } = { ...devices[index] };
+    const result = await removeDevice(store, device.mac);
+    if (result) {
+      // showSuccessNotificationByMsg(
+      //   intl.formatMessage(Messages.Text_WallSetting_DeleteSuccess)
+      // );
+      setReload(Math.random);
+    } else {
+      // showWarningNotification(
+      //   intl.formatMessage(Messages.Text_WallSetting_DeleteFail)
+      // );
+    }
   };
 
   const columns = [
@@ -185,7 +224,7 @@ const TemplateSetting = () => {
     // },
     {
       title: intl.formatMessage(Messages.Text_DeviceSetting_Operate),
-      width: "9%",
+      width: "11%",
       key: "edit",
       dataIndex: "id",
       render: (_, record) => {
@@ -216,6 +255,19 @@ const TemplateSetting = () => {
               <img
                 alt="edit"
                 src={PencilIcon}
+                className="device-table-content-icon"
+              />
+              {/* <FormattedMessage {...Messages.Text_Button_Edit} /> */}
+            </Button>
+            <Button
+              key={`remove.${record}`}
+              disabled={record.isNew}
+              style={{ border: "none", marginLeft: "2px" }}
+              onClick={() => remove(record.key)}
+            >
+              <img
+                alt="remove"
+                src={TrashIcon}
                 className="device-table-content-icon"
               />
               {/* <FormattedMessage {...Messages.Text_Button_Edit} /> */}
