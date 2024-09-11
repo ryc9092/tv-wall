@@ -1,5 +1,5 @@
 {
-  "WebUI": "v1.0.7",
+  "WebUI": "v1.0.8",
   "ApiServer": {
     "Hostname": "http://127.0.0.1:8888"
   }
