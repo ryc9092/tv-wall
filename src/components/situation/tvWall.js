@@ -232,9 +232,15 @@ const TvWall = ({
             <div
               style={{
                 width: document.getElementById(`screen-${block.block}`)
-                  ?.clientWidth,
+                  ?.clientWidth
+                  ? document.getElementById(`screen-${block.block}`)
+                      ?.clientWidth
+                  : 180,
                 height: document.getElementById(`screen-${block.block}`)
-                  ?.clientHeight,
+                  ?.clientHeight
+                  ? document.getElementById(`screen-${block.block}`)
+                      ?.clientHeight
+                  : 180,
                 position: "absolute",
               }}
             >
@@ -253,10 +259,11 @@ const TvWall = ({
                 }}
               >
                 <span
+                  id={`screen-cover-${block.block}`}
                   style={
                     currentBlock === `screen-cover-${block.block}`
-                      ? { color: "white" }
-                      : {}
+                      ? { color: "white", padding: 12 }
+                      : { padding: 12 }
                   }
                   className="wall-block-title"
                 >
@@ -277,7 +284,7 @@ const TvWall = ({
                   className="wall-block-text"
                   style={
                     currentBlock === `screen-cover-${block.block}`
-                      ? { color: "white" }
+                      ? { color: "white", padding: 12 }
                       : { display: "none" }
                   }
                 >
@@ -289,7 +296,7 @@ const TvWall = ({
                   className="wall-block-text"
                   style={
                     currentBlock === `screen-cover-${block.block}`
-                      ? { color: "white" }
+                      ? { color: "white", padding: 12 }
                       : { display: "none" }
                   }
                 >

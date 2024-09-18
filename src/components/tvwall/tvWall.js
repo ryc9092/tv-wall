@@ -231,9 +231,11 @@ const TvWall = ({
             <div
               style={{
                 width: document.getElementById(`screen-${block.block}`)
-                  ?.clientWidth,
+                  ?.clientWidth ? document.getElementById(`screen-${block.block}`)
+                  ?.clientWidth : 180,
                 height: document.getElementById(`screen-${block.block}`)
-                  ?.clientHeight,
+                  ?.clientHeight ? document.getElementById(`screen-${block.block}`)
+                  ?.clientHeight : 180,
                 position: "absolute",
               }}
             >
