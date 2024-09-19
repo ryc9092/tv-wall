@@ -53,7 +53,7 @@ const Status = () => {
   const columns = [
     {
       title: intl.formatMessage(Messages.Text_Common_Type),
-      width: "14%",
+      width: "17%",
       dataIndex: "type",
       key: "type",
       filters: [
@@ -71,19 +71,13 @@ const Status = () => {
     },
     {
       title: intl.formatMessage(Messages.Text_Common_Name),
-      dataIndex: "name",
-      key: "name",
-      render: (text) => <span className="table-content">{text}</span>,
-    },
-    {
-      title: intl.formatMessage(Messages.Text_Common_Alias),
       dataIndex: "nickName",
       key: "nickName",
       render: (text) => <span className="table-content">{text}</span>,
     },
     {
       title: intl.formatMessage(Messages.Text_Common_State),
-      width: "14%",
+      width: "15%",
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
@@ -111,7 +105,7 @@ const Status = () => {
     },
     {
       title: intl.formatMessage(Messages.Text_DeviceStatus_MonitorSwitch),
-      width: "14%",
+      width: "15%",
       key: "switch",
       dataIndex: "state",
       render: (_, { state, mac }) => (
@@ -127,7 +121,7 @@ const Status = () => {
     },
     {
       title: intl.formatMessage(Messages.Text_Common_Detail),
-      width: "10%",
+      width: "13%",
       dataIndex: ["name", "mac", "model", "productCode", "productDescription"],
       key: "detail",
       render: (text, record) => {
