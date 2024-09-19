@@ -68,8 +68,7 @@ const Surveillance = () => {
         <Row gutter={0}>{streamCards}</Row>
       </div>
       <Modal
-        className="surveillance-modal"
-        width={1260}
+        width={1180}
         open={isModalOpen}
         footer={null}
         onCancel={() => {
