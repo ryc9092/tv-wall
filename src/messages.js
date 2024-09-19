@@ -22,15 +22,15 @@ export default defineMessages({
   },
   Text_Common_EncoderName: {
     id: "Text-Common-EncoderName",
-    defaultMessage: "編碼器名稱",
+    defaultMessage: "來源名稱",
   },
   Text_Common_Encoder: {
     id: "Text-Common-Encoder",
-    defaultMessage: "編碼器",
+    defaultMessage: "輸入來源",
   },
   Text_Common_Decoder: {
     id: "Text-Common-Decoder",
-    defaultMessage: "解碼器",
+    defaultMessage: "輸出終端",
   },
   Text_Common_Description: {
     id: "Text-Common-Description",
@@ -234,7 +234,7 @@ export default defineMessages({
   },
   Text_TVWall_VideoSourceDesc: {
     id: "Text-TVWall-VideoSourceDesc",
-    defaultMessage: "選擇下方編碼器後，點選區塊以連結",
+    defaultMessage: "選擇下方影像來源後，點選區塊以連結",
   },
   Text_TVWall_Preview: {
     id: "Text-TVWall-Preview",
@@ -242,7 +242,7 @@ export default defineMessages({
   },
   Text_TVWall_InputEncoder: {
     id: "Text-TVWall-InputEncoder",
-    defaultMessage: "輸入編碼器名稱",
+    defaultMessage: "輸入影像來源名稱",
   },
   Text_TVWall_ActiveSuccess: {
     id: "Text-TVWall-ActiveSuccess",
@@ -250,7 +250,7 @@ export default defineMessages({
   },
   Text_TVWall_ActiveFail: {
     id: "Text-TVWall-ActiveFail",
-    defaultMessage: "投放影像失敗, 請確認樣板、編碼器設定無誤",
+    defaultMessage: "投放影像失敗, 請確認樣板、影像來源設定無誤",
   },
   Text_TVWall_DeactiveSuccess: {
     id: "Text-TVWall-DeactiveSuccess",
@@ -304,11 +304,11 @@ export default defineMessages({
   },
   Text_SingleScreen_ClearAllVideoConnectionDesc: {
     id: "Text-SingleScreen-ClearAllVideoConnectionDesc",
-    defaultMessage: "確定要移除所有解碼器的影像連結?",
+    defaultMessage: "確定要移除所有影像連結?",
   },
   Text_SingleScreen_InputDecoder: {
     id: "Text-SingleScreen-InputDecoder",
-    defaultMessage: "輸入解碼器或群組名稱",
+    defaultMessage: "輸入終端或群組名稱",
   },
   Text_SingleScreen_PlayVideo: {
     id: "Text-SingleScreen-PlayVideo",
@@ -350,11 +350,11 @@ export default defineMessages({
   },
   Text_USB_InputEncoderName: {
     id: "Text-USB-InputEncoderName",
-    defaultMessage: "輸入編碼器名稱",
+    defaultMessage: "輸入USB來源名稱",
   },
   Text_USB_InputDecoderName: {
     id: "Text-USB-InputDecoderName",
-    defaultMessage: "輸入解碼器名稱",
+    defaultMessage: "輸入USB終端名稱",
   },
   Text_USB_ConnectionStatus: {
     id: "Text-USB-ConnectionStatus",
@@ -448,11 +448,11 @@ export default defineMessages({
   },
   Text_Audio_InputEncoder: {
     id: "Text-Audio-InputEncoder",
-    defaultMessage: "輸入編碼器名稱",
+    defaultMessage: "輸入音頻來源名稱",
   },
   Text_Audio_InputDecoder: {
     id: "Text-Audio-InputDecoder",
-    defaultMessage: "輸入解碼器名稱",
+    defaultMessage: "輸入播放終端名稱",
   },
   Text_Audio_SourceName: {
     id: "Text-Audio-SourceName",
@@ -638,14 +638,6 @@ export default defineMessages({
     id: "Text-DeviceStatus-Detail",
     defaultMessage: "詳細資訊",
   },
-  Text_DeviceStatus_Encoder: {
-    id: "Text-DeviceStatus-Encoder",
-    defaultMessage: "編碼器",
-  },
-  Text_DeviceStatus_Decoder: {
-    id: "Text-DeviceStatus-Decoder",
-    defaultMessage: "解碼器",
-  },
   Text_DeviceStatus_Content: {
     id: "Text-DeviceStatus-Content",
     defaultMessage: "內容",
@@ -792,15 +784,15 @@ export default defineMessages({
   },
   Text_WallSetting_ScreenDecoder: {
     id: "Text-WallSetting-ScreenDecoder",
-    defaultMessage: "畫面與解碼器對應",
+    defaultMessage: "畫面與終端對應",
   },
   Text_WallSetting_ScreenDecoderDesc: {
     id: "Text-WallSetting-ScreenDecoderDesc",
-    defaultMessage: "點選畫面後，選擇畫面對應的解碼器",
+    defaultMessage: "點選畫面後，選擇畫面對應的終端名稱",
   },
   Text_WallSetting_InputDecoder: {
     id: "Text-WallSetting-InputDecoder",
-    defaultMessage: "輸入解碼器名稱",
+    defaultMessage: "輸入終端名稱",
   },
   Text_WallSetting_ScreenNumber: {
     id: "Text-WallSetting-ScreenNumber",
@@ -827,10 +819,6 @@ export default defineMessages({
   Text_WallSetting_Wall: {
     id: "Text-WallSetting-Wall",
     defaultMessage: "電視牆",
-  },
-  Text_WallSetting_ScreenDecoderPair: {
-    id: "Text-WallSetting-ScreenDecoderPair",
-    defaultMessage: "解碼器對應",
   },
   Text_WallSetting_ResetWall: {
     id: "Text-WallSetting-ResetWall",
