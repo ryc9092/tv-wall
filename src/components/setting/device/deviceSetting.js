@@ -160,7 +160,7 @@ const TemplateSetting = () => {
   const columns = [
     {
       title: intl.formatMessage(Messages.Text_Common_Type),
-      width: "15%",
+      width: "14%",
       dataIndex: ["type", "isNew"],
       key: "type",
       filters: [
@@ -188,6 +188,12 @@ const TemplateSetting = () => {
     },
     {
       title: intl.formatMessage(Messages.Text_Common_Name),
+      dataIndex: "name",
+      key: "name",
+      render: (text) => <span className="table-content">{text}</span>,
+    },
+    {
+      title: intl.formatMessage(Messages.Text_Common_Alias),
       dataIndex: "nickName",
       key: "nickName",
       editable: true,
@@ -195,7 +201,7 @@ const TemplateSetting = () => {
     },
     {
       title: "analog",
-      width: "18%",
+      width: "14%",
       dataIndex: "audioAnalogy",
       key: "audioAnalogy",
       editable: true,
@@ -203,7 +209,7 @@ const TemplateSetting = () => {
     },
     {
       title: "hdmi",
-      width: "18%",
+      width: "14%",
       dataIndex: "audioHdmi",
       key: "audioHdmi",
       editable: true,
@@ -218,7 +224,7 @@ const TemplateSetting = () => {
     // },
     {
       title: intl.formatMessage(Messages.Text_DeviceSetting_Operate),
-      width: "13%",
+      width: "11%",
       key: "edit",
       dataIndex: "id",
       render: (_, record) => {
