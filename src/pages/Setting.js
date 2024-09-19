@@ -1,7 +1,5 @@
 import { useContext, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import SettingWallModal from "../components/setting/tvWall/wallModal";
-import SettingDeviceModal from "../components/setting/device/deviceModal";
 import TVWallSetting from "../components/setting/tvWall/tvWallSetting";
 import TemplateSetting from "../components/setting/template/templateSetting";
 import DeviceSetting from "../components/setting/device/deviceSetting";
@@ -18,8 +16,6 @@ const Setting = () => {
     tvwall: <TVWallSetting />,
     template: <TemplateSetting />,
     device: <DeviceSetting />,
-    // singlescreen: <SettingWallModal />,
-    // devicesetting: <SettingDeviceModal />,
   };
 
   return (
