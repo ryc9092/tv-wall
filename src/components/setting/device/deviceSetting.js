@@ -187,13 +187,13 @@ const TemplateSetting = () => {
       ),
     },
     {
-      title: intl.formatMessage(Messages.Text_Common_Name),
+      title: "ID(MAC)",
       dataIndex: "name",
       key: "name",
       render: (text) => <span className="table-content">{text}</span>,
     },
     {
-      title: intl.formatMessage(Messages.Text_Common_Alias),
+      title: intl.formatMessage(Messages.Text_Common_Name),
       dataIndex: "nickName",
       key: "nickName",
       editable: true,
