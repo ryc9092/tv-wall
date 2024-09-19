@@ -87,7 +87,7 @@
   "Text-SingleScreen-ClearChoosedVideoConnection": "清除選取之影像連結",
   "Text-SingleScreen-ClearVideoConnectionDesc": "確定要移除XXX的影像連結?",
   "Text-SingleScreen-ClearAllVideoConnectionDesc": "確定要移除所有影像連結?",
-  "Text-SingleScreen-InputDecoder": "輸入終端或群組名稱",
+  "Text-SingleScreen-InputDecoder": "輸入顯示終端(群組)名稱",
   "Text-SingleScreen-PlayVideo": "執行",
   "Text-SingleScreen-PlayGroupVideo": "投放群組影像",
   "Text-SingleScreen-VideoPlaySuccess": "影像已投放至顯示器",
