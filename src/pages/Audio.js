@@ -125,23 +125,10 @@ const Audio = () => {
     {
       title: (
         <span className="audio-content-table-head">
-          {intl.formatMessage(Messages.Text_Audio_Input)}
-          {intl.formatMessage(Messages.Text_Audio_Output)}
-        </span>
-      ),
-      dataIndex: "value1",
-      key: "inputOutput",
-      render: (text) => {
-        return <span className="table-content">{text}</span>;
-      },
-    },
-    {
-      title: (
-        <span className="audio-content-table-head">
           {intl.formatMessage(Messages.Text_Button_Operation)}
         </span>
       ),
-      width: "20%",
+      width: "25%",
       key: "operate",
       dataIndex: "state",
       render: (text, record) => (
