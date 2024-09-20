@@ -269,7 +269,7 @@ const TVWallModal = ({
             <FormattedMessage {...Messages.Text_Situation_TVWallConnection} />
           </span>
         }
-        className="wall-modal wall-content modal-title"
+        className="wall-modal wall-content-modal-close-icon wall-content modal-title"
         open={isModalOpen}
         footer={null}
         onCancel={() => {

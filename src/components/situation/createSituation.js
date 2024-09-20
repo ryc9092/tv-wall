@@ -192,7 +192,7 @@ const CreateSituationModal = ({ setReload }) => {
         title=<span className="create-situation-modal-title">
           {intl.formatMessage(Messages.Text_Situation_CreateSituation)}
         </span>
-        className="create-situation-modal create-situation modal-title"
+        className="create-situation-modal create-situation-modal-close-icon create-situation modal-title"
         open={isModalOpen}
         footer={null}
         onCancel={() => {

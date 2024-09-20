@@ -230,7 +230,7 @@ const AudioModal = ({
             <FormattedMessage {...Messages.Text_Situation_AudioConnection} />
           </span>
         }
-        className="audio-modal audio-content modal-title"
+        className="audio-modal audio-content-modal-close-icon audio-content modal-title"
         open={isModalOpen}
         footer={null}
         onCancel={() => {

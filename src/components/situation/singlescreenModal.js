@@ -327,7 +327,7 @@ const SingleScreenModal = ({
             />
           </span>
         }
-        className="single-screen-modal single-screen-content modal-title"
+        className="single-screen-modal single-screen-content-modal-close-icon single-screen-content modal-title"
         open={isModalOpen}
         footer={null}
         onCancel={() => {

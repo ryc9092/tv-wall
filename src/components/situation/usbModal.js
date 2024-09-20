@@ -223,7 +223,7 @@ const USBModal = ({
             <FormattedMessage {...Messages.Text_Situation_USBConnection} />
           </span>
         }
-        className="usb-modal usb-content modal-title"
+        className="usb-modal usb-content-modal-close-icon usb-content modal-title"
         open={isModalOpen}
         footer={null}
         onCancel={() => {
@@ -260,7 +260,9 @@ const USBModal = ({
                 <div id="encoder-selection">
                   <div className="situation-usb-add-progress">
                     <div className="situation-usb-add-progress-circle">
-                      <span className="situation-usb-add-progress-circle-text">1</span>
+                      <span className="situation-usb-add-progress-circle-text">
+                        1
+                      </span>
                     </div>
                     <div
                       className={
@@ -311,7 +313,9 @@ const USBModal = ({
                           : "situation-usb-add-progress-circle-unstarted"
                       }
                     >
-                      <span className="situation-usb-add-progress-circle-text">2</span>
+                      <span className="situation-usb-add-progress-circle-text">
+                        2
+                      </span>
                     </div>
                     <div
                       className={

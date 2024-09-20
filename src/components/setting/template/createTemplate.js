@@ -181,7 +181,7 @@ const CreateTemplate = ({ setReload }) => {
         title=<span className="create-template-modal-title">
           {intl.formatMessage(Messages.Text_TemplateSetting_CreateWallTemplate)}
         </span>
-        className="create-template-modal create-template-setting modal-title"
+        className="create-template-modal create-template-modal-close-icon create-template-setting modal-title"
         open={isModalOpen}
         footer={null}
         onCancel={() => {

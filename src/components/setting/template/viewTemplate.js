@@ -31,13 +31,16 @@ const ViewTemplate = ({ template }) => {
         setTemplateSize({ col: template.col, row: template.row });
 
         let tempHandledScreenList = [];
-        let tempScreenBlockMap = {}
+        let tempScreenBlockMap = {};
         screens?.forEach((screen) => {
           tempHandledScreenList.push(screen.num);
-          tempScreenBlockMap = {...tempScreenBlockMap, [screen.num]:screen.block}
+          tempScreenBlockMap = {
+            ...tempScreenBlockMap,
+            [screen.num]: screen.block,
+          };
         });
         setHandledScreenList(tempHandledScreenList);
-        setScreenBlockMap(tempScreenBlockMap)
+        setScreenBlockMap(tempScreenBlockMap);
       })();
     }
   }, [template, modalOpen]);
@@ -99,7 +102,7 @@ const ViewTemplate = ({ template }) => {
       </Button>
       <Modal
         title={intl.formatMessage(Messages.Text_TemplateSetting_ViewTemplate)}
-        className="view-template-modal view-template-setting modal-title"
+        className="view-template-modal view-template-modal-close-icon view-template-setting modal-title"
         open={modalOpen}
         footer={null}
         onCancel={() => {
