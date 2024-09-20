@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Button, Input, Radio, Space, Table, Tag } from "antd";
+import { Button, Input, Modal, Radio, Space, Table, Tag } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import {
   getDeviceLinks,
@@ -29,6 +29,7 @@ const Audio = () => {
   const [searchFilter, setSearchFilter] = useState("");
   const [linkData, setLinkData] = useState([]);
   const [reload, setReload] = useState(null);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -157,9 +158,9 @@ const Audio = () => {
           <Button
             type="text"
             key={`remove.${record.decoderMac}`}
-            onClick={() =>
-              handleRemoveLink(record.encoderMac, record.decoderMac)
-            }
+            onClick={() => {
+              setOpenConfirmModal(true);
+            }}
             className="table-content"
           >
             <img
@@ -168,6 +169,28 @@ const Audio = () => {
               className="audio-content-table-icon"
             />
           </Button>
+          <Modal
+            className="audio-modal-close-x"
+            title={
+              <span style={{ marginRight: 12 }}>
+                <FormattedMessage
+                  {...Messages.Text_Audio_RemoveConnectionConfirm}
+                />
+              </span>
+            }
+            width={400}
+            okText={intl.formatMessage(Messages.Text_Common_Confirm)}
+            cancelText={intl.formatMessage(Messages.Text_Button_Cancel)}
+            open={openConfirmModal}
+            onCancel={() => {
+              setOpenConfirmModal(false);
+            }}
+            onOk={() => {
+              handleRemoveLink(record.encoderMac, record.decoderMac);
+            }}
+          >
+            <br />
+          </Modal>
         </div>
       ),
     },

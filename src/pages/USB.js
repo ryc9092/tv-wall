@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Button, Input, Table, Tag } from "antd";
+import { Button, Input, Modal, Table, Tag } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import {
   createDeviceLink,
@@ -29,6 +29,7 @@ const USB = () => {
   const [searchFilter, setSearchFilter] = useState("");
   const [linkData, setLinkData] = useState([]);
   const [reload, setReload] = useState(null);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -165,9 +166,9 @@ const USB = () => {
           <Button
             type="text"
             key={`remove.${record.decoderMac}`}
-            onClick={() =>
-              handleRemoveLink(record.encoderMac, record.decoderMac)
-            }
+            onClick={() => {
+              setOpenConfirmModal(true);
+            }}
           >
             <img
               alt="remove"
@@ -175,6 +176,28 @@ const USB = () => {
               className="usb-content-table-icon"
             />
           </Button>
+          <Modal
+            className="usb-modal-close-x"
+            title={
+              <span style={{ marginRight: 12 }}>
+                <FormattedMessage
+                  {...Messages.Text_USB_RemoveConnectionConfirm}
+                />
+              </span>
+            }
+            width={400}
+            okText={intl.formatMessage(Messages.Text_Common_Confirm)}
+            cancelText={intl.formatMessage(Messages.Text_Button_Cancel)}
+            open={openConfirmModal}
+            onCancel={() => {
+              setOpenConfirmModal(false);
+            }}
+            onOk={() => {
+              handleRemoveLink(record.encoderMac, record.decoderMac);
+            }}
+          >
+            <br />
+          </Modal>
         </div>
       ),
     },
