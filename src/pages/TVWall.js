@@ -101,14 +101,16 @@ const TVWall = () => {
         } else {
           // no actived wall
           let hasDefaultTemplate = false;
+          let lastTemplate = null;
           tempTemplateOptions.forEach((template) => {
+            lastTemplate = template;
             if (template.isDefault === 1) {
               hasDefaultTemplate = true;
               setSelectedTemplate(template);
             }
           });
           if (!hasDefaultTemplate) {
-            setSelectedTemplate(null);
+            setSelectedTemplate(lastTemplate);
             setBlocks([]);
           }
         }
