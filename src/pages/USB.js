@@ -30,6 +30,8 @@ const USB = () => {
   const [linkData, setLinkData] = useState([]);
   const [reload, setReload] = useState(null);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [selectEncoder, setSelectEncoder] = useState(null);
+  const [selectDecoder, setSelectDecoder] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -113,7 +115,7 @@ const USB = () => {
     {
       title: (
         <span className="usb-content-table-head">
-          {intl.formatMessage(Messages.Text_Common_Model)}
+          {intl.formatMessage(Messages.Text_Common_Decoder)}
         </span>
       ),
       dataIndex: "decoderName",
@@ -167,6 +169,8 @@ const USB = () => {
             type="text"
             key={`remove.${record.decoderMac}`}
             onClick={() => {
+              setSelectEncoder(record.encoderMac);
+              setSelectDecoder(record.decoderMac);
               setOpenConfirmModal(true);
             }}
           >
@@ -176,28 +180,6 @@ const USB = () => {
               className="usb-content-table-icon"
             />
           </Button>
-          <Modal
-            className="usb-modal-close-x"
-            title={
-              <span style={{ marginRight: 12 }}>
-                <FormattedMessage
-                  {...Messages.Text_USB_RemoveConnectionConfirm}
-                />
-              </span>
-            }
-            width={400}
-            okText={intl.formatMessage(Messages.Text_Common_Confirm)}
-            cancelText={intl.formatMessage(Messages.Text_Button_Cancel)}
-            open={openConfirmModal}
-            onCancel={() => {
-              setOpenConfirmModal(false);
-            }}
-            onOk={() => {
-              handleRemoveLink(record.encoderMac, record.decoderMac);
-            }}
-          >
-            <br />
-          </Modal>
         </div>
       ),
     },
@@ -466,6 +448,28 @@ const USB = () => {
             </div>
             <Divider style={{ marginTop: 8 }} /> */}
             <Table columns={columns} dataSource={linkData} />
+            <Modal
+              className="usb-modal-close-x"
+              title={
+                <span style={{ marginRight: 12 }}>
+                  <FormattedMessage
+                    {...Messages.Text_USB_RemoveConnectionConfirm}
+                  />
+                </span>
+              }
+              width={400}
+              okText={intl.formatMessage(Messages.Text_Common_Confirm)}
+              cancelText={intl.formatMessage(Messages.Text_Button_Cancel)}
+              open={openConfirmModal}
+              onCancel={() => {
+                setOpenConfirmModal(false);
+              }}
+              onOk={() => {
+                handleRemoveLink(selectEncoder, selectDecoder);
+              }}
+            >
+              <br />
+            </Modal>
           </div>
         ) : (
           <div className="usb-content-container-add-connection">
