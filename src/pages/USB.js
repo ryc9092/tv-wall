@@ -97,6 +97,7 @@ const USB = () => {
       decoders: [decoderMac],
     });
     setReload(Math.random());
+    setOpenConfirmModal(false);
   };
 
   const columns = [
