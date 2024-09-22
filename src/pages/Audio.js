@@ -30,6 +30,8 @@ const Audio = () => {
   const [linkData, setLinkData] = useState([]);
   const [reload, setReload] = useState(null);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [selectEncoder, setSelectEncoder] = useState(null);
+  const [selectDecoder, setSelectDecoder] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -159,6 +161,8 @@ const Audio = () => {
             type="text"
             key={`remove.${record.decoderMac}`}
             onClick={() => {
+              setSelectEncoder(record.encoderMac);
+              setSelectDecoder(record.decoderMac);
               setOpenConfirmModal(true);
             }}
             className="table-content"
@@ -169,28 +173,6 @@ const Audio = () => {
               className="audio-content-table-icon"
             />
           </Button>
-          <Modal
-            className="audio-modal-close-x"
-            title={
-              <span style={{ marginRight: 12 }}>
-                <FormattedMessage
-                  {...Messages.Text_Audio_RemoveConnectionConfirm}
-                />
-              </span>
-            }
-            width={400}
-            okText={intl.formatMessage(Messages.Text_Common_Confirm)}
-            cancelText={intl.formatMessage(Messages.Text_Button_Cancel)}
-            open={openConfirmModal}
-            onCancel={() => {
-              setOpenConfirmModal(false);
-            }}
-            onOk={() => {
-              handleRemoveLink(record.encoderMac, record.decoderMac);
-            }}
-          >
-            <br />
-          </Modal>
         </div>
       ),
     },
@@ -444,6 +426,28 @@ const Audio = () => {
               </Button>
             </div>
             <Table columns={columns} dataSource={linkData} />
+            <Modal
+              className="audio-modal-close-x"
+              title={
+                <span style={{ marginRight: 12 }}>
+                  <FormattedMessage
+                    {...Messages.Text_Audio_RemoveConnectionConfirm}
+                  />
+                </span>
+              }
+              width={400}
+              okText={intl.formatMessage(Messages.Text_Common_Confirm)}
+              cancelText={intl.formatMessage(Messages.Text_Button_Cancel)}
+              open={openConfirmModal}
+              onCancel={() => {
+                setOpenConfirmModal(false);
+              }}
+              onOk={() => {
+                handleRemoveLink(selectEncoder, selectDecoder);
+              }}
+            >
+              <br />
+            </Modal>
           </div>
         ) : (
           <div className="audio-content-container">
