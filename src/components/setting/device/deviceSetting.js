@@ -159,8 +159,25 @@ const TemplateSetting = () => {
 
   const columns = [
     {
+      title: intl.formatMessage(Messages.Text_Common_Model),
+      width: "12%",
+      dataIndex: ["model", "isNew"],
+      key: "model",
+      render: (text, record) => (
+        <div
+          className={
+            record.isNew === true
+              ? "table-content table-content-text-isnew"
+              : "table-content table-content-text"
+          }
+        >
+          {record.model}
+        </div>
+      ),
+    },
+    {
       title: intl.formatMessage(Messages.Text_Common_Type),
-      width: "14%",
+      width: "12%",
       dataIndex: ["type", "isNew"],
       key: "type",
       filters: [
@@ -188,6 +205,7 @@ const TemplateSetting = () => {
     },
     {
       title: "ID(MAC)",
+      width: "16%",
       dataIndex: "name",
       key: "name",
       render: (text) => <span className="table-content">{text}</span>,
@@ -201,7 +219,7 @@ const TemplateSetting = () => {
     },
     {
       title: "analog",
-      width: "14%",
+      width: "13%",
       dataIndex: "audioAnalogy",
       key: "audioAnalogy",
       editable: true,
@@ -209,7 +227,7 @@ const TemplateSetting = () => {
     },
     {
       title: "hdmi",
-      width: "14%",
+      width: "13%",
       dataIndex: "audioHdmi",
       key: "audioHdmi",
       editable: true,
@@ -224,7 +242,7 @@ const TemplateSetting = () => {
     // },
     {
       title: intl.formatMessage(Messages.Text_DeviceSetting_Operate),
-      width: "11%",
+      width: "10%",
       key: "edit",
       dataIndex: "id",
       render: (_, record) => {
