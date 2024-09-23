@@ -87,10 +87,13 @@ const TVWall = () => {
             });
           }
         });
-        const activedWall = await getActivedWall({
-          store: store,
-          activeId: selectedWall.wallId,
-        });
+        let activedWall;
+        if (selectedWall.wallId) {
+          activedWall = await getActivedWall({
+            store: store,
+            activeId: selectedWall.wallId,
+          });
+        }
         // has actived wall
         if (activedWall) {
           tempTemplateOptions.forEach((option) => {
