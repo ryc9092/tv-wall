@@ -180,8 +180,10 @@ const AudioModal = ({
       setSelectedDecoders(selectedRowKeys);
     },
     getCheckboxProps: (record) => {
-      const hasSelectedEncoder = selectedEncoder !== null;
-      return { disabled: !hasSelectedEncoder };
+      // const hasSelectedEncoder = selectedEncoder !== null;
+      // return { disabled: !hasSelectedEncoder };
+      const hasSelectedInputOutputOption = selectedInOutputOption !== null;
+      return { disabled: !hasSelectedInputOutputOption };
     },
   };
 
@@ -356,7 +358,7 @@ const AudioModal = ({
                   <div className="audio-add-progress">
                     <div
                       className={
-                        selectedEncoder
+                        selectedInOutputOption
                           ? "audio-progress-circle"
                           : "audio-progress-circle-unstarted"
                       }
