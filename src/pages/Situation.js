@@ -60,6 +60,7 @@ const Situation = () => {
   const deleteSituation = async (event) => {
     const situationId = event.currentTarget.id;
     await removeSituation(situationId, store);
+    setExpandSituation(null);
     setReload(Math.random());
   };
 
