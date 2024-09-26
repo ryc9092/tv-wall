@@ -329,11 +329,13 @@ const USB = () => {
   const decoderSelection = {
     selectedRowKeys: selectedDecoders,
     onChange: (selectedRowKeys, selectedRows) => {
+      // selectedRowKeys.push('DE7-MonitorD') add default checked box
       setSelectedDecoders(selectedRowKeys);
     },
     getCheckboxProps: (record) => {
       const hasSelectedEncoder = selectedEncoder !== null;
       return { disabled: !hasSelectedEncoder };
+      // return { disabled: record.nickName === "N-DE7-MonitorD" }; set disabled row
     },
   };
 
