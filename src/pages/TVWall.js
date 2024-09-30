@@ -395,9 +395,7 @@ const TVWall = () => {
             className="audio-modal-close-x"
             title={
               <span style={{ marginRight: 12 }}>
-                <FormattedMessage
-                  {...Messages.Text_Audio_RemoveConnectionConfirm}
-                />
+                <FormattedMessage {...Messages.Text_TVWall_ClearWallConnection}/>
               </span>
             }
             width={400}
@@ -409,7 +407,9 @@ const TVWall = () => {
             }}
             onOk={handleDeactiveWall}
           >
-            <br />
+            <p className="tvwall-confirm-text">
+              <FormattedMessage {...Messages.Text_TVWall_ConfirmClear}/>
+            </p>
           </Modal>
           <div className="tvwall-option-play-btn" onClick={handleActiveWall}>
             <img

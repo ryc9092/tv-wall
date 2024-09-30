@@ -222,11 +222,11 @@ export default defineMessages({
   },
   Text_TVWall_ActivateWall: {
     id: "Text-TVWall-ActivateWall",
-    defaultMessage: "投放影像",
+    defaultMessage: "投放",
   },
   Text_TVWall_ClearWallConnection: {
     id: "Text-TVWall-ClearWallConnection",
-    defaultMessage: "清除影像連接",
+    defaultMessage: "清除牆面影像",
   },
   Text_TVWall_ClearWallConnectionDesc: {
     id: "Text-TVWall-ClearWallConnectionDesc",
@@ -267,6 +267,10 @@ export default defineMessages({
   Text_TVWall_ConnectSource: {
     id: "Text-TVWall-ConnectSource",
     defaultMessage: "連接影像來源",
+  },
+  Text_TVWall_ConfirmClear: {
+    id: "Text-TVWall-ConfirmClear",
+    defaultMessage: "是否確認清除當前所有投放於實體牆面之影像?",
   },
 
   // Single screen management

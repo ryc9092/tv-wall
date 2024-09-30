@@ -65,8 +65,8 @@
   "Text-TVWall-TVWallManagement": "電視牆影像管理",
   "Text-TVWall-WallName": "電視牆名稱",
   "Text-TVWall-Template": "電視牆適用版型",
-  "Text-TVWall-ActivateWall": "執行",
-  "Text-TVWall-ClearWallConnection": "清除影像連接",
+  "Text-TVWall-ActivateWall": "投放",
+  "Text-TVWall-ClearWallConnection": "清除牆面影像",
   "Text-TVWall-ClearWallConnectionDesc": "確定要移除所有區塊的影像連結?",
   "Text-TVWall-VideoSource": "影像來源",
   "Text-TVWall-VideoSourceDesc": "選擇下方影像來源後，點選區塊以連結",
@@ -77,6 +77,7 @@
   "Text-TVWall-DeactiveSuccess": "清除影像連結成功",
   "Text-TVWall-DeactiveFail": "清除影像連結失敗",
   "Text-TVWall-ConnectSource": "連接影像來源",
+  "Text-TVWall-ConfirmClear": "是否確認清除當前所有投放於實體牆面之影像?",
 
   "Text-SingleScreen-Management": "單畫面影像管理",
   "Text-SingleScreen-TabSingleScreen": "單顯示器",

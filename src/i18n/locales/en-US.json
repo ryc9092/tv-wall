@@ -77,6 +77,7 @@
   "Text-TVWall-DeactiveSuccess": "Clear all connections successfully",
   "Text-TVWall-DeactiveFail": "Fail to clear all connections",
   "Text-TVWall-ConnectSource": "connect source",
+  "Text-TVWall-ConfirmClear": "are you sure to clear all the videos?",
 
   "Text-SingleScreen-Management": "Source and Display Management",
   "Text-SingleScreen-TabSingleScreen": "Single Display",
