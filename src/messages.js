@@ -502,11 +502,11 @@ export default defineMessages({
   },
   Text_Situation_TVWallConnection: {
     id: "Text-Situation-TVWallConnection",
-    defaultMessage: "電視牆影音連接",
+    defaultMessage: "電視牆影像連結",
   },
   Text_Situation_SingleScreenConnection: {
     id: "Text-Situation-SingleScreenConnection",
-    defaultMessage: "單畫面影音連接",
+    defaultMessage: "單畫面影像連結",
   },
   Text_Situation_USBConnection: {
     id: "Text-Situation-USBConnection",
