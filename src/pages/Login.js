@@ -38,8 +38,10 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
-    if (store.account) loginComplete(location, navigate);
-    else {
+    if (store.account) {
+      const currentRoute = store.currentRoute;
+      loginComplete(location, navigate, currentRoute);
+    } else {
       const account = sessionStorage.getItem("account");
       if (account) dispatch({ type: Actions.SetAccount, payload: account });
     }
@@ -178,8 +180,10 @@ const Login = () => {
 
 export default Login;
 
-function loginComplete(location, navigate) {
+function loginComplete(location, navigate, currentRoute = null) {
+  const route = currentRoute ? { from: { pathname: currentRoute } } : null;
   // redirect to previous state or root
-  const { from } = location.state || { from: { pathname: "/situation" } };
+  const { from } = location.state ||
+    route || { from: { pathname: "/situation" } };
   navigate(from);
 }

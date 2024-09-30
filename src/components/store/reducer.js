@@ -5,12 +5,14 @@ const Actions = {
   SetAccount: "SetAccount",
   SetSiderCollapse: "SetSiderCollapse",
   Logout: "Logout",
+  SetCurrentRoute: "SetCurrentRoute",
 };
 
 const setValueActions = {
   [Actions.SetVars]: "vars",
   [Actions.SetAccount]: "account",
   [Actions.SetSiderCollapse]: "siderCollapse",
+  [Actions.SetCurrentRoute]: "currentRoute",
 };
 
 const Reducer = (state, action) => {

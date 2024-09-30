@@ -5,6 +5,7 @@ export const clearState = {
   account: null,
   token: null,
   siderCollapse: false,
+  currentRoute: null,
 };
 
 export const initialState = {
