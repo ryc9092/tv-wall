@@ -493,6 +493,14 @@ export const deactiveWall = async ({ store, activeId }) => {
   });
 };
 
+export const listActivedWall = async ({ store, activeId }) => {
+  const apiPath = `/tvwalls/active/${activeId}`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
 export const getActivedWall = async ({ store, activeId }) => {
   const apiPath = `/tvwalls/active/${activeId}`;
   return await apiGET({
