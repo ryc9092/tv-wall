@@ -28,7 +28,7 @@ const ViewWall = ({ wall }) => {
 
   useEffect(() => {
     setModalOpen(modalOpen);
-  }, [modalOpen, setModalOpen]);
+  }, [modalOpen]);
 
   useEffect(() => {
     // create wall table
