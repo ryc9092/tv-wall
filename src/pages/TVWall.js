@@ -244,6 +244,7 @@ const TVWall = () => {
         });
       });
       setBlocks(tempblocks);
+      setBlockEncoderMapping({})
       showSuccessNotificationByMsg(
         intl.formatMessage(Messages.Text_TVWall_DeactiveSuccess)
       );
