@@ -263,7 +263,13 @@ const CreateSituationModal = ({ setReload }) => {
             </Dropdown>
           </div> */}
           <div className="create-situation-btn-row">
-            <Button className="cancel-btn" style={{ marginRight: 16 }}>
+            <Button
+              className="cancel-btn"
+              style={{ marginRight: 16 }}
+              onClick={() => {
+                setIsModalOpen(false);
+              }}
+            >
               <span className="cancel-btn-text">
                 <FormattedMessage {...Messages.Text_Button_Cancel} />
               </span>
