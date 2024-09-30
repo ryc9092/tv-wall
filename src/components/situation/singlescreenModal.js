@@ -12,7 +12,7 @@ import {
   Tag,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { getEncoders, getDecoders, presetDeviceLink } from "../../api/API";
+import { getEncoders, getFilteredDecoders, presetDeviceLink } from "../../api/API";
 import { uuid } from "../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
@@ -48,7 +48,7 @@ const SingleScreenModal = ({
   useEffect(() => {
     (async () => {
       const encoders = await getEncoders(store);
-      const decoders = await getDecoders(store);
+      const decoders = await getFilteredDecoders(store);
 
       let tempDecoders = []; // for set decoders
       decoders?.forEach((decoder) => {
