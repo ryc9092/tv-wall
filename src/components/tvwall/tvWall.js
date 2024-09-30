@@ -171,7 +171,7 @@ const TvWall = ({
       });
     }
     setBlocksWithPosition(tempBlocks);
-  }, [blocks]);
+  }, [blocks, blockEncoderMapping]);
 
   const modifyVideoSize = (previewUrl, width, height) => {
     const hostname = previewUrl.split("?")[0];

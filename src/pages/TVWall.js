@@ -153,7 +153,7 @@ const TVWall = () => {
         }
       }
     })();
-  }, [selectedTemplate]);
+  }, [selectedTemplate, encoders]);
 
   // Set "normal/abnormal encoder list" when search filter is changed
   useEffect(() => {
