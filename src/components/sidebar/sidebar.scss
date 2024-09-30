@@ -23,12 +23,13 @@
 }
 
 .ant-tooltip .ant-tooltip-inner {
-    background-color: white;
+    display: none;
     padding-right: 28px;
 }
 
 .ant-tooltip {
-    --antd-arrow-background-color: white;
+    display: none;
+    // --antd-arrow-background-color: white;
 }
 
 .logout-btn {
