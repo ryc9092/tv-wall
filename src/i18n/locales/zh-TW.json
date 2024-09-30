@@ -21,6 +21,7 @@
   "Text-Common-InputID": "輸入ID",
   "Text-Common-InputName": "輸入名稱",
   "Text-Common-SelectAll": "全選",
+  "Text-Common-OperationSuccess": "操作成功",
   "Text-Button-Save": "儲存",
   "Text-Button-View": "檢視",
   "Text-Button-Add": "新增",
@@ -196,6 +197,7 @@
   "Text-DeviceSetting-TerminalIP": "終端顯示設備IP",
   "Text-DeviceSetting-NetworkMask": "網路遮罩",
   "Text-DeviceSetting-NetworkGate": "網路閘道器",
+  "Text-DeviceSetting-OperationFailed": "操作失敗，請檢查名稱是否重複",
 
   "Text-GroupSetting-GroupSetting": "顯示群組設定",
   "Text-GroupSetting-Screen": "螢幕",

@@ -48,6 +48,10 @@ export default defineMessages({
     id: "Text-Common-SelectAll",
     defaultMessage: "全選",
   },
+  Text_Common_OperationSuccess: {
+    id: "Text-Common-OperationSuccess",
+    defaultMessage: "操作成功",
+  },
   Text_Button_Save: {
     id: "Text-Button-Save",
     defaultMessage: "儲存",
@@ -877,6 +881,10 @@ export default defineMessages({
   Text_DeviceSetting_NetworkGate: {
     id: "Text-DeviceSetting-NetworkGate",
     defaultMessage: "網路閘道器",
+  },
+  Text_DeviceSetting_OperationFailed: {
+    id: "Text-DeviceSetting-OperationFailed",
+    defaultMessage: "操作失敗，請檢查名稱是否重複",
   },
 
   // System setting - device setting legacy

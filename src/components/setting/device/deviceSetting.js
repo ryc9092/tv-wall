@@ -4,6 +4,10 @@ import { Button, Input, Table } from "antd";
 import { getDevices, editDevice, removeDevice } from "../../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
+import {
+  showWarningNotification,
+  showSuccessNotificationByMsg,
+} from "../../../utils/Utils";
 import PencilIcon from "../../../assets/pencil.png";
 import TrashIcon from "../../../assets/trash.png";
 import "./deviceSetting.scss";
@@ -124,14 +128,14 @@ const TemplateSetting = () => {
       device.origName
     );
     if (result) {
-      // showSuccessNotificationByMsg(
-      //   intl.formatMessage(Messages.Text_WallSetting_DeleteSuccess)
-      // );
+      showSuccessNotificationByMsg(
+        intl.formatMessage(Messages.Text_Common_OperationSuccess)
+      );
       setReload(Math.random);
     } else {
-      // showWarningNotification(
-      //   intl.formatMessage(Messages.Text_WallSetting_DeleteFail)
-      // );
+      showWarningNotification(
+        intl.formatMessage(Messages.Text_DeviceSetting_OperationFailed)
+      );
     }
     setIsEdited(false);
     setEditingKey("");

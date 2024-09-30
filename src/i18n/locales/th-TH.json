@@ -21,6 +21,7 @@
   "Text-Common-InputID": "Input ID",
   "Text-Common-InputName": "Input name",
   "Text-Common-SelectAll": "select all",
+  "Text-Common-OperationSuccess": "operation success",
   "Text-Button-Save": "save",
   "Text-Button-View": "view",
   "Text-Button-Add": "add",
@@ -196,6 +197,7 @@
   "Text-DeviceSetting-TerminalIP": "Terminal display device IP",
   "Text-DeviceSetting-NetworkMask": "network mask",
   "Text-DeviceSetting-NetworkGate": "network gateway",
+  "Text-DeviceSetting-OperationFailed": "operation failed, please check if name is duplicate",
 
   "Text-GroupSetting-GroupSetting": "Display group setting",
   "Text-GroupSetting-Screen": "screen",
