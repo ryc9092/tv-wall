@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Card, Input, Select, Table, Tag } from "antd";
+import { Card, Input, Select, Table, Tag, Modal } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import TvWall from "../components/tvwall/tvWall";
 import useWindowDimensions from "../utils/WindowDimension";
@@ -44,6 +44,7 @@ const TVWall = () => {
   const [blocks, setBlocks] = useState([]);
   const [isActivedWall, setIsActivedWall] = useState(false);
   const [blockEncoderMapping, setBlockEncoderMapping] = useState({});
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
 
   // Set "wall options"
   useEffect(() => {
@@ -244,7 +245,7 @@ const TVWall = () => {
         });
       });
       setBlocks(tempblocks);
-      setBlockEncoderMapping({})
+      setBlockEncoderMapping({});
       showSuccessNotificationByMsg(
         intl.formatMessage(Messages.Text_TVWall_DeactiveSuccess)
       );
@@ -253,6 +254,7 @@ const TVWall = () => {
         intl.formatMessage(Messages.Text_TVWall_DeactiveFail)
       );
     }
+    setOpenConfirmModal(false);
   };
 
   const columns = [
@@ -376,7 +378,9 @@ const TVWall = () => {
                 ? "tvwall-option-trash-btn-collapse"
                 : "tvwall-option-trash-btn"
             }
-            onClick={handleDeactiveWall}
+            onClick={() => {
+              setOpenConfirmModal(true);
+            }}
           >
             <img
               alt="trash"
@@ -387,6 +391,26 @@ const TVWall = () => {
               <FormattedMessage {...Messages.Text_TVWall_ClearWallConnection} />
             </span>
           </div>
+          <Modal
+            className="audio-modal-close-x"
+            title={
+              <span style={{ marginRight: 12 }}>
+                <FormattedMessage
+                  {...Messages.Text_Audio_RemoveConnectionConfirm}
+                />
+              </span>
+            }
+            width={400}
+            okText={intl.formatMessage(Messages.Text_Common_Confirm)}
+            cancelText={intl.formatMessage(Messages.Text_Button_Cancel)}
+            open={openConfirmModal}
+            onCancel={() => {
+              setOpenConfirmModal(false);
+            }}
+            onOk={handleDeactiveWall}
+          >
+            <br />
+          </Modal>
           <div className="tvwall-option-play-btn" onClick={handleActiveWall}>
             <img
               alt="play"
