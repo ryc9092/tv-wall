@@ -69,7 +69,7 @@ const SingleScreenModal = ({
       setEncoders(encoders);
       setDecoders(tempDecoders.length > 0 ? tempDecoders : decoders);
     })();
-  }, [isModalOpen]);
+  }, [isModalOpen, selectedEncoder]);
 
   // filtered encoder list
   useEffect(() => {
@@ -277,11 +277,12 @@ const SingleScreenModal = ({
   ];
 
   const handleChooseEncoder = (encoder) => {
-    setSelectedEncoder({
-      mac: encoder.mac,
-      previewUrl: encoder.previewUrl,
-      nickName: encoder.nickName,
-    });
+    if (encoder.mac !== selectedEncoder.mac)
+      setSelectedEncoder({
+        mac: encoder.mac,
+        previewUrl: encoder.previewUrl,
+        nickName: encoder.nickName,
+      });
   };
 
   const handleReset = () => {
