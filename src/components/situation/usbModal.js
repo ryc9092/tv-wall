@@ -3,6 +3,7 @@ import { StoreContext } from "../../components/store/store";
 import { Button, Divider, Input, Modal, Table, Tag } from "antd";
 import { getEncoders, getDecoders, presetDeviceLink } from "../../api/API";
 import { uuid } from "../../utils/Utils";
+import { showWarningNotification } from "../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
 import SearchIcon from "../../assets/magnifying-glass.png";
@@ -192,7 +193,7 @@ const USBModal = ({
   };
 
   const handleCreateItem = async () => {
-    if (selectedEncoder && selectedDecoders?.length !== 0) {
+    if (selectedEncoder && selectedDecoders?.length !== 0 && situationItemDesc) {
       await presetDeviceLink({
         store: store,
         presetDetailId: `usb@${uuid()}`,
@@ -210,6 +211,10 @@ const USBModal = ({
       handleReset();
       setReload(Math.random());
       setIsModalOpen(false);
+    } else {
+      showWarningNotification(
+        intl.formatMessage(Messages.Text_Common_RequiredHint)
+      );
     }
   };
 

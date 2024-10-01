@@ -114,35 +114,41 @@ const TemplateSetting = () => {
   };
 
   const save = async (key) => {
-    const index = devices.findIndex((item) => key === item.key);
-    const { ...device } = { ...devices[index] };
-    const result = await editDevice(
-      store,
-      device.mac,
-      editedNickName,
-      editedAudioAnalog,
-      editedAudioHdmi,
-      editedIP,
-      device.model,
-      device.type,
-      device.origName
-    );
-    if (result) {
-      showSuccessNotificationByMsg(
-        intl.formatMessage(Messages.Text_Common_OperationSuccess)
+    if (editedNickName && editedAudioAnalog && editedAudioHdmi) {
+      const index = devices.findIndex((item) => key === item.key);
+      const { ...device } = { ...devices[index] };
+      const result = await editDevice(
+        store,
+        device.mac,
+        editedNickName,
+        editedAudioAnalog,
+        editedAudioHdmi,
+        editedIP,
+        device.model,
+        device.type,
+        device.origName
       );
-      setReload(Math.random);
+      if (result) {
+        showSuccessNotificationByMsg(
+          intl.formatMessage(Messages.Text_Common_OperationSuccess)
+        );
+        setReload(Math.random);
+      } else {
+        showWarningNotification(
+          intl.formatMessage(Messages.Text_DeviceSetting_OperationFailed)
+        );
+      }
+      setIsEdited(false);
+      setEditingKey("");
+      setEditedNickName("");
+      setEditedAudioAnalog("");
+      setEditedAudioHdmi("");
+      // setEditedIP("");
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_DeviceSetting_OperationFailed)
+        intl.formatMessage(Messages.Text_Common_RequiredHint)
       );
     }
-    setIsEdited(false);
-    setEditingKey("");
-    setEditedNickName("");
-    setEditedAudioAnalog("");
-    setEditedAudioHdmi("");
-    // setEditedIP("");
   };
 
   const remove = async (key) => {

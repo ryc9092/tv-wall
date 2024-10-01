@@ -3,6 +3,7 @@ import { StoreContext } from "../../components/store/store";
 import { Button, Divider, Input, Modal, Radio, Space, Table, Tag } from "antd";
 import { getEncoders, getDecoders, presetDeviceLink } from "../../api/API";
 import { uuid } from "../../utils/Utils";
+import { showWarningNotification } from "../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
 import SearchIcon from "../../assets/magnifying-glass.png";
@@ -201,7 +202,7 @@ const AudioModal = ({
   };
 
   const handleCreateItem = async () => {
-    if (selectedEncoder && selectedDecoders?.length !== 0) {
+    if (selectedEncoder && selectedDecoders?.length !== 0 && situationItemDesc) {
       await presetDeviceLink({
         store: store,
         presetDetailId: `audio@${uuid()}`,
@@ -219,6 +220,10 @@ const AudioModal = ({
       handleReset();
       setReload(Math.random());
       setIsModalOpen(false);
+    } else {
+      showWarningNotification(
+        intl.formatMessage(Messages.Text_Common_RequiredHint)
+      );
     }
   };
 

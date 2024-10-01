@@ -12,8 +12,13 @@ import {
   Tag,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { getEncoders, getFilteredDecoders, presetDeviceLink } from "../../api/API";
+import {
+  getEncoders,
+  getFilteredDecoders,
+  presetDeviceLink,
+} from "../../api/API";
 import { uuid } from "../../utils/Utils";
+import { showWarningNotification } from "../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
 import "./addSituationContent.scss";
@@ -64,7 +69,7 @@ const SingleScreenModal = ({
       setEncoders(encoders);
       setDecoders(tempDecoders.length > 0 ? tempDecoders : decoders);
     })();
-  }, []);
+  }, [isModalOpen]);
 
   // filtered encoder list
   useEffect(() => {
@@ -292,27 +297,33 @@ const SingleScreenModal = ({
   };
 
   const handleCreateItem = async (decoders, encoder) => {
-    let linkDecoders = [];
-    decoders?.forEach((decoder) => {
-      if (decoder.encoder.mac === encoder.mac) linkDecoders.push(decoder.mac);
-    });
-    await presetDeviceLink({
-      store: store,
-      presetDetailId: `video@${uuid()}`,
-      linkType: "video",
-      value1: "",
-      encoder: encoder.mac,
-      remark: situationItemDesc,
-      deviceLinkDetails: linkDecoders,
-      presetPostDetail: {
-        preSetId: situation.id,
-        orderNum: situationItemLength + 1,
+    if (decoders?.length !== 0 && encoder.mac && situationItemDesc) {
+      let linkDecoders = [];
+      decoders?.forEach((decoder) => {
+        if (decoder.encoder.mac === encoder.mac) linkDecoders.push(decoder.mac);
+      });
+      await presetDeviceLink({
+        store: store,
+        presetDetailId: `video@${uuid()}`,
+        linkType: "video",
+        value1: "",
+        encoder: encoder.mac,
         remark: situationItemDesc,
-      },
-    });
-    handleReset();
-    setReload(Math.random());
-    setIsModalOpen(false);
+        deviceLinkDetails: linkDecoders,
+        presetPostDetail: {
+          preSetId: situation.id,
+          orderNum: situationItemLength + 1,
+          remark: situationItemDesc,
+        },
+      });
+      handleReset();
+      setReload(Math.random());
+      setIsModalOpen(false);
+    } else {
+      showWarningNotification(
+        intl.formatMessage(Messages.Text_Common_RequiredHint)
+      );
+    }
   };
 
   return (

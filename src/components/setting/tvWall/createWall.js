@@ -13,6 +13,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { getDecoders, createWall } from "../../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
+import { showWarningNotification } from "../../../utils/Utils";
 import PlusIcon from "../../../assets/plus-white.png";
 import XIcon from "../../../assets/X.png";
 import "../../../App.scss";
@@ -108,20 +109,26 @@ const CreateWall = ({ setReload }) => {
   };
 
   const saveWall = () => {
-    (async () => {
-      const result = await createWall(
-        store,
-        wallId,
-        wallName,
-        wallSize.col,
-        wallSize.row,
-        screenList
+    if (wallId && wallName && wallSize && screenList?.length !== 0) {
+      (async () => {
+        const result = await createWall(
+          store,
+          wallId,
+          wallName,
+          wallSize.col,
+          wallSize.row,
+          screenList
+        );
+        if (result) {
+          setReload(Math.random());
+          setIsModalOpen(false);
+        }
+      })();
+    } else {
+      showWarningNotification(
+        intl.formatMessage(Messages.Text_Common_RequiredHint)
       );
-      if (result) {
-        setReload(Math.random());
-        setIsModalOpen(false);
-      }
-    })();
+    }
   };
 
   const decoderTableColumns = [

@@ -135,35 +135,41 @@ const CreateTemplate = ({ setReload }) => {
   );
 
   const saveWall = () => {
-    // set block info to screen list
-    let screenListWithBlock = [];
-    screenList?.forEach((screen) => {
-      screenListWithBlock.push({
-        num: screen.num,
-        block: screenBlockMap[screen.num],
+    if (templateId && templateName) {
+      // set block info to screen list
+      let screenListWithBlock = [];
+      screenList?.forEach((screen) => {
+        screenListWithBlock.push({
+          num: screen.num,
+          block: screenBlockMap[screen.num],
+        });
       });
-    });
-    (async () => {
-      const result = await createTemplate(
-        store,
-        templateId,
-        templateName,
-        templateSize.col,
-        templateSize.row,
-        templateIsDefault ? 1 : 0,
-        screenListWithBlock
+      (async () => {
+        const result = await createTemplate(
+          store,
+          templateId,
+          templateName,
+          templateSize.col,
+          templateSize.row,
+          templateIsDefault ? 1 : 0,
+          screenListWithBlock
+        );
+        if (result) {
+          showSuccessNotificationByMsg(
+            intl.formatMessage(Messages.Text_TemplateSetting_CreateSuccess)
+          );
+          setReload(Math.random);
+          setIsModalOpen(false);
+        } else
+          showWarningNotification(
+            intl.formatMessage(Messages.Text_TemplateSetting_CreateFail)
+          );
+      })();
+    } else {
+      showWarningNotification(
+        intl.formatMessage(Messages.Text_Common_RequiredHint)
       );
-      if (result) {
-        showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_TemplateSetting_CreateSuccess)
-        );
-        setReload(Math.random);
-        setIsModalOpen(false);
-      } else
-        showWarningNotification(
-          intl.formatMessage(Messages.Text_TemplateSetting_CreateFail)
-        );
-    })();
+    }
   };
 
   return (
