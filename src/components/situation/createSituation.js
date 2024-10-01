@@ -6,6 +6,7 @@ import { createSituation } from "../../api/API";
 import TVWallModal from "./tvWallModal";
 import { uuid } from "../../utils/Utils";
 import Messages from "../../messages";
+import { showWarningNotification } from "../../utils/Utils";
 import PlusIcon from "../../assets/plus-white.png";
 import TrashIcon from "../../assets/trash.png";
 import PlusYellowIcon from "../../assets/plus-yellow.png";
@@ -43,6 +44,10 @@ const CreateSituationModal = ({ setReload }) => {
       form.resetFields();
       setReload(Math.random());
       setIsModalOpen(false);
+    } else {
+      showWarningNotification(
+        intl.formatMessage(Messages.Text_Common_RequiredHint)
+      );
     }
   };
 
@@ -210,12 +215,12 @@ const CreateSituationModal = ({ setReload }) => {
             label=<span className="create-situation-subtitle">
               {intl.formatMessage(Messages.Text_Situation_SituationName)}
             </span>
-            rules={[
-              {
-                required: true,
-                message: intl.formatMessage(Messages.Text_Common_Required),
-              },
-            ]}
+            // rules={[
+            //   {
+            //     required: true,
+            //     message: intl.formatMessage(Messages.Text_Common_Required),
+            //   },
+            // ]}
           >
             <Input
               className="create-situation-input create-situation-placeholder"
@@ -228,12 +233,12 @@ const CreateSituationModal = ({ setReload }) => {
             label=<span className="create-situation-subtitle">
               {intl.formatMessage(Messages.Text_Common_Description)}
             </span>
-            rules={[
-              {
-                required: true,
-                message: intl.formatMessage(Messages.Text_Common_Required),
-              },
-            ]}
+            // rules={[
+            //   {
+            //     required: true,
+            //     message: intl.formatMessage(Messages.Text_Common_Required),
+            //   },
+            // ]}
           >
             <Input.TextArea
               className="create-situation-textarea create-situation-placeholder"
