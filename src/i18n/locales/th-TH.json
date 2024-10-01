@@ -22,6 +22,7 @@
   "Text-Common-InputName": "Input name",
   "Text-Common-SelectAll": "select all",
   "Text-Common-OperationSuccess": "operation success",
+  "Text-Common-Required": "this column can't be blank",
   "Text-Button-Save": "save",
   "Text-Button-View": "view",
   "Text-Button-Add": "add",

@@ -210,6 +210,12 @@ const CreateSituationModal = ({ setReload }) => {
             label=<span className="create-situation-subtitle">
               {intl.formatMessage(Messages.Text_Situation_SituationName)}
             </span>
+            rules={[
+              {
+                required: true,
+                message: intl.formatMessage(Messages.Text_Common_Required),
+              },
+            ]}
           >
             <Input
               className="create-situation-input create-situation-placeholder"
@@ -222,6 +228,12 @@ const CreateSituationModal = ({ setReload }) => {
             label=<span className="create-situation-subtitle">
               {intl.formatMessage(Messages.Text_Common_Description)}
             </span>
+            rules={[
+              {
+                required: true,
+                message: intl.formatMessage(Messages.Text_Common_Required),
+              },
+            ]}
           >
             <Input.TextArea
               className="create-situation-textarea create-situation-placeholder"
