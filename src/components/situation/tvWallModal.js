@@ -1,16 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../components/store/store";
-import {
-  Button,
-  Card,
-  Divider,
-  Form,
-  Input,
-  Modal,
-  Select,
-  Table,
-  Tag,
-} from "antd";
+import { Button, Card, Divider, Input, Modal, Select, Table, Tag } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import TvWall from "./tvWall";
 import {
@@ -35,7 +25,6 @@ const TVWallModal = ({
   setReload,
 }) => {
   const intl = useIntl();
-  const [form] = Form.useForm();
   const [store] = useContext(StoreContext);
   const [situationItemDesc, setSituationItemDesc] = useState(null);
   const [wallOptions, setWallOptions] = useState([]);
@@ -53,7 +42,6 @@ const TVWallModal = ({
   const [encoders, setEncoders] = useState([]);
   const [blocks, setBlocks] = useState([]);
   const [blockEncoderMapping, setBlockEncoderMapping] = useState({});
-  const [initialFormValues, setInitialFormValues] = useState({});
 
   // Set "wall options"
   useEffect(() => {
@@ -227,7 +215,6 @@ const TVWallModal = ({
   ];
 
   const handleReset = () => {
-    form.resetFields();
     setSituationItemDesc(null);
     setWallOptions([]);
     setWallDimension({ col: 0, row: 0 });
@@ -245,8 +232,7 @@ const TVWallModal = ({
     setBlockEncoderMapping({});
   };
 
-  const handleCreateItem = async (values) => {
-    console.log(values, "ffjfjfjjlkjk", selectedTemplate, selectedWall);
+  const handleCreateItem = async () => {
     let tempBlocks = [];
     Object.entries(blockEncoderMapping)?.forEach(([key, block]) => {
       tempBlocks.push({
@@ -259,8 +245,8 @@ const TVWallModal = ({
     await presetWall({
       store: store,
       activeId: `tvwall@${uuid()}`,
-      wallId: values.wall.wallId,
-      templateId: values.template.templateId,
+      wallId: selectedWall.wallId,
+      templateId: selectedTemplate.templateId,
       blocks: tempBlocks,
       presetPostDetail: {
         preSetId: situation.id,
@@ -272,15 +258,6 @@ const TVWallModal = ({
     setReload(Math.random());
     setIsModalOpen(false);
   };
-
-  useEffect(() => {
-    setInitialFormValues({
-      description: "",
-      wall: selectedWall,
-      template: selectedTemplate,
-    });
-    console.log(selectedWall, selectedTemplate)
-  }, [form, selectedWall, selectedTemplate]);
 
   return (
     <div>
@@ -300,144 +277,97 @@ const TVWallModal = ({
           setIsModalOpen(false);
         }}
       >
-        <Form
-          form={form}
-          onFinish={handleCreateItem}
-          initialValues={initialFormValues}
-          style={{ marginTop: "28px" }}
-        >
-          <div className="situation-wall-layout-column">
-            <div className="situation-wall-option-container">
-              <div className="situation-wall-option-row">
-                <div className="situation-wall-input-layout-column">
-                  <div>
-                    <div>
-                      <Form.Item
-                        name="description"
-                        labelCol={{ span: 24 }}
-                        label=<span className="situation-wall-input-text">
-                          {intl.formatMessage(Messages.Text_Common_Description)}
-                        </span>
-                        rules={[
-                          {
-                            required: true,
-                            message: intl.formatMessage(
-                              Messages.Text_Common_Required
-                            ),
-                          },
-                        ]}
-                      >
-                        <Input
-                          className="situation-wall-input situation-wall-input-placeholder"
-                          // value={situationItemDesc}
-                          placeholder={intl.formatMessage(
-                            Messages.Text_Situation_InputDescription
-                          )}
-                          // onChange={(e) => {
-                          //   setSituationItemDesc(e.target.value);
-                          // }}
-                        />
-                      </Form.Item>
-                    </div>
+        <div className="situation-wall-layout-column">
+          <div className="situation-wall-option-container">
+            <div className="situation-wall-option-row">
+              <div className="situation-wall-input-layout-column">
+                <div>
+                  <div className="situation-wall-input-text">
+                    <FormattedMessage {...Messages.Text_Common_Description} />
                   </div>
-                </div>
-                <div className="situation-wall-input-layout-column">
                   <div>
-                    <div>
-                      <Form.Item
-                        name="wall"
-                        labelCol={{ span: 24 }}
-                        label=<span className="situation-wall-input-text">
-                          {intl.formatMessage(
-                            Messages.Text_WallSetting_WallName
-                          )}
-                        </span>
-                        rules={[
-                          {
-                            required: true,
-                            message: intl.formatMessage(
-                              Messages.Text_Common_Required
-                            ),
-                          },
-                        ]}
-                      >
-                        <Select
-                          className="situation-wall-input"
-                          options={wallOptions}
-                          // value={selectedWall}
-                          // onChange={(value, option) => {
-                          //   changeWallSelected(option);
-                          // }}
-                        />
-                      </Form.Item>
-                    </div>
-                  </div>
-                  <div style={{ marginTop: 24 }}>
-                    <div>
-                      <Form.Item
-                        name="template"
-                        labelCol={{ span: 24 }}
-                        label=<span className="situation-wall-input-text">
-                          {intl.formatMessage(Messages.Text_TVWall_Template)}
-                        </span>
-                        rules={[
-                          {
-                            required: true,
-                            message: intl.formatMessage(
-                              Messages.Text_Common_Required
-                            ),
-                          },
-                        ]}
-                      >
-                        <Select
-                          className="situation-wall-input"
-                          options={templateOptions}
-                          // value={selectedTemplate}
-                          // onChange={(value, option) => {
-                          //   setSelectedTemplate(option);
-                          // }}
-                        />
-                      </Form.Item>
-                    </div>
+                    <Input
+                      className="situation-wall-input situation-wall-input-placeholder"
+                      value={situationItemDesc}
+                      placeholder={intl.formatMessage(
+                        Messages.Text_Situation_InputDescription
+                      )}
+                      onChange={(e) => {
+                        setSituationItemDesc(e.target.value);
+                      }}
+                    />
                   </div>
                 </div>
               </div>
-              <Divider className="divider" />
-              <div className="connection-title">
-                <FormattedMessage
-                  {...Messages.Text_Situation_TVWallConnection}
-                />
-              </div>
-              <div style={{ width: 891, height: 535 }}>
-                <TvWall
-                  wallWidth={891}
-                  wallHeight={535}
-                  selectedWall={selectedWall}
-                  selectedTemplate={selectedTemplate}
-                  selectedEncoder={selectedEncoder}
-                  encoders={encoders}
-                  blocks={blocks}
-                  setBlocks={setBlocks}
-                  blockEncoderMapping={blockEncoderMapping}
-                  setBlockEncoderMapping={setBlockEncoderMapping}
-                />
+              <div className="situation-wall-input-layout-column">
+                <div>
+                  <div className="situation-wall-input-text">
+                    <FormattedMessage {...Messages.Text_WallSetting_WallName} />
+                    {" : "}
+                  </div>
+                  <div>
+                    <Select
+                      className="situation-wall-input"
+                      options={wallOptions}
+                      value={selectedWall}
+                      onChange={(value, option) => {
+                        changeWallSelected(option);
+                      }}
+                    />
+                  </div>
+                </div>
+                <div style={{ marginTop: 24 }}>
+                  <div className="situation-wall-input-text">
+                    <FormattedMessage {...Messages.Text_TVWall_Template} />
+                    {" : "}
+                  </div>
+                  <div>
+                    <Select
+                      className="situation-wall-input"
+                      options={templateOptions}
+                      value={selectedTemplate}
+                      onChange={(value, option) => {
+                        setSelectedTemplate(option);
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-            <div
-              className={
-                store.siderCollapse
-                  ? "tvwall-card-container-collapse"
-                  : "tvwall-card-container"
-              }
-            >
-              <Card className="tvwall-card-right">
-                <div className="tvwall-card-right-title">
-                  <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
-                </div>
-                <div className="tvwall-card-right-desc">
-                  <FormattedMessage {...Messages.Text_TVWall_VideoSourceDesc} />
-                </div>
-                {/* <div className="tvwall-card-right-preview">
+            <Divider className="divider" />
+            <div className="connection-title">
+              <FormattedMessage {...Messages.Text_Situation_TVWallConnection} />
+            </div>
+            <div style={{ width: 891, height: 535 }}>
+              <TvWall
+                wallWidth={891}
+                wallHeight={535}
+                selectedWall={selectedWall}
+                selectedTemplate={selectedTemplate}
+                selectedEncoder={selectedEncoder}
+                encoders={encoders}
+                blocks={blocks}
+                setBlocks={setBlocks}
+                blockEncoderMapping={blockEncoderMapping}
+                setBlockEncoderMapping={setBlockEncoderMapping}
+              />
+            </div>
+          </div>
+          <div
+            className={
+              store.siderCollapse
+                ? "tvwall-card-container-collapse"
+                : "tvwall-card-container"
+            }
+          >
+            <Card className="tvwall-card-right">
+              <div className="tvwall-card-right-title">
+                <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
+              </div>
+              <div className="tvwall-card-right-desc">
+                <FormattedMessage {...Messages.Text_TVWall_VideoSourceDesc} />
+              </div>
+              {/* <div className="tvwall-card-right-preview">
                 {selectedEncoder.previewUrl ? (
                   <div>
                     <iframe
@@ -453,52 +383,56 @@ const TVWallModal = ({
                   </div>
                 )}
               </div> */}
-                <Input
-                  className="tvwall-card-right-search tvwall-input"
-                  variant="filled"
-                  onChange={(e) => {
-                    setSearchFilter(e.target.value);
-                  }}
-                  prefix={<SearchOutlined />}
-                  placeholder={intl.formatMessage(
-                    Messages.Text_TVWall_InputEncoder
-                  )}
+              <Input
+                className="tvwall-card-right-search tvwall-input"
+                variant="filled"
+                onChange={(e) => {
+                  setSearchFilter(e.target.value);
+                }}
+                prefix={<SearchOutlined />}
+                placeholder={intl.formatMessage(
+                  Messages.Text_TVWall_InputEncoder
+                )}
+              />
+              <div className="tvwall-card-right-encoder-container">
+                <Table
+                  columns={columns}
+                  dataSource={filteredEncoders}
+                  pagination={{ pageSize: 11 }}
+                  onRow={(record) => ({
+                    onClick: () => {
+                      handleChooseEncoder(record);
+                    },
+                  })}
                 />
-                <div className="tvwall-card-right-encoder-container">
-                  <Table
-                    columns={columns}
-                    dataSource={filteredEncoders}
-                    pagination={{ pageSize: 11 }}
-                    onRow={(record) => ({
-                      onClick: () => {
-                        handleChooseEncoder(record);
-                      },
-                    })}
-                  />
-                </div>
-              </Card>
-            </div>
+              </div>
+            </Card>
           </div>
-          <div className="situation-wall-item-btn-row">
-            <Button
-              className="situation-wall-item-cancel-btn"
-              style={{ marginRight: 16 }}
-              onClick={() => {
-                handleReset();
-                setIsModalOpen(false);
-              }}
-            >
-              <span className="item-cancel-btn-text">
-                <FormattedMessage {...Messages.Text_Button_Cancel} />
-              </span>
-            </Button>
-            <Button className="item-submit-btn" htmlType="submit">
-              <span className="item-submit-btn-text">
-                <FormattedMessage {...Messages.Text_Button_Add} />
-              </span>
-            </Button>
-          </div>
-        </Form>
+        </div>
+        <div className="situation-wall-item-btn-row">
+          <Button
+            className="situation-wall-item-cancel-btn"
+            style={{ marginRight: 16 }}
+            onClick={() => {
+              handleReset();
+              setIsModalOpen(false);
+            }}
+          >
+            <span className="item-cancel-btn-text">
+              <FormattedMessage {...Messages.Text_Button_Cancel} />
+            </span>
+          </Button>
+          <Button
+            className="item-submit-btn"
+            onClick={() => {
+              handleCreateItem();
+            }}
+          >
+            <span className="item-submit-btn-text">
+              <FormattedMessage {...Messages.Text_Button_Add} />
+            </span>
+          </Button>
+        </div>
       </Modal>
     </div>
   );
