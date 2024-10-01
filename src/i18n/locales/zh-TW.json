@@ -23,6 +23,7 @@
   "Text-Common-SelectAll": "全選",
   "Text-Common-OperationSuccess": "操作成功",
   "Text-Common-Required": "此欄位不可為空白",
+  "Text-Common-RequiredHint": "欄位內容不可為空白",
   "Text-Button-Save": "儲存",
   "Text-Button-View": "檢視",
   "Text-Button-Add": "新增",

@@ -10,6 +10,7 @@ import {
   getEncoders,
   presetWall,
 } from "../../api/API";
+import { showWarningNotification } from "../../utils/Utils";
 import { uuid } from "../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
@@ -233,30 +234,36 @@ const TVWallModal = ({
   };
 
   const handleCreateItem = async () => {
-    let tempBlocks = [];
-    Object.entries(blockEncoderMapping)?.forEach(([key, block]) => {
-      tempBlocks.push({
-        block: parseInt(key),
-        encoder: block.mac,
-        col: block.col,
-        row: block.row,
+    if (selectedWall && selectedTemplate && situationItemDesc) {
+      let tempBlocks = [];
+      Object.entries(blockEncoderMapping)?.forEach(([key, block]) => {
+        tempBlocks.push({
+          block: parseInt(key),
+          encoder: block.mac,
+          col: block.col,
+          row: block.row,
+        });
       });
-    });
-    await presetWall({
-      store: store,
-      activeId: `tvwall@${uuid()}`,
-      wallId: selectedWall.wallId,
-      templateId: selectedTemplate.templateId,
-      blocks: tempBlocks,
-      presetPostDetail: {
-        preSetId: situation.id,
-        orderNum: situationItemLength + 1,
-        remark: situationItemDesc,
-      },
-    });
-    handleReset();
-    setReload(Math.random());
-    setIsModalOpen(false);
+      await presetWall({
+        store: store,
+        activeId: `tvwall@${uuid()}`,
+        wallId: selectedWall.wallId,
+        templateId: selectedTemplate.templateId,
+        blocks: tempBlocks,
+        presetPostDetail: {
+          preSetId: situation.id,
+          orderNum: situationItemLength + 1,
+          remark: situationItemDesc,
+        },
+      });
+      handleReset();
+      setReload(Math.random());
+      setIsModalOpen(false);
+    } else {
+      showWarningNotification(
+        intl.formatMessage(Messages.Text_Common_RequiredHint)
+      );
+    }
   };
 
   return (

@@ -56,6 +56,10 @@ export default defineMessages({
     id: "Text-Common-Required",
     defaultMessage: "此欄位不可為空白",
   },
+  Text_Common_RequiredHint: {
+    id: "Text-Common-RequiredHint",
+    defaultMessage: "欄位內容不可為空白",
+  },
   Text_Button_Save: {
     id: "Text-Button-Save",
     defaultMessage: "儲存",
