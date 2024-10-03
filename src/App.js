@@ -6,6 +6,7 @@ import Topbar from "./components/topbar/topbar";
 import Sidebar from "./components/sidebar/sidebar";
 import "./App.css";
 
+const About = loadable(() => import("./pages/About"));
 const Login = loadable(() => import("./pages/Login"));
 const Status = loadable(() => import("./pages/Status"));
 const TVWall = loadable(() => import("./pages/TVWall"));
@@ -155,6 +156,7 @@ function App({ setLocale }) {
             </PrivateRoute>
           }
         />
+        <Route path="/about" element=<About /> />
         <Route path="*" element=<Login /> />
       </Routes>
     </BrowserRouter>
