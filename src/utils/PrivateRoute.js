@@ -7,7 +7,8 @@ import { Navigate, useLocation } from "react-router-dom";
 // screen if you're not yet authenticated.
 function PrivateRoute({ children }) {
   const [store, dispatch] = useContext(StoreContext);
-  const isAuthenticated = store.account;
+  const isAuthenticated = sessionStorage.getItem("account");
+  // Save current route path
   const route = useLocation().pathname;
   if (store.currentRoute !== route)
     dispatch({ type: Actions.SetCurrentRoute, payload: route });
