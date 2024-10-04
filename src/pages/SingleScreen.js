@@ -107,7 +107,7 @@ const SingleScreen = () => {
       setEncoders(encoders);
       setDecoders(tempDecoders.length > 0 ? tempDecoders : decoders);
     })();
-  }, [reload]);
+  }, [reload, store]);
 
   // filtered encoder list
   useEffect(() => {

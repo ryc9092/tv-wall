@@ -98,7 +98,7 @@ const TemplateSetting = () => {
       // });
       setDevices(tempDevices);
     })();
-  }, [reload]);
+  }, [reload, store]);
 
   const isEditing = (record) => record.key === editingKey;
 

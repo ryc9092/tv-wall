@@ -55,7 +55,7 @@ const USB = () => {
       setDeviceLinks(deviceLinks);
       setLinkData([]);
     })();
-  }, [reload]);
+  }, [reload, store]);
 
   useEffect(() => {
     setLinkData([]);
@@ -87,7 +87,7 @@ const USB = () => {
       });
       if (index + 1 === deviceLinks.length) setLinkData(tempLinkData);
     });
-  }, [deviceLinks, searchFilter]);
+  }, [decoders, deviceLinks, encoders, searchFilter]);
 
   const handleRemoveLink = async (encoderMac, decoderMac) => {
     await removeDeviceLink({
@@ -246,7 +246,7 @@ const USB = () => {
       });
     }
     setFilteredEncoders(tempFilteredEncoders);
-  }, [encoderFilter]);
+  }, [encoderFilter, encoders]);
 
   const encoderSelection = {
     selectedRowKeys: [selectedEncoder],
@@ -324,7 +324,7 @@ const USB = () => {
       });
     }
     setFilteredEncoders(tempFilteredDecoders);
-  }, [decoderFilter]);
+  }, [decoderFilter, decoders]);
 
   const decoderSelection = {
     selectedRowKeys: selectedDecoders,

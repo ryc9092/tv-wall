@@ -70,7 +70,7 @@ const SituationUSB = ({
       const encoders = await getEncoders(store);
       setDeviceState(encoders, setEncoderDict);
     })();
-  }, []);
+  }, [store]);
 
   // Set "decoder list" when search filter is changed
   useEffect(() => {
@@ -196,7 +196,7 @@ const SituationUSB = ({
       );
     });
     setChoosedDecoderElements(tempChoosedDecoderElements);
-  }, [choosedDecoderList]);
+  }, [choosedDecoderList, decoderDict]);
 
   const handleCancel = () => {
     setChoosedDecoderList([]);

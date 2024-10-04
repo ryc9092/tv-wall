@@ -55,7 +55,7 @@ const Surveillance = () => {
         setStreamCards(tempStreamCards);
       }
     })();
-  }, []);
+  }, [store]);
 
   return (
     <div className="surveillance-layout">

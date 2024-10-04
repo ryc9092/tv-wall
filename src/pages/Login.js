@@ -45,7 +45,7 @@ const Login = () => {
       const account = sessionStorage.getItem("account");
       if (account) dispatch({ type: Actions.SetAccount, payload: account });
     }
-  }, [store.account, dispatch, location, navigate]);
+  }, [store.account, dispatch, location, navigate, store.currentRoute]);
 
   const onLogin = async ({ account, password }) => {
     const token = await login(account, password, store);

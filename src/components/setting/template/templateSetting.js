@@ -28,7 +28,7 @@ const TemplateSetting = () => {
       }
       setTemplates(tempTemplates);
     })();
-  }, [reload]);
+  }, [reload, store]);
 
   const columns = [
     {

@@ -138,7 +138,7 @@ const Situation = () => {
       }
       setSituationCards(cards);
     })();
-  }, [reload]);
+  }, [expandSituation, reload, store]);
 
   const columns = [
     {

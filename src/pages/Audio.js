@@ -55,7 +55,7 @@ const Audio = () => {
       setDeviceLinks(deviceLinks);
       setLinkData([]);
     })();
-  }, [reload]);
+  }, [reload, store]);
 
   useEffect(() => {
     setLinkData([]);
@@ -88,7 +88,7 @@ const Audio = () => {
       });
       if (index + 1 === deviceLinks.length) setLinkData(tempLinkData);
     });
-  }, [deviceLinks, searchFilter]);
+  }, [decoders, deviceLinks, encoders, searchFilter]);
 
   const handleRemoveLink = async (encoderMac, decoderMac, inputOutput) => {
     await removeDeviceLink({
@@ -239,7 +239,7 @@ const Audio = () => {
       });
     }
     setFilteredEncoders(tempFilteredEncoders);
-  }, [encoderFilter]);
+  }, [encoderFilter, encoders]);
 
   const encoderSelection = {
     selectedRowKeys: [selectedEncoder],
@@ -313,7 +313,7 @@ const Audio = () => {
       });
     }
     setFilteredEncoders(tempFilteredDecoders);
-  }, [decoderFilter]);
+  }, [decoderFilter, decoders]);
 
   const decoderSelection = {
     selectedRowKeys: selectedDecoders,

@@ -15,30 +15,25 @@ const Status = () => {
   const [searchFilter, setSearchFilter] = useState("");
 
   useEffect(() => {
-    retriveDevices();
-  }, [searchFilter]);
-
-  const retriveDevices = async () => {
-    let tempDevices = [];
-
-    const encoders = await getEncoders(store);
-    encoders?.forEach((encoder) => {
-      if (encoder.nickName.includes(searchFilter)) {
-        encoder.key = encoder.name;
-        tempDevices.push(encoder);
-      }
-    });
-
-    const decoders = await getDecoders(store);
-    decoders?.forEach((decoder) => {
-      if (decoder.nickName.includes(searchFilter)) {
-        decoder.key = decoder.name;
-        tempDevices.push(decoder);
-      }
-    });
-
-    setDevices(tempDevices);
-  };
+    (async () => {
+      let tempDevices = [];
+      const encoders = await getEncoders(store);
+      encoders?.forEach((encoder) => {
+        if (encoder.nickName.includes(searchFilter)) {
+          encoder.key = encoder.name;
+          tempDevices.push(encoder);
+        }
+      });
+      const decoders = await getDecoders(store);
+      decoders?.forEach((decoder) => {
+        if (decoder.nickName.includes(searchFilter)) {
+          decoder.key = decoder.name;
+          tempDevices.push(decoder);
+        }
+      });
+      setDevices(tempDevices);
+    })();
+  }, [searchFilter, store]);
 
   // Clear interval before set
   // window.clearInterval(window.retriveDevicesTimer);

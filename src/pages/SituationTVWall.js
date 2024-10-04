@@ -131,7 +131,7 @@ const SituationTVWall = ({
         setTemplateOptions(tempTemplateOptions);
       }
     })();
-  }, [wallDimension, selectedWall]);
+  }, [wallDimension, selectedWall, store]);
 
   // Set "normal/abnormal encoder list" when search filter is changed
   useEffect(() => {
@@ -198,7 +198,7 @@ const SituationTVWall = ({
       setEncoderElementsNormal(tempNormalEncoderElements);
       setEncoderElementsAbnormal(tempAbnormalEncoderElements);
     })();
-  }, [searchFilter]);
+  }, [searchFilter, store]);
 
   const changeWallSelected = (wall) => {
     setWallDimension({ col: wall.col, row: wall.row });

@@ -71,7 +71,7 @@ const SituationAudio = ({
       const encoders = await getEncoders(store);
       setDeviceState(encoders, setEncoderDict);
     })();
-  }, []);
+  }, [store]);
 
   // Set "decoder list" when search filter is changed
   useEffect(() => {
@@ -197,7 +197,7 @@ const SituationAudio = ({
       );
     });
     setChoosedDecoderElements(tempChoosedDecoderElements);
-  }, [choosedDecoderList]);
+  }, [choosedDecoderList, decoderDict]);
 
   const handleCancel = () => {
     setChoosedDecoderList([]);

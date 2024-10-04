@@ -28,7 +28,7 @@ const TVWallSetting = () => {
       }
       setWalls(tempWalls);
     })();
-  }, [reload]);
+  }, [reload, store]);
 
   const columns = [
     {

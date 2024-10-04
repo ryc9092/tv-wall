@@ -121,7 +121,7 @@ const TVWall = () => {
         setTemplateOptions(tempTemplateOptions);
       }
     })();
-  }, [selectedWall]);
+  }, [selectedWall, store, wallDimension.col, wallDimension.row]);
 
   // Show wall active status when selected wall changed and there is no selected template
   useEffect(() => {
@@ -154,7 +154,7 @@ const TVWall = () => {
         }
       }
     })();
-  }, [selectedTemplate, encoders]);
+  }, [selectedTemplate, encoders, selectedWall.wallId, store]);
 
   // Set "normal/abnormal encoder list" when search filter is changed
   useEffect(() => {
@@ -171,7 +171,7 @@ const TVWall = () => {
       }
       setFilteredEncoders(tempFilteredEncoders);
     })();
-  }, [searchFilter]);
+  }, [searchFilter, store]);
 
   const changeWallSelected = (wall) => {
     setWallDimension({ col: wall.col, row: wall.row });
