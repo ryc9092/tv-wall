@@ -49,6 +49,17 @@ const SingleScreenModal = ({
   const [decoderCards, setDecoderCards] = useState(null);
   const [searchEncoderFilter, setSearchEncoderFilter] = useState("");
   const [filteredEncoders, setFilteredEncoders] = useState([]);
+  const [updateDecoderCards, setUpdateDecoderCards] = useState(null);
+  const [currentScreen, setCurrentScreen] = useState(null);
+
+  const handleScreenMouseEnter = (event) => {
+    const itemId = event.target.id;
+    setCurrentScreen(itemId);
+  };
+
+  const handleScreenMouseLeave = () => {
+    setCurrentScreen(null);
+  };
 
   // set encoder, decoder
   useEffect(() => {
@@ -107,6 +118,7 @@ const SingleScreenModal = ({
         }
       });
       setDecoders(tempDecoders);
+      setUpdateDecoderCards(Math.random());
     }
   };
 
@@ -126,7 +138,7 @@ const SingleScreenModal = ({
     let tempDecoderCards = [];
     filteredDecoders?.forEach((decoder) => {
       tempDecoderCards.push(
-        <Col key={`col@${decoder.mac}`} id={`card@${decoder.mac}`}>
+        <Col key={`col@${decoder.mac}`} id={`card@${decoder.mac}`} onMouseOver={handleScreenMouseEnter} onMouseLeave={handleScreenMouseLeave}>
           <div
             className="situation-single-screen-card"
             onClick={(event) => onScreenClick(event, selectedEncoder)}
@@ -204,7 +216,7 @@ const SingleScreenModal = ({
       );
     });
     setDecoderCards(tempDecoderCards);
-  }, [filteredDecoders, selectedEncoder]);
+  }, [filteredDecoders, updateDecoderCards, selectedEncoder, currentScreen]);
 
   const columns = [
     {
