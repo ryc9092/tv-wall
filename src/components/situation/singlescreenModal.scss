@@ -1,3 +1,5 @@
+@import '../../pages/SingleScreen.scss';
+
 .single-screen-content .ant-modal-content {
     padding: 56px !important;
     height: 1208px;
@@ -155,7 +157,7 @@
 
 .situation-single-screen-card-top {
     width: 350px;
-    height: 268px;
+    height: 286px;
     border-radius: 12px;
     margin-bottom: 12px;
     cursor: pointer;

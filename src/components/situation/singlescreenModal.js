@@ -13,7 +13,6 @@ import {
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import {
-  getEncoders,
   getFilteredDecoders,
   presetDeviceLink,
 } from "../../api/API";
@@ -65,7 +64,7 @@ const SingleScreenModal = ({
   useEffect(() => {
     (async () => {
       const decoders = await getFilteredDecoders(store);
-
+      // const decoders = [{mac: "ffff", nickName: "test", state: "Up"}]
       let tempDecoders = []; // for set decoders
       decoders?.forEach((decoder) => {
         tempDecoders.push({
@@ -153,6 +152,12 @@ const SingleScreenModal = ({
             <div
               id={`card@${decoder.mac}`}
               className="situation-single-screen-card-top"
+              style={{
+                backgroundColor:
+                  currentScreen && currentScreen.includes(decoder.mac)
+                    ? "gray"
+                    : null,
+              }}
             >
               <div
                 id={`card@${decoder.mac}`}
@@ -161,6 +166,12 @@ const SingleScreenModal = ({
                 <span
                   id={`card@${decoder.mac}`}
                   className="situation-single-screen-card-title"
+                  style={{
+                    color:
+                      currentScreen && currentScreen.includes(decoder.mac)
+                        ? "white"
+                        : "#45413e",
+                  }}
                 >
                   {decoder.nickName}
                 </span>
@@ -210,6 +221,30 @@ const SingleScreenModal = ({
                   )}
                 </span>
               </div>
+              {currentScreen && currentScreen.includes(decoder.mac) ? (
+                <div id={`card@${decoder.mac}`}>
+                  <div
+                    id={`card@${decoder.mac}`}
+                    className="single-screen-card-desc"
+                    // style={{zIndex: 100, backgroundColor: "black", color: "white"}}
+                  >
+                    <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
+                    {" : "}{" "}
+                    {decoder.previewUrl
+                      ? decoder.encoder?.nickName
+                      : intl.formatMessage(Messages.Text_Common_None)}
+                  </div>
+                  <div
+                    id={`card@${decoder.mac}`}
+                    className={
+                      store.siderCollapse
+                        ? "single-screen-btn-position-collapse"
+                        : "single-screen-btn-position"
+                    }
+                  >
+                  </div>
+                </div>
+              ) : null}
             </div>
           </div>
         </Col>
