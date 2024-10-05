@@ -36,6 +36,7 @@ const SingleScreen = () => {
   });
   const [currentScreen, setCurrentScreen] = useState(null);
   const [reload, setReload] = useState(null);
+  const [updateDecoderCards, setUpdateDecoderCards] = useState(null);
 
   const handleScreenMouseEnter = (event) => {
     const itemId = event.target.id;
@@ -166,6 +167,7 @@ const SingleScreen = () => {
         }
       });
       setDecoders(tempDecoders);
+      setUpdateDecoderCards(Math.random());
     }
   };
 
@@ -421,7 +423,7 @@ const SingleScreen = () => {
       );
     });
     setDecoderCards(tempDecoderCards);
-  }, [filteredDecoders, currentScreen, store.siderCollapse]);
+  }, [filteredDecoders, updateDecoderCards, currentScreen, store.siderCollapse]);
 
   const columns = [
     {
