@@ -32,6 +32,8 @@ const SingleScreenModal = ({
   isModalOpen,
   setIsModalOpen,
   setReload,
+  encoders,
+  setEncoders,
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
@@ -47,12 +49,10 @@ const SingleScreenModal = ({
   const [decoderCards, setDecoderCards] = useState(null);
   const [searchEncoderFilter, setSearchEncoderFilter] = useState("");
   const [filteredEncoders, setFilteredEncoders] = useState([]);
-  const [encoders, setEncoders] = useState([]);
 
   // set encoder, decoder
   useEffect(() => {
     (async () => {
-      const encoders = await getEncoders(store);
       const decoders = await getFilteredDecoders(store);
 
       let tempDecoders = []; // for set decoders
@@ -66,10 +66,9 @@ const SingleScreenModal = ({
           },
         });
       });
-      setEncoders(encoders);
       setDecoders(tempDecoders.length > 0 ? tempDecoders : decoders);
     })();
-  }, [isModalOpen, selectedEncoder]);
+  }, [isModalOpen]);
 
   // filtered encoder list
   useEffect(() => {

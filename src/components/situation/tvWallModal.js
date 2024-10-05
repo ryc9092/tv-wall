@@ -7,7 +7,6 @@ import {
   getActivedWall,
   getWalls,
   getTemplates,
-  getEncoders,
   presetWall,
 } from "../../api/API";
 import { showWarningNotification } from "../../utils/Utils";
@@ -24,6 +23,8 @@ const TVWallModal = ({
   isModalOpen,
   setIsModalOpen,
   setReload,
+  encoders,
+  setEncoders,
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
@@ -40,7 +41,6 @@ const TVWallModal = ({
   });
   const [filteredEncoders, setFilteredEncoders] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
-  const [encoders, setEncoders] = useState([]);
   const [blocks, setBlocks] = useState([]);
   const [blockEncoderMapping, setBlockEncoderMapping] = useState({});
 
@@ -120,9 +120,6 @@ const TVWallModal = ({
   useEffect(() => {
     (async () => {
       let tempFilteredEncoders = [];
-      const encoders = await getEncoders(store);
-      setEncoders(encoders);
-
       if (encoders) {
         encoders.forEach((encoder) => {
           if (encoder.nickName.includes(searchFilter))
@@ -131,7 +128,7 @@ const TVWallModal = ({
       }
       setFilteredEncoders(tempFilteredEncoders);
     })();
-  }, [searchFilter, isModalOpen]);
+  }, [searchFilter, isModalOpen, encoders]);
 
   const changeWallSelected = (wall) => {
     setWallDimension({ col: wall.col, row: wall.row });

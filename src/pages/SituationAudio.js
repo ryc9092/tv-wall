@@ -197,7 +197,7 @@ const SituationAudio = ({
       );
     });
     setChoosedDecoderElements(tempChoosedDecoderElements);
-  }, [choosedDecoderList, decoderDict]);
+  }, [choosedDecoderList]);
 
   const handleCancel = () => {
     setChoosedDecoderList([]);

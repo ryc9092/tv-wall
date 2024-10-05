@@ -196,7 +196,7 @@ const SituationUSB = ({
       );
     });
     setChoosedDecoderElements(tempChoosedDecoderElements);
-  }, [choosedDecoderList, decoderDict]);
+  }, [choosedDecoderList]);
 
   const handleCancel = () => {
     setChoosedDecoderList([]);

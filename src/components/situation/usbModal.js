@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../components/store/store";
 import { Button, Divider, Input, Modal, Table, Tag } from "antd";
-import { getEncoders, getDecoders, presetDeviceLink } from "../../api/API";
+import { presetDeviceLink } from "../../api/API";
 import { uuid } from "../../utils/Utils";
 import { showWarningNotification } from "../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -16,29 +16,27 @@ const USBModal = ({
   isModalOpen,
   setIsModalOpen,
   setReload,
+  encoders,
+  setEncoders,
+  decoders,
+  setDecoders
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
   const [situationItemDesc, setSituationItemDesc] = useState(null);
-  const [decoders, setDecoders] = useState([]);
-  const [encoders, setEncoders] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const encoders = await getEncoders(store);
-      const decoders = await getDecoders(store);
       encoders?.forEach((encoder) => {
         encoder.key = encoder.mac;
       });
       decoders?.forEach((decoder) => {
         decoder.key = decoder.mac;
       });
-      setDecoders(decoders);
       setFilteredDecoders(decoders);
-      setEncoders(encoders);
       setFilteredEncoders(encoders);
     })();
-  }, [isModalOpen]);
+  }, [isModalOpen, encoders, decoders]);
 
   const [selectedEncoder, setSelectedEncoder] = useState(null);
   const [encoderFilter, setEncoderFilter] = useState("");

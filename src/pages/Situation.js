@@ -5,6 +5,8 @@ import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
 import CreateSituation from "../components/situation/createSituation";
 import {
+  getEncoders,
+  getDecoders,
   getSituations,
   getSituationDetails,
   removeSituation,
@@ -33,6 +35,8 @@ const Situation = () => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
   const [reload, setReload] = useState(null);
+  const [decoders, setDecoders] = useState([]);
+  const [encoders, setEncoders] = useState([]);
   const [situationCards, setSituationCards] = useState([]);
   const [expandSituation, setExpandSituation] = useState(null);
   const [expandSituationCard, setExpandSituationCard] = useState(null);
@@ -44,6 +48,21 @@ const Situation = () => {
   const [isSingleScreenModalOpen, setIsSingleScreenModalOpen] = useState(false);
   const [isUSBModalOpen, setIsUSBModalOpen] = useState(false);
   const [isAudioModalOpen, setIsAudioModalOpen] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const encoders = await getEncoders(store);
+      const decoders = await getDecoders(store);
+      encoders?.forEach((encoder) => {
+        encoder.key = encoder.mac;
+      });
+      decoders?.forEach((decoder) => {
+        decoder.key = decoder.mac;
+      });
+      setDecoders(decoders);
+      setEncoders(encoders);
+    })();
+  }, [store, isTVWallModalOpen, isSingleScreenModalOpen, isUSBModalOpen, isAudioModalOpen]);
 
   const startSituation = async (situationId) => {
     activateSituation(situationId, store).then(() => {
@@ -138,7 +157,7 @@ const Situation = () => {
       }
       setSituationCards(cards);
     })();
-  }, [expandSituation, reload, store]);
+  }, [reload, store]);
 
   const columns = [
     {
@@ -398,6 +417,10 @@ const Situation = () => {
         isModalOpen={isTVWallModalOpen}
         setIsModalOpen={setIsTVWallModalOpen}
         setReload={setReload}
+        encoders={encoders}
+        setEncoders={setEncoders}
+        decoders={decoders}
+        setDecoders={setDecoders}
       />
       <SingleScreenModal
         situation={expandSituation}
@@ -405,6 +428,10 @@ const Situation = () => {
         isModalOpen={isSingleScreenModalOpen}
         setIsModalOpen={setIsSingleScreenModalOpen}
         setReload={setReload}
+        encoders={encoders}
+        setEncoders={setEncoders}
+        decoders={decoders}
+        setDecoders={setDecoders}
       />
       <USBModal
         situation={expandSituation}
@@ -412,6 +439,10 @@ const Situation = () => {
         isModalOpen={isUSBModalOpen}
         setIsModalOpen={setIsUSBModalOpen}
         setReload={setReload}
+        encoders={encoders}
+        setEncoders={setEncoders}
+        decoders={decoders}
+        setDecoders={setDecoders}
       />
       <AudioModal
         situation={expandSituation}
@@ -419,6 +450,10 @@ const Situation = () => {
         isModalOpen={isAudioModalOpen}
         setIsModalOpen={setIsAudioModalOpen}
         setReload={setReload}
+        encoders={encoders}
+        setEncoders={setEncoders}
+        decoders={decoders}
+        setDecoders={setDecoders}
       />
     </div>
   );
