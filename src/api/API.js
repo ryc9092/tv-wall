@@ -39,6 +39,7 @@ const apiGET = async ({
   setError,
 }) => {
   if (setError) setError(null);
+  if (!vars) return;
   let result;
   const API_BASE = `${vars.ApiServer.Hostname}`;
   const paramsUri = params === undefined ? "" : `?${params}`;
