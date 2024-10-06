@@ -113,10 +113,10 @@ const Situation = () => {
     (async () => {
       const situations = await getSituations(store);
       let expandedSituationId = "";
-
-      if (situations) {
+      let expandedSituation;
+      if (situations && situations?.length !== 0) {
         let firstSituation = situations[0];
-        let expandedSituation = expandSituation
+        expandedSituation = expandSituation
           ? expandSituation
           : firstSituation;
 
@@ -139,12 +139,16 @@ const Situation = () => {
         );
         setExpandSituation(expandedSituation);
         setExpandSituationCard(expandCard);
+      } else {
+        expandedSituation = null;
+        setExpandSituation(null);
+        setExpandSituationCard(null);
       }
 
       let cards = [];
-      if (expandSituation) {
+      if (expandedSituation) {
         situations?.forEach((situation) => {
-          if (expandSituation.id !== situation.id) {
+          if (expandedSituation.id !== situation.id) {
             cards.push(getSituationCard(situation, [], expandedSituationId));
           }
         });
