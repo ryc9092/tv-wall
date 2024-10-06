@@ -70,29 +70,39 @@ const SingleScreen = () => {
 
       // set linked decoders list
       let linkedDecoders = [];
-      deviceLinks?.forEach((deviceLink) => {
-        const decoderMac = deviceLink?.deviceLinkDetails[0].decoder;
-        linkedDecoders.push(decoderMac);
-      });
+      if (deviceLinks && deviceLinks.length >= 0) {
+        deviceLinks.forEach((deviceLink) => {
+          if (deviceLink.deviceLinkDetails.length >= 0) {
+            deviceLink.deviceLinkDetails.forEach((deviceLinkDetail)=>{
+              const decoderMac = deviceLinkDetail.decoder;
+              linkedDecoders.push(decoderMac);
+            })
+          }
+        });
+      }
 
       let tempDecoders = []; // for set decoders
       decoders?.forEach((decoder) => {
         if (linkedDecoders.includes(decoder.mac)) {
           deviceLinks?.forEach((deviceLink) => {
             const encoderMac = deviceLink.encoder;
-            const decoderMac = deviceLink.deviceLinkDetails[0].decoder;
-            encoders?.forEach((encoder) => {
-              if (encoder.mac === encoderMac && decoder.mac === decoderMac) {
-                tempDecoders.push({
-                  ...decoder,
-                  previewUrl: encoder.previewUrl,
-                  encoder: {
-                    mac: encoder.mac,
-                    nickName: encoder.nickName,
-                  },
+            if (deviceLink.deviceLinkDetails.length >= 0) {
+              deviceLink.deviceLinkDetails.forEach((deviceLinkDetail)=>{
+                const decoderMac = deviceLinkDetail.decoder;
+                encoders?.forEach((encoder) => {
+                  if (encoder.mac === encoderMac && decoder.mac === decoderMac) {
+                    tempDecoders.push({
+                      ...decoder,
+                      previewUrl: encoder.previewUrl,
+                      encoder: {
+                        mac: encoder.mac,
+                        nickName: encoder.nickName,
+                      },
+                    });
+                  }
                 });
-              }
-            });
+              })
+            }
           });
         } else {
           tempDecoders.push({
