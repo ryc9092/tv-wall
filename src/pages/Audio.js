@@ -232,7 +232,7 @@ const Audio = () => {
 
   useEffect(() => {
     let tempFilteredEncoders = [];
-    if (encoders.length !== 0) {
+    if (encoders && encoders.length !== 0) {
       encoders?.forEach((encoder) => {
         if (encoder.nickName.includes(encoderFilter))
           tempFilteredEncoders.push(encoder);
@@ -306,7 +306,7 @@ const Audio = () => {
 
   useEffect(() => {
     let tempFilteredDecoders = [];
-    if (decoders.length !== 0) {
+    if (decoders && decoders.length !== 0) {
       decoders?.forEach((decoder) => {
         if (decoder.nickName.includes(decoderFilter))
           tempFilteredDecoders.push(decoder);

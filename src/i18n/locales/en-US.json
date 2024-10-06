@@ -160,6 +160,7 @@
   "Text-DeviceStatus-Model": "Model",
   "Text-DeviceStatus-ProductCode": "Product code",
   "Text-DeviceStatus-ProductDesc": "Product description",
+  "Text-DeviceStatus-Reboot": "reboot",
 
   "Text-SystemSetting-Title": "System setting",
 

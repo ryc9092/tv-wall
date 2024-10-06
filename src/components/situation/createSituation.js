@@ -122,7 +122,6 @@ const CreateSituationModal = ({ setReload }) => {
 
   const handleMenuClick = (event) => {
     // onCreateSituation()
-    console.log(form.getFieldsValue(), "!!!", event.key);
     if (event.key === "tvwall") setIsTVWallModalOpen(true);
   };
 
