@@ -21,6 +21,7 @@ import PlayIcon from "../assets/play-black.png";
 import PauseIcon from "../assets/pause.png";
 import CaretIcon from "../assets/caret-down.png";
 import TrashIcon from "../assets/trash.png";
+import PlusIcon from "../assets/plus-white.png";
 import PlusYellowIcon from "../assets/plus-yellow.png";
 import TVWallIcon from "../assets/tvWall.png";
 import SingleScreenIcon from "../assets/screen.png";
@@ -40,10 +41,10 @@ const Situation = () => {
   const [situationCards, setSituationCards] = useState([]);
   const [expandSituation, setExpandSituation] = useState(null);
   const [expandSituationCard, setExpandSituationCard] = useState(null);
-  const [situationItems, setSituationItems] = useState([]);
   const [situationItemLength, setSituationItemLength] = useState(0);
   const [situationActivated, setSituationActivated] = useState([]);
 
+  const [isSituationModalOpen, setIsSituationModalOpen] = useState(false);
   const [isTVWallModalOpen, setIsTVWallModalOpen] = useState(false);
   const [isSingleScreenModalOpen, setIsSingleScreenModalOpen] = useState(false);
   const [isUSBModalOpen, setIsUSBModalOpen] = useState(false);
@@ -62,7 +63,13 @@ const Situation = () => {
       setDecoders(decoders);
       setEncoders(encoders);
     })();
-  }, [store, isTVWallModalOpen, isSingleScreenModalOpen, isUSBModalOpen, isAudioModalOpen]);
+  }, [
+    store,
+    isTVWallModalOpen,
+    isSingleScreenModalOpen,
+    isUSBModalOpen,
+    isAudioModalOpen,
+  ]);
 
   const startSituation = async (situationId) => {
     activateSituation(situationId, store).then(() => {
@@ -116,16 +123,13 @@ const Situation = () => {
       let expandedSituation;
       if (situations && situations?.length !== 0) {
         let firstSituation = situations[0];
-        expandedSituation = expandSituation
-          ? expandSituation
-          : firstSituation;
+        expandedSituation = expandSituation ? expandSituation : firstSituation;
 
         expandedSituationId = expandedSituation.id;
         let situationDetail = await getSituationDetails(
           store,
           expandedSituation.id
         );
-        setSituationItems(situationDetail);
         let biggestSituationDetailOrder = 0;
         situationDetail?.forEach((detail) => {
           if (detail.orderNum > biggestSituationDetailOrder)
@@ -408,7 +412,28 @@ const Situation = () => {
           <div className="page-title">
             <FormattedMessage {...Messages.Text_Situation_Title} />
           </div>
-          <CreateSituation setReload={setReload} />
+          <div>
+            <Button
+              onClick={() => setIsSituationModalOpen(true)}
+              className="create-situation-btn"
+            >
+              <img
+                alt="create"
+                src={PlusIcon}
+                className="create-situation-btn-icon"
+              />
+              <span className="create-situation-btn-text">
+                <FormattedMessage
+                  {...Messages.Text_Situation_CreateSituation}
+                />
+              </span>
+            </Button>
+            <CreateSituation
+              setReload={setReload}
+              isModalOpen={isSituationModalOpen}
+              setIsModalOpen={setIsSituationModalOpen}
+            />
+          </div>
         </div>
       </div>
       <div className="situation-list-layout">

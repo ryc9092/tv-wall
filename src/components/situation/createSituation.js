@@ -1,36 +1,23 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { StoreContext } from "../../components/store/store";
-import { Button, Divider, Dropdown, Form, Input, Modal, Table } from "antd";
+import { Button, Form, Input, Modal } from "antd";
 import { FormattedMessage, useIntl } from "react-intl";
 import { createSituation } from "../../api/API";
-import TVWallModal from "./tvWallModal";
 import { uuid } from "../../utils/Utils";
 import Messages from "../../messages";
 import { showWarningNotification } from "../../utils/Utils";
-import PlusIcon from "../../assets/plus-white.png";
-import TrashIcon from "../../assets/trash.png";
-import PlusYellowIcon from "../../assets/plus-yellow.png";
-import TVWallIcon from "../../assets/tvWall.png";
-import SingleScreenIcon from "../../assets/screen.png";
-import USBIcon from "../../assets/usb.png";
-import AudioIcon from "../../assets/audio.png";
 import "./createSituation.scss";
 import "../../pages/Situation.scss";
 
-const CreateSituationModal = ({ setReload }) => {
+const CreateSituationModal = ({ setReload, isModalOpen, setIsModalOpen }) => {
   const intl = useIntl();
   const [form] = Form.useForm();
   const [store] = useContext(StoreContext);
-  const [isSituationCreated, setIsSituationCreated] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const [isTVWallModalOpen, setIsTVWallModalOpen] = useState(false);
 
   useEffect(() => {
     form.resetFields();
-    setIsSituationCreated(false);
     setReload(Math.random());
-  }, [isModalOpen]);
+  }, [form, isModalOpen, setReload]);
 
   const onCreateSituation = async (values) => {
     if (values.name && values.description) {
@@ -40,7 +27,6 @@ const CreateSituationModal = ({ setReload }) => {
         description: values.description,
         store: store,
       });
-      setIsSituationCreated(true);
       form.resetFields();
       setReload(Math.random());
       setIsModalOpen(false);
@@ -51,147 +37,8 @@ const CreateSituationModal = ({ setReload }) => {
     }
   };
 
-  const situationItem = [
-    // { id: "test", remark: "testefsdlfkjsdflkj", set_type: "sdlkfjsdlfkj" },
-  ];
-
-  const columns = [
-    {
-      title: (
-        <span className="table-head">
-          {intl.formatMessage(Messages.Text_Common_Type)}
-        </span>
-      ),
-      dataIndex: "set_type",
-      key: "type",
-      render: (text) => <span className="table-content">{text}</span>,
-    },
-    {
-      title: (
-        <span className="table-head">
-          {intl.formatMessage(Messages.Text_Common_Name)}
-        </span>
-      ),
-      dataIndex: "id",
-      key: "name",
-      render: (text) => {
-        return <span className="table-content">{text}</span>;
-      },
-    },
-    {
-      title: (
-        <span className="table-head">
-          {intl.formatMessage(Messages.Text_Common_Description)}
-        </span>
-      ),
-      dataIndex: "remark",
-      key: "description",
-      render: (text) => {
-        return <span className="table-content">{text}</span>;
-      },
-    },
-    {
-      title: (
-        <span className="table-head">
-          {intl.formatMessage(Messages.Text_Button_Operation)}
-        </span>
-      ),
-      dataIndex: "id",
-      key: "operate",
-      render: (text, record) => {
-        return (
-          <div key={`${text}-action`}>
-            <Button
-              key={`${text}-delete`}
-              id={text}
-              type="text"
-              onClick={() => {}}
-              className="table-content"
-            >
-              <img
-                alt="remove"
-                src={TrashIcon}
-                className="table-content-icon"
-              />
-            </Button>
-          </div>
-        );
-      },
-    },
-  ];
-
-  const handleMenuClick = (event) => {
-    // onCreateSituation()
-    if (event.key === "tvwall") setIsTVWallModalOpen(true);
-  };
-
-  const items = [
-    {
-      label: (
-        <span className="dropdown-menu-text">
-          {intl.formatMessage(Messages.Text_Situation_TVWallConnection)}
-        </span>
-      ),
-      key: "tvwall",
-      icon: (
-        <img src={TVWallIcon} alt="tvwall" className="dropdown-menu-icon" />
-      ),
-    },
-    {
-      label: (
-        <span className="dropdown-menu-text">
-          {intl.formatMessage(Messages.Text_Situation_SingleScreenConnection)}
-        </span>
-      ),
-      key: "singlescreen",
-      icon: (
-        <img
-          src={SingleScreenIcon}
-          alt="singlescreen"
-          className="dropdown-menu-icon"
-        />
-      ),
-    },
-    {
-      label: (
-        <span className="dropdown-menu-text">
-          {intl.formatMessage(Messages.Text_Situation_USBConnection)}
-        </span>
-      ),
-      key: "usb",
-      icon: <img src={USBIcon} alt="usb" className="dropdown-menu-icon" />,
-    },
-    {
-      label: (
-        <span className="dropdown-menu-text">
-          {intl.formatMessage(Messages.Text_Situation_AudioConnection)}
-        </span>
-      ),
-      key: "audio",
-      icon: <img src={AudioIcon} alt="audio" className="dropdown-menu-icon" />,
-    },
-  ];
-
-  const menuProps = {
-    items,
-    onClick: handleMenuClick,
-  };
-
   return (
     <div>
-      <Button
-        onClick={() => setIsModalOpen(true)}
-        className="create-situation-btn"
-      >
-        <img
-          alt="create"
-          src={PlusIcon}
-          className="create-situation-btn-icon"
-        />
-        <span className="create-situation-btn-text">
-          <FormattedMessage {...Messages.Text_Situation_CreateSituation} />
-        </span>
-      </Button>
       <Modal
         title=<span className="create-situation-modal-title">
           {intl.formatMessage(Messages.Text_Situation_CreateSituation)}
@@ -214,12 +61,6 @@ const CreateSituationModal = ({ setReload }) => {
             label=<span className="create-situation-subtitle">
               {intl.formatMessage(Messages.Text_Situation_SituationName)}
             </span>
-            // rules={[
-            //   {
-            //     required: true,
-            //     message: intl.formatMessage(Messages.Text_Common_Required),
-            //   },
-            // ]}
           >
             <Input
               className="create-situation-input create-situation-placeholder"
@@ -232,12 +73,6 @@ const CreateSituationModal = ({ setReload }) => {
             label=<span className="create-situation-subtitle">
               {intl.formatMessage(Messages.Text_Common_Description)}
             </span>
-            // rules={[
-            //   {
-            //     required: true,
-            //     message: intl.formatMessage(Messages.Text_Common_Required),
-            //   },
-            // ]}
           >
             <Input.TextArea
               className="create-situation-textarea create-situation-placeholder"
