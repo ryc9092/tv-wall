@@ -312,7 +312,7 @@ const Audio = () => {
           tempFilteredDecoders.push(decoder);
       });
     }
-    setFilteredEncoders(tempFilteredDecoders);
+    setFilteredDecoders(tempFilteredDecoders);
   }, [decoderFilter, decoders]);
 
   const decoderSelection = {

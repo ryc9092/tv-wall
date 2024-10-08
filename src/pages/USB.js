@@ -323,7 +323,7 @@ const USB = () => {
           tempFilteredDecoders.push(decoder);
       });
     }
-    setFilteredEncoders(tempFilteredDecoders);
+    setFilteredDecoders(tempFilteredDecoders);
   }, [decoderFilter, decoders]);
 
   const decoderSelection = {
