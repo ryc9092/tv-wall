@@ -7,7 +7,6 @@ import {
   removeDeviceLink,
   getDeviceLinks,
   getFilteredDecoders,
-  getDecoders,
   getEncoders,
 } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -64,7 +63,7 @@ const SingleScreen = () => {
   useEffect(() => {
     (async () => {
       const encoders = await getEncoders(store);
-      const decoders = await getDecoders(store);
+      const decoders = await getFilteredDecoders(store);
       const deviceLinks = await getDeviceLinks({
         store: store,
         linkType: "video",
@@ -123,10 +122,6 @@ const SingleScreen = () => {
           });
         }
       });
-      encoders.forEach((e)=>{ /////////// todo
-        e.previewUrl = "test"
-      })
-      console.log(encoders, "jjj")
       setEncoders(encoders);
       setOriginDecoders(tempDecoders.length > 0 ? tempDecoders : decoders);
       setDecoders(tempDecoders.length > 0 ? tempDecoders : decoders);
@@ -225,19 +220,24 @@ const SingleScreen = () => {
   const handleCancelScreenSetting = async (event) => {
     const decoderMac = event.target.id.split("@")[1];
     let tempDecoders = decoders;
-    console.log(tempDecoders, "===")
+    let originDecoder;
     tempDecoders?.forEach(async (decoder) => {
       if (decoder.mac === decoderMac && decoder.encoder !== "") {
-        let originDecoder;
         originDecoders?.forEach((oriDecoder) => {
           if (oriDecoder.mac === decoderMac) originDecoder = oriDecoder;
         });
         decoder.hasChanged = false;
-        decoder.encoder.previewUrl = originDecoder.encoder.previewUrl;  
+        decoder.previewUrl = originDecoder.previewUrl;
+        decoder.encoder = originDecoder.encoder;
       }
     });
-    console.log(tempDecoders, "!!!")
     setDecoders(tempDecoders);
+    const iframe = document.getElementById(`iframe.${decoderMac}`);
+    iframe.src = originDecoder?.previewUrl ? modifyVideoSize(
+      originDecoder?.previewUrl,
+      store.siderCollapse ? 307 : 278,
+      store.siderCollapse ? 237 : 213
+    ) : ""
   };
 
   const handleLinkScreen = (event) => {
@@ -308,6 +308,7 @@ const SingleScreen = () => {
           >
             {decoder.previewUrl ? (
               <iframe
+                id={`iframe.${decoder.mac}`}
                 className={
                   store.siderCollapse
                     ? "single-screen-card-video-collapse"
@@ -430,6 +431,8 @@ const SingleScreen = () => {
                           background: "white",
                           position: "absolute",
                           marginLeft: -42,
+                          display: decoder.hasChanged ? null : "none",
+                          opacity: decoder.hasChanged ? 10 : 0,
                         }}
                         onClick={(event) => handleCancelScreenSetting(event)}
                       >
