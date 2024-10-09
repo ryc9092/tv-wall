@@ -3,9 +3,9 @@ import Reducer from "./reducer";
 
 export const clearState = {
   account: null,
+  role: null,
   token: null,
   siderCollapse: false,
-  currentRoute: null,
 };
 
 export const initialState = {
@@ -14,7 +14,11 @@ export const initialState = {
 };
 
 const Store = ({ children }) => {
-  const [state, dispatch] = useReducer(Reducer, initialState);
+  let updateState = initialState;
+  updateState.token = sessionStorage.getItem("token");
+  updateState.account = sessionStorage.getItem("account");
+  updateState.role = sessionStorage.getItem("role");
+  const [state, dispatch] = useReducer(Reducer, updateState);
 
   return (
     <StoreContext.Provider value={[state, dispatch]}>

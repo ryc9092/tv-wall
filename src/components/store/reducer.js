@@ -3,16 +3,16 @@ import { clearState } from "./store";
 const Actions = {
   SetVars: "SetVars",
   SetAccount: "SetAccount",
+  SetRole: "SetRole",
   SetSiderCollapse: "SetSiderCollapse",
   Logout: "Logout",
-  SetCurrentRoute: "SetCurrentRoute",
 };
 
 const setValueActions = {
   [Actions.SetVars]: "vars",
   [Actions.SetAccount]: "account",
+  [Actions.SetRole]: "role",
   [Actions.SetSiderCollapse]: "siderCollapse",
-  [Actions.SetCurrentRoute]: "currentRoute",
 };
 
 const Reducer = (state, action) => {

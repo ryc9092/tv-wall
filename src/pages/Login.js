@@ -10,6 +10,7 @@ import { showWarningNotification } from "../utils/Utils";
 import BeforeLoginAnime from "../assets/logoAnimeForward.mp4";
 import AfterLoginAnime from "../assets/logoAnimeReverse.mp4";
 import loginBackground from "../assets/login.png";
+import { jwtDecode } from "jwt-decode";
 import "./Login.scss";
 
 const { Text } = Typography;
@@ -39,21 +40,18 @@ const Login = () => {
 
   useEffect(() => {
     if (store.account) {
-      const currentRoute = store.currentRoute;
-      loginComplete(location, navigate, currentRoute);
-    } else {
-      const account = sessionStorage.getItem("account");
-      if (account) dispatch({ type: Actions.SetAccount, payload: account });
+      loginComplete(location, navigate);
     }
-  }, [store.account, dispatch, location, navigate, store.currentRoute]);
+  }, [store.account, location, navigate]);
 
   const onLogin = async ({ account, password }) => {
-    const token = await login(account, password, store);
-    if (token) {
+    const jwtToken = await login(account, password, store);
+    if (jwtToken) {
+      const decodedJwt = jwtDecode(jwtToken);
       await playAnimePeriod(AfterLoginAnime);
-      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("token", jwtToken);
       sessionStorage.setItem("account", account);
-      dispatch({ type: Actions.SetAccount, payload: account });
+      sessionStorage.setItem("role", decodedJwt.role);
       loginComplete(location, navigate);
     } else {
       showWarningNotification(intl.formatMessage(Messages.Text_Login_FailMsg));
@@ -180,10 +178,8 @@ const Login = () => {
 
 export default Login;
 
-function loginComplete(location, navigate, currentRoute = null) {
-  const route = currentRoute ? { from: { pathname: currentRoute } } : null;
-  // redirect to previous state or root
-  const { from } = location.state ||
-    route || { from: { pathname: "/situation" } };
+function loginComplete(location, navigate) {
+  // redirect to previous state or default route
+  const { from } = location.state || { from: { pathname: "/situation" } };
   navigate(from);
 }
