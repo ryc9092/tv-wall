@@ -41,6 +41,9 @@ const Login = () => {
   useEffect(() => {
     if (store.account) {
       loginComplete(location, navigate);
+    } else {
+      const account = sessionStorage.getItem("account");
+      if (account) dispatch({ type: Actions.SetAccount, payload: account });
     }
   }, [store.account, location, navigate]);
 
