@@ -7,11 +7,13 @@ import {
   removeDeviceLink,
   getDeviceLinks,
   getFilteredDecoders,
+  getDecoders,
   getEncoders,
 } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
 import TrashIcon from "../assets/trash.png";
+import XIcon from "../assets/X.png";
 import {
   showWarningNotification,
   showSuccessNotificationByMsg,
@@ -24,6 +26,7 @@ const SingleScreen = () => {
   const [store] = useContext(StoreContext);
   const [tab, setTab] = useState("single-screen");
   const [decoders, setDecoders] = useState([]);
+  const [originDecoders, setOriginDecoders] = useState([]);
   const [searchDecoderFilter, setSearchDecoderFilter] = useState("");
   const [filteredDecoders, setFilteredDecoders] = useState([]);
   const [decoderCards, setDecoderCards] = useState(null);
@@ -61,7 +64,7 @@ const SingleScreen = () => {
   useEffect(() => {
     (async () => {
       const encoders = await getEncoders(store);
-      const decoders = await getFilteredDecoders(store);
+      const decoders = await getDecoders(store);
       const deviceLinks = await getDeviceLinks({
         store: store,
         linkType: "video",
@@ -73,10 +76,10 @@ const SingleScreen = () => {
       if (deviceLinks && deviceLinks.length >= 0) {
         deviceLinks.forEach((deviceLink) => {
           if (deviceLink.deviceLinkDetails.length >= 0) {
-            deviceLink.deviceLinkDetails.forEach((deviceLinkDetail)=>{
+            deviceLink.deviceLinkDetails.forEach((deviceLinkDetail) => {
               const decoderMac = deviceLinkDetail.decoder;
               linkedDecoders.push(decoderMac);
-            })
+            });
           }
         });
       }
@@ -87,10 +90,13 @@ const SingleScreen = () => {
           deviceLinks?.forEach((deviceLink) => {
             const encoderMac = deviceLink.encoder;
             if (deviceLink.deviceLinkDetails.length >= 0) {
-              deviceLink.deviceLinkDetails.forEach((deviceLinkDetail)=>{
+              deviceLink.deviceLinkDetails.forEach((deviceLinkDetail) => {
                 const decoderMac = deviceLinkDetail.decoder;
                 encoders?.forEach((encoder) => {
-                  if (encoder.mac === encoderMac && decoder.mac === decoderMac) {
+                  if (
+                    encoder.mac === encoderMac &&
+                    decoder.mac === decoderMac
+                  ) {
                     tempDecoders.push({
                       ...decoder,
                       previewUrl: encoder.previewUrl,
@@ -98,10 +104,11 @@ const SingleScreen = () => {
                         mac: encoder.mac,
                         nickName: encoder.nickName,
                       },
+                      hasChanged: false,
                     });
                   }
                 });
-              })
+              });
             }
           });
         } else {
@@ -112,10 +119,16 @@ const SingleScreen = () => {
               mac: "",
               nickName: "",
             },
+            hasChanged: false,
           });
         }
       });
+      encoders.forEach((e)=>{ /////////// todo
+        e.previewUrl = "test"
+      })
+      console.log(encoders, "jjj")
       setEncoders(encoders);
+      setOriginDecoders(tempDecoders.length > 0 ? tempDecoders : decoders);
       setDecoders(tempDecoders.length > 0 ? tempDecoders : decoders);
     })();
   }, [reload, store]);
@@ -171,6 +184,7 @@ const SingleScreen = () => {
               mac: selectedEncoder.mac,
               nickName: selectedEncoder.nickName,
             },
+            hasChanged: true,
           });
         } else {
           tempDecoders.push(decoder);
@@ -178,6 +192,7 @@ const SingleScreen = () => {
       });
       setDecoders(tempDecoders);
       setUpdateDecoderCards(Math.random());
+      sessionStorage.setItem("singleScreenDec", tempDecoders);
     }
   };
 
@@ -205,6 +220,24 @@ const SingleScreen = () => {
     });
     setDecoders(tempDecoders);
     setReload(Math.random());
+  };
+
+  const handleCancelScreenSetting = async (event) => {
+    const decoderMac = event.target.id.split("@")[1];
+    let tempDecoders = decoders;
+    console.log(tempDecoders, "===")
+    tempDecoders?.forEach(async (decoder) => {
+      if (decoder.mac === decoderMac && decoder.encoder !== "") {
+        let originDecoder;
+        originDecoders?.forEach((oriDecoder) => {
+          if (oriDecoder.mac === decoderMac) originDecoder = oriDecoder;
+        });
+        decoder.hasChanged = false;
+        decoder.encoder.previewUrl = originDecoder.encoder.previewUrl;  
+      }
+    });
+    console.log(tempDecoders, "!!!")
+    setDecoders(tempDecoders);
   };
 
   const handleLinkScreen = (event) => {
@@ -388,6 +421,26 @@ const SingleScreen = () => {
                         : "single-screen-btn-position"
                     }
                   >
+                    {decoder.hasChanged ? (
+                      <Button
+                        id={`btn@${decoder.mac}`}
+                        type="primary"
+                        shape="circle"
+                        style={{
+                          background: "white",
+                          position: "absolute",
+                          marginLeft: -42,
+                        }}
+                        onClick={(event) => handleCancelScreenSetting(event)}
+                      >
+                        <img
+                          id={`btn@${decoder.mac}`}
+                          alt="cancel"
+                          src={XIcon}
+                          style={{ width: 18, height: 18, marginTop: 2 }}
+                        />
+                      </Button>
+                    ) : null}
                     <Button
                       id={`btn@${decoder.mac}`}
                       type="primary"
@@ -433,7 +486,12 @@ const SingleScreen = () => {
       );
     });
     setDecoderCards(tempDecoderCards);
-  }, [filteredDecoders, updateDecoderCards, currentScreen, store.siderCollapse]);
+  }, [
+    filteredDecoders,
+    updateDecoderCards,
+    currentScreen,
+    store.siderCollapse,
+  ]);
 
   const columns = [
     {
