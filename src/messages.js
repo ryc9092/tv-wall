@@ -12,6 +12,7 @@ export default defineMessages({
   Text_Common_Down: { id: "Text-Common-Down", defaultMessage: "離線" },
   Text_Common_None: { id: "Text-Common-None", defaultMessage: "無" },
   Text_Common_Default: { id: "Text-Common-Default", defaultMessage: "預設" },
+  Text_Common_Step: { id: "Text-Common-Step", defaultMessage: "步驟" },
   Text_Common_Type: { id: "Text-Common-Type", defaultMessage: "類型" },
   Text_Common_Detail: { id: "Text-Common-Detail", defaultMessage: "詳細資料" },
   Text_Common_Group: { id: "Text-Common-Group", defaultMessage: "群組" },

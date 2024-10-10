@@ -130,10 +130,12 @@ const Situation = () => {
           store,
           expandedSituation.id
         );
+        let displayOrderNum = 1;
         let biggestSituationDetailOrder = 0;
         situationDetail?.forEach((detail) => {
           if (detail.orderNum > biggestSituationDetailOrder)
             biggestSituationDetailOrder = detail.orderNum;
+          detail.orderNum = displayOrderNum++;
         });
         setSituationItemLength(biggestSituationDetailOrder);
         let expandCard = getSituationCard(
@@ -171,6 +173,17 @@ const Situation = () => {
     {
       title: (
         <span className="table-head">
+          {intl.formatMessage(Messages.Text_Common_Step)}
+        </span>
+      ),
+      dataIndex: "orderNum",
+      key: "orderNum",
+      width: "100px",
+      render: (text) => <span className="table-content">{text}</span>,
+    },
+    {
+      title: (
+        <span className="table-head">
           {intl.formatMessage(Messages.Text_Common_Type)}
         </span>
       ),
@@ -196,7 +209,7 @@ const Situation = () => {
           {intl.formatMessage(Messages.Text_Button_Operation)}
         </span>
       ),
-      width: "25%",
+      width: "120px",
       dataIndex: "id",
       key: "operate",
       render: (text, record) => {
