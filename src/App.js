@@ -11,6 +11,7 @@ const Login = loadable(() => import("./pages/Login"));
 const Status = loadable(() => import("./pages/Status"));
 const TVWall = loadable(() => import("./pages/TVWall"));
 const SingleScreen = loadable(() => import("./pages/SingleScreen"));
+const MonitorMgmt = loadable(() => import("./pages/MonitorMgmt"));
 const Audio = loadable(() => import("./pages/Audio"));
 const USB = loadable(() => import("./pages/USB"));
 // const RS232 = loadable(() => import("./pages/RS232"));
@@ -18,7 +19,7 @@ const Schedule = loadable(() => import("./pages/Schedule"));
 const Situation = loadable(() => import("./pages/Situation"));
 const Event = loadable(() => import("./pages/Event"));
 const Setting = loadable(() => import("./pages/Setting"));
-const Surveillance = loadable(()=> import("./pages/Surveillance"));
+const Surveillance = loadable(() => import("./pages/Surveillance"));
 
 function App({ setLocale }) {
   return (
@@ -57,6 +58,18 @@ function App({ setLocale }) {
                 topbar={<Topbar setLocale={setLocale} />}
                 sidebar={<Sidebar />}
                 main={<SingleScreen />}
+              />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/monitor-mgmt"
+          element={
+            <PrivateRoute>
+              <ResponsiveLayout
+                topbar={<Topbar setLocale={setLocale} />}
+                sidebar={<Sidebar />}
+                main={<MonitorMgmt />}
               />
             </PrivateRoute>
           }

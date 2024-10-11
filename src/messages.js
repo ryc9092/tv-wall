@@ -1031,4 +1031,10 @@ export default defineMessages({
     id: "Text-EventAndAlarm-ViewAll",
     defaultMessage: "檢視全部",
   },
+
+    // Monitor Management
+    Text_MonitorManagement_Title: {
+      id: "Text-MonitorManagement-Title",
+      defaultMessage: "顯示器開關",
+    },
 });

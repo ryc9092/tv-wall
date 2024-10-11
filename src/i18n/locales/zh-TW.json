@@ -233,5 +233,7 @@
   "Text-EventAndAlarm-EventName": "事件名稱",
   "Text-EventAndAlarm-OccurTime": "發生時間",
   "Text-EventAndAlarm-EventDesc": "事件描述",
-  "Text-EventAndAlarm-ViewAll": "檢視全部"
+  "Text-EventAndAlarm-ViewAll": "檢視全部",
+
+  "Text-MonitorManagement-Title": "顯示器開關"
 }

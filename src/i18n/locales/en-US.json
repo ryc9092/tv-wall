@@ -233,5 +233,7 @@
   "Text-EventAndAlarm-EventName": "Event name",
   "Text-EventAndAlarm-OccurTime": "Occur time",
   "Text-EventAndAlarm-EventDesc": "Event description",
-  "Text-EventAndAlarm-ViewAll": "View all"
+  "Text-EventAndAlarm-ViewAll": "View all",
+
+  "Text-MonitorManagement-Title": "Monitor power"
 }

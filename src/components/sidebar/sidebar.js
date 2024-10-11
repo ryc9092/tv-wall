@@ -51,6 +51,19 @@ const Sidebar = () => {
       ),
     },
     {
+      key: "monitor-mgmt",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_MonitorManagement_Title)}
+          </span>
+        />
+      ),
+      icon: (
+        <img src={SingleScreenIcon} alt="singlescreen" className="menu-icon" />
+      ),
+    },
+    {
       key: "usb",
       label: (
         <MenuItem
