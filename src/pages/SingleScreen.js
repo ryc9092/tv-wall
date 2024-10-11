@@ -233,11 +233,13 @@ const SingleScreen = () => {
     });
     setDecoders(tempDecoders);
     const iframe = document.getElementById(`iframe.${decoderMac}`);
-    iframe.src = originDecoder?.previewUrl ? modifyVideoSize(
-      originDecoder?.previewUrl,
-      store.siderCollapse ? 307 : 278,
-      store.siderCollapse ? 237 : 213
-    ) : ""
+    iframe.src = originDecoder?.previewUrl
+      ? modifyVideoSize(
+          originDecoder?.previewUrl,
+          store.siderCollapse ? 307 : 278,
+          store.siderCollapse ? 237 : 213
+        )
+      : "";
   };
 
   const handleLinkScreen = (event) => {
