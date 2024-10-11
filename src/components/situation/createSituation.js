@@ -9,7 +9,13 @@ import { showWarningNotification } from "../../utils/Utils";
 import "./createSituation.scss";
 import "../../pages/Situation.scss";
 
-const CreateSituationModal = ({ setReload, isModalOpen, setIsModalOpen }) => {
+const CreateSituationModal = ({
+  setReload,
+  isModalOpen,
+  setIsModalOpen,
+  setExtendSituationId = null,
+  setExtendSituationDetail = null,
+}) => {
   const intl = useIntl();
   const [form] = Form.useForm();
   const [store] = useContext(StoreContext);
@@ -21,8 +27,9 @@ const CreateSituationModal = ({ setReload, isModalOpen, setIsModalOpen }) => {
 
   const onCreateSituation = async (values) => {
     if (values.name && values.description) {
+      let situationId = `preset.${uuid()}`;
       await createSituation({
-        id: `preset.${uuid()}`,
+        id: situationId,
         name: values.name,
         description: values.description,
         store: store,
@@ -30,6 +37,11 @@ const CreateSituationModal = ({ setReload, isModalOpen, setIsModalOpen }) => {
       form.resetFields();
       setReload(Math.random());
       setIsModalOpen(false);
+      // for audio page to open situation detail immediately after create situation
+      if (setExtendSituationDetail) {
+        setExtendSituationId(situationId);
+        setExtendSituationDetail(true);
+      }
     } else {
       showWarningNotification(
         intl.formatMessage(Messages.Text_Common_RequiredHint)

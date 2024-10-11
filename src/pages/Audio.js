@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Button, Input, Modal, Radio, Space, Table, Tag } from "antd";
+import { Button, Card, Input, Modal, Radio, Space, Table, Tag } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import {
   getDeviceLinks,
@@ -8,9 +8,11 @@ import {
   removeDeviceLink,
   getDecoders,
   getEncoders,
+  getSituationDetails,
 } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
+import CreateSituation from "../components/situation/createSituation";
 import PlusIcon from "../assets/plus.png";
 import CaretLeftIcon from "../assets/caret-left.png";
 import PencilIcon from "../assets/pencil.png";
@@ -32,6 +34,12 @@ const Audio = () => {
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [selectEncoder, setSelectEncoder] = useState(null);
   const [selectDecoder, setSelectDecoder] = useState(null);
+  const [isSituationModalOpen, setIsSituationModalOpen] = useState(false);
+
+  // For open situation detail model after create it
+  const [situationDetail, setSituationDetail] = useState([]);
+  const [extendSituationId, setExtendSituationId] = useState(null);
+  const [extendSituationDetail, setExtendSituationDetail] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -375,6 +383,15 @@ const Audio = () => {
     setPageType("CONN_STATE");
   };
 
+  useEffect(() => {
+    (async () => {
+      if (extendSituationDetail && extendSituationId) {
+        let detail = await getSituationDetails(store, extendSituationId);
+        setSituationDetail(detail);
+      }
+    })();
+  }, [extendSituationDetail, extendSituationId, store]);
+
   return (
     <div
       className={
@@ -412,11 +429,12 @@ const Audio = () => {
                 shape="circle"
                 className="audio-content-create-button"
                 onClick={() => {
-                  setPageType("ADD_LINK");
-                  setSelectedInOutputOption(null);
-                  setSelectedEncoder(null);
-                  setSelectedDecoders([]);
-                  setReload(Math.random());
+                  // setPageType("ADD_LINK");
+                  // setSelectedInOutputOption(null);
+                  // setSelectedEncoder(null);
+                  // setSelectedDecoders([]);
+                  // setReload(Math.random());
+                  setIsSituationModalOpen(true);
                 }}
               >
                 <img
@@ -426,6 +444,88 @@ const Audio = () => {
                 />
               </Button>
             </div>
+            <CreateSituation
+              setReload={setReload}
+              isModalOpen={isSituationModalOpen}
+              setIsModalOpen={setIsSituationModalOpen}
+              setExtendSituationId={setExtendSituationId}
+              setExtendSituationDetail={setExtendSituationDetail}
+            />
+            <Modal
+              open={extendSituationDetail}
+              onCancel={() => {
+                setExtendSituationId(null);
+                setExtendSituationDetail(false);
+              }}
+            >
+              {extendSituationId}
+              <Card
+                title={
+                  <div className={"situation-card-title-row-expanded"}>
+                    <div className="situation-card-title">
+                      {extendSituationId}
+                    </div>
+                    <div>
+                      <Button type="text">
+                        <img alt="play" className="situation-card-play-icon" />
+                      </Button>
+                    </div>
+                  </div>
+                }
+                key={extendSituationId}
+                className={"situation-card-expanded"}
+              >
+                <div className={"situation-card-content-expanded"}>
+                  <div className="situation-description">
+                    {/* {situation.remark} */}
+                  </div>
+                  <div>
+                    <Table
+                      columns={columns}
+                      dataSource={situationDetail}
+                      className={
+                        situationDetail.length === 0 ? "table-no-item" : null
+                      }
+                      pagination={false}
+                    />
+                    {/* <Dropdown
+                  menu={menuProps}
+                  trigger={["click"]}
+                  className="dropdown-menu"
+                >
+                  <Button type="text" className="add-situation-item-btn">
+                    <img
+                      alt="create"
+                      src={PlusYellowIcon}
+                      className="add-situation-item-btn-icon"
+                    />
+                    <span className="add-situation-item-btn-text">
+                      <FormattedMessage
+                        {...Messages.Text_Situation_AddSituationItem}
+                      />
+                    </span>
+                  </Button>
+                </Dropdown> */}
+                    <Button
+                      type="text"
+                      id={extendSituationId}
+                      className="delete-situation-btn"
+                    >
+                      <img
+                        alt="remove"
+                        src={TrashIcon}
+                        className="table-content-icon"
+                      />
+                      <span className="delete-situation-btn-text">
+                        <FormattedMessage
+                          {...Messages.Text_Situation_RemoveSituation}
+                        />
+                      </span>
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            </Modal>
             <Table columns={columns} dataSource={linkData} />
             <Modal
               className="audio-modal-close-x"
