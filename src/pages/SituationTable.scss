@@ -1,0 +1,83 @@
+@import '../App.scss';
+
+.status-title-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.status-title-input {
+    width: 270px;
+    height: 48px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 16px;
+    font-family: Noto Sans TC;
+    background-color: #e7e7e7;
+}
+
+.status-content-container {
+    width: 1520px;
+    height: 850px;
+    margin-top: 40px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    border-radius: 24px;
+    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+    background-color: white;
+    padding: 40px;
+}
+
+.situation-card-play-icon {
+    width: 18px;
+    height: 18px;
+    margin-top: 6px;
+}
+
+.situation-detail {
+    width: 960px;
+    padding: 30px;
+}
+
+.situation-title-row {
+    height: 80px;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+  
+
+.situation-description {
+    margin-bottom: 36px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    text-align: left;
+    color: #45413e;
+}
+
+.situation-finish-btn {
+    height: 40px;
+    margin: 10px 26px 10px 0px;
+    border-radius: 26px; 
+}
+
+.situation-finish-btn-text {
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #898989;
+}

@@ -16,6 +16,7 @@ const Audio = loadable(() => import("./pages/Audio"));
 const USB = loadable(() => import("./pages/USB"));
 // const RS232 = loadable(() => import("./pages/RS232"));
 const Schedule = loadable(() => import("./pages/Schedule"));
+const SituationTable = loadable(() => import("./pages/SituationTable"));
 const Situation = loadable(() => import("./pages/Situation"));
 const Event = loadable(() => import("./pages/Event"));
 const Setting = loadable(() => import("./pages/Setting"));
@@ -128,7 +129,19 @@ function App({ setLocale }) {
               <ResponsiveLayout
                 topbar={<Topbar setLocale={setLocale} />}
                 sidebar={<Sidebar />}
-                main={<Situation />}
+                main={<SituationTable />}
+              />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/situationtable"
+          element={
+            <PrivateRoute>
+              <ResponsiveLayout
+                topbar={<Topbar setLocale={setLocale} />}
+                sidebar={<Sidebar />}
+                main={<SituationTable />}
               />
             </PrivateRoute>
           }
