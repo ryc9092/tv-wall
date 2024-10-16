@@ -202,7 +202,7 @@ const Situation = () => {
     {
       title: (
         <span className="table-head">
-          {intl.formatMessage(Messages.Text_Common_Type)}
+          {intl.formatMessage(Messages.Text_Common_ItemName)}
         </span>
       ),
       dataIndex: "set_type",

@@ -26,6 +26,7 @@
   "Text-Common-OperationSuccess": "operation success",
   "Text-Common-Required": "this column can't be blank",
   "Text-Common-RequiredHint": "content of column can't be blank",
+  "Text-Common-ItemName": "name of corresponding item",
   "Text-Button-Save": "save",
   "Text-Button-View": "view",
   "Text-Button-Add": "add",
