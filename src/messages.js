@@ -566,6 +566,14 @@ export default defineMessages({
     id: "Text-Situation-InputDescription",
     defaultMessage: "輸入情境相關內容",
   },
+  Text_Situation_AddAudioHint: {
+    id: "Text-Situation-AddAudioHint",
+    defaultMessage: "請至音頻管理新增路由",
+  },
+  Text_Situation_GoAudioMgmt: {
+    id: "Text-Situation-GoAudioMgmt",
+    defaultMessage: "前往音頻管理設定",
+  },
 
   // Situation legacy
   Text_Situation_Activate: {

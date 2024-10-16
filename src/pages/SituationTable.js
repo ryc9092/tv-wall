@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Dropdown, Table, Modal } from "antd";
 import { StoreContext } from "../components/store/store";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -36,6 +37,7 @@ let situationActivatedList = []; // for set activate situation list immediately
 
 const Situation = () => {
   const intl = useIntl();
+  const navigate = useNavigate();
   const [store] = useContext(StoreContext);
   const [reload, setReload] = useState(null);
   const [isSituationModalOpen, setIsSituationModalOpen] = useState(false);
@@ -133,11 +135,11 @@ const Situation = () => {
         <div>
           <Button
             type="text"
-            // className={
-            //   situationActivated.includes(record.id)
-            //     ? "situation-card-pause-btn"
-            //     : "situation-card-play-btn"
-            // }
+            className={
+              situationActivated.includes(record.id)
+                ? "situation-pause-btn"
+                : ""
+            }
             key={`play.${record.id}`}
             disabled={situationActivated.includes(record.id)}
             onClick={() => startSituation(record.id)}
@@ -292,12 +294,18 @@ const Situation = () => {
   const [isSingleScreenModalOpen, setIsSingleScreenModalOpen] = useState(false);
   const [isUSBModalOpen, setIsUSBModalOpen] = useState(false);
   const [isAudioModalOpen, setIsAudioModalOpen] = useState(false);
+  const [openNoAudioHintModal, setOpenNoAudioHintModal] = useState(false);
 
   const handleMenuClick = (event) => {
     if (event.key === "tvwall") setIsTVWallModalOpen(true);
     else if (event.key === "singlescreen") setIsSingleScreenModalOpen(true);
     else if (event.key === "usb") setIsUSBModalOpen(true);
-    else if (event.key === "audio") setIsAudioModalOpen(true);
+    else if (event.key === "audio") {
+      // get audio settings, show hint modal if not exists
+      let audioSettings = [];
+      if (audioSettings.length === 0) setOpenNoAudioHintModal(true);
+      else setIsAudioModalOpen(true);
+    }
   };
 
   const items = [
@@ -439,14 +447,6 @@ const Situation = () => {
               setOpenSituationDetailModal(false);
             }}
             footer={
-              // <Button
-              //   onClick={}
-              //   style={{ marginRight: 20 }}
-              // >
-              //   <FormattedMessage
-              //     {...Messages.Text_Situation_CreateSituation}
-              //   />
-              // </Button>
               <Button
                 type="text"
                 onClick={() => setOpenSituationDetailModal(false)}
@@ -540,6 +540,42 @@ const Situation = () => {
                   decoders={decoders}
                   setDecoders={setDecoders}
                 />
+                <Modal
+                  width={420}
+                  open={openNoAudioHintModal}
+                  onCancel={() => {
+                    setOpenNoAudioHintModal(false);
+                  }}
+                  footer={
+                    <Button
+                      type="text"
+                      onClick={() => setOpenNoAudioHintModal(false)}
+                      className="situation-finish-btn"
+                    >
+                      <span className="situation-finish-btn-text">
+                        <FormattedMessage {...Messages.Text_Button_Cancel} />
+                      </span>
+                    </Button>
+                  }
+                  title=<span className="no-audio-hint-modal-title">
+                    {intl.formatMessage(Messages.Text_Situation_AddAudioHint)}
+                  </span>
+                >
+                  <div className="no-audio-hint-modal-content">
+                    <Button
+                      type="text"
+                      className="no-audio-hint-modal-content-btn"
+                      onClick={() => {
+                        navigate(`/audio`);
+                        window.location.reload();
+                      }}
+                    >
+                      <FormattedMessage
+                        {...Messages.Text_Situation_GoAudioMgmt}
+                      />
+                    </Button>
+                  </div>
+                </Modal>
               </div>
             </div>
           </Modal>

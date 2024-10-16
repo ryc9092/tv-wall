@@ -47,7 +47,6 @@
     flex-grow: 1;
     justify-content: space-between;
   }
-  
 
 .situation-description {
     margin-bottom: 36px;
@@ -61,6 +60,10 @@
     letter-spacing: 0.5px;
     text-align: left;
     color: #45413e;
+}
+
+.situation-pause-btn {
+    background-color: #fbf37b;
 }
 
 .situation-finish-btn {
@@ -80,4 +83,31 @@
     letter-spacing: 0.1px;
     text-align: center;
     color: #898989;
+}
+
+.no-audio-hint-modal-title {
+    height: 36px;
+    flex-grow: 1;
+    font-family: Noto Sans TC;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    text-align: left;
+    color: #45413e;
+}
+
+.no-audio-hint-modal-content {
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    margin: 36px 0px 0px 12px;
+}
+
+.no-audio-hint-modal-content-btn {
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    border-radius: 26px;
+    color:rgb(0, 89, 255);
 }

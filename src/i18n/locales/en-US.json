@@ -155,6 +155,8 @@
   "Text-Situation-SituationName": "Scenario name",
   "Text-Situation-InputName": "Enter name",
   "Text-Situation-InputDescription": "Enter Scenario description",
+  "Text-Situation-AddAudioHint": "Please add route in audio management page first",
+  "Text-Situation-GoAudioMgmt": "Setting on audio management page",
 
   "Text-DeviceStatus-CurrentStatus": "Device status",
   "Text-DeviceStatus-InputDeviceName": "Enter device name",
