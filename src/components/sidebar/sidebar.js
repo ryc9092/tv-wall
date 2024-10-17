@@ -5,6 +5,7 @@ import { useIntl } from "react-intl";
 import Messages from "../../messages";
 import TVWallIcon from "../../assets/tvWall.png";
 import SingleScreenIcon from "../../assets/screen.png";
+import PowerIcon from "../../assets/power-outline.svg";
 import USBIcon from "../../assets/usb.png";
 import AudioIcon from "../../assets/audio.png";
 import SituationIcon from "../../assets/situation.png";
@@ -59,9 +60,7 @@ const Sidebar = () => {
           </span>
         />
       ),
-      icon: (
-        <img src={SingleScreenIcon} alt="singlescreen" className="menu-icon" />
-      ),
+      icon: <img src={PowerIcon} alt="singlescreen" className="menu-icon" />,
     },
     {
       key: "usb",
