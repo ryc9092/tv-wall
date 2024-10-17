@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Button, Card, Col, Input, Row, Tabs, Tag, Table } from "antd";
+import { Button, Card, Col, Input, Row, Tag, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import {
   createDeviceLink,
@@ -23,7 +23,6 @@ import "./SingleScreen.scss";
 const SingleScreen = () => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
-  const [tab, setTab] = useState("single-screen");
   const [decoders, setDecoders] = useState([]);
   const [originDecoders, setOriginDecoders] = useState([]);
   const [searchDecoderFilter, setSearchDecoderFilter] = useState("");
@@ -48,16 +47,6 @@ const SingleScreen = () => {
   const handleScreenMouseLeave = () => {
     setCurrentScreen(null);
   };
-
-  const tabItems = [
-    {
-      key: "single-screen",
-      label: intl.formatMessage(Messages.Text_SingleScreen_TabSingleScreen),
-      onClick: () => {
-        setTab("single-screen");
-      },
-    },
-  ];
 
   // set encoder, decoder
   useEffect(() => {
@@ -581,6 +570,15 @@ const SingleScreen = () => {
           <span className="page-title">
             <FormattedMessage {...Messages.Text_SingleScreen_Management} />
           </span>
+        </div>
+        <div
+          className={
+            store.siderCollapse
+              ? "single-screen-title-row-collapse"
+              : "single-screen-title-row"
+          }
+          style={{ marginTop: "16px" }}
+        >
           <Input
             className="single-screen-title-input singlescreen-input"
             variant="filled"
@@ -599,18 +597,8 @@ const SingleScreen = () => {
               ? "single-screen-title-row-collapse"
               : "single-screen-title-row"
           }
-          style={{ marginTop: "16px" }}
         >
-          <Tabs defaultActiveKey="1" items={tabItems} />
-        </div>
-        <div
-          className={
-            store.siderCollapse
-              ? "single-screen-title-row-collapse"
-              : "single-screen-title-row"
-          }
-        >
-          <Row gutter={15}>{tab === "single-screen" ? decoderCards : null}</Row>
+          <Row gutter={15}>{decoderCards}</Row>
         </div>
       </div>
       <div

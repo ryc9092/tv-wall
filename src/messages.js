@@ -330,7 +330,7 @@ export default defineMessages({
   },
   Text_SingleScreen_InputDecoder: {
     id: "Text-SingleScreen-InputDecoder",
-    defaultMessage: "輸入顯示終端(群組)名稱",
+    defaultMessage: "輸入顯示終端名稱",
   },
   Text_SingleScreen_PlayVideo: {
     id: "Text-SingleScreen-PlayVideo",
