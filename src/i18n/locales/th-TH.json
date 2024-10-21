@@ -138,6 +138,8 @@
   "Text-Audio-EditConnection": "Edit audio connection",
   "Text-Audio-RemoveConnection": "Remove audio connection",
   "Text-Audio-RemoveConnectionConfirm": "Are you sure to remove this audio connection?",
+  "Text-Audio-MatrixRoute": "混音矩陣路由",
+  "Text-Audio-EnDecoderRoute": "編解碼器路由",
 
   "Text-Situation-Title": "Situation management",
   "Text-Situation-CreateSituation": "add situation",

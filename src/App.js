@@ -13,6 +13,7 @@ const TVWall = loadable(() => import("./pages/TVWall"));
 const SingleScreen = loadable(() => import("./pages/SingleScreen"));
 const MonitorMgmt = loadable(() => import("./pages/MonitorMgmt"));
 const Audio = loadable(() => import("./pages/Audio"));
+const AudioSituation = loadable(() => import("./pages/AudioSituation"));
 const USB = loadable(() => import("./pages/USB"));
 // const RS232 = loadable(() => import("./pages/RS232"));
 const Schedule = loadable(() => import("./pages/Schedule"));
@@ -82,7 +83,7 @@ function App({ setLocale }) {
               <ResponsiveLayout
                 topbar={<Topbar setLocale={setLocale} />}
                 sidebar={<Sidebar />}
-                main={<Audio />}
+                main={<AudioSituation />}
               />
             </PrivateRoute>
           }

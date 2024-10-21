@@ -500,6 +500,14 @@ export default defineMessages({
     id: "Text-Audio-RemoveConnectionConfirm",
     defaultMessage: "確定要刪除此音頻連結?",
   },
+  Text_Audio_MatrixRoute: {
+    id: "Text-Audio-MatrixRoute",
+    defaultMessage: "混音矩陣路由",
+  },
+  Text_Audio_EnDecoderRoute: {
+    id: "Text-Audio-EnDecoderRoute",
+    defaultMessage: "編解碼器路由",
+  },
 
   // Situation
   Text_Situation_Title: {

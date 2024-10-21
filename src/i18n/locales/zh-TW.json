@@ -138,6 +138,8 @@
   "Text-Audio-EditConnection": "編輯音頻連結",
   "Text-Audio-RemoveConnection": "刪除音頻連結",
   "Text-Audio-RemoveConnectionConfirm": "確定要刪除此音頻連結?",
+  "Text-Audio-MatrixRoute": "混音矩陣路由",
+  "Text-Audio-EnDecoderRoute": "編解碼器路由",
 
   "Text-Situation-Title": "情境管理",
   "Text-Situation-CreateSituation": "新增情境",
