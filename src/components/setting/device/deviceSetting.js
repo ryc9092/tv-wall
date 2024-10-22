@@ -70,7 +70,7 @@ const TemplateSetting = () => {
     (async () => {
       let tempDevices = [];
       const devices = await getDevices(store);
-      devices.forEach((device) => {
+      devices?.forEach((device) => {
         device.key = device.name + Math.random();
         tempDevices.push(device);
       });

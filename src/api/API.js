@@ -228,10 +228,7 @@ export const editDevice = async (
   });
 };
 
-export const removeDevice = async (
-  store,
-  macAddr,
-) => {
+export const removeDevice = async (store, macAddr) => {
   const httpMethod = `DELETE`;
   const apiPath = `/devices/${macAddr}`;
   return await apiCall({
@@ -640,6 +637,30 @@ export const getStreams = async (store) => {
   const apiPath = `/streams`;
   return await apiGET({
     apiPath,
+    store,
+  });
+};
+
+// Monitor power
+
+export const getMonitor = async (store) => {
+  const apiPath = `/display`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
+export const setMonitorStatus = async ({ store, deviceType, ip, status }) => {
+  const apiPath = `/display/status`;
+  const form = JSON.stringify({
+    deviceType: deviceType,
+    ip: ip,
+    status: status,
+  });
+  return await apiPOST({
+    apiPath,
+    form,
     store,
   });
 };
