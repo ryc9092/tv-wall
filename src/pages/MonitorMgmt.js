@@ -14,15 +14,37 @@ import "../App.scss";
 const MonitorMgmt = () => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
-  const [monitors, setMonitors] = useState([]);
   const [monitorCards, setMonitorCards] = useState([]);
 
   useEffect(() => {
+    const handlePowerOnOff = async (ip, status, monitors) => {
+      let handleMonitor;
+      monitors?.forEach((monitor) => {
+        if (monitor.Ip === ip) handleMonitor = monitor;
+      });
+      if (handleMonitor) {
+        let result = await setMonitorStatus({
+          store: store,
+          deviceType: handleMonitor.DeviceType,
+          ip: handleMonitor.Ip,
+          status: status,
+        });
+        if (result) {
+          showSuccessNotificationByMsg(
+            intl.formatMessage(Messages.Text_Common_OperationSuccess)
+          );
+        } else {
+          showWarningNotification(
+            intl.formatMessage(Messages.Text_Common_OperationFailed)
+          );
+        }
+      }
+    };
+
     (async () => {
-      const result = await getMonitor(store);
-      setMonitors(result);
+      const monitors = await getMonitor(store);
       let tempMonitorCards = [];
-      result?.forEach((monitor) => {
+      monitors?.forEach((monitor) => {
         let monitorCard = (
           <Col key={monitor.Name} className="monitor-card">
             <div className="monitor-cover">
@@ -35,7 +57,7 @@ const MonitorMgmt = () => {
                 className="monitor-power-on-btn"
                 onClick={(event) => {
                   const ip = event.currentTarget.id;
-                  handlePowerOnOff(ip, "on");
+                  handlePowerOnOff(ip, "on", monitors);
                 }}
               >
                 <FormattedMessage {...Messages.Text_Common_On} />
@@ -45,7 +67,7 @@ const MonitorMgmt = () => {
                 className="monitor-power-off-btn"
                 onClick={(event) => {
                   const ip = event.currentTarget.id;
-                  handlePowerOnOff(ip, "off");
+                  handlePowerOnOff(ip, "off", monitors);
                 }}
               >
                 <FormattedMessage {...Messages.Text_Common_Off} />
@@ -57,31 +79,7 @@ const MonitorMgmt = () => {
       });
       setMonitorCards(tempMonitorCards);
     })();
-  }, [store]);
-
-  const handlePowerOnOff = async (ip, status) => {
-    let handleMonitor;
-    monitors?.forEach((monitor) => {
-      if (monitor.Ip === ip) handleMonitor = monitor;
-    });
-    if (handleMonitor) {
-      let result = await setMonitorStatus({
-        store: store,
-        deviceType: handleMonitor.DeviceType,
-        ip: handleMonitor.Ip,
-        status: status,
-      });
-      if (result) {
-        showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_Common_OperationSuccess)
-        );
-      } else {
-        showWarningNotification(
-          intl.formatMessage(Messages.Text_Common_OperationFailed)
-        );
-      }
-    }
-  };
+  }, [intl, store]);
 
   return (
     <div className="monitor-layout">
