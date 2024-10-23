@@ -524,8 +524,8 @@ export const createSituation = async ({ id, name, description, store }) => {
   });
 };
 
-export const getSituations = async (store) => {
-  const apiPath = `/presets`;
+export const getSituations = async (store, category) => {
+  const apiPath = `/presets/category/${category}`;
   return await apiGET({
     apiPath,
     store,

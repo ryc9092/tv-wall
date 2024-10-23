@@ -33,6 +33,7 @@ import "./SituationTable.scss";
 import "./Situation.scss";
 import "./Audio.scss";
 
+const situationCategory = "1";
 let situationActivatedList = []; // for set activate situation list immediately
 
 const Situation = () => {
@@ -47,7 +48,7 @@ const Situation = () => {
   const [situationItemLength, setSituationItemLength] = useState(0);
   useEffect(() => {
     (async () => {
-      const situations = await getSituations(store);
+      const situations = await getSituations(store, situationCategory);
       setSituations(situations);
     })();
   }, [reload, store]);
