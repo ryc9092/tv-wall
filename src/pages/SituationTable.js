@@ -33,7 +33,7 @@ import "./SituationTable.scss";
 import "./Situation.scss";
 import "./Audio.scss";
 
-const situationCategory = "1";
+const normalSituationCategory = "1";
 let situationActivatedList = []; // for set activate situation list immediately
 
 const Situation = () => {
@@ -48,7 +48,7 @@ const Situation = () => {
   const [situationItemLength, setSituationItemLength] = useState(0);
   useEffect(() => {
     (async () => {
-      const situations = await getSituations(store, situationCategory);
+      const situations = await getSituations(store, normalSituationCategory);
       setSituations(situations);
     })();
   }, [reload, store]);
@@ -304,8 +304,9 @@ const Situation = () => {
     else if (event.key === "audio") {
       // get audio settings, show hint modal if not exists
       let audioSettings = [];
+      // todo: get audio situations
       if (audioSettings.length === 0) setOpenNoAudioHintModal(true);
-      else setIsAudioModalOpen(true);
+      else setIsAudioModalOpen(true); // todo: 增加選擇音頻情境的畫面
     }
   };
 

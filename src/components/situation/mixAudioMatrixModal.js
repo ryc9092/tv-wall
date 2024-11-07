@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../components/store/store";
 import { Button, Divider, Input, Modal, Table, Tag } from "antd";
-import { presetDeviceLink } from "../../api/API";
+import { presetDeviceLink, getP300Input, getP300Output } from "../../api/API";
 import { uuid } from "../../utils/Utils";
 import { showWarningNotification } from "../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -16,27 +16,29 @@ const MixAudioMatrixModal = ({
   isModalOpen,
   setIsModalOpen,
   setReload,
-  encoders,
-  setEncoders,
-  decoders,
-  setDecoders
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
+  const [encoders, setEncoders] = useState([]);
+  const [decoders, setDecoders] = useState([]);
   const [situationItemDesc, setSituationItemDesc] = useState(null);
 
   useEffect(() => {
-    (async () => {
-      encoders?.forEach((encoder) => {
-        encoder.key = encoder.mac;
-      });
-      decoders?.forEach((decoder) => {
-        decoder.key = decoder.mac;
-      });
-      setFilteredDecoders(decoders);
-      setFilteredEncoders(encoders);
-    })();
-  }, [isModalOpen, encoders, decoders]);
+    if (isModalOpen) {
+      (async () => {
+        const inputs = await getP300Input(store);
+        inputs?.forEach((input) => {
+          input.key = input.mac;
+        });
+        const outputs = await getP300Output(store);
+        outputs?.forEach((output) => {
+          output.key = output.mac;
+        });
+        setFilteredDecoders(outputs);
+        setFilteredEncoders(inputs);
+      })();
+    }
+  }, [isModalOpen, encoders, decoders, store]);
 
   const [selectedEncoder, setSelectedEncoder] = useState(null);
   const [encoderFilter, setEncoderFilter] = useState("");
@@ -191,11 +193,15 @@ const MixAudioMatrixModal = ({
   };
 
   const handleCreateItem = async () => {
-    if (selectedEncoder && selectedDecoders?.length !== 0 && situationItemDesc) {
+    if (
+      selectedEncoder &&
+      selectedDecoders?.length !== 0 &&
+      situationItemDesc
+    ) {
       await presetDeviceLink({
         store: store,
-        presetDetailId: `usb@${uuid()}`,
-        linkType: "usb",
+        presetDetailId: `p300@${uuid()}`,
+        linkType: "p300",
         value1: "",
         encoder: selectedEncoder,
         remark: situationItemDesc,
@@ -294,7 +300,7 @@ const MixAudioMatrixModal = ({
                       />
                     }
                     placeholder={intl.formatMessage(
-                      Messages.Text_USB_InputEncoderName
+                      Messages.Text_Audio_InputEncoder
                     )}
                   />
                   <Table
@@ -350,7 +356,7 @@ const MixAudioMatrixModal = ({
                       />
                     }
                     placeholder={intl.formatMessage(
-                      Messages.Text_USB_InputDecoderName
+                      Messages.Text_Audio_InputDecoder
                     )}
                   />
                   <Table

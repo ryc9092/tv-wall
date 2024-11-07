@@ -509,12 +509,13 @@ export const getActivedWall = async ({ store, activeId }) => {
 
 // Situation
 
-export const createSituation = async ({ id, name, description, store }) => {
+export const createSituation = async ({ id, name, description, category, store }) => {
   const apiPath = `/presets`;
   const form = JSON.stringify({
     id: id,
     name: name,
     remark: description,
+    category: category,
     preSetPostDetails: [],
   });
   return await apiPOST({
@@ -661,6 +662,24 @@ export const setMonitorStatus = async ({ store, deviceType, ip, status }) => {
   return await apiPOST({
     apiPath,
     form,
+    store,
+  });
+};
+
+// P300
+
+export const getP300Input = async (store) => {
+  const apiPath = `/shure/p300/input`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
+export const getP300Output = async (store) => {
+  const apiPath = `/shure/p300/output`;
+  return await apiGET({
+    apiPath,
     store,
   });
 };

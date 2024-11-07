@@ -29,6 +29,7 @@ import "./SituationTable.scss";
 import "./Situation.scss";
 import "./Audio.scss";
 
+const audioSituationCategory = "2";
 let situationActivatedList = []; // for set activate situation list immediately
 
 const AudioSituation = () => {
@@ -43,8 +44,8 @@ const AudioSituation = () => {
   const [situationItemLength, setSituationItemLength] = useState(0);
   useEffect(() => {
     (async () => {
-      const situations = await getSituations(store);
-      setSituations(situations);
+      const audioSituations = await getSituations(store, audioSituationCategory);
+      setSituations(audioSituations);
     })();
   }, [reload, store]);
 
@@ -286,14 +287,14 @@ const AudioSituation = () => {
   ]);
 
   // add situation details
-  const [isMixAudioMatrixModalOpen, setIsMixAudioMatrixModalOpen] = useState(false);
+  const [isMixAudioMatrixModalOpen, setIsMixAudioMatrixModalOpen] =
+    useState(false);
   const [isAudioModalOpen, setIsAudioModalOpen] = useState(false);
   const [openNoAudioHintModal, setOpenNoAudioHintModal] = useState(false);
 
   const handleMenuClick = (event) => {
     if (event.key === "matrix") setIsMixAudioMatrixModalOpen(true);
     else if (event.key === "endecoder") setIsAudioModalOpen(true);
-
   };
 
   const items = [
@@ -313,7 +314,9 @@ const AudioSituation = () => {
         </span>
       ),
       key: "endecoder",
-      icon: <img src={AudioIcon} alt="endecoder" className="dropdown-menu-icon" />,
+      icon: (
+        <img src={AudioIcon} alt="endecoder" className="dropdown-menu-icon" />
+      ),
     },
   ];
 
@@ -338,11 +341,7 @@ const AudioSituation = () => {
       setDecoders(decoders);
       setEncoders(encoders);
     })();
-  }, [
-    store,
-    isMixAudioMatrixModalOpen,
-    isAudioModalOpen,
-  ]);
+  }, [store, isMixAudioMatrixModalOpen, isAudioModalOpen]);
 
   return (
     <div
@@ -355,7 +354,7 @@ const AudioSituation = () => {
       <div>
         <div className="status-title-row">
           <span className="page-title">
-            <FormattedMessage {...Messages.Text_Situation_Title} />
+            <FormattedMessage {...Messages.Text_Sidebar_AudioManagement} />
           </span>
           {/* <Input
             className="status-title-input status-input"
@@ -385,6 +384,7 @@ const AudioSituation = () => {
               </span>
             </Button>
             <CreateSituation
+              category="2" // audio situation
               setReload={setReload}
               isModalOpen={isSituationModalOpen}
               setIsModalOpen={setIsSituationModalOpen}

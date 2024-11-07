@@ -10,6 +10,7 @@ import "./createSituation.scss";
 import "../../pages/Situation.scss";
 
 const CreateSituationModal = ({
+  category,
   setReload,
   isModalOpen,
   setIsModalOpen,
@@ -32,6 +33,7 @@ const CreateSituationModal = ({
         id: situationId,
         name: values.name,
         description: values.description,
+        category: category,
         store: store,
       });
       form.resetFields();
