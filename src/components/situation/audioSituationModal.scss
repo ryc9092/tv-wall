@@ -1,0 +1,64 @@
+.audio-situation-modal {
+    max-width: none !important;
+    width: 880px !important;
+    margin-top: -40px;
+}
+
+.audio-situation-input {
+    width: 360px;
+}
+
+.audio-situation-cancel-btn {
+    height: 48px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 47px;
+    padding: 0 24px;
+    border-radius: 26px;
+    border: solid 1px #575452;
+    margin-left: 560px;
+}
+
+.audio-situation-cancel-btn-text {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #575452;
+}
+
+.audio-situation-submit-btn {
+    height: 48px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 47px;
+    padding: 0 24px;
+    border-radius: 24px;
+    background-color: #262320;
+}
+
+.audio-situation-submit-btn-text {
+    height: 24px;
+    flex-grow: 0;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #e7e7e7;
+}

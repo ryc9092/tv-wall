@@ -18,6 +18,7 @@ import TVWallModal from "../components/situation/tvWallModal";
 import SingleScreenModal from "../components/situation/singlescreenModal";
 import USBModal from "../components/situation/usbModal";
 import AudioModal from "../components/situation/audioModal";
+import AudioSituationModal from "../components/situation/audioSituationModal";
 import PlayIcon from "../assets/play-black.png";
 import PauseIcon from "../assets/pause.png";
 import TrashIcon from "../assets/trash.png";
@@ -34,6 +35,7 @@ import "./Situation.scss";
 import "./Audio.scss";
 
 const normalSituationCategory = "1";
+const audioSituationCategory = "2";
 let situationActivatedList = []; // for set activate situation list immediately
 
 const Situation = () => {
@@ -294,7 +296,7 @@ const Situation = () => {
   const [isTVWallModalOpen, setIsTVWallModalOpen] = useState(false);
   const [isSingleScreenModalOpen, setIsSingleScreenModalOpen] = useState(false);
   const [isUSBModalOpen, setIsUSBModalOpen] = useState(false);
-  const [isAudioModalOpen, setIsAudioModalOpen] = useState(false);
+  const [isAudioSituationModalOpen, setIsAudioSituationModalOpen] = useState(false)
   const [openNoAudioHintModal, setOpenNoAudioHintModal] = useState(false);
 
   const handleMenuClick = (event) => {
@@ -302,11 +304,14 @@ const Situation = () => {
     else if (event.key === "singlescreen") setIsSingleScreenModalOpen(true);
     else if (event.key === "usb") setIsUSBModalOpen(true);
     else if (event.key === "audio") {
-      // get audio settings, show hint modal if not exists
-      let audioSettings = [];
-      // todo: get audio situations
-      if (audioSettings.length === 0) setOpenNoAudioHintModal(true);
-      else setIsAudioModalOpen(true); // todo: 增加選擇音頻情境的畫面
+      (async () => {
+        const audioSituations = await getSituations(
+          store,
+          audioSituationCategory
+        );
+        if (audioSituations?.length === 0) setOpenNoAudioHintModal(true);
+        else setIsAudioSituationModalOpen(true);
+      })();
     }
   };
 
@@ -383,7 +388,7 @@ const Situation = () => {
     isTVWallModalOpen,
     isSingleScreenModalOpen,
     isUSBModalOpen,
-    isAudioModalOpen,
+    isAudioSituationModalOpen,
   ]);
 
   return (
@@ -531,11 +536,11 @@ const Situation = () => {
                   decoders={decoders}
                   setDecoders={setDecoders}
                 />
-                <AudioModal
+                <AudioSituationModal
                   situation={editSituation}
                   situationItemLength={situationItemLength}
-                  isModalOpen={isAudioModalOpen}
-                  setIsModalOpen={setIsAudioModalOpen}
+                  isModalOpen={isAudioSituationModalOpen}
+                  setIsModalOpen={setIsAudioSituationModalOpen}
                   setReload={setReload}
                   encoders={encoders}
                   setEncoders={setEncoders}

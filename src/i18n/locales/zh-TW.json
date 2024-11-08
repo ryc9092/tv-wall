@@ -163,6 +163,9 @@
   "Text-Situation-InputDescription": "輸入情境相關內容",
   "Text-Situation-AddAudioHint": "請至音頻管理新增路由",
   "Text-Situation-GoAudioMgmt": "前往音頻管理設定",
+  "Text-Situation-AudioSituation": "音頻情境",
+  "Text-Situation-ChooseAudioSituation": "選擇音頻情境",
+  "Text-Situation-InputAudioSituationName": "輸入音頻情境名稱",
 
   "Text-DeviceStatus-CurrentStatus": "設備狀態",
   "Text-DeviceStatus-InputDeviceName": "輸入設備名稱",

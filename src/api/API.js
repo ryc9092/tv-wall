@@ -611,6 +611,27 @@ export const presetDeviceLink = async ({
   });
 };
 
+export const presetAudioSituation = async ({
+  store,
+  relation_id,
+  preSetId,
+  orderNum,
+  remark,
+}) => {
+  const apiPath = `/presets/subpreset`;
+  const form = JSON.stringify({
+    relation_id: relation_id,
+    preSetId: preSetId,
+    orderNum: orderNum,
+    remark: remark,
+  });
+  return await apiPOST({
+    apiPath,
+    form,
+    store,
+  });
+}
+
 export const presetWall = async ({
   store,
   activeId,

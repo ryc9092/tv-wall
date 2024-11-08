@@ -163,6 +163,9 @@
   "Text-Situation-InputDescription": "Input situation description",
   "Text-Situation-AddAudioHint": "Please add route in audio management page first",
   "Text-Situation-GoAudioMgmt": "Setting on audio management page",
+  "Text-Situation-AudioSituation": "Audio situation",
+  "Text-Situation-ChooseAudioSituation": "Choose audio situation",
+  "Text-Situation-InputAudioSituationName": "Input audio situation name",
 
   "Text-DeviceStatus-CurrentStatus": "Device status",
   "Text-DeviceStatus-InputDeviceName": "Input device name",

@@ -592,6 +592,18 @@ export default defineMessages({
     id: "Text-Situation-GoAudioMgmt",
     defaultMessage: "前往音頻管理設定",
   },
+  Text_Situation_AudioSituation: {
+    id: "Text-Situation-AudioSituation",
+    defaultMessage: "音頻情境",
+  },
+  Text_Situation_ChooseAudioSituation: {
+    id: "Text-Situation-ChooseAudioSituation",
+    defaultMessage: "選擇音頻情境",
+  },
+  Text_Situation_InputAudioSituationName: {
+    id: "Text-Situation-InputAudioSituationName",
+    defaultMessage: "輸入音頻情境名稱",
+  },
 
   // Situation legacy
   Text_Situation_Activate: {
