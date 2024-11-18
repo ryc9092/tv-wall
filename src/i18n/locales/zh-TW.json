@@ -16,8 +16,8 @@
   "Text-Common-Group": "群組",
   "Text-Common-Confirm": "確認",
   "Text-Common-Finish": "結束",
-  "Text-Common-On": "開",
-  "Text-Common-Off": "關",
+  "Text-Common-On": "On",
+  "Text-Common-Off": "Off",
   "Text-Common-EncoderName": "來源名稱",
   "Text-Common-Encoder": "輸入來源",
   "Text-Common-Decoder": "輸出終端",
@@ -247,5 +247,5 @@
   "Text-EventAndAlarm-EventDesc": "事件描述",
   "Text-EventAndAlarm-ViewAll": "檢視全部",
 
-  "Text-MonitorManagement-Title": "顯示器開關"
+  "Text-MonitorManagement-Title": "設備開關"
 }
