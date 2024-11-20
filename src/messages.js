@@ -17,7 +17,7 @@ export default defineMessages({
   Text_Common_Detail: { id: "Text-Common-Detail", defaultMessage: "詳細資料" },
   Text_Common_Group: { id: "Text-Common-Group", defaultMessage: "群組" },
   Text_Common_Confirm: { id: "Text-Common-Confirm", defaultMessage: "確認" },
-  Text_Common_Finish: { id: "Text-Common-Finish", defaultMessage: "結束" },
+  Text_Common_Finish: { id: "Text-Common-Finish", defaultMessage: "完成" },
   Text_Common_On: { id: "Text-Common-On", defaultMessage: "On" },
   Text_Common_Off: { id: "Text-Common-Off", defaultMessage: "Off" },
   Text_Common_Dimension: {
