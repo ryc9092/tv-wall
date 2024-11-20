@@ -612,6 +612,22 @@ export default defineMessages({
     id: "Text-Situation-InputAudioSituationName",
     defaultMessage: "輸入音頻情境名稱",
   },
+  Text_Situation_Itemtvwall: {
+    id: "Text-Situation-Itemtvwall",
+    defaultMessage: "電視牆影像連結",
+  },
+  Text_Situation_Itemvideo: {
+    id: "Text-Situation-Itemvideo",
+    defaultMessage: "單畫面影像連結",
+  },
+  Text_Situation_Itemusb: {
+    id: "Text-Situation-Itemusb",
+    defaultMessage: "USB連接",
+  },
+  Text_Situation_ItemsubPreset: {
+    id: "Text-Situation-ItemsubPreset",
+    defaultMessage: "音頻連接",
+  },
 
   // Situation legacy
   Text_Situation_Activate: {

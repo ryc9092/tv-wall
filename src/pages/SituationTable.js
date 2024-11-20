@@ -210,7 +210,11 @@ const Situation = () => {
       ),
       dataIndex: "set_type",
       key: "type",
-      render: (text) => <span className="table-content">{text}</span>,
+      render: (text) => (
+        <span className="table-content">
+          {intl.formatMessage(Messages[`Text_Situation_Item${text}`])}
+        </span>
+      ),
     },
     {
       title: (
@@ -296,7 +300,8 @@ const Situation = () => {
   const [isTVWallModalOpen, setIsTVWallModalOpen] = useState(false);
   const [isSingleScreenModalOpen, setIsSingleScreenModalOpen] = useState(false);
   const [isUSBModalOpen, setIsUSBModalOpen] = useState(false);
-  const [isAudioSituationModalOpen, setIsAudioSituationModalOpen] = useState(false)
+  const [isAudioSituationModalOpen, setIsAudioSituationModalOpen] =
+    useState(false);
   const [openNoAudioHintModal, setOpenNoAudioHintModal] = useState(false);
 
   const handleMenuClick = (event) => {

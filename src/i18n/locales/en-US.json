@@ -168,6 +168,10 @@
   "Text-Situation-AudioSituation": "Audio situation",
   "Text-Situation-ChooseAudioSituation": "Choose audio situation",
   "Text-Situation-InputAudioSituationName": "Input audio situation name",
+  "Text-Situation-Itemtvwall": "Video wall source connection",
+  "Text-Situation-Itemvideo": "Source and display connection",
+  "Text-Situation-Itemusb": "USB connection",
+  "Text-Situation-ItemsubPreset": "Audio connection",
 
   "Text-DeviceStatus-CurrentStatus": "Device status",
   "Text-DeviceStatus-InputDeviceName": "Enter device name",

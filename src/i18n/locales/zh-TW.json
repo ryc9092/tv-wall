@@ -168,6 +168,10 @@
   "Text-Situation-AudioSituation": "音頻情境",
   "Text-Situation-ChooseAudioSituation": "選擇音頻情境",
   "Text-Situation-InputAudioSituationName": "輸入音頻情境名稱",
+  "Text-Situation-Itemtvwall": "電視牆影像連結",
+  "Text-Situation-Itemvideo": "單畫面影像連結",
+  "Text-Situation-Itemusb": "USB連接",
+  "Text-Situation-ItemsubPreset": "音頻連接",
 
   "Text-DeviceStatus-CurrentStatus": "設備狀態",
   "Text-DeviceStatus-InputDeviceName": "輸入設備名稱",
