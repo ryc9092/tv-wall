@@ -458,6 +458,10 @@ export default defineMessages({
     id: "Text-Audio-ChooseSource",
     defaultMessage: "選擇來源",
   },
+  Text_Audio_MatrixChooseSource: {
+    id: "Text-Audio-MatrixChooseSource",
+    defaultMessage: "選擇音頻輸入通道",
+  },
   Text_Audio_ChooseInputOutput: {
     id: "Text-Audio-ChooseInputOutput",
     defaultMessage: "選擇輸入輸出選項",
@@ -469,6 +473,10 @@ export default defineMessages({
   Text_Audio_ChooseDestination: {
     id: "Text-Audio-ChooseDestination",
     defaultMessage: "選擇終端",
+  },
+  Text_Audio_MatrixChooseDestination: {
+    id: "Text-Audio-MatrixChooseDestination",
+    defaultMessage: "選擇音頻輸出通道",
   },
   Text_Audio_ChooseOutput: {
     id: "Text-Audio-ChooseOutput",

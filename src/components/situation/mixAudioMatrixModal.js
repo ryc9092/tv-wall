@@ -282,7 +282,7 @@ const MixAudioMatrixModal = ({
                     ></div>
                   </div>
                   <div className="situation-usb-add-subtitle">
-                    <FormattedMessage {...Messages.Text_USB_ChooseSource} /> (
+                    <FormattedMessage {...Messages.Text_Audio_MatrixChooseSource} /> (
                     <FormattedMessage {...Messages.Text_Common_Encoder} />)
                   </div>
                   <Input
@@ -336,7 +336,7 @@ const MixAudioMatrixModal = ({
                   </div>
                   <div className="situation-usb-add-subtitle">
                     <FormattedMessage
-                      {...Messages.Text_USB_ChooseDestination}
+                      {...Messages.Text_Audio_MatrixChooseDestination}
                     />{" "}
                     (
                     <FormattedMessage {...Messages.Text_Common_Decoder} />)
