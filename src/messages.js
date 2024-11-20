@@ -628,6 +628,14 @@ export default defineMessages({
     id: "Text-Situation-ItemsubPreset",
     defaultMessage: "音頻連接",
   },
+  Text_Situation_Itemp300: {
+    id: "Text-Situation-Itemp300",
+    defaultMessage: "混音矩陣路由",
+  },
+  Text_Situation_Itemaudio: {
+    id: "Text-Situation-Itemaudio",
+    defaultMessage: "編解碼器路由",
+  },
 
   // Situation legacy
   Text_Situation_Activate: {

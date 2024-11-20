@@ -172,6 +172,8 @@
   "Text-Situation-Itemvideo": "單畫面影像連結",
   "Text-Situation-Itemusb": "USB連接",
   "Text-Situation-ItemsubPreset": "音頻連接",
+  "Text-Situation-Itemp300": "混音矩陣路由",
+  "Text-Situation-Itemaudio": "編解碼器路由",
 
   "Text-DeviceStatus-CurrentStatus": "設備狀態",
   "Text-DeviceStatus-InputDeviceName": "輸入設備名稱",

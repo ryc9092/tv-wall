@@ -44,7 +44,10 @@ const AudioSituation = () => {
   const [situationItemLength, setSituationItemLength] = useState(0);
   useEffect(() => {
     (async () => {
-      const audioSituations = await getSituations(store, audioSituationCategory);
+      const audioSituations = await getSituations(
+        store,
+        audioSituationCategory
+      );
       setSituations(audioSituations);
     })();
   }, [reload, store]);
@@ -204,7 +207,11 @@ const AudioSituation = () => {
       ),
       dataIndex: "set_type",
       key: "type",
-      render: (text) => <span className="table-content">{text}</span>,
+      render: (text) => (
+        <span className="table-content">
+          {intl.formatMessage(Messages[`Text_Situation_Item${text}`])}
+        </span>
+      ),
     },
     {
       title: (

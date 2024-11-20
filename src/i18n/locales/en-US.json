@@ -172,6 +172,8 @@
   "Text-Situation-Itemvideo": "Source and display connection",
   "Text-Situation-Itemusb": "USB connection",
   "Text-Situation-ItemsubPreset": "Audio connection",
+  "Text-Situation-Itemp300": "p300",
+  "Text-Situation-Itemaudio": "audio",
 
   "Text-DeviceStatus-CurrentStatus": "Device status",
   "Text-DeviceStatus-InputDeviceName": "Enter device name",
