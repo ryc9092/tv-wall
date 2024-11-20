@@ -254,6 +254,8 @@ const SingleScreen = () => {
           isPreset: "N",
         });
         if (result) {
+          decoder.hasChanged = false;
+          setDecoders(tempDecoders);
           showSuccessNotificationByMsg(
             intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess)
           );
