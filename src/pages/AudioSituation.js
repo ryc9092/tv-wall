@@ -102,7 +102,7 @@ const AudioSituation = () => {
           {intl.formatMessage(Messages.Text_Common_Name)}
         </span>
       ),
-      width: "30%",
+      width: "25%",
       dataIndex: "name",
       key: "name",
       render: (text) => {
@@ -115,9 +115,22 @@ const AudioSituation = () => {
           {intl.formatMessage(Messages.Text_Common_Description)}
         </span>
       ),
-      width: "45%",
+      width: "35%",
       dataIndex: "remark",
       key: "remark",
+      render: (text) => {
+        return <span className="table-content">{text}</span>;
+      },
+    },
+    {
+      title: (
+        <span className="audio-content-table-head">
+          {intl.formatMessage(Messages.Text_Situation_LastExecTime)}
+        </span>
+      ),
+      width: "20%",
+      dataIndex: "LastExecDateTime",
+      key: "LastExecDateTime",
       render: (text) => {
         return <span className="table-content">{text}</span>;
       },
@@ -128,7 +141,7 @@ const AudioSituation = () => {
           {intl.formatMessage(Messages.Text_Button_Operation)}
         </span>
       ),
-      width: "25%",
+      width: "20%",
       key: "operate",
       dataIndex: "state",
       render: (text, record) => (

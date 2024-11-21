@@ -636,6 +636,10 @@ export default defineMessages({
     id: "Text-Situation-Itemaudio",
     defaultMessage: "編解碼器路由",
   },
+  Text_Situation_LastExecTime: {
+    id: "Text-Situation-LastExecTime",
+    defaultMessage: "上次執行時間",
+  },
 
   // Situation legacy
   Text_Situation_Activate: {
