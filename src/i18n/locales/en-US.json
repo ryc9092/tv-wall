@@ -175,6 +175,7 @@
   "Text-Situation-Itemp300": "p300",
   "Text-Situation-Itemaudio": "audio",
   "Text-Situation-LastExecTime": "last execute time",
+  "Text-Situation-NotExecuted": "not executed",
 
   "Text-DeviceStatus-CurrentStatus": "Device status",
   "Text-DeviceStatus-InputDeviceName": "Enter device name",

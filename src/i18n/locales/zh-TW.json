@@ -175,6 +175,7 @@
   "Text-Situation-Itemp300": "混音矩陣路由",
   "Text-Situation-Itemaudio": "編解碼器路由",
   "Text-Situation-LastExecTime": "上次執行時間",
+  "Text-Situation-NotExecuted": "未執行",
 
   "Text-DeviceStatus-CurrentStatus": "設備狀態",
   "Text-DeviceStatus-InputDeviceName": "輸入設備名稱",

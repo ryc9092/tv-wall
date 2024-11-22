@@ -640,6 +640,10 @@ export default defineMessages({
     id: "Text-Situation-LastExecTime",
     defaultMessage: "上次執行時間",
   },
+  Text_Situation_NotExecuted: {
+    id: "Text-Situation-NotExecuted",
+    defaultMessage: "未執行",
+  },
 
   // Situation legacy
   Text_Situation_Activate: {

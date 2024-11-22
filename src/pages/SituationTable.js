@@ -135,7 +135,32 @@ const Situation = () => {
       dataIndex: "LastExecDateTime",
       key: "LastExecDateTime",
       render: (text) => {
-        return <span className="table-content">{text}</span>;
+        let executeTime;
+        if (text !== 0) {
+          const date = new Date(text);
+          const hours = date.getHours();
+          const minutes = date.getMinutes();
+          const seconds = date.getSeconds();
+          executeTime =
+            date.getFullYear() +
+            "-" +
+            ("0" + (date.getMonth() + 1)).slice(-2) +
+            "-" +
+            ("0" + date.getDate()).slice(-2) +
+            " " +
+            ("0" + hours).slice(-2) +
+            ":" +
+            ("0" + minutes).slice(-2) +
+            ":" +
+            ("0" + seconds).slice(-2);
+        }
+        return (
+          <span className="table-content">
+            {executeTime
+              ? executeTime
+              : intl.formatMessage(Messages.Text_Situation_NotExecuted)}
+          </span>
+        );
       },
     },
     {
