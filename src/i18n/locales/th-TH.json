@@ -184,6 +184,8 @@
   "Text-DeviceStatus-ProductCode": "Product code",
   "Text-DeviceStatus-ProductDesc": "Product description",
   "Text-DeviceStatus-Reboot": "reboot",
+  "Text-DeviceStatus-RestartSuccess": "already reboot the device",
+  "Text-DeviceStatus-RebootFail": "reboot failed",
 
   "Text-SystemSetting-Title": "System setting",
 

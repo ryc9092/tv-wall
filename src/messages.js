@@ -716,6 +716,14 @@ export default defineMessages({
     id: "Text-DeviceStatus-ProductDesc",
     defaultMessage: "產品描述",
   },
+  Text_DeviceStatus_RestartSuccess: {
+    id: "Text-DeviceStatus-RestartSuccess",
+    defaultMessage: "已執行設備重啟",
+  },
+  Text_DeviceStatus_RebootFail: {
+    id: "Text-DeviceStatus-RebootFail",
+    defaultMessage: "重啟失敗",
+  },
 
   // Device status legacy
   Text_DeviceStatus_Type: {

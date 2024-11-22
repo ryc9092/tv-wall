@@ -184,6 +184,8 @@
   "Text-DeviceStatus-ProductCode": "產品編號",
   "Text-DeviceStatus-ProductDesc": "產品描述",
   "Text-DeviceStatus-Reboot": "重啟",
+  "Text-DeviceStatus-RestartSuccess": "已執行設備重啟",
+  "Text-DeviceStatus-RebootFail": "重啟失敗",
 
   "Text-SystemSetting-Title": "系統設定",
 

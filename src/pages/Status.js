@@ -5,6 +5,10 @@ import { SearchOutlined } from "@ant-design/icons";
 import { getEncoders, getDecoders, rebootDevice } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
+import {
+  showWarningNotification,
+  showSuccessNotificationByMsg,
+} from "../utils/Utils";
 import SearchIcon from "../assets/magnifying-glass.png";
 import "./Status.scss";
 
@@ -42,7 +46,15 @@ const Status = () => {
   // window.retriveDevicesTimer = setInterval(retriveDevices, 10000);
 
   const reboot = async (mac) => {
-    await rebootDevice(mac, store);
+    let result = await rebootDevice(mac, store);
+    if (result) {
+      showSuccessNotificationByMsg(
+        intl.formatMessage(Messages.Text_DeviceStatus_RestartSuccess)
+      );
+    } else
+      showWarningNotification(
+        intl.formatMessage(Messages.Text_DeviceStatus_RebootFail)
+      );
   };
 
   const columns = [
