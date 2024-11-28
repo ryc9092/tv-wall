@@ -1,5 +1,11 @@
-.content-container {
+.template-setting-content-container {
     width: 1200px;
+}
+
+@media(max-width: 1180px) {
+    .template-setting-content-container {
+        width: 820px;
+    }
 }
 
 .title-row {

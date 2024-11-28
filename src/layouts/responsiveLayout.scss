@@ -15,3 +15,17 @@
 .ant-layout-sider-trigger {
     display: none;
 }
+
+.responsive-layout {
+    min-width: 1920px;
+    min-height: 1080px;
+    height: 100vh;
+}
+
+@media(max-width: 1180px) {
+    .responsive-layout {
+        min-width: 1170px;
+        min-height: 820px;
+        height: 100vh;
+    }
+}

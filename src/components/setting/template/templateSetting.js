@@ -113,7 +113,7 @@ const TemplateSetting = () => {
   };
 
   return (
-    <div className="content-container">
+    <div className="template-setting-content-container">
       <div className="title-row">
         <div className="page-title">
           <FormattedMessage

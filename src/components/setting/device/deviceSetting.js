@@ -381,7 +381,7 @@ const TemplateSetting = () => {
   });
 
   return (
-    <div className="content-container">
+    <div className="device-setting-content-container">
       <div className="title-row">
         <div className="page-title">
           <FormattedMessage {...Messages.Text_DeviceSetting_AdvanceSetting} />

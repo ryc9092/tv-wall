@@ -106,7 +106,7 @@ const TVWallSetting = () => {
   };
 
   return (
-    <div className="content-container">
+    <div className="tv-wall-content-container">
       <div className="title-row">
         <div className="page-title">
           <FormattedMessage {...Messages.Text_WallSetting_WallSetting} />

@@ -143,7 +143,7 @@ const MonitorMgmt = () => {
                 const ip = event.currentTarget.id;
                 handlePowerOnOff(ip, "on");
               }}
-              className="table-content monitor-power-on-btn"
+              className="monitor-power-on-btn monitor-btn-text"
             >
               On
             </Button>
@@ -155,7 +155,7 @@ const MonitorMgmt = () => {
                 const ip = event.currentTarget.id;
                 handlePowerOnOff(ip, "off", monitors);
               }}
-              className="table-content monitor-power-off-btn"
+              className="monitor-power-off-btn monitor-btn-text"
             >
               Off
             </Button>
