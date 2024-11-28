@@ -108,6 +108,23 @@
     padding: 40px;
 }
 
+@media(max-width: 1180px) {
+    .usb-content-container-add-connection {
+        width: 820px;
+        height: 580px;
+        margin-top: 40px;
+        flex-grow: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        border-radius: 24px;
+        box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+        background-color: white;
+        padding: 40px;
+    }
+}
+
 .usb-content-title-row {
     display: flex;
     justify-content: space-between;
@@ -197,6 +214,16 @@
     margin-left: 8px;
 }
 
+.usb-add-container-interval {
+    width: 100px;
+}
+
+@media(max-width: 1180px) {
+    .usb-add-container-interval {
+        width: 20px;
+    }
+}
+
 .usb-add-row {
     display: flex;
     justify-content: space-between;
@@ -250,6 +277,12 @@
     color: #ffffff;
 }
 
+@media(max-width: 1180px) {
+    .usb-add-progress-column {
+        width: 342px;
+    }
+}
+
 .usb-add-progress-bar {
     width: 448.2px;
     height: 8px;
@@ -266,6 +299,26 @@
     margin: 15px 0 0 12px;
     border-radius: 5px;
     background-color: #45413e;
+}
+
+@media(max-width: 1180px) {
+    .usb-add-progress-bar {
+        width: 290px;
+        height: 8px;
+        flex-grow: 0;
+        margin: 15px 0 0 12px;
+        border-radius: 5px;
+        background-color: #a5a5a5;
+    }
+
+    .usb-add-progress-bar-finished {
+        width: 290px;
+        height: 8px;
+        flex-grow: 0;
+        margin: 15px 0 0 12px;
+        border-radius: 5px;
+        background-color: #45413e;
+    }
 }
 
 .usb-add-subtitle {
@@ -348,6 +401,24 @@
     padding: 0 24px;
     border-radius: 24px;
     background-color: #262320;
+}
+
+@media(max-width: 1180px) {
+    .usb-add-btn {
+        width: 120px;
+        height: 48px;
+        margin-top: 22px;
+        margin-left: 236px;
+        flex-grow: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 0 24px;
+        border-radius: 24px;
+        background-color: #262320;
+    }
 }
 
 .usb-add-btn-text {

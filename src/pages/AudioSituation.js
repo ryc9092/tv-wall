@@ -102,7 +102,7 @@ const AudioSituation = () => {
           {intl.formatMessage(Messages.Text_Common_Name)}
         </span>
       ),
-      width: "25%",
+      width: "23%",
       dataIndex: "name",
       key: "name",
       render: (text) => {
@@ -115,7 +115,7 @@ const AudioSituation = () => {
           {intl.formatMessage(Messages.Text_Common_Description)}
         </span>
       ),
-      width: "35%",
+      width: "32%",
       dataIndex: "remark",
       key: "remark",
       render: (text) => {
@@ -166,7 +166,7 @@ const AudioSituation = () => {
           {intl.formatMessage(Messages.Text_Button_Operation)}
         </span>
       ),
-      width: "20%",
+      width: "25%",
       key: "operate",
       dataIndex: "state",
       render: (text, record) => (

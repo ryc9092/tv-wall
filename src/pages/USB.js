@@ -497,7 +497,7 @@ const USB = () => {
               </span>
             </div>
             <div className="usb-add-row">
-              <div id="encoder-selection">
+              <div id="encoder-selection" className="usb-add-progress-column">
                 <div className="usb-add-progress">
                   <div className="usb-add-progress-circle">
                     <span className="usb-add-progress-circle-text">1</span>
@@ -541,8 +541,8 @@ const USB = () => {
                   pagination={false}
                 />
               </div>
-              <div style={{ width: "100px" }}></div>
-              <div id="decoder-selection">
+              <div className="usb-add-container-interval" />
+              <div id="decoder-selection" className="usb-add-progress-column">
                 <div className="usb-add-progress">
                   <div
                     className={

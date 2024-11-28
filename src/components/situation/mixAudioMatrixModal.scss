@@ -1,0 +1,35 @@
+.mix-audio-matrix-modal {
+    max-width: none !important;
+    width: 968px !important;
+    margin-top: -60px;
+}
+
+.mix-audio-matrix-modal-divider {
+    height: 1px;
+    margin-top: 24px;
+    margin-bottom: 31px;
+    align-self: stretch;
+    flex-grow: 0;
+    background-color: #d4d4d4;
+}
+
+.mix-audio-matrix-modal-container {
+    width: 856px;
+    height: 460px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+@media(max-width: 1180px) {
+    .mix-audio-matrix-modal-container {
+        width: 856px;
+        height: 335px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+}
+
+.mix-audio-matrix-modal-btn-row {
+    margin-top: 24px !important;
+    display: flex;
+}

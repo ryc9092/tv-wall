@@ -14,7 +14,7 @@
 .usb-modal {
     max-width: none !important;
     width: 968px !important;
-    margin-top: -40px;
+    margin-top: -60px;
 }
 
 .usb-modal-title {
@@ -128,14 +128,21 @@
 
 .situation-usb-container {
     width: 856px;
-    // height: 560px;
-    margin-top: 24px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 
+@media(max-width: 1180px) {
+    .situation-usb-container {
+        width: 856px;
+        height: 325px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+}
+
 .situation-usb-item-btn-row {
-    margin-top: 54px !important;
+    margin-top: 24px !important;
     display: flex;
 }
 

@@ -9,6 +9,7 @@ import Messages from "../../messages";
 import SearchIcon from "../../assets/magnifying-glass.png";
 import "./addSituationContent.scss";
 import "./usbModal.scss";
+import "./mixAudioMatrixModal.scss";
 
 const MixAudioMatrixModal = ({
   situation,
@@ -232,7 +233,7 @@ const MixAudioMatrixModal = ({
             <FormattedMessage {...Messages.Text_Audio_MatrixRoute} />
           </span>
         }
-        className="usb-modal usb-content-modal-close-icon usb-content modal-title"
+        className="mix-audio-matrix-modal usb-content-modal-close-icon usb-content modal-title"
         open={isModalOpen}
         footer={null}
         onCancel={() => {
@@ -261,10 +262,10 @@ const MixAudioMatrixModal = ({
                     />
                   </div>
                 </div>
-                <Divider className="divider" />
+                <Divider className="mix-audio-matrix-modal-divider" />
               </div>
             </div>
-            <div className="situation-usb-container">
+            <div className="mix-audio-matrix-modal-container">
               <div className="situation-usb-add-row">
                 <div id="encoder-selection">
                   <div className="situation-usb-add-progress">
@@ -373,7 +374,7 @@ const MixAudioMatrixModal = ({
             </div>
           </div>
         </div>
-        <div className="situation-usb-item-btn-row">
+        <div className="mix-audio-matrix-modal-btn-row">
           <Button
             className="situation-usb-item-cancel-btn"
             style={{ marginRight: 16 }}
