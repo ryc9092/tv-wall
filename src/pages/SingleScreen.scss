@@ -32,6 +32,14 @@
     }
 }
 
+@media(max-width: 1180px) {
+    .single-screen-card-container {
+        height: 570px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+}
+
 .single-screen-title-input {
     width: 270px;
     height: 48px;
@@ -248,7 +256,16 @@
 
 .singlescreen-card-right-encoder-container {
     margin-top: 16px;
+    height: 720px;
     overflow-y: scroll;
+}
+
+@media(max-width: 1180px) {
+    .singlescreen-card-right-encoder-container {
+        margin-top: 16px;
+        height: 500px;
+        overflow-y: scroll;
+    }
 }
 
 .singlescreen-card-right-bottom {
