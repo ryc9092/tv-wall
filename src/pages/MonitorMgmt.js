@@ -177,6 +177,7 @@ const MonitorMgmt = () => {
       </div> */}
       <div className="monitor-content-container">
         <Table
+          className="monitor-content-table"
           columns={columns}
           dataSource={monitors}
           pagination={{ pageSize: 10 }}

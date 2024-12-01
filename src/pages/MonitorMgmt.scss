@@ -24,10 +24,15 @@
     padding: 40px;
 }
 
+.monitor-content-table {
+    height: 770px;
+    overflow: scroll;
+}
+
 @media(max-width: 1180px) {
     .monitor-content-container {
         width: 830px;
-        height: 570px;
+        height: 580px;
         margin-top: 40px;
         flex-grow: 0;
         display: flex;
@@ -38,6 +43,11 @@
         box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
         background-color: white;
         padding: 40px;
+    }
+
+    .monitor-content-table {
+        height: 520px;
+        overflow: scroll;
     }
 }
 
