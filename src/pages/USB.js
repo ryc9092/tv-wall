@@ -450,7 +450,7 @@ const USB = () => {
             </span>
             </div>
             <Divider style={{ marginTop: 8 }} /> */}
-            <Table columns={columns} dataSource={linkData} />
+            <Table className="usb-content-table" columns={columns} dataSource={linkData} />
             <Modal
               className="usb-modal-close-x"
               title={
@@ -532,6 +532,7 @@ const USB = () => {
                   )}
                 />
                 <Table
+                  className="ust-connection-table"
                   columns={encoderSelectionColumns}
                   dataSource={filteredEncoders}
                   rowSelection={{
@@ -584,6 +585,7 @@ const USB = () => {
                   )}
                 />
                 <Table
+                  className="ust-connection-table"
                   columns={decoderSelectionColumns}
                   dataSource={filteredDecoders}
                   rowSelection={{

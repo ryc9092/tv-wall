@@ -76,6 +76,16 @@
     padding: 40px;
 }
 
+.usb-content-table {
+    height: 780px;
+    overflow: scroll;
+}
+
+.ust-connection-table {
+    height: 460px;
+    overflow: scroll;
+}
+
 @media(max-width: 1180px) {
     .usb-content-container {
         width: 830px;
@@ -90,6 +100,16 @@
         box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
         background-color: white;
         padding: 40px;
+    }
+
+    .usb-content-table {
+        height: 500px;
+        overflow: scroll;
+    }
+
+    .ust-connection-table {
+        height: 250px;
+        overflow: scroll;
     }
 }
 
@@ -111,7 +131,7 @@
 @media(max-width: 1180px) {
     .usb-content-container-add-connection {
         width: 820px;
-        height: 580px;
+        height: 590px;
         margin-top: 40px;
         flex-grow: 0;
         display: flex;
@@ -390,7 +410,7 @@
 .usb-add-btn {
     width: 120px;
     height: 48px;
-    margin-top: 48px;
+    margin-top: 36px;
     margin-left: 382px;
     flex-grow: 0;
     display: flex;
@@ -407,7 +427,7 @@
     .usb-add-btn {
         width: 120px;
         height: 48px;
-        margin-top: 22px;
+        margin-top: 0px;
         margin-left: 236px;
         flex-grow: 0;
         display: flex;
