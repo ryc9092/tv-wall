@@ -26,6 +26,507 @@ const AudioModal = ({
   const [store] = useContext(StoreContext);
   const [situationItemDesc, setSituationItemDesc] = useState(null);
 
+  encoders = [
+    {
+      "nickName": "Zyper4KD1",
+      "mac": "80:1f:12:4b:c5:5f",
+      "model": "Zyper4K",
+      "type": "decoder",
+      "virtualType": "",
+      "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+      "state": "Up",
+      "productCode": "",
+      "productDescription": "",
+      "pid": "",
+      "groupId": "-1",
+      "groupName": "",
+      "audioHdmi": "HDMI",
+      "audioAnalogy": "Analogy",
+      "additionalDeviceIp": "",
+      "ip": "192.168.0.33"
+  },{
+    "nickName": "Zyper4KD1",
+    "mac": "80:1f:12:4b:c5:5f",
+    "model": "Zyper4K",
+    "type": "decoder",
+    "virtualType": "",
+    "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+    "state": "Up",
+    "productCode": "",
+    "productDescription": "",
+    "pid": "",
+    "groupId": "-1",
+    "groupName": "",
+    "audioHdmi": "HDMI",
+    "audioAnalogy": "Analogy",
+    "additionalDeviceIp": "",
+    "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},
+  ]
+
+  decoders = [
+    {
+      "nickName": "Zyper4KD1",
+      "mac": "80:1f:12:4b:c5:5f",
+      "model": "Zyper4K",
+      "type": "decoder",
+      "virtualType": "",
+      "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+      "state": "Up",
+      "productCode": "",
+      "productDescription": "",
+      "pid": "",
+      "groupId": "-1",
+      "groupName": "",
+      "audioHdmi": "HDMI",
+      "audioAnalogy": "Analogy",
+      "additionalDeviceIp": "",
+      "ip": "192.168.0.33"
+  },{
+    "nickName": "Zyper4KD1",
+    "mac": "80:1f:12:4b:c5:5f",
+    "model": "Zyper4K",
+    "type": "decoder",
+    "virtualType": "",
+    "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+    "state": "Up",
+    "productCode": "",
+    "productDescription": "",
+    "pid": "",
+    "groupId": "-1",
+    "groupName": "",
+    "audioHdmi": "HDMI",
+    "audioAnalogy": "Analogy",
+    "additionalDeviceIp": "",
+    "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},{
+  "nickName": "Zyper4KD1",
+  "mac": "80:1f:12:4b:c5:5f",
+  "model": "Zyper4K",
+  "type": "decoder",
+  "virtualType": "",
+  "name": "80:1f:12:4b:c5:5f__192.168.0.33__80:1f:12:4b:c5:5f",
+  "state": "Up",
+  "productCode": "",
+  "productDescription": "",
+  "pid": "",
+  "groupId": "-1",
+  "groupName": "",
+  "audioHdmi": "HDMI",
+  "audioAnalogy": "Analogy",
+  "additionalDeviceIp": "",
+  "ip": "192.168.0.33"
+},
+  ]
+
   useEffect(() => {
     (async () => {
       encoders?.forEach((encoder) => {
@@ -264,7 +765,7 @@ const AudioModal = ({
                     />
                   </div>
                 </div>
-                <Divider className="divider" />
+                <Divider className="audio-divider" />
               </div>
             </div>
             <div className="audio-container">
@@ -282,6 +783,7 @@ const AudioModal = ({
                       }
                     ></div>
                   </div>
+                  <div className="situation-audio-selection-column">
                   <div className="audio-add-subtitle">
                     <FormattedMessage {...Messages.Text_Audio_ChooseSource} /> (
                     <FormattedMessage {...Messages.Text_Common_Encoder} />)
@@ -305,7 +807,6 @@ const AudioModal = ({
                     )}
                   />
                   <Table
-                    className="situation-audio-table"
                     columns={encoderSelectionColumns}
                     dataSource={filteredEncoders}
                     rowSelection={{
@@ -314,6 +815,7 @@ const AudioModal = ({
                     }}
                     pagination={false}
                   />
+                  </div>
                 </div>
                 <div id="input-output-selection" className="audio-add-row-step">
                   <div className="audio-add-progress">
@@ -376,6 +878,7 @@ const AudioModal = ({
                       }
                     ></div>
                   </div>
+                  <div className="situation-audio-selection-column">
                   <div className="audio-add-subtitle">
                     <FormattedMessage
                       {...Messages.Text_Audio_ChooseDestination}
@@ -402,7 +905,6 @@ const AudioModal = ({
                     )}
                   />
                   <Table
-                    className="situation-audio-table"
                     columns={decoderSelectionColumns}
                     dataSource={filteredDecoders}
                     rowSelection={{
@@ -411,6 +913,7 @@ const AudioModal = ({
                     }}
                     pagination={false}
                   />
+                </div>
                 </div>
               </div>
             </div>

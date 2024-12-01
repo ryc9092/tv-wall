@@ -233,7 +233,7 @@ const MixAudioMatrixModal = ({
             <FormattedMessage {...Messages.Text_Audio_MatrixRoute} />
           </span>
         }
-        className="mix-audio-matrix-modal usb-content-modal-close-icon usb-content modal-title"
+        className="mix-audio-matrix-modal usb-content-modal-close-icon mix-audio-matrix-content modal-title"
         open={isModalOpen}
         footer={null}
         onCancel={() => {
@@ -265,7 +265,7 @@ const MixAudioMatrixModal = ({
                 <Divider className="mix-audio-matrix-modal-divider" />
               </div>
             </div>
-            <div className="mix-audio-matrix-modal-container">
+            <div>
               <div className="situation-usb-add-row">
                 <div id="encoder-selection">
                   <div className="situation-usb-add-progress">
@@ -282,6 +282,7 @@ const MixAudioMatrixModal = ({
                       }
                     ></div>
                   </div>
+                  <div className="mix-audio-matrix-selection-column">
                   <div className="situation-usb-add-subtitle">
                     <FormattedMessage {...Messages.Text_Audio_MatrixChooseSource} /> (
                     <FormattedMessage {...Messages.Text_Common_Encoder} />)
@@ -314,6 +315,7 @@ const MixAudioMatrixModal = ({
                     pagination={false}
                   />
                 </div>
+                </div>
                 <div id="decoder-selection" style={{ marginLeft: 46 }}>
                   <div className="situation-usb-add-progress">
                     <div
@@ -335,6 +337,7 @@ const MixAudioMatrixModal = ({
                       }
                     ></div>
                   </div>
+                  <div className="mix-audio-matrix-selection-column">
                   <div className="situation-usb-add-subtitle">
                     <FormattedMessage
                       {...Messages.Text_Audio_MatrixChooseDestination}
@@ -369,6 +372,7 @@ const MixAudioMatrixModal = ({
                     }}
                     pagination={false}
                   />
+                </div>
                 </div>
               </div>
             </div>

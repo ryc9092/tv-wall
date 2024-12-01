@@ -1,5 +1,5 @@
 .audio-content .ant-modal-content {
-    padding: 56px !important;
+    padding: 26px !important;
 }
 
 .audio-content-modal-close-icon .ant-modal-close-icon {
@@ -14,7 +14,7 @@
 .audio-modal {
     max-width: none !important;
     width: 1480px !important;
-    margin-top: -40px;
+    margin-top: -60px;
 }
 
 .audio-modal-title {
@@ -92,10 +92,10 @@
     text-align: left;
 }
 
-.divider {
+.audio-divider {
     height: 1px;
     margin-top: 24px;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
     align-self: stretch;
     flex-grow: 0;
     background-color: #d4d4d4;
@@ -132,7 +132,7 @@
 }
 
 .situation-audio-item-btn-row {
-    margin-top: 20px;
+    margin-top: 14px;
     display: flex;
 }
 
@@ -302,10 +302,18 @@
     background-color: #e7e7e7;
 }
 
-.situation-audio-table {
-    height: 306px;
+.situation-audio-selection-column {
+    height: 606px;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+@media(max-width: 1180px) {
+    .situation-audio-selection-column {
+        height: 340px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
 }
 
 .audio-add-subtitle {

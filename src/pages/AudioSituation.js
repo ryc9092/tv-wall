@@ -28,6 +28,7 @@ import "../App.scss";
 import "./SituationTable.scss";
 import "./Situation.scss";
 import "./Audio.scss";
+import "./AudioSituation.scss";
 
 const audioSituationCategory = "2";
 let situationActivatedList = []; // for set activate situation list immediately
@@ -44,10 +45,111 @@ const AudioSituation = () => {
   const [situationItemLength, setSituationItemLength] = useState(0);
   useEffect(() => {
     (async () => {
-      const audioSituations = await getSituations(
-        store,
-        audioSituationCategory
-      );
+      // const audioSituations = await getSituations(
+      //   store,
+      //   audioSituationCategory
+      // );
+      const audioSituations = [
+        {
+          "id": "preset0022",
+          "remark": "r2..",
+          "groupId": "-1",
+          "name": "情境測試2",
+          "category": "2",
+          "LastExecDateTime": 0
+      },{
+        "id": "preset0022",
+        "remark": "r2..",
+        "groupId": "-1",
+        "name": "情境測試2",
+        "category": "2",
+        "LastExecDateTime": 0
+    },{
+      "id": "preset0022",
+      "remark": "r2..",
+      "groupId": "-1",
+      "name": "情境測試2",
+      "category": "2",
+      "LastExecDateTime": 0
+  },{
+    "id": "preset0022",
+    "remark": "r2..",
+    "groupId": "-1",
+    "name": "情境測試2",
+    "category": "2",
+    "LastExecDateTime": 0
+},{
+  "id": "preset0022",
+  "remark": "r2..",
+  "groupId": "-1",
+  "name": "情境測試2",
+  "category": "2",
+  "LastExecDateTime": 0
+},{
+  "id": "preset0022",
+  "remark": "r2..",
+  "groupId": "-1",
+  "name": "情境測試2",
+  "category": "2",
+  "LastExecDateTime": 0
+},{
+  "id": "preset0022",
+  "remark": "r2..",
+  "groupId": "-1",
+  "name": "情境測試2",
+  "category": "2",
+  "LastExecDateTime": 0
+},{
+  "id": "preset0022",
+  "remark": "r2..",
+  "groupId": "-1",
+  "name": "情境測試2",
+  "category": "2",
+  "LastExecDateTime": 0
+},{
+  "id": "preset0022",
+  "remark": "r2..",
+  "groupId": "-1",
+  "name": "情境測試2",
+  "category": "2",
+  "LastExecDateTime": 0
+},{
+  "id": "preset0022",
+  "remark": "r2..",
+  "groupId": "-1",
+  "name": "情境測試2",
+  "category": "2",
+  "LastExecDateTime": 0
+},{
+  "id": "preset0022",
+  "remark": "r2..",
+  "groupId": "-1",
+  "name": "情境測試2",
+  "category": "2",
+  "LastExecDateTime": 0
+},{
+  "id": "preset0022",
+  "remark": "r2..",
+  "groupId": "-1",
+  "name": "情境測試2",
+  "category": "2",
+  "LastExecDateTime": 0
+},{
+  "id": "preset0022",
+  "remark": "r2..",
+  "groupId": "-1",
+  "name": "情境測試2",
+  "category": "2",
+  "LastExecDateTime": 0
+},{
+  "id": "preset0022",
+  "remark": "r2..",
+  "groupId": "-1",
+  "name": "情境測試2",
+  "category": "2",
+  "LastExecDateTime": 0
+},
+      ]
       setSituations(audioSituations);
     })();
   }, [reload, store]);
@@ -440,6 +542,7 @@ const AudioSituation = () => {
         </div>
         <div className="status-content-container">
           <Table
+            className="audio-situation-table"
             columns={columns}
             dataSource={situations}
             pagination={{ pageSize: 9 }}
