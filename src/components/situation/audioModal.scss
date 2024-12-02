@@ -17,6 +17,14 @@
     margin-top: -60px;
 }
 
+@media(max-width: 1180px) {
+    .audio-modal {
+        max-width: none !important;
+        width: 1120px !important;
+        margin-top: -60px;
+    }
+}
+
 .audio-modal-title {
     height: 36px;
     flex-grow: 1;
@@ -50,6 +58,18 @@
 .situation-audio-input-layout-column {
     width: 1368px;
     // margin-right: 72px;
+}
+
+@media(max-width: 1180px) {
+    .situation-audio-option-row {
+        width: 1068px;
+        display: flex;
+    }
+
+    .situation-audio-input-layout-column {
+        width: 1068px;
+        // margin-right: 72px;
+    }
 }
 
 .situation-audio-input-text {
@@ -131,6 +151,23 @@
     overflow-x: hidden;
 }
 
+@media(max-width: 1180px) {
+    .audio-search-input {
+        width: 1068px;
+        height: 48px;
+        margin-top: 3px;
+        margin-bottom: 3px;
+        font-size: 16px;
+        background-color: #e7e7e7;
+    }
+
+    .audio-container {
+        width: 1068px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+}
+
 .situation-audio-item-btn-row {
     margin-top: 14px;
     display: flex;
@@ -148,6 +185,22 @@
     border-radius: 26px;
     border: solid 1px #575452;
     margin-left: 1154px;
+}
+
+@media(max-width: 1180px) {
+    .situation-audio-item-cancel-btn {
+        height: 48px;
+        flex-grow: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 47px;
+        padding: 0 24px;
+        border-radius: 26px;
+        border: solid 1px #575452;
+        margin-left: 850px;
+    }
 }
 
 .item-cancel-btn-text {
@@ -231,6 +284,12 @@
     display: flex;
     justify-content: space-between;
     padding: 16px;
+}
+
+@media(max-width: 1180px) {
+    .audio-add-step {
+        width: 312px;
+    }
 }
 
 .audio-add-progress {
