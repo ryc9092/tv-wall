@@ -47,6 +47,18 @@
     }
 }
 
+.status-content-table {
+    height: 900px;
+    overflow: scroll;
+}
+
+@media(max-width: 1180px) {
+    .status-content-table {
+        height: 620px;
+        overflow: scroll;
+    }
+}
+
 .situation-card-play-icon {
     width: 18px;
     height: 18px;

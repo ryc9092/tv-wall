@@ -1,8 +1,15 @@
 @import '../../pages/SingleScreen.scss';
 
 .single-screen-content .ant-modal-content {
-    padding: 56px !important;
-    height: 1208px;
+    padding: 30px !important;
+    height: 1068px;
+}
+
+@media(max-width: 1180px) {
+    .single-screen-content .ant-modal-content {
+        padding: 16px !important;
+        height: 778px;
+    }
 }
 
 .single-screen-content-modal-close-icon .ant-modal-close-icon {
@@ -17,7 +24,15 @@
 .single-screen-modal {
     max-width: none !important;
     width: 1307px !important;
-    margin-top: -40px;
+    margin-top: -66px;
+}
+
+@media(max-width: 1180px) {
+    .single-screen-modal {
+        max-width: none !important;
+        width: 1150px !important;
+        margin-top: -66px;
+    }
 }
 
 .single-screen-modal-title {
@@ -54,6 +69,24 @@
 .situation-single-screen-input-layout-column {
     width: 715px;
     // margin-right: 72px;
+}
+
+@media(max-width: 1180px) {
+    .situation-single-screen-option-container {
+        width: 820px;
+        margin-top: 18px;
+        margin-right: 72px;
+    }
+    
+    .situation-single-screen-option-row {
+        width: 700px;
+        display: flex;
+    }
+    
+    .situation-single-screen-input-layout-column {
+        width: 700px;
+        // margin-right: 72px;
+    }
 }
 
 .situation-single-screen-input-text {
@@ -96,17 +129,17 @@
     text-align: left;
 }
 
-.divider {
+.single-screen-modal-divider {
     height: 1px;
     margin-top: 24px;
-    margin-bottom: 31px;
+    margin-bottom: 21px;
     align-self: stretch;
     flex-grow: 0;
     background-color: #d4d4d4;
 }
 
-.connection-title {
-    margin: 0px;
+.single-screen-modal-connection-title {
+    margin-bottom: 24px;
     height: 32px;
     flex-grow: 0;
     font-family: Noto Sans TC;
@@ -129,12 +162,22 @@
     background-color: #e7e7e7;
 }
 
-.single-screen-container {
+.single-screen-modal-container {
     width: 732px;
-    height: 600px;
+    height: 596px;
     margin-top: 24px;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+@media(max-width: 1180px) {
+    .single-screen-modal-container {
+        width: 732px;
+        height: 330px;
+        margin-top: 24px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
 }
 
 .situation-single-screen-card {
@@ -200,6 +243,22 @@
     margin-left: 1004px;
 }
 
+@media(max-width: 1180px) {
+    .situation-single-screen-item-cancel-btn {
+        height: 48px;
+        flex-grow: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 47px;
+        padding: 0 24px;
+        border-radius: 26px;
+        border: solid 1px #575452;
+        margin-left: 918px;
+    }
+}
+
 .item-cancel-btn-text {
     height: 24px;
     flex-grow: 0;
@@ -239,4 +298,72 @@
     letter-spacing: 0.1px;
     text-align: center;
     color: #e7e7e7;
+}
+
+.single-screen-right-card-container {
+    width: 408px;
+    height: 866px;
+    margin-bottom: 24px;
+    margin-left: -90px;
+    border-radius: 24px;
+    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+}
+
+.single-screen-right-card-container-collapse {
+    width: 408px;
+    height: 866px;
+    margin-bottom: 24px;
+    margin-left: 60px;
+    border-radius: 24px;
+    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+}
+
+@media(max-width: 1180px) {
+    .single-screen-right-card-container {
+        width: 398px;
+        height: 580px;
+        overflow: hidden;
+        margin-top: 24px;
+        margin-bottom: 24px;
+        margin-left: -90px;
+        border-radius: 24px;
+        box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+    }
+
+    .single-screen-right-card-container-collapse {
+        width: 398px;
+        height: 580px;
+        margin-bottom: 24px;
+        margin-left: 60px;
+        border-radius: 24px;
+        box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+    }
+}
+
+.singlescreen-modal-card-right-encoder-container {
+    margin-top: 16px;
+    height: 720px;
+    overflow-y: scroll;
+}
+
+@media(max-width: 1180px) {
+    .singlescreen-modal-card-right-encoder-container {
+        margin-top: 16px;
+        height: 480px;
+        overflow-y: scroll;
+    }
+}
+
+.singlescreen-modal-card-right-encoder-table {
+    max-height: 700px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+@media(max-width: 1180px) {
+    .singlescreen-modal-card-right-encoder-table {
+        max-height: 450px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
 }

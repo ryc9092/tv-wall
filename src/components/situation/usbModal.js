@@ -255,7 +255,7 @@ const USBModal = ({
                     />
                   </div>
                 </div>
-                <Divider className="divider" />
+                <Divider className="usb-modal-divider" />
               </div>
             </div>
             <div className="situation-usb-container">
@@ -275,6 +275,7 @@ const USBModal = ({
                       }
                     ></div>
                   </div>
+                  <div className="usb-connect-selection-column">
                   <div className="situation-usb-add-subtitle">
                     <FormattedMessage {...Messages.Text_USB_ChooseSource} /> (
                     <FormattedMessage {...Messages.Text_Common_Encoder} />)
@@ -307,6 +308,7 @@ const USBModal = ({
                     pagination={false}
                   />
                 </div>
+                </div>
                 <div id="decoder-selection" style={{ marginLeft: 46 }}>
                   <div className="situation-usb-add-progress">
                     <div
@@ -328,6 +330,7 @@ const USBModal = ({
                       }
                     ></div>
                   </div>
+                  <div className="usb-connect-selection-column">
                   <div className="situation-usb-add-subtitle">
                     <FormattedMessage
                       {...Messages.Text_USB_ChooseDestination}
@@ -362,6 +365,7 @@ const USBModal = ({
                     }}
                     pagination={false}
                   />
+                </div>
                 </div>
               </div>
             </div>

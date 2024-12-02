@@ -485,9 +485,10 @@ const Situation = () => {
         </div>
         <div className="status-content-container">
           <Table
+            className="status-content-table"
             columns={columns}
             dataSource={situations}
-            pagination={{ pageSize: 9 }}
+            pagination={{ pageSize: 10 }}
             rowKey={(record) => record.id}
           />
           <Modal

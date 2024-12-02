@@ -1,5 +1,5 @@
 .usb-content .ant-modal-content {
-    padding: 56px !important;
+    padding: 36px !important;
 }
 
 .usb-content-modal-close-icon .ant-modal-close-icon {
@@ -93,10 +93,10 @@
     text-align: left;
 }
 
-.divider {
+.usb-modal-divider {
     height: 1px;
     margin-top: 24px;
-    margin-bottom: 31px;
+    margin-bottom: 21px;
     align-self: stretch;
     flex-grow: 0;
     background-color: #d4d4d4;
@@ -132,12 +132,15 @@
     overflow-x: hidden;
 }
 
+.usb-connect-selection-column {
+    max-height: 520px;
+    overflow: scroll;
+}
+
 @media(max-width: 1180px) {
-    .situation-usb-container {
-        width: 856px;
-        height: 325px;
-        overflow-y: scroll;
-        overflow-x: hidden;
+    .usb-connect-selection-column {
+        height: 300px;
+        overflow: scroll;
     }
 }
 

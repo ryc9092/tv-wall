@@ -414,10 +414,10 @@ const SingleScreenModal = ({
                     />
                   </div>
                 </div>
-                <Divider className="divider" />
+                <Divider className="single-screen-modal-divider" />
               </div>
             </div>
-            <div className="connection-title">
+            <div className="single-screen-modal-connection-title">
               <FormattedMessage
                 {...Messages.Text_Situation_SingleScreenConnection}
               />
@@ -432,17 +432,16 @@ const SingleScreenModal = ({
               placeholder={intl.formatMessage(
                 Messages.Text_SingleScreen_InputDecoder
               )}
-              style={{ marginTop: 8 }}
             />
-            <div className="single-screen-container">
+            <div className="single-screen-modal-container">
               <Row gutter={15}>{decoderCards}</Row>
             </div>
           </div>
           <div
             className={
               store.siderCollapse
-                ? "tvwall-card-container-collapse"
-                : "tvwall-card-container"
+                ? "single-screen-right-card-container-collapse"
+                : "single-screen-right-card-container"
             }
           >
             <Card className="singlescreen-card-right">
@@ -479,8 +478,9 @@ const SingleScreenModal = ({
                   Messages.Text_TVWall_InputEncoder
                 )}
               />
-              <div className="singlescreen-card-right-encoder-container">
+              <div className="singlescreen-modal-card-right-encoder-container">
                 <Table
+                  className="singlescreen-modal-card-right-encoder-table"
                   columns={columns}
                   dataSource={filteredEncoders}
                   pagination={{ pageSize: 11 }}

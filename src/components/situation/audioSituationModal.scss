@@ -62,3 +62,15 @@
     text-align: center;
     color: #e7e7e7;
 }
+
+.situation-audio-table {
+    max-height: 550px;
+    overflow: scroll;
+}
+
+@media(max-width: 1180px) {
+    .situation-audio-table {
+        max-height: 450px;
+        overflow: scroll;
+    }
+}
