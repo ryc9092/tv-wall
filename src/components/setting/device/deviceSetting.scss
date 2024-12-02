@@ -25,7 +25,7 @@
     border-radius: 24px;
     box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
     background-color: white;
-    padding: 40px;
+    padding: 10px;
 }
 
 .device-table-content-icon {
@@ -36,7 +36,7 @@
 .table-content-text {
     // text-align: center;
     height: 30px;
-    padding: 2px 12px;
+    // padding: 2px 2px;
     border-radius: 8px;
     background-color: #ffffff;
 }
@@ -45,7 +45,7 @@
     // text-align: center;
     margin: auto;
     height: 30px;
-    padding: 2px 12px;
+    // padding: 2px 2px;
     border-radius: 8px;
     background-color: #fffcd1;
 }
@@ -83,4 +83,16 @@
     font-family: Noto Sans TC;
     font-size: 16px;
     font-weight: 600;
+}
+
+.device-setting-content-table {
+    height: 860px;
+    overflow-x: scroll;
+}
+
+@media(max-width: 1180px) {
+    .device-setting-content-table {
+        height: 520px;
+        overflow-x: scroll;
+    }
 }

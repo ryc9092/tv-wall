@@ -222,6 +222,7 @@ const TemplateSetting = () => {
     },
     {
       title: intl.formatMessage(Messages.Text_Common_Name),
+      width: "15%",
       dataIndex: "nickName",
       key: "nickName",
       editable: true,
@@ -252,7 +253,7 @@ const TemplateSetting = () => {
     // },
     {
       title: intl.formatMessage(Messages.Text_DeviceSetting_Operate),
-      width: "10%",
+      width: "15%",
       key: "edit",
       dataIndex: "id",
       render: (_, record) => {
@@ -389,6 +390,7 @@ const TemplateSetting = () => {
       </div>
       <div className="table-container ">
         <Table
+          className="device-setting-content-table"
           components={{
             body: {
               cell: EditableCell,
