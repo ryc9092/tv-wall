@@ -275,7 +275,7 @@ const TemplateSetting = () => {
             </div>
           </div>
         ) : (
-          <div>
+          <div style={{minWidth: 100}}>
             <Button
               key={`edit.${record}`}
               style={{ border: "none" }}
