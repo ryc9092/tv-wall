@@ -72,3 +72,15 @@
     cursor: pointer;
     background-color: rgb(231 231 231 / 40%);
 }
+
+.status-content-table {
+    height: 860px;
+    overflow: scroll;
+}
+
+@media(max-width: 1180px) {
+    .status-content-table {
+        height: 520px;
+        overflow: scroll;
+    }
+}

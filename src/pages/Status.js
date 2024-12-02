@@ -192,6 +192,7 @@ const Status = () => {
         </div>
         <div className="status-content-container">
           <Table
+            className="status-content-table"
             columns={columns}
             dataSource={devices}
             pagination={{ pageSize: 11 }}
