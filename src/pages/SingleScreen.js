@@ -235,7 +235,8 @@ const SingleScreen = () => {
     const decoderMac = event.target.id.split("@")[1];
     let tempDecoders = decoders;
     let createdLink = false;
-    tempDecoders?.forEach(async (decoder) => {
+    let goingToSaveDecoders = [];
+    tempDecoders?.forEach((decoder) => {
       if (
         decoder.mac === decoderMac &&
         decoder.encoder &&
@@ -243,7 +244,7 @@ const SingleScreen = () => {
         createdLink === false
       ) {
         createdLink = true;
-        const result = await createDeviceLink({
+        const result = createDeviceLink({
           store: store,
           id: `video.${decoder.mac}`,
           linkType: "video",
@@ -254,8 +255,10 @@ const SingleScreen = () => {
           isPreset: "N",
         });
         if (result) {
-          decoder.hasChanged = false;
-          setDecoders(tempDecoders);
+          goingToSaveDecoders.push({
+            ...decoder,
+            hasChanged: false,
+          });
           showSuccessNotificationByMsg(
             intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess)
           );
@@ -264,8 +267,13 @@ const SingleScreen = () => {
             intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail)
           );
         }
+      } else {
+        goingToSaveDecoders.push({
+          ...decoder,
+        });
       }
     });
+    setDecoders(goingToSaveDecoders);
   };
 
   useEffect(() => {
