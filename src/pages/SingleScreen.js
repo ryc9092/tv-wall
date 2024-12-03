@@ -259,6 +259,20 @@ const SingleScreen = () => {
             ...decoder,
             hasChanged: false,
           });
+          // change origin decoder's preview url after link success
+          let tempOriginDecoders = [];
+          originDecoders?.forEach((oriDecoder) => {
+            if (oriDecoder.mac === decoder.mac) {
+              tempOriginDecoders.push({
+                ...oriDecoder,
+                previewUrl: decoder.previewUrl,
+              });
+            } else {
+              tempOriginDecoders.push({
+                oriDecoder,
+              });
+            }
+          });
           showSuccessNotificationByMsg(
             intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess)
           );
@@ -274,6 +288,7 @@ const SingleScreen = () => {
       }
     });
     setDecoders(goingToSaveDecoders);
+    setOriginDecoders(goingToSaveDecoders);
   };
 
   useEffect(() => {
