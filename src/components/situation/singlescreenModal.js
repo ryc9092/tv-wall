@@ -12,14 +12,12 @@ import {
   Tag,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import {
-  getFilteredDecoders,
-  presetDeviceLink,
-} from "../../api/API";
+import { getFilteredDecoders, presetDeviceLink } from "../../api/API";
 import { uuid } from "../../utils/Utils";
 import { showWarningNotification } from "../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
+import XIcon from "../../assets/X.png";
 import "./addSituationContent.scss";
 // import "./tvWallModal.scss";
 import "./singlescreenModal.scss";
@@ -74,6 +72,7 @@ const SingleScreenModal = ({
             mac: "",
             nickName: "",
           },
+          hasChanged: false,
         });
       });
       setDecoders(tempDecoders.length > 0 ? tempDecoders : decoders);
@@ -111,6 +110,7 @@ const SingleScreenModal = ({
               mac: encoder.mac,
               nickName: encoder.nickName,
             },
+            hasChanged: true,
           });
         } else {
           tempDecoders.push(decoder);
@@ -133,17 +133,46 @@ const SingleScreenModal = ({
     })();
   }, [decoders, searchDecoderFilter]);
 
+  const handleCancelScreenSetting = async (event) => {
+    const decoderMac = event.target.id.split("@")[1];
+    let tempDecoders = [];
+    decoders?.forEach(async (decoder) => {
+      if (decoder.mac === decoderMac && decoder.encoder !== "") {
+        tempDecoders.push({
+          ...decoder,
+          hasChanged: false,
+          previewUrl: "",
+          encoder: {
+            mac: "",
+            nickName: "",
+          },
+        });
+      } else {
+        tempDecoders.push(decoder);
+      }
+    });
+    setDecoders(tempDecoders);
+    const iframe = document.getElementById(`iframe.${decoderMac}`);
+    iframe.src = "";
+  };
+
   useEffect(() => {
     let tempDecoderCards = [];
     filteredDecoders?.forEach((decoder) => {
       tempDecoderCards.push(
-        <Col key={`col@${decoder.mac}`} id={`card@${decoder.mac}`} onMouseOver={handleScreenMouseEnter} onMouseLeave={handleScreenMouseLeave}>
+        <Col
+          key={`col@${decoder.mac}`}
+          id={`card@${decoder.mac}`}
+          onMouseOver={handleScreenMouseEnter}
+          onMouseLeave={handleScreenMouseLeave}
+        >
           <div
             className="situation-single-screen-card"
             onClick={(event) => onScreenClick(event, selectedEncoder)}
           >
             {decoder.previewUrl ? (
               <iframe
+                id={`iframe.${decoder.mac}`}
                 className="situation-single-screen-card-video"
                 src={modifyVideoSize(decoder.previewUrl, 350, 232)}
                 title="Video player"
@@ -236,12 +265,31 @@ const SingleScreenModal = ({
                   </div>
                   <div
                     id={`card@${decoder.mac}`}
-                    className={
-                      store.siderCollapse
-                        ? "single-screen-btn-position-collapse"
-                        : "single-screen-btn-position"
-                    }
+                    className="single-screen-btn-position"
                   >
+                    {decoder.hasChanged ? (
+                      <Button
+                        id={`btn@${decoder.mac}`}
+                        type="primary"
+                        shape="circle"
+                        style={{
+                          background: "white",
+                          position: "absolute",
+                          marginTop: 12,
+                          marginLeft: 155,
+                          display: decoder.hasChanged ? null : "none",
+                          opacity: decoder.hasChanged ? 10 : 0,
+                        }}
+                        onClick={(event) => handleCancelScreenSetting(event)}
+                      >
+                        <img
+                          id={`btn@${decoder.mac}`}
+                          alt="cancel"
+                          src={XIcon}
+                          style={{ width: 18, height: 18, marginTop: 2 }}
+                        />
+                      </Button>
+                    ) : null}
                   </div>
                 </div>
               ) : null}
@@ -437,13 +485,7 @@ const SingleScreenModal = ({
               <Row gutter={15}>{decoderCards}</Row>
             </div>
           </div>
-          <div
-            className={
-              store.siderCollapse
-                ? "single-screen-right-card-container-collapse"
-                : "single-screen-right-card-container"
-            }
-          >
+          <div className="single-screen-right-card-container">
             <Card className="singlescreen-card-right">
               <div className="singlescreen-card-right-title">
                 <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
