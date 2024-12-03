@@ -155,7 +155,7 @@ const SingleScreen = () => {
     return modifiedUrl;
   };
 
-  const onScreenClick = (event) => {
+  const onScreenClick = (event, selectedEncoder) => {
     if (!event.target.id.includes("btn") && selectedEncoder.previewUrl) {
       let tempDecoders = [];
       const decoderMac = event.target.id.split("@")[1];
@@ -208,16 +208,21 @@ const SingleScreen = () => {
 
   const handleCancelScreenSetting = async (event) => {
     const decoderMac = event.target.id.split("@")[1];
-    let tempDecoders = decoders;
+    let tempDecoders = [];
     let originDecoder;
-    tempDecoders?.forEach(async (decoder) => {
+    decoders?.forEach(async (decoder) => {
       if (decoder.mac === decoderMac && decoder.encoder !== "") {
         originDecoders?.forEach((oriDecoder) => {
           if (oriDecoder.mac === decoderMac) originDecoder = oriDecoder;
         });
-        decoder.hasChanged = false;
-        decoder.previewUrl = originDecoder.previewUrl;
-        decoder.encoder = originDecoder.encoder;
+        tempDecoders.push({
+          ...decoder,
+          hasChanged: false,
+          previewUrl: originDecoder.previewUrl,
+          encoder: originDecoder.encoder,
+        });
+      } else {
+        tempDecoders.push({ ...decoder });
       }
     });
     setDecoders(tempDecoders);
@@ -266,6 +271,10 @@ const SingleScreen = () => {
               tempOriginDecoders.push({
                 ...oriDecoder,
                 previewUrl: decoder.previewUrl,
+                encoder: {
+                  mac: selectedEncoder.mac,
+                  nickName: selectedEncoder.nickName,
+                },
               });
             } else {
               tempOriginDecoders.push({
@@ -320,7 +329,9 @@ const SingleScreen = () => {
                   ? "gray"
                   : "white",
             }}
-            onClick={onScreenClick}
+            onClick={(event) => {
+              onScreenClick(event, selectedEncoder);
+            }}
           >
             {decoder.previewUrl ? (
               <iframe
@@ -509,6 +520,7 @@ const SingleScreen = () => {
     filteredDecoders,
     updateDecoderCards,
     currentScreen,
+    selectedEncoder,
     store.siderCollapse,
   ]);
 
