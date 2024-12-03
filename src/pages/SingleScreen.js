@@ -38,6 +38,7 @@ const SingleScreen = () => {
   const [currentScreen, setCurrentScreen] = useState(null);
   const [reload, setReload] = useState(null);
   const [updateDecoderCards, setUpdateDecoderCards] = useState(null);
+  const [goingToModifyDecoder, setGoingToModifyDecoder] = useState({});
 
   const handleScreenMouseEnter = (event) => {
     const itemId = event.target.id;
@@ -240,7 +241,6 @@ const SingleScreen = () => {
     const decoderMac = event.target.id.split("@")[1];
     let tempDecoders = decoders;
     let createdLink = false;
-    let goingToSaveDecoders = [];
     tempDecoders?.forEach((decoder) => {
       if (
         decoder.mac === decoderMac &&
@@ -249,7 +249,7 @@ const SingleScreen = () => {
         createdLink === false
       ) {
         createdLink = true;
-        const result = createDeviceLink({
+        createDeviceLink({
           store: store,
           id: `video.${decoder.mac}`,
           linkType: "video",
@@ -258,47 +258,64 @@ const SingleScreen = () => {
           value1: "",
           remark: "",
           isPreset: "N",
-        });
-        if (result) {
-          goingToSaveDecoders.push({
-            ...decoder,
-            hasChanged: false,
-          });
-          // change origin decoder's preview url after link success
-          let tempOriginDecoders = [];
-          originDecoders?.forEach((oriDecoder) => {
-            if (oriDecoder.mac === decoder.mac) {
-              tempOriginDecoders.push({
-                ...oriDecoder,
-                previewUrl: decoder.previewUrl,
-                encoder: {
-                  mac: selectedEncoder.mac,
-                  nickName: selectedEncoder.nickName,
-                },
-              });
-            } else {
-              tempOriginDecoders.push({
-                oriDecoder,
-              });
-            }
-          });
-          showSuccessNotificationByMsg(
-            intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess)
-          );
-        } else {
-          showWarningNotification(
-            intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail)
-          );
-        }
-      } else {
-        goingToSaveDecoders.push({
-          ...decoder,
+        }).then((result) => {
+          if (result) {
+            setGoingToModifyDecoder({
+              decoderMac: decoder.mac,
+              previewUrl: decoder.previewUrl,
+              encoder: {
+                mac: selectedEncoder.mac,
+                nickName: selectedEncoder.nickName,
+              },
+            });
+            showSuccessNotificationByMsg(
+              intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess)
+            );
+          } else {
+            setGoingToModifyDecoder({});
+            showWarningNotification(
+              intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail)
+            );
+          }
         });
       }
     });
-    setDecoders(goingToSaveDecoders);
-    setOriginDecoders(goingToSaveDecoders);
   };
+
+  useEffect(() => {
+    let tempDecoders = [];
+    // update decoder hasChanged to false if link success
+    decoders?.forEach((decoder) => {
+      if (decoder.mac === goingToModifyDecoder.decoderMac) {
+        tempDecoders.push({
+          ...decoder,
+          previewUrl: goingToModifyDecoder.previewUrl,
+          encoder: goingToModifyDecoder.encoder,
+          hasChanged: false,
+        });
+      } else {
+        tempDecoders.push(decoder);
+      }
+    });
+
+    let tempOriginDecoders = [];
+    // update origin decoder to current if link success
+    originDecoders?.forEach((decoder) => {
+      if (decoder.mac === goingToModifyDecoder.decoderMac) {
+        tempOriginDecoders.push({
+          ...decoder,
+          previewUrl: goingToModifyDecoder.previewUrl,
+          encoder: goingToModifyDecoder.encoder,
+          hasChanged: false,
+        });
+      } else {
+        tempOriginDecoders.push(decoder);
+      }
+    });
+
+    setDecoders(tempDecoders);
+    setOriginDecoders(tempOriginDecoders);
+  }, [goingToModifyDecoder]);
 
   useEffect(() => {
     let tempDecoderCards = [];
