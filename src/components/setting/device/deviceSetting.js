@@ -114,7 +114,7 @@ const TemplateSetting = () => {
   };
 
   const save = async (key) => {
-    if (editedNickName && editedAudioAnalog && editedAudioHdmi) {
+    if (editedNickName) {
       const index = devices.findIndex((item) => key === item.key);
       const { ...device } = { ...devices[index] };
       const result = await editDevice(
@@ -274,8 +274,22 @@ const TemplateSetting = () => {
               </span>
             </div>
           </div>
+        ) : record.crtType === "M" ? (
+          <div style={{ minWidth: 100 }}>
+            <Button
+              key={`edit.${record}`}
+              style={{ border: "none" }}
+              onClick={() => edit(record)}
+            >
+              <img
+                alt="edit"
+                src={PencilIcon}
+                className="device-table-content-icon"
+              />
+            </Button>
+          </div>
         ) : (
-          <div style={{minWidth: 100}}>
+          <div style={{ minWidth: 100 }}>
             <Button
               key={`edit.${record}`}
               style={{ border: "none" }}
