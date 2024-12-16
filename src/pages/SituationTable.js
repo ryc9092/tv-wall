@@ -359,17 +359,17 @@ const Situation = () => {
   };
 
   const items = [
-    // {
-    //   label: (
-    //     <span className="dropdown-menu-text">
-    //       {intl.formatMessage(Messages.Text_Situation_TVWallConnection)}
-    //     </span>
-    //   ),
-    //   key: "tvwall",
-    //   icon: (
-    //     <img src={TVWallIcon} alt="tvwall" className="dropdown-menu-icon" />
-    //   ),
-    // },
+    {
+      label: (
+        <span className="dropdown-menu-text">
+          {intl.formatMessage(Messages.Text_Situation_TVWallConnection)}
+        </span>
+      ),
+      key: "tvwall",
+      icon: (
+        <img src={TVWallIcon} alt="tvwall" className="dropdown-menu-icon" />
+      ),
+    },
     {
       label: (
         <span className="dropdown-menu-text">

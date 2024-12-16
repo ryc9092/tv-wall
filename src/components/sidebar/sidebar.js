@@ -27,17 +27,17 @@ const Sidebar = () => {
   );
 
   const items = [
-    // {
-    //   key: "tv-wall",
-    //   label: (
-    //     <MenuItem
-    //       item=<span className="menu-text">
-    //         {intl.formatMessage(Messages.Text_Sidebar_TVWallManagement)}
-    //       </span>
-    //     />
-    //   ),
-    //   icon: <img src={TVWallIcon} alt="tvwall" className="menu-icon" />,
-    // },
+    {
+      key: "tv-wall",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Sidebar_TVWallManagement)}
+          </span>
+        />
+      ),
+      icon: <img src={TVWallIcon} alt="tvwall" className="menu-icon" />,
+    },
     {
       key: "single-screen",
       label: (
@@ -133,19 +133,19 @@ const Sidebar = () => {
       ),
       icon: <img src={SettingIcon} alt="setting" className="menu-icon" />,
     },
-    // {
-    //   key: "surveillance",
-    //   label: (
-    //     <MenuItem
-    //       item=<span className="menu-text">
-    //         {intl.formatMessage(Messages.Text_Surveillance_Title)}
-    //       </span>
-    //     />
-    //   ),
-    //   icon: (
-    //     <img src={SurveillanceIcon} alt="surveillance" className="menu-icon" />
-    //   ),
-    // },
+    {
+      key: "surveillance",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Surveillance_Title)}
+          </span>
+        />
+      ),
+      icon: (
+        <img src={SurveillanceIcon} alt="surveillance" className="menu-icon" />
+      ),
+    },
   ];
 
   const onNavigate = (e) => {
