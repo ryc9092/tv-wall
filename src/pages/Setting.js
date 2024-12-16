@@ -10,7 +10,7 @@ import "./Setting.scss";
 
 const Setting = () => {
   const [store] = useContext(StoreContext);
-  const [page, setPage] = useState("device");
+  const [page, setPage] = useState("tvwall");
 
   const pageContent = {
     tvwall: <TVWallSetting />,
@@ -29,7 +29,7 @@ const Setting = () => {
           <FormattedMessage {...Messages.Text_SystemSetting_Title} />
         </div>
         <div className="setting-topbar-line" />
-        {/* <div
+        <div
           className="setting-topbar-option"
           onClick={() => {
             setPage("tvwall");
@@ -46,7 +46,7 @@ const Setting = () => {
           <FormattedMessage
             {...Messages.Text_TemplateSetting_TemplateSetting}
           />
-        </div> */}
+        </div>
         <div
           className="setting-topbar-option"
           onClick={() => {
