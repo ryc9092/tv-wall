@@ -52,15 +52,15 @@ const Sidebar = () => {
       ),
     },
     {
-      key: "monitor-mgmt",
+      key: "audio",
       label: (
         <MenuItem
           item=<span className="menu-text">
-            {intl.formatMessage(Messages.Text_MonitorManagement_Title)}
+            {intl.formatMessage(Messages.Text_Sidebar_AudioManagement)}
           </span>
         />
       ),
-      icon: <img src={PowerIcon} alt="singlescreen" className="menu-icon" />,
+      icon: <img src={AudioIcon} alt="audio" className="menu-icon" />,
     },
     {
       key: "usb",
@@ -82,15 +82,15 @@ const Sidebar = () => {
     //   ),
     // },
     {
-      key: "audio",
+      key: "monitor-mgmt",
       label: (
         <MenuItem
           item=<span className="menu-text">
-            {intl.formatMessage(Messages.Text_Sidebar_AudioManagement)}
+            {intl.formatMessage(Messages.Text_MonitorManagement_Title)}
           </span>
         />
       ),
-      icon: <img src={AudioIcon} alt="audio" className="menu-icon" />,
+      icon: <img src={PowerIcon} alt="singlescreen" className="menu-icon" />,
     },
     {
       key: "situation",
