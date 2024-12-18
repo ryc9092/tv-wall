@@ -2,7 +2,7 @@ const About = () => {
 
   return (
     <div style={{ margin: 20 }}>
-        version : v2.1.5
+        version : v3.0.0
     </div>
   );
 };
