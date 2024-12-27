@@ -19,8 +19,10 @@ import SingleScreenModal from "../components/situation/singlescreenModal";
 import USBModal from "../components/situation/usbModal";
 import AudioModal from "../components/situation/audioModal";
 import AudioSituationModal from "../components/situation/audioSituationModal";
+import USBViewModal from "../components/usb/usbViewModal";
 import PlayIcon from "../assets/play-black.png";
 import PauseIcon from "../assets/pause.png";
+import ViewIcon from "../assets/view.png";
 import TrashIcon from "../assets/trash.png";
 import PlusIcon from "../assets/plus-white.png";
 import PlusYellowIcon from "../assets/plus-yellow.png";
@@ -97,6 +99,18 @@ const Situation = () => {
     await removeSituationDetail(situationDetailId, store);
     setReload(Math.random());
   };
+
+  const [isUSBViewModalOpen, setIsUSBViewModalOpen] = useState(false);
+  const [choosedSituationDetailId, setChoosedSituationDetailId] =
+    useState(null);
+  const viewSituationDetail = async (situationDetailRelationId) => {
+    setChoosedSituationDetailId(situationDetailRelationId);
+    setIsUSBViewModalOpen(true);
+  };
+
+  useEffect(() => {
+    if (!isUSBViewModalOpen) setChoosedSituationDetailId(null);
+  }, [isUSBViewModalOpen]);
 
   const columns = [
     {
@@ -277,10 +291,27 @@ const Situation = () => {
       key: "operate",
       render: (text, record) => {
         return (
-          <div key={`${text}-action`}>
+          <div
+            key={`${text}-action`}
+            style={{ display: "inline", whiteSpace: "nowrap" }}
+          >
+            <Button
+              key={`${text}-view`}
+              type="text"
+              onClick={() => {
+                viewSituationDetail(record.relation_id);
+              }}
+              className="table-content"
+            >
+              <img
+                alt="view"
+                src={ViewIcon}
+                className="table-content-icon"
+                style={{ opacity: 0.6 }}
+              />
+            </Button>
             <Button
               key={`${text}-delete`}
-              id={text}
               type="text"
               onClick={() => {
                 deleteSituationDetail(text);
@@ -632,6 +663,19 @@ const Situation = () => {
           </Modal>
         </div>
       </div>
+      {isUSBViewModalOpen === true && choosedSituationDetailId !== undefined && (
+        <USBViewModal
+          situationDetailId={choosedSituationDetailId}
+          situationItemLength={situationItemLength}
+          isModalOpen={isUSBViewModalOpen}
+          setIsModalOpen={setIsUSBViewModalOpen}
+          setReload={setReload}
+          encoders={encoders}
+          setEncoders={setEncoders}
+          decoders={decoders}
+          setDecoders={setDecoders}
+        />
+      )}
     </div>
   );
 };

@@ -37,6 +37,7 @@
   "Text-Button-Edit": "edit",
   "Text-Button-Delete": "delete",
   "Text-Button-Cancel": "cancel",
+  "Text-Button-Close": "close",
   "Text-Button-Remove": "remove",
   "Text-Button-Operation": "operation",
 
@@ -149,6 +150,7 @@
   "Text-Situation-Title": "Scenario management",
   "Text-Situation-CreateSituation": "add Scenario",
   "Text-Situation-AddSituationItem": "add Scenario item",
+  "Text-Situation-ViewSituationItem": "view Scenario item",
   "Text-Situation-ExecutePrevStep": "Execute previous step",
   "Text-Situation-TVWallConnection": "Videowall source connection",
   "Text-Situation-SingleScreenConnection": "Source and display connection",

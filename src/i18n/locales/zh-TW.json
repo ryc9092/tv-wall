@@ -37,6 +37,7 @@
   "Text-Button-Edit": "編輯",
   "Text-Button-Delete": "刪除",
   "Text-Button-Cancel": "取消",
+  "Text-Button-Close": "關閉",
   "Text-Button-Remove": "移除",
   "Text-Button-Operation": "操作",
 
@@ -149,6 +150,7 @@
   "Text-Situation-Title": "情境管理",
   "Text-Situation-CreateSituation": "新增情境",
   "Text-Situation-AddSituationItem": "新增情境項目",
+  "Text-Situation-ViewSituationItem": "檢視情境項目",
   "Text-Situation-ExecutePrevStep": "執行上一步",
   "Text-Situation-TVWallConnection": "電視牆影像連結",
   "Text-Situation-SingleScreenConnection": "單畫面影像連結",

@@ -307,7 +307,8 @@ export const getDevices = async (store) => {
 
 export const getDeviceLinks = async ({ store, linkType, isPreset }) => {
   const params = `linkType=${linkType}`;
-  const apiPath = `/devicelinks/query`;
+  const apiPath =
+    isPreset === "N" ? `/devicelinks/query` : `/devicelinks/preset/query`;
   return await apiGET({
     apiPath,
     params,
@@ -509,7 +510,13 @@ export const getActivedWall = async ({ store, activeId }) => {
 
 // Situation
 
-export const createSituation = async ({ id, name, description, category, store }) => {
+export const createSituation = async ({
+  id,
+  name,
+  description,
+  category,
+  store,
+}) => {
   const apiPath = `/presets`;
   const form = JSON.stringify({
     id: id,
@@ -611,6 +618,14 @@ export const presetDeviceLink = async ({
   });
 };
 
+export const getPresetDeviceLink = async (store) => {
+  const apiPath = `/devicelinks/preset/query?linkType=usb`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
 export const presetAudioSituation = async ({
   store,
   relation_id,
@@ -630,7 +645,7 @@ export const presetAudioSituation = async ({
     form,
     store,
   });
-}
+};
 
 export const presetWall = async ({
   store,

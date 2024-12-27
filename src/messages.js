@@ -104,6 +104,10 @@ export default defineMessages({
     id: "Text-Button-Cancel",
     defaultMessage: "取消",
   },
+  Text_Button_Close: {
+    id: "Text-Button-Close",
+    defaultMessage: "關閉",
+  },
   Text_Button_Remove: {
     id: "Text-Button-Remove",
     defaultMessage: "移除",
@@ -535,6 +539,10 @@ export default defineMessages({
   Text_Situation_AddSituationItem: {
     id: "Text-Situation-AddSituationItem",
     defaultMessage: "新增情境項目",
+  },
+  Text_Situation_ViewSituationItem: {
+    id: "Text-Situation-ViewSituationItem",
+    defaultMessage: "檢視情境項目",
   },
   Text_Situation_ExecutePrevStep: {
     id: "Text-Situation-ExecutePrevStep",
