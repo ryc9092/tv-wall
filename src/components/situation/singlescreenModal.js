@@ -17,6 +17,7 @@ import { uuid } from "../../utils/Utils";
 import { showWarningNotification } from "../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
+import SearchIcon from "../../assets/magnifying-glass.png";
 import XIcon from "../../assets/X.png";
 import "./addSituationContent.scss";
 // import "./tvWallModal.scss";
@@ -35,314 +36,46 @@ const SingleScreenModal = ({
   const intl = useIntl();
   const [store] = useContext(StoreContext);
   const [situationItemDesc, setSituationItemDesc] = useState(null);
-  const [selectedEncoder, setSelectedEncoder] = useState({
-    mac: "",
-    previewUrl: "",
-    nickName: "",
-  });
+
   const [decoders, setDecoders] = useState([]);
-  const [searchDecoderFilter, setSearchDecoderFilter] = useState("");
-  const [filteredDecoders, setFilteredDecoders] = useState([]);
-  const [decoderCards, setDecoderCards] = useState(null);
-  const [searchEncoderFilter, setSearchEncoderFilter] = useState("");
-  const [filteredEncoders, setFilteredEncoders] = useState([]);
-  const [updateDecoderCards, setUpdateDecoderCards] = useState(null);
-  const [currentScreen, setCurrentScreen] = useState(null);
-
-  const handleScreenMouseEnter = (event) => {
-    const itemId = event.target.id;
-    setCurrentScreen(itemId);
-  };
-
-  const handleScreenMouseLeave = () => {
-    setCurrentScreen(null);
-  };
-
-  // set encoder, decoder
   useEffect(() => {
     (async () => {
-      const decoders = await getFilteredDecoders(store);
-      // const decoders = [{mac: "ffff", nickName: "test", state: "Up"}]
-      let tempDecoders = []; // for set decoders
-      decoders?.forEach((decoder) => {
-        tempDecoders.push({
-          ...decoder,
-          previewUrl: "",
-          encoder: {
-            mac: "",
-            nickName: "",
-          },
-          hasChanged: false,
-        });
-      });
-      setDecoders(tempDecoders.length > 0 ? tempDecoders : decoders);
-    })();
-  }, [isModalOpen]);
-
-  // filtered encoder list
-  useEffect(() => {
-    (async () => {
-      let tempFilteredEncoders = [];
       encoders?.forEach((encoder) => {
-        if (encoder.nickName.includes(searchEncoderFilter))
-          tempFilteredEncoders.push({ key: encoder.mac, ...encoder });
+        encoder.key = encoder.mac;
       });
-      setFilteredEncoders(tempFilteredEncoders);
-    })();
-  }, [encoders, searchEncoderFilter]);
-
-  const modifyVideoSize = (previewUrl, width, height) => {
-    const hostname = previewUrl.split("?")[0];
-    const modifiedUrl = `${hostname}?action=stream&w=${width}&h=${height}&fps=15&bw=5000&as=0`;
-    return modifiedUrl;
-  };
-
-  const onScreenClick = (event, encoder) => {
-    if (!event.target.id.includes("btn") && encoder.previewUrl) {
-      let tempDecoders = [];
-      const decoderMac = event.target.id.split("@")[1];
+      const decoders = await getFilteredDecoders(store);
       decoders?.forEach((decoder) => {
-        if (decoder.mac === decoderMac) {
-          tempDecoders.push({
-            ...decoder,
-            previewUrl: encoder.previewUrl,
-            encoder: {
-              mac: encoder.mac,
-              nickName: encoder.nickName,
-            },
-            hasChanged: true,
-          });
-        } else {
-          tempDecoders.push(decoder);
-        }
+        decoder.key = decoder.mac;
       });
-      setDecoders(tempDecoders);
-      setUpdateDecoderCards(Math.random());
-    }
-  };
-
-  // filtered decoder list
-  useEffect(() => {
-    (async () => {
-      let tempFilteredDecoders = [];
-      decoders?.forEach((decoder) => {
-        if (decoder.nickName.includes(searchDecoderFilter))
-          tempFilteredDecoders.push(decoder);
-      });
-      setFilteredDecoders(tempFilteredDecoders);
+      setDecoders(decoders);
+      setFilteredDecoders(decoders);
+      setFilteredEncoders(encoders);
     })();
-  }, [decoders, searchDecoderFilter]);
+  }, [isModalOpen, encoders]);
 
-  const handleCancelScreenSetting = async (event) => {
-    const decoderMac = event.target.id.split("@")[1];
-    let tempDecoders = [];
-    decoders?.forEach(async (decoder) => {
-      if (decoder.mac === decoderMac && decoder.encoder !== "") {
-        tempDecoders.push({
-          ...decoder,
-          hasChanged: false,
-          previewUrl: "",
-          encoder: {
-            mac: "",
-            nickName: "",
-          },
-        });
-      } else {
-        tempDecoders.push(decoder);
-      }
-    });
-    setDecoders(tempDecoders);
-    const iframe = document.getElementById(`iframe.${decoderMac}`);
-    iframe.src = "";
-  };
+  const [selectedEncoder, setSelectedEncoder] = useState(null);
+  const [encoderFilter, setEncoderFilter] = useState("");
+  const [filteredEncoders, setFilteredEncoders] = useState([]);
 
-  useEffect(() => {
-    let tempDecoderCards = [];
-    filteredDecoders?.forEach((decoder) => {
-      tempDecoderCards.push(
-        <Col
-          key={`col@${decoder.mac}`}
-          id={`card@${decoder.mac}`}
-          onMouseOver={handleScreenMouseEnter}
-          onMouseLeave={handleScreenMouseLeave}
-        >
-          <div
-            className="situation-single-screen-card"
-            onClick={(event) => onScreenClick(event, selectedEncoder)}
-          >
-            {decoder.previewUrl ? (
-              <iframe
-                id={`iframe.${decoder.mac}`}
-                className="situation-single-screen-card-video"
-                src={modifyVideoSize(decoder.previewUrl, 350, 232)}
-                title="Video player"
-              />
-            ) : null}
-            <div
-              id={`card@${decoder.mac}`}
-              className="situation-single-screen-card-top"
-              style={{
-                backgroundColor:
-                  currentScreen && currentScreen.includes(decoder.mac)
-                    ? "gray"
-                    : null,
-              }}
-            >
-              <div
-                id={`card@${decoder.mac}`}
-                className="situation-single-screen-card-title-row"
-              >
-                <span
-                  id={`card@${decoder.mac}`}
-                  className="situation-single-screen-card-title"
-                  style={{
-                    color:
-                      currentScreen && currentScreen.includes(decoder.mac)
-                        ? "white"
-                        : "#45413e",
-                  }}
-                >
-                  {decoder.nickName}
-                </span>
-                <span id={`card@${decoder.mac}`} style={{ marginTop: "2px" }}>
-                  {decoder.state === "Up" ? (
-                    <Tag
-                      id={`card@${decoder.mac}`}
-                      color={"#eef9b4"}
-                      key={`${decoder.name}.${decoder.state}`}
-                    >
-                      <span
-                        id={`card@${decoder.mac}`}
-                        style={{ color: "#a0b628" }}
-                        className="tag-content"
-                      >
-                        <FormattedMessage {...Messages.Text_Common_Up} />
-                      </span>
-                    </Tag>
-                  ) : decoder.state === "Down" ? (
-                    <Tag
-                      id={`card@${decoder.mac}`}
-                      color={"#ffe6e5"}
-                      key={`${decoder.name}.${decoder.state}`}
-                    >
-                      <span
-                        id={`card@${decoder.mac}`}
-                        style={{ color: "#d55959" }}
-                        className="tag-content"
-                      >
-                        <FormattedMessage {...Messages.Text_Common_Down} />
-                      </span>
-                    </Tag>
-                  ) : (
-                    <Tag
-                      id={`card@${decoder.mac}`}
-                      color={"yellow"}
-                      key={`${decoder.name}.${decoder.state}`}
-                    >
-                      <span
-                        id={`card@${decoder.mac}`}
-                        style={{ color: "#d55959" }}
-                        className="tag-content"
-                      >
-                        {decoder.state}
-                      </span>
-                    </Tag>
-                  )}
-                </span>
-              </div>
-              {currentScreen && currentScreen.includes(decoder.mac) ? (
-                <div id={`card@${decoder.mac}`}>
-                  <div
-                    id={`card@${decoder.mac}`}
-                    className="single-screen-card-desc"
-                    // style={{zIndex: 100, backgroundColor: "black", color: "white"}}
-                  >
-                    <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
-                    {" : "}{" "}
-                    {decoder.previewUrl
-                      ? decoder.encoder?.nickName
-                      : intl.formatMessage(Messages.Text_Common_None)}
-                  </div>
-                  <div
-                    id={`card@${decoder.mac}`}
-                    className="single-screen-btn-position"
-                  >
-                    {decoder.hasChanged ? (
-                      <Button
-                        id={`btn@${decoder.mac}`}
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          background: "white",
-                          position: "absolute",
-                          marginTop: 12,
-                          marginLeft: 155,
-                          display: decoder.hasChanged ? null : "none",
-                          opacity: decoder.hasChanged ? 10 : 0,
-                        }}
-                        onClick={(event) => handleCancelScreenSetting(event)}
-                      >
-                        <img
-                          id={`btn@${decoder.mac}`}
-                          alt="cancel"
-                          src={XIcon}
-                          style={{ width: 18, height: 18, marginTop: 2 }}
-                        />
-                      </Button>
-                    ) : null}
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          </div>
-        </Col>
-      );
-    });
-    setDecoderCards(tempDecoderCards);
-  }, [filteredDecoders, updateDecoderCards, selectedEncoder, currentScreen]);
-
-  const columns = [
+  const encoderSelectionColumns = [
     {
-      title: intl.formatMessage(Messages.Text_Common_Name),
+      title: (
+        <span className="usb-content-table-head">
+          {intl.formatMessage(Messages.Text_USB_Source)}
+        </span>
+      ),
       dataIndex: "nickName",
       key: "nickName",
       render: (text) => {
-        return (
-          <span
-            className="table-content"
-            style={
-              selectedEncoder.nickName === text
-                ? { backgroundColor: "#FDEBD0" }
-                : null
-            }
-          >
-            {text}
-          </span>
-        );
+        return <span>{text}</span>;
       },
     },
     {
-      title: intl.formatMessage(Messages.Text_Common_Model),
-      dataIndex: "model",
-      key: "model",
-      filters: [
-        {
-          text: "ZyperUHD60",
-          value: "ZyperUHD60",
-        },
-        {
-          text: "Zyper4k",
-          value: "Zyper4k",
-        },
-      ],
-      onFilter: (value, data) => data.model.indexOf(value) === 0,
-      render: (text) => {
-        return <span className="table-content">{text}</span>;
-      },
-    },
-    {
-      title: intl.formatMessage(Messages.Text_Common_State),
-      width: "25%",
+      title: (
+        <span className="usb-content-table-head">
+          {intl.formatMessage(Messages.Text_USB_Status)}
+        </span>
+      ),
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
@@ -350,19 +83,19 @@ const SingleScreenModal = ({
         <>
           {state === "Up" ? (
             <Tag color={"#eef9b4"} key={`${name}.${state}`}>
-              <span style={{ color: "#a0b628" }} className="tag-content">
+              <span style={{ color: "#a0b628" }}>
                 <FormattedMessage {...Messages.Text_Common_Up} />
               </span>
             </Tag>
           ) : state === "Down" ? (
             <Tag color={"#ffe6e5"} key={`${name}.${state}`}>
-              <span style={{ color: "#d55959" }} className="tag-content">
+              <span style={{ color: "#d55959" }}>
                 <FormattedMessage {...Messages.Text_Common_Down} />
               </span>
             </Tag>
           ) : (
             <Tag color={"yellow"} key={`${name}.${state}`}>
-              <span className="tag-content">{state}</span>
+              {state}
             </Tag>
           )}
         </>
@@ -370,28 +103,109 @@ const SingleScreenModal = ({
     },
   ];
 
-  const handleChooseEncoder = (encoder) => {
-    if (encoder.mac !== selectedEncoder.mac)
-      setSelectedEncoder({
-        mac: encoder.mac,
-        previewUrl: encoder.previewUrl,
-        nickName: encoder.nickName,
+  useEffect(() => {
+    let tempFilteredEncoders = [];
+    if (encoders?.length !== 0) {
+      encoders?.forEach((encoder) => {
+        if (encoder.nickName.includes(encoderFilter))
+          tempFilteredEncoders.push(encoder);
       });
+    }
+    setFilteredEncoders(tempFilteredEncoders);
+  }, [encoderFilter]);
+
+  const encoderSelection = {
+    selectedRowKeys: [selectedEncoder],
+    onChange: (selectedRowKeys, selectedRows) => {
+      setSelectedEncoder(selectedRowKeys[0]);
+    },
+  };
+
+  const [selectedDecoders, setSelectedDecoders] = useState([]);
+  const [decoderFilter, setDecoderFilter] = useState("");
+  const [filteredDecoders, setFilteredDecoders] = useState([]);
+
+  const decoderSelectionColumns = [
+    {
+      title: (
+        <span className="usb-content-table-head">
+          {intl.formatMessage(Messages.Text_USB_Destination)}
+        </span>
+      ),
+      dataIndex: "nickName",
+      key: "nickName",
+      render: (text) => {
+        return <span>{text}</span>;
+      },
+    },
+    {
+      title: (
+        <span className="usb-content-table-head">
+          {intl.formatMessage(Messages.Text_USB_Status)}
+        </span>
+      ),
+      key: "state",
+      dataIndex: "state",
+      sorter: (a, b) => a.state.length - b.state.length,
+      render: (_, { state, name }) => (
+        <>
+          {state === "Up" ? (
+            <Tag color={"#eef9b4"} key={`${name}.${state}`}>
+              <span style={{ color: "#a0b628" }}>
+                <FormattedMessage {...Messages.Text_Common_Up} />
+              </span>
+            </Tag>
+          ) : state === "Down" ? (
+            <Tag color={"#ffe6e5"} key={`${name}.${state}`}>
+              <span style={{ color: "#d55959" }}>
+                <FormattedMessage {...Messages.Text_Common_Down} />
+              </span>
+            </Tag>
+          ) : (
+            <Tag color={"yellow"} key={`${name}.${state}`}>
+              {state}
+            </Tag>
+          )}
+        </>
+      ),
+    },
+  ];
+
+  useEffect(() => {
+    let tempFilteredDecoders = [];
+    if (decoders?.length !== 0) {
+      decoders?.forEach((decoder) => {
+        if (decoder.nickName.includes(decoderFilter))
+          tempFilteredDecoders.push(decoder);
+      });
+    }
+    setFilteredDecoders(tempFilteredDecoders);
+  }, [decoderFilter]);
+
+  const decoderSelection = {
+    selectedRowKeys: selectedDecoders,
+    onChange: (selectedRowKeys, selectedRows) => {
+      setSelectedDecoders(selectedRowKeys);
+    },
+    getCheckboxProps: (record) => {
+      const hasSelectedEncoder = selectedEncoder !== null;
+      return { disabled: !hasSelectedEncoder };
+    },
   };
 
   const handleReset = () => {
     setSituationItemDesc(null);
-    setSelectedEncoder({
-      mac: "",
-      previewUrl: "",
-      nickName: "",
-    });
-    setFilteredEncoders([]);
-    setEncoders([]);
     setDecoders([]);
+    setEncoders([]);
+    setSelectedEncoder(null);
+    setEncoderFilter("");
+    setFilteredEncoders([]);
+    setSelectedDecoders([]);
+    setDecoderFilter("");
+    setFilteredDecoders([]);
   };
 
-  const handleCreateItem = async (decoders, encoder) => {
+  const handleCreateItem = async (decoders, encoder) => { // TODO: fix! create item
     if (decoders?.length !== 0 && encoder.mac && situationItemDesc) {
       let linkDecoders = [];
       decoders?.forEach((decoder) => {
@@ -421,19 +235,47 @@ const SingleScreenModal = ({
     }
   };
 
+  // const handleCreateItem = async () => {
+  //   if (
+  //     selectedEncoder &&
+  //     selectedDecoders?.length !== 0 &&
+  //     situationItemDesc
+  //   ) {
+  //     await presetDeviceLink({
+  //       store: store,
+  //       presetDetailId: `usb@${uuid()}`,
+  //       linkType: "usb",
+  //       value1: "",
+  //       encoder: selectedEncoder,
+  //       remark: situationItemDesc,
+  //       deviceLinkDetails: selectedDecoders,
+  //       presetPostDetail: {
+  //         preSetId: situation.id,
+  //         orderNum: situationItemLength + 1,
+  //         remark: situationItemDesc,
+  //       },
+  //     });
+  //     handleReset();
+  //     setReload(Math.random());
+  //     setIsModalOpen(false);
+  //   } else {
+  //     showWarningNotification(
+  //       intl.formatMessage(Messages.Text_Common_RequiredHint)
+  //     );
+  //   }
+  // };
+
   return (
     <div>
       <Modal
         title={
-          <span className="single-screen-modal-title">
+          <span className="usb-modal-title">
             <FormattedMessage {...Messages.Text_Situation_AddSituationItem} />
             {" - "}
-            <FormattedMessage
-              {...Messages.Text_Situation_SingleScreenConnection}
-            />
+            <FormattedMessage {...Messages.Text_Situation_USBConnection} />
           </span>
         }
-        className="single-screen-modal single-screen-content-modal-close-icon single-screen-content modal-title"
+        className="usb-modal usb-content-modal-close-icon usb-content modal-title"
         open={isModalOpen}
         footer={null}
         onCancel={() => {
@@ -441,17 +283,17 @@ const SingleScreenModal = ({
           setIsModalOpen(false);
         }}
       >
-        <div className="situation-single-screen-layout-column">
-          <div className="situation-single-screen-option-container">
-            <div className="situation-single-screen-option-row">
-              <div className="situation-single-screen-input-layout-column">
+        <div className="situation-usb-layout-column">
+          <div className="situation-usb-option-container">
+            <div className="situation-usb-option-row">
+              <div className="situation-usb-input-layout-column">
                 <div>
-                  <div className="situation-single-screen-input-text">
+                  <div className="situation-usb-input-text">
                     <FormattedMessage {...Messages.Text_Common_Description} />
                   </div>
                   <div>
                     <Input
-                      className="situation-single-screen-input situation-single-screen-input-placeholder"
+                      className="situation-usb-input situation-usb-input-placeholder"
                       value={situationItemDesc}
                       placeholder={intl.formatMessage(
                         Messages.Text_Situation_InputDescription
@@ -462,83 +304,125 @@ const SingleScreenModal = ({
                     />
                   </div>
                 </div>
-                <Divider className="single-screen-modal-divider" />
+                <Divider className="usb-modal-divider" />
               </div>
             </div>
-            <div className="single-screen-modal-connection-title">
-              <FormattedMessage
-                {...Messages.Text_Situation_SingleScreenConnection}
-              />
-            </div>
-            <Input
-              className="single-screen-search-input singlescreen-input"
-              variant="filled"
-              onChange={(e) => {
-                setSearchDecoderFilter(e.target.value);
-              }}
-              prefix={<SearchOutlined />}
-              placeholder={intl.formatMessage(
-                Messages.Text_SingleScreen_InputDecoder
-              )}
-            />
-            <div className="single-screen-modal-container">
-              <Row gutter={15}>{decoderCards}</Row>
-            </div>
-          </div>
-          <div className="single-screen-right-card-container">
-            <Card className="singlescreen-card-right">
-              <div className="singlescreen-card-right-title">
-                <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
-              </div>
-              <div className="singlescreen-card-right-desc">
-                <FormattedMessage {...Messages.Text_TVWall_VideoSourceDesc} />
-              </div>
-              {/* <div className="singlescreen-card-right-preview">
-                {selectedEncoder.previewUrl ? (
-                  <div>
-                    <iframe
-                      className="singlescreen-card-right-preview-video"
-                      src={selectedEncoder.previewUrl}
-                      title="Video player"
+            <div className="situation-usb-container">
+              <div className="situation-usb-add-row">
+                <div id="encoder-selection">
+                  <div className="situation-usb-add-progress">
+                    <div className="situation-usb-add-progress-circle">
+                      <span className="situation-usb-add-progress-circle-text">
+                        1
+                      </span>
+                    </div>
+                    <div
+                      className={
+                        selectedEncoder
+                          ? "situation-usb-add-progress-bar-finished"
+                          : "situation-usb-add-progress-bar"
+                      }
+                    ></div>
+                  </div>
+                  <div className="usb-connect-selection-column">
+                    <div className="situation-usb-add-subtitle">
+                      <FormattedMessage {...Messages.Text_USB_ChooseSource} /> (
+                      <FormattedMessage {...Messages.Text_Common_Encoder} />)
+                    </div>
+                    <Input
+                      className="situation-usb-add-input situation-usb-input situation-usb-add-input-placeholder"
+                      variant="filled"
+                      value={encoderFilter}
+                      onChange={(e) => {
+                        setEncoderFilter(e.target.value);
+                      }}
+                      prefix={
+                        <img
+                          alt="search"
+                          src={SearchIcon}
+                          className="situation-usb-add-input-prefix"
+                        />
+                      }
+                      placeholder={intl.formatMessage(
+                        Messages.Text_USB_InputEncoderName
+                      )}
                     />
-                    <span>{selectedEncoder.nickName}</span>
+                    <Table
+                      columns={encoderSelectionColumns}
+                      dataSource={filteredEncoders}
+                      rowSelection={{
+                        type: "radio",
+                        ...encoderSelection,
+                      }}
+                      pagination={false}
+                    />
                   </div>
-                ) : (
-                  <div className="singlescreen-card-right-preview-text singlescreen-card-right-desc">
-                    <FormattedMessage {...Messages.Text_TVWall_Preview} />
+                </div>
+                <div id="decoder-selection" style={{ marginLeft: 46 }}>
+                  <div className="situation-usb-add-progress">
+                    <div
+                      className={
+                        selectedEncoder
+                          ? "situation-usb-add-progress-circle"
+                          : "situation-usb-add-progress-circle-unstarted"
+                      }
+                    >
+                      <span className="situation-usb-add-progress-circle-text">
+                        2
+                      </span>
+                    </div>
+                    <div
+                      className={
+                        selectedDecoders.length !== 0
+                          ? "situation-usb-add-progress-bar-finished"
+                          : "situation-usb-add-progress-bar"
+                      }
+                    ></div>
                   </div>
-                )}
-              </div> */}
-              <Input
-                className="singlescreen-card-right-search singlescreen-input"
-                variant="filled"
-                onChange={(e) => {
-                  setSearchEncoderFilter(e.target.value);
-                }}
-                prefix={<SearchOutlined />}
-                placeholder={intl.formatMessage(
-                  Messages.Text_TVWall_InputEncoder
-                )}
-              />
-              <div className="singlescreen-modal-card-right-encoder-container">
-                <Table
-                  className="singlescreen-modal-card-right-encoder-table"
-                  columns={columns}
-                  dataSource={filteredEncoders}
-                  pagination={{ pageSize: 11 }}
-                  onRow={(record) => ({
-                    onClick: () => {
-                      handleChooseEncoder(record);
-                    },
-                  })}
-                />
+                  <div className="usb-connect-selection-column">
+                    <div className="situation-usb-add-subtitle">
+                      <FormattedMessage
+                        {...Messages.Text_USB_ChooseDestination}
+                      />{" "}
+                      (
+                      <FormattedMessage {...Messages.Text_Common_Decoder} />)
+                    </div>
+                    <Input
+                      className="situation-usb-add-input situation-usb-input situation-usb-add-input-placeholder"
+                      variant="filled"
+                      value={decoderFilter}
+                      onChange={(e) => {
+                        setDecoderFilter(e.target.value);
+                      }}
+                      prefix={
+                        <img
+                          alt="search"
+                          src={SearchIcon}
+                          className="situation-usb-add-input-prefix"
+                        />
+                      }
+                      placeholder={intl.formatMessage(
+                        Messages.Text_USB_InputDecoderName
+                      )}
+                    />
+                    <Table
+                      columns={decoderSelectionColumns}
+                      dataSource={filteredDecoders}
+                      rowSelection={{
+                        type: "checkbox",
+                        ...decoderSelection,
+                      }}
+                      pagination={false}
+                    />
+                  </div>
+                </div>
               </div>
-            </Card>
+            </div>
           </div>
         </div>
-        <div className="situation-single-screen-item-btn-row">
+        <div className="situation-usb-item-btn-row">
           <Button
-            className="situation-single-screen-item-cancel-btn"
+            className="situation-usb-item-cancel-btn"
             style={{ marginRight: 16 }}
             onClick={() => {
               handleReset();
@@ -552,7 +436,7 @@ const SingleScreenModal = ({
           <Button
             className="item-submit-btn"
             onClick={() => {
-              handleCreateItem(decoders, selectedEncoder);
+              handleCreateItem();
             }}
           >
             <span className="item-submit-btn-text">
