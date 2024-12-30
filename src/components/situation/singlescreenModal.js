@@ -205,20 +205,16 @@ const SingleScreenModal = ({
     setFilteredDecoders([]);
   };
 
-  const handleCreateItem = async (decoders, encoder) => { // TODO: fix! create item
-    if (decoders?.length !== 0 && encoder.mac && situationItemDesc) {
-      let linkDecoders = [];
-      decoders?.forEach((decoder) => {
-        if (decoder.encoder.mac === encoder.mac) linkDecoders.push(decoder.mac);
-      });
+  const handleCreateItem = async () => {
+    if (selectedEncoder && selectedDecoders?.length !== 0 && situationItemDesc) {
       await presetDeviceLink({
         store: store,
         presetDetailId: `video@${uuid()}`,
         linkType: "video",
         value1: "",
-        encoder: encoder.mac,
+        encoder: selectedEncoder,
         remark: situationItemDesc,
-        deviceLinkDetails: linkDecoders,
+        deviceLinkDetails: selectedDecoders,
         presetPostDetail: {
           preSetId: situation.id,
           orderNum: situationItemLength + 1,
@@ -272,7 +268,7 @@ const SingleScreenModal = ({
           <span className="usb-modal-title">
             <FormattedMessage {...Messages.Text_Situation_AddSituationItem} />
             {" - "}
-            <FormattedMessage {...Messages.Text_Situation_USBConnection} />
+            <FormattedMessage {...Messages.Text_Situation_SingleScreenConnection} />
           </span>
         }
         className="usb-modal usb-content-modal-close-icon usb-content modal-title"
@@ -344,7 +340,7 @@ const SingleScreenModal = ({
                         />
                       }
                       placeholder={intl.formatMessage(
-                        Messages.Text_USB_InputEncoderName
+                        Messages.Text_TVWall_InputEncoder
                       )}
                     />
                     <Table
@@ -402,7 +398,7 @@ const SingleScreenModal = ({
                         />
                       }
                       placeholder={intl.formatMessage(
-                        Messages.Text_USB_InputDecoderName
+                        Messages.Text_SingleScreen_InputDecoder
                       )}
                     />
                     <Table
