@@ -8,7 +8,7 @@ import SearchIcon from "../../assets/magnifying-glass.png";
 import "../situation/addSituationContent.scss";
 import "../situation/usbModal.scss";
 
-const USBViewModal = ({
+const SingleScreenViewModal = ({
   situationDetailId,
   isModalOpen,
   setIsModalOpen,
@@ -200,7 +200,7 @@ const USBViewModal = ({
                 {...Messages.Text_Situation_ViewSituationItem}
               />
               {" - "}
-              <FormattedMessage {...Messages.Text_Situation_USBConnection} />
+              <FormattedMessage {...Messages.Text_Situation_SingleScreenConnection} />
             </span>
           }
           className="usb-modal usb-content-modal-close-icon usb-content modal-title"
@@ -269,7 +269,7 @@ const USBViewModal = ({
                           />
                         }
                         placeholder={intl.formatMessage(
-                          Messages.Text_USB_InputEncoderName
+                          Messages.Text_TVWall_InputEncoder
                         )}
                       />
                       <Table
@@ -327,7 +327,7 @@ const USBViewModal = ({
                           />
                         }
                         placeholder={intl.formatMessage(
-                          Messages.Text_USB_InputDecoderName
+                          Messages.Text_SingleScreen_InputDecoder
                         )}
                       />
                       <Table
@@ -364,4 +364,4 @@ const USBViewModal = ({
   );
 };
 
-export default USBViewModal;
+export default SingleScreenViewModal;

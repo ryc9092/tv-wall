@@ -618,8 +618,8 @@ export const presetDeviceLink = async ({
   });
 };
 
-export const getPresetDeviceLink = async (store) => {
-  const apiPath = `/devicelinks/preset/query?linkType=usb`;
+export const getPresetDeviceLink = async (store, type) => {
+  const apiPath = `/devicelinks/preset/query?linkType=${type}`;
   return await apiGET({
     apiPath,
     store,
