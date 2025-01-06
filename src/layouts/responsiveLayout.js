@@ -11,21 +11,19 @@ const ResponsiveLayout = ({ topbar, sidebar, main }) => {
 
   return (
     <Layout className="responsive-layout">
-      <div style={{ width: "100vw", height: "100vh" }}>
-        <Header>{topbar}</Header>
-        <Layout>
-          <Sider
-            collapsible
-            collapsedWidth={72}
-            collapsed={store.siderCollapse}
-            zeroWidthTriggerStyle={{ display: "none" }}
-            className="responsive-sider"
-          >
-            {sidebar}
-          </Sider>
-          <Content>{main}</Content>
-        </Layout>
-      </div>
+      <Header>{topbar}</Header>
+      <Layout>
+        <Sider
+          collapsible
+          collapsedWidth={72}
+          collapsed={store.siderCollapse}
+          zeroWidthTriggerStyle={{ display: "none" }}
+          className="responsive-sider"
+        >
+          {sidebar}
+        </Sider>
+        <Content>{main}</Content>
+      </Layout>
     </Layout>
   );
 };
