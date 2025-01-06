@@ -16,6 +16,8 @@ import {
 } from "../api/API";
 import MixAudioMatrixModal from "../components/situation/mixAudioMatrixModal";
 import AudioModal from "../components/situation/audioModal";
+import AudioViewModal from "../components/audio/audioViewModal";
+import ViewIcon from "../assets/view.png";
 import PlayIcon from "../assets/play-black.png";
 import PauseIcon from "../assets/pause.png";
 import TrashIcon from "../assets/trash.png";
@@ -96,6 +98,21 @@ const AudioSituation = () => {
     setReload(Math.random());
   };
 
+  // view connections
+  const [isAudioViewModalOpen, setIsAudioViewModalOpen] = useState(false);
+  const [choosedSituationDetailId, setChoosedSituationDetailId] =
+    useState(null);
+  const [linkType, setLinkType] = useState(null);
+  const viewSituationDetail = async (situationDetailRelationId, type) => {
+    setChoosedSituationDetailId(situationDetailRelationId);
+    setLinkType(type);
+    setIsAudioViewModalOpen(true);
+  };
+
+  useEffect(() => {
+    if (!isAudioViewModalOpen) setChoosedSituationDetailId(null);
+  }, [isAudioViewModalOpen]);
+
   const columns = [
     {
       title: (
@@ -171,7 +188,7 @@ const AudioSituation = () => {
       key: "operate",
       dataIndex: "state",
       render: (text, record) => (
-        <div>
+        <div style={{ width: 155 }}>
           <Button
             type="text"
             className={
@@ -275,7 +292,22 @@ const AudioSituation = () => {
       key: "operate",
       render: (text, record) => {
         return (
-          <div key={`${text}-action`}>
+          <div key={`${text}-action`} style={{ width: 120 }}>
+            <Button
+              key={`${text}-view`}
+              type="text"
+              onClick={() => {
+                viewSituationDetail(record.relation_id, record.set_type);
+              }}
+              className="table-content"
+            >
+              <img
+                alt="view"
+                src={ViewIcon}
+                className="table-content-icon"
+                style={{ opacity: 0.6 }}
+              />
+            </Button>
             <Button
               key={`${text}-delete`}
               id={text}
@@ -567,6 +599,21 @@ const AudioSituation = () => {
           </Modal>
         </div>
       </div>
+      {isAudioViewModalOpen === true &&
+        choosedSituationDetailId !== undefined && (
+          <AudioViewModal
+            situationDetailId={choosedSituationDetailId}
+            situationItemLength={situationItemLength}
+            isModalOpen={isAudioViewModalOpen}
+            setIsModalOpen={setIsAudioViewModalOpen}
+            setReload={setReload}
+            encoders={encoders}
+            setEncoders={setEncoders}
+            decoders={decoders}
+            setDecoders={setDecoders}
+            type={linkType}
+          />
+        )}
     </div>
   );
 };
