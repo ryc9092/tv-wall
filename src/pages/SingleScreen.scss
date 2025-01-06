@@ -5,39 +5,23 @@
 }
 
 .single-screen-title-row {
-    width: 1168px;
+    width: calc(100vw - 760px);
+    min-width: 300px;
     display: flex;
     justify-content: space-between;
-}
-
-@media(max-width: 1180px) {
-    .single-screen-title-row {
-        width: 420px;
-        display: flex;
-        justify-content: space-between;
-    }
 }
 
 .single-screen-title-row-collapse {
-    width: 1288px;
+    width: calc(100vw - 610px);
+    min-width: 320px;
     display: flex;
     justify-content: space-between;
 }
 
-@media(max-width: 1180px) {
-    .single-screen-title-row-collapse {
-        width: 560px;
-        display: flex;
-        justify-content: space-between;
-    }
-}
-
-@media(max-width: 1180px) {
-    .single-screen-card-container {
-        height: 570px;
-        overflow-x: hidden;
-        overflow-y: scroll;
-    }
+.single-screen-card-container {
+    height: calc(100vh - 300px);
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .single-screen-title-input {
@@ -160,40 +144,20 @@
 
 .singlescreen-card-container {
     width: 408px;
-    height: 926px;
+    height: calc(100vh - 150px);
     margin-bottom: 24px;
     margin-left: 45px;
     border-radius: 24px;
-    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+    box-shadow: 0 2px 6px 0 rgba(124, 123, 122, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
 }
 
 .singlescreen-card-container-collapse {
     width: 408px;
-    height: 926px;
+    height: calc(100vh - 150px);
     margin-bottom: 24px;
     margin-left: 56px;
     border-radius: 24px;
     box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
-}
-
-@media(max-width: 1180px) {
-    .singlescreen-card-container {
-        width: 408px;
-        height: 690px;
-        margin-bottom: 24px;
-        margin-left: 45px;
-        border-radius: 24px;
-        box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
-    }
-    
-    .singlescreen-card-container-collapse {
-        width: 408px;
-        height: 690px;
-        margin-bottom: 24px;
-        margin-left: 56px;
-        border-radius: 24px;
-        box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
-    }
 }
 
 .singlescreen-card-right {
@@ -256,16 +220,8 @@
 
 .singlescreen-card-right-encoder-container {
     margin-top: 16px;
-    height: 720px;
+    height: calc(100vh - 360px);
     overflow-y: scroll;
-}
-
-@media(max-width: 1180px) {
-    .singlescreen-card-right-encoder-container {
-        margin-top: 16px;
-        height: 500px;
-        overflow-y: scroll;
-    }
 }
 
 .singlescreen-card-right-bottom {
