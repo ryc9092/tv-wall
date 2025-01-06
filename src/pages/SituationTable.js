@@ -103,7 +103,8 @@ const Situation = () => {
 
   // view various connections
   const [isUSBViewModalOpen, setIsUSBViewModalOpen] = useState(false);
-  const [isSingleScreenViewModalOpen, setIsSingleScreenViewModalOpen] = useState(false);
+  const [isSingleScreenViewModalOpen, setIsSingleScreenViewModalOpen] =
+    useState(false);
   const [choosedSituationDetailId, setChoosedSituationDetailId] =
     useState(null);
   const [linkType, setLinkType] = useState(null);
@@ -117,7 +118,8 @@ const Situation = () => {
   };
 
   useEffect(() => {
-    if (!isUSBViewModalOpen && !isSingleScreenViewModalOpen) setChoosedSituationDetailId(null);
+    if (!isUSBViewModalOpen && !isSingleScreenViewModalOpen)
+      setChoosedSituationDetailId(null);
   }, [isUSBViewModalOpen, isSingleScreenViewModalOpen]);
 
   const columns = [
@@ -195,7 +197,7 @@ const Situation = () => {
       key: "operate",
       dataIndex: "state",
       render: (text, record) => (
-        <div>
+        <div style={{ width: 155 }}>
           <Button
             type="text"
             className={
@@ -527,8 +529,9 @@ const Situation = () => {
             className="status-content-table"
             columns={columns}
             dataSource={situations}
-            pagination={{ pageSize: 10 }}
+            pagination={{ pageSize: 9 }}
             rowKey={(record) => record.id}
+            // size="small"
           />
           <Modal
             width={1080}
@@ -686,7 +689,7 @@ const Situation = () => {
             type={linkType}
           />
         )}
-        {isSingleScreenViewModalOpen === true &&
+      {isSingleScreenViewModalOpen === true &&
         choosedSituationDetailId !== undefined && (
           <SingleScreenViewModal
             situationDetailId={choosedSituationDetailId}
