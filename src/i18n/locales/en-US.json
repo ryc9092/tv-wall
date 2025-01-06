@@ -166,6 +166,7 @@
   "Text-Situation-InputName": "Enter name",
   "Text-Situation-InputDescription": "Enter Scenario description",
   "Text-Situation-AddAudioHint": "Please add route in audio management page first",
+  "Text-Situation-ViewAudioHint": "請至主功能欄位'音頻管理'內'音頻路由'，檢視相關設定。",
   "Text-Situation-GoAudioMgmt": "Setting on audio management page",
   "Text-Situation-AudioSituation": "Audio situation",
   "Text-Situation-ChooseAudioSituation": "Choose audio situation",

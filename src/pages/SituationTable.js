@@ -21,6 +21,7 @@ import AudioModal from "../components/situation/audioModal";
 import AudioSituationModal from "../components/situation/audioSituationModal";
 import USBViewModal from "../components/usb/usbViewModal";
 import SingleScreenViewModal from "../components/singleScreen/singleScreenViewModal";
+import AudioViewHintModal from "../components/audio/audioViewHintModal";
 import PlayIcon from "../assets/play-black.png";
 import PauseIcon from "../assets/pause.png";
 import ViewIcon from "../assets/view.png";
@@ -105,6 +106,7 @@ const Situation = () => {
   const [isUSBViewModalOpen, setIsUSBViewModalOpen] = useState(false);
   const [isSingleScreenViewModalOpen, setIsSingleScreenViewModalOpen] =
     useState(false);
+  const [isAudioViewModalOpen, setIsAudioViewModalOpen] = useState(false);
   const [choosedSituationDetailId, setChoosedSituationDetailId] =
     useState(null);
   const [linkType, setLinkType] = useState(null);
@@ -112,15 +114,19 @@ const Situation = () => {
     setChoosedSituationDetailId(situationDetailRelationId);
     setLinkType(type);
     if (type === "usb") setIsUSBViewModalOpen(true);
-    else if (type === "subPreset") console.log("subPreset");
+    else if (type === "subPreset") setIsAudioViewModalOpen(true);
     else if (type === "video") setIsSingleScreenViewModalOpen(true);
     else if (type === "tvwall") console.log("tvwall");
   };
 
   useEffect(() => {
-    if (!isUSBViewModalOpen && !isSingleScreenViewModalOpen)
+    if (
+      !isUSBViewModalOpen &&
+      !isSingleScreenViewModalOpen &&
+      !isAudioViewModalOpen
+    )
       setChoosedSituationDetailId(null);
-  }, [isUSBViewModalOpen, isSingleScreenViewModalOpen]);
+  }, [isUSBViewModalOpen, isSingleScreenViewModalOpen, isAudioViewModalOpen]);
 
   const columns = [
     {
@@ -702,6 +708,13 @@ const Situation = () => {
             decoders={decoders}
             setDecoders={setDecoders}
             type={linkType}
+          />
+        )}
+      {isAudioViewModalOpen === true &&
+        choosedSituationDetailId !== undefined && (
+          <AudioViewHintModal
+            isModalOpen={isAudioViewModalOpen}
+            setIsModalOpen={setIsAudioViewModalOpen}
           />
         )}
     </div>

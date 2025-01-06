@@ -166,6 +166,7 @@
   "Text-Situation-InputName": "輸入名稱",
   "Text-Situation-InputDescription": "輸入情境相關內容",
   "Text-Situation-AddAudioHint": "請至音頻管理新增路由",
+  "Text-Situation-ViewAudioHint": "請至主功能欄位'音頻管理'內'音頻路由'，檢視相關設定。",
   "Text-Situation-GoAudioMgmt": "前往音頻管理設定",
   "Text-Situation-AudioSituation": "音頻情境",
   "Text-Situation-ChooseAudioSituation": "選擇音頻情境",

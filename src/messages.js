@@ -604,6 +604,10 @@ export default defineMessages({
     id: "Text-Situation-AddAudioHint",
     defaultMessage: "請至音頻管理新增路由",
   },
+  Text_Situation_ViewAudioHint: {
+    id: "Text-Situation-ViewAudioHint",
+    defaultMessage: "請至主功能欄位'音頻管理'內'音頻路由'，檢視相關設定。",
+  },
   Text_Situation_GoAudioMgmt: {
     id: "Text-Situation-GoAudioMgmt",
     defaultMessage: "前往音頻管理設定",
