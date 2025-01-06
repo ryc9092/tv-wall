@@ -12,20 +12,25 @@
     min-width: 72px !important;
 }
 
+.responsive-sider {
+    width: 224px;
+    height: calc(100vh - 56px); // 56px is length of topbar
+    background-color: #e7e7e7 !important;
+}
+
+@media(max-height: 680px) {
+    .responsive-sider {
+        width: 224px;
+        height: 623px;
+        background-color: #e7e7e7 !important;
+    }
+}
+
 .ant-layout-sider-trigger {
     display: none;
 }
 
 .responsive-layout {
-    min-width: 1920px;
-    min-height: 1080px;
-    height: 100vh;
-}
-
-@media(max-width: 1180px) {
-    .responsive-layout {
-        min-width: 1170px;
-        min-height: 820px;
-        height: 100vh;
-    }
+    height: 100%;
+    width: 100%;
 }
