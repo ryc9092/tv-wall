@@ -30,6 +30,7 @@
   "Text-Common-Required": "this column can't be blank",
   "Text-Common-RequiredHint": "content of column can't be blank",
   "Text-Common-ItemName": "name of corresponding item",
+  "Text-Common-SourceDestinationRequiredHint": "未選擇輸入來源/輸出終端",
   "Text-Button-Save": "save",
   "Text-Button-View": "view",
   "Text-Button-Add": "add",
@@ -87,6 +88,7 @@
   "Text-TVWall-DeactiveFail": "clear video connection fail",
   "Text-TVWall-ConnectSource": "connect source",
   "Text-TVWall-ConfirmClear": "are you sure to clear all the videos?",
+  "Text-TVWall-PreviewRequiredHint": "未選擇電視牆名稱/版型",
 
   "Text-SingleScreen-Management": "Single Screen Management",
   "Text-SingleScreen-TabSingleScreen": "Single Screen",
@@ -179,6 +181,7 @@
   "Text-Situation-Itemaudio": "audio",
   "Text-Situation-LastExecTime": "last execute time",
   "Text-Situation-NotExecuted": "not executed",
+  "Text-Situation-CreateRequiredHint": "未填寫情境名稱",
 
   "Text-DeviceStatus-CurrentStatus": "Device status",
   "Text-DeviceStatus-InputDeviceName": "Input device name",

@@ -27,12 +27,12 @@ const CreateSituationModal = ({
   }, [form, isModalOpen, setReload]);
 
   const onCreateSituation = async (values) => {
-    if (values.name && values.description) {
+    if (values.name) {
       let situationId = `preset.${uuid()}`;
       await createSituation({
         id: situationId,
         name: values.name,
-        description: values.description,
+        description: values.description ? values.description : "",
         category: category,
         store: store,
       });
@@ -46,7 +46,7 @@ const CreateSituationModal = ({
       }
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_Common_RequiredHint)
+        intl.formatMessage(Messages.Text_Situation_CreateRequiredHint)
       );
     }
   };

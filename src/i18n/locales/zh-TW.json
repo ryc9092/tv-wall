@@ -30,6 +30,7 @@
   "Text-Common-Required": "此欄位不可為空白",
   "Text-Common-RequiredHint": "欄位內容不可為空白",
   "Text-Common-ItemName": "對應項目名稱",
+  "Text-Common-SourceDestinationRequiredHint": "未選擇輸入來源/輸出終端",
   "Text-Button-Save": "儲存",
   "Text-Button-View": "檢視",
   "Text-Button-Add": "新增",
@@ -87,6 +88,7 @@
   "Text-TVWall-DeactiveFail": "清除影像連結失敗",
   "Text-TVWall-ConnectSource": "連接影像來源",
   "Text-TVWall-ConfirmClear": "是否確認清除當前所有投放於實體牆面之影像?",
+  "Text-TVWall-PreviewRequiredHint": "未選擇電視牆名稱/版型",
 
   "Text-SingleScreen-Management": "單畫面影像管理",
   "Text-SingleScreen-TabSingleScreen": "單顯示器",
@@ -179,6 +181,7 @@
   "Text-Situation-Itemaudio": "編解碼器路由",
   "Text-Situation-LastExecTime": "上次執行時間",
   "Text-Situation-NotExecuted": "未執行",
+  "Text-Situation-CreateRequiredHint": "未填寫情境名稱",
 
   "Text-DeviceStatus-CurrentStatus": "設備狀態",
   "Text-DeviceStatus-InputDeviceName": "輸入設備名稱",

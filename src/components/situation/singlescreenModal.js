@@ -35,7 +35,7 @@ const SingleScreenModal = ({
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
-  const [situationItemDesc, setSituationItemDesc] = useState(null);
+  const [situationItemDesc, setSituationItemDesc] = useState("");
 
   const [decoders, setDecoders] = useState([]);
   useEffect(() => {
@@ -194,7 +194,7 @@ const SingleScreenModal = ({
   };
 
   const handleReset = () => {
-    setSituationItemDesc(null);
+    setSituationItemDesc("");
     setDecoders([]);
     setEncoders([]);
     setSelectedEncoder(null);
@@ -206,7 +206,7 @@ const SingleScreenModal = ({
   };
 
   const handleCreateItem = async () => {
-    if (selectedEncoder && selectedDecoders?.length !== 0 && situationItemDesc) {
+    if (selectedEncoder && selectedDecoders?.length !== 0) {
       await presetDeviceLink({
         store: store,
         presetDetailId: `video@${uuid()}`,
@@ -226,40 +226,10 @@ const SingleScreenModal = ({
       setIsModalOpen(false);
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_Common_RequiredHint)
+        intl.formatMessage(Messages.Text_Common_SourceDestinationRequiredHint)
       );
     }
   };
-
-  // const handleCreateItem = async () => {
-  //   if (
-  //     selectedEncoder &&
-  //     selectedDecoders?.length !== 0 &&
-  //     situationItemDesc
-  //   ) {
-  //     await presetDeviceLink({
-  //       store: store,
-  //       presetDetailId: `usb@${uuid()}`,
-  //       linkType: "usb",
-  //       value1: "",
-  //       encoder: selectedEncoder,
-  //       remark: situationItemDesc,
-  //       deviceLinkDetails: selectedDecoders,
-  //       presetPostDetail: {
-  //         preSetId: situation.id,
-  //         orderNum: situationItemLength + 1,
-  //         remark: situationItemDesc,
-  //       },
-  //     });
-  //     handleReset();
-  //     setReload(Math.random());
-  //     setIsModalOpen(false);
-  //   } else {
-  //     showWarningNotification(
-  //       intl.formatMessage(Messages.Text_Common_RequiredHint)
-  //     );
-  //   }
-  // };
 
   return (
     <div>
@@ -268,7 +238,9 @@ const SingleScreenModal = ({
           <span className="usb-modal-title">
             <FormattedMessage {...Messages.Text_Situation_AddSituationItem} />
             {" - "}
-            <FormattedMessage {...Messages.Text_Situation_SingleScreenConnection} />
+            <FormattedMessage
+              {...Messages.Text_Situation_SingleScreenConnection}
+            />
           </span>
         }
         className="usb-modal usb-content-modal-close-icon usb-content modal-title"

@@ -20,11 +20,11 @@ const AudioModal = ({
   encoders,
   setEncoders,
   decoders,
-  setDecoders
+  setDecoders,
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
-  const [situationItemDesc, setSituationItemDesc] = useState(null);
+  const [situationItemDesc, setSituationItemDesc] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -187,7 +187,7 @@ const AudioModal = ({
   };
 
   const handleReset = () => {
-    setSituationItemDesc(null);
+    setSituationItemDesc("");
     setDecoders([]);
     setEncoders([]);
     setSelectedEncoder(null);
@@ -200,7 +200,7 @@ const AudioModal = ({
   };
 
   const handleCreateItem = async () => {
-    if (selectedEncoder && selectedDecoders?.length !== 0 && situationItemDesc) {
+    if (selectedEncoder && selectedDecoders?.length !== 0) {
       await presetDeviceLink({
         store: store,
         presetDetailId: `audio@${uuid()}`,
@@ -220,7 +220,7 @@ const AudioModal = ({
       setIsModalOpen(false);
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_Common_RequiredHint)
+        intl.formatMessage(Messages.Text_Common_SourceDestinationRequiredHint)
       );
     }
   };
@@ -283,37 +283,38 @@ const AudioModal = ({
                     ></div>
                   </div>
                   <div className="situation-audio-selection-column">
-                  <div className="audio-add-subtitle">
-                    <FormattedMessage {...Messages.Text_Audio_ChooseSource} /> (
-                    <FormattedMessage {...Messages.Text_Common_Encoder} />)
-                  </div>
-                  <Input
-                    className="audio-add-input audio-input audio-add-input-placeholder"
-                    variant="filled"
-                    value={encoderFilter}
-                    onChange={(e) => {
-                      setEncoderFilter(e.target.value);
-                    }}
-                    prefix={
-                      <img
-                        alt="search"
-                        src={SearchIcon}
-                        className="audio-add-input-prefix"
-                      />
-                    }
-                    placeholder={intl.formatMessage(
-                      Messages.Text_Audio_InputEncoder
-                    )}
-                  />
-                  <Table
-                    columns={encoderSelectionColumns}
-                    dataSource={filteredEncoders}
-                    rowSelection={{
-                      type: "radio",
-                      ...encoderSelection,
-                    }}
-                    pagination={false}
-                  />
+                    <div className="audio-add-subtitle">
+                      <FormattedMessage {...Messages.Text_Audio_ChooseSource} />{" "}
+                      (
+                      <FormattedMessage {...Messages.Text_Common_Encoder} />)
+                    </div>
+                    <Input
+                      className="audio-add-input audio-input audio-add-input-placeholder"
+                      variant="filled"
+                      value={encoderFilter}
+                      onChange={(e) => {
+                        setEncoderFilter(e.target.value);
+                      }}
+                      prefix={
+                        <img
+                          alt="search"
+                          src={SearchIcon}
+                          className="audio-add-input-prefix"
+                        />
+                      }
+                      placeholder={intl.formatMessage(
+                        Messages.Text_Audio_InputEncoder
+                      )}
+                    />
+                    <Table
+                      columns={encoderSelectionColumns}
+                      dataSource={filteredEncoders}
+                      rowSelection={{
+                        type: "radio",
+                        ...encoderSelection,
+                      }}
+                      pagination={false}
+                    />
                   </div>
                 </div>
                 <div id="input-output-selection" className="audio-add-step">
@@ -378,41 +379,41 @@ const AudioModal = ({
                     ></div>
                   </div>
                   <div className="situation-audio-selection-column">
-                  <div className="audio-add-subtitle">
-                    <FormattedMessage
-                      {...Messages.Text_Audio_ChooseDestination}
-                    />{" "}
-                    (
-                    <FormattedMessage {...Messages.Text_Common_Decoder} />)
+                    <div className="audio-add-subtitle">
+                      <FormattedMessage
+                        {...Messages.Text_Audio_ChooseDestination}
+                      />{" "}
+                      (
+                      <FormattedMessage {...Messages.Text_Common_Decoder} />)
+                    </div>
+                    <Input
+                      className="audio-add-input audio-input audio-add-input-placeholder"
+                      variant="filled"
+                      value={decoderFilter}
+                      onChange={(e) => {
+                        setDecoderFilter(e.target.value);
+                      }}
+                      prefix={
+                        <img
+                          alt="search"
+                          src={SearchIcon}
+                          className="audio-add-input-prefix"
+                        />
+                      }
+                      placeholder={intl.formatMessage(
+                        Messages.Text_Audio_InputDecoder
+                      )}
+                    />
+                    <Table
+                      columns={decoderSelectionColumns}
+                      dataSource={filteredDecoders}
+                      rowSelection={{
+                        type: "checkbox",
+                        ...decoderSelection,
+                      }}
+                      pagination={false}
+                    />
                   </div>
-                  <Input
-                    className="audio-add-input audio-input audio-add-input-placeholder"
-                    variant="filled"
-                    value={decoderFilter}
-                    onChange={(e) => {
-                      setDecoderFilter(e.target.value);
-                    }}
-                    prefix={
-                      <img
-                        alt="search"
-                        src={SearchIcon}
-                        className="audio-add-input-prefix"
-                      />
-                    }
-                    placeholder={intl.formatMessage(
-                      Messages.Text_Audio_InputDecoder
-                    )}
-                  />
-                  <Table
-                    columns={decoderSelectionColumns}
-                    dataSource={filteredDecoders}
-                    rowSelection={{
-                      type: "checkbox",
-                      ...decoderSelection,
-                    }}
-                    pagination={false}
-                  />
-                </div>
                 </div>
               </div>
             </div>

@@ -19,11 +19,11 @@ const USBModal = ({
   encoders,
   setEncoders,
   decoders,
-  setDecoders
+  setDecoders,
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
-  const [situationItemDesc, setSituationItemDesc] = useState(null);
+  const [situationItemDesc, setSituationItemDesc] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -179,7 +179,7 @@ const USBModal = ({
   };
 
   const handleReset = () => {
-    setSituationItemDesc(null);
+    setSituationItemDesc("");
     setDecoders([]);
     setEncoders([]);
     setSelectedEncoder(null);
@@ -191,7 +191,7 @@ const USBModal = ({
   };
 
   const handleCreateItem = async () => {
-    if (selectedEncoder && selectedDecoders?.length !== 0 && situationItemDesc) {
+    if (selectedEncoder && selectedDecoders?.length !== 0) {
       await presetDeviceLink({
         store: store,
         presetDetailId: `usb@${uuid()}`,
@@ -211,7 +211,7 @@ const USBModal = ({
       setIsModalOpen(false);
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_Common_RequiredHint)
+        intl.formatMessage(Messages.Text_Common_SourceDestinationRequiredHint)
       );
     }
   };
@@ -276,38 +276,38 @@ const USBModal = ({
                     ></div>
                   </div>
                   <div className="usb-connect-selection-column">
-                  <div className="situation-usb-add-subtitle">
-                    <FormattedMessage {...Messages.Text_USB_ChooseSource} /> (
-                    <FormattedMessage {...Messages.Text_Common_Encoder} />)
+                    <div className="situation-usb-add-subtitle">
+                      <FormattedMessage {...Messages.Text_USB_ChooseSource} /> (
+                      <FormattedMessage {...Messages.Text_Common_Encoder} />)
+                    </div>
+                    <Input
+                      className="situation-usb-add-input situation-usb-input situation-usb-add-input-placeholder"
+                      variant="filled"
+                      value={encoderFilter}
+                      onChange={(e) => {
+                        setEncoderFilter(e.target.value);
+                      }}
+                      prefix={
+                        <img
+                          alt="search"
+                          src={SearchIcon}
+                          className="situation-usb-add-input-prefix"
+                        />
+                      }
+                      placeholder={intl.formatMessage(
+                        Messages.Text_USB_InputEncoderName
+                      )}
+                    />
+                    <Table
+                      columns={encoderSelectionColumns}
+                      dataSource={filteredEncoders}
+                      rowSelection={{
+                        type: "radio",
+                        ...encoderSelection,
+                      }}
+                      pagination={false}
+                    />
                   </div>
-                  <Input
-                    className="situation-usb-add-input situation-usb-input situation-usb-add-input-placeholder"
-                    variant="filled"
-                    value={encoderFilter}
-                    onChange={(e) => {
-                      setEncoderFilter(e.target.value);
-                    }}
-                    prefix={
-                      <img
-                        alt="search"
-                        src={SearchIcon}
-                        className="situation-usb-add-input-prefix"
-                      />
-                    }
-                    placeholder={intl.formatMessage(
-                      Messages.Text_USB_InputEncoderName
-                    )}
-                  />
-                  <Table
-                    columns={encoderSelectionColumns}
-                    dataSource={filteredEncoders}
-                    rowSelection={{
-                      type: "radio",
-                      ...encoderSelection,
-                    }}
-                    pagination={false}
-                  />
-                </div>
                 </div>
                 <div id="decoder-selection" style={{ marginLeft: 46 }}>
                   <div className="situation-usb-add-progress">
@@ -331,41 +331,41 @@ const USBModal = ({
                     ></div>
                   </div>
                   <div className="usb-connect-selection-column">
-                  <div className="situation-usb-add-subtitle">
-                    <FormattedMessage
-                      {...Messages.Text_USB_ChooseDestination}
-                    />{" "}
-                    (
-                    <FormattedMessage {...Messages.Text_Common_Decoder} />)
+                    <div className="situation-usb-add-subtitle">
+                      <FormattedMessage
+                        {...Messages.Text_USB_ChooseDestination}
+                      />{" "}
+                      (
+                      <FormattedMessage {...Messages.Text_Common_Decoder} />)
+                    </div>
+                    <Input
+                      className="situation-usb-add-input situation-usb-input situation-usb-add-input-placeholder"
+                      variant="filled"
+                      value={decoderFilter}
+                      onChange={(e) => {
+                        setDecoderFilter(e.target.value);
+                      }}
+                      prefix={
+                        <img
+                          alt="search"
+                          src={SearchIcon}
+                          className="situation-usb-add-input-prefix"
+                        />
+                      }
+                      placeholder={intl.formatMessage(
+                        Messages.Text_USB_InputDecoderName
+                      )}
+                    />
+                    <Table
+                      columns={decoderSelectionColumns}
+                      dataSource={filteredDecoders}
+                      rowSelection={{
+                        type: "checkbox",
+                        ...decoderSelection,
+                      }}
+                      pagination={false}
+                    />
                   </div>
-                  <Input
-                    className="situation-usb-add-input situation-usb-input situation-usb-add-input-placeholder"
-                    variant="filled"
-                    value={decoderFilter}
-                    onChange={(e) => {
-                      setDecoderFilter(e.target.value);
-                    }}
-                    prefix={
-                      <img
-                        alt="search"
-                        src={SearchIcon}
-                        className="situation-usb-add-input-prefix"
-                      />
-                    }
-                    placeholder={intl.formatMessage(
-                      Messages.Text_USB_InputDecoderName
-                    )}
-                  />
-                  <Table
-                    columns={decoderSelectionColumns}
-                    dataSource={filteredDecoders}
-                    rowSelection={{
-                      type: "checkbox",
-                      ...decoderSelection,
-                    }}
-                    pagination={false}
-                  />
-                </div>
                 </div>
               </div>
             </div>

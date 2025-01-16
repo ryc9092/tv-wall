@@ -72,6 +72,10 @@ export default defineMessages({
     id: "Text-Common-ItemName",
     defaultMessage: "對應項目名稱",
   },
+  Text_Common_SourceDestinationRequiredHint: {
+    id: "Text-Common-SourceDestinationRequiredHint",
+    defaultMessage: "未選擇輸入來源/輸出終端",
+  },
   Text_Button_Save: {
     id: "Text-Button-Save",
     defaultMessage: "儲存",
@@ -296,6 +300,10 @@ export default defineMessages({
     id: "Text-TVWall-ConfirmClear",
     defaultMessage: "是否確認清除當前所有投放於實體牆面之影像?",
   },
+  Text_TVWall_PreviewRequiredHint: {
+    id: "Text-TVWall-PreviewRequiredHint",
+    defaultMessage: "未選擇電視牆名稱/版型",
+  },
 
   // Single screen management
   Text_SingleScreen_Management: {
@@ -370,6 +378,10 @@ export default defineMessages({
     id: "Text-SingleScreen-VideoClearFail",
     defaultMessage: "影像清除失敗",
   },
+  Text_SingleScreen_PreviewRequiredHint: {
+    id: "Text-SingleScreen-PreviewRequiredHint",
+    defaultMessage: "未選擇輸入來源/輸出終端",
+  },
 
   // USB management
   Text_USB_USBMgmt: {
@@ -431,6 +443,10 @@ export default defineMessages({
   Text_USB_RemoveConnectionConfirm: {
     id: "Text-USB-RemoveConnectionConfirm",
     defaultMessage: "確定要刪除此USB連結?",
+  },
+  Text_USB_PreviewRequiredHint: {
+    id: "Text-USB-PreviewRequiredHint",
+    defaultMessage: "未選擇輸入來源/輸出終端",
   },
 
   // Audio management
@@ -656,6 +672,10 @@ export default defineMessages({
     id: "Text-Situation-NotExecuted",
     defaultMessage: "未執行",
   },
+  Text_Situation_CreateRequiredHint: {
+    id: "Text-Situation-CreateRequiredHint",
+    defaultMessage: "未填寫情境名稱",
+  },
 
   // Situation legacy
   Text_Situation_Activate: {
@@ -769,10 +789,6 @@ export default defineMessages({
   Text_DeviceStatus_RebootSuccess: {
     id: "Text-DeviceStatus-RebootSuccess",
     defaultMessage: "重啟成功",
-  },
-  Text_DeviceStatus_RebootFail: {
-    id: "Text-DeviceStatus-RebootFail",
-    defaultMessage: "重啟失敗",
   },
 
   // System setting

@@ -28,7 +28,7 @@ const TVWallModal = ({
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
-  const [situationItemDesc, setSituationItemDesc] = useState(null);
+  const [situationItemDesc, setSituationItemDesc] = useState("");
   const [wallOptions, setWallOptions] = useState([]);
   const [wallDimension, setWallDimension] = useState({ col: 0, row: 0 });
   const [selectedWall, setSelectedWall] = useState({});
@@ -213,7 +213,7 @@ const TVWallModal = ({
   ];
 
   const handleReset = () => {
-    setSituationItemDesc(null);
+    setSituationItemDesc("");
     setWallOptions([]);
     setWallDimension({ col: 0, row: 0 });
     setSelectedWall({});
@@ -231,7 +231,7 @@ const TVWallModal = ({
   };
 
   const handleCreateItem = async () => {
-    if (selectedWall && selectedTemplate && situationItemDesc) {
+    if (selectedWall && selectedTemplate) {
       let tempBlocks = [];
       Object.entries(blockEncoderMapping)?.forEach(([key, block]) => {
         tempBlocks.push({
@@ -258,7 +258,7 @@ const TVWallModal = ({
       setIsModalOpen(false);
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_Common_RequiredHint)
+        intl.formatMessage(Messages.Text_TVWall_PreviewRequiredHint)
       );
     }
   };
