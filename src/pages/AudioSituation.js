@@ -5,6 +5,7 @@ import { StoreContext } from "../components/store/store";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
 import CreateSituation from "../components/situation/createSituation";
+import ConfirmModal from "../components/elements/confirmModal";
 import {
   getEncoders,
   getDecoders,
@@ -41,6 +42,9 @@ const AudioSituation = () => {
   const [store] = useContext(StoreContext);
   const [reload, setReload] = useState(null);
   const [isSituationModalOpen, setIsSituationModalOpen] = useState(false);
+  const [openConfirmModal, setOpenComfirmModal] = useState(false);
+  const [hasConfirm, setHasConfirm] = useState(false);
+  const [confirmData, setConfirmData] = useState({});
 
   // get situations on reload
   const [situations, setSituations] = useState([]);
@@ -88,10 +92,21 @@ const AudioSituation = () => {
 
   const deleteSituation = async (event) => {
     const situationId = event.currentTarget.id;
-    console.log(situationId);
-    await removeSituation(situationId, store);
-    setReload(Math.random());
+    setConfirmData({ ...confirmData, situationId: situationId });
+    setOpenComfirmModal(true);
   };
+
+  useEffect(() => {
+    if (hasConfirm) {
+      (async () => {
+        await removeSituation(confirmData?.situationId, store);
+        setHasConfirm(false);
+        setConfirmData({});
+        setReload(Math.random());
+      })();
+      console.log(hasConfirm, confirmData, "=========");
+    }
+  }, [hasConfirm, confirmData, store]);
 
   const deleteSituationDetail = async (situationDetailId) => {
     await removeSituationDetail(situationDetailId, store);
@@ -238,6 +253,13 @@ const AudioSituation = () => {
               className="audio-content-table-icon"
             />
           </Button>
+          <ConfirmModal
+            title={"刪除xxx"}
+            description="確認要刪除xxx?"
+            isModalOpen={openConfirmModal}
+            setIsModalOpen={setOpenComfirmModal}
+            setHasConfirm={setHasConfirm}
+          />
         </div>
       ),
     },
