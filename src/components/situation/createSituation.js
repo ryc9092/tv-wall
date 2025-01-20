@@ -62,6 +62,7 @@ const CreateSituationModal = ({
         footer={null}
         onCancel={() => {
           setIsModalOpen(false);
+          setExtendSituationId(null);
         }}
       >
         <Form
