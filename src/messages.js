@@ -676,6 +676,15 @@ export default defineMessages({
     id: "Text-Situation-CreateRequiredHint",
     defaultMessage: "未填寫情境名稱",
   },
+  Text_Situation_Delete: {
+    id: "Text-Situation-Delete",
+    defaultMessage: "刪除情境",
+  },
+  Text_Situation_DeleteConfirm: {
+    id: "Text-Situation-DeleteConfirm",
+    defaultMessage: "確認要刪除此情境?",
+  },
+
 
   // Situation legacy
   Text_Situation_Activate: {

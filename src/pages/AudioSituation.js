@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Dropdown, Table, Modal } from "antd";
+import { Button, Dropdown, Table, Modal, Popconfirm } from "antd";
 import { StoreContext } from "../components/store/store";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
 import CreateSituation from "../components/situation/createSituation";
-import ConfirmModal from "../components/elements/confirmModal";
 import {
   getEncoders,
   getDecoders,
@@ -42,9 +41,6 @@ const AudioSituation = () => {
   const [store] = useContext(StoreContext);
   const [reload, setReload] = useState(null);
   const [isSituationModalOpen, setIsSituationModalOpen] = useState(false);
-  const [openConfirmModal, setOpenComfirmModal] = useState(false);
-  const [hasConfirm, setHasConfirm] = useState(false);
-  const [confirmData, setConfirmData] = useState({});
 
   // get situations on reload
   const [situations, setSituations] = useState([]);
@@ -90,23 +86,10 @@ const AudioSituation = () => {
     setOpenSituationDetailModal(true);
   };
 
-  const deleteSituation = async (event) => {
-    const situationId = event.currentTarget.id;
-    setConfirmData({ ...confirmData, situationId: situationId });
-    setOpenComfirmModal(true);
+  const deleteSituation = async (situationId) => {
+    await removeSituation(situationId, store);
+    setReload(Math.random());
   };
-
-  useEffect(() => {
-    if (hasConfirm) {
-      (async () => {
-        await removeSituation(confirmData?.situationId, store);
-        setHasConfirm(false);
-        setConfirmData({});
-        setReload(Math.random());
-      })();
-      console.log(hasConfirm, confirmData, "=========");
-    }
-  }, [hasConfirm, confirmData, store]);
 
   const deleteSituationDetail = async (situationDetailId) => {
     await removeSituationDetail(situationDetailId, store);
@@ -238,28 +221,37 @@ const AudioSituation = () => {
               className="audio-content-table-icon"
             />
           </Button>
-          <Button
-            type="text"
-            id={record.id}
-            key={`remove.${record.id}`}
-            onClick={(event) => {
-              deleteSituation(event);
+          <Popconfirm
+            id={`confirm-${record.id}`}
+            title={
+              <span className="general-font">
+                {intl.formatMessage(Messages.Text_Situation_Delete)}
+              </span>
+            }
+            description={
+              <span className="general-font">
+                {intl.formatMessage(Messages.Text_Situation_DeleteConfirm)}
+              </span>
+            }
+            okText={intl.formatMessage(Messages.Text_Common_Confirm)}
+            cancelText={intl.formatMessage(Messages.Text_Button_Cancel)}
+            onConfirm={() => {
+              deleteSituation(record.id);
             }}
-            className="table-content"
           >
-            <img
-              alt="remove"
-              src={TrashIcon}
-              className="audio-content-table-icon"
-            />
-          </Button>
-          <ConfirmModal
-            title={"刪除xxx"}
-            description="確認要刪除xxx?"
-            isModalOpen={openConfirmModal}
-            setIsModalOpen={setOpenComfirmModal}
-            setHasConfirm={setHasConfirm}
-          />
+            <Button
+              type="text"
+              id={record.id}
+              key={`remove.${record.id}`}
+              className="table-content"
+            >
+              <img
+                alt="remove"
+                src={TrashIcon}
+                className="audio-content-table-icon"
+              />
+            </Button>
+          </Popconfirm>
         </div>
       ),
     },
