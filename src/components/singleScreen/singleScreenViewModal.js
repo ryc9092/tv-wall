@@ -220,11 +220,9 @@ const SingleScreenViewModal = ({
                     </div>
                     <div>
                       <Input
-                        className="situation-usb-input situation-usb-input-placeholder"
+                        className="situation-usb-input situation-usb-input-text"
                         value={situationItemDesc}
-                        placeholder={intl.formatMessage(
-                          Messages.Text_Situation_InputDescription
-                        )}
+                        disabled
                       />
                     </div>
                   </div>
