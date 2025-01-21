@@ -542,6 +542,15 @@ export default defineMessages({
     id: "Text-Audio-EnDecoderRoute",
     defaultMessage: "編解碼器路由",
   },
+  Text_Audio_Route: {
+    id: "Text-Audio-Route",
+    defaultMessage: "音頻路由",
+  },
+  Text_Audio_DeleteConfirm: {
+    id: "Text-Audio-DeleteConfirm",
+    defaultMessage: "確認要刪除此組路由?",
+  },
+
 
   // Situation
   Text_Situation_Title: {

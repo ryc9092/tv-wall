@@ -225,12 +225,12 @@ const AudioSituation = () => {
             id={`confirm-${record.id}`}
             title={
               <span className="general-font">
-                {intl.formatMessage(Messages.Text_Situation_Delete)}
+                {intl.formatMessage(Messages.Text_Audio_Route)}
               </span>
             }
             description={
               <span className="general-font">
-                {intl.formatMessage(Messages.Text_Situation_DeleteConfirm)}
+                {intl.formatMessage(Messages.Text_Audio_DeleteConfirm)}
               </span>
             }
             okText={intl.formatMessage(Messages.Text_Common_Confirm)}

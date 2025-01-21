@@ -240,7 +240,7 @@ const Situation = () => {
             id={`confirm-${record.id}`}
             title={
               <span className="general-font">
-                {intl.formatMessage(Messages.Text_Situation_Delete)}
+                {intl.formatMessage(Messages.Text_Sidebar_SituationManagement)}
               </span>
             }
             description={

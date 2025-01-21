@@ -148,6 +148,8 @@
   "Text-Audio-RemoveConnectionConfirm": "確定要刪除此音頻連結?",
   "Text-Audio-MatrixRoute": "混音矩陣路由",
   "Text-Audio-EnDecoderRoute": "編解碼器路由",
+  "Text-Audio-Route": "音頻路由",
+  "Text-Audio-DeleteConfirm": "確認要刪除此組路由?",
 
   "Text-Situation-Title": "情境管理",
   "Text-Situation-CreateSituation": "新增情境",
@@ -182,7 +184,6 @@
   "Text-Situation-LastExecTime": "上次執行時間",
   "Text-Situation-NotExecuted": "未執行",
   "Text-Situation-CreateRequiredHint": "未填寫情境名稱",
-  "Text-Situation-Delete": "刪除情境",
   "Text-Situation-DeleteConfirm": "確認要刪除此情境?",
 
   "Text-DeviceStatus-CurrentStatus": "設備狀態",
