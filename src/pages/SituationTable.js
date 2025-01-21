@@ -558,6 +558,7 @@ const Situation = () => {
             open={openSituationDetailModal}
             onCancel={() => {
               setOpenSituationDetailModal(false);
+              setExtendSituationId(null);
             }}
             footer={
               <Button
