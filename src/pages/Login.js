@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Alert, Button, Form, Input, Typography } from "antd";
+import { Button, Form, Input, Typography } from "antd";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Actions } from "../components/store/reducer";
@@ -20,42 +20,58 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [store, dispatch] = useContext(StoreContext);
-  const [error, setError] = useState(null);
   const [anime, setAnime] = useState(null);
   const [playAnime, setPlayAnime] = useState(false);
+  const [alreadyPlayedAnime, setAlreadyPlayedAnime] = useState(false);
 
-  async function playAnimePeriod(anime, ms = 2000) {
+  async function startToPlayAnime(anime) {
     setAnime(anime);
     setPlayAnime(true);
-    await new Promise((r) => setTimeout(r, ms));
   }
 
-  // play before login anime
+  // play anime on load page
   useEffect(() => {
     (async () => {
-      await playAnimePeriod(BeforeLoginAnime);
-      setPlayAnime(false);
+      startToPlayAnime(BeforeLoginAnime);
     })();
   }, []);
 
+  // check if anime already played
   useEffect(() => {
-    if (store.account) {
-      loginComplete(location, navigate);
-    } else {
-      const account = sessionStorage.getItem("account");
-      if (account) dispatch({ type: Actions.SetAccount, payload: account });
+    if (playAnime) {
+      const video = document.getElementById("video");
+      video.addEventListener(
+        "ended",
+        (e) => {
+          setAlreadyPlayedAnime(true);
+        },
+        false
+      );
     }
-  }, [store.account, location, navigate]);
+  }, [playAnime]);
+
+  useEffect(() => {
+    // After play anime finished, reset Already Played Anime to false
+    if (sessionStorage.getItem("token") && alreadyPlayedAnime) {
+      // Navigate: login completed and play anime finished
+      setAlreadyPlayedAnime(false);
+      loginComplete(location, navigate);
+    } else if (!sessionStorage.getItem("token") && alreadyPlayedAnime) {
+      // Stop anime: login not completed and play anime finished
+      setAlreadyPlayedAnime(false);
+      setPlayAnime(false);
+    }
+  }, [location, navigate, alreadyPlayedAnime]);
 
   const onLogin = async ({ account, password }) => {
     const jwtToken = await login(account, password, store);
     if (jwtToken) {
+      startToPlayAnime(AfterLoginAnime);
       const decodedJwt = jwtDecode(jwtToken);
-      await playAnimePeriod(AfterLoginAnime);
       sessionStorage.setItem("token", jwtToken);
       sessionStorage.setItem("account", account);
       sessionStorage.setItem("role", decodedJwt.role);
-      loginComplete(location, navigate);
+      dispatch({ type: Actions.SetAccount, payload: account });
     } else {
       showWarningNotification(intl.formatMessage(Messages.Text_Login_FailMsg));
     }
@@ -87,7 +103,7 @@ const Login = () => {
             backgroundColor: "black",
           }}
         >
-          <video autoPlay muted className="login-anime">
+          <video id="video" autoPlay muted className="login-anime">
             <source src={anime} type="video/mp4" />
           </video>
         </div>
@@ -170,7 +186,6 @@ const Login = () => {
                   </Button>
                 </Form.Item>
               </Form>
-              {error ? <Alert message={error} type="error" /> : null}
             </div>
           </div>
         </div>
