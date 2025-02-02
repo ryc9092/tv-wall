@@ -33,84 +33,68 @@
     background-color: #e7e7e7;
 }
 
+.single-screen-card-outer {
+    width: 240px;
+    height: 240px;
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    cursor: pointer;
+    border: solid 2px #ffffff;
+}
+
 .single-screen-card {
-    width: 280px;
-    height: 269px;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    border: solid 1px #a5a5a5;
-}
-
-.single-screen-card-collapse {
-    width: 309px;
-    height: 293px;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    border: solid 1px #a5a5a5;
-}
-
-.single-screen-card-top {
-    width: 278px;
-    height: 268px;
-    border-radius: 12px;
-    margin-bottom: 12px;
+    width: 236px;
+    height: 236px;
+    border-radius: 4px;
+    border: solid 8px #e7e7e7;
     cursor: pointer;
     position: absolute;
     z-index: 100;
-    opacity: 0.8;
 }
 
-.single-screen-card-top-collapse {
-    width: 307px;
-    height: 292px;
-    border-radius: 12px;
-    margin-bottom: 12px;
+.single-screen-card-with-source {
+    width: 236px;
+    height: 236px;
+    border-radius: 4px;
+    border: solid 8px rgba(0, 0, 0, 0);
     cursor: pointer;
     position: absolute;
     z-index: 100;
-    opacity: 0.8;
 }
 
-.single-screen-card-video {
-    width: 278px;
-    height: 213px;
-    margin-top: 55px;
+.single-screen-card-selected {
+    width: 236px;
+    height: 236px;
+    border-radius: 4px;
+    border: solid 8px #757371;
+    cursor: pointer;
     position: absolute;
-    border: 0;
-    border-radius: 0px 0px 12px 12px !important;
-}
-
-.single-screen-card-video-collapse {
-    width: 307px;
-    height: 237px;
-    margin-top: 55px;
-    position: absolute;
-    border: 0;
-    border-radius: 0px 0px 12px 12px !important;
+    z-index: 100;
 }
 
 .single-screen-card-title-row {
-    padding: 14px;
-    width: 280px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.single-screen-card-title-row-collapse {
-    padding: 14px;
-    width: 309px;
+    padding: 20px 18px 20px 12px;
+    width: 234px;
     display: flex;
     justify-content: space-between;
 }
 
 .single-screen-card-title {
-    width: 100%;
+    border-radius: 4px;
     color: #45413e;
     font-family: Noto Sans TC;
     font-size: 22px;
-    font-weight: 600;
+    font-weight: 500;
+}
+
+.single-screen-card-title-selected {
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #ffffff;
+    background-color: #757371;
+    font-family: Noto Sans TC;
+    font-size: 22px;
+    font-weight: 500;
 }
 
 .single-screen-card-desc {
@@ -118,17 +102,21 @@
     font-family: Noto Sans TC;
     font-size: 16px;
     font-weight: normal;
-    color: white;
+    color: #45413e;
+}
+
+.single-screen-card-desc-selected {
+    padding: 2px 0px 0px 14px;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: normal;
+    color: #45413e;
+    margin-top: -8px;
 }
 
 .single-screen-btn-position {
-    margin-top: 135px;
-    margin-left: 140px;
-}
-
-.single-screen-btn-position-collapse {
-    margin-top: 155px;
-    margin-left: 165px;
+    margin-top: 85px;
+    margin-left: 90px;
 }
 
 .single-screen-trash-btn {
@@ -139,7 +127,7 @@
 .single-screen-btn-text {
     font-family: Noto Sans TC;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .singlescreen-card-container {

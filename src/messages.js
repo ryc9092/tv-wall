@@ -120,6 +120,10 @@ export default defineMessages({
     id: "Text-Button-Operation",
     defaultMessage: "操作",
   },
+  Text_Button_ClearSource: {
+    id: "Text-Button-ClearSource",
+    defaultMessage: "清除來源",
+  },
 
   // Login
   Text_Login_Account: {

@@ -11,8 +11,9 @@ import {
 } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
-import TrashIcon from "../assets/trash.png";
-import XIcon from "../assets/X.png";
+import ScreenBackgroundImage from "../assets/screenBackground.png";
+import ClearLinkIcon from "../assets/clearLink.png";
+import ClearLinkDisabledIcon from "../assets/clearLinkDisabled.png";
 import {
   showWarningNotification,
   showSuccessNotificationByMsg,
@@ -24,7 +25,6 @@ const SingleScreen = () => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
   const [decoders, setDecoders] = useState([]);
-  const [originDecoders, setOriginDecoders] = useState([]);
   const [searchDecoderFilter, setSearchDecoderFilter] = useState("");
   const [filteredDecoders, setFilteredDecoders] = useState([]);
   const [decoderCards, setDecoderCards] = useState(null);
@@ -93,7 +93,6 @@ const SingleScreen = () => {
                         mac: encoder.mac,
                         nickName: encoder.nickName,
                       },
-                      hasChanged: false,
                     });
                   }
                 });
@@ -108,12 +107,10 @@ const SingleScreen = () => {
               mac: "",
               nickName: "",
             },
-            hasChanged: false,
           });
         }
       });
       setEncoders(encoders);
-      setOriginDecoders(tempDecoders.length > 0 ? tempDecoders : decoders);
       setDecoders(tempDecoders.length > 0 ? tempDecoders : decoders);
     })();
   }, [reload, store]);
@@ -150,12 +147,6 @@ const SingleScreen = () => {
     })();
   }, [decoders, searchDecoderFilter]);
 
-  const modifyVideoSize = (previewUrl, width, height) => {
-    const hostname = previewUrl.split("?")[0];
-    const modifiedUrl = `${hostname}?action=stream&w=${width}&h=${height}&fps=15&bw=5000&as=0`;
-    return modifiedUrl;
-  };
-
   const onScreenClick = (event, selectedEncoder) => {
     if (!event.target.id.includes("btn") && selectedEncoder.previewUrl) {
       let tempDecoders = [];
@@ -169,7 +160,6 @@ const SingleScreen = () => {
               mac: selectedEncoder.mac,
               nickName: selectedEncoder.nickName,
             },
-            hasChanged: true,
           });
         } else {
           tempDecoders.push(decoder);
@@ -205,36 +195,6 @@ const SingleScreen = () => {
     });
     setDecoders(tempDecoders);
     setReload(Math.random());
-  };
-
-  const handleCancelScreenSetting = async (event) => {
-    const decoderMac = event.target.id.split("@")[1];
-    let tempDecoders = [];
-    let originDecoder;
-    decoders?.forEach(async (decoder) => {
-      if (decoder.mac === decoderMac && decoder.encoder !== "") {
-        originDecoders?.forEach((oriDecoder) => {
-          if (oriDecoder.mac === decoderMac) originDecoder = oriDecoder;
-        });
-        tempDecoders.push({
-          ...decoder,
-          hasChanged: false,
-          previewUrl: originDecoder.previewUrl,
-          encoder: originDecoder.encoder,
-        });
-      } else {
-        tempDecoders.push({ ...decoder });
-      }
-    });
-    setDecoders(tempDecoders);
-    const iframe = document.getElementById(`iframe.${decoderMac}`);
-    iframe.src = originDecoder?.previewUrl
-      ? modifyVideoSize(
-          originDecoder?.previewUrl,
-          store.siderCollapse ? 307 : 278,
-          store.siderCollapse ? 237 : 213
-        )
-      : "";
   };
 
   const handleLinkScreen = (event) => {
@@ -284,37 +244,18 @@ const SingleScreen = () => {
 
   useEffect(() => {
     let tempDecoders = [];
-    // update decoder hasChanged to false if link success
     decoders?.forEach((decoder) => {
       if (decoder.mac === goingToModifyDecoder.decoderMac) {
         tempDecoders.push({
           ...decoder,
           previewUrl: goingToModifyDecoder.previewUrl,
           encoder: goingToModifyDecoder.encoder,
-          hasChanged: false,
         });
       } else {
         tempDecoders.push(decoder);
       }
     });
-
-    let tempOriginDecoders = [];
-    // update origin decoder to current if link success
-    originDecoders?.forEach((decoder) => {
-      if (decoder.mac === goingToModifyDecoder.decoderMac) {
-        tempOriginDecoders.push({
-          ...decoder,
-          previewUrl: goingToModifyDecoder.previewUrl,
-          encoder: goingToModifyDecoder.encoder,
-          hasChanged: false,
-        });
-      } else {
-        tempOriginDecoders.push(decoder);
-      }
-    });
-
     setDecoders(tempDecoders);
-    setOriginDecoders(tempOriginDecoders);
   }, [goingToModifyDecoder]);
 
   useEffect(() => {
@@ -324,81 +265,30 @@ const SingleScreen = () => {
         <Col
           key={`col@${decoder.mac}`}
           id={`card@${decoder.mac}`}
-          onMouseOver={handleScreenMouseEnter}
-          onMouseLeave={handleScreenMouseLeave}
         >
-          {/* <Col
-          span={6}
-          key={`col-${decoder.mac}`}
-          id={`card-${decoder.mac}`}
-          onMouseOver={handleScreenMouseEnter}
-          onMouseLeave={handleScreenMouseLeave}
-          > */}
           <div
-            className={
-              store.siderCollapse
-                ? "single-screen-card-collapse"
-                : "single-screen-card"
-            }
-            style={{
-              backgroundColor:
-                currentScreen && currentScreen.includes(decoder.mac)
-                  ? "gray"
-                  : "white",
-            }}
+            id={`card@${decoder.mac}`}
+            className="single-screen-card-outer"
+            style={decoder.encoder.mac ? { backgroundImage: `url(${ScreenBackgroundImage}` } : null}
+            onMouseOver={handleScreenMouseEnter}
+            onMouseLeave={handleScreenMouseLeave}
             onClick={(event) => {
               onScreenClick(event, selectedEncoder);
             }}
           >
-            {decoder.previewUrl ? (
-              <iframe
-                id={`iframe.${decoder.mac}`}
-                className={
-                  store.siderCollapse
-                    ? "single-screen-card-video-collapse"
-                    : "single-screen-card-video"
-                }
-                src={modifyVideoSize(
-                  decoder.previewUrl,
-                  store.siderCollapse ? 307 : 278,
-                  store.siderCollapse ? 237 : 213
-                )}
-                title="Video player"
-              />
-            ) : null}
             <div
               id={`card@${decoder.mac}`}
-              className={
-                store.siderCollapse
-                  ? "single-screen-card-top-collapse"
-                  : "single-screen-card-top"
-              }
-              style={{
-                backgroundColor:
-                  currentScreen && currentScreen.includes(decoder.mac)
-                    ? "gray"
-                    : null,
-              }}
+              className={currentScreen && currentScreen.includes(decoder.mac) ? "single-screen-card-selected" : decoder.encoder.mac ? "single-screen-card-with-source" : "single-screen-card"}
             >
               <div
                 id={`card@${decoder.mac}`}
-                className={
-                  store.siderCollapse
-                    ? "single-screen-card-title-row-collapse"
-                    : "single-screen-card-title-row"
-                }
+                className="single-screen-card-title-row"
               >
                 <span
                   id={`card@${decoder.mac}`}
-                  className="single-screen-card-title"
-                  style={{
-                    color:
-                      currentScreen && currentScreen.includes(decoder.mac)
-                        ? "white"
-                        : "#45413e",
-                  }}
+                  className={currentScreen && currentScreen.includes(decoder.mac) ? "single-screen-card-title-selected" : "single-screen-card-title"}
                 >
-                  {decoder.nickName}
+                  {decoder.nickName.length > 10 ? decoder.nickName.substring(0, 10) + "..." : decoder.nickName}
                 </span>
                 <span id={`card@${decoder.mac}`} style={{ marginTop: "2px" }}>
                   {decoder.state === "Up" ? (
@@ -446,87 +336,81 @@ const SingleScreen = () => {
                   )}
                 </span>
               </div>
-              {currentScreen && currentScreen.includes(decoder.mac) ? (
-                <div id={`card@${decoder.mac}`}>
-                  <div
-                    id={`card@${decoder.mac}`}
-                    className="single-screen-card-desc"
-                  >
-                    <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
-                    {" : "}{" "}
-                    {decoder.previewUrl
-                      ? decoder.encoder?.nickName
-                      : intl.formatMessage(Messages.Text_Common_None)}
-                  </div>
-                  <div
-                    id={`card@${decoder.mac}`}
-                    className={
-                      store.siderCollapse
-                        ? "single-screen-btn-position-collapse"
-                        : "single-screen-btn-position"
-                    }
-                  >
-                    {decoder.hasChanged ? (
-                      <Button
-                        id={`btn@${decoder.mac}`}
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          background: "white",
-                          position: "absolute",
-                          marginLeft: -42,
-                          display: decoder.hasChanged ? null : "none",
-                          opacity: decoder.hasChanged ? 10 : 0,
-                        }}
-                        onClick={(event) => handleCancelScreenSetting(event)}
-                      >
-                        <img
-                          id={`btn@${decoder.mac}`}
-                          alt="cancel"
-                          src={XIcon}
-                          style={{ width: 18, height: 18, marginTop: 2 }}
-                        />
-                      </Button>
-                    ) : null}
-                    <Button
-                      id={`btn@${decoder.mac}`}
-                      type="primary"
-                      shape="circle"
-                      style={{ background: "black", position: "absolute" }}
-                      onClick={(event) => handleClearScreen(event)}
-                    >
-                      <img
-                        id={`btn@${decoder.mac}`}
-                        alt="trash"
-                        src={TrashIcon}
-                        style={{ width: 18, height: 18, marginTop: 2 }}
-                      />
-                    </Button>
+              <div id={`card@${decoder.mac}`}>
+                <div
+                  id={`card@${decoder.mac}`}
+                  className={currentScreen && currentScreen.includes(decoder.mac) ? "single-screen-card-desc-selected" : "single-screen-card-desc"}
+                >
+                  <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
+                  {" : "}{" "}
+                  {decoder.previewUrl
+                    ? decoder.encoder?.nickName
+                    : intl.formatMessage(Messages.Text_Common_None)}
+                </div>
+                <div
+                  id={`card@${decoder.mac}`}
+                  className="single-screen-btn-position"
+                >
+                  {decoder.encoder.mac ? (
                     <Button
                       id={`btn@${decoder.mac}`}
                       type="primary"
                       style={{
-                        width: "80px",
-                        color: "black",
-                        backgroundColor: "#ebdd2d",
+                        color: "#e7e7e7",
+                        backgroundColor: "#262320",
                         position: "absolute",
-                        marginLeft: 42,
-                        marginBottom: 2,
+                        borderRadius: "20px",
                       }}
-                      onClick={(event) => handleLinkScreen(event)}
+                      onClick={(event) => handleClearScreen(event)}
                     >
-                      <span
-                        id={`btn@${decoder.mac}`}
-                        className="single-screen-btn-text"
-                      >
-                        <FormattedMessage
-                          {...Messages.Text_SingleScreen_PlayVideo}
+                      <div style={{ display: "flex" }}>
+                        <img
+                          id={`btn@${decoder.mac}`}
+                          alt="clear link"
+                          src={ClearLinkIcon}
+                          style={{ width: 18, height: 18, marginTop: 2, marginRight: 6 }}
                         />
-                      </span>
-                    </Button>
-                  </div>
+                        <span
+                          id={`btn@${decoder.mac}`}
+                          className="single-screen-btn-text"
+                        >
+                          <FormattedMessage
+                            {...Messages.Text_Button_ClearSource}
+                          />
+                        </span>
+                      </div>
+                    </Button>) : (
+                    <Button
+                      id={`btn@${decoder.mac}`}
+                      type="primary"
+                      disabled
+                      style={{
+                        color: "#a5a5a5",
+                        backgroundColor: "#c6c6c6",
+                        position: "absolute",
+                        borderRadius: "20px",
+                      }}
+                    // onClick={(event) => handleLinkScreen(event)}
+                    >
+                      <div style={{ display: "flex" }}>
+                        <img
+                          id={`btn@${decoder.mac}`}
+                          alt="clear link"
+                          src={ClearLinkDisabledIcon}
+                          style={{ width: 18, height: 18, marginTop: 2, marginRight: 6 }}
+                        />
+                        <span
+                          id={`btn@${decoder.mac}`}
+                          className="single-screen-btn-text"
+                        >
+                          <FormattedMessage
+                            {...Messages.Text_Button_ClearSource}
+                          />
+                        </span>
+                      </div>
+                    </Button>)}
                 </div>
-              ) : null}
+              </div>
             </div>
           </div>
         </Col>
@@ -645,15 +529,7 @@ const SingleScreen = () => {
             )}
           />
         </div>
-        <div
-          className={
-            store.siderCollapse
-              ? "single-screen-title-row-collapse single-screen-card-container"
-              : "single-screen-title-row single-screen-card-container"
-          }
-        >
-          <Row gutter={15}>{decoderCards}</Row>
-        </div>
+        <Row gutter={[15, 15]}>{decoderCards}</Row>
       </div>
       <div
         className={
@@ -706,12 +582,6 @@ const SingleScreen = () => {
               })}
             />
           </div>
-          {/* <div className="singlescreen-card-right-bottom">
-            <div className="singlescreen-card-right-bottom-text">
-              <FormattedMessage {...Messages.Text_SingleScreen_ConnectType} />
-            </div>
-            <Select className="singlescreen-card-right-bottom-select" />
-          </div> */}
         </Card>
       </div>
     </div>

@@ -41,6 +41,7 @@
   "Text-Button-Close": "close",
   "Text-Button-Remove": "remove",
   "Text-Button-Operation": "operation",
+  "Text-Button-ClearSource": "清除來源",
 
   "Text-Login-Account": "Account",
   "Text-Login-Password": "Password",
