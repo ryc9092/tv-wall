@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Button, Card, Col, Input, Row, Tag, Table } from "antd";
+import { Button, Card, Col, Input, Radio, Row, Tag, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import {
   createDeviceLink,
@@ -32,22 +32,11 @@ const SingleScreen = () => {
   const [searchEncoderFilter, setSearchEncoderFilter] = useState("");
   const [filteredEncoders, setFilteredEncoders] = useState([]);
   const [selectedEncoder, setSelectedEncoder] = useState({
-    name: "",
+    nickName: "",
+    mac: "",
     previewUrl: "",
   });
-  const [currentScreen, setCurrentScreen] = useState(null);
   const [reload, setReload] = useState(null);
-  const [updateDecoderCards, setUpdateDecoderCards] = useState(null);
-  const [goingToModifyDecoder, setGoingToModifyDecoder] = useState({});
-
-  const handleScreenMouseEnter = (event) => {
-    const itemId = event.target.id;
-    setCurrentScreen(itemId);
-  };
-
-  const handleScreenMouseLeave = () => {
-    setCurrentScreen(null);
-  };
 
   // set encoder, decoder
   useEffect(() => {
@@ -88,7 +77,6 @@ const SingleScreen = () => {
                   ) {
                     tempDecoders.push({
                       ...decoder,
-                      previewUrl: encoder.previewUrl,
                       encoder: {
                         mac: encoder.mac,
                         nickName: encoder.nickName,
@@ -102,7 +90,6 @@ const SingleScreen = () => {
         } else {
           tempDecoders.push({
             ...decoder,
-            previewUrl: "",
             encoder: {
               mac: "",
               nickName: "",
@@ -127,12 +114,25 @@ const SingleScreen = () => {
     })();
   }, [encoders, searchEncoderFilter]);
 
+  const [chooseEncoderTime, setChooseEncoderTime] = useState(null);
   const handleChooseEncoder = (encoder) => {
-    setSelectedEncoder({
-      mac: encoder.mac,
-      previewUrl: encoder.previewUrl,
-      nickName: encoder.nickName,
-    });
+    // prevent choose encoder interval too short
+    if (chooseEncoderTime === null || Date.now() - chooseEncoderTime > 300) {
+      // unselect encoder if it already selected
+      if (selectedEncoder.mac === encoder.mac)
+        setSelectedEncoder({
+          nickName: "",
+          mac: "",
+          previewUrl: "",
+        });
+      else
+        setSelectedEncoder({
+          nickName: encoder.nickName,
+          mac: encoder.mac,
+          previewUrl: encoder.previewUrl,
+        });
+    }
+    setChooseEncoderTime(Date.now());
   };
 
   // filtered decoder list
@@ -146,30 +146,6 @@ const SingleScreen = () => {
       setFilteredDecoders(tempFilteredDecoders);
     })();
   }, [decoders, searchDecoderFilter]);
-
-  const onScreenClick = (event, selectedEncoder) => {
-    if (!event.target.id.includes("btn") && selectedEncoder.previewUrl) {
-      let tempDecoders = [];
-      const decoderMac = event.target.id.split("@")[1];
-      decoders?.forEach((decoder) => {
-        if (decoder.mac === decoderMac) {
-          tempDecoders.push({
-            ...decoder,
-            previewUrl: selectedEncoder.previewUrl,
-            encoder: {
-              mac: selectedEncoder.mac,
-              nickName: selectedEncoder.nickName,
-            },
-          });
-        } else {
-          tempDecoders.push(decoder);
-        }
-      });
-      setDecoders(tempDecoders);
-      setUpdateDecoderCards(Math.random());
-      sessionStorage.setItem("singleScreenDec", tempDecoders);
-    }
-  };
 
   const handleClearScreen = async (event) => {
     const decoderMac = event.target.id.split("@")[1];
@@ -197,88 +173,38 @@ const SingleScreen = () => {
     setReload(Math.random());
   };
 
-  const handleLinkScreen = (event) => {
-    const decoderMac = event.target.id.split("@")[1];
-    let tempDecoders = decoders;
-    let createdLink = false;
-    tempDecoders?.forEach((decoder) => {
-      if (
-        decoder.mac === decoderMac &&
-        decoder.encoder &&
-        decoder.encoder.mac !== "" &&
-        createdLink === false
-      ) {
-        createdLink = true;
-        createDeviceLink({
-          store: store,
-          id: `video.${decoder.mac}`,
-          linkType: "video",
-          encoder: decoder.encoder.mac,
-          decoders: [decoder.mac],
-          value1: "",
-          remark: "",
-          isPreset: "N",
-        }).then((result) => {
-          if (result) {
-            setGoingToModifyDecoder({
-              decoderMac: decoder.mac,
-              previewUrl: decoder.previewUrl,
-              encoder: {
-                mac: selectedEncoder.mac,
-                nickName: selectedEncoder.nickName,
-              },
-            });
-            showSuccessNotificationByMsg(
-              intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess)
-            );
-          } else {
-            setGoingToModifyDecoder({});
-            showWarningNotification(
-              intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail)
-            );
-          }
-        });
-      }
-    });
-  };
-
-  useEffect(() => {
-    let tempDecoders = [];
-    decoders?.forEach((decoder) => {
-      if (decoder.mac === goingToModifyDecoder.decoderMac) {
-        tempDecoders.push({
-          ...decoder,
-          previewUrl: goingToModifyDecoder.previewUrl,
-          encoder: goingToModifyDecoder.encoder,
-        });
-      } else {
-        tempDecoders.push(decoder);
-      }
-    });
-    setDecoders(tempDecoders);
-  }, [goingToModifyDecoder]);
-
+  const [selectedScreen, setSelectedScreen] = useState(null);
   useEffect(() => {
     let tempDecoderCards = [];
     filteredDecoders?.forEach((decoder) => {
       tempDecoderCards.push(
-        <Col
-          key={`col@${decoder.mac}`}
-          id={`card@${decoder.mac}`}
-        >
+        <Col key={`col@${decoder.mac}`} id={`card@${decoder.mac}`}>
           <div
             id={`card@${decoder.mac}`}
             className="single-screen-card-outer"
-            style={decoder.encoder.mac ? { backgroundImage: `url(${ScreenBackgroundImage}` } : null}
-            onMouseOver={handleScreenMouseEnter}
-            onMouseLeave={handleScreenMouseLeave}
+            style={
+              decoder.encoder.mac
+                ? { backgroundImage: `url(${ScreenBackgroundImage}` }
+                : null
+            }
             onClick={(event) => {
-              onScreenClick(event, selectedEncoder);
+              if (!event.target.id.includes("btn")) {
+                const decoderMac = event.target.id.split("@")[1];
+                // already selected, unselected it
+                if (selectedScreen === decoderMac) setSelectedScreen(null);
+                else setSelectedScreen(decoderMac);
+              }
             }}
           >
             <div
               id={`card@${decoder.mac}`}
-              className={currentScreen && currentScreen.includes(decoder.mac) ? "single-screen-card-selected" : decoder.encoder.mac ? "single-screen-card-with-source" : "single-screen-card"}
+              className={
+                selectedScreen === decoder.mac
+                  ? "single-screen-card-selected"
+                  : decoder.encoder.mac
+                  ? "single-screen-card-with-source"
+                  : "single-screen-card"
+              }
             >
               <div
                 id={`card@${decoder.mac}`}
@@ -286,9 +212,15 @@ const SingleScreen = () => {
               >
                 <span
                   id={`card@${decoder.mac}`}
-                  className={currentScreen && currentScreen.includes(decoder.mac) ? "single-screen-card-title-selected" : "single-screen-card-title"}
+                  className={
+                    selectedScreen === decoder.mac
+                      ? "single-screen-card-title-selected"
+                      : "single-screen-card-title"
+                  }
                 >
-                  {decoder.nickName.length > 10 ? decoder.nickName.substring(0, 10) + "..." : decoder.nickName}
+                  {decoder.nickName.length > 10
+                    ? decoder.nickName.substring(0, 10) + "..."
+                    : decoder.nickName}
                 </span>
                 <span id={`card@${decoder.mac}`} style={{ marginTop: "2px" }}>
                   {decoder.state === "Up" ? (
@@ -339,11 +271,15 @@ const SingleScreen = () => {
               <div id={`card@${decoder.mac}`}>
                 <div
                   id={`card@${decoder.mac}`}
-                  className={currentScreen && currentScreen.includes(decoder.mac) ? "single-screen-card-desc-selected" : "single-screen-card-desc"}
+                  className={
+                    selectedScreen === decoder.mac
+                      ? "single-screen-card-desc-selected"
+                      : "single-screen-card-desc"
+                  }
                 >
                   <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
                   {" : "}{" "}
-                  {decoder.previewUrl
+                  {decoder.encoder?.nickName
                     ? decoder.encoder?.nickName
                     : intl.formatMessage(Messages.Text_Common_None)}
                 </div>
@@ -360,6 +296,7 @@ const SingleScreen = () => {
                         backgroundColor: "#262320",
                         position: "absolute",
                         borderRadius: "20px",
+                        zIndex: 100,
                       }}
                       onClick={(event) => handleClearScreen(event)}
                     >
@@ -368,7 +305,12 @@ const SingleScreen = () => {
                           id={`btn@${decoder.mac}`}
                           alt="clear link"
                           src={ClearLinkIcon}
-                          style={{ width: 18, height: 18, marginTop: 2, marginRight: 6 }}
+                          style={{
+                            width: 18,
+                            height: 18,
+                            marginTop: 2,
+                            marginRight: 6,
+                          }}
                         />
                         <span
                           id={`btn@${decoder.mac}`}
@@ -379,7 +321,8 @@ const SingleScreen = () => {
                           />
                         </span>
                       </div>
-                    </Button>) : (
+                    </Button>
+                  ) : (
                     <Button
                       id={`btn@${decoder.mac}`}
                       type="primary"
@@ -389,15 +332,20 @@ const SingleScreen = () => {
                         backgroundColor: "#c6c6c6",
                         position: "absolute",
                         borderRadius: "20px",
+                        zIndex: 100,
                       }}
-                    // onClick={(event) => handleLinkScreen(event)}
                     >
                       <div style={{ display: "flex" }}>
                         <img
                           id={`btn@${decoder.mac}`}
                           alt="clear link"
                           src={ClearLinkDisabledIcon}
-                          style={{ width: 18, height: 18, marginTop: 2, marginRight: 6 }}
+                          style={{
+                            width: 18,
+                            height: 18,
+                            marginTop: 2,
+                            marginRight: 6,
+                          }}
                         />
                         <span
                           id={`btn@${decoder.mac}`}
@@ -408,7 +356,8 @@ const SingleScreen = () => {
                           />
                         </span>
                       </div>
-                    </Button>)}
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
@@ -417,15 +366,53 @@ const SingleScreen = () => {
       );
     });
     setDecoderCards(tempDecoderCards);
-  }, [
-    filteredDecoders,
-    updateDecoderCards,
-    currentScreen,
-    selectedEncoder,
-    store.siderCollapse,
-  ]);
+  }, [selectedScreen, filteredDecoders, selectedEncoder, store.siderCollapse]);
+
+  useEffect(() => {
+    const handleLinkScreen = (decoderMac, encoderMac) => {
+      createDeviceLink({
+        store: store,
+        id: `video.${decoderMac}`,
+        linkType: "video",
+        encoder: encoderMac,
+        decoders: [decoderMac],
+        value1: "",
+        remark: "",
+        isPreset: "N",
+      }).then((result) => {
+        if (result) {
+          showSuccessNotificationByMsg(
+            intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess)
+          );
+        } else {
+          showWarningNotification(
+            intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail)
+          );
+        }
+        setSelectedScreen(null);
+        setSelectedEncoder({
+          nickName: "",
+          mac: "",
+          previewUrl: "",
+        });
+        setReload(Math.random());
+      });
+    };
+    if (selectedScreen && selectedEncoder.mac) {
+      handleLinkScreen(selectedScreen, selectedEncoder.mac);
+    }
+  }, [selectedScreen, selectedEncoder, store, intl]);
 
   const columns = [
+    {
+      dataIndex: "mac",
+      key: "radio",
+      render: (text) => {
+        return (
+          <Radio id={`btn@${text}`} checked={selectedEncoder.mac === text} />
+        );
+      },
+    },
     {
       title: intl.formatMessage(Messages.Text_Common_Name),
       dataIndex: "nickName",
@@ -447,7 +434,6 @@ const SingleScreen = () => {
     },
     {
       title: intl.formatMessage(Messages.Text_Common_Model),
-      width: "35%",
       dataIndex: "model",
       key: "model",
       filters: [
@@ -467,7 +453,6 @@ const SingleScreen = () => {
     },
     {
       title: intl.formatMessage(Messages.Text_Common_State),
-      width: "20%",
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
