@@ -5,7 +5,8 @@ export const showWarningNotification = (warningMsg) => {
   notification.info({
     message: warningMsg,
     icon: <ExclamationCircleFilled style={{ color: "#D12727" }} />,
-    placement: "bottom",
+    placement: "topRight",
+    duration: 1,
     style: {
       width: "500px",
       fontSize: "16px",
@@ -20,7 +21,8 @@ export const showSuccessNotificationByMsg = (successMsg) => {
   notification.info({
     message: successMsg,
     icon: <InfoCircleFilled style={{ color: "green" }} />,
-    placement: "bottom",
+    placement: "topRight",
+    duration: 1,
     style: {
       width: "500px",
       fontSize: "16px",
