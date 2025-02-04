@@ -202,8 +202,8 @@ const SingleScreen = () => {
                 selectedScreen === decoder.mac
                   ? "single-screen-card-selected"
                   : decoder.encoder.mac
-                  ? "single-screen-card-with-source"
-                  : "single-screen-card"
+                    ? "single-screen-card-with-source"
+                    : "single-screen-card"
               }
             >
               <div
@@ -419,14 +419,7 @@ const SingleScreen = () => {
       key: "nickName",
       render: (text) => {
         return (
-          <span
-            className="table-content"
-            style={
-              selectedEncoder.nickName === text
-                ? { backgroundColor: "#FDEBD0" }
-                : null
-            }
-          >
+          <span className="single-screen-table-content">
             {text}
           </span>
         );
@@ -448,7 +441,7 @@ const SingleScreen = () => {
       ],
       onFilter: (value, data) => data.model.indexOf(value) === 0,
       render: (text) => {
-        return <span className="table-content">{text}</span>;
+        return <span className="single-screen-table-content">{text}</span>;
       },
     },
     {
@@ -530,7 +523,7 @@ const SingleScreen = () => {
           <div className="singlescreen-card-right-desc">
             <FormattedMessage {...Messages.Text_TVWall_VideoSourceDesc} />
           </div>
-          {/* <div className="singlescreen-card-right-preview">
+          <div className="singlescreen-card-right-preview">
             {selectedEncoder.previewUrl ? (
               <div>
                 <iframe
@@ -545,7 +538,7 @@ const SingleScreen = () => {
                 <FormattedMessage {...Messages.Text_TVWall_Preview} />
               </div>
             )}
-          </div> */}
+          </div>
           <Input
             className="singlescreen-card-right-search singlescreen-input"
             variant="filled"
