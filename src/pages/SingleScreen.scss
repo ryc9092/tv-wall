@@ -169,7 +169,7 @@
 
 .singlescreen-card-right-preview {
     width: 100%;
-    min-height: 205px;
+    height: 205px;
     border-radius: 8px;
     border: 1px solid gray;
     position: relative;
@@ -179,7 +179,7 @@
 .singlescreen-card-right-preview-video {
     width: 100%;
     max-width: 100%;
-    min-height: 203px;
+    height: 203px;
     margin-bottom: -6px;
     border-radius: 8px;
     border: 0px;
@@ -208,7 +208,7 @@
 
 .singlescreen-card-right-encoder-container {
     margin-top: 16px;
-    height: calc(100vh - 360px);
+    height: calc(100vh - 565px);
     overflow-y: scroll;
 }
 
