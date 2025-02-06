@@ -507,7 +507,7 @@ const SingleScreen = () => {
             )}
           />
         </div>
-        <Row gutter={[15, 15]}>{decoderCards}</Row>
+        <Row className="single-screen-left-container" gutter={[15, 15]}>{decoderCards}</Row>
       </div>
       <div
         className={
