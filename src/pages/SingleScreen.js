@@ -202,8 +202,8 @@ const SingleScreen = () => {
                 selectedScreen === decoder.mac
                   ? "single-screen-card-selected"
                   : decoder.encoder.mac
-                    ? "single-screen-card-with-source"
-                    : "single-screen-card"
+                  ? "single-screen-card-with-source"
+                  : "single-screen-card"
               }
             >
               <div
@@ -417,18 +417,16 @@ const SingleScreen = () => {
       title: intl.formatMessage(Messages.Text_Common_Name),
       dataIndex: "nickName",
       key: "nickName",
+      minWidth: 55,
       render: (text) => {
-        return (
-          <span className="single-screen-table-content">
-            {text}
-          </span>
-        );
+        return <span className="single-screen-table-content">{text}</span>;
       },
     },
     {
       title: intl.formatMessage(Messages.Text_Common_Model),
       dataIndex: "model",
       key: "model",
+      minWidth: 110,
       filters: [
         {
           text: "ZyperUHD60",
@@ -507,7 +505,9 @@ const SingleScreen = () => {
             )}
           />
         </div>
-        <Row className="single-screen-left-container" gutter={[15, 15]}>{decoderCards}</Row>
+        <Row className="single-screen-left-container" gutter={[15, 15]}>
+          {decoderCards}
+        </Row>
       </div>
       <div
         className={
@@ -558,6 +558,8 @@ const SingleScreen = () => {
                   handleChooseEncoder(record);
                 },
               })}
+              size="small"
+              tableLayout="auto"
             />
           </div>
         </Card>
