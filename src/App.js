@@ -25,7 +25,12 @@ const Surveillance = loadable(() => import("./pages/Surveillance"));
 
 function App({ setLocale }) {
   return (
-    <BrowserRouter>
+    <BrowserRouter
+      future={{
+        v7_relativeSplatPath: true,
+        v7_startTransition: true,
+      }}
+    >
       <Routes>
         <Route path="/login" element=<Login /> />
         <Route
