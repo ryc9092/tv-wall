@@ -395,7 +395,9 @@ const TVWall = () => {
             className="audio-modal-close-x"
             title={
               <span style={{ marginRight: 12 }}>
-                <FormattedMessage {...Messages.Text_TVWall_ClearWallConnection}/>
+                <FormattedMessage
+                  {...Messages.Text_TVWall_ClearWallConnection}
+                />
               </span>
             }
             width={400}
@@ -408,7 +410,7 @@ const TVWall = () => {
             onOk={handleDeactiveWall}
           >
             <p className="tvwall-confirm-text">
-              <FormattedMessage {...Messages.Text_TVWall_ConfirmClear}/>
+              <FormattedMessage {...Messages.Text_TVWall_ConfirmClear} />
             </p>
           </Modal>
           <div className="tvwall-option-play-btn" onClick={handleActiveWall}>
@@ -422,17 +424,8 @@ const TVWall = () => {
             </span>
           </div>
         </div>
-        <div
-          id="wall-screen"
-          className={
-            store.siderCollapse
-              ? "tvwall-screen-container-collapse"
-              : "tvwall-screen-container"
-          }
-        >
+        <div id="wall-screen" className="tvwall-screen-container">
           <TvWall
-            wallWidth={store.siderCollapse ? 1268 : 1118}
-            wallHeight={762}
             selectedWall={selectedWall}
             selectedTemplate={selectedTemplate}
             selectedEncoder={selectedEncoder}

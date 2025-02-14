@@ -12,7 +12,6 @@ const TvWall = ({
   selectedWall,
   selectedTemplate,
   selectedEncoder,
-  clearTvWall,
   blocks,
   setBlocks,
   isActivedWall,
@@ -43,8 +42,10 @@ const TvWall = ({
     setCurrentBlock(null);
   };
 
+  const [blocksDetail, setBlocksDetail] = useState([]); // [{block: 1, smallestScreenNum: 1, col: 1, row: 1, details: [...]}]
   useEffect(() => {
     let tempScreens = [];
+    let tempBlocksDetail = [];
     if (
       selectedWall &&
       selectedTemplate &&
@@ -69,6 +70,49 @@ const TvWall = ({
             tempScreen.encoder = "";
             tempScreen.block = parseInt(templateScreens[idx].block);
             tempScreens.push(tempScreen);
+
+            if (tempBlocksDetail.length >= 0) {
+              let hasSet = false;
+              tempBlocksDetail.forEach((block, idx) => {
+                if (block.block === tempScreen.block) {
+                  if (tempBlocksDetail[idx].smallestScreenNum > tempScreen.num)
+                    tempBlocksDetail[idx].smallestScreenNum = tempScreen.num;
+                  tempBlocksDetail[idx].detail.push(tempScreen);
+                  hasSet = true;
+                }
+              });
+              if (!hasSet) {
+                tempBlocksDetail.push({
+                  block: tempScreen.block,
+                  smallestScreenNum: tempScreen.num,
+                  detail: [tempScreen],
+                });
+              }
+            } else {
+              tempBlocksDetail.push({
+                block: tempScreen.block,
+                smallestScreenNum: tempScreen.num,
+                detail: [tempScreen],
+              });
+            }
+          });
+          // caculate block size
+          tempBlocksDetail?.forEach((block) => {
+            let previousScreenNum = 0;
+            let blockCol = 1;
+            block.detail.forEach((screen) => {
+              if (previousScreenNum === 0) {
+                previousScreenNum = screen.num;
+              } else if (
+                previousScreenNum + 1 === screen.num &&
+                blockCol < selectedWall.col
+              ) {
+                blockCol = blockCol + 1;
+                previousScreenNum = screen.num;
+              }
+            });
+            block.col = blockCol;
+            block.row = block.detail.length / blockCol;
           });
         }
         setTvWallScreens(tempScreens);
@@ -76,10 +120,45 @@ const TvWall = ({
           col: selectedWall.col,
           row: selectedWall.row,
         });
+        setBlocksDetail(tempBlocksDetail);
         setWallReloaded(false);
       })();
     }
-  }, [selectedWall, selectedTemplate, clearTvWall]);
+  }, [selectedWall, selectedTemplate]);
+
+  const [wallHTML, setWallHTML] = useState();
+  useEffect(() => {
+    let wallBlocksHTML = [];
+    if (tvWallSize.col !== 0) {
+      blocksDetail?.forEach((block) => {
+        wallBlocksHTML.push(
+          <div
+            style={{
+              position: "absolute",
+              width: block.col * 240,
+              height: block.row * 240,
+              border: "2px solid black",
+              marginLeft:
+                ((block.smallestScreenNum - 1) % tvWallSize.col) * 240,
+              marginTop:
+                Math.floor((block.smallestScreenNum - 1) / tvWallSize.col) *
+                240,
+            }}
+          >
+            {block.smallestScreenNum}
+          </div>
+        );
+      });
+    }
+    setWallHTML(
+      <div
+        id="wallScreens"
+        style={{ width: "100%", height: "100%", position: "absolute" }}
+      >
+        {wallBlocksHTML}
+      </div>
+    );
+  }, [blocksDetail, tvWallSize]);
 
   const getAboveScreen = (screen) => {
     if (screen.num > tvWallSize.col) {
@@ -452,7 +531,8 @@ const TvWall = ({
       id="tv-wall-container"
       style={{ width: "100%", height: "100%", border: "1px solid #a5a5a5" }}
     >
-      {tvWallTemplate}
+      {wallHTML}
+      {/* {tvWallTemplate} */}
     </div>
   );
 };
