@@ -127,22 +127,33 @@ const TvWall = ({
   }, [selectedWall, selectedTemplate]);
 
   const [wallHTML, setWallHTML] = useState();
+  const [selectedBlockNumber, setSelectedBlockNumber] = useState(null);
   useEffect(() => {
     let wallBlocksHTML = [];
     if (tvWallSize.col !== 0) {
       blocksDetail?.forEach((block) => {
         wallBlocksHTML.push(
           <div
+            id={block.block}
             style={{
               position: "absolute",
               width: block.col * 240,
               height: block.row * 240,
               border: "2px solid black",
-              marginLeft:
-                ((block.smallestScreenNum - 1) % tvWallSize.col) * 240,
-              marginTop:
+              left: ((block.smallestScreenNum - 1) % tvWallSize.col) * 240,
+              top:
                 Math.floor((block.smallestScreenNum - 1) / tvWallSize.col) *
                 240,
+              color:
+                selectedBlockNumber?.toString() === block.block?.toString()
+                  ? "red"
+                  : "black",
+            }}
+            onClick={(event) => {
+              const blockNo = event.target.id;
+              // already selected, unselected it
+              if (selectedBlockNumber === blockNo) setSelectedBlockNumber(null);
+              else setSelectedBlockNumber(blockNo);
             }}
           >
             {block.smallestScreenNum}
@@ -158,7 +169,7 @@ const TvWall = ({
         {wallBlocksHTML}
       </div>
     );
-  }, [blocksDetail, tvWallSize]);
+  }, [blocksDetail, tvWallSize, selectedBlockNumber]);
 
   const getAboveScreen = (screen) => {
     if (screen.num > tvWallSize.col) {
