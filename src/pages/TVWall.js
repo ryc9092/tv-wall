@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Card, Input, Select, Table, Tag, Modal } from "antd";
+import { Card, Input, Select, Table, Tag, Modal, Radio } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import TvWall from "../components/tvwall/tvWall";
 import useWindowDimensions from "../utils/WindowDimension";
@@ -32,6 +32,7 @@ const TVWall = () => {
   const [selectedWall, setSelectedWall] = useState({});
   const [templateOptions, setTemplateOptions] = useState([]);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [selectedBlockNumber, setSelectedBlockNumber] = useState(null);
   const [searchFilter, setSearchFilter] = useState("");
   const [encoders, setEncoders] = useState([]);
   const [filteredEncoders, setFilteredEncoders] = useState([]);
@@ -182,12 +183,25 @@ const TVWall = () => {
     setSelectedTemplate(template);
   };
 
+  const [chooseEncoderTime, setChooseEncoderTime] = useState(null);
   const handleChooseEncoder = (encoder) => {
-    setSelectedEncoder({
-      mac: encoder.mac,
-      previewUrl: encoder.previewUrl,
-      nickName: encoder.nickName,
-    });
+    // prevent choose encoder interval too short
+    if (chooseEncoderTime === null || Date.now() - chooseEncoderTime > 300) {
+      // unselect encoder if it already selected
+      if (selectedEncoder.mac === encoder.mac)
+        setSelectedEncoder({
+          nickName: "",
+          mac: "",
+          previewUrl: "",
+        });
+      else
+        setSelectedEncoder({
+          nickName: encoder.nickName,
+          mac: encoder.mac,
+          previewUrl: encoder.previewUrl,
+        });
+    }
+    setChooseEncoderTime(Date.now());
   };
 
   const handleActiveWall = async () => {
@@ -257,24 +271,81 @@ const TVWall = () => {
     setOpenConfirmModal(false);
   };
 
+  useEffect(() => {
+    const handleLinkScreen = (encoderMac) => {
+      let outputBlocks = [];
+      blocks.forEach((block, idx) => {
+        outputBlocks[idx] = {
+          block: block.block,
+          row: block.row,
+          col: block.col,
+          encoder: block.encoder.mac ? block.encoder.mac : "",
+          marginLeft: block.marginLeft,
+          marginTop: block.marginTop,
+          decoder: block.decoder,
+        };
+      });
+      let data = {
+        activeId: selectedWall.wallId,
+        wallId: selectedWall.wallId,
+        wallType: "normal",
+        templateId: selectedTemplate.templateId,
+        blocks: outputBlocks,
+        isPreset: "N",
+        // store: store,
+      };
+      console.log(data);
+
+      // createDeviceLink({
+      //   store: store,
+      //   id: `video.${decoderMac}`,
+      //   linkType: "video",
+      //   encoder: encoderMac,
+      //   decoders: [decoderMac],
+      //   value1: "",
+      //   remark: "",
+      //   isPreset: "N",
+      // }).then((result) => {
+      //   if (result) {
+      //     showSuccessNotificationByMsg(
+      //       intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess)
+      //     );
+      //   } else {
+      //     showWarningNotification(
+      //       intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail)
+      //     );
+      //   }
+      //   setSelectedScreen(null);
+      //   setSelectedEncoder({
+      //     nickName: "",
+      //     mac: "",
+      //     previewUrl: "",
+      //   });
+      //   setReload(Math.random());
+      // });
+    };
+    if (selectedBlockNumber && selectedEncoder.mac) {
+      console.log(selectedBlockNumber, selectedEncoder.mac, "lsdkfjsdlfjdlfkj");
+      handleLinkScreen(selectedEncoder.mac);
+    }
+  }, [selectedBlockNumber, selectedEncoder, store, intl]);
+
   const columns = [
+    {
+      dataIndex: "mac",
+      key: "radio",
+      render: (text) => {
+        return (
+          <Radio id={`btn@${text}`} checked={selectedEncoder.mac === text} />
+        );
+      },
+    },
     {
       title: intl.formatMessage(Messages.Text_Common_EncoderName),
       dataIndex: "nickName",
       key: "nickName",
       render: (text) => {
-        return (
-          <span
-            className="table-content"
-            style={
-              selectedEncoder.nickName === text
-                ? { backgroundColor: "#FDEBD0" }
-                : null
-            }
-          >
-            {text}
-          </span>
-        );
+        return <span className="table-content">{text}</span>;
       },
     },
     {
@@ -436,6 +507,8 @@ const TVWall = () => {
             isActivedWall={isActivedWall}
             blockEncoderMapping={blockEncoderMapping}
             setBlockEncoderMapping={setBlockEncoderMapping}
+            selectedBlockNumber={selectedBlockNumber}
+            setSelectedBlockNumber={setSelectedBlockNumber}
           />
         </div>
       </div>
