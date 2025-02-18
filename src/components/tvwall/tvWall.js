@@ -122,6 +122,7 @@ const TvWall = ({
         });
         setBlocksDetail(tempBlocksDetail);
         setWallReloaded(false);
+        setSelectedBlockNumber(null);
       })();
     }
   }, [selectedWall, selectedTemplate]);
@@ -134,29 +135,63 @@ const TvWall = ({
       blocksDetail?.forEach((block) => {
         wallBlocksHTML.push(
           <div
-            id={block.block}
+            className="wall-block-outer"
             style={{
-              position: "absolute",
               width: block.col * 240,
               height: block.row * 240,
-              border: "2px solid black",
               left: ((block.smallestScreenNum - 1) % tvWallSize.col) * 240,
               top:
                 Math.floor((block.smallestScreenNum - 1) / tvWallSize.col) *
                 240,
-              color:
-                selectedBlockNumber?.toString() === block.block?.toString()
-                  ? "red"
-                  : "black",
-            }}
-            onClick={(event) => {
-              const blockNo = event.target.id;
-              // already selected, unselected it
-              if (selectedBlockNumber === blockNo) setSelectedBlockNumber(null);
-              else setSelectedBlockNumber(blockNo);
+              zIndex: 100,
             }}
           >
-            {block.smallestScreenNum}
+            <div
+              id={block.block}
+              className={
+                selectedBlockNumber?.toString() === block.block?.toString()
+                  ? "wall-block-selected"
+                  : "wall-block"
+              }
+              style={{
+                width: block.col * 240 - 4,
+                height: block.row * 240 - 4,
+              }}
+              onClick={(event) => {
+                const blockNo = event.target.id;
+                // already selected, unselected it
+                if (selectedBlockNumber === blockNo)
+                  setSelectedBlockNumber(null);
+                else setSelectedBlockNumber(blockNo);
+              }}
+            >
+              <div id={block.block} className="wall-block-title-row">
+                <span
+                  id={block.block}
+                  className={
+                    selectedBlockNumber?.toString() === block.block?.toString()
+                      ? "wall-block-title-selected"
+                      : "wall-block-title"
+                  }
+                >
+                  <FormattedMessage {...Messages.Text_Common_Block} />{" "}
+                  {block.block}
+                </span>
+              </div>
+              <div id={block.block}>
+                <div id={block.block} className="wall-block-desc">
+                  <FormattedMessage {...Messages.Text_Common_Dimension} />
+                  {" : "}
+                  {block.col} X {block.row}
+                </div>
+              </div>
+              <div id={block.block}>
+                <div id={block.block} className="wall-block-desc">
+                  <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
+                  {" : "}{" "}
+                </div>
+              </div>
+            </div>
           </div>
         );
       });
@@ -540,7 +575,13 @@ const TvWall = ({
   return (
     <div
       id="tv-wall-container"
-      style={{ width: "100%", height: "100%", border: "1px solid #a5a5a5" }}
+      style={{
+        padding: 6,
+        width: tvWallSize.col * 240 + 12,
+        height: tvWallSize.row * 240 + 12,
+        borderRadius: 12,
+        backgroundColor: "white",
+      }}
     >
       {wallHTML}
       {/* {tvWallTemplate} */}

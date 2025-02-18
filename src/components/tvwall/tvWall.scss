@@ -1,18 +1,49 @@
+.wall-block-outer {
+    position: absolute;
+    background-color: #e7e7e7;
+    border-radius: 8px;
+    cursor: pointer;
+    border: solid 2px #ffffff;
+}
+
 .wall-block {
-    
+    position: absolute;
+    border: solid 8px #e7e7e7;
+    border-radius: 6px;
+}
+
+.wall-block-selected {
+    position: absolute;
+    border: solid 8px #757371;
+    border-radius: 6px;
+}
+
+.wall-block-title-row {
+    padding: 18px 18px 10px 12px;
 }
 
 .wall-block-title {
+    border-radius: 4px;
     color: #45413e;
     font-family: Noto Sans TC;
     font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 12px;
+    font-weight: 500;
 }
 
-.wall-block-text {
-    height: 24px;
-    color: #45413e;
+.wall-block-title-selected {
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #ffffff;
+    background-color: #757371;
     font-family: Noto Sans TC;
-    font-size: 14px;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.wall-block-desc {
+    padding: 8px 0px 0px 14px;
+    font-family: Noto Sans TC;
+    font-size: 16px;
+    font-weight: normal;
+    color: #45413e;
 }
