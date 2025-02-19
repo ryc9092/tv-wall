@@ -132,6 +132,7 @@ const TVWall = () => {
           store: store,
           activeId: selectedWall.wallId,
         });
+        console.log(activedWall, "!!!");
         if (activedWall && activedWall.templateId === selectedTemplate?.id) {
           // has actived wall, and select template is the same
           let tempMap = {};
@@ -146,16 +147,54 @@ const TVWall = () => {
               }
             });
           });
+          console.log(tempMap, "kkkk");
           setIsActivedWall(true);
           setBlockEncoderMapping(tempMap);
         } else {
           // has actived wall, but select the other template OR doesn't has actived wall
           setIsActivedWall(false);
           setBlocks([]);
+          setBlockEncoderMapping([]);
         }
       }
     })();
   }, [selectedTemplate, encoders, selectedWall.wallId, store]);
+
+    useEffect(() => {
+      // const handleLinkScreen = (decoderMac, encoderMac) => {
+      //   createDeviceLink({
+      //     store: store,
+      //     id: `video.${decoderMac}`,
+      //     linkType: "video",
+      //     encoder: encoderMac,
+      //     decoders: [decoderMac],
+      //     value1: "",
+      //     remark: "",
+      //     isPreset: "N",
+      //   }).then((result) => {
+      //     if (result) {
+      //       showSuccessNotificationByMsg(
+      //         intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess)
+      //       );
+      //     } else {
+      //       showWarningNotification(
+      //         intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail)
+      //       );
+      //     }
+      //     setSelectedScreen(null);
+      //     setSelectedEncoder({
+      //       nickName: "",
+      //       mac: "",
+      //       previewUrl: "",
+      //     });
+      //     setReload(Math.random());
+      //   });
+      // };
+      if (selectedBlockNumber && selectedEncoder.mac) {
+        console.log(selectedBlockNumber , selectedEncoder.mac, "jjjj", blocks)
+        // handleLinkScreen(selectedScreen, selectedEncoder.mac);
+      }
+    }, [selectedBlockNumber, selectedEncoder, store, intl]);
 
   // Set "normal/abnormal encoder list" when search filter is changed
   useEffect(() => {

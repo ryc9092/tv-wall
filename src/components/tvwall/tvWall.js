@@ -133,7 +133,7 @@ const TvWall = ({
   useEffect(() => {
     let wallBlocksHTML = [];
     if (tvWallSize.col !== 0) {
-      console.log(blocksDetail)
+      console.log(blocksDetail);
       blocksDetail?.forEach((block) => {
         wallBlocksHTML.push(
           <div
@@ -191,9 +191,9 @@ const TvWall = ({
                 <div id={block.block} className="wall-block-desc">
                   <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
                   {" : "}{" "}
-                  {/* {decoder.encoder?.nickName
-                    ? decoder.encoder?.nickName
-                    : intl.formatMessage(Messages.Text_Common_None)} */}
+                  {blockEncoderMapping[block.block]?.nickName
+                    ? blockEncoderMapping[block.block].nickName
+                    : intl.formatMessage(Messages.Text_Common_None)}
                 </div>
               </div>
             </div>
