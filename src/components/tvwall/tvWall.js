@@ -1,9 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../components/store/store";
+import { Button } from "antd";
 import { getTemplateScreensById, getWallScreensById } from "../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
 import ScreenBackgroundImage from "../../assets/screenBackground.png";
+import ClearLinkIcon from "../../assets/clearLink.png";
+import ClearLinkDisabledIcon from "../../assets/clearLinkDisabled.png";
 import "./tvWall.scss";
 import "../../App.scss";
 
@@ -176,6 +179,86 @@ const TvWall = ({
                     : intl.formatMessage(Messages.Text_Common_None)}
                 </div>
               </div>
+              <div
+                // id={`card@${decoder.mac}`}
+                className="single-screen-btn-position"
+                style={{
+                  marginLeft: 95 + (block.col - 1) * 240,
+                  marginTop: 55 + (block.col - 1) * 240,
+                }}
+              >
+                {blockEncoderMapping[block.block]?.nickName ? (
+                  <Button
+                    // id={`btn@${decoder.mac}`}
+                    type="primary"
+                    style={{
+                      color: "#e7e7e7",
+                      backgroundColor: "#262320",
+                      position: "absolute",
+                      borderRadius: "20px",
+                      zIndex: 100,
+                    }}
+                    // onClick={(event) => handleClearScreen(event)}
+                  >
+                    <div style={{ display: "flex" }}>
+                      <img
+                        // id={`btn@${decoder.mac}`}
+                        alt="clear link"
+                        src={ClearLinkIcon}
+                        style={{
+                          width: 18,
+                          height: 18,
+                          marginTop: 2,
+                          marginRight: 6,
+                        }}
+                      />
+                      <span
+                        // id={`btn@${decoder.mac}`}
+                        className="single-screen-btn-text"
+                      >
+                        <FormattedMessage
+                          {...Messages.Text_Button_ClearSource}
+                        />
+                      </span>
+                    </div>
+                  </Button>
+                ) : (
+                  <Button
+                    // id={`btn@${decoder.mac}`}
+                    type="primary"
+                    disabled
+                    style={{
+                      color: "#a5a5a5",
+                      backgroundColor: "#c6c6c6",
+                      position: "absolute",
+                      borderRadius: "20px",
+                      zIndex: 100,
+                    }}
+                  >
+                    <div style={{ display: "flex" }}>
+                      <img
+                        // id={`btn@${decoder.mac}`}
+                        alt="clear link"
+                        src={ClearLinkDisabledIcon}
+                        style={{
+                          width: 18,
+                          height: 18,
+                          marginTop: 2,
+                          marginRight: 6,
+                        }}
+                      />
+                      <span
+                        // id={`btn@${decoder.mac}`}
+                        className="single-screen-btn-text"
+                      >
+                        <FormattedMessage
+                          {...Messages.Text_Button_ClearSource}
+                        />
+                      </span>
+                    </div>
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
         );
@@ -189,7 +272,14 @@ const TvWall = ({
         {wallBlocksHTML}
       </div>
     );
-  }, [blocksDetail, tvWallSize, selectedBlockNumber, blockEncoderMapping, intl, setSelectedBlockNumber]);
+  }, [
+    blocksDetail,
+    tvWallSize,
+    selectedBlockNumber,
+    blockEncoderMapping,
+    intl,
+    setSelectedBlockNumber,
+  ]);
 
   return (
     <div

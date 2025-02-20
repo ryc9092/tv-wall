@@ -3,7 +3,6 @@ import { StoreContext } from "../components/store/store";
 import { Card, Input, Select, Table, Tag, Modal, Radio } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import TvWall from "../components/tvwall/tvWall";
-import useWindowDimensions from "../utils/WindowDimension";
 import {
   activeWall,
   deactiveWall,
@@ -25,7 +24,6 @@ import "./TVWall.scss";
 
 const TVWall = () => {
   const intl = useIntl();
-  const { width, height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [wallOptions, setWallOptions] = useState([]);
   const [wallDimension, setWallDimension] = useState({ col: 0, row: 0 });
