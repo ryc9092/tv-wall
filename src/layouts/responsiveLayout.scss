@@ -18,13 +18,24 @@
     background-color: #e7e7e7 !important;
 }
 
-@media(max-height: 675px) {
-    .responsive-sider {
-        width: 224px;
-        height: 643px;
-        background-color: #e7e7e7 !important;
-    }
-}
+//  ipad air chrome: height -> 695px, width -> 1179px
+//  ipad air chrome full screen: height -> 795px, width -> 1179px
+
+// @media(max-height: 795px) {
+//     .responsive-sider {
+//         width: 224px;
+//         height: 739px;
+//         background-color: #e7e7e7 !important;
+//     }
+// }
+
+// @media(max-width: 1179px) {
+//     .responsive-sider {
+//         width: 224px;
+//         height: 643px;
+//         background-color: #e7e7e7 !important;
+//     }
+// }
 
 .ant-layout-sider-trigger {
     display: none;
