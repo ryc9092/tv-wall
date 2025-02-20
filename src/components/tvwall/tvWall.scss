@@ -8,14 +8,16 @@
 
 .wall-block {
     position: absolute;
-    border: solid 8px #e7e7e7;
+    border: solid 8px rgba(0, 0, 0, 0);
     border-radius: 6px;
+    z-index: 100;
 }
 
 .wall-block-selected {
     position: absolute;
     border: solid 8px #757371;
     border-radius: 6px;
+    z-index: 100;
 }
 
 .wall-block-title-row {
