@@ -41,9 +41,11 @@ const TVWall = () => {
     nickName: "",
   });
   const [blocks, setBlocks] = useState([]);
+  const [blocksDetail, setBlocksDetail] = useState([]); // [{block: 1, smallestScreenNum: 1, col: 1, row: 1, details: [...]}]
   const [isActivedWall, setIsActivedWall] = useState(false);
   const [blockEncoderMapping, setBlockEncoderMapping] = useState({});
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [reload, setReload] = useState(null);
 
   // Set "wall options"
   useEffect(() => {
@@ -130,7 +132,6 @@ const TVWall = () => {
           store: store,
           activeId: selectedWall.wallId,
         });
-        console.log(activedWall, "!!!");
         if (activedWall && activedWall.templateId === selectedTemplate?.id) {
           // has actived wall, and select template is the same
           let tempMap = {};
@@ -145,54 +146,70 @@ const TVWall = () => {
               }
             });
           });
-          console.log(tempMap, "kkkk");
           setIsActivedWall(true);
           setBlockEncoderMapping(tempMap);
         } else {
           // has actived wall, but select the other template OR doesn't has actived wall
           setIsActivedWall(false);
           setBlocks([]);
-          setBlockEncoderMapping([]);
+          setBlockEncoderMapping({});
         }
       }
     })();
-  }, [selectedTemplate, encoders, selectedWall.wallId, store]);
+  }, [selectedTemplate, encoders, selectedWall.wallId, store, reload]);
 
-    useEffect(() => {
-      // const handleLinkScreen = (decoderMac, encoderMac) => {
-      //   createDeviceLink({
-      //     store: store,
-      //     id: `video.${decoderMac}`,
-      //     linkType: "video",
-      //     encoder: encoderMac,
-      //     decoders: [decoderMac],
-      //     value1: "",
-      //     remark: "",
-      //     isPreset: "N",
-      //   }).then((result) => {
-      //     if (result) {
-      //       showSuccessNotificationByMsg(
-      //         intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess)
-      //       );
-      //     } else {
-      //       showWarningNotification(
-      //         intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail)
-      //       );
-      //     }
-      //     setSelectedScreen(null);
-      //     setSelectedEncoder({
-      //       nickName: "",
-      //       mac: "",
-      //       previewUrl: "",
-      //     });
-      //     setReload(Math.random());
-      //   });
-      // };
-      if (selectedBlockNumber && selectedEncoder.mac) {
-        console.log(selectedBlockNumber , selectedEncoder.mac, "jjjj", blocks)
-        // handleLinkScreen(selectedScreen, selectedEncoder.mac);
-      }
-    }, [selectedBlockNumber, selectedEncoder, store, intl]);
+  useEffect(() => {
+    const handleActiveWall = async (data) => {
+      activeWall(data).then((result) => {
+        if (result) {
+          showSuccessNotificationByMsg(
+            intl.formatMessage(Messages.Text_TVWall_ActiveSuccess)
+          );
+        } else {
+          showWarningNotification(
+            intl.formatMessage(Messages.Text_TVWall_ActiveFail)
+          );
+        }
+        setSelectedBlockNumber(null);
+        setSelectedEncoder({
+          nickName: "",
+          mac: "",
+          previewUrl: "",
+        });
+        setReload(Math.random());
+      });
+    };
+    if (selectedBlockNumber && selectedEncoder.mac) {
+      let apiFormatBlocks = [];
+      blocksDetail?.forEach((block) => {
+        let blockDecoders = [];
+        block.detail?.forEach((detail) => {
+          blockDecoders.push(detail.decoder);
+        });
+        apiFormatBlocks.push({
+          block: block.block,
+          col: block.col,
+          row: block.row,
+          // update block to link new encoder
+          encoder:
+            selectedBlockNumber.toString() === block.block.toString()
+              ? selectedEncoder.mac
+              : block.detail[0].encoder,
+          decoder: blockDecoders,
+        });
+      });
+      const data = {
+        activeId: selectedWall.wallId,
+        wallId: selectedWall.wallId,
+        wallType: "normal",
+        templateId: selectedTemplate.templateId,
+        blocks: apiFormatBlocks,
+        isPreset: "N",
+        store: store,
+      };
+      handleActiveWall(data);
+    }
+  }, [selectedBlockNumber, selectedEncoder, store, intl, blocksDetail]);
 
   // Set "normal/abnormal encoder list" when search filter is changed
   useEffect(() => {
@@ -241,40 +258,40 @@ const TVWall = () => {
     setChooseEncoderTime(Date.now());
   };
 
-  const handleActiveWall = async () => {
-    try {
-      let outputBlocks = [];
+  // const handleActiveWall = async () => {
+  //   try {
+  //     let outputBlocks = [];
 
-      blocks.forEach((block, idx) => {
-        outputBlocks[idx] = {
-          block: block.block,
-          row: block.row,
-          col: block.col,
-          encoder: block.encoder.mac ? block.encoder.mac : "",
-          marginLeft: block.marginLeft,
-          marginTop: block.marginTop,
-          decoder: block.decoder,
-        };
-      });
-      const result = await activeWall({
-        activeId: selectedWall.wallId,
-        wallId: selectedWall.wallId,
-        wallType: "normal",
-        templateId: selectedTemplate.templateId,
-        blocks: outputBlocks,
-        isPreset: "N",
-        store: store,
-      });
-      if (!result) throw new Error("call api failed");
-      showSuccessNotificationByMsg(
-        intl.formatMessage(Messages.Text_TVWall_ActiveSuccess)
-      );
-    } catch (error) {
-      showWarningNotification(
-        intl.formatMessage(Messages.Text_TVWall_ActiveFail)
-      );
-    }
-  };
+  //     blocks.forEach((block, idx) => {
+  //       outputBlocks[idx] = {
+  //         block: block.block,
+  //         row: block.row,
+  //         col: block.col,
+  //         encoder: block.encoder.mac ? block.encoder.mac : "",
+  //         marginLeft: block.marginLeft,
+  //         marginTop: block.marginTop,
+  //         decoder: block.decoder,
+  //       };
+  //     });
+  //     const result = await activeWall({
+  //       activeId: selectedWall.wallId,
+  //       wallId: selectedWall.wallId,
+  //       wallType: "normal",
+  //       templateId: selectedTemplate.templateId,
+  //       blocks: outputBlocks,
+  //       isPreset: "N",
+  //       store: store,
+  //     });
+  //     if (!result) throw new Error("call api failed");
+  //     showSuccessNotificationByMsg(
+  //       intl.formatMessage(Messages.Text_TVWall_ActiveSuccess)
+  //     );
+  //   } catch (error) {
+  //     showWarningNotification(
+  //       intl.formatMessage(Messages.Text_TVWall_ActiveFail)
+  //     );
+  //   }
+  // };
 
   const handleDeactiveWall = async () => {
     try {
@@ -331,7 +348,6 @@ const TVWall = () => {
         isPreset: "N",
         // store: store,
       };
-      console.log(data);
 
       // createDeviceLink({
       //   store: store,
@@ -362,7 +378,6 @@ const TVWall = () => {
       // });
     };
     if (selectedBlockNumber && selectedEncoder.mac) {
-      console.log(selectedBlockNumber, selectedEncoder.mac, "lsdkfjsdlfjdlfkj");
       handleLinkScreen(selectedEncoder.mac);
     }
   }, [selectedBlockNumber, selectedEncoder, store, intl]);
@@ -521,7 +536,7 @@ const TVWall = () => {
               <FormattedMessage {...Messages.Text_TVWall_ConfirmClear} />
             </p>
           </Modal>
-          <div className="tvwall-option-play-btn" onClick={handleActiveWall}>
+          <div className="tvwall-option-play-btn">
             <img
               alt="play"
               src={PlayIcon}
@@ -546,6 +561,8 @@ const TVWall = () => {
             setBlockEncoderMapping={setBlockEncoderMapping}
             selectedBlockNumber={selectedBlockNumber}
             setSelectedBlockNumber={setSelectedBlockNumber}
+            blocksDetail={blocksDetail}
+            setBlocksDetail={setBlocksDetail}
           />
         </div>
       </div>

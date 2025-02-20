@@ -21,11 +21,13 @@ const TvWall = ({
   setBlockEncoderMapping,
   selectedBlockNumber,
   setSelectedBlockNumber,
+  blocksDetail,
+  setBlocksDetail,
 }) => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
   const [tvWallSize, setTvWallSize] = useState({ col: 0, row: 0 });
-  const [blocksDetail, setBlocksDetail] = useState([]); // [{block: 1, smallestScreenNum: 1, col: 1, row: 1, details: [...]}]
+
   useEffect(() => {
     let tempScreens = [];
     let tempBlocksDetail = [];
@@ -47,10 +49,19 @@ const TvWall = ({
         wallScreens.sort(function (wall1, wall2) {
           return wall1.num - wall2.num;
         });
-        if (wallScreens && templateScreens) {
+        if (
+          wallScreens &&
+          templateScreens &&
+          blockEncoderMapping &&
+          Object.keys(blockEncoderMapping).length >= 0
+        ) {
           wallScreens.forEach((screen, idx) => {
             let tempScreen = screen;
-            tempScreen.encoder = "";
+            tempScreen.encoder = Object.values(blockEncoderMapping).includes(
+              templateScreens[idx].block
+            )
+              ? blockEncoderMapping[templateScreens[idx].block].mac
+              : "";
             tempScreen.block = parseInt(templateScreens[idx].block);
             tempScreens.push(tempScreen);
 
@@ -106,13 +117,19 @@ const TvWall = ({
         setSelectedBlockNumber(null);
       })();
     }
-  }, [selectedWall, selectedTemplate, store, setSelectedBlockNumber]);
+  }, [
+    selectedWall,
+    selectedTemplate,
+    store,
+    setSelectedBlockNumber,
+    setBlocksDetail,
+    blockEncoderMapping,
+  ]);
 
   const [wallHTML, setWallHTML] = useState();
   useEffect(() => {
     let wallBlocksHTML = [];
     if (tvWallSize.col !== 0) {
-      console.log(blocksDetail);
       blocksDetail?.forEach((block) => {
         wallBlocksHTML.push(
           <div
