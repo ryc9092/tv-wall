@@ -1,6 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../components/store/store";
-import { Button, Card, Divider, Input, Modal, Select, Table, Tag } from "antd";
+import {
+  Button,
+  Card,
+  Divider,
+  Input,
+  Modal,
+  Select,
+  Table,
+  Tag,
+  Radio,
+} from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import TvWall from "./tvWall";
 import {
@@ -34,6 +44,8 @@ const TVWallModal = ({
   const [selectedWall, setSelectedWall] = useState({});
   const [templateOptions, setTemplateOptions] = useState([]);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [selectedBlockNumber, setSelectedBlockNumber] = useState(null);
+  const [clearBlockNumber, setClearBlockNumber] = useState(null);
   const [selectedEncoder, setSelectedEncoder] = useState({
     mac: "",
     previewUrl: "",
@@ -43,6 +55,7 @@ const TVWallModal = ({
   const [searchFilter, setSearchFilter] = useState("");
   const [blocks, setBlocks] = useState([]);
   const [blockEncoderMapping, setBlockEncoderMapping] = useState({});
+  const [blocksDetail, setBlocksDetail] = useState([]); // [{block: 1, smallestScreenNum: 1, col: 1, row: 1, details: [...]}]
 
   // Set "wall options"
   useEffect(() => {
@@ -135,32 +148,43 @@ const TVWallModal = ({
     setSelectedWall(wall);
   };
 
+  const [chooseEncoderTime, setChooseEncoderTime] = useState(null);
   const handleChooseEncoder = (encoder) => {
-    setSelectedEncoder({
-      mac: encoder.mac,
-      previewUrl: encoder.previewUrl,
-      nickName: encoder.nickName,
-    });
+    // prevent choose encoder interval too short
+    if (chooseEncoderTime === null || Date.now() - chooseEncoderTime > 300) {
+      // unselect encoder if it already selected
+      if (selectedEncoder.mac === encoder.mac)
+        setSelectedEncoder({
+          nickName: "",
+          mac: "",
+          previewUrl: "",
+        });
+      else
+        setSelectedEncoder({
+          nickName: encoder.nickName,
+          mac: encoder.mac,
+          previewUrl: encoder.previewUrl,
+        });
+    }
+    setChooseEncoderTime(Date.now());
   };
 
   const columns = [
+    {
+      dataIndex: "mac",
+      key: "radio",
+      render: (text) => {
+        return (
+          <Radio id={`btn@${text}`} checked={selectedEncoder.mac === text} />
+        );
+      },
+    },
     {
       title: intl.formatMessage(Messages.Text_Common_EncoderName),
       dataIndex: "nickName",
       key: "nickName",
       render: (text) => {
-        return (
-          <span
-            className="table-content"
-            style={
-              selectedEncoder.nickName === text
-                ? { backgroundColor: "#FDEBD0" }
-                : null
-            }
-          >
-            {text}
-          </span>
-        );
+        return <span className="table-content">{text}</span>;
       },
     },
     {
@@ -212,6 +236,32 @@ const TVWallModal = ({
     },
   ];
 
+  // set link of block & encoder
+  useEffect(() => {
+    if (selectedBlockNumber && selectedEncoder.mac) {
+      setBlockEncoderMapping({
+        ...blockEncoderMapping,
+        [selectedBlockNumber]: selectedEncoder,
+      });
+      setSelectedBlockNumber(null);
+      setSelectedEncoder({
+        nickName: "",
+        mac: "",
+        previewUrl: "",
+      });
+    }
+  }, [blockEncoderMapping, selectedBlockNumber, selectedEncoder]);
+
+  useEffect(() => {
+    if (clearBlockNumber) {
+      setBlockEncoderMapping({
+        ...blockEncoderMapping,
+        [clearBlockNumber]: { mac: "", previewUrl: "", nickName: "" },
+      });
+      setClearBlockNumber(null);
+    }
+  }, [clearBlockNumber]);
+
   const handleReset = () => {
     setSituationItemDesc("");
     setWallOptions([]);
@@ -234,11 +284,20 @@ const TVWallModal = ({
     if (selectedWall && selectedTemplate) {
       let tempBlocks = [];
       Object.entries(blockEncoderMapping)?.forEach(([key, block]) => {
+        let blockDetail = {};
+        blocksDetail.forEach((detail) => {
+          if (detail.block.toString() === key.toString()) {
+            blockDetail = {
+              col: detail.col,
+              row: detail.row,
+            };
+          }
+        });
         tempBlocks.push({
           block: parseInt(key),
           encoder: block.mac,
-          col: block.col,
-          row: block.row,
+          col: blockDetail.col,
+          row: blockDetail.row,
         });
       });
       await presetWall({
@@ -354,6 +413,11 @@ const TVWallModal = ({
                 setBlocks={setBlocks}
                 blockEncoderMapping={blockEncoderMapping}
                 setBlockEncoderMapping={setBlockEncoderMapping}
+                selectedBlockNumber={selectedBlockNumber}
+                setSelectedBlockNumber={setSelectedBlockNumber}
+                setClearBlockNumber={setClearBlockNumber}
+                blocksDetail={blocksDetail}
+                setBlocksDetail={setBlocksDetail}
               />
             </div>
           </div>
@@ -371,7 +435,7 @@ const TVWallModal = ({
               <div className="tvwall-card-right-desc">
                 <FormattedMessage {...Messages.Text_TVWall_VideoSourceDesc} />
               </div>
-              {/* <div className="tvwall-card-right-preview">
+              <div className="tvwall-card-right-preview">
                 {selectedEncoder.previewUrl ? (
                   <div>
                     <iframe
@@ -386,7 +450,7 @@ const TVWallModal = ({
                     <FormattedMessage {...Messages.Text_TVWall_Preview} />
                   </div>
                 )}
-              </div> */}
+              </div>
               <Input
                 className="tvwall-card-right-search tvwall-input"
                 variant="filled"
