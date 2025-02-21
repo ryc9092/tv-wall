@@ -21,6 +21,7 @@ const TvWall = ({
   setBlockEncoderMapping,
   selectedBlockNumber,
   setSelectedBlockNumber,
+  setClearBlockNumber,
   blocksDetail,
   setBlocksDetail,
 }) => {
@@ -197,7 +198,7 @@ const TvWall = ({
                 </div>
               </div>
               <div
-                // id={`card@${decoder.mac}`}
+                id={block.block}
                 className="single-screen-btn-position"
                 style={{
                   marginLeft: 95 + (block.col - 1) * 240,
@@ -206,7 +207,7 @@ const TvWall = ({
               >
                 {blockEncoderMapping[block.block]?.nickName ? (
                   <Button
-                    // id={`btn@${decoder.mac}`}
+                    id={block.block}
                     type="primary"
                     style={{
                       color: "#e7e7e7",
@@ -215,11 +216,14 @@ const TvWall = ({
                       borderRadius: "20px",
                       zIndex: 100,
                     }}
-                    // onClick={(event) => handleClearScreen(event)}
+                    onClick={(event) => {
+                      let clearBlockNumber = event.target.id;
+                      setClearBlockNumber(clearBlockNumber);
+                    }}
                   >
-                    <div style={{ display: "flex" }}>
+                    <div id={block.block} style={{ display: "flex" }}>
                       <img
-                        // id={`btn@${decoder.mac}`}
+                        id={block.block}
                         alt="clear link"
                         src={ClearLinkIcon}
                         style={{
@@ -229,10 +233,7 @@ const TvWall = ({
                           marginRight: 6,
                         }}
                       />
-                      <span
-                        // id={`btn@${decoder.mac}`}
-                        className="single-screen-btn-text"
-                      >
+                      <span id={block.block} className="single-screen-btn-text">
                         <FormattedMessage
                           {...Messages.Text_Button_ClearSource}
                         />
@@ -241,7 +242,7 @@ const TvWall = ({
                   </Button>
                 ) : (
                   <Button
-                    // id={`btn@${decoder.mac}`}
+                    id={block.block}
                     type="primary"
                     disabled
                     style={{
@@ -254,7 +255,7 @@ const TvWall = ({
                   >
                     <div style={{ display: "flex" }}>
                       <img
-                        // id={`btn@${decoder.mac}`}
+                        id={block.block}
                         alt="clear link"
                         src={ClearLinkDisabledIcon}
                         style={{
@@ -264,10 +265,7 @@ const TvWall = ({
                           marginRight: 6,
                         }}
                       />
-                      <span
-                        // id={`btn@${decoder.mac}`}
-                        className="single-screen-btn-text"
-                      >
+                      <span id={block.block} className="single-screen-btn-text">
                         <FormattedMessage
                           {...Messages.Text_Button_ClearSource}
                         />

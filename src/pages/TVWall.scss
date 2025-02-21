@@ -49,28 +49,24 @@
 }
 
 .tvwall-option-trash-btn {
-    width: 139px;
+    width: 146px;
     height: 40px;
     cursor: pointer;
-    margin: 40px 12px 0px 89px;
-}
-
-.tvwall-option-trash-btn-collapse {
-    width: 139px;
-    height: 40px;
-    cursor: pointer;
-    margin: 40px 12px 0px 174px;
+    padding: 8px 12px;
+    margin: 32px 12px 0px 89px;
+    border: 1px solid #c33434;
+    border-radius: 26px;
 }
 
 .tvwall-option-trash-icon {
     width: 18px;
     margin-top: 2px;
-    margin-right: 3px;
+    margin-right: 6px;
 }
 
 .tvwall-option-trash-text {
     width: 139px;
-    color: #898989;
+    color: #c33434;
     font-family: Noto Sans TC;
     font-size: 14px;
     font-weight: 600;

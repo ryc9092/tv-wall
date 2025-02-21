@@ -258,7 +258,7 @@ export default defineMessages({
   },
   Text_TVWall_ClearWallConnection: {
     id: "Text-TVWall-ClearWallConnection",
-    defaultMessage: "清除牆面影像",
+    defaultMessage: "清除所有來源",
   },
   Text_TVWall_ClearWallConnectionDesc: {
     id: "Text-TVWall-ClearWallConnectionDesc",

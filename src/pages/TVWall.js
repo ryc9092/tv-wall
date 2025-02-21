@@ -17,8 +17,7 @@ import {
   showWarningNotification,
   showSuccessNotificationByMsg,
 } from "../utils/Utils";
-import TrashIcon from "../assets/trash.png";
-import PlayIcon from "../assets/play.png";
+import ClearLinkIcon from "../assets/clearLinkIconRed.png";
 import "../App.scss";
 import "./TVWall.scss";
 
@@ -31,6 +30,7 @@ const TVWall = () => {
   const [templateOptions, setTemplateOptions] = useState([]);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [selectedBlockNumber, setSelectedBlockNumber] = useState(null);
+  const [clearBlockNumber, setClearBlockNumber] = useState(null);
   const [searchFilter, setSearchFilter] = useState("");
   const [encoders, setEncoders] = useState([]);
   const [filteredEncoders, setFilteredEncoders] = useState([]);
@@ -158,27 +158,28 @@ const TVWall = () => {
     })();
   }, [selectedTemplate, encoders, selectedWall.wallId, store, reload]);
 
-  useEffect(() => {
-    const handleActiveWall = async (data) => {
-      activeWall(data).then((result) => {
-        if (result) {
-          showSuccessNotificationByMsg(
-            intl.formatMessage(Messages.Text_TVWall_ActiveSuccess)
-          );
-        } else {
-          showWarningNotification(
-            intl.formatMessage(Messages.Text_TVWall_ActiveFail)
-          );
-        }
-        setSelectedBlockNumber(null);
-        setSelectedEncoder({
-          nickName: "",
-          mac: "",
-          previewUrl: "",
-        });
-        setReload(Math.random());
+  const handleActiveWall = async (data) => {
+    activeWall(data).then((result) => {
+      if (result) {
+        showSuccessNotificationByMsg(
+          intl.formatMessage(Messages.Text_TVWall_ActiveSuccess)
+        );
+      } else {
+        showWarningNotification(
+          intl.formatMessage(Messages.Text_TVWall_ActiveFail)
+        );
+      }
+      setSelectedBlockNumber(null);
+      setSelectedEncoder({
+        nickName: "",
+        mac: "",
+        previewUrl: "",
       });
-    };
+      setReload(Math.random());
+    });
+  };
+
+  useEffect(() => {
     if (selectedBlockNumber && selectedEncoder.mac) {
       let apiFormatBlocks = [];
       blocksDetail?.forEach((block) => {
@@ -209,7 +210,61 @@ const TVWall = () => {
       };
       handleActiveWall(data);
     }
-  }, [selectedBlockNumber, selectedEncoder, store, intl, blocksDetail]);
+  }, [
+    selectedBlockNumber,
+    selectedEncoder,
+    store,
+    intl,
+    blocksDetail,
+    selectedWall,
+    selectedTemplate,
+  ]);
+
+  useEffect(() => {
+    (async () => {
+      if (clearBlockNumber) {
+        try {
+          const result = await deactiveWall({
+            activeId: selectedWall.wallId,
+            store: store,
+          });
+          if (!result) throw new Error("call api failed");
+          let apiFormatBlocks = [];
+          blocksDetail?.forEach((block) => {
+            let blockDecoders = [];
+            block.detail?.forEach((detail) => {
+              blockDecoders.push(detail.decoder);
+            });
+            apiFormatBlocks.push({
+              block: block.block,
+              col: block.col,
+              row: block.row,
+              // update block to not link encoder
+              encoder:
+                clearBlockNumber === block.block.toString()
+                  ? ""
+                  : block.detail[0].encoder,
+              decoder: blockDecoders,
+            });
+          });
+          const data = {
+            activeId: selectedWall.wallId,
+            wallId: selectedWall.wallId,
+            wallType: "normal",
+            templateId: selectedTemplate.templateId,
+            blocks: apiFormatBlocks,
+            isPreset: "N",
+            store: store,
+          };
+          handleActiveWall(data);
+        } catch (error) {
+          showWarningNotification(
+            intl.formatMessage(Messages.Text_TVWall_DeactiveFail)
+          );
+        }
+      }
+    })();
+  }, [clearBlockNumber, intl, selectedWall, store]);
 
   // Set "normal/abnormal encoder list" when search filter is changed
   useEffect(() => {
@@ -258,41 +313,6 @@ const TVWall = () => {
     setChooseEncoderTime(Date.now());
   };
 
-  // const handleActiveWall = async () => {
-  //   try {
-  //     let outputBlocks = [];
-
-  //     blocks.forEach((block, idx) => {
-  //       outputBlocks[idx] = {
-  //         block: block.block,
-  //         row: block.row,
-  //         col: block.col,
-  //         encoder: block.encoder.mac ? block.encoder.mac : "",
-  //         marginLeft: block.marginLeft,
-  //         marginTop: block.marginTop,
-  //         decoder: block.decoder,
-  //       };
-  //     });
-  //     const result = await activeWall({
-  //       activeId: selectedWall.wallId,
-  //       wallId: selectedWall.wallId,
-  //       wallType: "normal",
-  //       templateId: selectedTemplate.templateId,
-  //       blocks: outputBlocks,
-  //       isPreset: "N",
-  //       store: store,
-  //     });
-  //     if (!result) throw new Error("call api failed");
-  //     showSuccessNotificationByMsg(
-  //       intl.formatMessage(Messages.Text_TVWall_ActiveSuccess)
-  //     );
-  //   } catch (error) {
-  //     showWarningNotification(
-  //       intl.formatMessage(Messages.Text_TVWall_ActiveFail)
-  //     );
-  //   }
-  // };
-
   const handleDeactiveWall = async () => {
     try {
       const result = await deactiveWall({
@@ -324,63 +344,6 @@ const TVWall = () => {
     }
     setOpenConfirmModal(false);
   };
-
-  useEffect(() => {
-    const handleLinkScreen = (encoderMac) => {
-      let outputBlocks = [];
-      blocks.forEach((block, idx) => {
-        outputBlocks[idx] = {
-          block: block.block,
-          row: block.row,
-          col: block.col,
-          encoder: block.encoder.mac ? block.encoder.mac : "",
-          marginLeft: block.marginLeft,
-          marginTop: block.marginTop,
-          decoder: block.decoder,
-        };
-      });
-      let data = {
-        activeId: selectedWall.wallId,
-        wallId: selectedWall.wallId,
-        wallType: "normal",
-        templateId: selectedTemplate.templateId,
-        blocks: outputBlocks,
-        isPreset: "N",
-        // store: store,
-      };
-
-      // createDeviceLink({
-      //   store: store,
-      //   id: `video.${decoderMac}`,
-      //   linkType: "video",
-      //   encoder: encoderMac,
-      //   decoders: [decoderMac],
-      //   value1: "",
-      //   remark: "",
-      //   isPreset: "N",
-      // }).then((result) => {
-      //   if (result) {
-      //     showSuccessNotificationByMsg(
-      //       intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess)
-      //     );
-      //   } else {
-      //     showWarningNotification(
-      //       intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail)
-      //     );
-      //   }
-      //   setSelectedScreen(null);
-      //   setSelectedEncoder({
-      //     nickName: "",
-      //     mac: "",
-      //     previewUrl: "",
-      //   });
-      //   setReload(Math.random());
-      // });
-    };
-    if (selectedBlockNumber && selectedEncoder.mac) {
-      handleLinkScreen(selectedEncoder.mac);
-    }
-  }, [selectedBlockNumber, selectedEncoder, store, intl]);
 
   const columns = [
     {
@@ -496,18 +459,14 @@ const TVWall = () => {
             />
           </div>
           <div
-            className={
-              store.siderCollapse
-                ? "tvwall-option-trash-btn-collapse"
-                : "tvwall-option-trash-btn"
-            }
+            className="tvwall-option-trash-btn"
             onClick={() => {
               setOpenConfirmModal(true);
             }}
           >
             <img
               alt="trash"
-              src={TrashIcon}
+              src={ClearLinkIcon}
               className="tvwall-option-trash-icon"
             />
             <span className="tvwall-option-trash-text">
@@ -536,16 +495,6 @@ const TVWall = () => {
               <FormattedMessage {...Messages.Text_TVWall_ConfirmClear} />
             </p>
           </Modal>
-          <div className="tvwall-option-play-btn">
-            <img
-              alt="play"
-              src={PlayIcon}
-              className="tvwall-option-play-icon"
-            />
-            <span className="tvwall-option-play-text">
-              <FormattedMessage {...Messages.Text_TVWall_ActivateWall} />
-            </span>
-          </div>
         </div>
         <div id="wall-screen" className="tvwall-screen-container">
           <TvWall
@@ -561,6 +510,7 @@ const TVWall = () => {
             setBlockEncoderMapping={setBlockEncoderMapping}
             selectedBlockNumber={selectedBlockNumber}
             setSelectedBlockNumber={setSelectedBlockNumber}
+            setClearBlockNumber={setClearBlockNumber}
             blocksDetail={blocksDetail}
             setBlocksDetail={setBlocksDetail}
           />
