@@ -202,7 +202,7 @@ const TvWall = ({
                 className="single-screen-btn-position"
                 style={{
                   marginLeft: 95 + (block.col - 1) * 240,
-                  marginTop: 55 + (block.col - 1) * 240,
+                  marginTop: 55 + (block.row - 1) * 240,
                 }}
               >
                 {blockEncoderMapping[block.block]?.nickName ? (
@@ -280,10 +280,7 @@ const TvWall = ({
       });
     }
     setWallHTML(
-      <div
-        id="wallScreens"
-        style={{ width: "100%", height: "100%", position: "absolute" }}
-      >
+      <div id="wallScreens" style={{ position: "absolute" }}>
         {wallBlocksHTML}
       </div>
     );
@@ -300,15 +297,14 @@ const TvWall = ({
     <div
       id="tv-wall-container"
       style={{
-        padding: 6,
-        width: tvWallSize.col * 240 + 12,
-        height: tvWallSize.row * 240 + 12,
+        padding: 3,
+        width: tvWallSize.col * 240 + 6,
+        height: tvWallSize.row * 240 + 6,
         borderRadius: 12,
         backgroundColor: "white",
       }}
     >
       {wallHTML}
-      {/* {tvWallTemplate} */}
     </div>
   );
 };

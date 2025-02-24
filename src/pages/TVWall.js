@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
+import { Actions } from "../components/store/reducer";
 import { Card, Input, Select, Table, Tag, Modal, Radio } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import TvWall from "../components/tvwall/tvWall";
@@ -21,9 +22,12 @@ import ClearLinkIcon from "../assets/clearLinkIconRed.png";
 import "../App.scss";
 import "./TVWall.scss";
 
+import useWindowDimensions from "../utils/WindowDimension";
+
 const TVWall = () => {
   const intl = useIntl();
-  const [store] = useContext(StoreContext);
+  const [store, dispatch] = useContext(StoreContext);
+  const { width } = useWindowDimensions();
   const [wallOptions, setWallOptions] = useState([]);
   const [wallDimension, setWallDimension] = useState({ col: 0, row: 0 });
   const [selectedWall, setSelectedWall] = useState({});
@@ -46,6 +50,11 @@ const TVWall = () => {
   const [blockEncoderMapping, setBlockEncoderMapping] = useState({});
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [reload, setReload] = useState(null);
+
+  useEffect(() => {
+    if (width < 1180)
+      dispatch({ type: Actions.SetSiderCollapse, payload: true });
+  }, [dispatch, width]);
 
   // Set "wall options"
   useEffect(() => {
@@ -359,15 +368,16 @@ const TVWall = () => {
       title: intl.formatMessage(Messages.Text_Common_EncoderName),
       dataIndex: "nickName",
       key: "nickName",
+      minWidth: 55,
       render: (text) => {
         return <span className="table-content">{text}</span>;
       },
     },
     {
       title: intl.formatMessage(Messages.Text_Common_Model),
-      width: "35%",
       dataIndex: "model",
       key: "model",
+      minWidth: 105,
       filters: [
         {
           text: "ZyperUHD60",
@@ -516,14 +526,14 @@ const TVWall = () => {
           />
         </div>
       </div>
-      <div
-        className={
-          store.siderCollapse
-            ? "tvwall-card-container-collapse"
-            : "tvwall-card-container"
-        }
-      >
-        <Card className="tvwall-card-right">
+      <div className="tvwall-card-container">
+        <Card
+          className={
+            store.siderCollapse
+              ? "tvwall-card-right-collapse"
+              : "tvwall-card-right"
+          }
+        >
           <div className="tvwall-card-right-title">
             <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
           </div>
@@ -531,7 +541,7 @@ const TVWall = () => {
             <FormattedMessage {...Messages.Text_TVWall_VideoSourceDesc} />
           </div>
           <div className="tvwall-card-right-preview">
-            {selectedEncoder.previewUrl ? (
+            {selectedEncoder.nickName ? (
               <div>
                 <iframe
                   className="tvwall-card-right-preview-video"
@@ -541,7 +551,7 @@ const TVWall = () => {
                 <span>{selectedEncoder.nickName}</span>
               </div>
             ) : (
-              <div className="tvwall-card-right-preview-text tvwall-card-right-desc">
+              <div className="tvwall-card-right-preview-text tvwall-card-right-preview-text ">
                 <FormattedMessage {...Messages.Text_TVWall_Preview} />
               </div>
             )}
@@ -558,6 +568,7 @@ const TVWall = () => {
           <div className="tvwall-card-right-encoder-container">
             <Table
               columns={columns}
+              size="small"
               dataSource={filteredEncoders}
               pagination={{ pageSize: 11 }}
               onRow={(record) => ({
