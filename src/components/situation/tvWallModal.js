@@ -259,6 +259,7 @@ const TVWallModal = ({
         [clearBlockNumber]: { mac: "", previewUrl: "", nickName: "" },
       });
       setClearBlockNumber(null);
+      setSelectedBlockNumber(null);
     }
   }, [clearBlockNumber]);
 
