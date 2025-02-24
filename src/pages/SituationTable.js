@@ -19,6 +19,7 @@ import SingleScreenModal from "../components/situation/singlescreenModal";
 import USBModal from "../components/situation/usbModal";
 import AudioModal from "../components/situation/audioModal";
 import AudioSituationModal from "../components/situation/audioSituationModal";
+import TVWallViewModal from "../components/tvwall/situationTvWallView";
 import USBViewModal from "../components/usb/usbViewModal";
 import SingleScreenViewModal from "../components/singleScreen/singleScreenViewModal";
 import AudioViewHintModal from "../components/audio/audioViewHintModal";
@@ -101,6 +102,7 @@ const Situation = () => {
   };
 
   // view various connections
+  const [isTVWallViewModalOpen, setIsTVWallViewModalOpen] = useState(false);
   const [isUSBViewModalOpen, setIsUSBViewModalOpen] = useState(false);
   const [isSingleScreenViewModalOpen, setIsSingleScreenViewModalOpen] =
     useState(false);
@@ -114,6 +116,7 @@ const Situation = () => {
     if (type === "usb") setIsUSBViewModalOpen(true);
     else if (type === "subPreset") setIsAudioViewModalOpen(true);
     else if (type === "video") setIsSingleScreenViewModalOpen(true);
+    // else if (type === "tvwall") setIsTVWallViewModalOpen(true);
     else if (type === "tvwall") console.log("tvwall");
   };
 
@@ -121,10 +124,16 @@ const Situation = () => {
     if (
       !isUSBViewModalOpen &&
       !isSingleScreenViewModalOpen &&
-      !isAudioViewModalOpen
+      !isAudioViewModalOpen &&
+      !isTVWallViewModalOpen
     )
       setChoosedSituationDetailId(null);
-  }, [isUSBViewModalOpen, isSingleScreenViewModalOpen, isAudioViewModalOpen]);
+  }, [
+    isTVWallViewModalOpen,
+    isUSBViewModalOpen,
+    isSingleScreenViewModalOpen,
+    isAudioViewModalOpen,
+  ]);
 
   const columns = [
     {
@@ -695,6 +704,21 @@ const Situation = () => {
           </Modal>
         </div>
       </div>
+      {isTVWallViewModalOpen === true &&
+        choosedSituationDetailId !== undefined && (
+          <TVWallViewModal
+            situationDetailId={choosedSituationDetailId}
+            situationItemLength={situationItemLength}
+            isModalOpen={isTVWallViewModalOpen}
+            setIsModalOpen={setIsTVWallViewModalOpen}
+            setReload={setReload}
+            encoders={encoders}
+            setEncoders={setEncoders}
+            decoders={decoders}
+            setDecoders={setDecoders}
+            type={linkType}
+          />
+        )}
       {isUSBViewModalOpen === true &&
         choosedSituationDetailId !== undefined && (
           <USBViewModal
