@@ -509,13 +509,7 @@ const SingleScreen = () => {
           {decoderCards}
         </Row>
       </div>
-      <div
-        className={
-          store.siderCollapse
-            ? "singlescreen-card-container-collapse"
-            : "singlescreen-card-container"
-        }
-      >
+      <div className="singlescreen-card-container">
         <Card className="singlescreen-card-right">
           <div className="singlescreen-card-right-title">
             <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
@@ -524,7 +518,7 @@ const SingleScreen = () => {
             <FormattedMessage {...Messages.Text_TVWall_VideoSourceDesc} />
           </div>
           <div className="singlescreen-card-right-preview">
-            {selectedEncoder.previewUrl ? (
+            {selectedEncoder.nickName ? (
               <div>
                 <iframe
                   className="singlescreen-card-right-preview-video"

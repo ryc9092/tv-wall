@@ -137,20 +137,11 @@
 
 .singlescreen-card-container {
     width: 389px;
-    height: calc(100vh - 160px);
-    margin-right: 12px;
-    margin-left: 45px;
+    height: calc(100vh - 145px);
     border-radius: 24px;
     box-shadow: 0 2px 6px 0 rgba(124, 123, 122, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
-}
-
-.singlescreen-card-container-collapse {
-    width: 388px;
-    height: calc(100vh - 160px);
-    margin-right: 10px;
-    margin-left: 60px;
-    border-radius: 24px;
-    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+    position: absolute;
+    right: 26px;
 }
 
 .singlescreen-card-right {
@@ -215,7 +206,7 @@
 
 .singlescreen-card-right-encoder-container {
     margin-top: 10px;
-    height: calc(100vh - 535px);
+    height: calc(100vh - 515px);
     overflow-y: scroll;
 }
 
