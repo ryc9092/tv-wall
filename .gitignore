@@ -24,4 +24,4 @@ yarn-error.log*
 
 .vscode
 
-vars.json
+/public/vars.json
