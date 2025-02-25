@@ -5,7 +5,15 @@
 .mix-audio-matrix-modal {
     max-width: none !important;
     width: 968px !important;
-    margin-top: -60px;
+    margin-top: -70px;
+}
+
+@media(max-width: 1180px) {
+    .mix-audio-matrix-modal {
+        max-width: none !important;
+        width: 968px !important;
+        margin-top: -75px;
+    }
 }
 
 .mix-audio-matrix-modal-divider {
@@ -19,7 +27,7 @@
 
 .mix-audio-matrix-selection-column {
     width: 400px;
-    height: 560px;
+    height: 530px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -27,7 +35,7 @@
 @media(max-width: 1180px) {
     .mix-audio-matrix-selection-column {
         width: 400px;
-        height: 355px;
+        height: 348px;
         overflow-y: scroll;
         overflow-x: hidden;
     }
