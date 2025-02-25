@@ -52,7 +52,7 @@ const TVWall = () => {
   const [reload, setReload] = useState(null);
 
   useEffect(() => {
-    if (width < 1180)
+    if (width < 1240)
       dispatch({ type: Actions.SetSiderCollapse, payload: true });
   }, [dispatch, width]);
 
