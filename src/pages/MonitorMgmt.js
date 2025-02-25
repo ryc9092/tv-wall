@@ -175,7 +175,13 @@ const MonitorMgmt = () => {
       {/* <div className="monitor-container">
         <Row gutter={0}>{monitorCards}</Row>
       </div> */}
-      <div className="monitor-content-container">
+      <div
+        className={
+          store.siderCollapse
+            ? "monitor-content-container-collapse"
+            : "monitor-content-container"
+        }
+      >
         <Table
           className="monitor-content-table"
           columns={columns}
