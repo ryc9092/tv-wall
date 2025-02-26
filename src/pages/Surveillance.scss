@@ -1,8 +1,8 @@
 @import '../App.scss';
 
 .surveillance-layout {
-    margin-top: 48px;
-    margin-left: 80px;
+    margin-top: 38px;
+    margin-left: 48px;
 }
 
 .surveillance-container {
@@ -39,6 +39,12 @@
 .surveillance-stream-cover-text {
     font-family: Noto Sans TC;
     font-size: 24px;
+}
+
+.surveillance-modal {
+    max-width: none !important;
+    width: 1160px !important;
+    margin-top: -60px;
 }
 
 .surveillance-modal-stream-iframe {
