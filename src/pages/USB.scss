@@ -6,6 +6,12 @@
     width: 98%;
 }
 
+.usb-layout-column {
+    display: flex;
+    margin-top: 26px;
+    margin-left: 48px;
+}
+
 @media(max-width: 685px) {
     .container-width {
         width: 558px;
@@ -62,8 +68,29 @@
 }
 
 .usb-content-container {
-    width: 1520px;
-    height: 850px;
+    max-height: calc(100vh - 296px);
+    min-height: 455px;
+    width: calc(100vw - 360px);
+    max-width: calc(100vw - 360px);
+    min-width: 750px;
+    margin-top: 40px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    border-radius: 24px;
+    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+    background-color: white;
+    padding: 40px;
+}
+
+.usb-content-container-collapse {
+    max-height: calc(100vh - 296px);
+    min-height: 455px;
+    width: calc(100vw - 270px);
+    max-width: calc(100vw - 270px);
+    min-width: 840px;
     margin-top: 40px;
     flex-grow: 0;
     display: flex;
@@ -77,16 +104,16 @@
 }
 
 .usb-content-table {
-    height: 780px;
+    height: 720px;
     overflow: scroll;
 }
 
-.ust-connection-table {
-    height: 460px;
+.usb-connection-table {
+    height: 400px;
     overflow: scroll;
 }
 
-@media(max-width: 1180px) {
+@media(max-width: 1180px), (max-height: 800px) {
     .usb-content-container {
         width: 830px;
         height: 570px;
@@ -102,20 +129,56 @@
         padding: 40px;
     }
 
+    .monitor-content-container-collapse {
+        width: 960px;
+        height: 520px;
+        margin-top: 40px;
+        flex-grow: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        border-radius: 24px;
+        box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+        background-color: white;
+        padding: 40px;
+    }
+
     .usb-content-table {
-        height: 500px;
+        height: 472px;
         overflow: scroll;
     }
 
-    .ust-connection-table {
-        height: 250px;
+    .usb-connection-table {
+        height: 192px;
         overflow: scroll;
     }
 }
 
 .usb-content-container-add-connection {
-    width: 1320px;
-    height: 850px;
+    max-height: calc(100vh - 196px);
+    min-height: 555px;
+    width: calc(100vw - 360px);
+    max-width: calc(100vw - 360px);
+    min-width: 750px;
+    margin-top: 30px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    border-radius: 24px;
+    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+    background-color: white;
+    padding: 40px;
+}
+
+.usb-content-container-add-connection-collapse {
+    max-height: calc(100vh - 226px);
+    min-height: 525px;
+    width: calc(100vw - 270px);
+    max-width: calc(100vw - 270px);
+    min-width: 840px;
     margin-top: 40px;
     flex-grow: 0;
     display: flex;
@@ -128,10 +191,63 @@
     padding: 40px;
 }
 
-@media(max-width: 1180px) {
+@media(max-height: 800px) {
     .usb-content-container-add-connection {
-        width: 820px;
-        height: 590px;
+        max-height: calc(100vh - 226px);
+        min-height: 525px;
+        width: calc(100vw - 360px);
+        max-width: calc(100vw - 360px);
+        min-width: 750px;
+        margin-top: 10px;
+        flex-grow: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        border-radius: 24px;
+        box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+        background-color: white;
+        padding: 40px;
+    }
+
+    .monitor-content-container-collapse {
+        max-height: calc(100vh - 226px);
+        min-height: 525px;
+        width: calc(100vw - 270px);
+        max-width: calc(100vw - 270px);
+        min-width: 840px;
+        margin-top: 10px;
+        flex-grow: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        border-radius: 24px;
+        box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+        background-color: white;
+        padding: 40px;
+    }
+}
+
+@media(max-width: 1240px) {
+    .usb-content-container-add-connection {
+        width: 830px;
+        height: 570px;
+        margin-top: 40px;
+        flex-grow: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        border-radius: 24px;
+        box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+        background-color: white;
+        padding: 40px;
+    }
+
+    .monitor-content-container-collapse {
+        width: 960px;
+        height: 520px;
         margin-top: 40px;
         flex-grow: 0;
         display: flex;
@@ -177,7 +293,7 @@
 
 .usb-content-create-button-icon {
     width: 16px;
-    margin-left: 11px;
+    // margin-left: 11px;
 }
 
 .usb-content-table-row {
@@ -297,6 +413,12 @@
     color: #ffffff;
 }
 
+@media(max-width: 1580px) {
+    .usb-add-progress-column {
+        width: 422px;
+    }
+}
+
 @media(max-width: 1180px) {
     .usb-add-progress-column {
         width: 342px;
@@ -410,7 +532,7 @@
 .usb-add-btn {
     width: 120px;
     height: 48px;
-    margin-top: 36px;
+    margin-top: 16px;
     margin-left: 382px;
     flex-grow: 0;
     display: flex;
@@ -421,6 +543,24 @@
     padding: 0 24px;
     border-radius: 24px;
     background-color: #262320;
+}
+
+@media(max-width: 1280px), (max-height: 800px) {
+    .usb-add-btn {
+        width: 120px;
+        height: 48px;
+        margin-top: 0px;
+        margin-left: 290px;
+        flex-grow: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 0 24px;
+        border-radius: 24px;
+        background-color: #262320;
+    }
 }
 
 @media(max-width: 1180px) {

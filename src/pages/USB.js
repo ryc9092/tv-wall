@@ -388,13 +388,7 @@ const USB = () => {
   };
 
   return (
-    <div
-      className={
-        store.siderCollapse
-          ? `page-layout-column-collapse`
-          : `page-layout-column`
-      }
-    >
+    <div className="usb-layout-column">
       <div>
         <div className="usb-title-row">
           <span className="page-title">
@@ -413,7 +407,13 @@ const USB = () => {
           ) : null}
         </div>
         {pageType === "CONN_STATE" ? (
-          <div className="usb-content-container">
+          <div
+            className={
+              store.siderCollapse
+                ? "usb-content-container-collapse"
+                : "usb-content-container"
+            }
+          >
             <div className="usb-content-title-row">
               <span className="usb-content-title">
                 <FormattedMessage {...Messages.Text_USB_ConnectionStatus} />
@@ -450,7 +450,11 @@ const USB = () => {
             </span>
             </div>
             <Divider style={{ marginTop: 8 }} /> */}
-            <Table className="usb-content-table" columns={columns} dataSource={linkData} />
+            <Table
+              className="usb-content-table"
+              columns={columns}
+              dataSource={linkData}
+            />
             <Modal
               className="usb-modal-close-x"
               title={
@@ -475,7 +479,13 @@ const USB = () => {
             </Modal>
           </div>
         ) : (
-          <div className="usb-content-container-add-connection">
+          <div
+            className={
+              store.siderCollapse
+                ? "usb-content-container-add-connection-collapse"
+                : "usb-content-container-add-connection"
+            }
+          >
             <div className="usb-add-title-row">
               <Button
                 shape="circle"
@@ -532,7 +542,7 @@ const USB = () => {
                   )}
                 />
                 <Table
-                  className="ust-connection-table"
+                  className="usb-connection-table"
                   columns={encoderSelectionColumns}
                   dataSource={filteredEncoders}
                   rowSelection={{
@@ -585,7 +595,7 @@ const USB = () => {
                   )}
                 />
                 <Table
-                  className="ust-connection-table"
+                  className="usb-connection-table"
                   columns={decoderSelectionColumns}
                   dataSource={filteredDecoders}
                   rowSelection={{
