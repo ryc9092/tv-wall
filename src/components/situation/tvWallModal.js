@@ -398,14 +398,14 @@ const TVWallModal = ({
                 </div>
               </div>
             </div>
-            <Divider className="divider" />
+            <Divider className="wall-modal-divider" />
             <div className="connection-title">
               <FormattedMessage {...Messages.Text_Situation_TVWallConnection} />
             </div>
-            <div style={{ width: 891, height: 535 }}>
+            <div style={{ width: 891, height: 505 }}>
               <TvWall
                 wallWidth={891}
-                wallHeight={535}
+                wallHeight={505}
                 selectedWall={selectedWall}
                 selectedTemplate={selectedTemplate}
                 selectedEncoder={selectedEncoder}
@@ -422,14 +422,8 @@ const TVWallModal = ({
               />
             </div>
           </div>
-          <div
-            className={
-              store.siderCollapse
-                ? "tvwall-card-container-collapse"
-                : "tvwall-card-container"
-            }
-          >
-            <Card className="tvwall-card-right">
+          <div className="siutation-tvwall-card-container">
+            <Card className="tvwall-card-right-collapse">
               <div className="tvwall-card-right-title">
                 <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
               </div>
@@ -437,7 +431,7 @@ const TVWallModal = ({
                 <FormattedMessage {...Messages.Text_TVWall_VideoSourceDesc} />
               </div>
               <div className="tvwall-card-right-preview">
-                {selectedEncoder.previewUrl ? (
+                {selectedEncoder.nickName ? (
                   <div>
                     <iframe
                       className="tvwall-card-right-preview-video"
@@ -447,7 +441,7 @@ const TVWallModal = ({
                     <span>{selectedEncoder.nickName}</span>
                   </div>
                 ) : (
-                  <div className="tvwall-card-right-preview-text tvwall-card-right-desc">
+                  <div className="siutation-tvwall-card-right-preview-text tvwall-card-right-desc">
                     <FormattedMessage {...Messages.Text_TVWall_Preview} />
                   </div>
                 )}
@@ -463,9 +457,10 @@ const TVWallModal = ({
                   Messages.Text_TVWall_InputEncoder
                 )}
               />
-              <div className="tvwall-card-right-encoder-container">
+              <div className="siutation-tvwall-card-right-encoder-container">
                 <Table
                   columns={columns}
+                  size="small"
                   dataSource={filteredEncoders}
                   pagination={{ pageSize: 11 }}
                   onRow={(record) => ({

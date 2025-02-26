@@ -208,7 +208,7 @@ const TvWall = ({
                 className="single-screen-btn-position"
                 style={{
                   marginLeft: 95 + (block.col - 1) * 240,
-                  marginTop: 55 + (block.col - 1) * 240,
+                  marginTop: 55 + (block.row - 1) * 240,
                 }}
               >
                 {blockEncoderMapping[block.block]?.nickName ? (
@@ -288,7 +288,7 @@ const TvWall = ({
     setWallHTML(
       <div
         id="wallScreens"
-        style={{ width: "100%", height: "100%", position: "absolute" }}
+        style={{ position: "absolute" }}
       >
         {wallBlocksHTML}
       </div>
