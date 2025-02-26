@@ -2,6 +2,12 @@
     width: 1200px;
 }
 
+@media(max-height: 800px) {
+    .tv-wall-content-container {
+        width: 1040px;
+    }
+}
+
 @media(max-width: 1180px) {
     .tv-wall-content-container {
         width: 820px;
@@ -50,7 +56,7 @@
 }
 
 .table-container {
-    height: 788px;
+    height: calc(100vh - 276px);
     margin-top: 40px;
     flex-grow: 0;
     display: flex;

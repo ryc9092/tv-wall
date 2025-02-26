@@ -64,15 +64,7 @@ const Setting = () => {
           <FormattedMessage {...Messages.Text_DeviceSetting_AdvanceSetting} />
         </div> */}
       </div>
-      <div
-        className={
-          store.siderCollapse
-            ? `page-layout-column-collapse`
-            : `page-layout-column`
-        }
-      >
-        {pageContent[page]}
-      </div>
+      <div className="setting-page-layout-column">{pageContent[page]}</div>
     </div>
   );
 };

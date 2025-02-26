@@ -402,7 +402,7 @@ const TemplateSetting = () => {
           <FormattedMessage {...Messages.Text_DeviceSetting_AdvanceSetting} />
         </div>
       </div>
-      <div className="table-container ">
+      <div className="table-container">
         <Table
           className="device-setting-content-table"
           components={{
