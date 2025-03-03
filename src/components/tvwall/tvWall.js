@@ -58,7 +58,7 @@ const TvWall = ({
         ) {
           wallScreens.forEach((screen, idx) => {
             let tempScreen = screen;
-            tempScreen.encoder = Object.values(blockEncoderMapping).includes(
+            tempScreen.encoder = blockEncoderMapping.hasOwnProperty(
               templateScreens[idx].block
             )
               ? blockEncoderMapping[templateScreens[idx].block].mac
