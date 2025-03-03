@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../store/store";
 import { Button, Divider, Input, Modal, Table, Tag } from "antd";
-import { getPresetDeviceLink } from "../../api/API";
+import { getFilteredDecoders, getPresetDeviceLink } from "../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
 import SearchIcon from "../../assets/magnifying-glass.png";
@@ -13,7 +13,6 @@ const SingleScreenViewModal = ({
   isModalOpen,
   setIsModalOpen,
   encoders,
-  decoders,
   type
 }) => {
   const intl = useIntl();
@@ -41,18 +40,21 @@ const SingleScreenViewModal = ({
     }
   }, [isModalOpen]);
 
+  const [decoders, setDecoders] = useState([]);
   useEffect(() => {
     (async () => {
       encoders?.forEach((encoder) => {
         encoder.key = encoder.mac;
       });
+      const decoders = await getFilteredDecoders(store);
       decoders?.forEach((decoder) => {
         decoder.key = decoder.mac;
       });
+      setDecoders(decoders);
       setFilteredDecoders(decoders);
       setFilteredEncoders(encoders);
     })();
-  }, [isModalOpen, encoders, decoders]);
+  }, [isModalOpen, encoders]);
 
   const [selectedEncoder, setSelectedEncoder] = useState(null);
   const [encoderFilter, setEncoderFilter] = useState("");
