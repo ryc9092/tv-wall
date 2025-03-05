@@ -173,7 +173,11 @@ const TVWallViewModal = ({
       key: "radio",
       render: (text) => {
         return (
-          <Radio disabled id={`btn@${text}`} checked={selectedEncoder.mac === text} />
+          <Radio
+            disabled
+            id={`btn@${text}`}
+            checked={selectedEncoder.mac === text}
+          />
         );
       },
     },
@@ -182,7 +186,7 @@ const TVWallViewModal = ({
       dataIndex: "nickName",
       key: "nickName",
       render: (text) => {
-        return <span className="table-content">{text}</span>;
+        return <span className="table-content sdcp-font">{text}</span>;
       },
     },
     {
@@ -201,7 +205,7 @@ const TVWallViewModal = ({
       ],
       onFilter: (value, data) => data.model.indexOf(value) === 0,
       render: (text) => {
-        return <span className="table-content">{text}</span>;
+        return <span className="table-content sdcp-font">{text}</span>;
       },
     },
     {

@@ -35,7 +35,7 @@ const TemplateSetting = () => {
       title: <span className="table-head">ID</span>,
       dataIndex: "templateId",
       key: "templateId",
-      render: (text) => <span className="table-content">{text}</span>,
+      render: (text) => <span className="table-content sdcp-font">{text}</span>,
     },
     {
       title: (
@@ -46,7 +46,7 @@ const TemplateSetting = () => {
       dataIndex: "templateName",
       key: "templateName",
       render: (text) => {
-        return <span className="table-content">{text}</span>;
+        return <span className="table-content sdcp-font">{text}</span>;
       },
     },
     {
@@ -60,7 +60,7 @@ const TemplateSetting = () => {
       key: "dimension",
       render: (text, record) => (
         <div>
-          <span className="table-content">{`${record.col} X ${record.row}`}</span>
+          <span className="table-content sdcp-font">{`${record.col} X ${record.row}`}</span>
           {record.isDefault === 1 ? (
             <span className="table-default-desc">
               {`  (${intl.formatMessage(Messages.Text_Common_Default)})`}
@@ -89,7 +89,7 @@ const TemplateSetting = () => {
               onClick={() => {
                 removeTemplate(record);
               }}
-              className="table-content"
+              className="table-content sdcp-font"
             >
               <img
                 alt="remove"

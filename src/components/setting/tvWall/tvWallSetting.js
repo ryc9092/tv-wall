@@ -35,7 +35,7 @@ const TVWallSetting = () => {
       title: <span className="table-head">ID</span>,
       dataIndex: "wallId",
       key: "wallId",
-      render: (text) => <span className="table-content">{text}</span>,
+      render: (text) => <span className="table-content sdcp-font">{text}</span>,
     },
     {
       title: (
@@ -46,7 +46,7 @@ const TVWallSetting = () => {
       dataIndex: "wallName",
       key: "wallName",
       render: (text) => {
-        return <span className="table-content">{text}</span>;
+        return <span className="table-content sdcp-font">{text}</span>;
       },
     },
     {
@@ -59,7 +59,7 @@ const TVWallSetting = () => {
       dataIndex: ["col", "row"],
       key: "dimension",
       render: (text, record) => (
-        <span className="table-content">{`${record.col} X ${record.row}`}</span>
+        <span className="table-content sdcp-font">{`${record.col} X ${record.row}`}</span>
       ),
     },
     {
@@ -82,7 +82,7 @@ const TVWallSetting = () => {
               onClick={() => {
                 removeWall(record);
               }}
-              className="table-content"
+              className="table-content sdcp-font"
             >
               <img
                 alt="remove"

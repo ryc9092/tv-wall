@@ -96,7 +96,7 @@ const ViewTemplate = ({ template }) => {
         type="text"
         onClick={() => setModalOpen(true)}
         style={{ marginight: 6 }}
-        className="table-content"
+        className="table-content sdcp-font"
       >
         <img alt="edit" src={ViewIcon} className="table-content-icon" />
       </Button>

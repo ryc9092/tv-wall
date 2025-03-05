@@ -74,13 +74,13 @@ const Status = () => {
         },
       ],
       onFilter: (value, data) => data.type.indexOf(value) === 0,
-      render: (text) => <span className="table-content">{text}</span>,
+      render: (text) => <span className="table-content sdcp-font">{text}</span>,
     },
     {
       title: intl.formatMessage(Messages.Text_Common_Name),
       dataIndex: "nickName",
       key: "nickName",
-      render: (text) => <span className="table-content">{text}</span>,
+      render: (text) => <span className="table-content sdcp-font">{text}</span>,
     },
     {
       title: intl.formatMessage(Messages.Text_Common_State),
@@ -120,7 +120,7 @@ const Status = () => {
           onClick={() => {
             reboot(mac);
           }}
-          className="table-content"
+          className="table-content sdcp-font"
         >
           <FormattedMessage {...Messages.Text_DeviceStatus_Reboot} />
         </Button>
@@ -133,7 +133,7 @@ const Status = () => {
       key: "detail",
       render: (text, record) => {
         const content = (
-          <div className="table-content">
+          <div className="table-content sdcp-font">
             IP : {record.ip}
             <br />
             MAC : {record.mac}

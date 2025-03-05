@@ -119,7 +119,7 @@ const Audio = () => {
       dataIndex: "encoderName",
       key: "encoderName",
       render: (text) => {
-        return <span className="table-content">{text}</span>;
+        return <span className="table-content sdcp-font">{text}</span>;
       },
     },
     {
@@ -131,7 +131,7 @@ const Audio = () => {
       dataIndex: "decoderName",
       key: "decoderName",
       render: (text) => {
-        return <span className="table-content">{text}</span>;
+        return <span className="table-content sdcp-font">{text}</span>;
       },
     },
     {
@@ -158,7 +158,7 @@ const Audio = () => {
               });
               setSelectedDecoders(linkedDecoders);
             }}
-            className="table-content"
+            className="table-content sdcp-font"
           >
             <img
               alt="edit"
@@ -174,7 +174,7 @@ const Audio = () => {
               setSelectDecoder(record.decoderMac);
               setOpenConfirmModal(true);
             }}
-            className="table-content"
+            className="table-content sdcp-font"
           >
             <img
               alt="remove"

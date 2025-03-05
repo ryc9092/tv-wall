@@ -116,13 +116,13 @@ const MonitorMgmt = () => {
       ),
       dataIndex: "Name",
       key: "Name",
-      render: (text) => <span className="table-content">{text}</span>,
+      render: (text) => <span className="table-content sdcp-font">{text}</span>,
     },
     {
       title: <span className="table-head">IP</span>,
       dataIndex: "Ip",
       key: "Ip",
-      render: (text) => <span className="table-content">{text}</span>,
+      render: (text) => <span className="table-content sdcp-font">{text}</span>,
     },
     {
       title: (
