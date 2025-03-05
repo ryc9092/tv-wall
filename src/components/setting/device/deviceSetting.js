@@ -398,7 +398,7 @@ const TemplateSetting = () => {
   return (
     <div className="device-setting-content-container">
       <div className="title-row">
-        <div className="page-title">
+        <div className="page-title sdcp-font">
           <FormattedMessage {...Messages.Text_DeviceSetting_AdvanceSetting} />
         </div>
       </div>

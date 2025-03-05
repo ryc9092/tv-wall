@@ -60,7 +60,7 @@ const Surveillance = () => {
   return (
     <div className="surveillance-layout">
       <div>
-        <span className="page-title">
+        <span className="page-title sdcp-font">
           <FormattedMessage {...Messages.Text_Surveillance_Title} />
         </span>
       </div>

@@ -391,7 +391,7 @@ const USB = () => {
     <div className="usb-layout-column">
       <div>
         <div className="usb-title-row">
-          <span className="page-title">
+          <span className="page-title sdcp-font">
             <FormattedMessage {...Messages.Text_USB_USBMgmt} />
           </span>
           {pageType === "CONN_STATE" ? (

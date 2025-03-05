@@ -422,7 +422,7 @@ const Situation = () => {
     <div>
       <div className="situation-title-layout">
         <div className="situation-title-row">
-          <div className="page-title">
+          <div className="page-title sdcp-font">
             <FormattedMessage {...Messages.Text_Situation_Title} />
           </div>
           <div>

@@ -36,7 +36,7 @@ const RS232 = () => {
   return (
     <div>
       {store.siderCollapse ? (
-        <div className="page-title">RS232管理</div>
+        <div className="page-title sdcp-font">RS232管理</div>
       ) : (
         <div style={{ marginTop: 60 }} />
       )}

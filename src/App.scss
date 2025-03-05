@@ -1,3 +1,6 @@
+// https://www.npmjs.com/package/@fontsource/m-plus-rounded-1c
+@import url(@fontsource/m-plus-rounded-1c);
+
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -5,6 +8,10 @@
 ::-webkit-scrollbar-thumb {
     border-radius: 16px;
     background: rgba(198, 198, 198, 0.8)
+}
+
+.sdcp-font {
+    font-family: "M PLUS Rounded 1c";
 }
 
 .page-layout-column {
@@ -23,7 +30,6 @@
 
 .page-title {
     font-size: 32px;
-    font-family: Noto Sans TC;
     text-align: left;
 }
 

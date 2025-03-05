@@ -481,7 +481,7 @@ const SingleScreen = () => {
               : "single-screen-title-row"
           }
         >
-          <span className="page-title">
+          <span className="page-title sdcp-font">
             <FormattedMessage {...Messages.Text_SingleScreen_Management} />
           </span>
         </div>

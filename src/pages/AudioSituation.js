@@ -445,7 +445,7 @@ const AudioSituation = () => {
     >
       <div>
         <div className="status-title-row">
-          <span className="page-title">
+          <span className="page-title sdcp-font">
             <FormattedMessage {...Messages.Text_Sidebar_AudioManagement} />
           </span>
           {/* <Input

@@ -426,7 +426,7 @@ const TVWall = () => {
   return (
     <div className="tvwall-layout-column">
       <div>
-        <div className="page-title">
+        <div className="page-title sdcp-font">
           <FormattedMessage {...Messages.Text_TVWall_TVWallManagement} />
         </div>
         <div className="tvwall-option-row">
