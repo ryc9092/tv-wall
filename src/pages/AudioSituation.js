@@ -122,7 +122,7 @@ const AudioSituation = () => {
       dataIndex: "name",
       key: "name",
       render: (text) => {
-        return <span className="table-content sdcp-font">{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
@@ -135,7 +135,7 @@ const AudioSituation = () => {
       dataIndex: "remark",
       key: "remark",
       render: (text) => {
-        return <span className="table-content sdcp-font">{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
@@ -168,7 +168,7 @@ const AudioSituation = () => {
             ("0" + seconds).slice(-2);
         }
         return (
-          <span className="table-content sdcp-font">
+          <span className="table-content">
             {executeTime
               ? executeTime
               : intl.formatMessage(Messages.Text_Situation_NotExecuted)}
@@ -213,7 +213,7 @@ const AudioSituation = () => {
             onClick={(event) => {
               onClickEditBtn(event);
             }}
-            className="table-content sdcp-font"
+            className="table-content"
           >
             <img
               alt="edit"
@@ -243,7 +243,7 @@ const AudioSituation = () => {
               type="text"
               id={record.id}
               key={`remove.${record.id}`}
-              className="table-content sdcp-font"
+              className="table-content"
             >
               <img
                 alt="remove"
@@ -267,7 +267,7 @@ const AudioSituation = () => {
       dataIndex: "orderNum",
       key: "orderNum",
       width: "100px",
-      render: (text) => <span className="table-content sdcp-font">{text}</span>,
+      render: (text) => <span className="table-content">{text}</span>,
     },
     {
       title: (
@@ -278,7 +278,7 @@ const AudioSituation = () => {
       dataIndex: "set_type",
       key: "type",
       render: (text) => (
-        <span className="table-content sdcp-font">
+        <span className="table-content">
           {intl.formatMessage(Messages[`Text_Situation_Item${text}`])}
         </span>
       ),
@@ -292,7 +292,7 @@ const AudioSituation = () => {
       dataIndex: "remark",
       key: "description",
       render: (text) => {
-        return <span className="table-content sdcp-font">{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
@@ -313,7 +313,7 @@ const AudioSituation = () => {
               onClick={() => {
                 viewSituationDetail(record.relation_id, record.set_type);
               }}
-              className="table-content sdcp-font"
+              className="table-content"
             >
               <img
                 alt="view"
@@ -329,7 +329,7 @@ const AudioSituation = () => {
               onClick={() => {
                 deleteSituationDetail(text);
               }}
-              className="table-content sdcp-font"
+              className="table-content"
             >
               <img
                 alt="remove"

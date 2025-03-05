@@ -177,8 +177,8 @@ const TemplateSetting = () => {
         <div
           className={
             record.isNew === true
-              ? "table-content sdcp-font table-content-text-isnew"
-              : "table-content sdcp-font table-content-text"
+              ? "table-content table-content-text-isnew"
+              : "table-content table-content-text"
           }
         >
           {record.model}
@@ -205,8 +205,8 @@ const TemplateSetting = () => {
         <div
           className={
             record.isNew === true
-              ? "table-content sdcp-font table-content-text-isnew"
-              : "table-content sdcp-font table-content-text"
+              ? "table-content table-content-text-isnew"
+              : "table-content table-content-text"
           }
         >
           {record.type}
@@ -218,7 +218,7 @@ const TemplateSetting = () => {
       width: "16%",
       dataIndex: "name",
       key: "name",
-      render: (text) => <span className="table-content sdcp-font">{text}</span>,
+      render: (text) => <span className="table-content">{text}</span>,
     },
     {
       title: intl.formatMessage(Messages.Text_Common_Name),
@@ -226,7 +226,7 @@ const TemplateSetting = () => {
       dataIndex: "nickName",
       key: "nickName",
       editable: true,
-      render: (text) => <span className="table-content sdcp-font">{text}</span>,
+      render: (text) => <span className="table-content">{text}</span>,
     },
     {
       title: "analog",
@@ -234,7 +234,7 @@ const TemplateSetting = () => {
       dataIndex: "audioAnalogy",
       key: "audioAnalogy",
       editable: true,
-      render: (text) => <span className="table-content sdcp-font">{text}</span>,
+      render: (text) => <span className="table-content">{text}</span>,
     },
     {
       title: "hdmi",
@@ -242,7 +242,7 @@ const TemplateSetting = () => {
       dataIndex: "audioHdmi",
       key: "audioHdmi",
       editable: true,
-      render: (text) => <span className="table-content sdcp-font">{text}</span>,
+      render: (text) => <span className="table-content">{text}</span>,
     },
     // {
     //   title: "ip",

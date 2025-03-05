@@ -1,8 +1,5 @@
 // https://www.npmjs.com/package/@fontsource/m-plus-rounded-1c
 @import url(@fontsource/m-plus-rounded-1c);
-@import url(@fontsource/m-plus-rounded-1c/500.css);
-@import url(@fontsource/m-plus-rounded-1c/700.css);
-@import url(@fontsource/m-plus-rounded-1c/800.css);
 
 ::-webkit-scrollbar {
     width: 8px;
@@ -38,11 +35,12 @@
 
 .ant-table-thead > tr > th {
     font-size: 14px;
-    font-family: "M PLUS Rounded 1c";
+    font-family: Noto Sans TC;
 }
 
 .table-content {
     font-size: 16px;
+    font-family: Noto Sans TC;
 }
 
 .tag-content {

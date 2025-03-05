@@ -146,7 +146,7 @@ const Situation = () => {
       dataIndex: "name",
       key: "name",
       render: (text) => {
-        return <span className="table-content sdcp-font">{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
@@ -159,7 +159,7 @@ const Situation = () => {
       dataIndex: "remark",
       key: "remark",
       render: (text) => {
-        return <span className="table-content sdcp-font">{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
@@ -192,7 +192,7 @@ const Situation = () => {
             ("0" + seconds).slice(-2);
         }
         return (
-          <span className="table-content sdcp-font">
+          <span className="table-content">
             {executeTime
               ? executeTime
               : intl.formatMessage(Messages.Text_Situation_NotExecuted)}
@@ -237,7 +237,7 @@ const Situation = () => {
             onClick={(event) => {
               onClickEditBtn(event);
             }}
-            className="table-content sdcp-font"
+            className="table-content"
           >
             <img
               alt="edit"
@@ -267,7 +267,7 @@ const Situation = () => {
               type="text"
               id={record.id}
               key={`remove.${record.id}`}
-              className="table-content sdcp-font"
+              className="table-content"
             >
               <img
                 alt="remove"
@@ -291,7 +291,7 @@ const Situation = () => {
       dataIndex: "orderNum",
       key: "orderNum",
       width: "100px",
-      render: (text) => <span className="table-content sdcp-font">{text}</span>,
+      render: (text) => <span className="table-content">{text}</span>,
     },
     {
       title: (
@@ -302,7 +302,7 @@ const Situation = () => {
       dataIndex: "set_type",
       key: "type",
       render: (text) => (
-        <span className="table-content sdcp-font">
+        <span className="table-content">
           {intl.formatMessage(Messages[`Text_Situation_Item${text}`])}
         </span>
       ),
@@ -316,7 +316,7 @@ const Situation = () => {
       dataIndex: "remark",
       key: "description",
       render: (text) => {
-        return <span className="table-content sdcp-font">{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
@@ -340,7 +340,7 @@ const Situation = () => {
               onClick={() => {
                 viewSituationDetail(record.relation_id, record.set_type);
               }}
-              className="table-content sdcp-font"
+              className="table-content"
             >
               <img
                 alt="view"
@@ -355,7 +355,7 @@ const Situation = () => {
               onClick={() => {
                 deleteSituationDetail(text);
               }}
-              className="table-content sdcp-font"
+              className="table-content"
             >
               <img
                 alt="remove"

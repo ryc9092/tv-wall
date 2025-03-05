@@ -370,7 +370,7 @@ const TVWall = () => {
       key: "nickName",
       minWidth: 55,
       render: (text) => {
-        return <span className="table-content sdcp-font">{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
@@ -390,7 +390,7 @@ const TVWall = () => {
       ],
       onFilter: (value, data) => data.model.indexOf(value) === 0,
       render: (text) => {
-        return <span className="table-content sdcp-font">{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {

@@ -179,7 +179,7 @@ const Situation = () => {
       dataIndex: "orderNum",
       key: "orderNum",
       width: "100px",
-      render: (text) => <span className="table-content sdcp-font">{text}</span>,
+      render: (text) => <span className="table-content">{text}</span>,
     },
     {
       title: (
@@ -189,7 +189,7 @@ const Situation = () => {
       ),
       dataIndex: "set_type",
       key: "type",
-      render: (text) => <span className="table-content sdcp-font">{text}</span>,
+      render: (text) => <span className="table-content">{text}</span>,
     },
     {
       title: (
@@ -200,7 +200,7 @@ const Situation = () => {
       dataIndex: "remark",
       key: "description",
       render: (text) => {
-        return <span className="table-content sdcp-font">{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
@@ -222,7 +222,7 @@ const Situation = () => {
               onClick={() => {
                 deleteSituationDetail(text);
               }}
-              className="table-content sdcp-font"
+              className="table-content"
             >
               <img
                 alt="remove"

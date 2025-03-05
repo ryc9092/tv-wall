@@ -71,7 +71,7 @@ const ViewWall = ({ wall }) => {
       dataIndex: "num",
       key: "num",
       render: (text) => {
-        return <span className="table-content sdcp-font">{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
@@ -100,7 +100,7 @@ const ViewWall = ({ wall }) => {
         type="text"
         onClick={() => setModalOpen(true)}
         style={{ marginight: 6 }}
-        className="table-content sdcp-font"
+        className="table-content"
       >
         <img alt="edit" src={SearchIcon} className="table-content-icon" />
       </Button>

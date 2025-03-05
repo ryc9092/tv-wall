@@ -141,7 +141,7 @@ const CreateWall = ({ setReload }) => {
       dataIndex: "num",
       key: "num",
       render: (text) => {
-        return <span className="table-content sdcp-font">{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
