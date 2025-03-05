@@ -419,7 +419,7 @@ const SingleScreen = () => {
       key: "nickName",
       minWidth: 55,
       render: (text) => {
-        return <span className="single-screen-table-content">{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
@@ -439,7 +439,7 @@ const SingleScreen = () => {
       ],
       onFilter: (value, data) => data.model.indexOf(value) === 0,
       render: (text) => {
-        return <span className="single-screen-table-content">{text}</span>;
+        return <span className="table-content">{text}</span>;
       },
     },
     {
