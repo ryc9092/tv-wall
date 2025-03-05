@@ -402,7 +402,7 @@ const Audio = () => {
     >
       <div>
         <div className="audio-title-row">
-          <span className="page-title sdcp-font">
+          <span className="page-title">
             <FormattedMessage {...Messages.Text_Audio_AudioMgmt} />
           </span>
           {pageType === "CONN_STATE" ? (

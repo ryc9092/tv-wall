@@ -115,7 +115,7 @@ const TemplateSetting = () => {
   return (
     <div className="template-setting-content-container">
       <div className="title-row">
-        <div className="page-title sdcp-font">
+        <div className="page-title">
           <FormattedMessage
             {...Messages.Text_TemplateSetting_TemplateSetting}
           />

@@ -168,7 +168,7 @@ const MonitorMgmt = () => {
   return (
     <div className="monitor-layout">
       <div>
-        <span className="page-title sdcp-font">
+        <span className="page-title">
           <FormattedMessage {...Messages.Text_MonitorManagement_Title} />
         </span>
       </div>

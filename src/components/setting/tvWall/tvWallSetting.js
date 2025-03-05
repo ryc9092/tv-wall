@@ -108,7 +108,7 @@ const TVWallSetting = () => {
   return (
     <div className="tv-wall-content-container">
       <div className="title-row">
-        <div className="page-title sdcp-font">
+        <div className="page-title">
           <FormattedMessage {...Messages.Text_WallSetting_WallSetting} />
         </div>
         <CreateWall setReload={setReload} />

@@ -514,7 +514,7 @@ const Situation = () => {
     >
       <div>
         <div className="status-title-row">
-          <span className="page-title sdcp-font">
+          <span className="page-title">
             <FormattedMessage {...Messages.Text_Situation_Title} />
           </span>
           {/* <Input
