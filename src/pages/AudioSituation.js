@@ -224,12 +224,12 @@ const AudioSituation = () => {
           <Popconfirm
             id={`confirm-${record.id}`}
             title={
-              <span className="general-font">
+              <span className="pop-confirm-text">
                 {intl.formatMessage(Messages.Text_Audio_Route)}
               </span>
             }
             description={
-              <span className="general-font">
+              <span className="pop-confirm-text">
                 {intl.formatMessage(Messages.Text_Audio_DeleteConfirm)}
               </span>
             }

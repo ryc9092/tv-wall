@@ -106,6 +106,7 @@
     font-size: 22px;
 }
 
-.general-font {
-    font: Noto Sans TC;
+.pop-confirm-text {
+    @extend .sdcp-font;
+    font-size: 16px;
 }

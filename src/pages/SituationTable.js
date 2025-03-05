@@ -248,12 +248,12 @@ const Situation = () => {
           <Popconfirm
             id={`confirm-${record.id}`}
             title={
-              <span className="general-font">
+              <span className="pop-confirm-text">
                 {intl.formatMessage(Messages.Text_Sidebar_SituationManagement)}
               </span>
             }
             description={
-              <span className="general-font">
+              <span className="pop-confirm-text">
                 {intl.formatMessage(Messages.Text_Situation_DeleteConfirm)}
               </span>
             }
