@@ -4,6 +4,7 @@ import { getTemplateScreensById, getWallScreensById } from "../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Button } from "antd";
 import Messages from "../../messages";
+import { WALL_SCREEN_SIZE, POSITION_CLEAR_BTN } from "../../utils/Constant";
 import ScreenBackgroundImage from "../../assets/screenBackground.png";
 import ClearLinkIcon from "../../assets/clearLink.png";
 import ClearLinkDisabledIcon from "../../assets/clearLinkDisabled.png";
@@ -142,12 +143,14 @@ const TvWall = ({
           <div
             className="wall-block-outer"
             style={{
-              width: block.col * 240,
-              height: block.row * 240,
-              left: ((block.smallestScreenNum - 1) % tvWallSize.col) * 240,
+              width: block.col * WALL_SCREEN_SIZE,
+              height: block.row * WALL_SCREEN_SIZE,
+              left:
+                ((block.smallestScreenNum - 1) % tvWallSize.col) *
+                WALL_SCREEN_SIZE,
               top:
                 Math.floor((block.smallestScreenNum - 1) / tvWallSize.col) *
-                240,
+                WALL_SCREEN_SIZE,
               backgroundImage: blockEncoderMapping[block.block]?.nickName
                 ? `url(${ScreenBackgroundImage})`
                 : null,
@@ -163,8 +166,8 @@ const TvWall = ({
                   : "wall-block"
               }
               style={{
-                width: block.col * 240 - 16,
-                height: block.row * 240 - 16,
+                width: block.col * WALL_SCREEN_SIZE - 16,
+                height: block.row * WALL_SCREEN_SIZE - 16,
               }}
             >
               <div id={block.block} className="wall-block-title-row">
@@ -200,8 +203,11 @@ const TvWall = ({
                 id={block.block}
                 className="single-screen-btn-position"
                 style={{
-                  marginLeft: 95 + (block.col - 1) * 240,
-                  marginTop: 55 + (block.col - 1) * 240,
+                  marginLeft:
+                    POSITION_CLEAR_BTN.left +
+                    (block.col - 1) * WALL_SCREEN_SIZE,
+                  marginTop:
+                    POSITION_CLEAR_BTN.top + (block.col - 1) * WALL_SCREEN_SIZE,
                 }}
               >
                 {blockEncoderMapping[block.block]?.nickName ? (
