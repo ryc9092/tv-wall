@@ -1,3 +1,5 @@
+@import "../../../App.scss";
+
 .create-wall-setting .ant-modal-content {
     padding: 56px !important;
     height: 988px;
@@ -16,7 +18,7 @@
 .create-wall-modal-title {
     height: 36px;
     flex-grow: 1;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 28px;
     font-weight: normal;
     font-stretch: normal;
@@ -35,7 +37,7 @@
 
 .input-title {
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
@@ -89,7 +91,7 @@
 .screen-decoder-setting-title {
     height: 32px;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 24px;
     font-weight: normal;
     font-stretch: normal;
@@ -104,7 +106,7 @@
     height: 24px;
     flex-grow: 0;
     margin-top: 8px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -134,7 +136,7 @@
     width: 40px;
     height: 40px;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 22px;
     font-weight: normal;
     font-stretch: normal;
@@ -160,7 +162,7 @@
     height: 40px;
     background-color: #45413e;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 22px;
     font-weight: normal;
     font-stretch: normal;
@@ -212,7 +214,7 @@
   }
 
 .decoder-setting-table-head {
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 14px;
     font-weight: 600;
     text-align: left;
@@ -221,7 +223,7 @@
 
 .ant-table-cell {
     width: 148px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -235,7 +237,7 @@
 .decoder-setting-table-select {
     width: 200px;
     height: 36px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -266,7 +268,7 @@
 
 .screen-setting-clear-btn-text {
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 14px;
     font-weight: 600;
     font-stretch: normal;
@@ -293,7 +295,7 @@
 
 .screen-setting-create-btn-text {
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;

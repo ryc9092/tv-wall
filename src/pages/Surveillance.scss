@@ -37,7 +37,7 @@
 }
 
 .surveillance-stream-cover-text {
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 24px;
 }
 

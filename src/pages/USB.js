@@ -125,17 +125,6 @@ const USB = () => {
         return <span style={{ fontSize: "16px" }}>{text}</span>;
       },
     },
-    // {
-    //   title: (
-    //     <span style={{ fontSize: "16px", fontFamily: "Noto Sans TC" }}>
-    //       {intl.formatMessage(Messages.Text_DeviceStatus_State)}
-    //     </span>
-    //   ),
-    //   key: "state",
-    //   dataIndex: "state",
-    //   sorter: (a, b) => a.state.length - b.state.length,
-    //   render: (_, { state, name }) => <></>,
-    // },
     {
       title: (
         <span className="usb-content-table-head">

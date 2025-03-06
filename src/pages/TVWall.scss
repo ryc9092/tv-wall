@@ -32,7 +32,7 @@
     color: #45413e;
     margin-bottom: 4px;
     line-height: 1.5;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
 }
@@ -46,7 +46,7 @@
     height: 42px;
     color: #45413e;
     font-size: 16px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
 }
 
 .tvwall-option-trash-btn {
@@ -68,7 +68,7 @@
 .tvwall-option-trash-text {
     width: 139px;
     color: #c33434;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 14px;
     font-weight: 600;
     position: absolute;
@@ -92,7 +92,7 @@
 .tvwall-option-play-text {
     width: 131px;
     color: #e7e7e7;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     position: absolute;
@@ -158,14 +158,14 @@
 .tvwall-card-right-title {
     color: #45413e;
     font-size: 22px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-weight: 600;
 }
 
 .tvwall-card-right-desc {
     color: #a5a5a5;
     font-size: 16px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-weight: normal;
     width: 340px;
 }
@@ -182,7 +182,7 @@
 .tvwall-card-right-preview-text {
     color: #a5a5a5;
     font-size: 16px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-weight: normal;
 }
 
@@ -214,7 +214,7 @@
 
 .tvwall-input .ant-input {
     background-color: #e7e7e7;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
 }
 
 .tvwall-card-right-encoder-container {
@@ -238,5 +238,5 @@
 
 .tvwall-confirm-text {
     font-size: 15px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
 }

@@ -1,3 +1,5 @@
+@import "../../App.scss";
+
 .ant-menu-item {
     height: 52px !important;
 }
@@ -18,7 +20,7 @@
 .menu-text {
     color: #45413e;
     font-size: 16px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     margin-left: 20px;
 }
 

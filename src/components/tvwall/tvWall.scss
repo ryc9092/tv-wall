@@ -1,3 +1,5 @@
+@import "../../App.scss";
+
 .wall-block-outer {
     position: absolute;
     background-color: #e7e7e7;
@@ -27,7 +29,7 @@
 .wall-block-title {
     border-radius: 4px;
     color: #45413e;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 22px;
     font-weight: 500;
 }
@@ -37,14 +39,14 @@
     border-radius: 4px;
     color: #ffffff;
     background-color: #757371;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 22px;
     font-weight: 500;
 }
 
 .wall-block-desc {
     padding: 8px 0px 0px 14px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: normal;
     color: #45413e;

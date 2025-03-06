@@ -1,3 +1,5 @@
+@import "../../App.scss";
+
 .usb-content .ant-modal-content {
     padding: 36px !important;
 }
@@ -20,7 +22,7 @@
 .usb-modal-title {
     height: 36px;
     flex-grow: 1;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 28px;
     font-weight: normal;
     font-stretch: normal;
@@ -56,7 +58,7 @@
 .situation-usb-input-text {
     height: 24px;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
@@ -83,7 +85,7 @@
 
 .situation-usb-input-placeholder {
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
@@ -106,7 +108,7 @@
     margin: 0px;
     height: 32px;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 24px;
     font-weight: normal;
     font-stretch: normal;
@@ -166,7 +168,7 @@
 .item-cancel-btn-text {
     height: 24px;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
@@ -193,7 +195,7 @@
 .item-submit-btn-text {
     height: 24px;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
@@ -246,7 +248,7 @@
     width: 10px;
     height: 28px;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 22px;
     font-weight: 600;
     font-stretch: normal;
@@ -284,7 +286,7 @@
     margin-top: 24px;
     align-self: stretch;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
@@ -318,7 +320,7 @@
 
 .situation-usb-add-input-placeholder {
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
@@ -334,7 +336,7 @@
 }
 
 .ant-table-cell {
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -363,7 +365,7 @@
 
 .situation-usb-add-btn-text {
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;

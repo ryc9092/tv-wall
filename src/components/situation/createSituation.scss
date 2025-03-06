@@ -1,3 +1,5 @@
+@import "../../App.scss";
+
 .create-situation .ant-modal-content {
     padding: 40px !important;
 }
@@ -15,7 +17,7 @@
 .create-situation-modal-title {
     height: 36px;
     flex-grow: 1;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 28px;
     font-weight: normal;
     font-stretch: normal;
@@ -29,7 +31,7 @@
 .create-situation-subtitle {
     height: 24px;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
@@ -72,7 +74,7 @@
 
 .create-situation-placeholder {
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
@@ -101,7 +103,7 @@
 }
 
 .table-head {
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 14px;
     font-weight: 600;
     text-align: left;
@@ -134,7 +136,7 @@
 .add-situation-item-btn-text {
     height: 24px;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
@@ -167,7 +169,7 @@
 .cancel-btn-text {
     height: 24px;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
@@ -194,7 +196,7 @@
 .submit-btn-text {
     height: 24px;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;

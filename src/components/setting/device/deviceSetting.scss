@@ -1,3 +1,5 @@
+@import "../../../App.scss";
+
 .device-setting-content-container {
     width: 1200px;
 }
@@ -68,7 +70,7 @@
 
 .device-setting-save-btn-text {
     color: #e7e7e7;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     margin-left: 28px;
@@ -86,7 +88,7 @@
 
 .device-setting-cancel-btn-text {
     color: #898989;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
 }

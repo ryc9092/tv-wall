@@ -1,3 +1,5 @@
+@import "../../../App.scss";
+
 .view-template-setting .ant-modal-content {
     padding: 40px !important;
     height: 760px;
@@ -20,7 +22,7 @@
 .view-template-modal-title {
     height: 36px;
     flex-grow: 1;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 28px;
     font-weight: normal;
     font-stretch: normal;
@@ -35,7 +37,7 @@
   height: 24px;
   align-self: stretch;
   flex-grow: 0;
-  font-family: Noto Sans TC;
+   @extend .sdcp-font;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -59,7 +61,7 @@
     width: 40px;
     height: 40px;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 22px;
     font-weight: normal;
     font-stretch: normal;
@@ -85,7 +87,7 @@
     height: 40px;
     background-color: #45413e;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 22px;
     font-weight: normal;
     font-stretch: normal;
@@ -116,7 +118,7 @@
 
 .view-screen-block-num-text {
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 26px;
     font-weight: normal;
     font-stretch: normal;

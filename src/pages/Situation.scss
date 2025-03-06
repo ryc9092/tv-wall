@@ -1,9 +1,11 @@
+@import "../App.scss";
+
 .situation-title-row {
   height: 40px;
   display: flex;
   flex-grow: 1;
   justify-content: space-between;
-  font-family: Noto Sans TC;
+   @extend .sdcp-font;
   font-size: 32px;
   font-weight: normal;
   font-stretch: normal;
@@ -80,7 +82,7 @@
 .situation-card-title {
   height: 32px;
   flex-grow: 0;
-  font-family: Noto Sans TC;
+   @extend .sdcp-font;
   font-size: 24px;
   font-weight: normal;
   font-stretch: normal;
@@ -152,7 +154,7 @@
   margin-top: -24px;
   margin-bottom: 30px;
   flex-grow: 0;
-  font-family: Noto Sans TC;
+   @extend .sdcp-font;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -195,7 +197,7 @@
 .add-situation-item-btn-text {
   height: 24px;
   flex-grow: 0;
-  font-family: Noto Sans TC;
+   @extend .sdcp-font;
   font-size: 16px;
   font-weight: 600;
   font-stretch: normal;
@@ -223,7 +225,7 @@
 .delete-situation-btn-text {
   height: 20px;
   flex-grow: 0;
-  font-family: Noto Sans TC;
+   @extend .sdcp-font;
   font-size: 14px;
   font-weight: 600;
   font-stretch: normal;
@@ -247,7 +249,7 @@
 .dropdown-menu-text {
   height: 24px;
   flex-grow: 0;
-  font-family: Noto Sans TC;
+   @extend .sdcp-font;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -286,7 +288,7 @@
 .create-situation-btn-text {
   height: 24px;
   flex-grow: 0;
-  font-family: Noto Sans TC;
+   @extend .sdcp-font;
   font-size: 16px;
   font-weight: 600;
   font-stretch: normal;

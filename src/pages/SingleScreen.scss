@@ -1,3 +1,5 @@
+@import "../App.scss";
+
 .single-screen-layout-column {
     display: flex;
     margin-top: 48px;
@@ -87,7 +89,7 @@
 .single-screen-card-title {
     border-radius: 4px;
     color: #45413e;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 22px;
     font-weight: 500;
 }
@@ -97,14 +99,14 @@
     border-radius: 4px;
     color: #ffffff;
     background-color: #757371;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 22px;
     font-weight: 500;
 }
 
 .single-screen-card-desc {
     padding: 2px 0px 0px 14px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: normal;
     color: #45413e;
@@ -112,7 +114,7 @@
 
 .single-screen-card-desc-selected {
     padding: 2px 0px 0px 14px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: normal;
     color: #45413e;
@@ -130,7 +132,7 @@
 }
 
 .single-screen-btn-text {
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 500;
 }
@@ -154,14 +156,14 @@
     margin-top: -6px;
     color: #45413e;
     font-size: 22px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-weight: 600;
 }
 
 .singlescreen-card-right-desc {
     color: #a5a5a5;
     font-size: 16px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-weight: normal;
 }
 
@@ -201,7 +203,7 @@
 
 .singlescreen-input .ant-input {
     background-color: #e7e7e7;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
 }
 
 .singlescreen-card-right-encoder-container {
@@ -223,7 +225,7 @@
     padding-top: 8px;
     height: 36px;
     color: #45413e;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
 }
@@ -248,7 +250,7 @@
     color: #262320 !important;
     width: 160px;
     text-align: center;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 22px;
     font-weight: 600;
 }

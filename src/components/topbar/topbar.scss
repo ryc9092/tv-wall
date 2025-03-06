@@ -1,3 +1,4 @@
+@import "../../App.scss";
 
 .ant-layout-header {
     padding: 0;
@@ -54,12 +55,12 @@
     text-align: center;
     color: #45413e;
     font-size: 22px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     margin-bottom: 6px;
 }
 
 .topbar-user-menu-text {
     font-size: 16px;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     color: #363330;
 }

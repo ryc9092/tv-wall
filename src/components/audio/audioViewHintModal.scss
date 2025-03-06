@@ -1,7 +1,9 @@
+@import "../../App.scss";
+
 .situation-view-audio-hint-text {
     height: 24px;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 500;
     font-stretch: normal;

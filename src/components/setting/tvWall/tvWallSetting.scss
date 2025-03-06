@@ -1,3 +1,5 @@
+@import "../../../App.scss";
+
 .tv-wall-content-container {
     width: 1200px;
 }
@@ -44,7 +46,7 @@
 .create-wall-btn-text {
     height: 24px;
     flex-grow: 0;
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
@@ -87,7 +89,7 @@
 }
 
 .table-head {
-    font-family: Noto Sans TC;
+     @extend .sdcp-font;
     font-size: 14px;
     font-weight: 600;
     text-align: left;
