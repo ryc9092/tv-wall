@@ -482,12 +482,16 @@ export const activeWall = async ({
   });
 };
 
-export const deactiveWall = async ({ store, activeId }) => {
+export const deactiveWall = async ({ store, activeId, decoders }) => {
   const httpMethod = "DELETE";
   const apiPath = `/tvwalls/active/${activeId}`;
+  const form = JSON.stringify({
+    decoders: decoders,
+  });
   return await apiCall({
     httpMethod,
     apiPath,
+    form,
     store,
   });
 };

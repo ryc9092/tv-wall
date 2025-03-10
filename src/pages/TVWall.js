@@ -233,39 +233,20 @@ const TVWall = () => {
     (async () => {
       if (clearBlockNumber) {
         try {
+          let unlinkDecoders = [];
+          blocksDetail?.forEach((block) => {
+            if (clearBlockNumber === block.block.toString()) {
+              block.detail?.forEach((detail) => {
+                unlinkDecoders.push(detail.decoder);
+              });
+            }
+          });
           const result = await deactiveWall({
             activeId: selectedWall.wallId,
             store: store,
+            decoders: unlinkDecoders,
           });
           if (!result) throw new Error("call api failed");
-          let apiFormatBlocks = [];
-          blocksDetail?.forEach((block) => {
-            let blockDecoders = [];
-            block.detail?.forEach((detail) => {
-              blockDecoders.push(detail.decoder);
-            });
-            apiFormatBlocks.push({
-              block: block.block,
-              col: block.col,
-              row: block.row,
-              // update block to not link encoder
-              encoder:
-                clearBlockNumber === block.block.toString()
-                  ? ""
-                  : block.detail[0].encoder,
-              decoder: blockDecoders,
-            });
-          });
-          const data = {
-            activeId: selectedWall.wallId,
-            wallId: selectedWall.wallId,
-            wallType: "normal",
-            templateId: selectedTemplate.templateId,
-            blocks: apiFormatBlocks,
-            isPreset: "N",
-            store: store,
-          };
-          handleActiveWall(data);
         } catch (error) {
           showWarningNotification(
             intl.formatMessage(Messages.Text_TVWall_DeactiveFail)
