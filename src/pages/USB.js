@@ -417,11 +417,13 @@ const USB = () => {
                   setReload(Math.random());
                 }}
               >
-                <img
-                  alt="create"
-                  src={PlusIcon}
-                  className="usb-content-create-button-icon"
-                />
+                <div className="usb-content-create-button-wrapper">
+                  <img
+                    alt="create"
+                    src={PlusIcon}
+                    className="usb-content-create-button-icon"
+                  />
+                </div>
               </Button>
             </div>
             {/* <div className="usb-content-table-row ">

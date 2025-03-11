@@ -293,8 +293,14 @@
     cursor: pointer;
 }
 
+.usb-content-create-button-wrapper {
+    width: 100% !important;
+    display: inline-block;
+}
+
 .usb-content-create-button-icon {
     width: 16px;
+    margin-top: 4px;
     // margin-left: 11px;
 }
 
