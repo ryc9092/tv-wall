@@ -27,7 +27,7 @@ import useWindowDimensions from "../utils/WindowDimension";
 const TVWall = () => {
   const intl = useIntl();
   const [store, dispatch] = useContext(StoreContext);
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   const [wallOptions, setWallOptions] = useState([]);
   const [wallDimension, setWallDimension] = useState({ col: 0, row: 0 });
   const [selectedWall, setSelectedWall] = useState({});
@@ -77,7 +77,7 @@ const TVWall = () => {
         setSelectedWall(tempWallOptions[0]);
       }
     })();
-  }, [store]);
+  }, []);
 
   // Set template when selected wall is changed
   useEffect(() => {
@@ -131,7 +131,7 @@ const TVWall = () => {
         setTemplateOptions(tempTemplateOptions);
       }
     })();
-  }, [selectedWall, store, wallDimension.col, wallDimension.row]);
+  }, [selectedWall, wallDimension.col, wallDimension.row]);
 
   // Show wall active status when selected wall changed and there is no selected template
   useEffect(() => {
@@ -165,7 +165,7 @@ const TVWall = () => {
         }
       }
     })();
-  }, [selectedTemplate, encoders, selectedWall.wallId, store, reload]);
+  }, [selectedTemplate, encoders, selectedWall.wallId, reload]);
 
   const handleActiveWall = async (data) => {
     activeWall(data).then((result) => {
@@ -222,7 +222,6 @@ const TVWall = () => {
   }, [
     selectedBlockNumber,
     selectedEncoder,
-    store,
     intl,
     blocksDetail,
     selectedWall,
@@ -254,7 +253,7 @@ const TVWall = () => {
         }
       }
     })();
-  }, [clearBlockNumber, intl, selectedWall, store]);
+  }, [clearBlockNumber, intl, selectedWall]);
 
   // Set "normal/abnormal encoder list" when search filter is changed
   useEffect(() => {
@@ -271,7 +270,7 @@ const TVWall = () => {
       }
       setFilteredEncoders(tempFilteredEncoders);
     })();
-  }, [searchFilter, store]);
+  }, [searchFilter]);
 
   const changeWallSelected = (wall) => {
     setWallDimension({ col: wall.col, row: wall.row });
@@ -487,24 +486,30 @@ const TVWall = () => {
             </p>
           </Modal>
         </div>
-        <div id="wall-screen" className="tvwall-screen-container">
-          <TvWall
-            selectedWall={selectedWall}
-            selectedTemplate={selectedTemplate}
-            selectedEncoder={selectedEncoder}
-            encoders={encoders}
-            clearTvWall={clearTvWall}
-            blocks={blocks}
-            setBlocks={setBlocks}
-            isActivedWall={isActivedWall}
-            blockEncoderMapping={blockEncoderMapping}
-            setBlockEncoderMapping={setBlockEncoderMapping}
-            selectedBlockNumber={selectedBlockNumber}
-            setSelectedBlockNumber={setSelectedBlockNumber}
-            setClearBlockNumber={setClearBlockNumber}
-            blocksDetail={blocksDetail}
-            setBlocksDetail={setBlocksDetail}
-          />
+        <div
+          id="wall-screen"
+          className="tvwall-screen-container"
+          style={{ width: width - 628, height: height - 265 }}
+        >
+          <div style={{ position: "relative" }}>
+            <TvWall
+              selectedWall={selectedWall}
+              selectedTemplate={selectedTemplate}
+              selectedEncoder={selectedEncoder}
+              encoders={encoders}
+              clearTvWall={clearTvWall}
+              blocks={blocks}
+              setBlocks={setBlocks}
+              isActivedWall={isActivedWall}
+              blockEncoderMapping={blockEncoderMapping}
+              setBlockEncoderMapping={setBlockEncoderMapping}
+              selectedBlockNumber={selectedBlockNumber}
+              setSelectedBlockNumber={setSelectedBlockNumber}
+              setClearBlockNumber={setClearBlockNumber}
+              blocksDetail={blocksDetail}
+              setBlocksDetail={setBlocksDetail}
+            />
+          </div>
         </div>
       </div>
       <div className="tvwall-card-container">

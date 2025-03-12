@@ -101,8 +101,9 @@
 
 .tvwall-screen-container {
     margin-top: 16px;
-    margin-bottom: 36px;
+    margin-bottom: 16px;
     flex-grow: 1;
+    overflow: scroll;
 }
 
 .tvwall-card-container {
