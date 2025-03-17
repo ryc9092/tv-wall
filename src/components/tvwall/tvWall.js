@@ -221,6 +221,7 @@ const TvWall = ({
                       position: "absolute",
                       borderRadius: "20px",
                       zIndex: 100,
+                      height: 34
                     }}
                     onClick={(event) => {
                       let clearBlockNumber = event.target.id;
@@ -257,6 +258,7 @@ const TvWall = ({
                       position: "absolute",
                       borderRadius: "20px",
                       zIndex: 100,
+                      height: 34
                     }}
                   >
                     <div style={{ display: "flex" }}>
