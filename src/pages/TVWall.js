@@ -489,7 +489,21 @@ const TVWall = () => {
         <div
           id="wall-screen"
           className="tvwall-screen-container"
-          style={{ width: width - 628, height: height - 265 }}
+          style={
+            store.siderCollapse
+              ? {
+                  width: width - 463,
+                  height: height - 262,
+                  border: "1px solid #a5a5a5",
+                  borderRadius: "8px",
+                }
+              : {
+                  width: width - 615,
+                  height: height - 262,
+                  border: "1px solid #a5a5a5",
+                  borderRadius: "8px",
+                }
+          }
         >
           <div style={{ position: "relative" }}>
             <TvWall
