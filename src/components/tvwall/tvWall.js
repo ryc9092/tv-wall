@@ -139,6 +139,7 @@ const TvWall = ({
             style={{
               width: block.col * WALL_SCREEN_SIZE,
               height: block.row * WALL_SCREEN_SIZE,
+              // zIndex: 2222,
               left:
                 ((block.smallestScreenNum - 1) % tvWallSize.col) *
                 WALL_SCREEN_SIZE,
@@ -221,6 +222,7 @@ const TvWall = ({
                       position: "absolute",
                       borderRadius: "20px",
                       zIndex: 100,
+                      height: 36
                     }}
                     onClick={(event) => {
                       let clearBlockNumber = event.target.id;
@@ -257,6 +259,7 @@ const TvWall = ({
                       position: "absolute",
                       borderRadius: "20px",
                       zIndex: 100,
+                      height: 36
                     }}
                   >
                     <div style={{ display: "flex" }}>
