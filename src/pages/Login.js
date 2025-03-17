@@ -7,7 +7,6 @@ import { StoreContext } from "../components/store/store";
 import Messages from "../messages";
 import { login } from "../api/API";
 import { showWarningNotification } from "../utils/Utils";
-import BeforeLoginAnime from "../assets/logoAnimeForward.mp4";
 import AfterLoginAnime from "../assets/logoAnimeReverse.mp4";
 import loginBackground from "../assets/login.png";
 import { jwtDecode } from "jwt-decode";
@@ -28,13 +27,6 @@ const Login = () => {
     setAnime(anime);
     setPlayAnime(true);
   }
-
-  // play anime on load page
-  useEffect(() => {
-    (async () => {
-      startToPlayAnime(BeforeLoginAnime);
-    })();
-  }, []);
 
   // check if anime already played
   useEffect(() => {
