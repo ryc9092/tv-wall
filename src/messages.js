@@ -6,7 +6,7 @@ export default defineMessages({
   Text_Common_Alias: { id: "Text-Common-Alias", defaultMessage: "別名" },
   Text_Common_Block: { id: "Text-Common-Block", defaultMessage: "區塊" },
   Text_Common_Screen: { id: "Text-Common-Screen", defaultMessage: "畫面" },
-  Text_Common_Model: { id: "Text-Common-Model", defaultMessage: "產品型號" },
+  Text_Common_Model: { id: "Text-Common-Model", defaultMessage: "型號" },
   Text_Common_State: { id: "Text-Common-State", defaultMessage: "狀態" },
   Text_Common_Up: { id: "Text-Common-Up", defaultMessage: "上線" },
   Text_Common_Down: { id: "Text-Common-Down", defaultMessage: "離線" },
@@ -26,7 +26,7 @@ export default defineMessages({
   },
   Text_Common_EncoderName: {
     id: "Text-Common-EncoderName",
-    defaultMessage: "來源名稱",
+    defaultMessage: "名稱",
   },
   Text_Common_Encoder: {
     id: "Text-Common-Encoder",

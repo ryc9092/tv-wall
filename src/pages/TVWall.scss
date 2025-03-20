@@ -111,8 +111,8 @@
     border-radius: 24px;
     box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
     position: absolute;
-    right: 14px;
-    // margin-left: 6px;
+    right: 18px;
+    margin-left: 6px;
 }
 
 // @media(max-width: 1179px) {
@@ -127,33 +127,15 @@
 // }
 
 .tvwall-card-right {
-    width: 348px;
+    width: 323px;
     border-radius: 24px;
     z-index: 100;
     overflow: hidden;
 }
 
-.tvwall-card-right-collapse {
-    width: 348px;
-    border-radius: 24px;
-    z-index: 100;
-    overflow: hidden;
-}
-
-@media(max-width: 1179px) {
-    .tvwall-card-right {
-        width: 200px;
-        border-radius: 24px;
-        z-index: 100;
-        overflow: scroll;
-    }
-
-    .tvwall-card-right-collapse {
-        width: 348px;
-        border-radius: 24px;
-        z-index: 100;
-        // overflow: scroll;
-    }
+.tvwall-title-column {
+    justify-content: space-between;
+    display: flex;
 }
 
 .tvwall-card-right-title {
@@ -168,12 +150,11 @@
     font-size: 16px;
      @extend .sdcp-font;
     font-weight: normal;
-    width: 340px;
 }
 
 .tvwall-card-right-preview {
-    width: 304px;
-    height: 171px;
+    width: 276px;
+    height: 155px;
     border-radius: 8px;
     border: 1px solid gray;
     position: relative;
@@ -206,8 +187,8 @@
 }
 
 .tvwall-card-right-search {
-    height: 48px;
-    width: 306px;
+    height: 40px;
+    width: 278px;
     margin-top: 10px;
     font-size: 16px;
     background-color: #e7e7e7;
@@ -219,8 +200,15 @@
 }
 
 .tvwall-card-right-encoder-container {
-    margin-top: 16px;
-    height: calc(100vh - 472px);
+    margin-top: 12px;
+    height: calc(100vh - 436px);
+    border-radius: 24px;
+    // overflow-y: scroll;
+}
+
+.tvwall-card-right-encoder-container-without-preview {
+    margin-top: 12px;
+    height: calc(100vh - 436px + 171px);
     border-radius: 24px;
     // overflow-y: scroll;
 }

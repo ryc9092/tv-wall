@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
 import { Actions } from "../components/store/reducer";
-import { Card, Input, Select, Table, Tag, Modal, Radio } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { Button, Card, Input, Select, Table, Tag, Modal, Radio } from "antd";
+import { SearchOutlined, EyeOutlined } from "@ant-design/icons";
 import TvWall from "../components/tvwall/tvWall";
 import {
   activeWall,
@@ -38,6 +38,7 @@ const TVWall = () => {
   const [searchFilter, setSearchFilter] = useState("");
   const [encoders, setEncoders] = useState([]);
   const [filteredEncoders, setFilteredEncoders] = useState([]);
+  const [showPreview, setShowPreview] = useState(false);
   const [clearTvWall, setClearTvWall] = useState(null);
   const [selectedEncoder, setSelectedEncoder] = useState({
     mac: "",
@@ -373,34 +374,6 @@ const TVWall = () => {
         return <span className="table-content">{text}</span>;
       },
     },
-    {
-      title: intl.formatMessage(Messages.Text_Common_State),
-      width: "20%",
-      key: "state",
-      dataIndex: "state",
-      sorter: (a, b) => a.state.length - b.state.length,
-      render: (_, { state, name }) => (
-        <>
-          {state === "Up" ? (
-            <Tag color={"#eef9b4"} key={`${name}.${state}`}>
-              <span style={{ color: "#a0b628" }} className="tag-content">
-                <FormattedMessage {...Messages.Text_Common_Up} />
-              </span>
-            </Tag>
-          ) : state === "Down" ? (
-            <Tag color={"#ffe6e5"} key={`${name}.${state}`}>
-              <span style={{ color: "#d55959" }} className="tag-content">
-                <FormattedMessage {...Messages.Text_Common_Down} />
-              </span>
-            </Tag>
-          ) : (
-            <Tag color={"yellow"} key={`${name}.${state}`}>
-              <span className="tag-content">{state}</span>
-            </Tag>
-          )}
-        </>
-      ),
-    },
   ];
 
   return (
@@ -527,35 +500,49 @@ const TVWall = () => {
         </div>
       </div>
       <div className="tvwall-card-container">
-        <Card
-          className={
-            store.siderCollapse
-              ? "tvwall-card-right-collapse"
-              : "tvwall-card-right"
-          }
-        >
-          <div className="tvwall-card-right-title">
-            <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
+        <Card className="tvwall-card-right">
+          <div className="tvwall-title-column">
+            <div className="tvwall-card-right-title">
+              <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
+            </div>
+            <div>
+              <Button
+                onClick={() => {
+                  setShowPreview(!showPreview);
+                }}
+                style={{
+                  marginTop: 6,
+                  marginBottom: 12,
+                  border: 0,
+                  padding: 5,
+                  boxShadow: "none",
+                }}
+              >
+                <EyeOutlined style={{ fontSize: 16 }} />
+              </Button>
+            </div>
           </div>
           <div className="tvwall-card-right-desc">
             <FormattedMessage {...Messages.Text_TVWall_VideoSourceDesc} />
           </div>
-          <div className="tvwall-card-right-preview">
-            {selectedEncoder.nickName ? (
-              <div>
-                <iframe
-                  className="tvwall-card-right-preview-video"
-                  src={selectedEncoder.previewUrl}
-                  title="Video player"
-                />
-                <span>{selectedEncoder.nickName}</span>
-              </div>
-            ) : (
-              <div className="tvwall-card-right-preview-text tvwall-card-right-preview-text ">
-                <FormattedMessage {...Messages.Text_TVWall_Preview} />
-              </div>
-            )}
-          </div>
+          {showPreview ? (
+            <div className="tvwall-card-right-preview">
+              {selectedEncoder.nickName ? (
+                <div>
+                  <iframe
+                    className="tvwall-card-right-preview-video"
+                    src={selectedEncoder.previewUrl}
+                    title="Video player"
+                  />
+                  <span>{selectedEncoder.nickName}</span>
+                </div>
+              ) : (
+                <div className="tvwall-card-right-preview-text tvwall-card-right-preview-text ">
+                  <FormattedMessage {...Messages.Text_TVWall_Preview} />
+                </div>
+              )}
+            </div>
+          ) : null}
           <Input
             className="tvwall-card-right-search tvwall-input"
             variant="filled"
@@ -565,7 +552,13 @@ const TVWall = () => {
             prefix={<SearchOutlined />}
             placeholder={intl.formatMessage(Messages.Text_TVWall_InputEncoder)}
           />
-          <div className="tvwall-card-right-encoder-container">
+          <div
+            className={
+              showPreview
+                ? "tvwall-card-right-encoder-container"
+                : "tvwall-card-right-encoder-container-without-preview"
+            }
+          >
             <Table
               columns={columns}
               size="small"
