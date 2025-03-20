@@ -247,6 +247,13 @@ const TVWall = () => {
             decoders: unlinkDecoders,
           });
           if (!result) throw new Error("call api failed");
+          else {
+            showSuccessNotificationByMsg(
+              intl.formatMessage(Messages.Text_TVWall_DeactiveSuccess)
+            );
+            setClearBlockNumber(null);
+            setReload(Math.random());
+          }
         } catch (error) {
           showWarningNotification(
             intl.formatMessage(Messages.Text_TVWall_DeactiveFail)
