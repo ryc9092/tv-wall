@@ -478,8 +478,8 @@ const TVWall = () => {
                   borderRadius: "8px",
                 }
               : {
-                  width: width - 615,
-                  height: height - 262,
+                  width: width - 614,
+                  height: height - 258,
                   border: "1px solid #a5a5a5",
                   borderRadius: "8px",
                 }
