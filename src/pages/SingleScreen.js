@@ -441,38 +441,11 @@ const SingleScreen = () => {
       render: (text) => {
         return <span className="table-content">{text}</span>;
       },
-    },
-    {
-      title: intl.formatMessage(Messages.Text_Common_State),
-      key: "state",
-      dataIndex: "state",
-      sorter: (a, b) => a.state.length - b.state.length,
-      render: (_, { state, name }) => (
-        <>
-          {state === "Up" ? (
-            <Tag color={"#eef9b4"} key={`${name}.${state}`}>
-              <span style={{ color: "#a0b628" }} className="tag-content">
-                <FormattedMessage {...Messages.Text_Common_Up} />
-              </span>
-            </Tag>
-          ) : state === "Down" ? (
-            <Tag color={"#ffe6e5"} key={`${name}.${state}`}>
-              <span style={{ color: "#d55959" }} className="tag-content">
-                <FormattedMessage {...Messages.Text_Common_Down} />
-              </span>
-            </Tag>
-          ) : (
-            <Tag color={"yellow"} key={`${name}.${state}`}>
-              <span className="tag-content">{state}</span>
-            </Tag>
-          )}
-        </>
-      ),
-    },
+    }
   ];
 
   return (
-    <div className="single-screen-layout-column">
+    <div className="page-layout-column">
       <div>
         <div
           className={

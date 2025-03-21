@@ -384,7 +384,7 @@ const TVWall = () => {
   ];
 
   return (
-    <div className="tvwall-layout-column">
+    <div className="page-layout-column">
       <div>
         <div className="page-title">
           <FormattedMessage {...Messages.Text_TVWall_TVWallManagement} />

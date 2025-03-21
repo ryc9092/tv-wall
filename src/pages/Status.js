@@ -166,13 +166,7 @@ const Status = () => {
   ];
 
   return (
-    <div
-      className={
-        store.siderCollapse
-          ? `page-layout-column-collapse`
-          : `page-layout-column`
-      }
-    >
+    <div className="page-layout-column">
       <div>
         <div className="status-title-row">
           <span className="page-title">

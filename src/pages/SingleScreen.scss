@@ -1,11 +1,5 @@
  @use "../App.scss";
 
-.single-screen-layout-column {
-    display: flex;
-    margin-top: 48px;
-    margin-left: 56px;
-}
-
 .single-screen-left-container {
     max-height: calc(100vh - 340px);
     overflow: scroll;

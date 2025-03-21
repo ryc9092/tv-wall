@@ -20,17 +20,9 @@
 }
 
 .page-layout-column {
-    display: grid;
-    grid-template-columns: 21fr 7fr;
-    margin-top: 48px;
-    margin-left: 80px;
-}
-
-.page-layout-column-collapse {
-    display: grid;
-    grid-template-columns: 21fr 7fr;
-    margin-top: 48px;
-    margin-left: 120px;
+    display: flex;
+    margin-top: 22px;
+    margin-left: 24px;
 }
 
 .page-title {
