@@ -202,12 +202,12 @@ const TvWall = ({
               </div>
               <div
                 id={block.block}
-                className="single-screen-btn-position"
                 style={{
-                  marginLeft:
+                  position: "absolute",
+                  left:
                     POSITION_CLEAR_BTN.left +
                     (block.col - 1) * WALL_SCREEN_SIZE,
-                  marginTop:
+                  top:
                     POSITION_CLEAR_BTN.top + (block.row - 1) * WALL_SCREEN_SIZE,
                 }}
               >
