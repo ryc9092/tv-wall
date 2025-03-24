@@ -549,7 +549,9 @@ const TVWall = () => {
                 </div>
               )}
             </div>
-          ) : null}
+          ) : (
+            <div className="none-preview"></div>
+          )}
           <Input
             className="tvwall-card-right-search tvwall-input"
             variant="filled"
