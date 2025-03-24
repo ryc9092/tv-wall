@@ -54,7 +54,7 @@ const TVWall = () => {
       dispatch({ type: Actions.SetSiderCollapse, payload: true });
   }, [dispatch, width]);
 
-  // Set "wall options"
+  // Set "wall options", get encoders
   useEffect(() => {
     (async () => {
       let tempWallOptions = [];
@@ -74,8 +74,10 @@ const TVWall = () => {
         });
         setSelectedWall(tempWallOptions[0]);
       }
+      const encoders = await getEncoders(store);
+      setEncoders(encoders);
     })();
-  }, []);
+  }, [store]);
 
   // Set template when selected wall is changed
   useEffect(() => {
@@ -260,13 +262,6 @@ const TVWall = () => {
     })();
   }, [clearBlockNumber, intl, selectedWall]);
 
-  useEffect(() => {
-    (async () => {
-      const encoders = await getEncoders(store);
-      setEncoders(encoders);
-    })();
-  }, []);
-
   const changeWallSelected = (wall) => {
     setWallDimension({ col: wall.col, row: wall.row });
     setSelectedWall(wall);
@@ -399,14 +394,14 @@ const TVWall = () => {
               ? {
                   width: width - 463,
                   height: height - 262,
-                  border: "1px solid #a5a5a5",
-                  borderRadius: "8px",
+                  // border: "1px solid #a5a5a5",
+                  // borderRadius: "8px",
                 }
               : {
                   width: width - 614,
                   height: height - 258,
-                  border: "1px solid #a5a5a5",
-                  borderRadius: "8px",
+                  // border: "1px solid #a5a5a5",
+                  // borderRadius: "8px",
                 }
           }
         >
