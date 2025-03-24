@@ -1,0 +1,132 @@
+@import '../../App.scss';
+
+.card-container {
+    height: calc(100vh - 102px);
+    border-radius: 24px;
+    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+    position: absolute;
+    right: 18px;
+    margin-left: 6px;
+}
+
+.encoder-card {
+    width: 323px;
+    border-radius: 24px;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.encoder-card-title-column {
+    justify-content: space-between;
+    display: flex;
+}
+
+.encoder-card-title {
+    color: #45413e;
+    font-size: 22px;
+     @extend .sdcp-font;
+    font-weight: 600;
+}
+
+.encoder-card-desc {
+    color: #a5a5a5;
+    font-size: 16px;
+     @extend .sdcp-font;
+    font-weight: normal;
+}
+
+@keyframes grow {
+    0% {
+        height: 55px;
+    }
+    100% {
+        height: 155px;
+    }
+}
+
+.encoder-preview {
+    width: 276px;
+    height: 155px;
+    border-radius: 8px;
+    border: 1px solid gray;
+    position: relative;
+    margin-top: 16px;
+    animation: grow 0.2s ease;
+}
+
+.encoder-preview-video {
+    width: 100%;
+    max-width: 100%;
+    height: 203px;
+    margin-bottom: -6px;
+    border-radius: 8px;
+    border: 0px;
+    position: absolute;
+}
+
+.encoder-preview-text {
+    color: #a5a5a5;
+    font-size: 16px;
+     @extend .sdcp-font;
+    font-weight: normal;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+@keyframes shrink {
+    0% {
+        height: 155px;
+    }
+    100% {
+        height: 0px;
+    }
+}
+
+.none-preview {
+    width: 0px;
+    height: 0px;
+    animation: shrink 0.3s ease;
+}
+
+.encoder-card-search {
+    height: 40px;
+    width: 278px;
+    margin-top: 10px;
+    font-size: 16px;
+    background-color: #e7e7e7;
+}
+
+.encoder-search-input .ant-input {
+    background-color: #e7e7e7;
+     @extend .sdcp-font;
+}
+
+.encoder-card-table-container {
+    margin-top: 12px;
+    height: calc(100vh - 436px);
+    border-radius: 24px;
+    overflow-y: scroll;
+}
+
+.encoder-card-table-container-without-preview {
+    margin-top: 12px;
+    height: calc(100vh - 436px + 171px);
+    border-radius: 24px;
+    animation: encoder-grow 0.3s ease;
+    overflow-y: scroll;
+}
+
+.ant-table-thead > tr > th {
+    border: none;
+}
+
+.ant-table-tbody > tr > td {
+    border: none
+}
+
+.ant-card-body {
+    padding-bottom: 0px !important;
+}

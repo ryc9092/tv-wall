@@ -4,6 +4,7 @@ import { Actions } from "../components/store/reducer";
 import { Button, Card, Input, Select, Table, Tag, Modal, Radio } from "antd";
 import { SearchOutlined, EyeOutlined } from "@ant-design/icons";
 import TvWall from "../components/tvwall/tvWall";
+import EncoderCard from "../components/tvwall/encoderCard";
 import {
   activeWall,
   deactiveWall,
@@ -35,11 +36,7 @@ const TVWall = () => {
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [selectedBlockNumber, setSelectedBlockNumber] = useState(null);
   const [clearBlockNumber, setClearBlockNumber] = useState(null);
-  const [searchFilter, setSearchFilter] = useState("");
   const [encoders, setEncoders] = useState([]);
-  const [filteredEncoders, setFilteredEncoders] = useState([]);
-  const [showPreview, setShowPreview] = useState(false);
-  const [clearTvWall, setClearTvWall] = useState(null);
   const [selectedEncoder, setSelectedEncoder] = useState({
     mac: "",
     previewUrl: "",
@@ -263,22 +260,12 @@ const TVWall = () => {
     })();
   }, [clearBlockNumber, intl, selectedWall]);
 
-  // Set "normal/abnormal encoder list" when search filter is changed
   useEffect(() => {
     (async () => {
-      let tempFilteredEncoders = [];
       const encoders = await getEncoders(store);
       setEncoders(encoders);
-
-      if (encoders) {
-        encoders.forEach((encoder) => {
-          if (encoder.nickName.includes(searchFilter))
-            tempFilteredEncoders.push({ key: encoder.mac, ...encoder });
-        });
-      }
-      setFilteredEncoders(tempFilteredEncoders);
     })();
-  }, [searchFilter]);
+  }, []);
 
   const changeWallSelected = (wall) => {
     setWallDimension({ col: wall.col, row: wall.row });
@@ -287,27 +274,6 @@ const TVWall = () => {
 
   const changeTemplateSelected = (template) => {
     setSelectedTemplate(template);
-  };
-
-  const [chooseEncoderTime, setChooseEncoderTime] = useState(null);
-  const handleChooseEncoder = (encoder) => {
-    // prevent choose encoder interval too short
-    if (chooseEncoderTime === null || Date.now() - chooseEncoderTime > 300) {
-      // unselect encoder if it already selected
-      if (selectedEncoder.mac === encoder.mac)
-        setSelectedEncoder({
-          nickName: "",
-          mac: "",
-          previewUrl: "",
-        });
-      else
-        setSelectedEncoder({
-          nickName: encoder.nickName,
-          mac: encoder.mac,
-          previewUrl: encoder.previewUrl,
-        });
-    }
-    setChooseEncoderTime(Date.now());
   };
 
   const handleDeactiveWall = async () => {
@@ -341,47 +307,6 @@ const TVWall = () => {
     }
     setOpenConfirmModal(false);
   };
-
-  const columns = [
-    {
-      dataIndex: "mac",
-      key: "radio",
-      render: (text) => {
-        return (
-          <Radio id={`btn@${text}`} checked={selectedEncoder.mac === text} />
-        );
-      },
-    },
-    {
-      title: intl.formatMessage(Messages.Text_Common_EncoderName),
-      dataIndex: "nickName",
-      key: "nickName",
-      minWidth: 55,
-      render: (text) => {
-        return <span className="table-content">{text}</span>;
-      },
-    },
-    {
-      title: intl.formatMessage(Messages.Text_Common_Model),
-      dataIndex: "model",
-      key: "model",
-      minWidth: 105,
-      filters: [
-        {
-          text: "ZyperUHD60",
-          value: "ZyperUHD60",
-        },
-        {
-          text: "Zyper4k",
-          value: "Zyper4k",
-        },
-      ],
-      onFilter: (value, data) => data.model.indexOf(value) === 0,
-      render: (text) => {
-        return <span className="table-content">{text}</span>;
-      },
-    },
-  ];
 
   return (
     <div className="page-layout-column">
@@ -491,7 +416,6 @@ const TVWall = () => {
               selectedTemplate={selectedTemplate}
               selectedEncoder={selectedEncoder}
               encoders={encoders}
-              clearTvWall={clearTvWall}
               blocks={blocks}
               setBlocks={setBlocks}
               isActivedWall={isActivedWall}
@@ -506,82 +430,11 @@ const TVWall = () => {
           </div>
         </div>
       </div>
-      <div className="tvwall-card-container">
-        <Card className="tvwall-card-right">
-          <div className="tvwall-title-column">
-            <div className="tvwall-card-right-title">
-              <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
-            </div>
-            <div>
-              <Button
-                onClick={() => {
-                  setShowPreview(!showPreview);
-                }}
-                style={{
-                  marginTop: 6,
-                  marginBottom: 12,
-                  border: 0,
-                  padding: 5,
-                  boxShadow: "none",
-                }}
-              >
-                <EyeOutlined style={{ fontSize: 16 }} />
-              </Button>
-            </div>
-          </div>
-          <div className="tvwall-card-right-desc">
-            <FormattedMessage {...Messages.Text_TVWall_VideoSourceDesc} />
-          </div>
-          {showPreview ? (
-            <div className="tvwall-card-right-preview">
-              {selectedEncoder.nickName ? (
-                <div>
-                  <iframe
-                    className="tvwall-card-right-preview-video"
-                    src={selectedEncoder.previewUrl}
-                    title="Video player"
-                  />
-                  <span>{selectedEncoder.nickName}</span>
-                </div>
-              ) : (
-                <div className="tvwall-card-right-preview-text tvwall-card-right-preview-text ">
-                  <FormattedMessage {...Messages.Text_TVWall_Preview} />
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="none-preview"></div>
-          )}
-          <Input
-            className="tvwall-card-right-search tvwall-input"
-            variant="filled"
-            onChange={(e) => {
-              setSearchFilter(e.target.value);
-            }}
-            prefix={<SearchOutlined />}
-            placeholder={intl.formatMessage(Messages.Text_TVWall_InputEncoder)}
-          />
-          <div
-            className={
-              showPreview
-                ? "tvwall-card-right-encoder-container"
-                : "tvwall-card-right-encoder-container-without-preview"
-            }
-          >
-            <Table
-              columns={columns}
-              size="small"
-              dataSource={filteredEncoders}
-              pagination={{ pageSize: 11 }}
-              onRow={(record) => ({
-                onClick: () => {
-                  handleChooseEncoder(record);
-                },
-              })}
-            />
-          </div>
-        </Card>
-      </div>
+      <EncoderCard
+        encoders={encoders}
+        selectedEncoder={selectedEncoder}
+        setSelectedEncoder={setSelectedEncoder}
+      />
     </div>
   );
 };
