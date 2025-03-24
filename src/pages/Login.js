@@ -86,7 +86,7 @@ const Login = () => {
   );
 
   return (
-    <div>
+    <div style={{backgroundColor: "black"}}>
       {playAnime ? (
         <div
           style={{

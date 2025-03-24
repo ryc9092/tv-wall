@@ -1,14 +1,18 @@
  @use "../App.scss";
 
-@keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+ @keyframes zoom-out {
+    0% {
+      scale: 60%;
+    }
+    100% {
+      scale: 100%;
+    }
 }
 
 .container {
     display: flex;
     background-color: #262320;
-    animation: fadein 4s;
+    animation: zoom-out 1.5s ease;
 }
 
 .left-column {
