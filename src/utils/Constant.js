@@ -1,5 +1,5 @@
-export const WALL_SCREEN_SIZE = 184;
-export const POSITION_CLEAR_BTN = { left: 36, top: 124 };
+export const WALL_SCREEN_SIZE = 236;
+export const POSITION_CLEAR_BTN = { left: 90, top: 176 };
 
 export const LANGUAGE_LOCALE_MAP = {
   english: "en",

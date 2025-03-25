@@ -45,6 +45,9 @@
 }
 
 .wall-block-desc {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     padding: 8px 0px 0px 10px;
      @extend .sdcp-font;
     font-size: 16px;

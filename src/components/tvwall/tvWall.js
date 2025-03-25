@@ -217,17 +217,45 @@ const TvWall = ({
               <div id={block.block}>
                 <div id={block.block} className="wall-block-desc">
                   <FormattedMessage {...Messages.Text_Common_Dimension} />
-                  {" : "}
+                  {": "}
                   {block.col} X {block.row}
                 </div>
               </div>
               <div id={block.block}>
                 <div id={block.block} className="wall-block-desc">
                   <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
-                  {" : "}{" "}
+                  {": "}{" "}
                   {blockEncoderMapping[block.block]?.nickName
                     ? blockEncoderMapping[block.block].nickName
                     : intl.formatMessage(Messages.Text_Common_None)}
+                </div>
+              </div>
+              <div id={block.block}>
+                <div id={block.block} className="wall-block-desc">
+                  <div
+                    style={{
+                      display: "flex",
+                    }}
+                  >
+                    <div>
+                      <FormattedMessage {...Messages.Text_Common_Decoder} />
+                      {":"}
+                    </div>
+                    <div>
+                      {blocksDetail?.map((detail) => {
+                        if (detail.block === block.block)
+                          return detail.detail?.map((detail) => {
+                            return (
+                              <span style={{ marginLeft: 5 }}>
+                                {detail.decoder}
+                                <br />
+                              </span>
+                            );
+                          });
+                        else return null;
+                      })}
+                    </div>
+                  </div>
                 </div>
               </div>
               <div

@@ -34,7 +34,7 @@ export default defineMessages({
   },
   Text_Common_Decoder: {
     id: "Text-Common-Decoder",
-    defaultMessage: "輸出終端",
+    defaultMessage: "播放終端",
   },
   Text_Common_Description: {
     id: "Text-Common-Description",
