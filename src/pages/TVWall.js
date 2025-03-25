@@ -77,7 +77,7 @@ const TVWall = () => {
       const encoders = await getEncoders(store);
       setEncoders(encoders);
     })();
-  }, [store]);
+  }, [store.vars]);
 
   // Set template when selected wall is changed
   useEffect(() => {
