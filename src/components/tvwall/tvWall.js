@@ -152,6 +152,36 @@ const TvWall = ({
               backgroundRepeat: "no-repeat",
             }}
           >
+            {block.col > 1
+              ? [...Array(block.col - 1)].map((x, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      zIndex: 1000,
+                      height: "100%",
+                      position: "absolute",
+                      left: `${(i + 1) * WALL_SCREEN_SIZE - 3}px`,
+                      borderLeft: "1px dashed #757371",
+                      opacity: 0.3,
+                    }}
+                  />
+                ))
+              : null}
+            {block.row > 1
+              ? [...Array(block.row - 1)].map((x, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      zIndex: 1000,
+                      width: "100%",
+                      position: "absolute",
+                      top: `${(i + 1) * WALL_SCREEN_SIZE - 3}px`,
+                      borderBottom: "1px dashed #757371",
+                      opacity: 0.3,
+                    }}
+                  />
+                ))
+              : null}
             <div
               id={block.block}
               className={
@@ -221,7 +251,7 @@ const TvWall = ({
                       position: "absolute",
                       borderRadius: "20px",
                       zIndex: 100,
-                      height: 34
+                      height: 34,
                     }}
                     onClick={(event) => {
                       let clearBlockNumber = event.target.id;
@@ -258,7 +288,7 @@ const TvWall = ({
                       position: "absolute",
                       borderRadius: "20px",
                       zIndex: 100,
-                      height: 34
+                      height: 34,
                     }}
                   >
                     <div style={{ display: "flex" }}>
