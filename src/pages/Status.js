@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
 import { Button, Input, Popover, Table, Tag } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { getEncoders, getDecoders, rebootDevice } from "../api/API";
+import { getDevicesStatus, rebootDevice } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
 import {
@@ -21,18 +21,11 @@ const Status = () => {
   useEffect(() => {
     (async () => {
       let tempDevices = [];
-      const encoders = await getEncoders(store);
-      encoders?.forEach((encoder) => {
-        if (encoder.nickName.includes(searchFilter)) {
-          encoder.key = encoder.name;
-          tempDevices.push(encoder);
-        }
-      });
-      const decoders = await getDecoders(store);
-      decoders?.forEach((decoder) => {
-        if (decoder.nickName.includes(searchFilter)) {
-          decoder.key = decoder.name;
-          tempDevices.push(decoder);
+      const devices = await getDevicesStatus(store);
+      devices?.forEach((device) => {
+        if (device.nickName.includes(searchFilter)) {
+          device.key = device.name;
+          tempDevices.push(device);
         }
       });
       setDevices(tempDevices);

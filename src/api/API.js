@@ -174,6 +174,14 @@ const apiCall = async ({
 
 // Device ========================================================
 
+export const getDevicesStatus = async (store) => {
+  const apiPath = `/devices/status`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
 export const getDecoders = async (store) => {
   const apiPath = `/devices/decoders`;
   return await apiGET({
