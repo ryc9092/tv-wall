@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Button, Card, Col, Input, Radio, Row, Tag, Table } from "antd";
+import { Button, Col, Input, Row, Tag } from "antd";
+import EncoderCard from "../components/tvwall/encoderCard";
 import { SearchOutlined } from "@ant-design/icons";
 import {
   createDeviceLink,
@@ -21,16 +22,17 @@ import {
 import "../App.scss";
 import "./SingleScreen.scss";
 
+import useWindowDimensions from "../utils/WindowDimension";
+
 const SingleScreen = () => {
   const intl = useIntl();
   const [store] = useContext(StoreContext);
+  const { width } = useWindowDimensions();
   const [decoders, setDecoders] = useState([]);
   const [searchDecoderFilter, setSearchDecoderFilter] = useState("");
   const [filteredDecoders, setFilteredDecoders] = useState([]);
   const [decoderCards, setDecoderCards] = useState(null);
   const [encoders, setEncoders] = useState([]);
-  const [searchEncoderFilter, setSearchEncoderFilter] = useState("");
-  const [filteredEncoders, setFilteredEncoders] = useState([]);
   const [selectedEncoder, setSelectedEncoder] = useState({
     nickName: "",
     mac: "",
@@ -64,76 +66,45 @@ const SingleScreen = () => {
 
       let tempDecoders = []; // for set decoders
       decoders?.forEach((decoder) => {
-        if (linkedDecoders.includes(decoder.mac)) {
-          deviceLinks?.forEach((deviceLink) => {
-            const encoderMac = deviceLink.encoder;
-            if (deviceLink.deviceLinkDetails.length >= 0) {
-              deviceLink.deviceLinkDetails.forEach((deviceLinkDetail) => {
-                const decoderMac = deviceLinkDetail.decoder;
-                encoders?.forEach((encoder) => {
-                  if (
-                    encoder.mac === encoderMac &&
-                    decoder.mac === decoderMac
-                  ) {
-                    tempDecoders.push({
-                      ...decoder,
-                      encoder: {
-                        mac: encoder.mac,
-                        nickName: encoder.nickName,
-                      },
-                    });
-                  }
+        if (decoder.state === "Up") {
+          if (linkedDecoders.includes(decoder.mac)) {
+            deviceLinks?.forEach((deviceLink) => {
+              const encoderMac = deviceLink.encoder;
+              if (deviceLink.deviceLinkDetails.length >= 0) {
+                deviceLink.deviceLinkDetails.forEach((deviceLinkDetail) => {
+                  const decoderMac = deviceLinkDetail.decoder;
+                  encoders?.forEach((encoder) => {
+                    if (
+                      encoder.mac === encoderMac &&
+                      decoder.mac === decoderMac
+                    ) {
+                      tempDecoders.push({
+                        ...decoder,
+                        encoder: {
+                          mac: encoder.mac,
+                          nickName: encoder.nickName,
+                        },
+                      });
+                    }
+                  });
                 });
-              });
-            }
-          });
-        } else {
-          tempDecoders.push({
-            ...decoder,
-            encoder: {
-              mac: "",
-              nickName: "",
-            },
-          });
+              }
+            });
+          } else {
+            tempDecoders.push({
+              ...decoder,
+              encoder: {
+                mac: "",
+                nickName: "",
+              },
+            });
+          }
         }
       });
       setEncoders(encoders);
       setDecoders(tempDecoders.length > 0 ? tempDecoders : decoders);
     })();
   }, [reload, store]);
-
-  // filtered encoder list
-  useEffect(() => {
-    (async () => {
-      let tempFilteredEncoders = [];
-      encoders?.forEach((encoder) => {
-        if (encoder.nickName.includes(searchEncoderFilter))
-          tempFilteredEncoders.push({ key: encoder.mac, ...encoder });
-      });
-      setFilteredEncoders(tempFilteredEncoders);
-    })();
-  }, [encoders, searchEncoderFilter]);
-
-  const [chooseEncoderTime, setChooseEncoderTime] = useState(null);
-  const handleChooseEncoder = (encoder) => {
-    // prevent choose encoder interval too short
-    if (chooseEncoderTime === null || Date.now() - chooseEncoderTime > 300) {
-      // unselect encoder if it already selected
-      if (selectedEncoder.mac === encoder.mac)
-        setSelectedEncoder({
-          nickName: "",
-          mac: "",
-          previewUrl: "",
-        });
-      else
-        setSelectedEncoder({
-          nickName: encoder.nickName,
-          mac: encoder.mac,
-          previewUrl: encoder.previewUrl,
-        });
-    }
-    setChooseEncoderTime(Date.now());
-  };
 
   // filtered decoder list
   useEffect(() => {
@@ -221,51 +192,6 @@ const SingleScreen = () => {
                   {decoder.nickName.length > 10
                     ? decoder.nickName.substring(0, 10) + "..."
                     : decoder.nickName}
-                </span>
-                <span id={`card@${decoder.mac}`} style={{ marginTop: "2px" }}>
-                  {decoder.state === "Up" ? (
-                    <Tag
-                      id={`card@${decoder.mac}`}
-                      color={"#eef9b4"}
-                      key={`${decoder.name}.${decoder.state}`}
-                    >
-                      <span
-                        id={`card@${decoder.mac}`}
-                        style={{ color: "#a0b628" }}
-                        className="tag-content"
-                      >
-                        <FormattedMessage {...Messages.Text_Common_Up} />
-                      </span>
-                    </Tag>
-                  ) : decoder.state === "Down" ? (
-                    <Tag
-                      id={`card@${decoder.mac}`}
-                      color={"#ffe6e5"}
-                      key={`${decoder.name}.${decoder.state}`}
-                    >
-                      <span
-                        id={`card@${decoder.mac}`}
-                        style={{ color: "#d55959" }}
-                        className="tag-content"
-                      >
-                        <FormattedMessage {...Messages.Text_Common_Down} />
-                      </span>
-                    </Tag>
-                  ) : (
-                    <Tag
-                      id={`card@${decoder.mac}`}
-                      color={"yellow"}
-                      key={`${decoder.name}.${decoder.state}`}
-                    >
-                      <span
-                        id={`card@${decoder.mac}`}
-                        style={{ color: "#d55959" }}
-                        className="tag-content"
-                      >
-                        {decoder.state}
-                      </span>
-                    </Tag>
-                  )}
                 </span>
               </div>
               <div id={`card@${decoder.mac}`}>
@@ -403,47 +329,6 @@ const SingleScreen = () => {
     }
   }, [selectedScreen, selectedEncoder, store, intl]);
 
-  const columns = [
-    {
-      dataIndex: "mac",
-      key: "radio",
-      render: (text) => {
-        return (
-          <Radio id={`btn@${text}`} checked={selectedEncoder.mac === text} />
-        );
-      },
-    },
-    {
-      title: intl.formatMessage(Messages.Text_Common_Name),
-      dataIndex: "nickName",
-      key: "nickName",
-      minWidth: 55,
-      render: (text) => {
-        return <span className="table-content">{text}</span>;
-      },
-    },
-    {
-      title: intl.formatMessage(Messages.Text_Common_Model),
-      dataIndex: "model",
-      key: "model",
-      minWidth: 110,
-      filters: [
-        {
-          text: "ZyperUHD60",
-          value: "ZyperUHD60",
-        },
-        {
-          text: "Zyper4k",
-          value: "Zyper4k",
-        },
-      ],
-      onFilter: (value, data) => data.model.indexOf(value) === 0,
-      render: (text) => {
-        return <span className="table-content">{text}</span>;
-      },
-    }
-  ];
-
   return (
     <div className="page-layout-column">
       <div>
@@ -478,59 +363,27 @@ const SingleScreen = () => {
             )}
           />
         </div>
-        <Row className="single-screen-left-container" gutter={[15, 15]}>
+        <Row
+          className="single-screen-left-container"
+          style={
+            store.siderCollapse
+              ? {
+                  width: width - 431,
+                }
+              : {
+                  width: width - 600,
+                }
+          }
+          gutter={[6, 6]}
+        >
           {decoderCards}
         </Row>
       </div>
-      <div className="singlescreen-card-container">
-        <Card className="singlescreen-card-right">
-          <div className="singlescreen-card-right-title">
-            <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
-          </div>
-          <div className="singlescreen-card-right-desc">
-            <FormattedMessage {...Messages.Text_TVWall_VideoSourceDesc} />
-          </div>
-          <div className="singlescreen-card-right-preview">
-            {selectedEncoder.nickName ? (
-              <div>
-                <iframe
-                  className="singlescreen-card-right-preview-video"
-                  src={selectedEncoder.previewUrl}
-                  title="Video player"
-                />
-                <span>{selectedEncoder.nickName}</span>
-              </div>
-            ) : (
-              <div className="singlescreen-card-right-preview-text singlescreen-card-right-desc">
-                <FormattedMessage {...Messages.Text_TVWall_Preview} />
-              </div>
-            )}
-          </div>
-          <Input
-            className="singlescreen-card-right-search singlescreen-input"
-            variant="filled"
-            onChange={(e) => {
-              setSearchEncoderFilter(e.target.value);
-            }}
-            prefix={<SearchOutlined />}
-            placeholder={intl.formatMessage(Messages.Text_TVWall_InputEncoder)}
-          />
-          <div className="singlescreen-card-right-encoder-container">
-            <Table
-              columns={columns}
-              dataSource={filteredEncoders}
-              pagination={{ pageSize: 11 }}
-              onRow={(record) => ({
-                onClick: () => {
-                  handleChooseEncoder(record);
-                },
-              })}
-              size="small"
-              tableLayout="auto"
-            />
-          </div>
-        </Card>
-      </div>
+      <EncoderCard
+        encoders={encoders}
+        selectedEncoder={selectedEncoder}
+        setSelectedEncoder={setSelectedEncoder}
+      />
     </div>
   );
 };
