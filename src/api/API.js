@@ -490,12 +490,10 @@ export const activeWall = async ({
   });
 };
 
-export const deactiveWall = async ({ store, activeId, decoders }) => {
+export const deactiveWall = async ({ store, activeId, data }) => {
   const httpMethod = "DELETE";
   const apiPath = `/tvwalls/active/${activeId}`;
-  const form = JSON.stringify({
-    decoders: decoders,
-  });
+  const form = JSON.stringify(data);
   return await apiCall({
     httpMethod,
     apiPath,

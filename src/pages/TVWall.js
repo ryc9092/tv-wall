@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
 import { Actions } from "../components/store/reducer";
-import { Button, Card, Input, Select, Table, Tag, Modal, Radio } from "antd";
-import { SearchOutlined, EyeOutlined } from "@ant-design/icons";
+import { Select, Modal } from "antd";
 import TvWall from "../components/tvwall/tvWall";
 import EncoderCard from "../components/tvwall/encoderCard";
 import {
@@ -233,17 +232,31 @@ const TVWall = () => {
       if (clearBlockNumber) {
         try {
           let unlinkDecoders = [];
+          let apiFormatBlocks = [];
           blocksDetail?.forEach((block) => {
             if (clearBlockNumber === block.block.toString()) {
               block.detail?.forEach((detail) => {
                 unlinkDecoders.push(detail.decoder);
               });
             }
+            apiFormatBlocks.push({
+              block: block.block,
+              col: block.col,
+              row: block.row,
+              // update block to not link encoder
+              encoder:
+                clearBlockNumber === block.block.toString()
+                  ? ""
+                  : block.detail[0].encoder,
+            });
           });
           const result = await deactiveWall({
             activeId: selectedWall.wallId,
             store: store,
-            decoders: unlinkDecoders,
+            data: {
+              active: apiFormatBlocks,
+              leave: unlinkDecoders,
+            }
           });
           if (!result) throw new Error("call api failed");
           else {
@@ -276,6 +289,10 @@ const TVWall = () => {
       const result = await deactiveWall({
         activeId: selectedWall.wallId,
         store: store,
+        data: {
+          active: [],
+          leave: [],
+        }
       });
       if (!result) throw new Error("call api failed");
       // clean encoder info in block
