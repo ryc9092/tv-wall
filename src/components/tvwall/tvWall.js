@@ -246,8 +246,8 @@ const TvWall = ({
                         if (detail.block === block.block)
                           return detail.detail?.map((detail) => {
                             return (
-                              <span style={{ marginLeft: 5 }}>
-                                {detail.decoder}
+                              <span style={{ marginLeft: 4 }}>
+                                {detail.nickName}
                                 <br />
                               </span>
                             );
