@@ -106,6 +106,7 @@
 
 .encoder-card-table-container {
     margin-top: 12px;
+    width: calc(100% + 10px);
     height: calc(100vh - 436px);
     border-radius: 24px;
     overflow-y: scroll;
@@ -113,6 +114,7 @@
 
 .encoder-card-table-container-without-preview {
     margin-top: 12px;
+    width: calc(100% + 10px);
     height: calc(100vh - 436px + 171px);
     border-radius: 24px;
     animation: encoder-grow 0.3s ease;

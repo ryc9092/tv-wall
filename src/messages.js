@@ -286,7 +286,7 @@ export default defineMessages({
   },
   Text_TVWall_ActiveFail: {
     id: "Text-TVWall-ActiveFail",
-    defaultMessage: "投放影像失敗, 請確認樣板、影像來源設定無誤",
+    defaultMessage: "投放失敗",
   },
   Text_TVWall_DeactiveSuccess: {
     id: "Text-TVWall-DeactiveSuccess",

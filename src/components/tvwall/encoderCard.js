@@ -50,11 +50,15 @@ const EncoderCard = ({ encoders, selectedEncoder, setSelectedEncoder }) => {
 
   const columns = [
     {
-      dataIndex: "mac",
+      dataIndex: ["mac", "state"],
       key: "radio",
-      render: (text) => {
+      render: (text, record) => {
         return (
-          <Radio id={`btn@${text}`} checked={selectedEncoder.mac === text} />
+          <Radio
+            disabled={record.state !== "Up"}
+            id={`btn@${record.mac}`}
+            checked={selectedEncoder.mac === record.mac}
+          />
         );
       },
     },
@@ -62,16 +66,23 @@ const EncoderCard = ({ encoders, selectedEncoder, setSelectedEncoder }) => {
       title: intl.formatMessage(Messages.Text_Common_EncoderName),
       dataIndex: "nickName",
       key: "nickName",
-      minWidth: 55,
-      render: (text) => {
-        return <span className="table-content">{text}</span>;
+      minWidth: 80,
+      render: (text, record) => {
+        return (
+          <span
+            className="table-content"
+            style={record.state !== "Up" ? { color: "#c33434" } : null}
+          >
+            {text}
+          </span>
+        );
       },
     },
     {
       title: intl.formatMessage(Messages.Text_Common_Model),
       dataIndex: "model",
       key: "model",
-      minWidth: 105,
+      minWidth: 60,
       filters: [
         {
           text: "ZyperUHD60",
@@ -159,7 +170,7 @@ const EncoderCard = ({ encoders, selectedEncoder, setSelectedEncoder }) => {
             pagination={{ pageSize: 11 }}
             onRow={(record) => ({
               onClick: () => {
-                handleChooseEncoder(record);
+                if (record.state === "Up") handleChooseEncoder(record);
               },
             })}
           />

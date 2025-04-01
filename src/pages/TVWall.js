@@ -256,7 +256,7 @@ const TVWall = () => {
             data: {
               active: apiFormatBlocks,
               leave: unlinkDecoders,
-            }
+            },
           });
           if (!result) throw new Error("call api failed");
           else {
@@ -292,7 +292,7 @@ const TVWall = () => {
         data: {
           active: [],
           leave: [],
-        }
+        },
       });
       if (!result) throw new Error("call api failed");
       // clean encoder info in block

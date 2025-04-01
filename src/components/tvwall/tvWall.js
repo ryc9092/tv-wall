@@ -1,7 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../components/store/store";
 import { Button } from "antd";
-import { getTemplateScreensById, getWallScreensById } from "../../api/API";
+import {
+  getTemplateScreensById,
+  getWallScreensById,
+  getDecoders,
+} from "../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
 import { WALL_SCREEN_SIZE, POSITION_CLEAR_BTN } from "../../utils/Constant";
@@ -48,6 +52,7 @@ const TvWall = ({
           store,
           selectedWall.wallId
         );
+        const decoders = await getDecoders(store);
         wallScreens.sort(function (wall1, wall2) {
           return wall1.num - wall2.num;
         });
@@ -55,10 +60,19 @@ const TvWall = ({
           wallScreens &&
           templateScreens &&
           blockEncoderMapping &&
+          decoders.length > 0 &&
           Object.keys(blockEncoderMapping).length >= 0
         ) {
           wallScreens.forEach((screen, idx) => {
             let tempScreen = screen;
+
+            // set state to screen
+            const decoder = decoders.filter(
+              (decoder) => decoder.nickName === screen.nickName
+            )[0];
+            tempScreen.state = decoder.state;
+
+            // set encoder to screen
             tempScreen.encoder = blockEncoderMapping.hasOwnProperty(
               templateScreens[idx].block
             )
@@ -246,7 +260,13 @@ const TvWall = ({
                         if (detail.block === block.block)
                           return detail.detail?.map((detail) => {
                             return (
-                              <span style={{ marginLeft: 4 }}>
+                              <span
+                                style={
+                                  detail.state !== "Up"
+                                    ? { marginLeft: 4, color: "#c33434" }
+                                    : { marginLeft: 4 }
+                                }
+                              >
                                 {detail.nickName}
                                 <br />
                               </span>
