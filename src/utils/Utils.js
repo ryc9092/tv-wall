@@ -10,7 +10,7 @@ export const showWarningNotification = (warningMsg) => {
     style: {
       width: "500px",
       fontSize: "16px",
-      borderRadius: "16px",
+      borderRadius: "8px",
       border: "1px solid #D12727",
       backgroundColor: "rgb(250, 232, 232)",
     },
@@ -26,7 +26,7 @@ export const showSuccessNotificationByMsg = (successMsg) => {
     style: {
       width: "500px",
       fontSize: "16px",
-      borderRadius: "16px",
+      borderRadius: "8px",
       border: "1px solid #3A84A7",
       backgroundColor: "rgb(234, 242, 245)",
     },
