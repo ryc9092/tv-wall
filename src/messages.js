@@ -372,7 +372,7 @@ export default defineMessages({
   },
   Text_SingleScreen_VideoPlayFail: {
     id: "Text-SingleScreen-VideoPlayFail",
-    defaultMessage: "影像投放失敗",
+    defaultMessage: "投放失敗",
   },
   Text_SingleScreen_VideoClearSuccess: {
     id: "Text-SingleScreen-VideoClearSuccess",

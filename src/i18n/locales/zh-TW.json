@@ -106,7 +106,7 @@
   "Text-SingleScreen-PlayGroupVideo": "投放群組影像",
   "Text-SingleScreen-VideoPlaySuccess": "影像已投放至顯示器",
   "Text-SingleScreen-GroupVideoPlaySuccess": "群組之影像已投放顯示器",
-  "Text-SingleScreen-VideoPlayFail": "影像投放失敗",
+  "Text-SingleScreen-VideoPlayFail": "投放失敗",
   "Text-SingleScreen-VideoClearSuccess": "影像清除成功",
   "Text-SingleScreen-VideoClearFail": "影像清除失敗",
 

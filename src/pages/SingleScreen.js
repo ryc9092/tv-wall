@@ -66,39 +66,37 @@ const SingleScreen = () => {
 
       let tempDecoders = []; // for set decoders
       decoders?.forEach((decoder) => {
-        if (decoder.state === "Up") {
-          if (linkedDecoders.includes(decoder.mac)) {
-            deviceLinks?.forEach((deviceLink) => {
-              const encoderMac = deviceLink.encoder;
-              if (deviceLink.deviceLinkDetails.length >= 0) {
-                deviceLink.deviceLinkDetails.forEach((deviceLinkDetail) => {
-                  const decoderMac = deviceLinkDetail.decoder;
-                  encoders?.forEach((encoder) => {
-                    if (
-                      encoder.mac === encoderMac &&
-                      decoder.mac === decoderMac
-                    ) {
-                      tempDecoders.push({
-                        ...decoder,
-                        encoder: {
-                          mac: encoder.mac,
-                          nickName: encoder.nickName,
-                        },
-                      });
-                    }
-                  });
+        if (linkedDecoders.includes(decoder.mac)) {
+          deviceLinks?.forEach((deviceLink) => {
+            const encoderMac = deviceLink.encoder;
+            if (deviceLink.deviceLinkDetails.length >= 0) {
+              deviceLink.deviceLinkDetails.forEach((deviceLinkDetail) => {
+                const decoderMac = deviceLinkDetail.decoder;
+                encoders?.forEach((encoder) => {
+                  if (
+                    encoder.mac === encoderMac &&
+                    decoder.mac === decoderMac
+                  ) {
+                    tempDecoders.push({
+                      ...decoder,
+                      encoder: {
+                        mac: encoder.mac,
+                        nickName: encoder.nickName,
+                      },
+                    });
+                  }
                 });
-              }
-            });
-          } else {
-            tempDecoders.push({
-              ...decoder,
-              encoder: {
-                mac: "",
-                nickName: "",
-              },
-            });
-          }
+              });
+            }
+          });
+        } else {
+          tempDecoders.push({
+            ...decoder,
+            encoder: {
+              mac: "",
+              nickName: "",
+            },
+          });
         }
       });
       setEncoders(encoders);
@@ -159,7 +157,7 @@ const SingleScreen = () => {
                 : null
             }
             onClick={(event) => {
-              if (!event.target.id.includes("btn")) {
+              if (!event.target.id.includes("btn") && decoder.state === "Up") {
                 const decoderMac = event.target.id.split("@")[1];
                 // already selected, unselected it
                 if (selectedScreen === decoderMac) setSelectedScreen(null);
@@ -188,6 +186,7 @@ const SingleScreen = () => {
                       ? "single-screen-card-title-selected"
                       : "single-screen-card-title"
                   }
+                  style={decoder.state !== "Up" ? { color: "#c33434" } : null}
                 >
                   {decoder.nickName.length > 10
                     ? decoder.nickName.substring(0, 10) + "..."
