@@ -1,13 +1,12 @@
  @use "../../App.scss";
 
 .wall-content .ant-modal-content {
-    padding: 56px !important;
+    padding: 20px !important;
     height: 980px;
 }
 
 .wall-content-modal-close-icon .ant-modal-close-icon {
-    margin-top: 50px;
-    margin-right: 72px;
+    height: 20px;
 }
 
 .ant-modal-close-x {
@@ -16,8 +15,8 @@
 
 .wall-modal {
     max-width: none !important;
-    width: 1160px !important;
-    margin-top: -80px;
+    width: 1100px !important;
+    margin-top: -86px;
 }
 
 .wall-modal-title {
@@ -41,7 +40,7 @@
 }
 
 .situation-wall-option-container {
-    width: 736px;
+    width: 700px;
     margin-top: 24px;
     margin-right: 12px;
 }
@@ -54,8 +53,8 @@
 
 .wall-modal-divider {
     height: 1px;
-    margin-top: 10px;
-    margin-bottom: 22px;
+    margin-top: 6px;
+    margin-bottom: 16px;
     align-self: stretch;
     flex-grow: 0;
     background-color: #d4d4d4;

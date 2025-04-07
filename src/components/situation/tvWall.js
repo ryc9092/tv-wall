@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../components/store/store";
-import { getTemplateScreensById, getWallScreensById } from "../../api/API";
+import { getTemplateScreensById, getWallScreensById, getDecoders } from "../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Button } from "antd";
 import Messages from "../../messages";
@@ -61,6 +61,7 @@ const TvWall = ({
           store,
           selectedWall.wallId
         );
+        const decoders = await getDecoders(store);
         wallScreens.sort(function (wall1, wall2) {
           return wall1.num - wall2.num;
         });
@@ -68,10 +69,19 @@ const TvWall = ({
           wallScreens &&
           templateScreens &&
           blockEncoderMapping &&
+          decoders.length > 0 &&
           Object.keys(blockEncoderMapping).length >= 0
         ) {
           wallScreens.forEach((screen, idx) => {
             let tempScreen = screen;
+
+            // set state to screen
+            const decoder = decoders.filter(
+              (decoder) => decoder.nickName === screen.nickName
+            )[0];
+            tempScreen.state = decoder.state;
+
+            // set encoder to screen
             tempScreen.encoder = Object.values(blockEncoderMapping).includes(
               templateScreens[idx].block
             )
@@ -206,14 +216,48 @@ const TvWall = ({
                     : intl.formatMessage(Messages.Text_Common_None)}
                 </div>
               </div>
+              <div id={block.block}>
+                <div id={block.block} className="wall-block-desc">
+                  <div
+                    style={{
+                      display: "flex",
+                    }}
+                  >
+                    <div>
+                      <FormattedMessage {...Messages.Text_Common_Decoder} />
+                      {":"}
+                    </div>
+                    <div>
+                      {blocksDetail?.map((detail) => {
+                        if (detail.block === block.block)
+                          return detail.detail?.map((detail) => {
+                            return (
+                              <span
+                                style={
+                                  detail.state !== "Up"
+                                    ? { marginLeft: 4, color: "#c33434" }
+                                    : { marginLeft: 4 }
+                                }
+                              >
+                                {detail.nickName}
+                                <br />
+                              </span>
+                            );
+                          });
+                        else return null;
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div
                 id={block.block}
-                className="single-screen-btn-position"
                 style={{
-                  marginLeft:
+                  position: "absolute",
+                  left:
                     POSITION_CLEAR_BTN.left +
                     (block.col - 1) * WALL_SCREEN_SIZE,
-                  marginTop:
+                  top:
                     POSITION_CLEAR_BTN.top + (block.row - 1) * WALL_SCREEN_SIZE,
                 }}
               >

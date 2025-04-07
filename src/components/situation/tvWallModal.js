@@ -13,6 +13,7 @@ import {
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import TvWall from "./tvWall";
+import EncoderCard from "../tvwall/encoderCard";
 import {
   getActivedWall,
   getWalls,
@@ -422,56 +423,11 @@ const TVWallModal = ({
               />
             </div>
           </div>
-          <div className="siutation-tvwall-card-container">
-            <Card className="tvwall-card-right-collapse">
-              <div className="tvwall-card-right-title">
-                <FormattedMessage {...Messages.Text_TVWall_VideoSource} />
-              </div>
-              <div className="tvwall-card-right-desc">
-                <FormattedMessage {...Messages.Text_TVWall_VideoSourceDesc} />
-              </div>
-              <div className="tvwall-card-right-preview">
-                {selectedEncoder.nickName ? (
-                  <div>
-                    <iframe
-                      className="tvwall-card-right-preview-video"
-                      src={selectedEncoder.previewUrl}
-                      title="Video player"
-                    />
-                    <span>{selectedEncoder.nickName}</span>
-                  </div>
-                ) : (
-                  <div className="siutation-tvwall-card-right-preview-text tvwall-card-right-desc">
-                    <FormattedMessage {...Messages.Text_TVWall_Preview} />
-                  </div>
-                )}
-              </div>
-              <Input
-                className="tvwall-card-right-search tvwall-input"
-                variant="filled"
-                onChange={(e) => {
-                  setSearchFilter(e.target.value);
-                }}
-                prefix={<SearchOutlined />}
-                placeholder={intl.formatMessage(
-                  Messages.Text_TVWall_InputEncoder
-                )}
-              />
-              <div className="siutation-tvwall-card-right-encoder-container">
-                <Table
-                  columns={columns}
-                  size="small"
-                  dataSource={filteredEncoders}
-                  pagination={{ pageSize: 11 }}
-                  onRow={(record) => ({
-                    onClick: () => {
-                      handleChooseEncoder(record);
-                    },
-                  })}
-                />
-              </div>
-            </Card>
-          </div>
+          <EncoderCard
+            encoders={encoders}
+            selectedEncoder={selectedEncoder}
+            setSelectedEncoder={setSelectedEncoder}
+          />
         </div>
         <div className="situation-wall-item-btn-row">
           <Button
