@@ -348,6 +348,22 @@ const TVWallModal = ({
               <div className="situation-wall-input-layout-column">
                 <div>
                   <div className="situation-wall-input-text">
+                    <FormattedMessage {...Messages.Text_WallSetting_WallName} />
+                    {" : "}
+                  </div>
+                  <div>
+                    <Select
+                      className="situation-wall-input"
+                      options={wallOptions}
+                      value={selectedWall}
+                      onChange={(value, option) => {
+                        changeWallSelected(option);
+                      }}
+                    />
+                  </div>
+                </div>
+                <div style={{ marginTop: 12 }}>
+                  <div className="situation-wall-input-text">
                     <FormattedMessage {...Messages.Text_Common_Description} />
                   </div>
                   <div>
@@ -367,22 +383,6 @@ const TVWallModal = ({
               <div className="situation-wall-input-layout-column">
                 <div>
                   <div className="situation-wall-input-text">
-                    <FormattedMessage {...Messages.Text_WallSetting_WallName} />
-                    {" : "}
-                  </div>
-                  <div>
-                    <Select
-                      className="situation-wall-input"
-                      options={wallOptions}
-                      value={selectedWall}
-                      onChange={(value, option) => {
-                        changeWallSelected(option);
-                      }}
-                    />
-                  </div>
-                </div>
-                <div style={{ marginTop: 24 }}>
-                  <div className="situation-wall-input-text">
                     <FormattedMessage {...Messages.Text_TVWall_Template} />
                     {" : "}
                   </div>
@@ -400,33 +400,37 @@ const TVWallModal = ({
               </div>
             </div>
             <Divider className="wall-modal-divider" />
-            <div className="connection-title">
+            {/* <div className="connection-title">
               <FormattedMessage {...Messages.Text_Situation_TVWallConnection} />
-            </div>
-            <div style={{ width: 891, height: 505 }}>
-              <TvWall
-                wallWidth={891}
-                wallHeight={505}
-                selectedWall={selectedWall}
-                selectedTemplate={selectedTemplate}
-                selectedEncoder={selectedEncoder}
-                encoders={encoders}
-                blocks={blocks}
-                setBlocks={setBlocks}
-                blockEncoderMapping={blockEncoderMapping}
-                setBlockEncoderMapping={setBlockEncoderMapping}
-                selectedBlockNumber={selectedBlockNumber}
-                setSelectedBlockNumber={setSelectedBlockNumber}
-                setClearBlockNumber={setClearBlockNumber}
-                blocksDetail={blocksDetail}
-                setBlocksDetail={setBlocksDetail}
-              />
+            </div> */}
+            <div
+              className="siutation-tvwall-screen-container"
+              style={{ position: "relative", width: 720, height: 392 }}
+            >
+              <div style={{ position: "relative" }}>
+                <TvWall
+                  selectedWall={selectedWall}
+                  selectedTemplate={selectedTemplate}
+                  selectedEncoder={selectedEncoder}
+                  encoders={encoders}
+                  blocks={blocks}
+                  setBlocks={setBlocks}
+                  blockEncoderMapping={blockEncoderMapping}
+                  setBlockEncoderMapping={setBlockEncoderMapping}
+                  selectedBlockNumber={selectedBlockNumber}
+                  setSelectedBlockNumber={setSelectedBlockNumber}
+                  setClearBlockNumber={setClearBlockNumber}
+                  blocksDetail={blocksDetail}
+                  setBlocksDetail={setBlocksDetail}
+                />
+              </div>
             </div>
           </div>
           <EncoderCard
             encoders={encoders}
             selectedEncoder={selectedEncoder}
             setSelectedEncoder={setSelectedEncoder}
+            isSituation={true}
           />
         </div>
         <div className="situation-wall-item-btn-row">

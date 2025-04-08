@@ -2,7 +2,7 @@
 
 .wall-content .ant-modal-content {
     padding: 20px !important;
-    height: 980px;
+    height: 758px;
 }
 
 .wall-content-modal-close-icon .ant-modal-close-icon {
@@ -15,8 +15,8 @@
 
 .wall-modal {
     max-width: none !important;
-    width: 1100px !important;
-    margin-top: -86px;
+    width: 1110px !important;
+    margin-top: -88px;
 }
 
 .wall-modal-title {
@@ -35,13 +35,13 @@
 
 .situation-wall-layout-column {
     display: flex;
-    margin-top: 0px !important;
+    margin-top: -10px !important;
     margin-left: 0px !important;
 }
 
 .situation-wall-option-container {
     width: 700px;
-    margin-top: 24px;
+    margin-top: 18px;
     margin-right: 12px;
 }
 
@@ -53,8 +53,8 @@
 
 .wall-modal-divider {
     height: 1px;
-    margin-top: 6px;
-    margin-bottom: 16px;
+    margin-top: -12px;
+    margin-bottom: 10px;
     align-self: stretch;
     flex-grow: 0;
     background-color: #d4d4d4;
@@ -118,6 +118,13 @@
     letter-spacing: 1.2px;
     text-align: left;
     color: #000;
+}
+
+.siutation-tvwall-screen-container {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    flex-grow: 1;
+    overflow: auto;
 }
 
 .siutation-tvwall-card-container {

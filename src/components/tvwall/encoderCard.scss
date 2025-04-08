@@ -9,6 +9,16 @@
     margin-left: 6px;
 }
 
+.situation-card-container {
+    // height: calc(100vh - 182px);
+    height: 614px;
+    border-radius: 24px;
+    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+    position: absolute;
+    right: 18px;
+    margin-left: 6px;
+}
+
 .encoder-card {
     width: 323px;
     border-radius: 24px;
@@ -116,6 +126,25 @@
     margin-top: 12px;
     width: calc(100% + 10px);
     height: calc(100vh - 436px + 171px);
+    border-radius: 24px;
+    animation: encoder-grow 0.3s ease;
+    overflow-y: scroll;
+}
+
+.situation-encoder-card-table-container {
+    margin-top: 12px;
+    width: calc(100% + 10px);
+    // height: calc(100vh - 516px);
+    height: 279px;
+    border-radius: 24px;
+    overflow-y: scroll;
+}
+
+.situation-encoder-card-table-container-without-preview {
+    margin-top: 12px;
+    width: calc(100% + 10px);
+    // height: calc(100vh - 516px + 171px);
+    height: 450px;
     border-radius: 24px;
     animation: encoder-grow 0.3s ease;
     overflow-y: scroll;

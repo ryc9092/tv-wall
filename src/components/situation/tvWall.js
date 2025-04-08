@@ -1,6 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../components/store/store";
-import { getTemplateScreensById, getWallScreensById, getDecoders } from "../../api/API";
+import {
+  getTemplateScreensById,
+  getWallScreensById,
+  getDecoders,
+} from "../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Button } from "antd";
 import Messages from "../../messages";
@@ -168,6 +172,36 @@ const TvWall = ({
               backgroundRepeat: "no-repeat",
             }}
           >
+            {block.col > 1
+              ? [...Array(block.col - 1)].map((x, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      zIndex: 1000,
+                      height: "100%",
+                      position: "absolute",
+                      left: `${(i + 1) * WALL_SCREEN_SIZE - 3}px`,
+                      borderLeft: "1px dashed #757371",
+                      opacity: 0.3,
+                    }}
+                  />
+                ))
+              : null}
+            {block.row > 1
+              ? [...Array(block.row - 1)].map((x, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      zIndex: 1000,
+                      width: "100%",
+                      position: "absolute",
+                      top: `${(i + 1) * WALL_SCREEN_SIZE - 3}px`,
+                      borderBottom: "1px dashed #757371",
+                      opacity: 0.3,
+                    }}
+                  />
+                ))
+              : null}
             <div
               id={block.block}
               className={
@@ -218,21 +252,21 @@ const TvWall = ({
               </div>
               <div id={block.block}>
                 <div id={block.block} className="wall-block-desc">
-                  <div
+                  <div id={block.block}
                     style={{
                       display: "flex",
                     }}
                   >
-                    <div>
+                    <div id={block.block}>
                       <FormattedMessage {...Messages.Text_Common_Decoder} />
                       {":"}
                     </div>
-                    <div>
+                    <div id={block.block}>
                       {blocksDetail?.map((detail) => {
                         if (detail.block === block.block)
                           return detail.detail?.map((detail) => {
                             return (
-                              <span
+                              <span id={block.block}
                                 style={
                                   detail.state !== "Up"
                                     ? { marginLeft: 4, color: "#c33434" }

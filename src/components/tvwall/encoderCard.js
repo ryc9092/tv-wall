@@ -7,7 +7,12 @@ import "../../App.scss";
 import "./encoderCard.scss";
 import "../../pages/TVWall.scss";
 
-const EncoderCard = ({ encoders, selectedEncoder, setSelectedEncoder }) => {
+const EncoderCard = ({
+  encoders,
+  selectedEncoder,
+  setSelectedEncoder,
+  isSituation,
+}) => {
   const intl = useIntl();
   const [showPreview, setShowPreview] = useState(false);
   const [searchFilter, setSearchFilter] = useState("");
@@ -101,7 +106,9 @@ const EncoderCard = ({ encoders, selectedEncoder, setSelectedEncoder }) => {
   ];
 
   return (
-    <div className="card-container">
+    <div
+      className={isSituation ? "situation-card-container" : "card-container"}
+    >
       <Card className="encoder-card">
         <div className="encoder-card-title-column">
           <div className="encoder-card-title">
@@ -158,7 +165,11 @@ const EncoderCard = ({ encoders, selectedEncoder, setSelectedEncoder }) => {
         />
         <div
           className={
-            showPreview
+            isSituation
+              ? showPreview
+                ? "situation-encoder-card-table-container"
+                : "situation-encoder-card-table-container-without-preview"
+              : showPreview
               ? "encoder-card-table-container"
               : "encoder-card-table-container-without-preview"
           }
