@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
-import { Button, Col, Input, Row, Tag } from "antd";
+import { Button, Col, Input, Row } from "antd";
 import EncoderCard from "../components/tvwall/encoderCard";
 import { SearchOutlined } from "@ant-design/icons";
 import {
@@ -18,6 +18,7 @@ import ClearLinkDisabledIcon from "../assets/clearLinkDisabled.png";
 import {
   showWarningNotification,
   showSuccessNotificationByMsg,
+  sleep,
 } from "../utils/Utils";
 import "../App.scss";
 import "./SingleScreen.scss";
@@ -320,7 +321,9 @@ const SingleScreen = () => {
           mac: "",
           previewUrl: "",
         });
-        setReload(Math.random());
+        sleep(200).then(() => {
+          setReload(Math.random());
+        });
       });
     };
     if (selectedScreen && selectedEncoder.mac) {
