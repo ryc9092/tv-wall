@@ -224,6 +224,7 @@
   "Text-WallSetting-ScreenNumber": "screen number",
   "Text-WallSetting-DestinationName": "Destination name",
   "Text-WallSetting-ViewWall": "View Videowall",
+  "Text-WallSetting-CreateWallConfirm": "尚有未綁定顯示器，是否要儲存?",
 
   "Text-DeviceSetting-AdvanceSetting": "Advanced device setting",
   "Text-DeviceSetting-DeviceSetting": "Device setting",

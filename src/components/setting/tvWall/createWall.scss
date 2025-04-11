@@ -1,18 +1,18 @@
  @use "../../../App.scss";
 
 .create-wall-setting .ant-modal-content {
-    padding: 56px !important;
-    height: 988px;
+    padding: 26px !important;
+    height: 755px;
 }
 
 .create-wall-modal-close-icon .ant-modal-close-icon {
-    margin-top: 50px;
-    margin-right: 72px;
+    margin-top: 20px;
+    margin-right: 32px;
 }
 
 .create-wall-modal {
     width: 1115px !important;
-    margin-top: -40px;
+    margin-top: -88px;
 }
 
 .create-wall-modal-title {
@@ -29,9 +29,9 @@
     color: #45413e;
 }
 
-.input-option-row {
+.create-wall-input-option-row {
     height: 80px;
-    margin-top: 28px;
+    margin-top: 14px;
     display: flex;
 }
 
@@ -79,10 +79,10 @@
     margin: 24px 12px 0px 12px;
 }
 
-.divider {
+.create-wall-divider {
     height: 1px;
-    margin-top: 40px;
-    margin-bottom: 56px;
+    margin-top: 20px;
+    margin-bottom: 12px;
     align-self: stretch;
     flex-grow: 0;
     background-color: #d4d4d4;
@@ -117,22 +117,24 @@
     color: #898989;
 }
 
-.screen-setting-row {
-    margin-top: 56px;
-    height: 468px;
+.create-wall-screen-setting-row {
+    margin-top: 14px;
+    height: 410px;
     display: flex;
 }
 
-.screen-block-default {
-    width: 124px;
-    height: 115px;
+.create-wall-screen-block-default {
+    width: 118px;
+    height: 118px;
+    min-width: 118px;
+    min-height: 118px;
     gap: 10px;
     padding: 0;
     border: solid 1px #c6c6c6;
     background-color: #f5f5f5;
 }
 
-.screen-block-text-default {
+.create-wall-screen-block-text-default {
     width: 40px;
     height: 40px;
     flex-grow: 0;
@@ -143,21 +145,25 @@
     font-style: normal;
     letter-spacing: normal;
     color: #45413e;
-    position: absolute;
-    margin: -58px 0px 0px 0px !important;
-    text-align: center;
+    position: relative;
+    top: -35px;
+    left: 12px;
+    // margin: -58px 0px 0px 0px !important;
+    // text-align: center;
 }
 
-.screen-block-handled {
-    width: 124px;
-    height: 115px;
+.create-wall-screen-block-handled {
+    width: 118px;
+    height: 118px;
+    min-width: 118px;
+    min-height: 118px;
     gap: 10px;
     padding: 0;
     border: solid 3px #45413e;
     background-color: rgba(38, 35, 32, 0.3);
 }
 
-.screen-block-text-handled {
+.create-wall-screen-block-text-handled {
     width: 40px;
     height: 40px;
     background-color: #45413e;
@@ -170,9 +176,12 @@
     line-height: 1.27;
     letter-spacing: normal;
     color: #ffffff;
-    position: absolute;
-    margin: -58px 0px 0px 0px !important;
-    text-align: center;
+    position: relative;
+    padding: 6px 16px 8px 12px;
+    top: -37px;
+    left: -1px;
+    // margin: -58px 0px 0px 0px !important;
+    // text-align: center;
 }
 
 .decoder-setting-container {
@@ -187,14 +196,12 @@
     border-radius: 16px;
     background-color: #ffffff;
     height: 480px;
-    right: 48px;
+    right: 20px;
 }
 
 .decoder-setting-input {
-    width: 346px;
+    width: 470px;
     height: 48px;
-    margin-top: 3px;
-    margin-bottom: 3px;
     font-size: 16px;
     background-color: #e7e7e7;
 }
@@ -204,8 +211,9 @@
 }
 
 .decoder-setting-table {
-    width: 346px;
-    height: 432px;
+    margin-top: -6px;
+    width: 480px;
+    height: 332px;
     overflow: scroll;
 }
 
@@ -235,7 +243,7 @@
 }
 
 .decoder-setting-table-select {
-    width: 200px;
+    width: 170px;
     height: 36px;
      @extend .sdcp-font;
     font-size: 16px;
@@ -248,38 +256,38 @@
     color: #45413e;
 }
 
-.screen-setting-submit-row {
-    margin-top: 36px;
+.create-wall-screen-setting-submit-row {
+    // margin-top: 36px;
+    width: 1045px;
     display: flex;
     justify-content: space-between;
 }
 
-.screen-setting-clear-btn {
+.create-wall-screen-setting-clear-btn {
     height: 40px;
     flex-grow: 0;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 47px;
     padding: 0 12px;
     border-radius: 26px; 
 }
 
-.screen-setting-clear-btn-text {
+.create-wall-screen-setting-clear-btn-text {
     flex-grow: 0;
      @extend .sdcp-font;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.43;
     letter-spacing: 0.1px;
     text-align: center;
-    color: #898989;
+    color: #c33434;
 }
 
-.screen-setting-create-btn {
+.create-wall-screen-setting-create-btn {
     width: 120px;
     height: 48px;
     flex-grow: 0;
@@ -304,4 +312,9 @@
     letter-spacing: 0.1px;
     text-align: center;
     color: #e7e7e7;
+}
+
+.create-wall-clear-icon {
+    width: 22px;
+    border: none;
 }

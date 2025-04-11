@@ -960,6 +960,10 @@ export default defineMessages({
     id: "Text-WallSetting-ViewWall",
     defaultMessage: "檢視電視牆",
   },
+  Text_WallSetting_CreateWallConfirm: {
+    id: "Text-WallSetting-CreateWallConfirm",
+    defaultMessage: "尚有未綁定顯示器，是否要儲存?",
+  },
 
   // System setting - wall setting legacy
   Text_WallSetting_DeleteSuccess: {

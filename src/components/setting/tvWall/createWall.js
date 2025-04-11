@@ -16,6 +16,7 @@ import Messages from "../../../messages";
 import { showWarningNotification } from "../../../utils/Utils";
 import PlusIcon from "../../../assets/plus-white.png";
 import XIcon from "../../../assets/X.png";
+import TrashIcon from "../../../assets/trash.png";
 import "../../../App.scss";
 import "./createWall.scss";
 
@@ -28,17 +29,28 @@ const CreateWall = ({ setReload }) => {
   const [wallSize, setWallSize] = useState({ col: 1, row: 1 });
   const [screenList, setScreenList] = useState([]);
   const [handledScreenList, setHandledScreenList] = useState([]);
+  const [reloadDecoder, setReloadDecoder] = useState(null);
   const [decoderOptions, setDecoderOptions] = useState([]);
   const [wallObj, setWallObj] = useState(null);
   const [searchFilter, setSearchFilter] = useState("");
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
 
   // get decoders
   useEffect(() => {
+    // get set decoders from screen list
+    let selectedDecoders = [];
+    screenList?.forEach((screen) => {
+      if (screen.decoder) selectedDecoders.push(screen.decoder);
+    });
+
     let tempDecoderOptions = [];
     (async () => {
       const decoders = await getDecoders(store);
       decoders?.forEach((decoder) => {
-        if (decoder.nickName.includes(searchFilter))
+        if (
+          decoder.nickName.includes(searchFilter) &&
+          !selectedDecoders.includes(decoder.mac)
+        )
           tempDecoderOptions.push({
             value: decoder.mac,
             label: decoder.nickName,
@@ -46,7 +58,7 @@ const CreateWall = ({ setReload }) => {
       });
       setDecoderOptions(tempDecoderOptions);
     })();
-  }, [searchFilter]);
+  }, [searchFilter, reloadDecoder]);
 
   const resetWall = () => {
     setWallId(null);
@@ -64,7 +76,8 @@ const CreateWall = ({ setReload }) => {
     // generate default screen list: [{number: 1, decoder: ""}, {number: 2, decoder: ""}, ...]
     setScreenList(
       Array.from({ length: wallSize.col * wallSize.row }, (v, i) => {
-        return { num: i + 1, decoder: "", block: "" };
+        if (screenList[i] !== undefined) return screenList[i];
+        else return { num: i + 1, decoder: "", block: "" };
       })
     );
   }, [wallSize]);
@@ -78,16 +91,16 @@ const CreateWall = ({ setReload }) => {
         <td
           className={
             handledScreenList.includes(screen.num)
-              ? "screen-block-handled"
-              : "screen-block-default"
+              ? "create-wall-screen-block-handled"
+              : "create-wall-screen-block-default"
           }
           key={screen.num}
         >
           <span
             className={
               handledScreenList.includes(screen.num)
-                ? "screen-block-text-handled"
-                : "screen-block-text-default"
+                ? "create-wall-screen-block-text-handled"
+                : "create-wall-screen-block-text-default"
             }
           >
             {screen.num}
@@ -109,6 +122,7 @@ const CreateWall = ({ setReload }) => {
   };
 
   const saveWall = () => {
+    let wallId = Math.random().toString();
     if (wallId && wallName && wallSize && screenList?.length !== 0) {
       (async () => {
         const result = await createWall(
@@ -134,14 +148,19 @@ const CreateWall = ({ setReload }) => {
   const decoderTableColumns = [
     {
       title: (
-        <span className="decoder-setting-table-head">
+        <span className="decoder-setting-table-head" style={{ maxWidth: 30 }}>
           {intl.formatMessage(Messages.Text_WallSetting_ScreenNumber)}
         </span>
       ),
+      width: "20%",
       dataIndex: "num",
       key: "num",
       render: (text) => {
-        return <span className="table-content">{text}</span>;
+        return (
+          <span className="table-content" style={{ maxWidth: 30 }}>
+            {text}
+          </span>
+        );
       },
     },
     {
@@ -162,9 +181,18 @@ const CreateWall = ({ setReload }) => {
               decoder: value,
             });
             setHandledScreenList([...handledScreenList, record.num]);
+            setReloadDecoder(Math.random());
           }}
         />
       ),
+    },
+    {
+      title: <span className="decoder-setting-table-head">IP</span>,
+      dataIndex: "num",
+      key: "num",
+      render: (text) => {
+        return <Input className="table-content"></Input>;
+      },
     },
   ];
 
@@ -188,8 +216,8 @@ const CreateWall = ({ setReload }) => {
           setIsModalOpen(false);
         }}
       >
-        <div className="input-option-row">
-          <div style={{ marginRight: 100 }}>
+        <div className="create-wall-input-option-row">
+          {/* <div style={{ marginRight: 100 }}>
             <span className="input-title">
               <FormattedMessage {...Messages.Text_WallSetting_WallID} />
             </span>
@@ -201,7 +229,7 @@ const CreateWall = ({ setReload }) => {
                 setWallId(e.target.value);
               }}
             />
-          </div>
+          </div> */}
           <div style={{ marginRight: 100 }}>
             <span className="input-title">
               <FormattedMessage {...Messages.Text_WallSetting_WallName} />
@@ -223,7 +251,7 @@ const CreateWall = ({ setReload }) => {
               <InputNumber
                 value={wallSize.col}
                 min={1}
-                max={5}
+                max={15}
                 onChange={(value) => setWallSize({ ...wallSize, col: value })}
                 className="input-object input-dimension"
               />
@@ -235,25 +263,35 @@ const CreateWall = ({ setReload }) => {
               <InputNumber
                 value={wallSize.row}
                 min={1}
-                max={4}
+                max={15}
                 onChange={(value) => setWallSize({ ...wallSize, row: value })}
                 className="input-object input-dimension"
               />
             </div>
           </div>
         </div>
-        <Divider className="divider" />
+        <Divider className="create-wall-divider" />
         <div className="screen-decoder-setting-title">
           <FormattedMessage {...Messages.Text_WallSetting_ScreenDecoder} />
         </div>
         <div className="screen-decoder-setting-desc">
           <FormattedMessage {...Messages.Text_WallSetting_ScreenDecoderDesc} />
         </div>
-        <div className="screen-setting-row">
-          <div>
-            <table style={{ border: 0, borderCollapse: "collapse" }}>
-              <tbody>{wallObj}</tbody>
-            </table>
+        <div className="create-wall-screen-setting-row">
+          <div
+            style={{
+              border: "1px solid #d4d4d4",
+              borderRadius: 12,
+              padding: 6,
+              width: 500,
+              height: 375,
+            }}
+          >
+            <div style={{ width: 498, height: 375, overflow: "auto" }}>
+              <table style={{ border: 0, borderCollapse: "collapse" }}>
+                <tbody>{wallObj}</tbody>
+              </table>
+            </div>
           </div>
           <div className="decoder-setting-container">
             <Input
@@ -275,24 +313,62 @@ const CreateWall = ({ setReload }) => {
             />
           </div>
         </div>
-        <div className="screen-setting-submit-row">
+        <div className="create-wall-screen-setting-submit-row">
           <div>
             <Button
               type="text"
               onClick={resetWall}
-              className="screen-setting-clear-btn"
+              className="create-wall-screen-setting-clear-btn"
             >
-              <span className="screen-setting-clear-btn-text">
+              <img
+                alt="remove"
+                src={TrashIcon}
+                className="create-wall-clear-icon"
+              />
+              <span className="create-wall-screen-setting-clear-btn-text">
                 <FormattedMessage {...Messages.Text_Button_Clear} />
               </span>
             </Button>
           </div>
           <div>
-            <Button onClick={saveWall} className="screen-setting-create-btn">
+            <Button
+              onClick={() => {
+                let hasEmptyScreen = false;
+                screenList.forEach((screen) => {
+                  if (screen.decoder === "") hasEmptyScreen = true;
+                });
+                if (hasEmptyScreen) setOpenConfirmModal(true);
+                else saveWall();
+              }}
+              className="create-wall-screen-setting-create-btn"
+            >
               <span className="screen-setting-create-btn-text">
                 <FormattedMessage {...Messages.Text_Button_Create} />
               </span>
             </Button>
+            <Modal
+              className="audio-modal-close-x"
+              title={
+                <span style={{ marginRight: 12 }}>
+                  <FormattedMessage
+                    {...Messages.Text_WallSetting_CreateWallConfirm}
+                  />
+                </span>
+              }
+              width={400}
+              okText={intl.formatMessage(Messages.Text_Common_Confirm)}
+              cancelText={intl.formatMessage(Messages.Text_Button_Cancel)}
+              open={openConfirmModal}
+              onCancel={() => {
+                setOpenConfirmModal(false);
+              }}
+              onOk={() => {
+                saveWall();
+                setOpenConfirmModal(false);
+              }}
+            >
+              <br />
+            </Modal>
           </div>
         </div>
       </Modal>
