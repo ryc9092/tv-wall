@@ -345,7 +345,7 @@ const TVWallModal = ({
         <div className="situation-wall-layout-column">
           <div className="situation-wall-option-container">
             <div className="situation-wall-option-row">
-              <div style={{ width: "188px", marginRight: "20px" }}>
+              <div style={{ width: "189px", marginRight: "20px" }}>
                 <div className="situation-wall-input-text">
                   <FormattedMessage {...Messages.Text_WallSetting_WallName} />
                   {" : "}
@@ -361,7 +361,7 @@ const TVWallModal = ({
                   />
                 </div>
               </div>
-              <div style={{ width: "188px", marginRight: "20px" }}>
+              <div style={{ width: "189px", marginRight: "20px" }}>
                 <div className="situation-wall-input-text">
                   <FormattedMessage {...Messages.Text_TVWall_Template} />
                   {" : "}
@@ -377,7 +377,7 @@ const TVWallModal = ({
                   />
                 </div>
               </div>
-              <div style={{ width: "278px" }}>
+              <div style={{ width: "287px" }}>
                 <div className="situation-wall-input-text">
                   <FormattedMessage {...Messages.Text_Common_Description} />
                 </div>

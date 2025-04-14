@@ -60,17 +60,17 @@ const TvWall = ({
           wallScreens &&
           templateScreens &&
           blockEncoderMapping &&
-          decoders.length > 0 &&
+          decoders?.length > 0 &&
           Object.keys(blockEncoderMapping).length >= 0
         ) {
           wallScreens.forEach((screen, idx) => {
             let tempScreen = screen;
 
             // set state to screen
-            const decoder = decoders.filter(
+            const decoder = decoders?.filter(
               (decoder) => decoder.nickName === screen.nickName
             )[0];
-            tempScreen.state = decoder.state;
+            tempScreen.state = decoder?.state;
 
             // set encoder to screen
             tempScreen.encoder = blockEncoderMapping.hasOwnProperty(
@@ -81,7 +81,7 @@ const TvWall = ({
             tempScreen.block = parseInt(templateScreens[idx].block);
             tempScreens.push(tempScreen);
 
-            if (tempBlocksDetail.length >= 0) {
+            if (tempBlocksDetail?.length >= 0) {
               let hasSet = false;
               tempBlocksDetail.forEach((block, idx) => {
                 if (block.block === tempScreen.block) {
@@ -122,7 +122,7 @@ const TvWall = ({
               }
             });
             block.col = blockCol;
-            block.row = block.detail.length / blockCol;
+            block.row = block.detail?.length / blockCol;
           });
         }
         setTvWallSize({

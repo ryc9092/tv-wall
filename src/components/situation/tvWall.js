@@ -73,7 +73,7 @@ const TvWall = ({
           wallScreens &&
           templateScreens &&
           blockEncoderMapping &&
-          decoders.length > 0 &&
+          decoders?.length > 0 &&
           Object.keys(blockEncoderMapping).length >= 0
         ) {
           wallScreens.forEach((screen, idx) => {
