@@ -77,7 +77,7 @@ const CreateWall = ({ setReload }) => {
     setScreenList(
       Array.from({ length: wallSize.col * wallSize.row }, (v, i) => {
         if (screenList[i] !== undefined) return screenList[i];
-        else return { num: i + 1, decoder: "", block: "" };
+        else return { num: i + 1, decoder: "", block: "", ip: "" };
       })
     );
   }, [wallSize]);
@@ -117,7 +117,16 @@ const CreateWall = ({ setReload }) => {
 
   const setScreenDecoder = ({ screenNumber, decoder }) => {
     let list = screenList;
-    list[screenNumber - 1] = { num: screenNumber, decoder: decoder };
+    list[screenNumber - 1] = {
+      ...screenList[screenNumber - 1],
+      decoder: decoder,
+    };
+    setScreenList(screenList);
+  };
+
+  const setScreenIP = ({ screenNumber, ip }) => {
+    let list = screenList;
+    list[screenNumber - 1] = { ...screenList[screenNumber - 1], ip: ip };
     setScreenList(screenList);
   };
 
@@ -180,7 +189,11 @@ const CreateWall = ({ setReload }) => {
               screenNumber: record.num,
               decoder: value,
             });
-            setHandledScreenList([...handledScreenList, record.num]);
+            if (
+              screenList[record.num - 1].decoder !== "" &&
+              screenList[record.num - 1].ip !== ""
+            )
+              setHandledScreenList([...handledScreenList, record.num]);
             setReloadDecoder(Math.random());
           }}
         />
@@ -190,8 +203,24 @@ const CreateWall = ({ setReload }) => {
       title: <span className="decoder-setting-table-head">IP</span>,
       dataIndex: "num",
       key: "num",
-      render: (text) => {
-        return <Input className="table-content"></Input>;
+      render: (text, record) => {
+        return (
+          <Input
+            className="table-content"
+            onChange={(value, option) => {
+              setScreenIP({
+                screenNumber: record.num,
+                ip: value.currentTarget.value,
+              });
+              if (
+                screenList[record.num - 1].decoder !== "" &&
+                screenList[record.num - 1].ip !== ""
+              )
+                setHandledScreenList([...handledScreenList, record.num]);
+              setReloadDecoder(Math.random());
+            }}
+          />
+        );
       },
     },
   ];
@@ -335,7 +364,8 @@ const CreateWall = ({ setReload }) => {
               onClick={() => {
                 let hasEmptyScreen = false;
                 screenList.forEach((screen) => {
-                  if (screen.decoder === "") hasEmptyScreen = true;
+                  if (screen.decoder === "" || screen.ip === "")
+                    hasEmptyScreen = true;
                 });
                 if (hasEmptyScreen) setOpenConfirmModal(true);
                 else saveWall();
