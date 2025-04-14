@@ -122,7 +122,7 @@ const CreateWall = ({ setReload }) => {
   };
 
   const saveWall = () => {
-    let wallId = Math.random().toString();
+    let wallId = `wall${Math.random().toString().substring(0, 6)}`;
     if (wallId && wallName && wallSize && screenList?.length !== 0) {
       (async () => {
         const result = await createWall(

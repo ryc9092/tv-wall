@@ -66,7 +66,7 @@ const TvWall = ({
           selectedWall.wallId
         );
         const decoders = await getDecoders(store);
-        wallScreens.sort(function (wall1, wall2) {
+        wallScreens?.sort(function (wall1, wall2) {
           return wall1.num - wall2.num;
         });
         if (

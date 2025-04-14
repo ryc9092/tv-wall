@@ -345,57 +345,53 @@ const TVWallModal = ({
         <div className="situation-wall-layout-column">
           <div className="situation-wall-option-container">
             <div className="situation-wall-option-row">
-              <div className="situation-wall-input-layout-column">
-                <div>
-                  <div className="situation-wall-input-text">
-                    <FormattedMessage {...Messages.Text_WallSetting_WallName} />
-                    {" : "}
-                  </div>
-                  <div>
-                    <Select
-                      className="situation-wall-input"
-                      options={wallOptions}
-                      value={selectedWall}
-                      onChange={(value, option) => {
-                        changeWallSelected(option);
-                      }}
-                    />
-                  </div>
+              <div style={{ width: "188px", marginRight: "20px" }}>
+                <div className="situation-wall-input-text">
+                  <FormattedMessage {...Messages.Text_WallSetting_WallName} />
+                  {" : "}
                 </div>
-                <div style={{ marginTop: 12 }}>
-                  <div className="situation-wall-input-text">
-                    <FormattedMessage {...Messages.Text_Common_Description} />
-                  </div>
-                  <div>
-                    <Input
-                      className="situation-wall-input situation-wall-input-placeholder"
-                      value={situationItemDesc}
-                      placeholder={intl.formatMessage(
-                        Messages.Text_Situation_InputDescription
-                      )}
-                      onChange={(e) => {
-                        setSituationItemDesc(e.target.value);
-                      }}
-                    />
-                  </div>
+                <div>
+                  <Select
+                    className="situation-wall-input"
+                    options={wallOptions}
+                    value={selectedWall}
+                    onChange={(value, option) => {
+                      changeWallSelected(option);
+                    }}
+                  />
                 </div>
               </div>
-              <div className="situation-wall-input-layout-column">
+              <div style={{ width: "188px", marginRight: "20px" }}>
+                <div className="situation-wall-input-text">
+                  <FormattedMessage {...Messages.Text_TVWall_Template} />
+                  {" : "}
+                </div>
                 <div>
-                  <div className="situation-wall-input-text">
-                    <FormattedMessage {...Messages.Text_TVWall_Template} />
-                    {" : "}
-                  </div>
-                  <div>
-                    <Select
-                      className="situation-wall-input"
-                      options={templateOptions}
-                      value={selectedTemplate}
-                      onChange={(value, option) => {
-                        setSelectedTemplate(option);
-                      }}
-                    />
-                  </div>
+                  <Select
+                    className="situation-wall-input"
+                    options={templateOptions}
+                    value={selectedTemplate}
+                    onChange={(value, option) => {
+                      setSelectedTemplate(option);
+                    }}
+                  />
+                </div>
+              </div>
+              <div style={{ width: "278px" }}>
+                <div className="situation-wall-input-text">
+                  <FormattedMessage {...Messages.Text_Common_Description} />
+                </div>
+                <div>
+                  <Input
+                    className="situation-wall-input situation-wall-input-placeholder"
+                    value={situationItemDesc}
+                    placeholder={intl.formatMessage(
+                      Messages.Text_Situation_InputDescription
+                    )}
+                    onChange={(e) => {
+                      setSituationItemDesc(e.target.value);
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -405,7 +401,7 @@ const TVWallModal = ({
             </div> */}
             <div
               className="siutation-tvwall-screen-container"
-              style={{ position: "relative", width: 720, height: 392 }}
+              style={{ position: "relative", width: 720, height: 486 }}
             >
               <div style={{ position: "relative" }}>
                 <TvWall
