@@ -80,10 +80,10 @@ const TvWall = ({
             let tempScreen = screen;
 
             // set state to screen
-            const decoder = decoders.filter(
+            const decoder = decoders?.filter(
               (decoder) => decoder.nickName === screen.nickName
             )[0];
-            tempScreen.state = decoder.state;
+            tempScreen.state = decoder?.state;
 
             // set encoder to screen
             tempScreen.encoder = Object.values(blockEncoderMapping).includes(
