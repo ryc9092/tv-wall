@@ -822,7 +822,7 @@ export default defineMessages({
   // System setting - template setting
   Text_TemplateSetting_TemplateSetting: {
     id: "Text-TemplateSetting-TemplateSetting",
-    defaultMessage: "電視牆版型設定",
+    defaultMessage: "操作版型設定",
   },
   Text_TemplateSetting_CreateTemplate: {
     id: "Text-TemplateSetting-CreateTemplate",
@@ -910,7 +910,7 @@ export default defineMessages({
   // System setting - wall setting
   Text_WallSetting_WallSetting: {
     id: "Text-WallSetting-WallSetting",
-    defaultMessage: "電視牆設定",
+    defaultMessage: "基本設定",
   },
   Text_WallSetting_RemoveWall: {
     id: "Text-WallSetting-RemoveWall",
@@ -963,6 +963,10 @@ export default defineMessages({
   Text_WallSetting_CreateWallConfirm: {
     id: "Text-WallSetting-CreateWallConfirm",
     defaultMessage: "尚有未綁定顯示器，是否要儲存?",
+  },
+  Text_WallSetting_Preview: {
+    id: "Text-WallSetting-Preview",
+    defaultMessage: "預覽",
   },
 
   // System setting - wall setting legacy

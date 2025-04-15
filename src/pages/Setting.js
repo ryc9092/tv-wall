@@ -15,7 +15,7 @@ const Setting = () => {
   const pageContent = {
     tvwall: <TVWallSetting />,
     template: <TemplateSetting />,
-    device: <DeviceSetting />,
+    // device: <DeviceSetting />,
   };
 
   return (
@@ -47,14 +47,14 @@ const Setting = () => {
             {...Messages.Text_TemplateSetting_TemplateSetting}
           />
         </div>
-        <div
+        {/* <div
           className="setting-topbar-option"
           onClick={() => {
             setPage("device");
           }}
         >
           <FormattedMessage {...Messages.Text_DeviceSetting_AdvanceSetting} />
-        </div>
+        </div> */}
         {/* <div
           className="setting-topbar-option"
           onClick={() => {
@@ -64,7 +64,7 @@ const Setting = () => {
           <FormattedMessage {...Messages.Text_DeviceSetting_AdvanceSetting} />
         </div> */}
       </div>
-      <div className="setting-page-layout-column">{pageContent[page]}</div>
+      <div className="page-layout-column">{pageContent[page]}</div>
     </div>
   );
 };

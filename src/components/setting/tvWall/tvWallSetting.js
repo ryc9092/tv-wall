@@ -3,7 +3,7 @@ import { StoreContext } from "../../store/store";
 import { Button, Table } from "antd";
 import CreateWall from "./createWall";
 import ViewWall from "./viewWall";
-import { getWalls, deleteWall } from "../../../api/API";
+import { getWalls, deleteWall, getWallScreensById } from "../../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
 import TrashIcon from "../../../assets/trash.png";
@@ -32,15 +32,9 @@ const TVWallSetting = () => {
 
   const columns = [
     {
-      title: <span className="table-head">ID</span>,
-      dataIndex: "wallId",
-      key: "wallId",
-      render: (text) => <span className="table-content">{text}</span>,
-    },
-    {
       title: (
         <span className="table-head">
-          {intl.formatMessage(Messages.Text_Common_Name)}
+          {intl.formatMessage(Messages.Text_WallSetting_WallName)}
         </span>
       ),
       dataIndex: "wallName",
@@ -55,7 +49,6 @@ const TVWallSetting = () => {
           {intl.formatMessage(Messages.Text_Common_Dimension)}
         </span>
       ),
-      width: "20%",
       dataIndex: ["col", "row"],
       key: "dimension",
       render: (text, record) => (
@@ -68,13 +61,26 @@ const TVWallSetting = () => {
           {intl.formatMessage(Messages.Text_Button_Operation)}
         </span>
       ),
-      width: "20%",
       dataIndex: "wallId",
       key: "action",
       render: (text, record) => {
         return (
           <div key={`${text}-action`}>
-            <ViewWall wall={record} />
+            {/* <ViewWall wall={record} /> */}
+            <Button
+              // key={`${wall.wallId}-edit`}
+              // id={wall.wallId}
+              // type="text"
+              // onClick={() => setModalOpen(true)}
+              // style={{ marginight: 6 }}
+              // className="table-content"
+              onClick={()=>{
+                console.log(record)
+                setSelectedWall(record);
+              }}
+            >
+              {/* <img alt="edit" src={SearchIcon} className="table-content-icon" /> */}
+            </Button>
             <Button
               key={`${text}-delete`}
               id={text}
@@ -96,6 +102,50 @@ const TVWallSetting = () => {
     },
   ];
 
+  const [selectedWall, setSelectedWall] = useState(null);
+  // const [screenList, setScreenList] = useState([]);
+  // const [wallObj, setWallObj] = useState(null);
+
+  //   useEffect(() => {
+  //     if (selectedWall) {
+  //       (async () => {
+  //         const screens = await getWallScreensById(store, selectedWall.wallId);
+  //         setScreenList(screens);
+  //       })();
+  //     }
+  //   }, [selectedWall]);
+  
+  //   useEffect(() => {
+  //     // create wall table
+  //     let tempRow = [];
+  //     let tempWall = [];
+  //     screenList?.forEach((screen) => {
+  //       tempRow.push(
+  //         <td
+  //           className={
+  //             screen.nickName ? "screen-block-handled" : "screen-block-default"
+  //           }
+  //           key={screen.num}
+  //         >
+  //           <span
+  //             className={
+  //               screen.nickName
+  //                 ? "screen-block-text-handled"
+  //                 : "screen-block-text-default"
+  //             }
+  //           >
+  //             {screen.num}
+  //           </span>
+  //         </td>
+  //       );
+  //       if (tempRow.length === selectedWall.col) {
+  //         tempWall.push(<tr key={screen.num}>{tempRow}</tr>);
+  //         tempRow = []; // clear row
+  //       }
+  //     });
+  //     setWallObj(tempWall);
+  //   }, [screenList]);
+
   const removeWall = (wall) => {
     (async () => {
       const result = await deleteWall(wall.wallId, store);
@@ -106,15 +156,51 @@ const TVWallSetting = () => {
   };
 
   return (
-    <div className="tv-wall-content-container">
-      <div className="title-row">
+    <div
+      className={
+        store.siderCollapse
+          ? "tv-wall-content-container-collapse"
+          : "tv-wall-content-container"
+      }
+    >
+      <div className="wall-setting-title-row">
         <div className="page-title">
           <FormattedMessage {...Messages.Text_WallSetting_WallSetting} />
         </div>
         <CreateWall setReload={setReload} />
       </div>
-      <div className="table-container ">
-        <Table columns={columns} dataSource={walls} />
+      <div className="table-row">
+        <div
+          className={
+            store.siderCollapse
+              ? "wall-setting-table-container-collapse"
+              : "wall-setting-table-container"
+          }
+        >
+          <Table columns={columns} dataSource={walls} />
+        </div>
+        <div
+          className={
+            store.siderCollapse
+              ? "wall-setting-table-container-collapse"
+              : "wall-setting-table-container"
+          }
+        >
+          <div
+            style={{
+              backgroundColor: "#FAFAFA",
+              height: 56,
+              borderRadius: 8,
+              textAlign: "center",
+              paddingTop: 20,
+              color: "#A5A5A5",
+            }}
+          >
+            <FormattedMessage {...Messages.Text_WallSetting_Preview} />
+          </div>
+          {/* <div>{wallObj}</div> */}
+          {/* <Table columns={columns} dataSource={walls} /> */}
+        </div>
       </div>
     </div>
   );
