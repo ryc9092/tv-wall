@@ -1,20 +1,31 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../store/store";
+import { Actions } from "../../store/reducer";
 import { Button, Table } from "antd";
 import CreateWall from "./createWall";
-import ViewWall from "./viewWall";
 import { getWalls, deleteWall, getWallScreensById } from "../../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
 import TrashIcon from "../../../assets/trash.png";
+import SearchIcon from "../../../assets/magnifying-glass.png";
 import "./tvWallSetting.scss";
+import "./createWall.scss";
+import "./viewWall.scss";
 import "../../../App.scss";
+
+import useWindowDimensions from "../../../utils/WindowDimension";
 
 const TVWallSetting = () => {
   const intl = useIntl();
-  const [store] = useContext(StoreContext);
+  const { width, height } = useWindowDimensions();
+  const [store, dispatch] = useContext(StoreContext);
   const [walls, setWalls] = useState([]);
   const [reload, setReload] = useState(null);
+
+  useEffect(() => {
+    if (width < 1240)
+      dispatch({ type: Actions.SetSiderCollapse, payload: true });
+  }, [dispatch, width]);
 
   useEffect(() => {
     (async () => {
@@ -27,6 +38,7 @@ const TVWallSetting = () => {
         });
       }
       setWalls(tempWalls);
+      setSelectedWall(tempWalls.length > 0 ? tempWalls[0] : null);
     })();
   }, [reload, store]);
 
@@ -52,7 +64,7 @@ const TVWallSetting = () => {
       dataIndex: ["col", "row"],
       key: "dimension",
       render: (text, record) => (
-        <span className="table-content">{`${record.col} X ${record.row}`}</span>
+        <span className="table-content">{`${record?.col} X ${record?.row}`}</span>
       ),
     },
     {
@@ -66,20 +78,17 @@ const TVWallSetting = () => {
       render: (text, record) => {
         return (
           <div key={`${text}-action`}>
-            {/* <ViewWall wall={record} /> */}
             <Button
-              // key={`${wall.wallId}-edit`}
-              // id={wall.wallId}
-              // type="text"
-              // onClick={() => setModalOpen(true)}
-              // style={{ marginight: 6 }}
-              // className="table-content"
-              onClick={()=>{
-                console.log(record)
+              key={`${record.wallId}-edit`}
+              id={record.wallId}
+              type="text"
+              style={{ marginight: 6 }}
+              className="table-content"
+              onClick={() => {
                 setSelectedWall(record);
               }}
             >
-              {/* <img alt="edit" src={SearchIcon} className="table-content-icon" /> */}
+              <img alt="edit" src={SearchIcon} className="table-content-icon" />
             </Button>
             <Button
               key={`${text}-delete`}
@@ -103,48 +112,63 @@ const TVWallSetting = () => {
   ];
 
   const [selectedWall, setSelectedWall] = useState(null);
-  // const [screenList, setScreenList] = useState([]);
-  // const [wallObj, setWallObj] = useState(null);
+  const [screenList, setScreenList] = useState([]);
+  const [wallObj, setWallObj] = useState(null);
 
-  //   useEffect(() => {
-  //     if (selectedWall) {
-  //       (async () => {
-  //         const screens = await getWallScreensById(store, selectedWall.wallId);
-  //         setScreenList(screens);
-  //       })();
-  //     }
-  //   }, [selectedWall]);
-  
-  //   useEffect(() => {
-  //     // create wall table
-  //     let tempRow = [];
-  //     let tempWall = [];
-  //     screenList?.forEach((screen) => {
-  //       tempRow.push(
-  //         <td
-  //           className={
-  //             screen.nickName ? "screen-block-handled" : "screen-block-default"
-  //           }
-  //           key={screen.num}
-  //         >
-  //           <span
-  //             className={
-  //               screen.nickName
-  //                 ? "screen-block-text-handled"
-  //                 : "screen-block-text-default"
-  //             }
-  //           >
-  //             {screen.num}
-  //           </span>
-  //         </td>
-  //       );
-  //       if (tempRow.length === selectedWall.col) {
-  //         tempWall.push(<tr key={screen.num}>{tempRow}</tr>);
-  //         tempRow = []; // clear row
-  //       }
-  //     });
-  //     setWallObj(tempWall);
-  //   }, [screenList]);
+  useEffect(() => {
+    if (selectedWall) {
+      (async () => {
+        const screens = await getWallScreensById(store, selectedWall.wallId);
+        setScreenList(screens);
+      })();
+    }
+  }, [selectedWall]);
+
+  useEffect(() => {
+    // create wall table
+    let tempRow = [];
+    let tempWall = [];
+    screenList?.forEach((screen) => {
+      tempRow.push(
+        <td className="wall-setting-screen-block" key={screen.num}>
+          {/* <div>
+            {intl.formatMessage(Messages.Text_Common_Block)}
+            {": "}
+            {screen.block}
+          </div> */}
+          <div className="wall-setting-screen-block-content">
+            <div style={{ marginBottom: 4, textOverflow: "ellipsis" }}>
+              {intl.formatMessage(Messages.Text_Common_Decoder)}
+              {":"}
+              <br />
+              {screen?.nickName ? (
+                screen.nickName
+              ) : (
+                <span
+                  style={{
+                    color: "#e7e7e7",
+                    // lineHeight: 22,
+                    content: " ",
+                    whiteSpace: "pre",
+                  }}
+                > </span>
+              )}
+            </div>
+            <div>
+              {intl.formatMessage(Messages.Text_DeviceSetting_TVIP)}
+              {":"}
+              <br />
+            </div>
+          </div>
+        </td>
+      );
+      if (tempRow.length === selectedWall?.col) {
+        tempWall.push(<tr key={screen.num}>{tempRow}</tr>);
+        tempRow = []; // clear row
+      }
+    });
+    setWallObj(tempWall);
+  }, [screenList, selectedWall]);
 
   const removeWall = (wall) => {
     (async () => {
@@ -198,8 +222,7 @@ const TVWallSetting = () => {
           >
             <FormattedMessage {...Messages.Text_WallSetting_Preview} />
           </div>
-          {/* <div>{wallObj}</div> */}
-          {/* <Table columns={columns} dataSource={walls} /> */}
+          <div className="wall-setting-screen-block-container">{wallObj}</div>
         </div>
       </div>
     </div>

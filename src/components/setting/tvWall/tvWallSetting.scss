@@ -47,7 +47,7 @@
 .create-wall-btn-text {
     height: 24px;
     flex-grow: 0;
-     @extend .sdcp-font;
+    @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
@@ -76,7 +76,7 @@
     border-radius: 24px;
     box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
     background-color: white;
-    padding: 40px;
+    padding: 12px !important;
 }
 
 .wall-setting-table-container-collapse {
@@ -90,7 +90,7 @@
     border-radius: 24px;
     box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
     background-color: white;
-    padding: 40px;
+    padding: 12px !important;
 }
 
 @media(max-width: 1180px) {
@@ -111,7 +111,7 @@
 }
 
 .table-head {
-     @extend .sdcp-font;
+    @extend .sdcp-font;
     font-size: 14px;
     font-weight: 600;
     text-align: left;
@@ -120,4 +120,36 @@
 
 .table-content-icon {
     width: 19px;
+}
+
+.wall-setting-screen-block-container {
+    border: 1px solid gray;
+    border-radius: 12px;
+    margin-top: 16px;
+    padding: 16px 8px;
+    height: calc(100vh - 365px);
+    overflow: scroll;
+}
+
+.wall-setting-screen-block {
+    width: 160px;
+    height: 160px;
+    min-width: 160px;
+    min-height: 160px;
+    max-width: 160px;
+    max-height: 160px;
+    border: solid 2px white;
+    border-radius: 8px;
+    background-color: #e7e7e7;
+}
+
+.wall-setting-screen-block-content {
+    @extend .sdcp-font;
+    width: 148px;
+    font-size: 16px;
+    color: #45413e;
+    margin: 6px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
