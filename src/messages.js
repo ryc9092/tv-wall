@@ -960,9 +960,13 @@ export default defineMessages({
     id: "Text-WallSetting-ViewWall",
     defaultMessage: "檢視電視牆",
   },
-  Text_WallSetting_CreateWallConfirm: {
-    id: "Text-WallSetting-CreateWallConfirm",
+  Text_WallSetting_CreateWallConfirmDecoder: {
+    id: "Text-WallSetting-CreateWallConfirmDecoder",
     defaultMessage: "尚有未綁定顯示器，是否要儲存?",
+  },
+  Text_WallSetting_CreateWallConfirmIP: {
+    id: "Text-WallSetting-CreateWallConfirmIP",
+    defaultMessage: "尚有顯示器未填入IP，是否要儲存?",
   },
   Text_WallSetting_Preview: {
     id: "Text-WallSetting-Preview",

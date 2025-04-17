@@ -224,7 +224,8 @@
   "Text-WallSetting-ScreenNumber": "畫面編號",
   "Text-WallSetting-DestinationName": "終端名稱",
   "Text-WallSetting-ViewWall": "檢視電視牆",
-  "Text-WallSetting-CreateWallConfirm": "尚有未綁定顯示器，是否要儲存?",
+  "Text-WallSetting-CreateWallConfirmDecoder": "尚有未綁定顯示器，是否要儲存?",
+  "Text-WallSetting-CreateWallConfirmIP": "尚有顯示器未填入IP，是否要儲存?",
   "Text-WallSetting-Preview": "預覽",
 
   "Text-DeviceSetting-AdvanceSetting": "設備進階設定",
