@@ -30,8 +30,6 @@ const CreateTemplate = ({ setReload }) => {
   const [templateObj, setTemplateObj] = useState(null);
   const [templateIsDefault, setTemplateIsDefault] = useState(false);
 
-  const blockMap = { 1: "A", 2: "B", 3: "C", 4: "D", 5: "E", 6: "F", 7: "G" };
-
   const resetTemplate = () => {
     setTemplateId(null);
     setScreenList([]);
@@ -91,7 +89,7 @@ const CreateTemplate = ({ setReload }) => {
 
           {screen.num in screenBlockMap ? (
             <span className="screen-block-num screen-block-num-text">
-              {blockMap[screenBlockMap[screen.num]]}
+              {screenBlockMap[screen.num]}
             </span>
           ) : null}
         </td>
@@ -127,8 +125,7 @@ const CreateTemplate = ({ setReload }) => {
               setScreenBlockMap({ ...screenBlockMap, ...tempMap });
             }}
           >
-            <FormattedMessage {...Messages.Text_Common_Block} />{" "}
-            {blockMap[block]}
+            <FormattedMessage {...Messages.Text_Common_Block} /> {block}
           </div>
         );
       })}
@@ -279,7 +276,7 @@ const CreateTemplate = ({ setReload }) => {
                   type="text"
                   onClick={() => {
                     let blockNum = parseInt(blocks) + 1;
-                    if (blockNum <= 7) setBlocks(blockNum);
+                    setBlocks(blockNum);
                   }}
                   className="block-setting-add-block-button"
                 >
