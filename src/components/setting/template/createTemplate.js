@@ -231,7 +231,7 @@ const CreateTemplate = ({ setReload }) => {
           </div>
           <div>
             <span className="input-title">
-              <FormattedMessage {...Messages.Text_WallSetting_WallDimension} />
+              <FormattedMessage {...Messages.Text_Common_Dimension} />
             </span>
             <div className="input-dimension-row">
               <InputNumber
