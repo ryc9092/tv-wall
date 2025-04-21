@@ -72,7 +72,24 @@ const CreateTemplate = ({ setReload }) => {
           }
           key={screen.num}
           onClick={() => {
-            setSelectedScreenList([...selectedScreenList, screen.num]);
+            // if no selected screen
+            if (!selectedScreenList?.includes(screen.num))
+              setSelectedScreenList([...selectedScreenList, screen.num]);
+            // if has selected screen
+            else {
+              // if selected screen is handled, remove it from handled list
+              if (handledScreenList?.includes(screen.num)) {
+                setHandledScreenList(
+                  handledScreenList.filter((item) => item !== screen.num)
+                );
+                let tempMap = screenBlockMap;
+                delete tempMap[screen.num];
+                setScreenBlockMap({ ...tempMap });
+              }
+              setSelectedScreenList(
+                selectedScreenList.filter((item) => item !== screen.num)
+              );
+            }
           }}
         >
           <span
