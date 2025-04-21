@@ -11,6 +11,7 @@ import Messages from "../../../messages";
 import PlusIcon from "../../../assets/plus-white.png";
 import PlusGrayIcon from "../../../assets/plus-gray.png";
 import XIcon from "../../../assets/X.png";
+import ClearLinkIcon from "../../../assets/clearLinkIconRed.png";
 import "../../../App.scss";
 import "./createTemplate.scss";
 
@@ -135,6 +136,7 @@ const CreateTemplate = ({ setReload }) => {
   );
 
   const saveWall = () => {
+    let templateId = `template${Math.random().toString().substring(0, 6)}`;
     if (templateId && templateName) {
       // set block info to screen list
       let screenListWithBlock = [];
@@ -198,19 +200,6 @@ const CreateTemplate = ({ setReload }) => {
         <div className="input-option-row">
           <div style={{ marginRight: 100 }}>
             <span className="input-title">
-              <FormattedMessage {...Messages.Text_TemplateSetting_TemplateId} />
-            </span>
-            <Input
-              value={templateId}
-              className="input-object"
-              placeholder={intl.formatMessage(Messages.Text_Common_InputID)}
-              onChange={(e) => {
-                setTemplateId(e.target.value);
-              }}
-            />
-          </div>
-          <div style={{ marginRight: 100 }}>
-            <span className="input-title">
               <FormattedMessage
                 {...Messages.Text_TemplateSetting_TemplateName}
               />
@@ -232,7 +221,7 @@ const CreateTemplate = ({ setReload }) => {
               <InputNumber
                 value={templateSize.col}
                 min={1}
-                max={5}
+                max={15}
                 className="input-object input-dimension"
                 onChange={(value) =>
                   setTemplateSize({ ...templateSize, col: value })
@@ -246,7 +235,7 @@ const CreateTemplate = ({ setReload }) => {
               <InputNumber
                 value={templateSize.row}
                 min={1}
-                max={4}
+                max={15}
                 className="input-object input-dimension"
                 onChange={(value) =>
                   setTemplateSize({ ...templateSize, row: value })
@@ -255,7 +244,7 @@ const CreateTemplate = ({ setReload }) => {
             </div>
           </div>
         </div>
-        <Divider className="divider" />
+        <Divider className="create-template-divider" />
         <div className="create-template-second-title">
           <FormattedMessage {...Messages.Text_TemplateSetting_BlockSetting} />
         </div>
@@ -264,11 +253,21 @@ const CreateTemplate = ({ setReload }) => {
             {...Messages.Text_TemplateSetting_BlockSettingDesc}
           />
         </div>
-        <div className="screen-setting-row">
-          <div>
-            <table style={{ border: 0, borderCollapse: "collapse" }}>
-              <tbody>{templateObj}</tbody>
-            </table>
+        <div className="create-template-screen-setting-row">
+          <div
+            style={{
+              border: "1px solid #d4d4d4",
+              borderRadius: 12,
+              padding: 6,
+              width: 500,
+              height: 375,
+            }}
+          >
+            <div style={{ width: 498, height: 375, overflow: "auto" }}>
+              <table style={{ border: 0, borderCollapse: "collapse" }}>
+                <tbody>{templateObj}</tbody>
+              </table>
+            </div>
           </div>
           <div className="block-setting-container">
             <div className="block-setting-container-row">
@@ -316,8 +315,13 @@ const CreateTemplate = ({ setReload }) => {
               onClick={resetTemplate}
               className="screen-setting-clear-btn"
             >
+              <img
+                alt="remove"
+                src={ClearLinkIcon}
+                className="create-template-clear-icon"
+              />
               <span className="screen-setting-clear-btn-text">
-                <FormattedMessage {...Messages.Text_Button_Clear} />
+                <FormattedMessage {...Messages.Text_Button_ClearAll} />
               </span>
             </Button>
           </div>

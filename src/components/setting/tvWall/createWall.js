@@ -16,7 +16,7 @@ import Messages from "../../../messages";
 import { showWarningNotification } from "../../../utils/Utils";
 import PlusIcon from "../../../assets/plus-white.png";
 import XIcon from "../../../assets/X.png";
-import TrashIcon from "../../../assets/trash.png";
+import ClearLinkIcon from "../../../assets/clearLinkIconRed.png";
 import "../../../App.scss";
 import "./createWall.scss";
 
@@ -353,11 +353,11 @@ const CreateWall = ({ setReload }) => {
             >
               <img
                 alt="remove"
-                src={TrashIcon}
+                src={ClearLinkIcon}
                 className="create-wall-clear-icon"
               />
               <span className="create-wall-screen-setting-clear-btn-text">
-                <FormattedMessage {...Messages.Text_Button_Clear} />
+                <FormattedMessage {...Messages.Text_Button_ClearAll} />
               </span>
             </Button>
           </div>
