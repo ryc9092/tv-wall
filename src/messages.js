@@ -104,6 +104,10 @@ export default defineMessages({
     id: "Text-Button-Clear",
     defaultMessage: "清除",
   },
+  Text_Button_ClearAll: {
+    id: "Text-Button-ClearAll",
+    defaultMessage: "全數清除",
+  },
   Text_Button_Cancel: {
     id: "Text-Button-Cancel",
     defaultMessage: "取消",
@@ -898,6 +902,10 @@ export default defineMessages({
     id: "Text-TemplateSetting-ResetTemplate",
     defaultMessage: "重置版型",
   },
+  Text_TemplateSetting_FormatInvalid: {
+    id: "Text-TemplateSetting-FormatInvalid",
+    defaultMessage: "版型格式錯誤",
+  },
   Text_TemplateSetting_CreateSuccess: {
     id: "Text-TemplateSetting-CreateSuccess",
     defaultMessage: "版型建立成功",
@@ -960,9 +968,13 @@ export default defineMessages({
     id: "Text-WallSetting-ViewWall",
     defaultMessage: "檢視電視牆",
   },
-  Text_WallSetting_CreateWallConfirm: {
-    id: "Text-WallSetting-CreateWallConfirm",
+  Text_WallSetting_CreateWallConfirmDecoder: {
+    id: "Text-WallSetting-CreateWallConfirmDecoder",
     defaultMessage: "尚有未綁定顯示器，是否要儲存?",
+  },
+  Text_WallSetting_CreateWallConfirmIP: {
+    id: "Text-WallSetting-CreateWallConfirmIP",
+    defaultMessage: "尚有顯示器未填入IP，是否要儲存?",
   },
   Text_WallSetting_Preview: {
     id: "Text-WallSetting-Preview",

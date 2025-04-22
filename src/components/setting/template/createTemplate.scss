@@ -35,13 +35,13 @@
 }
 
 .create-template-setting .ant-modal-content {
-    padding: 56px !important;
-    height: 988px;
+    padding: 26px !important;
+    height: 765px;
 }
 
 .create-template-modal-close-icon .ant-modal-close-icon {
-    margin-top: 50px;
-    margin-right: 72px;
+    margin-top: 20px;
+    margin-right: 32px;
 }
 
 .ant-modal-close-x {
@@ -49,8 +49,8 @@
 }
 
 .create-template-modal {
-    width: 1190px !important;
-    margin-top: -40px;
+    width: 960px !important;
+    margin-top: -88px;
 }
 
 .create-template-modal-title {
@@ -69,7 +69,7 @@
 
 .input-option-row {
     height: 80px;
-    margin-top: 28px;
+    margin-top: 14px;
     display: flex;
 }
 
@@ -117,10 +117,10 @@
     margin: 24px 12px 0px 12px;
 }
 
-.divider {
+.create-template-divider {
     height: 1px;
-    margin-top: 40px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 12px;
     align-self: stretch;
     flex-grow: 0;
     background-color: #d4d4d4;
@@ -155,14 +155,14 @@
     color: #898989;
 }
 
-.screen-setting-row {
-    margin-top: 40px;
-    height: 468px;
+.create-template-screen-setting-row {
+    margin-top: 14px;
+    height: 390px;
     display: flex;
 }
 
 .block-setting-container {
-    width: 402px;
+    width: 302px;
     align-self: stretch;
     flex-grow: 0;
     display: flex;
@@ -174,12 +174,12 @@
     padding: 0 12px;
     border-radius: 12px;
     border: solid 1px #d4d4d4;
-    height: 464px;
+    height: 387px;
     right: 48px;
 }
 
 .block-setting-container-row {
-    width: 378px;
+    width: 278px;
     display: flex;
     justify-content: space-between;
 }
@@ -213,16 +213,18 @@
 
 .block-setting-divider {
     height: 1px;
-    margin-top: 28px;
-    margin-bottom: 24px;
+    margin-top: 8px;
+    margin-bottom: 0px;
     align-self: stretch;
     flex-grow: 0;
     background-color: #d4d4d4;
 }
 
 .screen-block-default {
-    width: 124px;
-    height: 115px;
+    width: 118px;
+    height: 118px;
+    min-width: 118px;
+    min-height: 118px;
     gap: 10px;
     padding: 0;
     border: solid 1px #c6c6c6;
@@ -240,14 +242,17 @@
     font-style: normal;
     letter-spacing: normal;
     color: #45413e;
-    position: absolute;
-    margin: -58px 0px 0px 0px !important;
+    position: relative;
+    top: -35px;
+    left: 12px;
     text-align: center;
 }
 
 .screen-block-handled {
-    width: 124px;
-    height: 115px;
+    width: 118px;
+    height: 118px;
+    min-width: 118px;
+    min-height: 118px;
     gap: 10px;
     padding: 0;
     border: solid 3px #45413e;
@@ -267,14 +272,18 @@
     line-height: 1.27;
     letter-spacing: normal;
     color: #ffffff;
-    position: absolute;
-    margin: -58px 0px 0px 0px !important;
+    position: relative;
+    padding: 7px 16px 8px 12px;
+    top: -37px;
+    left: -1px;
     text-align: center;
 }
 
 .screen-block-selected {
-    width: 124px;
-    height: 115px;
+    width: 118px;
+    height: 118px;
+    min-width: 118px;
+    min-height: 118px;
     gap: 10px;
     padding: 0;
     border: solid 3px #45413e;
@@ -294,8 +303,10 @@
     line-height: 1.27;
     letter-spacing: normal;
     color: #ffffff;
-    position: absolute;
-    margin: -58px 0px 0px 0px !important;
+    position: relative;
+    padding: 6px 16px 8px 12px;
+    top: -37px;
+    left: -1px;
     text-align: center;
 }
 
@@ -312,31 +323,32 @@
     line-height: 1.27;
     letter-spacing: normal;
     color: #ffffff;
-    position: absolute;
+    position: relative;
     margin: -58px 0px 0px 0px !important;
     text-align: center;
 }
 
 .screen-block-num {
-    width: 45px;
-    height: 45px;
-    flex-grow: 0;
-    display: flex;
-    flex-direction: column;
+    width: 42px;
+    height: 42px;
+    // flex-grow: 0;
+    // display: flex;
+    // flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    margin-left: 36px;
-    margin-top: -16px;
-    gap: 10px;
+    position: relative;
+    padding: 4px 14px;
+    // margin-left: 36px;
+    top: 10px;
+    // gap: 10px;
     border-radius: 36px;
     background-color: #45413e;
 }
 
 .screen-block-num-text {
     flex-grow: 0;
-     @extend .sdcp-font;
-    font-size: 26px;
+    @extend .sdcp-font;
+    font-size: 24px;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
@@ -351,9 +363,9 @@
 }
 
 .block-option {
-    width: 342px;
-    height: 24px;
-     @extend .sdcp-font;
+    width: 242px;
+    height: 16px;
+    @extend .sdcp-font;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -361,7 +373,7 @@
     line-height: 1.5;
     letter-spacing: 0.5px;
     text-align: left;
-    padding: 16px;
+    padding: 14px 16px 16px 16px;
     color: #363330;
     margin: 0px 16px;
     cursor: pointer;
@@ -372,8 +384,8 @@
 }
 
 .is-default-ckbox-container {
-    margin-top: 26px;
-    margin-left: 12px;
+    margin-left: 4px;
+    margin-top: 12px;
 }
 
 .ant-checkbox-inner {
@@ -396,7 +408,8 @@
 }
 
 .screen-setting-submit-row {
-    margin-top: 26px;
+    width: 890px;
+    margin-top: 12px;
     display: flex;
     justify-content: space-between;
 }
@@ -408,22 +421,21 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 47px;
-    padding: 0 12px;
+    padding: 0px 0px;
     border-radius: 26px; 
 }
 
 .screen-setting-clear-btn-text {
     flex-grow: 0;
      @extend .sdcp-font;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.43;
     letter-spacing: 0.1px;
     text-align: center;
-    color: #898989;
+    color: #c33434;
 }
 
 .screen-setting-create-btn {
@@ -451,4 +463,9 @@
     letter-spacing: 0.1px;
     text-align: center;
     color: #e7e7e7;
+}
+
+.create-template-clear-icon {
+    width: 22px;
+    border: none;
 }

@@ -11,6 +11,7 @@ import Messages from "../../../messages";
 import PlusIcon from "../../../assets/plus-white.png";
 import PlusGrayIcon from "../../../assets/plus-gray.png";
 import XIcon from "../../../assets/X.png";
+import ClearLinkIcon from "../../../assets/clearLinkIconRed.png";
 import "../../../App.scss";
 import "./createTemplate.scss";
 
@@ -28,8 +29,6 @@ const CreateTemplate = ({ setReload }) => {
   const [screenBlockMap, setScreenBlockMap] = useState({});
   const [templateObj, setTemplateObj] = useState(null);
   const [templateIsDefault, setTemplateIsDefault] = useState(false);
-
-  const blockMap = { 1: "A", 2: "B", 3: "C", 4: "D", 5: "E", 6: "F", 7: "G" };
 
   const resetTemplate = () => {
     setTemplateId(null);
@@ -73,7 +72,26 @@ const CreateTemplate = ({ setReload }) => {
           }
           key={screen.num}
           onClick={() => {
-            setSelectedScreenList([...selectedScreenList, screen.num]);
+            // if not the selected screen
+            if (!selectedScreenList?.includes(screen.num)) {
+              // if the select screen is handled, remove it from handled list
+              if (handledScreenList?.includes(screen.num)) {
+                setHandledScreenList(
+                  handledScreenList.filter((item) => item !== screen.num)
+                );
+                let tempMap = screenBlockMap;
+                delete tempMap[screen.num];
+                setScreenBlockMap({ ...tempMap });
+              }
+              // if the select screen is not handled, select it
+              else setSelectedScreenList([...selectedScreenList, screen.num]);
+            }
+            // if the screen is selected, unselect it
+            else {
+              setSelectedScreenList(
+                selectedScreenList.filter((item) => item !== screen.num)
+              );
+            }
           }}
         >
           <span
@@ -90,7 +108,7 @@ const CreateTemplate = ({ setReload }) => {
 
           {screen.num in screenBlockMap ? (
             <span className="screen-block-num screen-block-num-text">
-              {blockMap[screenBlockMap[screen.num]]}
+              {screenBlockMap[screen.num]}
             </span>
           ) : null}
         </td>
@@ -126,15 +144,78 @@ const CreateTemplate = ({ setReload }) => {
               setScreenBlockMap({ ...screenBlockMap, ...tempMap });
             }}
           >
-            <FormattedMessage {...Messages.Text_Common_Block} />{" "}
-            {blockMap[block]}
+            <FormattedMessage {...Messages.Text_Common_Block} /> {block}
           </div>
         );
       })}
     </>
   );
 
+  const validateTemplate = (screenListWithBlock, templateSize) => {
+    console.log(screenListWithBlock, templateSize, "templateSize");
+    let blockScreenMap = {};
+    screenListWithBlock?.forEach((screen) => {
+      if (typeof screen.block !== "undefined") {
+        if (!blockScreenMap.hasOwnProperty(screen.block?.toString()))
+          blockScreenMap[screen.block.toString()] = [screen.num];
+        else blockScreenMap[screen.block.toString()].push(screen.num);
+      }
+    });
+
+    let isBlockValid = true;
+    Object.entries(blockScreenMap).forEach(([block, screens]) => {
+      // Get block column
+      let blockCol = 1;
+      let stopCountBlockCol = false;
+      screens?.forEach((screen, idx) => {
+        let screenNum = parseInt(screen);
+        if (
+          !stopCountBlockCol &&
+          screens.length >= idx + 1 &&
+          parseInt(screens[idx + 1]) === screenNum + 1
+        ) {
+          // console.log(screens, screenNum, idx, "1qqqqq", blockCol);
+          blockCol += 1;
+        } else stopCountBlockCol = true;
+      });
+
+      // Check each block's screens is validated
+      let leftScreensLength = screens.length;
+      screens?.forEach((screen, idx) => {
+        let screenNum = parseInt(screen);
+
+        // Check if the screen should be exist is existed
+        leftScreensLength -= 1;
+        if (leftScreensLength < blockCol && leftScreensLength !== 0) {
+          // Check right screen is exist
+          if (screens[idx + 1] !== screenNum + 1) {
+            // console.log("111111", screenNum, blockCol);
+            isBlockValid = false;
+            return;
+          }
+        } else if (leftScreensLength >= blockCol) {
+          // Check below screen is exist
+          if (!screens.includes(screenNum + templateSize.col)) {
+            // console.log("222222", screenNum, blockCol);
+            isBlockValid = false;
+            return;
+          }
+        }
+        // Check above screen is exist
+        if (screens.length - leftScreensLength > blockCol) {
+          if (!screens.includes(screenNum - templateSize.col)) {
+            // console.log("333333", screenNum, blockCol);
+            isBlockValid = false;
+            return;
+          }
+        }
+      });
+    });
+    return isBlockValid;
+  };
+
   const saveWall = () => {
+    let templateId = `template${Math.random().toString().substring(0, 6)}`;
     if (templateId && templateName) {
       // set block info to screen list
       let screenListWithBlock = [];
@@ -144,27 +225,34 @@ const CreateTemplate = ({ setReload }) => {
           block: screenBlockMap[screen.num],
         });
       });
-      (async () => {
-        const result = await createTemplate(
-          store,
-          templateId,
-          templateName,
-          templateSize.col,
-          templateSize.row,
-          templateIsDefault ? 1 : 0,
-          screenListWithBlock
+      let isBlockValid = validateTemplate(screenListWithBlock, templateSize);
+      if (isBlockValid) {
+        (async () => {
+          const result = await createTemplate(
+            store,
+            templateId,
+            templateName,
+            templateSize.col,
+            templateSize.row,
+            templateIsDefault ? 1 : 0,
+            screenListWithBlock
+          );
+          if (result) {
+            showSuccessNotificationByMsg(
+              intl.formatMessage(Messages.Text_TemplateSetting_CreateSuccess)
+            );
+            setReload(Math.random);
+            setIsModalOpen(false);
+          } else
+            showWarningNotification(
+              intl.formatMessage(Messages.Text_TemplateSetting_CreateFail)
+            );
+        })();
+      } else {
+        showWarningNotification(
+          intl.formatMessage(Messages.Text_TemplateSetting_FormatInvalid)
         );
-        if (result) {
-          showSuccessNotificationByMsg(
-            intl.formatMessage(Messages.Text_TemplateSetting_CreateSuccess)
-          );
-          setReload(Math.random);
-          setIsModalOpen(false);
-        } else
-          showWarningNotification(
-            intl.formatMessage(Messages.Text_TemplateSetting_CreateFail)
-          );
-      })();
+      }
     } else {
       showWarningNotification(
         intl.formatMessage(Messages.Text_Common_RequiredHint)
@@ -198,19 +286,6 @@ const CreateTemplate = ({ setReload }) => {
         <div className="input-option-row">
           <div style={{ marginRight: 100 }}>
             <span className="input-title">
-              <FormattedMessage {...Messages.Text_TemplateSetting_TemplateId} />
-            </span>
-            <Input
-              value={templateId}
-              className="input-object"
-              placeholder={intl.formatMessage(Messages.Text_Common_InputID)}
-              onChange={(e) => {
-                setTemplateId(e.target.value);
-              }}
-            />
-          </div>
-          <div style={{ marginRight: 100 }}>
-            <span className="input-title">
               <FormattedMessage
                 {...Messages.Text_TemplateSetting_TemplateName}
               />
@@ -226,13 +301,13 @@ const CreateTemplate = ({ setReload }) => {
           </div>
           <div>
             <span className="input-title">
-              <FormattedMessage {...Messages.Text_WallSetting_WallDimension} />
+              <FormattedMessage {...Messages.Text_Common_Dimension} />
             </span>
             <div className="input-dimension-row">
               <InputNumber
                 value={templateSize.col}
                 min={1}
-                max={5}
+                max={15}
                 className="input-object input-dimension"
                 onChange={(value) =>
                   setTemplateSize({ ...templateSize, col: value })
@@ -246,7 +321,7 @@ const CreateTemplate = ({ setReload }) => {
               <InputNumber
                 value={templateSize.row}
                 min={1}
-                max={4}
+                max={15}
                 className="input-object input-dimension"
                 onChange={(value) =>
                   setTemplateSize({ ...templateSize, row: value })
@@ -255,7 +330,7 @@ const CreateTemplate = ({ setReload }) => {
             </div>
           </div>
         </div>
-        <Divider className="divider" />
+        <Divider className="create-template-divider" />
         <div className="create-template-second-title">
           <FormattedMessage {...Messages.Text_TemplateSetting_BlockSetting} />
         </div>
@@ -264,11 +339,21 @@ const CreateTemplate = ({ setReload }) => {
             {...Messages.Text_TemplateSetting_BlockSettingDesc}
           />
         </div>
-        <div className="screen-setting-row">
-          <div>
-            <table style={{ border: 0, borderCollapse: "collapse" }}>
-              <tbody>{templateObj}</tbody>
-            </table>
+        <div className="create-template-screen-setting-row">
+          <div
+            style={{
+              border: "1px solid #d4d4d4",
+              borderRadius: 12,
+              padding: 6,
+              width: 500,
+              height: 375,
+            }}
+          >
+            <div style={{ width: 498, height: 375, overflow: "auto" }}>
+              <table style={{ border: 0, borderCollapse: "collapse" }}>
+                <tbody>{templateObj}</tbody>
+              </table>
+            </div>
           </div>
           <div className="block-setting-container">
             <div className="block-setting-container-row">
@@ -280,7 +365,7 @@ const CreateTemplate = ({ setReload }) => {
                   type="text"
                   onClick={() => {
                     let blockNum = parseInt(blocks) + 1;
-                    if (blockNum <= 7) setBlocks(blockNum);
+                    setBlocks(blockNum);
                   }}
                   className="block-setting-add-block-button"
                 >
@@ -316,8 +401,13 @@ const CreateTemplate = ({ setReload }) => {
               onClick={resetTemplate}
               className="screen-setting-clear-btn"
             >
+              <img
+                alt="remove"
+                src={ClearLinkIcon}
+                className="create-template-clear-icon"
+              />
               <span className="screen-setting-clear-btn-text">
-                <FormattedMessage {...Messages.Text_Button_Clear} />
+                <FormattedMessage {...Messages.Text_Button_ClearAll} />
               </span>
             </Button>
           </div>

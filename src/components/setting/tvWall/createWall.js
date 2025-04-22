@@ -16,7 +16,7 @@ import Messages from "../../../messages";
 import { showWarningNotification } from "../../../utils/Utils";
 import PlusIcon from "../../../assets/plus-white.png";
 import XIcon from "../../../assets/X.png";
-import TrashIcon from "../../../assets/trash.png";
+import ClearLinkIcon from "../../../assets/clearLinkIconRed.png";
 import "../../../App.scss";
 import "./createWall.scss";
 
@@ -34,6 +34,7 @@ const CreateWall = ({ setReload }) => {
   const [wallObj, setWallObj] = useState(null);
   const [searchFilter, setSearchFilter] = useState("");
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [confirmText, setConfirmText] = useState("");
 
   // get decoders
   useEffect(() => {
@@ -66,6 +67,7 @@ const CreateWall = ({ setReload }) => {
     setWallSize({ col: 1, row: 1 });
     setScreenList([]);
     setHandledScreenList([]);
+    setConfirmText("");
   };
 
   useEffect(() => {
@@ -351,23 +353,27 @@ const CreateWall = ({ setReload }) => {
             >
               <img
                 alt="remove"
-                src={TrashIcon}
+                src={ClearLinkIcon}
                 className="create-wall-clear-icon"
               />
               <span className="create-wall-screen-setting-clear-btn-text">
-                <FormattedMessage {...Messages.Text_Button_Clear} />
+                <FormattedMessage {...Messages.Text_Button_ClearAll} />
               </span>
             </Button>
           </div>
           <div>
             <Button
               onClick={() => {
-                let hasEmptyScreen = false;
+                let hasEmptyScreenDecoder = false;
+                let hasEmptyScreenIP = false;
                 screenList.forEach((screen) => {
-                  if (screen.decoder === "" || screen.ip === "")
-                    hasEmptyScreen = true;
+                  if (screen.decoder === "") hasEmptyScreenDecoder = true;
+                  if (screen.ip === "") hasEmptyScreenIP = true;
                 });
-                if (hasEmptyScreen) setOpenConfirmModal(true);
+                if (hasEmptyScreenDecoder) setConfirmText("Decoder");
+                else if (hasEmptyScreenIP) setConfirmText("IP");
+                if (hasEmptyScreenDecoder || hasEmptyScreenIP)
+                  setOpenConfirmModal(true);
                 else saveWall();
               }}
               className="create-wall-screen-setting-create-btn"
@@ -380,9 +386,15 @@ const CreateWall = ({ setReload }) => {
               className="audio-modal-close-x"
               title={
                 <span style={{ marginRight: 12 }}>
-                  <FormattedMessage
-                    {...Messages.Text_WallSetting_CreateWallConfirm}
-                  />
+                  {confirmText === "Decoder" ? (
+                    <FormattedMessage
+                      {...Messages.Text_WallSetting_CreateWallConfirmDecoder}
+                    />
+                  ) : (
+                    <FormattedMessage
+                      {...Messages.Text_WallSetting_CreateWallConfirmIP}
+                    />
+                  )}
                 </span>
               }
               width={400}

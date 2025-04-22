@@ -157,8 +157,8 @@ const TvWall = ({
           <div
             className="wall-block-outer"
             style={{
-              width: block.col * WALL_SCREEN_SIZE,
-              height: block.row * WALL_SCREEN_SIZE,
+              width: block.col * WALL_SCREEN_SIZE - 3,
+              height: block.row * WALL_SCREEN_SIZE - 3,
               left:
                 ((block.smallestScreenNum - 1) % tvWallSize.col) *
                 WALL_SCREEN_SIZE,
@@ -252,7 +252,8 @@ const TvWall = ({
               </div>
               <div id={block.block}>
                 <div id={block.block} className="wall-block-desc">
-                  <div id={block.block}
+                  <div
+                    id={block.block}
                     style={{
                       display: "flex",
                     }}
@@ -266,7 +267,8 @@ const TvWall = ({
                         if (detail.block === block.block)
                           return detail.detail?.map((detail) => {
                             return (
-                              <span id={block.block}
+                              <span
+                                id={block.block}
                                 style={
                                   detail.state !== "Up"
                                     ? { marginLeft: 4, color: "#c33434" }

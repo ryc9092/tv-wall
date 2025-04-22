@@ -37,6 +37,7 @@
   "Text-Button-Create": "建立",
   "Text-Button-Edit": "編輯",
   "Text-Button-Delete": "刪除",
+  "Text-Button-ClearAll": "全數清除",
   "Text-Button-Cancel": "取消",
   "Text-Button-Close": "關閉",
   "Text-Button-Remove": "移除",
@@ -210,6 +211,7 @@
   "Text-TemplateSetting-BlockSettingDesc": "點選畫面後，選擇畫面對應的區塊或該範圍的區塊",
   "Text-TemplateSetting-SetToDefault": "設為電視牆維度XXX的預設值",
   "Text-TemplateSetting-ViewTemplate": "檢視電視牆版型",
+  "Text-TemplateSetting-FormatInvalid": "版型格式錯誤",
 
   "Text-WallSetting-WallSetting": "基本設定",
   "Text-WallSetting-RemoveWall": "刪除電視牆",
@@ -224,7 +226,8 @@
   "Text-WallSetting-ScreenNumber": "畫面編號",
   "Text-WallSetting-DestinationName": "終端名稱",
   "Text-WallSetting-ViewWall": "檢視電視牆",
-  "Text-WallSetting-CreateWallConfirm": "尚有未綁定顯示器，是否要儲存?",
+  "Text-WallSetting-CreateWallConfirmDecoder": "尚有未綁定顯示器，是否要儲存?",
+  "Text-WallSetting-CreateWallConfirmIP": "尚有顯示器未填入IP，是否要儲存?",
   "Text-WallSetting-Preview": "預覽",
 
   "Text-DeviceSetting-AdvanceSetting": "設備進階設定",
