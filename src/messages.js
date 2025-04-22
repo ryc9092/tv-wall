@@ -902,6 +902,10 @@ export default defineMessages({
     id: "Text-TemplateSetting-ResetTemplate",
     defaultMessage: "重置版型",
   },
+  Text_TemplateSetting_FormatInvalid: {
+    id: "Text-TemplateSetting-FormatInvalid",
+    defaultMessage: "版型格式錯誤",
+  },
   Text_TemplateSetting_CreateSuccess: {
     id: "Text-TemplateSetting-CreateSuccess",
     defaultMessage: "版型建立成功",

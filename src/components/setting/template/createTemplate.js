@@ -151,6 +151,69 @@ const CreateTemplate = ({ setReload }) => {
     </>
   );
 
+  const validateTemplate = (screenListWithBlock, templateSize) => {
+    console.log(screenListWithBlock, templateSize, "templateSize");
+    let blockScreenMap = {};
+    screenListWithBlock?.forEach((screen) => {
+      if (typeof screen.block !== "undefined") {
+        if (!blockScreenMap.hasOwnProperty(screen.block?.toString()))
+          blockScreenMap[screen.block.toString()] = [screen.num];
+        else blockScreenMap[screen.block.toString()].push(screen.num);
+      }
+    });
+
+    let isBlockValid = true;
+    Object.entries(blockScreenMap).forEach(([block, screens]) => {
+      // Get block column
+      let blockCol = 1;
+      let stopCountBlockCol = false;
+      screens?.forEach((screen, idx) => {
+        let screenNum = parseInt(screen);
+        if (
+          !stopCountBlockCol &&
+          screens.length >= idx + 1 &&
+          parseInt(screens[idx + 1]) === screenNum + 1
+        ) {
+          // console.log(screens, screenNum, idx, "1qqqqq", blockCol);
+          blockCol += 1;
+        } else stopCountBlockCol = true;
+      });
+
+      // Check each block's screens is validated
+      let leftScreensLength = screens.length;
+      screens?.forEach((screen, idx) => {
+        let screenNum = parseInt(screen);
+
+        // Check if the screen should be exist is existed
+        leftScreensLength -= 1;
+        if (leftScreensLength < blockCol && leftScreensLength !== 0) {
+          // Check right screen is exist
+          if (screens[idx + 1] !== screenNum + 1) {
+            // console.log("111111", screenNum, blockCol);
+            isBlockValid = false;
+            return;
+          }
+        } else if (leftScreensLength >= blockCol) {
+          // Check below screen is exist
+          if (!screens.includes(screenNum + templateSize.col)) {
+            // console.log("222222", screenNum, blockCol);
+            isBlockValid = false;
+            return;
+          }
+        }
+        // Check above screen is exist
+        if (screens.length - leftScreensLength > blockCol) {
+          if (!screens.includes(screenNum - templateSize.col)) {
+            // console.log("333333", screenNum, blockCol);
+            isBlockValid = false;
+            return;
+          }
+        }
+      });
+    });
+    return isBlockValid;
+  };
+
   const saveWall = () => {
     let templateId = `template${Math.random().toString().substring(0, 6)}`;
     if (templateId && templateName) {
@@ -162,27 +225,34 @@ const CreateTemplate = ({ setReload }) => {
           block: screenBlockMap[screen.num],
         });
       });
-      (async () => {
-        const result = await createTemplate(
-          store,
-          templateId,
-          templateName,
-          templateSize.col,
-          templateSize.row,
-          templateIsDefault ? 1 : 0,
-          screenListWithBlock
+      let isBlockValid = validateTemplate(screenListWithBlock, templateSize);
+      if (isBlockValid) {
+        (async () => {
+          const result = await createTemplate(
+            store,
+            templateId,
+            templateName,
+            templateSize.col,
+            templateSize.row,
+            templateIsDefault ? 1 : 0,
+            screenListWithBlock
+          );
+          if (result) {
+            showSuccessNotificationByMsg(
+              intl.formatMessage(Messages.Text_TemplateSetting_CreateSuccess)
+            );
+            setReload(Math.random);
+            setIsModalOpen(false);
+          } else
+            showWarningNotification(
+              intl.formatMessage(Messages.Text_TemplateSetting_CreateFail)
+            );
+        })();
+      } else {
+        showWarningNotification(
+          intl.formatMessage(Messages.Text_TemplateSetting_FormatInvalid)
         );
-        if (result) {
-          showSuccessNotificationByMsg(
-            intl.formatMessage(Messages.Text_TemplateSetting_CreateSuccess)
-          );
-          setReload(Math.random);
-          setIsModalOpen(false);
-        } else
-          showWarningNotification(
-            intl.formatMessage(Messages.Text_TemplateSetting_CreateFail)
-          );
-      })();
+      }
     } else {
       showWarningNotification(
         intl.formatMessage(Messages.Text_Common_RequiredHint)

@@ -211,6 +211,7 @@
   "Text-TemplateSetting-BlockSettingDesc": "點選畫面後，選擇畫面對應的區塊或該範圍的區塊",
   "Text-TemplateSetting-SetToDefault": "設為電視牆維度XXX的預設值",
   "Text-TemplateSetting-ViewTemplate": "檢視電視牆版型",
+  "Text-TemplateSetting-FormatInvalid": "版型格式錯誤",
 
   "Text-WallSetting-WallSetting": "基本設定",
   "Text-WallSetting-RemoveWall": "刪除電視牆",
