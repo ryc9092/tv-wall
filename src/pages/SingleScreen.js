@@ -321,7 +321,7 @@ const SingleScreen = () => {
           mac: "",
           previewUrl: "",
         });
-        sleep(200).then(() => {
+        sleep(800).then(() => {
           setReload(Math.random());
         });
       });
