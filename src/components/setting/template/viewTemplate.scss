@@ -74,11 +74,13 @@
 }
 
 .view-screen-block-handled {
-    width: 124px;
-    height: 115px;
+    width: 118px;
+    height: 118px;
+    min-width: 118px;
+    min-height: 118px;
     gap: 10px;
     padding: 0;
-    border: solid 3px #45413e;
+    border: solid 2px #45413e;
     background-color: rgba(38, 35, 32, 0.3);
 }
 
@@ -95,31 +97,28 @@
     line-height: 1.27;
     letter-spacing: normal;
     color: #ffffff;
-    position: absolute;
-    margin: 0px 0px 0px 0px !important;
-    text-align: center;
+    position: relative;
+    padding: 7px 16px 8px 12px;
+    top: 7px;
+    left: -1px;
 }
 
 .view-screen-block-num {
-    width: 45px;
-    height: 45px;
-    flex-grow: 0;
-    display: flex;
-    flex-direction: column;
+    width: 42px;
+    height: 42px;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    margin-left: 42px;
-    margin-top: 36px;
-    gap: 10px;
+    position: relative;
+    padding: 4px 14px;
+    top: 55px;
     border-radius: 36px;
     background-color: #45413e;
 }
 
 .view-screen-block-num-text {
     flex-grow: 0;
-     @extend .sdcp-font;
-    font-size: 26px;
+    @extend .sdcp-font;
+    font-size: 24px;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;

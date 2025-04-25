@@ -2,12 +2,17 @@ import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../store/store";
 import { Button, Table } from "antd";
 import CreateTemplate from "./createTemplate";
-import ViewTemplate from "./viewTemplate";
-import { getTemplates, deleteTemplate } from "../../../api/API";
+import {
+  getTemplates,
+  deleteTemplate,
+  getTemplateScreensById,
+} from "../../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
 import TrashIcon from "../../../assets/trash.png";
+import SearchIcon from "../../../assets/magnifying-glass.png";
 import "./templateSetting.scss";
+import "./viewTemplate.scss";
 import "../../../App.scss";
 
 const TemplateSetting = () => {
@@ -27,16 +32,11 @@ const TemplateSetting = () => {
         });
       }
       setTemplates(tempTemplates);
+      setSelectedTemplate(tempTemplates.length > 0 ? tempTemplates[0] : null);
     })();
   }, [reload, store]);
 
   const columns = [
-    {
-      title: <span className="table-head">ID</span>,
-      dataIndex: "templateId",
-      key: "templateId",
-      render: (text) => <span className="table-content">{text}</span>,
-    },
     {
       title: (
         <span className="table-head">
@@ -55,7 +55,6 @@ const TemplateSetting = () => {
           {intl.formatMessage(Messages.Text_Common_Dimension)}
         </span>
       ),
-      width: "20%",
       dataIndex: ["col", "row", "isDefault"],
       key: "dimension",
       render: (text, record) => (
@@ -75,13 +74,23 @@ const TemplateSetting = () => {
           {intl.formatMessage(Messages.Text_Button_Operation)}
         </span>
       ),
-      width: "20%",
       dataIndex: "templateId",
       key: "action",
       render: (text, record) => {
         return (
           <div key={`${text}-action`}>
-            <ViewTemplate template={record} />
+            <Button
+              key={`${record.templateId}-edit`}
+              id={record.templateId}
+              type="text"
+              style={{ marginight: 6 }}
+              className="table-content"
+              onClick={() => {
+                setSelectedTemplate(record);
+              }}
+            >
+              <img alt="edit" src={SearchIcon} className="table-content-icon" />
+            </Button>
             <Button
               key={`${text}-delete`}
               id={text}
@@ -103,6 +112,92 @@ const TemplateSetting = () => {
     },
   ];
 
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [templateSize, setTemplateSize] = useState({ col: 1, row: 1 });
+  const [screenList, setScreenList] = useState([]);
+  const [handledScreenList, setHandledScreenList] = useState([]);
+  const [screenBlockMap, setScreenBlockMap] = useState({});
+  const [templateObj, setTemplateObj] = useState(null);
+
+  useEffect(() => {
+    if (selectedTemplate) {
+      (async () => {
+        const screens = await getTemplateScreensById(
+          store,
+          selectedTemplate.templateId
+        );
+        setScreenList(screens);
+      })();
+    }
+  }, [selectedTemplate]);
+
+  useEffect(() => {
+    if (selectedTemplate) {
+      (async () => {
+        const screens = await getTemplateScreensById(
+          store,
+          selectedTemplate.templateId
+        );
+        setScreenList(screens);
+        setTemplateSize({
+          col: selectedTemplate.col,
+          row: selectedTemplate.row,
+        });
+
+        let tempHandledScreenList = [];
+        let tempScreenBlockMap = {};
+        screens?.forEach((screen) => {
+          tempHandledScreenList.push(screen.num);
+          tempScreenBlockMap = {
+            ...tempScreenBlockMap,
+            [screen.num]: screen.block,
+          };
+        });
+        setHandledScreenList(tempHandledScreenList);
+        setScreenBlockMap(tempScreenBlockMap);
+      })();
+    }
+  }, [selectedTemplate]);
+
+  useEffect(() => {
+    // create template table
+    let tempRow = [];
+    let tempTemplate = [];
+    screenList.forEach((screen) => {
+      tempRow.push(
+        <td
+          className={
+            handledScreenList?.includes(screen.num)
+              ? "view-screen-block-handled"
+              : "view-screen-block-default"
+          }
+          key={screen.num}
+        >
+          <span
+            className={
+              handledScreenList?.includes(screen.num)
+                ? "view-screen-block-text-handled"
+                : "view-screen-block-text-default"
+            }
+          >
+            {screen.num}
+          </span>
+
+          {screen.num in screenBlockMap ? (
+            <span className="view-screen-block-num view-screen-block-num-text">
+              {screenBlockMap[screen.num]}
+            </span>
+          ) : null}
+        </td>
+      );
+      if (tempRow.length === templateSize.col) {
+        tempTemplate.push(<tr key={screen.num}>{tempRow}</tr>);
+        tempRow = []; // clear row
+      }
+    });
+    setTemplateObj(tempTemplate);
+  }, [screenList, selectedTemplate]);
+
   const removeTemplate = (template) => {
     (async () => {
       const result = await deleteTemplate(store, template.templateId);
@@ -113,8 +208,14 @@ const TemplateSetting = () => {
   };
 
   return (
-    <div className="template-setting-content-container">
-      <div className="title-row">
+    <div
+      className={
+        store.siderCollapse
+          ? "template-setting-content-container-collapse"
+          : "template-setting-content-container"
+      }
+    >
+      <div className="template-setting-title-row">
         <div className="page-title">
           <FormattedMessage
             {...Messages.Text_TemplateSetting_TemplateSetting}
@@ -122,8 +223,39 @@ const TemplateSetting = () => {
         </div>
         <CreateTemplate setReload={setReload} />
       </div>
-      <div className="table-container ">
-        <Table columns={columns} dataSource={templates} />
+      <div className="template-setting-table-row">
+        <div
+          className={
+            store.siderCollapse
+              ? "template-setting-table-container-collapse"
+              : "template-setting-table-container"
+          }
+        >
+          <Table columns={columns} dataSource={templates} />
+        </div>
+        <div
+          className={
+            store.siderCollapse
+              ? "template-setting-table-container-collapse"
+              : "template-setting-table-container"
+          }
+        >
+          <div
+            style={{
+              backgroundColor: "#FAFAFA",
+              height: 56,
+              borderRadius: 8,
+              textAlign: "center",
+              paddingTop: 20,
+              color: "#A5A5A5",
+            }}
+          >
+            <FormattedMessage {...Messages.Text_WallSetting_Preview} />
+          </div>
+          <div className="template-setting-screen-block-container">
+            {templateObj}
+          </div>
+        </div>
       </div>
     </div>
   );
