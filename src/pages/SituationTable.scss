@@ -1,5 +1,10 @@
 @import '../App.scss';
 
+.situation-detail-modal {
+    width: 1080px !important;
+    margin-top: -60px;
+}
+
 .status-title-row {
     display: flex;
     justify-content: space-between;
@@ -70,6 +75,11 @@
     margin-top: 6px;
 }
 
+.situation-detail-table {
+    max-height: calc(100vh - 390px);
+    overflow: scroll;
+}
+
 .situation-detail {
     width: 960px;
     padding: 30px;
@@ -83,7 +93,7 @@
   }
 
 .situation-description {
-    margin-bottom: 36px;
+    margin-bottom: 26px;
     flex-grow: 0;
      @extend .sdcp-font;
     font-size: 16px;
@@ -102,7 +112,7 @@
 
 .situation-finish-btn {
     height: 40px;
-    margin: 10px 26px 10px 0px;
+    margin: -12px 26px 10px 0px;
     border-radius: 26px; 
 }
 

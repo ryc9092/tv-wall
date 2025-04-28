@@ -557,7 +557,7 @@ const Situation = () => {
             // size="small"
           />
           <Modal
-            width={1080}
+            className="situation-detail-modal"
             open={openSituationDetailModal}
             onCancel={() => {
               setOpenSituationDetailModal(false);
@@ -590,6 +590,7 @@ const Situation = () => {
               </div>
               <div>
                 <Table
+                  className="situation-detail-table"
                   columns={detailColumns}
                   dataSource={editSituationDetails}
                   pagination={false}
