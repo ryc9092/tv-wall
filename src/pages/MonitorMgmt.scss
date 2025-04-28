@@ -1,8 +1,8 @@
 @import '../App.scss';
 
 .monitor-layout {
-    margin-top: 48px;
-    margin-left: 80px;
+    margin-top: 22px;
+    margin-left: 24px;
 }
 
 .monitor-container {
@@ -10,11 +10,11 @@
 }
 
 .monitor-content-container {
-    max-height: calc(100vh - 296px);
-    min-height: 455px;
-    width: calc(100vw - 360px);
-    max-width: calc(100vw - 360px);
-    min-width: 750px;
+    height: calc(100vh - 236px);
+    // min-height: 475px;
+    width: calc(100vw - 313px);
+    // max-width: calc(100vw - 330px);
+    // min-width: 750px;
     margin-top: 40px;
     flex-grow: 0;
     display: flex;
@@ -28,11 +28,11 @@
 }
 
 .monitor-content-container-collapse {
-    max-height: calc(100vh - 296px);
-    min-height: 455px;
-    width: calc(100vw - 270px);
-    max-width: calc(100vw - 270px);
-    min-width: 840px;
+    height: calc(100vh - 236px);
+    // min-height: 475px;
+    width: calc(100vw - 160px);
+    // max-width: calc(100vw - 270px);
+    // min-width: 840px;
     margin-top: 40px;
     flex-grow: 0;
     display: flex;
@@ -47,45 +47,46 @@
 
 .monitor-content-table {
     height: 600px;
+    width: 100%;
     overflow: scroll;
 }
 
-@media(max-width: 1180px) {
-    .monitor-content-container {
-        width: 830px;
-        height: 520px;
-        margin-top: 40px;
-        flex-grow: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: stretch;
-        border-radius: 24px;
-        box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
-        background-color: white;
-        padding: 40px;
-    }
+// @media(max-width: 1180px) {
+//     .monitor-content-container {
+//         width: 830px;
+//         height: 520px;
+//         margin-top: 40px;
+//         flex-grow: 0;
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: flex-start;
+//         align-items: stretch;
+//         border-radius: 24px;
+//         box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+//         background-color: white;
+//         padding: 40px;
+//     }
 
-    .monitor-content-container-collapse {
-        width: 960px;
-        height: 520px;
-        margin-top: 40px;
-        flex-grow: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: stretch;
-        border-radius: 24px;
-        box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
-        background-color: white;
-        padding: 40px;
-    }
+//     .monitor-content-container-collapse {
+//         width: 960px;
+//         height: 520px;
+//         margin-top: 40px;
+//         flex-grow: 0;
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: flex-start;
+//         align-items: stretch;
+//         border-radius: 24px;
+//         box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+//         background-color: white;
+//         padding: 40px;
+//     }
 
-    .monitor-content-table {
-        height: 460px;
-        overflow: scroll;
-    }
-}
+//     .monitor-content-table {
+//         height: 460px;
+//         overflow: scroll;
+//     }
+// }
 
 .monitor-card {
     width: 320px;

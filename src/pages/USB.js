@@ -11,6 +11,7 @@ import {
 } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
+import { showWarningNotification } from "../utils/Utils";
 import PlusIcon from "../assets/plus.png";
 import CaretLeftIcon from "../assets/caret-left.png";
 import PencilIcon from "../assets/pencil.png";
@@ -329,7 +330,7 @@ const USB = () => {
   };
 
   const handleAddDeviceLink = async () => {
-    await createDeviceLink({
+    let result = await createDeviceLink({
       store: store,
       id: `usb.${selectedEncoder}`,
       linkType: "usb",
@@ -339,6 +340,11 @@ const USB = () => {
       remark: "",
       isPreset: "N",
     });
+    if (!result) {
+      showWarningNotification(
+        intl.formatMessage(Messages.Text_Common_OperationFailed)
+      );
+    }
     setReload(Math.random());
     setPageType("CONN_STATE");
   };
