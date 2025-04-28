@@ -57,17 +57,17 @@
 }
 
 .status-content-table {
-    height: 100%;
+    height: calc(100vh - 300px);
     width: 100%;
     overflow: scroll;
 }
 
-@media(max-width: 1180px) {
-    .status-content-table {
-        height: 620px;
-        overflow: scroll;
-    }
-}
+// @media(max-width: 1180px) {
+//     .status-content-table {
+//         height: 620px;
+//         overflow: scroll;
+//     }
+// }
 
 .situation-card-play-icon {
     width: 18px;

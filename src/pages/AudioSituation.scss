@@ -3,9 +3,15 @@
     overflow: scroll;
 }
 
-@media(max-width: 1180px) {
-    .audio-situation-table {
-        height: 490px;
-        overflow: scroll;
-    }
+.audio-situation-table {
+    // height: 360px;
+    height: calc(100vh - 300px);
+    overflow: scroll;
 }
+
+// @media(max-width: 1180px) {
+//     .audio-situation-table {
+//         height: 495px;
+//         overflow: scroll;
+//     }
+// }
