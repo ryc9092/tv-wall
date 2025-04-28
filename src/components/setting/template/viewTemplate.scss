@@ -49,8 +49,10 @@
 }
 
 .view-screen-block-default {
-    width: 124px;
-    height: 115px;
+    width: 118px;
+    height: 118px;
+    min-width: 118px;
+    min-height: 118px;
     gap: 10px;
     padding: 0;
     border: solid 1px #c6c6c6;
@@ -68,9 +70,9 @@
     font-style: normal;
     letter-spacing: normal;
     color: #45413e;
-    position: absolute;
-    margin: 0px 0px 0px 0px !important;
-    text-align: center;
+    position: relative;
+    top: -35px;
+    left: 12px;
 }
 
 .view-screen-block-handled {
@@ -80,7 +82,7 @@
     min-height: 118px;
     gap: 10px;
     padding: 0;
-    border: solid 2px #45413e;
+    border: solid 1px #45413e;
     background-color: rgba(38, 35, 32, 0.3);
 }
 
@@ -98,8 +100,8 @@
     letter-spacing: normal;
     color: #ffffff;
     position: relative;
-    padding: 7px 16px 8px 12px;
-    top: 7px;
+    padding: 3px 16px 6px 12px;
+    top: 3px;
     left: -1px;
 }
 
