@@ -53,6 +53,7 @@ const AudioSituationModal = ({
           {intl.formatMessage(Messages.Text_Common_Name)}
         </span>
       ),
+      width: "35%",
       dataIndex: "name",
       key: "name",
       render: (text) => {
@@ -65,6 +66,7 @@ const AudioSituationModal = ({
           {intl.formatMessage(Messages.Text_Common_Description)}
         </span>
       ),
+      width: "50%",
       dataIndex: "remark",
       key: "remark",
       render: (text) => {
@@ -122,7 +124,7 @@ const AudioSituationModal = ({
               <FormattedMessage {...Messages.Text_Situation_AudioSituation} />
             </span>
           }
-          className="audio-situation-modal audio-content-modal-close-icon audio-content modal-title"
+          className="audio-situation-modal audio-situation-content-modal-close-icon audio-content modal-title"
           open={isModalOpen}
           footer={null}
           onCancel={() => {
@@ -137,7 +139,7 @@ const AudioSituationModal = ({
               />
             </div>
             <Input
-              className="audio-situation-input audio-add-input audio-input audio-add-input-placeholder"
+              className="audio-add-input audio-input audio-add-input-placeholder"
               variant="filled"
               value={situationFilter}
               onChange={(e) => {

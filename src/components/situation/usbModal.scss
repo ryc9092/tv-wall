@@ -1,11 +1,11 @@
  @use "../../App.scss";
 
 .usb-content .ant-modal-content {
-    padding: 36px !important;
+    padding: 30px !important;
 }
 
 .usb-content-modal-close-icon .ant-modal-close-icon {
-    margin-top: 50px;
+    margin-top: 30px;
     margin-right: 72px;
 }
 
@@ -15,8 +15,8 @@
 
 .usb-modal {
     max-width: none !important;
-    width: 968px !important;
-    margin-top: -60px;
+    width: 938px !important;
+    margin-top: -80px;
 }
 
 .usb-modal-title {
@@ -35,7 +35,7 @@
 
 .situation-usb-layout-column {
     display: flex;
-    margin-top: 24px !important;
+    margin-top: -12px !important;
     margin-left: 0px !important;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .situation-usb-input-layout-column {
-    width: 856px;
+    width: 842px;
     // margin-right: 72px;
 }
 
@@ -97,8 +97,8 @@
 
 .usb-modal-divider {
     height: 1px;
-    margin-top: 24px;
-    margin-bottom: 21px;
+    margin-top: 21px;
+    margin-bottom: 6px;
     align-self: stretch;
     flex-grow: 0;
     background-color: #d4d4d4;
@@ -135,19 +135,20 @@
 }
 
 .usb-connect-selection-column {
-    max-height: 520px;
+    // max-height: 580px;
+    max-height: calc(100vh - 390px);
     overflow: scroll;
 }
 
-@media(max-width: 1180px) {
-    .usb-connect-selection-column {
-        height: 300px;
-        overflow: scroll;
-    }
-}
+// @media(max-width: 1180px) {
+//     .usb-connect-selection-column {
+//         height: 365px;
+//         overflow: scroll;
+//     }
+// }
 
 .situation-usb-item-btn-row {
-    margin-top: 24px !important;
+    margin-top: 6px !important;
     display: flex;
 }
 

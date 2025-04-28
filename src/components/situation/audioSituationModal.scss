@@ -2,12 +2,13 @@
 
 .audio-situation-modal {
     max-width: none !important;
-    width: 880px !important;
-    margin-top: -40px;
+    width: 800px !important;
+    margin-top: -72px;
 }
 
-.audio-situation-input {
-    width: 360px;
+.audio-situation-content-modal-close-icon .ant-modal-close-icon {
+    margin-top: 30px;
+    margin-right: 26px;
 }
 
 .audio-situation-cancel-btn {
@@ -66,13 +67,14 @@
 }
 
 .situation-audio-table {
-    max-height: 550px;
+    // max-height: 550px;
+    max-height: calc(100vh - 345px);
     overflow: scroll;
 }
 
-@media(max-width: 1180px) {
-    .situation-audio-table {
-        max-height: 450px;
-        overflow: scroll;
-    }
-}
+// @media(max-width: 1180px) {
+//     .situation-audio-table {
+//         max-height: 440px;
+//         overflow: scroll;
+//     }
+// }
