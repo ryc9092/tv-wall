@@ -57,6 +57,7 @@ const TemplateSetting = () => {
       ),
       dataIndex: ["col", "row", "isDefault"],
       key: "dimension",
+      sorter: (a, b) => a.col - b.col,
       render: (text, record) => (
         <div>
           <span className="table-content">{`${record.col} X ${record.row}`}</span>

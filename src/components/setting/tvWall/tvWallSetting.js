@@ -64,6 +64,7 @@ const TVWallSetting = () => {
       ),
       dataIndex: ["col", "row"],
       key: "dimension",
+      sorter: (a, b) => a.col - b.col,
       render: (text, record) => (
         <span className="table-content">{`${record?.col} X ${record?.row}`}</span>
       ),
