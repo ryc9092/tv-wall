@@ -482,8 +482,8 @@ const AudioSituation = () => {
         <div
           className={
             store.siderCollapse
-              ? "status-content-container-collapse"
-              : "status-content-container"
+              ? "audio-situation-content-container-collapse"
+              : "audio-situation-content-container"
           }
         >
           <Table

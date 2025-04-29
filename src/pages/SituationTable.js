@@ -547,7 +547,13 @@ const Situation = () => {
             />
           </div>
         </div>
-        <div className="status-content-container">
+        <div
+          className={
+            store.siderCollapse
+              ? "situation-content-container-collapse"
+              : "situation-content-container"
+          }
+        >
           <Table
             className="status-content-table"
             columns={columns}
