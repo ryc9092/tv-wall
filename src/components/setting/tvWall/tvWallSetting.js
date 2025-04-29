@@ -49,6 +49,7 @@ const TVWallSetting = () => {
           {intl.formatMessage(Messages.Text_WallSetting_WallName)}
         </span>
       ),
+      width: "43%",
       dataIndex: "wallName",
       key: "wallName",
       render: (text) => {
@@ -137,9 +138,11 @@ const TVWallSetting = () => {
             {screen.block}
           </div> */}
           <div className="wall-setting-screen-block-content">
-            <div style={{ marginBottom: 4, textOverflow: "ellipsis" }}>
-              {intl.formatMessage(Messages.Text_Common_Decoder)}
-              {":"}
+            <div style={{ marginBottom: 5, textOverflow: "ellipsis" }}>
+              <span style={{ fontWeight: 600 }}>
+                {intl.formatMessage(Messages.Text_Common_Decoder)}
+                {":"}
+              </span>
               <br />
               {screen?.nickName ? (
                 screen.nickName
@@ -151,12 +154,16 @@ const TVWallSetting = () => {
                     content: " ",
                     whiteSpace: "pre",
                   }}
-                > </span>
+                >
+                  {" "}
+                </span>
               )}
             </div>
             <div>
-              {intl.formatMessage(Messages.Text_DeviceSetting_TVIP)}
-              {":"}
+              <span style={{ fontWeight: 600 }}>
+                {intl.formatMessage(Messages.Text_DeviceSetting_TVIP)}
+                {":"}
+              </span>
               <br />
             </div>
           </div>

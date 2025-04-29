@@ -68,6 +68,7 @@ const CreateWall = ({ setReload }) => {
     setScreenList([]);
     setHandledScreenList([]);
     setConfirmText("");
+    setReloadDecoder(null);
   };
 
   useEffect(() => {
