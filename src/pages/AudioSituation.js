@@ -495,6 +495,7 @@ const AudioSituation = () => {
           />
           <Modal
             width={1080}
+            className="audio-situation-content-modal"
             open={openSituationDetailModal}
             onCancel={() => {
               setOpenSituationDetailModal(false);

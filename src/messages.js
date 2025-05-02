@@ -7,6 +7,7 @@ export default defineMessages({
   Text_Common_Block: { id: "Text-Common-Block", defaultMessage: "區塊" },
   Text_Common_Screen: { id: "Text-Common-Screen", defaultMessage: "畫面" },
   Text_Common_Model: { id: "Text-Common-Model", defaultMessage: "型號" },
+  Text_Common_Category: { id: "Text-Common-Category", defaultMessage: "類別" },
   Text_Common_State: { id: "Text-Common-State", defaultMessage: "狀態" },
   Text_Common_Up: { id: "Text-Common-Up", defaultMessage: "上線" },
   Text_Common_Down: { id: "Text-Common-Down", defaultMessage: "離線" },
@@ -546,9 +547,17 @@ export default defineMessages({
     id: "Text-Audio-MatrixRoute",
     defaultMessage: "混音矩陣路由",
   },
+  Text_Audio_AddMatrixRoute: {
+    id: "Text-Audio-AddMatrixRoute",
+    defaultMessage: "新增混音矩陣路由",
+  },
   Text_Audio_EnDecoderRoute: {
     id: "Text-Audio-EnDecoderRoute",
     defaultMessage: "編解碼器路由",
+  },
+  Text_Audio_AddEnDecoderRoute: {
+    id: "Text-Audio-AddEnDecoderRoute",
+    defaultMessage: "新增AVoIP音頻路由",
   },
   Text_Audio_Route: {
     id: "Text-Audio-Route",

@@ -224,9 +224,7 @@ const MixAudioMatrixModal = ({
       <Modal
         title={
           <span className="usb-modal-title">
-            <FormattedMessage {...Messages.Text_Situation_AddSituationItem} />
-            {" - "}
-            <FormattedMessage {...Messages.Text_Audio_MatrixRoute} />
+            <FormattedMessage {...Messages.Text_Audio_AddMatrixRoute} />
           </span>
         }
         className="mix-audio-matrix-modal usb-content-modal-close-icon mix-audio-matrix-content modal-title"

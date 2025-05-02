@@ -9,6 +9,7 @@ import Messages from "../../messages";
 import SearchIcon from "../../assets/magnifying-glass.png";
 import "./addSituationContent.scss";
 import "./audioModal.scss";
+import "./usbModal.scss";
 import "../../pages/Audio.scss";
 
 const AudioModal = ({
@@ -181,8 +182,8 @@ const AudioModal = ({
     getCheckboxProps: (record) => {
       // const hasSelectedEncoder = selectedEncoder !== null;
       // return { disabled: !hasSelectedEncoder };
-      const hasSelectedInputOutputOption = selectedInOutputOption !== null;
-      return { disabled: !hasSelectedInputOutputOption };
+      const hasSelectedEncoder = selectedEncoder !== null;
+      return { disabled: !hasSelectedEncoder };
     },
   };
 
@@ -230,9 +231,7 @@ const AudioModal = ({
       <Modal
         title={
           <span className="audio-modal-title">
-            <FormattedMessage {...Messages.Text_Situation_AddSituationItem} />
-            {" - "}
-            <FormattedMessage {...Messages.Text_Audio_EnDecoderRoute} />
+            <FormattedMessage {...Messages.Text_Audio_AddEnDecoderRoute} />
           </span>
         }
         className="audio-modal audio-content-modal-close-icon audio-content modal-title"
@@ -267,23 +266,25 @@ const AudioModal = ({
                 <Divider className="audio-divider" />
               </div>
             </div>
-            <div className="audio-container">
-              <div className="audio-add-row">
+            <div>
+              <div className="situation-usb-add-row">
                 <div id="encoder-selection" className="audio-add-step">
-                  <div className="audio-add-progress">
-                    <div className="audio-progress-circle">
-                      <span className="audio-add-progress-circle-text">1</span>
+                  <div className="situation-usb-add-progress">
+                    <div className="situation-usb-add-progress-circle">
+                      <span className="situation-usb-add-progress-circle-text">
+                        1
+                      </span>
                     </div>
                     <div
                       className={
                         selectedEncoder
-                          ? "audio-add-progress-bar-finished"
-                          : "audio-add-progress-bar"
+                          ? "situation-usb-add-progress-bar-finished"
+                          : "situation-usb-add-progress-bar"
                       }
                     ></div>
                   </div>
                   <div className="situation-audio-selection-column">
-                    <div className="audio-add-subtitle">
+                    <div className="situation-usb-add-subtitle">
                       <FormattedMessage {...Messages.Text_Audio_ChooseSource} />{" "}
                       (
                       <FormattedMessage {...Messages.Text_Common_Encoder} />)
@@ -317,7 +318,7 @@ const AudioModal = ({
                     />
                   </div>
                 </div>
-                <div id="input-output-selection" className="audio-add-step">
+                {/* <div id="input-output-selection" className="audio-add-step">
                   <div className="audio-add-progress">
                     <div
                       className={
@@ -358,28 +359,34 @@ const AudioModal = ({
                       </Radio>
                     </Space>
                   </Radio.Group>
-                </div>
-                <div id="decoder-selection" className="audio-add-step">
-                  <div className="audio-add-progress">
+                </div> */}
+                <div
+                  id="decoder-selection"
+                  className="situation-usb-add-step"
+                  style={{ marginLeft: 46 }}
+                >
+                  <div className="situation-usb-add-progress">
                     <div
                       className={
-                        selectedInOutputOption
-                          ? "audio-progress-circle"
-                          : "audio-progress-circle-unstarted"
+                        selectedEncoder
+                          ? "situation-usb-add-progress-circle"
+                          : "situation-usb-add-progress-circle-unstarted"
                       }
                     >
-                      <span className="audio-add-progress-circle-text">3</span>
+                      <span className="situation-usb-add-progress-circle-text">
+                        2
+                      </span>
                     </div>
                     <div
                       className={
                         selectedDecoders.length !== 0
-                          ? "audio-add-progress-bar-finished"
-                          : "audio-add-progress-bar"
+                          ? "situation-usb-add-progress-bar-finished"
+                          : "situation-usb-add-progress-bar"
                       }
                     ></div>
                   </div>
                   <div className="situation-audio-selection-column">
-                    <div className="audio-add-subtitle">
+                    <div className="situation-usb-add-subtitle">
                       <FormattedMessage
                         {...Messages.Text_Audio_ChooseDestination}
                       />{" "}
@@ -421,7 +428,7 @@ const AudioModal = ({
         </div>
         <div className="situation-audio-item-btn-row">
           <Button
-            className="situation-audio-item-cancel-btn"
+            className="situation-usb-item-cancel-btn"
             style={{ marginRight: 16 }}
             onClick={() => {
               handleReset();

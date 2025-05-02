@@ -518,8 +518,7 @@ const USB = () => {
                   ></div>
                 </div>
                 <div className="usb-add-subtitle">
-                  <FormattedMessage {...Messages.Text_USB_ChooseSource} /> (
-                  <FormattedMessage {...Messages.Text_Common_Encoder} />)
+                  <FormattedMessage {...Messages.Text_USB_ChooseSource} />
                 </div>
                 <Input
                   className="usb-add-input usb-input usb-add-input-placeholder"
@@ -570,9 +569,7 @@ const USB = () => {
                   ></div>
                 </div>
                 <div className="usb-add-subtitle">
-                  <FormattedMessage {...Messages.Text_USB_ChooseDestination} />{" "}
-                  (
-                  <FormattedMessage {...Messages.Text_Common_Decoder} />)
+                  <FormattedMessage {...Messages.Text_USB_ChooseDestination} />
                 </div>
                 <Input
                   className="usb-add-input usb-input usb-add-input-placeholder"
