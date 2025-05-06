@@ -12,8 +12,11 @@ import {
 import SearchIcon from "../assets/magnifying-glass.png";
 import "./Status.scss";
 
+import useWindowDimensions from "../utils/WindowDimension";
+
 const Status = () => {
   const intl = useIntl();
+  const { height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [devices, setDevices] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
@@ -204,8 +207,7 @@ const Status = () => {
             dataSource={devices}
             pagination={{ pageSize: 10 }}
             size={"small"}
-            // scroll={{ x: "max-content", y: 220 }}
-            // scroll={{ x: "max-content", y: "calc(100% - 20px)" }}
+            scroll={{ x: "max-content", y: height - 380 }}
           />
         </div>
       </div>
