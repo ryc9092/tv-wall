@@ -52,20 +52,19 @@ const Status = () => {
 
   const columns = [
     {
-      title: intl.formatMessage(Messages.Text_Common_Type),
-      width: "17%",
-      dataIndex: "type",
-      key: "type",
-      filters: [
-        {
-          text: intl.formatMessage(Messages.Text_Common_Encoder),
-          value: "encoder",
-        },
-        {
-          text: intl.formatMessage(Messages.Text_Common_Decoder),
-          value: "decoder",
-        },
-      ],
+      title: intl.formatMessage(Messages.Text_Common_Category),
+      dataIndex: "model",
+      key: "model",
+      // filters: [
+      //   {
+      //     text: intl.formatMessage(Messages.Text_Common_Encoder),
+      //     value: "encoder",
+      //   },
+      //   {
+      //     text: intl.formatMessage(Messages.Text_Common_Decoder),
+      //     value: "decoder",
+      //   },
+      // ],
       onFilter: (value, data) => data.type.indexOf(value) === 0,
       render: (text) => <span className="table-content">{text}</span>,
     },
@@ -76,8 +75,14 @@ const Status = () => {
       render: (text) => <span className="table-content">{text}</span>,
     },
     {
+      title: intl.formatMessage(Messages.Text_Common_Mode),
+      dataIndex: "type",
+      key: "type",
+      render: (text) => <span className="table-content">{text}</span>,
+    },
+    {
       title: intl.formatMessage(Messages.Text_Common_State),
-      width: "15%",
+      width: "12%",
       key: "state",
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
@@ -105,7 +110,7 @@ const Status = () => {
     },
     {
       title: intl.formatMessage(Messages.Text_DeviceStatus_MonitorSwitch),
-      width: "15%",
+      width: "13%",
       key: "switch",
       dataIndex: "state",
       render: (_, { state, mac }) => (
@@ -121,13 +126,22 @@ const Status = () => {
     },
     {
       title: intl.formatMessage(Messages.Text_Common_Detail),
-      width: "13%",
-      dataIndex: ["name", "mac", "model", "productCode", "productDescription"],
+      width: "12%",
+      // dataIndex: ["name", "mac", "model", "productCode", "productDescription"],
       key: "detail",
       render: (text, record) => {
+        let columns = record.info.split("|").map((item) => {
+          return (
+            <span key={item}>
+              {item}
+              <br />
+            </span>
+          );
+        });
         const content = (
           <div className="table-content">
-            IP : {record.ip}
+            {columns}
+            {/* IP : {record.ip}
             <br />
             MAC : {record.mac}
             <br />
@@ -141,7 +155,7 @@ const Status = () => {
             <br />
             <FormattedMessage {...Messages.Text_DeviceStatus_ProductDesc} />
             {" : "}
-            {record.productDescription}
+            {record.productDescription} */}
           </div>
         );
         return (
@@ -188,8 +202,10 @@ const Status = () => {
             className="status-content-table"
             columns={columns}
             dataSource={devices}
-            pagination={{ pageSize: 11 }}
+            pagination={{ pageSize: 10 }}
             size={"small"}
+            // scroll={{ x: "max-content", y: 220 }}
+            // scroll={{ x: "max-content", y: "calc(100% - 20px)" }}
           />
         </div>
       </div>

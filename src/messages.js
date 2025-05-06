@@ -8,6 +8,7 @@ export default defineMessages({
   Text_Common_Screen: { id: "Text-Common-Screen", defaultMessage: "畫面" },
   Text_Common_Model: { id: "Text-Common-Model", defaultMessage: "型號" },
   Text_Common_Category: { id: "Text-Common-Category", defaultMessage: "類別" },
+  Text_Common_Mode: { id: "Text-Common-Mode", defaultMessage: "模式" },
   Text_Common_State: { id: "Text-Common-State", defaultMessage: "狀態" },
   Text_Common_Up: { id: "Text-Common-Up", defaultMessage: "上線" },
   Text_Common_Down: { id: "Text-Common-Down", defaultMessage: "離線" },
