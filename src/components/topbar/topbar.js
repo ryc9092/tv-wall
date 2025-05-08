@@ -6,7 +6,7 @@ import Messages from "../../messages";
 import { Actions } from "../store/reducer";
 import { Button, Divider, Dropdown, theme } from "antd";
 import { LANGUAGE_LOCALE_MAP } from "../../utils/Constant";
-import Logo from "../../assets/IPEC-Logo.png";
+import Logo from "../../assets/topbar-logo.png";
 import ListIcon from "../../assets/list.png";
 import UserIcon from "../../assets/user.png";
 import BellIcon from "../../assets/bell.png";
