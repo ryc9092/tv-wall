@@ -9,11 +9,28 @@ import { login } from "../api/API";
 import { showWarningNotification } from "../utils/Utils";
 import AfterLoginAnime from "../assets/logoAnimeReverse.mp4";
 import loginBackground from "../assets/loginBackground.png";
+import afterLoginBackground from "../assets/afterLoginBackground.png";
+import afterLoginLogo from "../assets/afterLoginLogo.png";
 import WJLogo from "../assets/WJLogo.png";
 import { jwtDecode } from "jwt-decode";
 import "./Login.scss";
 
 const { Text } = Typography;
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+var myopacity = 0;
+function MyFadeFunction() {
+  if (myopacity < 1) {
+    myopacity += 0.075;
+    setTimeout(function () {
+      MyFadeFunction();
+    }, 100);
+  }
+  document.getElementById("after-login-logo").style.opacity = myopacity;
+}
 
 const Login = () => {
   const intl = useIntl();
@@ -31,16 +48,21 @@ const Login = () => {
 
   // check if anime already played
   useEffect(() => {
-    if (playAnime) {
-      const video = document.getElementById("video");
-      video.addEventListener(
-        "ended",
-        (e) => {
-          setAlreadyPlayedAnime(true);
-        },
-        false
-      );
-    }
+    (async () => {
+      if (playAnime) {
+        MyFadeFunction();
+        await sleep(1600);
+        setAlreadyPlayedAnime(true);
+        // const video = document.getElementById("video");
+        // video.addEventListener(
+        //   "ended",
+        //   (e) => {
+        //     setAlreadyPlayedAnime(true);
+        //   },
+        //   false
+        // );
+      }
+    })();
   }, [playAnime]);
 
   useEffect(() => {
@@ -74,15 +96,17 @@ const Login = () => {
     <div style={{ backgroundColor: "black" }}>
       {playAnime ? (
         <div
-          style={{
-            overflow: "hidden",
-            lineHeight: 0,
-            backgroundColor: "black",
-          }}
+        id="test"
+          className="container"
+          style={{ backgroundImage: `url(${afterLoginBackground})` }}
         >
-          <video id="video" autoPlay muted className="login-anime">
-            <source src={anime} type="video/mp4" />
-          </video>
+          <img
+            id="after-login-logo"
+            src={afterLoginLogo}
+            alt="logo"
+            className="after-login-logo"
+            // style={{ width: "100px", height: "100px" }}
+          />
         </div>
       ) : (
         <div

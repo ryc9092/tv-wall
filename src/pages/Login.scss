@@ -113,3 +113,36 @@
     object-fit: cover;
     pointer-events: none;
 }
+
+@keyframes bottom-up {
+    0% {
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 440px;
+        opacity: 0.1 !important;
+    }
+    100% {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 440px;
+        opacity: 1 !important;
+    }
+}
+
+
+.after-login-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 440px;
+    opacity: 1 !important;
+    animation: bottom-up 1.5s ease-out;
+}
