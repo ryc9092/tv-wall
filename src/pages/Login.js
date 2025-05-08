@@ -8,7 +8,8 @@ import Messages from "../messages";
 import { login } from "../api/API";
 import { showWarningNotification } from "../utils/Utils";
 import AfterLoginAnime from "../assets/logoAnimeReverse.mp4";
-import loginBackground from "../assets/login.png";
+import loginBackground from "../assets/loginBackground.png";
+import WJLogo from "../assets/WJLogo.png";
 import { jwtDecode } from "jwt-decode";
 import "./Login.scss";
 
@@ -69,24 +70,8 @@ const Login = () => {
     }
   };
 
-  let logoLetters = [
-    { letter: "I", fontSize: "92px", color: "#ebdd2d", marginRight: "10px" },
-    { letter: "P", fontSize: "60px", color: "#595757", marginRight: "10px" },
-    { letter: "E", fontSize: "60px", color: "#898989", marginRight: "10px" },
-    { letter: "C", fontSize: "60px", color: "#b5b5b6", marginRight: "10px" },
-  ];
-  let logo = (
-    <div className="login-logo-container">
-      {logoLetters.map((letter) => (
-        <span className="login-logo" style={{ ...letter }} key={letter.letter}>
-          {letter.letter}
-        </span>
-      ))}
-    </div>
-  );
-
   return (
-    <div style={{backgroundColor: "black"}}>
+    <div style={{ backgroundColor: "black" }}>
       {playAnime ? (
         <div
           style={{
@@ -100,85 +85,71 @@ const Login = () => {
           </video>
         </div>
       ) : (
-        <div className="container">
-          <div className="left-column" style={{ lineHeight: 0 }}>
-            <img
-              alt="login"
-              src={loginBackground}
-              style={{
-                width: "100%",
-                height: "100%",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "left top",
-              }}
-            />
-          </div>
-          <div className="right-column">
-            <div className="right-column-container">
-              {logo}
-              <Form
-                className="login-form"
-                name="login"
-                onFinish={(values) =>
-                  onLogin({
-                    account: values.account,
-                    password: values.password,
-                  })
-                }
-              >
-                <Text className="login-form-text">
-                  <FormattedMessage {...Messages.Text_Login_Account} />
-                </Text>
-                <Form.Item
-                  name="account"
-                  rules={[
-                    {
-                      required: true,
-                      message: intl.formatMessage(
-                        Messages.Text_Login_RequiredAccount
-                      ),
-                    },
-                  ]}
-                >
-                  <Input
-                    placeholder={intl.formatMessage(
-                      Messages.Text_Login_EnterAccount
-                    )}
-                    className="login-form-input"
-                  />
-                </Form.Item>
-                <Text className="login-form-text">
-                  <FormattedMessage {...Messages.Text_Login_Password} />
-                </Text>
-                <Form.Item
-                  name="password"
-                  rules={[
-                    {
-                      required: true,
-                      message: intl.formatMessage(
-                        Messages.Text_Login_RequiredPassword
-                      ),
-                    },
-                  ]}
-                >
-                  <Input.Password
-                    placeholder={intl.formatMessage(
-                      Messages.Text_Login_EnterPassword
-                    )}
-                    className="login-form-input"
-                  />
-                </Form.Item>
-                <Form.Item>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    className="login-form-button"
-                  >
-                    {intl.formatMessage(Messages.Text_Login_ButtonLogin)}
-                  </Button>
-                </Form.Item>
-              </Form>
+        <div
+          className="container"
+          style={{ backgroundImage: `url(${loginBackground})` }}
+        >
+          <div className="login-form-container-background" />
+          <div className="login-form-container">
+            <div className="login-logo-container">
+              <img
+                src={WJLogo}
+                alt="logo"
+                className="login-logo"
+                // style={{ width: "100px", height: "100px" }}
+              />
             </div>
+            <Form
+              name="login"
+              onFinish={(values) =>
+                onLogin({
+                  account: values.account,
+                  password: values.password,
+                })
+              }
+            >
+              <Form.Item
+                name="account"
+                label={
+                  <Text className="login-form-text">
+                    <FormattedMessage {...Messages.Text_Login_Account} />
+                  </Text>
+                }
+                colon={false}
+              >
+                <Input
+                  placeholder={intl.formatMessage(
+                    Messages.Text_Login_EnterAccount
+                  )}
+                  className="login-form-input"
+                />
+              </Form.Item>
+              <Form.Item
+                name="password"
+                label={
+                  <Text className="login-form-text">
+                    <FormattedMessage {...Messages.Text_Login_Password} />
+                  </Text>
+                }
+                colon={false}
+              >
+                <Input.Password
+                  placeholder={intl.formatMessage(
+                    Messages.Text_Login_EnterPassword
+                  )}
+                  className="login-form-input"
+                />
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button"
+                >
+                  {intl.formatMessage(Messages.Text_Login_ButtonLogin)}
+                </Button>
+              </Form.Item>
+            </Form>
           </div>
         </div>
       )}
