@@ -11,8 +11,11 @@ import {
 import "./MonitorMgmt.scss";
 import "../App.scss";
 
+import useWindowDimensions from "../utils/WindowDimension";
+
 const MonitorMgmt = () => {
   const intl = useIntl();
+  const { height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [monitors, setMonitors] = useState([]);
   // const [monitorCards, setMonitorCards] = useState([]);
@@ -185,9 +188,11 @@ const MonitorMgmt = () => {
         <Table
           className="monitor-content-table"
           columns={columns}
+          size={"small"}
           dataSource={monitors}
           pagination={{ pageSize: 10 }}
           rowKey={(record) => record.Ip}
+          scroll={{ x: "max-content", y: height - 380 }}
         />
       </div>
     </div>
