@@ -57,6 +57,7 @@ const EncoderCard = ({
     {
       dataIndex: ["mac", "state"],
       key: "radio",
+      width: "40px",
       render: (text, record) => {
         return (
           <Radio
