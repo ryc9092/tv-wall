@@ -17,7 +17,32 @@
     background-position: center;
     background-size: cover;
     background-color: #262320;
-    animation: zoom-out 1.5s ease;
+    // animation: zoom-out 1.5s ease;
+}
+
+@keyframes login-form-container-background-animation {
+    0% {
+        width: 285px;
+        height: 400px;
+        position: absolute;
+        top: 65%;
+        right: 24px;
+        transform: translate(0%, -50%);
+        border-radius: 32px;
+        opacity: 0.8;
+        background-color: #444444;
+    }
+    100% {
+        width: 285px;
+        height: 400px;
+        position: absolute;
+        top: 50%;
+        right: 24px;
+        transform: translate(0%, -50%);
+        border-radius: 32px;
+        opacity: 0.8;
+        background-color: #444444;
+    }
 }
 
 .login-form-container-background {
@@ -31,6 +56,28 @@
     opacity: 0.8;
     background-color: #444444;
     // z-index: 11000;
+    animation: login-form-container-background-animation 2s ease;
+}
+
+@keyframes login-form-container-animation {
+    0% {
+        height: 360px;
+        padding: 32px;
+        // width: 285px;
+        position: absolute;
+        top: 65%;
+        right: 24px;
+        transform: translate(0%, -50%);
+    }
+    100% {
+        height: 360px;
+        padding: 32px;
+        // width: 285px;
+        position: absolute;
+        top: 50%;
+        right: 24px;
+        transform: translate(0%, -50%);
+    }
 }
 
 .login-form-container {
@@ -41,6 +88,7 @@
     top: 50%;
     right: 24px;
     transform: translate(0%, -50%);
+    animation: login-form-container-animation 2s ease;
 
     // background-color: white;
 }
