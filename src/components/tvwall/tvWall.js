@@ -247,20 +247,22 @@ const TvWall = ({
               <div id={block.block}>
                 <div id={block.block} className="wall-block-desc">
                   <div
+                    id={block.block}
                     style={{
                       display: "flex",
                     }}
                   >
-                    <div>
+                    <div id={block.block}>
                       <FormattedMessage {...Messages.Text_Common_Decoder} />
                       {":"}
                     </div>
-                    <div>
+                    <div id={block.block}>
                       {blocksDetail?.map((detail) => {
                         if (detail.block === block.block)
                           return detail.detail?.map((detail) => {
                             return (
                               <span
+                                id={block.block}
                                 style={
                                   detail.state !== "Up"
                                     ? { marginLeft: 4, color: "#c33434" }
