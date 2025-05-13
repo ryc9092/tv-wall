@@ -20,8 +20,11 @@ import SearchIcon from "../assets/magnifying-glass.png";
 import "../App.scss";
 import "./USB.scss";
 
+import useWindowDimensions from "../utils/WindowDimension";
+
 const USB = () => {
   const intl = useIntl();
+  const { height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [pageType, setPageType] = useState("CONN_STATE"); // CONN_STATE, ADD_LINK, EDIT_LINK
   const [decoders, setDecoders] = useState([]);
@@ -88,6 +91,9 @@ const USB = () => {
       });
       if (index + 1 === deviceLinks.length) setLinkData(tempLinkData);
     });
+    // let test = []
+    // test.push({encoderMac: "123", encoderName: "123", decoderMac: "123", decoderName: "123"})
+    // setLinkData(test);
   }, [decoders, deviceLinks, encoders, searchFilter]);
 
   const handleRemoveLink = async (encoderMac, decoderMac) => {
@@ -449,8 +455,10 @@ const USB = () => {
             <Divider style={{ marginTop: 8 }} /> */}
             <Table
               className="usb-content-table"
+              size={"small"}
               columns={columns}
               dataSource={linkData}
+              scroll={{ x: "max-content", y: height - 425 }}
             />
             <Modal
               className="usb-modal-close-x"
@@ -545,7 +553,9 @@ const USB = () => {
                     type: "radio",
                     ...encoderSelection,
                   }}
+                  size={"small"}
                   pagination={false}
+                  scroll={{ x: "max-content", y: height - 595 }}
                 />
               </div>
               <div className="usb-add-container-interval" />
@@ -596,8 +606,18 @@ const USB = () => {
                     type: "checkbox",
                     ...decoderSelection,
                   }}
+                  size={"small"}
                   pagination={false}
+                  scroll={{ x: "max-content", y: height - 595 }}
                 />
+                <Button
+                  className="usb-cancel-btn"
+                  onClick={() => setPageType("CONN_STATE")}
+                >
+                  <span className="usb-cancel-btn-text">
+                    <FormattedMessage {...Messages.Text_Button_Cancel} />
+                  </span>
+                </Button>
                 <Button
                   className="usb-add-btn"
                   disabled={!selectedEncoder || selectedDecoders.length === 0}

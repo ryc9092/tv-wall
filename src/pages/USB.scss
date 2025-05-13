@@ -85,6 +85,7 @@
     box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
     background-color: white;
     padding: 40px;
+    padding-bottom: 0px !important;
 }
 
 .usb-content-container-collapse {
@@ -103,6 +104,7 @@
     box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
     background-color: white;
     padding: 40px;
+    padding-bottom: 0px !important;
 }
 
 .usb-content-table {
@@ -325,7 +327,7 @@
 
 .usb-add-title-row {
     display: flex;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .usb-add-link-button {
@@ -408,8 +410,8 @@
 }
 
 .usb-add-progress-circle-text {
-    width: 10px;
-    height: 28px;
+    width: 13px;
+    height: 30px;
     flex-grow: 0;
      @extend .sdcp-font;
     font-size: 22px;
@@ -543,11 +545,43 @@
     color: #45413e;
 }
 
+.usb-cancel-btn {
+    position: absolute;
+    height: 48px;
+    bottom: 65px;
+    right: 265px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 47px;
+    padding: 0 24px;
+    border-radius: 26px;
+    border: solid 1px #575452;
+    // margin-left: 540px;
+}
+
+.usb-cancel-btn-text {
+    height: 24px;
+    flex-grow: 0;
+    @extend .sdcp-font;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.1px;
+    text-align: center;
+    color: #575452;
+}
+
 .usb-add-btn {
+    position: absolute;
     width: 120px;
     height: 48px;
-    margin-top: 16px;
-    margin-left: 382px;
+    bottom: 65px;
+    right: 125px;
     flex-grow: 0;
     display: flex;
     flex-direction: row;
@@ -559,45 +593,9 @@
     background-color: #262320;
 }
 
-@media(max-width: 1280px), (max-height: 800px) {
-    .usb-add-btn {
-        width: 120px;
-        height: 48px;
-        margin-top: 0px;
-        margin-left: 290px;
-        flex-grow: 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        padding: 0 24px;
-        border-radius: 24px;
-        background-color: #262320;
-    }
-}
-
-@media(max-width: 1180px) {
-    .usb-add-btn {
-        width: 120px;
-        height: 48px;
-        margin-top: 0px;
-        margin-left: 236px;
-        flex-grow: 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        padding: 0 24px;
-        border-radius: 24px;
-        background-color: #262320;
-    }
-}
-
 .usb-add-btn-text {
     flex-grow: 0;
-     @extend .sdcp-font;
+    @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
