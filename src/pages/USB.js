@@ -123,7 +123,7 @@ const USB = () => {
     {
       title: (
         <span className="usb-content-table-head">
-          {intl.formatMessage(Messages.Text_Common_Decoder)}
+          {intl.formatMessage(Messages.Text_USB_Destination)}
         </span>
       ),
       dataIndex: "decoderName",
