@@ -32,11 +32,14 @@ import "./Situation.scss";
 import "./Audio.scss";
 import "./AudioSituation.scss";
 
+import useWindowDimensions from "../utils/WindowDimension";
+
 const audioSituationCategory = "2";
 let situationActivatedList = []; // for set activate situation list immediately
 
 const AudioSituation = () => {
   const intl = useIntl();
+  const { height } = useWindowDimensions();
   const navigate = useNavigate();
   const [store] = useContext(StoreContext);
   const [reload, setReload] = useState(null);
@@ -266,7 +269,7 @@ const AudioSituation = () => {
       ),
       dataIndex: "orderNum",
       key: "orderNum",
-      width: "100px",
+      width: "7%",
       render: (text) => <span className="table-content">{text}</span>,
     },
     {
@@ -301,7 +304,7 @@ const AudioSituation = () => {
           {intl.formatMessage(Messages.Text_Button_Operation)}
         </span>
       ),
-      width: "120px",
+      width: "15%",
       dataIndex: "id",
       key: "operate",
       render: (text, record) => {
@@ -487,11 +490,12 @@ const AudioSituation = () => {
           }
         >
           <Table
-            className="audio-situation-table"
             columns={columns}
             dataSource={situations}
-            pagination={{ pageSize: 9 }}
+            size={"small"}
+            pagination={{ pageSize: 10 }}
             rowKey={(record) => record.id}
+            scroll={{ x: "max-content", y: height - 380 }}
           />
           <Modal
             width={1080}
@@ -531,8 +535,10 @@ const AudioSituation = () => {
                   className="audio-situation-detail-table"
                   columns={detailColumns}
                   dataSource={editSituationDetails}
+                  size={"small"}
                   pagination={false}
                   rowKey={(record) => record.orderNum}
+                  scroll={{ x: "max-content", y: 265 }}
                 />
                 <Dropdown
                   menu={menuProps}
