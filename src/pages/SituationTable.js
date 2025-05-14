@@ -39,12 +39,15 @@ import "./SituationTable.scss";
 import "./Situation.scss";
 import "./Audio.scss";
 
+import useWindowDimensions from "../utils/WindowDimension";
+
 const normalSituationCategory = "1";
 const audioSituationCategory = "2";
 let situationActivatedList = []; // for set activate situation list immediately
 
 const Situation = () => {
   const intl = useIntl();
+  const { height } = useWindowDimensions();
   const navigate = useNavigate();
   const [store] = useContext(StoreContext);
   const [reload, setReload] = useState(null);
@@ -555,12 +558,12 @@ const Situation = () => {
           }
         >
           <Table
-            className="status-content-table"
             columns={columns}
             dataSource={situations}
-            pagination={{ pageSize: 9 }}
+            size="small"
+            pagination={{ pageSize: 10 }}
             rowKey={(record) => record.id}
-            // size="small"
+            scroll={{ x: "max-content", y: height - 380 }}
           />
           <Modal
             className="situation-detail-modal"

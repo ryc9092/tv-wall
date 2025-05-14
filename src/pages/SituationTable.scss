@@ -38,6 +38,7 @@
     box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
     background-color: white;
     padding: 40px;
+    padding-bottom: 0px !important;
 }
 
 .situation-content-container-collapse {
@@ -53,20 +54,8 @@
     box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
     background-color: white;
     padding: 40px;
+    padding-bottom: 0px !important;
 }
-
-.status-content-table {
-    height: calc(100vh - 300px);
-    width: 100%;
-    overflow: scroll;
-}
-
-// @media(max-width: 1180px) {
-//     .status-content-table {
-//         height: 620px;
-//         overflow: scroll;
-//     }
-// }
 
 .situation-card-play-icon {
     width: 18px;
