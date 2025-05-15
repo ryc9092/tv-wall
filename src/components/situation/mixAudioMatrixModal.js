@@ -11,6 +11,8 @@ import "./addSituationContent.scss";
 import "./usbModal.scss";
 import "./mixAudioMatrixModal.scss";
 
+import useWindowDimensions from "../../utils/WindowDimension";
+
 const MixAudioMatrixModal = ({
   situation,
   situationItemLength,
@@ -19,6 +21,7 @@ const MixAudioMatrixModal = ({
   setReload,
 }) => {
   const intl = useIntl();
+  const { height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [encoders, setEncoders] = useState([]);
   const [decoders, setDecoders] = useState([]);
@@ -309,7 +312,9 @@ const MixAudioMatrixModal = ({
                         type: "radio",
                         ...encoderSelection,
                       }}
+                      size={"small"}
                       pagination={false}
+                      scroll={{ x: "max-content", y: height - 520 }}
                     />
                   </div>
                 </div>
@@ -367,7 +372,9 @@ const MixAudioMatrixModal = ({
                         type: "checkbox",
                         ...decoderSelection,
                       }}
+                      size={"small"}
                       pagination={false}
+                      scroll={{ x: "max-content", y: height - 520 }}
                     />
                   </div>
                 </div>

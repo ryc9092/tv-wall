@@ -12,6 +12,8 @@ import "./audioModal.scss";
 import "./usbModal.scss";
 import "../../pages/Audio.scss";
 
+import useWindowDimensions from "../../utils/WindowDimension";
+
 const AudioModal = ({
   situation,
   situationItemLength,
@@ -24,6 +26,7 @@ const AudioModal = ({
   setDecoders,
 }) => {
   const intl = useIntl();
+  const { height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [situationItemDesc, setSituationItemDesc] = useState("");
 
@@ -314,7 +317,9 @@ const AudioModal = ({
                         type: "radio",
                         ...encoderSelection,
                       }}
+                      size={"small"}
                       pagination={false}
+                      scroll={{ x: "max-content", y: height - 520 }}
                     />
                   </div>
                 </div>
@@ -418,7 +423,9 @@ const AudioModal = ({
                         type: "checkbox",
                         ...decoderSelection,
                       }}
+                      size={"small"}
                       pagination={false}
+                      scroll={{ x: "max-content", y: height - 520 }}
                     />
                   </div>
                 </div>

@@ -1,5 +1,5 @@
 .mix-audio-matrix-content .ant-modal-content {
-    padding: 26px !important;
+    padding: 26px 26px 20px 26px !important;
 }
 
 .mix-audio-matrix-modal {
@@ -11,7 +11,7 @@
 .mix-audio-matrix-modal-divider {
     height: 1px;
     margin-top: 21px;
-    margin-bottom: 6px;
+    margin-bottom: 2px;
     align-self: stretch;
     flex-grow: 0;
     background-color: #d4d4d4;
@@ -19,19 +19,11 @@
 
 .mix-audio-matrix-selection-column {
     max-height: calc(100vh - 390px);
-    overflow: scroll;
+    width: 395px;
+    margin-top: -6px;
 }
 
-// @media(max-width: 1180px) {
-//     .mix-audio-matrix-selection-column {
-//         width: 400px;
-//         height: 348px;
-//         overflow-y: scroll;
-//         overflow-x: hidden;
-//     }
-// }
-
 .mix-audio-matrix-modal-btn-row {
-    margin-top: 4px !important;
+    margin-top: 12px !important;
     display: flex;
 }
