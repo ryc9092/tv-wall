@@ -1050,6 +1050,10 @@ export default defineMessages({
     id: "Text-DeviceSetting-TVIP",
     defaultMessage: "電視IP",
   },
+  Text_DeviceSetting_TVBrand: {
+    id: "Text-DeviceSetting-TVBrand",
+    defaultMessage: "電視廠牌",
+  },
   Text_DeviceSetting_TerminalIP: {
     id: "Text-DeviceSetting-TerminalIP",
     defaultMessage: "終端顯示設備IP",

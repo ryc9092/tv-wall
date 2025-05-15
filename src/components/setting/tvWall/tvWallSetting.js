@@ -139,7 +139,7 @@ const TVWallSetting = () => {
             {screen.block}
           </div> */}
           <div className="wall-setting-screen-block-content">
-            <div style={{ marginBottom: 5, textOverflow: "ellipsis" }}>
+            <div style={{ marginBottom: 8, textOverflow: "ellipsis" }}>
               <span style={{ fontWeight: 600 }}>
                 {intl.formatMessage(Messages.Text_Common_Decoder)}
                 {":"}
@@ -160,12 +160,47 @@ const TVWallSetting = () => {
                 </span>
               )}
             </div>
-            <div>
+            <div style={{ marginBottom: 8, textOverflow: "ellipsis" }}>
               <span style={{ fontWeight: 600 }}>
                 {intl.formatMessage(Messages.Text_DeviceSetting_TVIP)}
                 {":"}
               </span>
               <br />
+              {screen?.ip ? (
+                screen.ip
+              ) : (
+                <span
+                  style={{
+                    color: "#e7e7e7",
+                    // lineHeight: 22,
+                    content: " ",
+                    whiteSpace: "pre",
+                  }}
+                >
+                  {" "}
+                </span>
+              )}
+            </div>
+            <div style={{ textOverflow: "ellipsis" }}>
+              <span style={{ fontWeight: 600 }}>
+                {intl.formatMessage(Messages.Text_DeviceSetting_TVBrand)}
+                {":"}
+              </span>
+              <br />
+              {screen?.brand ? (
+                screen.brand
+              ) : (
+                <span
+                  style={{
+                    color: "#e7e7e7",
+                    // lineHeight: 22,
+                    content: " ",
+                    whiteSpace: "pre",
+                  }}
+                >
+                  {" "}
+                </span>
+              )}
             </div>
           </div>
         </td>
@@ -209,13 +244,18 @@ const TVWallSetting = () => {
               : "wall-setting-table-container"
           }
         >
-          <Table columns={columns} dataSource={walls} />
+          <Table
+            columns={columns}
+            dataSource={walls}
+            size="small"
+            scroll={{ x: "max-content", y: height - 345 }}
+          />
         </div>
         <div
           className={
             store.siderCollapse
-              ? "wall-setting-table-container-collapse"
-              : "wall-setting-table-container"
+              ? "wall-setting-screen-container-collapse"
+              : "wall-setting-screen-container"
           }
         >
           <div
