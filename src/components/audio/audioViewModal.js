@@ -7,6 +7,7 @@ import Messages from "../../messages";
 import SearchIcon from "../../assets/magnifying-glass.png";
 import "../situation/addSituationContent.scss";
 import "../situation/usbModal.scss";
+import "../usb/usbViewModal.scss";
 
 import useWindowDimensions from "../../utils/WindowDimension";
 
@@ -206,7 +207,7 @@ const AudioViewModal = ({
               <FormattedMessage {...Messages.Text_Situation_AudioConnection} />
             </span>
           }
-          className="usb-modal usb-content-modal-close-icon usb-content modal-title"
+          className="usb-view-modal usb-content-modal-close-icon usb-content modal-title"
           open={isModalOpen}
           footer={null}
           onCancel={() => {
@@ -249,7 +250,7 @@ const AudioViewModal = ({
                         }
                       ></div>
                     </div>
-                    <div className="usb-connect-selection-column">
+                    <div className="usb-view-connect-selection-column">
                       <div className="situation-usb-add-subtitle">
                         <FormattedMessage {...Messages.Text_USB_ChooseSource} />{" "}
                         (
@@ -307,7 +308,7 @@ const AudioViewModal = ({
                         }
                       ></div>
                     </div>
-                    <div className="usb-connect-selection-column">
+                    <div className="usb-view-connect-selection-column">
                       <div className="situation-usb-add-subtitle">
                         <FormattedMessage
                           {...Messages.Text_USB_ChooseDestination}

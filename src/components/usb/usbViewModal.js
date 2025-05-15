@@ -7,6 +7,9 @@ import Messages from "../../messages";
 import SearchIcon from "../../assets/magnifying-glass.png";
 import "../situation/addSituationContent.scss";
 import "../situation/usbModal.scss";
+import "./usbViewModal.scss";
+
+import useWindowDimensions from "../../utils/WindowDimension";
 
 const USBViewModal = ({
   situationDetailId,
@@ -17,6 +20,7 @@ const USBViewModal = ({
   type,
 }) => {
   const intl = useIntl();
+  const { height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [situationItemDesc, setSituationItemDesc] = useState(null);
 
@@ -203,7 +207,7 @@ const USBViewModal = ({
               <FormattedMessage {...Messages.Text_Situation_USBConnection} />
             </span>
           }
-          className="usb-modal usb-content-modal-close-icon usb-content modal-title"
+          className="usb-view-modal usb-content-modal-close-icon usb-content modal-title"
           open={isModalOpen}
           footer={null}
           onCancel={() => {
@@ -246,7 +250,7 @@ const USBViewModal = ({
                         }
                       ></div>
                     </div>
-                    <div className="usb-connect-selection-column">
+                    <div className="usb-view-connect-selection-column">
                       <div className="situation-usb-add-subtitle">
                         <FormattedMessage {...Messages.Text_USB_ChooseSource} />{" "}
                         (
@@ -277,7 +281,9 @@ const USBViewModal = ({
                           type: "radio",
                           ...encoderSelection,
                         }}
+                        size="small"
                         pagination={false}
+                        scroll={{ x: "max-content", y: height - 520 }}
                       />
                     </div>
                   </div>
@@ -302,7 +308,7 @@ const USBViewModal = ({
                         }
                       ></div>
                     </div>
-                    <div className="usb-connect-selection-column">
+                    <div className="usb-view-connect-selection-column">
                       <div className="situation-usb-add-subtitle">
                         <FormattedMessage
                           {...Messages.Text_USB_ChooseDestination}
@@ -335,7 +341,9 @@ const USBViewModal = ({
                           type: "checkbox",
                           ...decoderSelection,
                         }}
+                        size="small"
                         pagination={false}
+                        scroll={{ x: "max-content", y: height - 520 }}
                       />
                     </div>
                   </div>

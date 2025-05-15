@@ -135,17 +135,8 @@
 }
 
 .usb-connect-selection-column {
-    // max-height: 580px;
     max-height: calc(100vh - 390px);
-    // overflow: scroll;
 }
-
-// @media(max-width: 1180px) {
-//     .usb-connect-selection-column {
-//         height: 365px;
-//         overflow: scroll;
-//     }
-// }
 
 .situation-usb-item-btn-row {
     margin-top: 10px !important;
