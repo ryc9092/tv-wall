@@ -24,6 +24,8 @@ import "./addSituationContent.scss";
 import "./singlescreenModal.scss";
 import "../../pages/SingleScreen.scss";
 
+import useWindowDimensions from "../../utils/WindowDimension";
+
 const SingleScreenModal = ({
   situation,
   situationItemLength,
@@ -34,6 +36,7 @@ const SingleScreenModal = ({
   setEncoders,
 }) => {
   const intl = useIntl();
+  const { height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [situationItemDesc, setSituationItemDesc] = useState("");
 
@@ -322,7 +325,9 @@ const SingleScreenModal = ({
                         type: "radio",
                         ...encoderSelection,
                       }}
+                      size={"small"}
                       pagination={false}
+                      scroll={{ x: "max-content", y: height - 520 }}
                     />
                   </div>
                 </div>
@@ -380,7 +385,9 @@ const SingleScreenModal = ({
                         type: "checkbox",
                         ...decoderSelection,
                       }}
+                      size={"small"}
                       pagination={false}
+                      scroll={{ x: "max-content", y: height - 520 }}
                     />
                   </div>
                 </div>

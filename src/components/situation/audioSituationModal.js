@@ -11,6 +11,8 @@ import "../../pages/Audio.scss";
 import "./audioSituationModal.scss";
 import "./audioModal.scss";
 
+import useWindowDimensions from "../../utils/WindowDimension";
+
 const audioSituationCategory = "2";
 
 const AudioSituationModal = ({
@@ -21,6 +23,7 @@ const AudioSituationModal = ({
   setReload,
 }) => {
   const intl = useIntl();
+  const { height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [audioSituations, setAudioSituations] = useState([]);
   const [filteredSituations, setFilteredSituations] = useState([]);
@@ -164,10 +167,12 @@ const AudioSituationModal = ({
                 type: "radio",
                 ...situationSelection,
               }}
+              size={"small"}
               pagination={false}
+              scroll={{ x: "max-content", y: height - 370 }}
             />
           </div>
-          <div className="situation-audio-item-btn-row">
+          <div className="situation-audio-select-item-btn-row">
             <Button
               className="audio-situation-cancel-btn"
               style={{ marginRight: 16 }}

@@ -10,6 +10,8 @@ import SearchIcon from "../../assets/magnifying-glass.png";
 import "./addSituationContent.scss";
 import "./usbModal.scss";
 
+import useWindowDimensions from "../../utils/WindowDimension";
+
 const USBModal = ({
   situation,
   situationItemLength,
@@ -22,6 +24,7 @@ const USBModal = ({
   setDecoders,
 }) => {
   const intl = useIntl();
+  const { height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [situationItemDesc, setSituationItemDesc] = useState("");
 
@@ -305,7 +308,9 @@ const USBModal = ({
                         type: "radio",
                         ...encoderSelection,
                       }}
+                      size={"small"}
                       pagination={false}
+                      scroll={{ x: "max-content", y: height - 520 }}
                     />
                   </div>
                 </div>
@@ -363,7 +368,9 @@ const USBModal = ({
                         type: "checkbox",
                         ...decoderSelection,
                       }}
+                      size={"small"}
                       pagination={false}
+                      scroll={{ x: "max-content", y: height - 520 }}
                     />
                   </div>
                 </div>

@@ -67,14 +67,10 @@
 }
 
 .situation-audio-table {
-    // max-height: 550px;
     max-height: calc(100vh - 345px);
-    overflow: scroll;
 }
 
-// @media(max-width: 1180px) {
-//     .situation-audio-table {
-//         max-height: 440px;
-//         overflow: scroll;
-//     }
-// }
+.situation-audio-select-item-btn-row {
+    margin-top: 30px !important;
+    display: flex;
+}
