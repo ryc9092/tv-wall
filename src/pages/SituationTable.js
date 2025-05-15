@@ -602,8 +602,10 @@ const Situation = () => {
                   className="situation-detail-table"
                   columns={detailColumns}
                   dataSource={editSituationDetails}
+                  size={"small"}
                   pagination={false}
                   rowKey={(record) => record.orderNum}
+                  scroll={{ x: "max-content", y: height - 415 }}
                 />
                 <Dropdown
                   menu={menuProps}

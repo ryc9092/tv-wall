@@ -538,7 +538,7 @@ const AudioSituation = () => {
                   size={"small"}
                   pagination={false}
                   rowKey={(record) => record.orderNum}
-                  scroll={{ x: "max-content", y: 265 }}
+                  scroll={{ x: "max-content", y: height - 415 }}
                 />
                 <Dropdown
                   menu={menuProps}
