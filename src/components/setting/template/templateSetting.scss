@@ -42,10 +42,38 @@
     box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
     background-color: white;
     padding: 12px !important;
-    overflow: auto;
 }
 
 .template-setting-table-container-collapse {
+    min-width: calc(50vw - 66px);
+    height: calc(100vh - 240px);
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    border-radius: 24px;
+    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+    background-color: white;
+    padding: 12px !important;
+}
+
+.template-setting-screen-container {
+    min-width: calc(50vw - 142px);
+    height: calc(100vh - 240px);
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    border-radius: 24px;
+    box-shadow: 0 2px 6px 0 rgba(38, 35, 32, 0.2), 0 1px 2px 0 rgba(38, 35, 32, 0.1);
+    background-color: white;
+    padding: 12px !important;
+    overflow: auto;
+}
+
+.template-setting-screen-container-collapse {
     min-width: calc(50vw - 66px);
     height: calc(100vh - 240px);
     flex-grow: 0;

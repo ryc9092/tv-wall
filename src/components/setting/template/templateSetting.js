@@ -15,8 +15,11 @@ import "./templateSetting.scss";
 import "./viewTemplate.scss";
 import "../../../App.scss";
 
+import useWindowDimensions from "../../../utils/WindowDimension";
+
 const TemplateSetting = () => {
   const intl = useIntl();
+  const { width, height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [templates, setTemplates] = useState([]);
   const [reload, setReload] = useState(null);
@@ -232,13 +235,18 @@ const TemplateSetting = () => {
               : "template-setting-table-container"
           }
         >
-          <Table columns={columns} dataSource={templates} />
+          <Table
+            columns={columns}
+            dataSource={templates}
+            size="small"
+            scroll={{ x: "max-content", y: height - 345 }}
+          />
         </div>
         <div
           className={
             store.siderCollapse
-              ? "template-setting-table-container-collapse"
-              : "template-setting-table-container"
+              ? "template-setting-screen-container-collapse"
+              : "template-setting-screen-container"
           }
         >
           <div
