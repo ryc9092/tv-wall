@@ -1,7 +1,7 @@
  @use "../../App.scss";
 
 .usb-content .ant-modal-content {
-    padding: 30px !important;
+    padding: 26px 26px 20px 26px !important;
 }
 
 .usb-content-modal-close-icon .ant-modal-close-icon {
@@ -98,7 +98,7 @@
 .usb-modal-divider {
     height: 1px;
     margin-top: 21px;
-    margin-bottom: 6px;
+    margin-bottom: 2px;
     align-self: stretch;
     flex-grow: 0;
     background-color: #d4d4d4;
@@ -137,7 +137,7 @@
 .usb-connect-selection-column {
     // max-height: 580px;
     max-height: calc(100vh - 390px);
-    overflow: scroll;
+    // overflow: scroll;
 }
 
 // @media(max-width: 1180px) {
@@ -148,7 +148,7 @@
 // }
 
 .situation-usb-item-btn-row {
-    margin-top: 6px !important;
+    margin-top: 10px !important;
     display: flex;
 }
 

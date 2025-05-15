@@ -8,6 +8,8 @@ import SearchIcon from "../../assets/magnifying-glass.png";
 import "../situation/addSituationContent.scss";
 import "../situation/usbModal.scss";
 
+import useWindowDimensions from "../../utils/WindowDimension";
+
 const AudioViewModal = ({
   situationDetailId,
   isModalOpen,
@@ -17,6 +19,7 @@ const AudioViewModal = ({
   type
 }) => {
   const intl = useIntl();
+  const { height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [situationItemDesc, setSituationItemDesc] = useState(null);
 
@@ -277,7 +280,9 @@ const AudioViewModal = ({
                           type: "radio",
                           ...encoderSelection,
                         }}
+                        size="small"
                         pagination={false}
+                        scroll={{ x: "max-content", y: height - 520 }}
                       />
                     </div>
                   </div>
@@ -335,7 +340,9 @@ const AudioViewModal = ({
                           type: "checkbox",
                           ...decoderSelection,
                         }}
+                        size="small"
                         pagination={false}
+                        scroll={{ x: "max-content", y: height - 520 }}
                       />
                     </div>
                   </div>
