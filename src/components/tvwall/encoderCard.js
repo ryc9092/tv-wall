@@ -85,7 +85,7 @@ const EncoderCard = ({
       },
     },
     {
-      title: intl.formatMessage(Messages.Text_Common_Model),
+      title: intl.formatMessage(Messages.Text_Common_Category),
       dataIndex: "model",
       key: "model",
       minWidth: 60,
