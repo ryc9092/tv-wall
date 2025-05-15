@@ -316,11 +316,11 @@ const SingleScreen = () => {
           );
         }
         setSelectedScreen(null);
-        setSelectedEncoder({
-          nickName: "",
-          mac: "",
-          previewUrl: "",
-        });
+        // setSelectedEncoder({
+        //   nickName: "",
+        //   mac: "",
+        //   previewUrl: "",
+        // });
         sleep(800).then(() => {
           setReload(Math.random());
         });

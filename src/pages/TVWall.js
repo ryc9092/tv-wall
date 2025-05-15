@@ -178,11 +178,11 @@ const TVWall = () => {
         );
       }
       setSelectedBlockNumber(null);
-      setSelectedEncoder({
-        nickName: "",
-        mac: "",
-        previewUrl: "",
-      });
+      // setSelectedEncoder({
+      //   nickName: "",
+      //   mac: "",
+      //   previewUrl: "",
+      // });
       setReload(Math.random());
     });
   };
