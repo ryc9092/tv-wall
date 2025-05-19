@@ -136,7 +136,11 @@ const Status = () => {
         let columns = record.info.split("|").map((item) => {
           return (
             <span key={item}>
-              {item}
+              <span className="detail-content-key">
+                {item.split(":")[0]}
+                {": "}
+              </span>
+              <span>{item.split(":")[1]}</span>
               <br />
             </span>
           );
