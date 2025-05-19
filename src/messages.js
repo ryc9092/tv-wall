@@ -982,6 +982,10 @@ export default defineMessages({
     id: "Text-WallSetting-ViewWall",
     defaultMessage: "檢視電視牆",
   },
+  Text_WallSetting_CreateWallConfirmWallName: {
+    id: "Text-WallSetting-CreateWallConfirmWallName",
+    defaultMessage: "尚未輸入電視牆名稱，無法儲存",
+  },
   Text_WallSetting_CreateWallConfirmDecoder: {
     id: "Text-WallSetting-CreateWallConfirmDecoder",
     defaultMessage: "尚有未綁定顯示器，是否要儲存?",

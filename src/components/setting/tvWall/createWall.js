@@ -384,9 +384,10 @@ const CreateWall = ({ setReload }) => {
                   if (screen.decoder === "") hasEmptyScreenDecoder = true;
                   if (screen.ip === "") hasEmptyScreenIP = true;
                 });
-                if (hasEmptyScreenDecoder) setConfirmText("Decoder");
+                if (!wallName) setConfirmText("WallName");
+                else if (hasEmptyScreenDecoder) setConfirmText("Decoder");
                 else if (hasEmptyScreenIP) setConfirmText("IP");
-                if (hasEmptyScreenDecoder || hasEmptyScreenIP)
+                if (!wallName || hasEmptyScreenDecoder || hasEmptyScreenIP)
                   setOpenConfirmModal(true);
                 else saveWall();
               }}
@@ -400,7 +401,11 @@ const CreateWall = ({ setReload }) => {
               className="audio-modal-close-x"
               title={
                 <span style={{ marginRight: 12 }}>
-                  {confirmText === "Decoder" ? (
+                  {confirmText === "WallName" ? (
+                    <FormattedMessage
+                      {...Messages.Text_WallSetting_CreateWallConfirmWallName}
+                    />
+                  ) : confirmText === "Decoder" ? (
                     <FormattedMessage
                       {...Messages.Text_WallSetting_CreateWallConfirmDecoder}
                     />
@@ -419,7 +424,7 @@ const CreateWall = ({ setReload }) => {
                 setOpenConfirmModal(false);
               }}
               onOk={() => {
-                saveWall();
+                if (!confirmText === "WallName") saveWall();
                 setOpenConfirmModal(false);
               }}
             >
