@@ -20,8 +20,11 @@ import ClearLinkIcon from "../../../assets/clearLinkIconRed.png";
 import "../../../App.scss";
 import "./createWall.scss";
 
+import useWindowDimensions from "../../../utils/WindowDimension";
+
 const CreateWall = ({ setReload }) => {
   const intl = useIntl();
+  const { width, height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [wallId, setWallId] = useState(null);
@@ -275,7 +278,7 @@ const CreateWall = ({ setReload }) => {
               }}
             />
           </div>
-          <div>
+          <div style={{ marginRight: 100 }}>
             <span className="input-title">
               <FormattedMessage {...Messages.Text_WallSetting_WallDimension} />
             </span>
@@ -299,6 +302,14 @@ const CreateWall = ({ setReload }) => {
                 onChange={(value) => setWallSize({ ...wallSize, row: value })}
                 className="input-object input-dimension"
               />
+            </div>
+          </div>
+          <div>
+            <span className="input-title">
+              <FormattedMessage {...Messages.Text_WallSetting_WallBrand} />
+            </span>
+            <div className="input-dimension-row">
+              <Select className="input-object wall-setting-brand-select" />
             </div>
           </div>
         </div>
@@ -341,7 +352,9 @@ const CreateWall = ({ setReload }) => {
               className="decoder-setting-table"
               columns={decoderTableColumns}
               dataSource={screenList}
+              size="small"
               pagination={false}
+              scroll={{ x: "max-content", y: 300 }}
             />
           </div>
         </div>

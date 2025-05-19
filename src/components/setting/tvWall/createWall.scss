@@ -65,6 +65,11 @@
     background-color: #ffffff;
 }
 
+.wall-setting-brand-select .ant-select-selector {
+    border-radius: 12px !important;
+    border: 0px !important;
+}
+
 .input-dimension-row {
     display: flex;
 }
@@ -213,8 +218,6 @@
 .decoder-setting-table {
     margin-top: -6px;
     width: 480px;
-    height: 332px;
-    overflow: scroll;
 }
 
 .ant-table-tbody > tr > td {

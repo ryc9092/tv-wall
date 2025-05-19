@@ -954,6 +954,10 @@ export default defineMessages({
     id: "Text-WallSetting-WallDimension",
     defaultMessage: "電視牆維度",
   },
+  Text_WallSetting_WallBrand: {
+    id: "Text-WallSetting-WallBrand",
+    defaultMessage: "電視牆廠牌",
+  },
   Text_WallSetting_ScreenDecoder: {
     id: "Text-WallSetting-ScreenDecoder",
     defaultMessage: "畫面與終端對應",
