@@ -424,7 +424,7 @@ const CreateWall = ({ setReload }) => {
                 setOpenConfirmModal(false);
               }}
               onOk={() => {
-                if (!confirmText === "WallName") saveWall();
+                if (confirmText !== "WallName") saveWall();
                 setOpenConfirmModal(false);
               }}
             >
