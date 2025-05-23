@@ -209,10 +209,12 @@ const TvWall = ({
               }}
               onClick={(event) => {
                 const blockNo = event.target.id;
-                // already selected, unselected it
-                if (selectedBlockNumber === blockNo)
-                  setSelectedBlockNumber(null);
-                else setSelectedBlockNumber(blockNo);
+                if (!blockNo.includes("btn")) {
+                  // already selected, unselected it
+                  if (selectedBlockNumber === blockNo)
+                    setSelectedBlockNumber(null);
+                  else setSelectedBlockNumber(blockNo);
+                }
               }}
             >
               <div id={block.block} className="wall-block-title-row">
@@ -293,7 +295,7 @@ const TvWall = ({
               >
                 {blockEncoderMapping[block.block]?.nickName ? (
                   <Button
-                    id={block.block}
+                    id={`${block.block}-btn`}
                     type="primary"
                     style={{
                       color: "#e7e7e7",
@@ -304,13 +306,13 @@ const TvWall = ({
                       height: 34,
                     }}
                     onClick={(event) => {
-                      let clearBlockNumber = event.target.id;
+                      let clearBlockNumber = event.target.id.split("-")[0];
                       setClearBlockNumber(clearBlockNumber);
                     }}
                   >
-                    <div id={block.block} style={{ display: "flex" }}>
+                    <div id={`${block.block}-btn`} style={{ display: "flex" }}>
                       <img
-                        id={block.block}
+                        id={`${block.block}-btn`}
                         alt="clear link"
                         src={ClearLinkIcon}
                         style={{
@@ -320,7 +322,10 @@ const TvWall = ({
                           marginRight: 6,
                         }}
                       />
-                      <span id={block.block} className="single-screen-btn-text">
+                      <span
+                        id={`${block.block}-btn`}
+                        className="single-screen-btn-text"
+                      >
                         <FormattedMessage
                           {...Messages.Text_Button_ClearSource}
                         />
