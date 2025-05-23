@@ -427,6 +427,9 @@ const CreateWall = ({ setReload }) => {
                 if (confirmText !== "WallName") saveWall();
                 setOpenConfirmModal(false);
               }}
+              cancelButtonProps={{
+                style: confirmText === "WallName" ? { display: "none" } : {},
+              }}
             >
               <br />
             </Modal>
