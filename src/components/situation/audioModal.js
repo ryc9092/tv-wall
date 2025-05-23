@@ -314,6 +314,7 @@ const AudioModal = ({
                       columns={encoderSelectionColumns}
                       dataSource={filteredEncoders}
                       rowSelection={{
+                        columnWidth: 50,
                         type: "radio",
                         ...encoderSelection,
                       }}
@@ -420,6 +421,7 @@ const AudioModal = ({
                       columns={decoderSelectionColumns}
                       dataSource={filteredDecoders}
                       rowSelection={{
+                        columnWidth: 50,
                         type: "checkbox",
                         ...decoderSelection,
                       }}

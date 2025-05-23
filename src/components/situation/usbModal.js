@@ -305,6 +305,7 @@ const USBModal = ({
                       columns={encoderSelectionColumns}
                       dataSource={filteredEncoders}
                       rowSelection={{
+                        columnWidth: 50,
                         type: "radio",
                         ...encoderSelection,
                       }}
@@ -365,6 +366,7 @@ const USBModal = ({
                       columns={decoderSelectionColumns}
                       dataSource={filteredDecoders}
                       rowSelection={{
+                        columnWidth: 50,
                         type: "checkbox",
                         ...decoderSelection,
                       }}

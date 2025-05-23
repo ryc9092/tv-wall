@@ -280,6 +280,7 @@ const SingleScreenViewModal = ({
                         columns={encoderSelectionColumns}
                         dataSource={filteredEncoders}
                         rowSelection={{
+                          columnWidth: 50,
                           type: "radio",
                           ...encoderSelection,
                         }}
@@ -340,6 +341,7 @@ const SingleScreenViewModal = ({
                         columns={decoderSelectionColumns}
                         dataSource={filteredDecoders}
                         rowSelection={{
+                          columnWidth: 50,
                           type: "checkbox",
                           ...decoderSelection,
                         }}

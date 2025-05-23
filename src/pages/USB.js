@@ -550,6 +550,7 @@ const USB = () => {
                   columns={encoderSelectionColumns}
                   dataSource={filteredEncoders}
                   rowSelection={{
+                    columnWidth: 50,
                     type: "radio",
                     ...encoderSelection,
                   }}
@@ -603,6 +604,7 @@ const USB = () => {
                   columns={decoderSelectionColumns}
                   dataSource={filteredDecoders}
                   rowSelection={{
+                    columnWidth: 50,
                     type: "checkbox",
                     ...decoderSelection,
                   }}

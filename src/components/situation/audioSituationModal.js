@@ -164,6 +164,7 @@ const AudioSituationModal = ({
               columns={audioSituationColumns}
               dataSource={filteredSituations}
               rowSelection={{
+                columnWidth: 50,
                 type: "radio",
                 ...situationSelection,
               }}
