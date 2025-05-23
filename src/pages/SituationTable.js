@@ -560,10 +560,10 @@ const Situation = () => {
           <Table
             columns={columns}
             dataSource={situations}
-            size="small"
+            // size="small"
             pagination={{ pageSize: 10 }}
             rowKey={(record) => record.id}
-            scroll={{ x: "max-content", y: height - 380 }}
+            scroll={{ x: "max-content", y: height - 395 }}
           />
           <Modal
             className="situation-detail-modal"

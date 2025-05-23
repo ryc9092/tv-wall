@@ -49,7 +49,6 @@ const TVWallSetting = () => {
           {intl.formatMessage(Messages.Text_WallSetting_WallName)}
         </span>
       ),
-      width: "43%",
       dataIndex: "wallName",
       key: "wallName",
       render: (text) => {
@@ -247,8 +246,8 @@ const TVWallSetting = () => {
           <Table
             columns={columns}
             dataSource={walls}
-            size="small"
-            scroll={{ x: "max-content", y: height - 345 }}
+            // size="small"
+            scroll={{ x: "max-content", y: height - 365 }}
           />
         </div>
         <div

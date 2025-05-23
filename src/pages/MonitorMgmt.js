@@ -188,11 +188,11 @@ const MonitorMgmt = () => {
         <Table
           className="monitor-content-table"
           columns={columns}
-          size={"small"}
+          // size={"small"}
           dataSource={monitors}
           pagination={{ pageSize: 10 }}
           rowKey={(record) => record.Ip}
-          scroll={{ x: "max-content", y: height - 380 }}
+          scroll={{ x: "max-content", y: height - 395 }}
         />
       </div>
     </div>

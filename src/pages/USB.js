@@ -455,10 +455,10 @@ const USB = () => {
             <Divider style={{ marginTop: 8 }} /> */}
             <Table
               className="usb-content-table"
-              size={"small"}
+              // size={"small"}
               columns={columns}
               dataSource={linkData}
-              scroll={{ x: "max-content", y: height - 425 }}
+              scroll={{ x: "max-content", y: height - 440 }}
             />
             <Modal
               className="usb-modal-close-x"

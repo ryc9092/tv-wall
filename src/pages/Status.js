@@ -209,8 +209,8 @@ const Status = () => {
             columns={columns}
             dataSource={devices}
             pagination={{ pageSize: 10 }}
-            size={"small"}
-            scroll={{ x: "max-content", y: height - 380 }}
+            // size={"small"}
+            scroll={{ x: "max-content", y: height - 395 }}
           />
         </div>
       </div>

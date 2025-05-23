@@ -238,8 +238,8 @@ const TemplateSetting = () => {
           <Table
             columns={columns}
             dataSource={templates}
-            size="small"
-            scroll={{ x: "max-content", y: height - 345 }}
+            // size="small"
+            scroll={{ x: "max-content", y: height - 365 }}
           />
         </div>
         <div
