@@ -80,6 +80,7 @@ const SingleScreenModal = ({
         </span>
       ),
       key: "state",
+      width: 120,
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
       render: (_, { state, name }) => (
@@ -148,6 +149,7 @@ const SingleScreenModal = ({
         </span>
       ),
       key: "state",
+      width: 120,
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
       render: (_, { state, name }) => (

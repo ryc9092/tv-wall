@@ -65,6 +65,7 @@ const USBModal = ({
         </span>
       ),
       key: "state",
+      width: 120,
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
       render: (_, { state, name }) => (
@@ -133,6 +134,7 @@ const USBModal = ({
         </span>
       ),
       key: "state",
+      width: 120,
       dataIndex: "state",
       sorter: (a, b) => a.state.length - b.state.length,
       render: (_, { state, name }) => (
