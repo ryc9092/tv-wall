@@ -472,6 +472,10 @@ export default defineMessages({
     id: "Text-Audio-ConnectionStatus",
     defaultMessage: "連接狀態",
   },
+  Text_Audio_VolumeSetting: {
+    id: "Text-Audio-VolumeSetting",
+    defaultMessage: "音量調整",
+  },
   Text_Audio_Input: {
     id: "Text-Audio-Input",
     defaultMessage: "輸入",
