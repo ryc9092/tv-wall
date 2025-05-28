@@ -46,6 +46,7 @@ let situationActivatedList = []; // for set activate situation list immediately
 
 const AudioSituation = () => {
   const intl = useIntl();
+  const [page, setPage] = useState("connectionStatus");
   const { height } = useWindowDimensions();
   const navigate = useNavigate();
   const [store] = useContext(StoreContext);
@@ -559,13 +560,37 @@ const AudioSituation = () => {
   };
 
   return (
-    <div className="page-layout-column">
-      <div>
-        <div className="status-title-row">
-          <span className="page-title">
-            <FormattedMessage {...Messages.Text_Audio_Route} />
-          </span>
-          {/* <Input
+    <div>
+      <div className="audio-situation-topbar">
+        <div className="setting-topbar-title">
+          <FormattedMessage {...Messages.Text_Sidebar_AudioManagement} />
+        </div>
+        <div className="setting-topbar-line" />
+        <div
+          className="setting-topbar-option"
+          onClick={() => {
+            setPage("connectionStatus");
+          }}
+        >
+          <FormattedMessage {...Messages.Text_Audio_ConnectionStatus} />
+        </div>
+        <div
+          className="setting-topbar-option"
+          onClick={() => {
+            setPage("template");
+          }}
+        >
+          <FormattedMessage {...Messages.Text_Audio_VolumeSetting} />
+        </div>
+      </div>
+      {page === "connectionStatus" ? (
+        <div className="page-layout-column">
+          <div>
+            <div className="status-title-row">
+              <span className="page-title">
+                <FormattedMessage {...Messages.Text_Sidebar_AudioManagement} />
+              </span>
+              {/* <Input
             className="status-title-input status-input"
             variant="filled"
             onChange={(e) => {
@@ -576,221 +601,238 @@ const AudioSituation = () => {
               Messages.Text_DeviceStatus_InputDeviceName
             )}
           /> */}
-          <div style={{ display: "flex" }}>
-            {store.vars?.DisableStopAllAudio === true ? null : (
-              <div
-                className="audio-situation-trash-btn"
-                onClick={() => {
-                  setOpenConfirmClearModal(true);
-                }}
-              >
-                <img
-                  alt="trash"
-                  src={ClearLinkIcon}
-                  className="audio-situation-trash-icon"
-                />
-                <FormattedMessage {...Messages.Text_Audio_ClearAudioRoute} />
-              </div>)}
-            <ConfirmModal
-              open={openConfirmClearModal}
-              setOpen={setOpenConfirmClearModal}
-              onOk={() => {
-                clearAudioRoute();
-              }}
-              width={460}
-              title={
-                <FormattedMessage {...Messages.Text_Audio_ClearAudioRoute} />
-              }
-              content={confirmClearModalContent}
-              confirmBtnText={
-                <FormattedMessage {...Messages.Text_Common_Confirm} />
-              }
-            />
-            <Button
-              onClick={() => setIsSituationModalOpen(true)}
-              className="create-situation-btn"
-            >
-              <img
-                alt="create"
-                src={PlusIcon}
-                className="create-situation-btn-icon"
-              />
-              <span className="create-situation-btn-text">
-                <FormattedMessage {...Messages.Text_Audio_AddAudio} />
-              </span>
-            </Button>
-            <CreateSituation
-              category="2" // audio situation
-              setReload={setReload}
-              isModalOpen={isSituationModalOpen}
-              setIsModalOpen={setIsSituationModalOpen}
-              setExtendSituationId={setExtendSituationId}
-              setExtendSituationDetail={setOpenSituationDetailModal}
-            />
-          </div>
-        </div>
-        <div
-          className={
-            store.siderCollapse
-              ? "audio-situation-content-container-collapse"
-              : "audio-situation-content-container"
-          }
-        >
-          <Table
-            columns={columns}
-            dataSource={situations}
-            // size={"small"}
-            pagination={{ pageSize: 10 }}
-            rowKey={(record) => record.id}
-            scroll={{ x: "max-content", y: height - 395 }}
-          />
-          <ConfirmModal
-            open={openConfirmModal}
-            setOpen={setOpenConfirmModal}
-            onOk={() => {
-              deleteSituation(deleteSituationId);
-            }}
-            width={460}
-            title={
-              <FormattedMessage {...Messages.Text_Audio_RemoveConnection} />
-            }
-            content={confirmModalContent}
-          />
-          <Modal
-            width={1080}
-            className="audio-situation-content-modal audio-modal-close-x"
-            open={openSituationDetailModal}
-            onCancel={() => {
-              setOpenSituationDetailModal(false);
-              setExtendSituationId(null);
-            }}
-            footer={
-              <Button
-                type="text"
-                onClick={() => setOpenSituationDetailModal(false)}
-                className="situation-finish-btn"
-              >
-                <span className="situation-finish-btn-text">
-                  <FormattedMessage {...Messages.Text_Common_Finish} />
-                </span>
-              </Button>
-            }
-          >
-            <div className="situation-detail">
-              <div className="situation-title-row">
-                <div className="situation-card-title">
-                  <FormattedMessage {...Messages.Text_Audio_AudioName} />
-                  {`: ${editSituation?.name}`}
-                </div>
-              </div>
-              <div className="situation-description">
-                <FormattedMessage {...Messages.Text_Common_Description} />
-                {`: ${editSituation?.remark}`}
-              </div>
-              <div>
-                <Table
-                  className="audio-situation-detail-table"
-                  columns={detailColumns}
-                  dataSource={editSituationDetails}
-                  size={"small"}
-                  pagination={false}
-                  rowKey={(record) => record.orderNum}
-                  scroll={{ x: "max-content", y: height - 420 }}
-                />
-                <Dropdown
-                  menu={menuProps}
-                  trigger={["click"]}
-                  className="dropdown-menu"
-                >
-                  <Button type="text" className="add-situation-item-btn">
+              <div style={{ display: "flex" }}>
+                {store.vars?.DisableStopAllAudio === true ? null : (
+                  <div
+                    className="audio-situation-trash-btn"
+                    onClick={() => {
+                      setOpenConfirmClearModal(true);
+                    }}
+                  >
                     <img
-                      alt="create"
-                      src={PlusYellowIcon}
-                      className="add-situation-item-btn-icon"
+                      alt="trash"
+                      src={ClearLinkIcon}
+                      className="audio-situation-trash-icon"
                     />
-                    <span className="add-situation-item-btn-text">
-                      <FormattedMessage {...Messages.Text_Audio_AddSubAudio} />
-                    </span>
-                  </Button>
-                </Dropdown>
-                <MixAudioMatrixModal
-                  situation={editSituation}
-                  situationItemLength={situationItemLength}
-                  isModalOpen={isMixAudioMatrixModalOpen}
-                  setIsModalOpen={setIsMixAudioMatrixModalOpen}
-                  setReload={setReload}
-                  encoders={encoders}
-                  setEncoders={setEncoders}
-                  decoders={decoders}
-                  setDecoders={setDecoders}
-                />
-                <AudioModal
-                  situation={editSituation}
-                  situationItemLength={situationItemLength}
-                  isModalOpen={isAudioModalOpen}
-                  setIsModalOpen={setIsAudioModalOpen}
-                  setReload={setReload}
-                  encoders={encoders}
-                  setEncoders={setEncoders}
-                  decoders={decoders}
-                  setDecoders={setDecoders}
-                />
-                <Modal
-                  width={420}
-                  open={openNoAudioHintModal}
-                  onCancel={() => {
-                    setOpenNoAudioHintModal(false);
-                  }}
-                  footer={
-                    <Button
-                      type="text"
-                      onClick={() => setOpenNoAudioHintModal(false)}
-                      className="situation-finish-btn"
-                    >
-                      <span className="situation-finish-btn-text">
-                        <FormattedMessage {...Messages.Text_Button_Cancel} />
-                      </span>
-                    </Button>
-                  }
-                  title=<span className="no-audio-hint-modal-title">
-                    {intl.formatMessage(Messages.Text_Situation_AddAudioHint)}
-                  </span>
-                >
-                  <div className="no-audio-hint-modal-content">
-                    <Button
-                      type="text"
-                      className="no-audio-hint-modal-content-btn"
-                      onClick={() => {
-                        navigate(`/audio`);
-                        window.location.reload();
-                      }}
-                    >
-                      <FormattedMessage
-                        {...Messages.Text_Situation_GoAudioMgmt}
-                      />
-                    </Button>
+                    <FormattedMessage
+                      {...Messages.Text_Audio_ClearAudioRoute}
+                    />
                   </div>
-                </Modal>
+                )}
+                <ConfirmModal
+                  open={openConfirmClearModal}
+                  setOpen={setOpenConfirmClearModal}
+                  onOk={() => {
+                    clearAudioRoute();
+                  }}
+                  width={460}
+                  title={
+                    <FormattedMessage
+                      {...Messages.Text_Audio_ClearAudioRoute}
+                    />
+                  }
+                  content={confirmClearModalContent}
+                  confirmBtnText={
+                    <FormattedMessage {...Messages.Text_Common_Confirm} />
+                  }
+                />
+                <Button
+                  onClick={() => setIsSituationModalOpen(true)}
+                  className="create-situation-btn"
+                >
+                  <img
+                    alt="create"
+                    src={PlusIcon}
+                    className="create-situation-btn-icon"
+                  />
+                  <span className="create-situation-btn-text">
+                    <FormattedMessage
+                      {...Messages.Text_Situation_CreateSituation}
+                    />
+                  </span>
+                </Button>
+                <CreateSituation
+                  category="2" // audio situation
+                  setReload={setReload}
+                  isModalOpen={isSituationModalOpen}
+                  setIsModalOpen={setIsSituationModalOpen}
+                  setExtendSituationId={setExtendSituationId}
+                  setExtendSituationDetail={setOpenSituationDetailModal}
+                />
               </div>
             </div>
-          </Modal>
+            <div
+              className={
+                store.siderCollapse
+                  ? "audio-situation-content-container-collapse"
+                  : "audio-situation-content-container"
+              }
+            >
+              <Table
+                columns={columns}
+                dataSource={situations}
+                // size={"small"}
+                pagination={{ pageSize: 10 }}
+                rowKey={(record) => record.id}
+                scroll={{ x: "max-content", y: height - 399 }}
+              />
+              <ConfirmModal
+                open={openConfirmModal}
+                setOpen={setOpenConfirmModal}
+                onOk={() => {
+                  deleteSituation(deleteSituationId);
+                }}
+                width={460}
+                title={
+                  <FormattedMessage {...Messages.Text_Audio_RemoveConnection} />
+                }
+                content={confirmModalContent}
+              />
+              <Modal
+                width={1080}
+                className="audio-situation-content-modal"
+                open={openSituationDetailModal}
+                onCancel={() => {
+                  setOpenSituationDetailModal(false);
+                  setExtendSituationId(null);
+                }}
+                footer={
+                  <Button
+                    type="text"
+                    onClick={() => setOpenSituationDetailModal(false)}
+                    className="situation-finish-btn"
+                  >
+                    <span className="situation-finish-btn-text">
+                      <FormattedMessage {...Messages.Text_Common_Finish} />
+                    </span>
+                  </Button>
+                }
+              >
+                <div className="situation-detail">
+                  <div className="situation-title-row">
+                    <div className="situation-card-title">
+                      <FormattedMessage
+                        {...Messages.Text_Situation_SituationName}
+                      />
+                      {`: ${editSituation?.name}`}
+                    </div>
+                  </div>
+                  <div className="situation-description">
+                    <FormattedMessage {...Messages.Text_Common_Description} />
+                    {`: ${editSituation?.remark}`}
+                  </div>
+                  <div>
+                    <Table
+                      className="audio-situation-detail-table"
+                      columns={detailColumns}
+                      dataSource={editSituationDetails}
+                      size={"small"}
+                      pagination={false}
+                      rowKey={(record) => record.orderNum}
+                      scroll={{ x: "max-content", y: height - 420 }}
+                    />
+                    <Dropdown
+                      menu={menuProps}
+                      trigger={["click"]}
+                      className="dropdown-menu"
+                    >
+                      <Button type="text" className="add-situation-item-btn">
+                        <img
+                          alt="create"
+                          src={PlusYellowIcon}
+                          className="add-situation-item-btn-icon"
+                        />
+                        <span className="add-situation-item-btn-text">
+                          <FormattedMessage
+                            {...Messages.Text_Situation_AddSituationItem}
+                          />
+                        </span>
+                      </Button>
+                    </Dropdown>
+                    <MixAudioMatrixModal
+                      situation={editSituation}
+                      situationItemLength={situationItemLength}
+                      isModalOpen={isMixAudioMatrixModalOpen}
+                      setIsModalOpen={setIsMixAudioMatrixModalOpen}
+                      setReload={setReload}
+                      encoders={encoders}
+                      setEncoders={setEncoders}
+                      decoders={decoders}
+                      setDecoders={setDecoders}
+                    />
+                    <AudioModal
+                      situation={editSituation}
+                      situationItemLength={situationItemLength}
+                      isModalOpen={isAudioModalOpen}
+                      setIsModalOpen={setIsAudioModalOpen}
+                      setReload={setReload}
+                      encoders={encoders}
+                      setEncoders={setEncoders}
+                      decoders={decoders}
+                      setDecoders={setDecoders}
+                    />
+                    <Modal
+                      width={420}
+                      open={openNoAudioHintModal}
+                      onCancel={() => {
+                        setOpenNoAudioHintModal(false);
+                      }}
+                      footer={
+                        <Button
+                          type="text"
+                          onClick={() => setOpenNoAudioHintModal(false)}
+                          className="situation-finish-btn"
+                        >
+                          <span className="situation-finish-btn-text">
+                            <FormattedMessage
+                              {...Messages.Text_Button_Cancel}
+                            />
+                          </span>
+                        </Button>
+                      }
+                      title=<span className="no-audio-hint-modal-title">
+                        {intl.formatMessage(
+                          Messages.Text_Situation_AddAudioHint
+                        )}
+                      </span>
+                    >
+                      <div className="no-audio-hint-modal-content">
+                        <Button
+                          type="text"
+                          className="no-audio-hint-modal-content-btn"
+                          onClick={() => {
+                            navigate(`/audio`);
+                            window.location.reload();
+                          }}
+                        >
+                          <FormattedMessage
+                            {...Messages.Text_Situation_GoAudioMgmt}
+                          />
+                        </Button>
+                      </div>
+                    </Modal>
+                  </div>
+                </div>
+              </Modal>
+            </div>
+          </div>
+          {isAudioViewModalOpen === true &&
+            choosedSituationDetailId !== undefined && (
+              <AudioViewModal
+                situationDetailId={choosedSituationDetailId}
+                situationItemLength={situationItemLength}
+                isModalOpen={isAudioViewModalOpen}
+                setIsModalOpen={setIsAudioViewModalOpen}
+                setReload={setReload}
+                encoders={encoders}
+                setEncoders={setEncoders}
+                decoders={decoders}
+                setDecoders={setDecoders}
+                type={linkType}
+              />
+            )}
         </div>
-      </div>
-      {isAudioViewModalOpen === true &&
-        choosedSituationDetailId !== undefined && (
-          <AudioViewModal
-            situationDetailId={choosedSituationDetailId}
-            situationItemLength={situationItemLength}
-            isModalOpen={isAudioViewModalOpen}
-            setIsModalOpen={setIsAudioViewModalOpen}
-            setReload={setReload}
-            encoders={encoders}
-            setEncoders={setEncoders}
-            decoders={decoders}
-            setDecoders={setDecoders}
-            type={linkType}
-          />
-        )}
+      ) : null}
     </div>
   );
 };
