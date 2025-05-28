@@ -24,6 +24,7 @@ import MixAudioMatrixModal from "../components/situation/mixAudioMatrixModal";
 import AudioModal from "../components/situation/audioModal";
 import AudioViewModal from "../components/audio/audioViewModal";
 import ClearLinkIcon from "../assets/clearLinkIconRed.png";
+// import Volume from "../components/audio/volume";
 import ViewIcon from "../assets/view.png";
 import PlayIcon from "../assets/play-black.png";
 import PauseIcon from "../assets/pause.png";
@@ -562,12 +563,12 @@ const AudioSituation = () => {
   return (
     <div>
       <div className="audio-situation-topbar">
-        <div className="setting-topbar-title">
+        <div className="audio-situation-topbar-title">
           <FormattedMessage {...Messages.Text_Sidebar_AudioManagement} />
         </div>
-        <div className="setting-topbar-line" />
+        <div className="audio-situation-topbar-line" />
         <div
-          className="setting-topbar-option"
+          className="audio-situation-topbar-option"
           onClick={() => {
             setPage("connectionStatus");
           }}
@@ -575,7 +576,7 @@ const AudioSituation = () => {
           <FormattedMessage {...Messages.Text_Audio_ConnectionStatus} />
         </div>
         <div
-          className="setting-topbar-option"
+          className="audio-situation-topbar-option"
           onClick={() => {
             setPage("template");
           }}
@@ -832,7 +833,9 @@ const AudioSituation = () => {
               />
             )}
         </div>
-      ) : null}
+      ) : (
+        <div>{/* <Volume /> */}</div>
+      )}
     </div>
   );
 };
