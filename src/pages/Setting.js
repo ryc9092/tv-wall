@@ -20,11 +20,7 @@ const Setting = () => {
 
   return (
     <div>
-      <div
-        className={
-          store.siderCollapse ? `setting-topbar-collapse` : `setting-topbar`
-        }
-      >
+      <div className="setting-topbar">
         <div className="setting-topbar-title">
           <FormattedMessage {...Messages.Text_SystemSetting_Title} />
         </div>
