@@ -24,7 +24,7 @@ import MixAudioMatrixModal from "../components/situation/mixAudioMatrixModal";
 import AudioModal from "../components/situation/audioModal";
 import AudioViewModal from "../components/audio/audioViewModal";
 import ClearLinkIcon from "../assets/clearLinkIconRed.png";
-// import Volume from "../components/audio/volume";
+import Volume from "../components/audio/volume";
 import ViewIcon from "../assets/view.png";
 import PlayIcon from "../assets/play-black.png";
 import PauseIcon from "../assets/pause.png";
@@ -675,7 +675,7 @@ const AudioSituation = () => {
                 // size={"small"}
                 pagination={{ pageSize: 10 }}
                 rowKey={(record) => record.id}
-                scroll={{ x: "max-content", y: height - 399 }}
+                scroll={{ x: "max-content", y: height - 395 }}
               />
               <ConfirmModal
                 open={openConfirmModal}
@@ -834,7 +834,7 @@ const AudioSituation = () => {
             )}
         </div>
       ) : (
-        <div>{/* <Volume /> */}</div>
+        <Volume />
       )}
     </div>
   );
