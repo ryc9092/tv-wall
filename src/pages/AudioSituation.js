@@ -17,7 +17,7 @@ import {
 import MixAudioMatrixModal from "../components/situation/mixAudioMatrixModal";
 import AudioModal from "../components/situation/audioModal";
 import AudioViewModal from "../components/audio/audioViewModal";
-// import Volume from "../components/audio/volume";
+import Volume from "../components/audio/volume";
 import ViewIcon from "../assets/view.png";
 import PlayIcon from "../assets/play-black.png";
 import PauseIcon from "../assets/pause.png";
@@ -668,7 +668,7 @@ const AudioSituation = () => {
             )}
         </div>
       ) : (
-        <div>{/* <Volume /> */}</div>
+        <Volume />
       )}
     </div>
   );

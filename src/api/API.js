@@ -729,3 +729,11 @@ export const getP300Output = async (store) => {
     store,
   });
 };
+
+export const geVolumeData = async (store) => {
+  const apiPath = `/voice/p300`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
