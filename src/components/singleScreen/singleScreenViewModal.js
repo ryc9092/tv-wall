@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../store/store";
 import { Button, Divider, Input, Modal, Table, Tag } from "antd";
-import { getFilteredDecoders, getPresetDeviceLink } from "../../api/API";
+import { getSingleScreenDecoders, getPresetDeviceLink } from "../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
 import SearchIcon from "../../assets/magnifying-glass.png";
@@ -50,7 +50,7 @@ const SingleScreenViewModal = ({
       encoders?.forEach((encoder) => {
         encoder.key = encoder.mac;
       });
-      const decoders = await getFilteredDecoders(store);
+      const decoders = await getSingleScreenDecoders(store);
       decoders?.forEach((decoder) => {
         decoder.key = decoder.mac;
       });

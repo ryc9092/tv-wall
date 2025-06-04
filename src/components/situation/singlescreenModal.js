@@ -12,7 +12,7 @@ import {
   Tag,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { getFilteredDecoders, presetDeviceLink } from "../../api/API";
+import { getSingleScreenDecoders, presetDeviceLink } from "../../api/API";
 import { uuid } from "../../utils/Utils";
 import { showWarningNotification } from "../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -46,7 +46,7 @@ const SingleScreenModal = ({
       encoders?.forEach((encoder) => {
         encoder.key = encoder.mac;
       });
-      const decoders = await getFilteredDecoders(store);
+      const decoders = await getSingleScreenDecoders(store);
       decoders?.forEach((decoder) => {
         decoder.key = decoder.mac;
       });

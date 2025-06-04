@@ -190,8 +190,8 @@ export const getDecoders = async (store) => {
   });
 };
 
-export const getFilteredDecoders = async (store) => {
-  const apiPath = `/devices/singledisplay/decoders`;
+export const getSingleScreenDecoders = async (store) => {
+  const apiPath = `/devices/available/singledisplay/decoders`;
   return await apiGET({
     apiPath,
     store,

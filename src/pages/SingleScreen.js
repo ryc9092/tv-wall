@@ -7,7 +7,7 @@ import {
   createDeviceLink,
   removeDeviceLink,
   getDeviceLinks,
-  getFilteredDecoders,
+  getSingleScreenDecoders,
   getEncoders,
 } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -45,7 +45,7 @@ const SingleScreen = () => {
   useEffect(() => {
     (async () => {
       const encoders = await getEncoders(store);
-      const decoders = await getFilteredDecoders(store);
+      const decoders = await getSingleScreenDecoders(store);
       const deviceLinks = await getDeviceLinks({
         store: store,
         linkType: "video",
