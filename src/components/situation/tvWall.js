@@ -81,7 +81,7 @@ const TvWall = ({
 
             // set state to screen
             const decoder = decoders?.filter(
-              (decoder) => decoder.nickName === screen.nickName
+              (decoder) => decoder.mac === screen.decoder
             )[0];
             tempScreen.state = decoder?.state;
 

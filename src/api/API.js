@@ -215,6 +215,14 @@ export const getSingleScreenDecoders = async (store) => {
   });
 };
 
+export const getSituationScreenDecoders = async (store, situationId) => {
+  const apiPath = `/devices/available/preset/singlevedeo/decoders/${situationId}`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
 export const getEncoders = async (store) => {
   const apiPath = `/devices/encoders`;
   return await apiGET({
