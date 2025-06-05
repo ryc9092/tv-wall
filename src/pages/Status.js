@@ -26,7 +26,10 @@ const Status = () => {
       let tempDevices = [];
       const devices = await getDevicesStatus(store);
       devices?.forEach((device) => {
-        if (device.nickName.includes(searchFilter)) {
+        if (
+          device.nickName.includes(searchFilter) ||
+          device.info.includes(searchFilter)
+        ) {
           device.key = device.name;
           tempDevices.push(device);
         }
@@ -194,7 +197,7 @@ const Status = () => {
             }}
             prefix={<SearchOutlined />}
             placeholder={intl.formatMessage(
-              Messages.Text_DeviceStatus_InputDeviceName
+              Messages.Text_DeviceStatus_InputDeviceNameOrTunnelName
             )}
           />
         </div>

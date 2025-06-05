@@ -768,6 +768,10 @@ export default defineMessages({
     id: "Text-DeviceStatus-InputDeviceName",
     defaultMessage: "輸入設備名稱",
   },
+  Text_DeviceStatus_InputDeviceNameOrTunnelName: {
+    id: "Text-DeviceStatus-InputDeviceNameOrTunnelName",
+    defaultMessage: "輸入設備名稱或通道名稱",
+  },
   Text_DeviceStatus_MonitorSwitch: {
     id: "Text-DeviceStatus-MonitorSwitch",
     defaultMessage: "設備重啟",
