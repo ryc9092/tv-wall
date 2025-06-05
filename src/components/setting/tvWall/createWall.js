@@ -56,8 +56,8 @@ const CreateWall = ({ setReload }) => {
       let tempBrandOptions = [];
       brands?.forEach((brand) => {
         tempBrandOptions.push({
-          value: brand.Key,
-          label: brand.Name,
+          value: brand.id,
+          label: brand.name,
         });
       });
       setBrandOptions(tempBrandOptions);

@@ -186,8 +186,8 @@ const TVWallSetting = () => {
                 {":"}
               </span>
               <br />
-              {screen?.monitorbrand ? (
-                screen.monitorbrand
+              {screen?.monitorBrandName ? (
+                screen.monitorBrandName
               ) : (
                 <span
                   style={{
