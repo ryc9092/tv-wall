@@ -190,6 +190,23 @@ export const getDecoders = async (store) => {
   });
 };
 
+export const getTVWallBrands = async (store) => {
+  const apiPath = `/tv/monitorbrands`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
+
+export const getTVWallDecoders = async (store) => {
+  const apiPath = `/devices/available/tvwall/decoders`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
 export const getSingleScreenDecoders = async (store) => {
   const apiPath = `/devices/available/singledisplay/decoders`;
   return await apiGET({
@@ -438,6 +455,7 @@ export const createWall = async (
   wallName,
   col,
   row,
+  brand,
   screens
 ) => {
   const apiPath = `/tvwalls`;
@@ -446,6 +464,7 @@ export const createWall = async (
     wallName: wallName,
     col: col,
     row: row,
+    monitorbrand: brand,
     screens: screens,
   });
   return await apiPOST({

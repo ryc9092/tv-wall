@@ -10,7 +10,11 @@ import {
   Table,
 } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { getDecoders, createWall } from "../../../api/API";
+import {
+  getTVWallBrands,
+  getTVWallDecoders,
+  createWall,
+} from "../../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
 import { showWarningNotification } from "../../../utils/Utils";
@@ -33,13 +37,35 @@ const CreateWall = ({ setReload }) => {
   const [screenList, setScreenList] = useState([]);
   const [handledScreenList, setHandledScreenList] = useState([]);
   const [reloadDecoder, setReloadDecoder] = useState(null);
+  const [selectedBrand, setSelectedBrand] = useState(null);
+  const [brandOptions, setBrandOptions] = useState([]);
+  const [decoders, setDecoders] = useState([]);
   const [decoderOptions, setDecoderOptions] = useState([]);
   const [wallObj, setWallObj] = useState(null);
   const [searchFilter, setSearchFilter] = useState("");
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [confirmText, setConfirmText] = useState("");
 
-  // get decoders
+  // get decoders & brands options
+  useEffect(() => {
+    (async () => {
+      const decoders = await getTVWallDecoders(store);
+      setDecoders(decoders);
+
+      const brands = await getTVWallBrands(store);
+      let tempBrandOptions = [];
+      brands?.forEach((brand) => {
+        tempBrandOptions.push({
+          value: brand.Key,
+          label: brand.Name,
+        });
+      });
+      setBrandOptions(tempBrandOptions);
+      setSelectedBrand(tempBrandOptions[0]?.value || "");
+    })();
+  }, [isModalOpen]);
+
+  // get decoders not selected
   useEffect(() => {
     // get set decoders from screen list
     let selectedDecoders = [];
@@ -48,21 +74,18 @@ const CreateWall = ({ setReload }) => {
     });
 
     let tempDecoderOptions = [];
-    (async () => {
-      const decoders = await getDecoders(store);
-      decoders?.forEach((decoder) => {
-        if (
-          decoder.nickName.includes(searchFilter) &&
-          !selectedDecoders.includes(decoder.mac)
-        )
-          tempDecoderOptions.push({
-            value: decoder.mac,
-            label: decoder.nickName,
-          });
-      });
-      setDecoderOptions(tempDecoderOptions);
-    })();
-  }, [searchFilter, reloadDecoder]);
+    decoders?.forEach((decoder) => {
+      if (
+        decoder.nickName.includes(searchFilter) &&
+        !selectedDecoders.includes(decoder.mac)
+      )
+        tempDecoderOptions.push({
+          value: decoder.mac,
+          label: decoder.nickName,
+        });
+    });
+    setDecoderOptions(tempDecoderOptions);
+  }, [decoders, searchFilter, reloadDecoder]);
 
   const resetWall = () => {
     setWallId(null);
@@ -146,6 +169,7 @@ const CreateWall = ({ setReload }) => {
           wallName,
           wallSize.col,
           wallSize.row,
+          selectedBrand,
           screenList
         );
         if (result) {
@@ -309,7 +333,14 @@ const CreateWall = ({ setReload }) => {
               <FormattedMessage {...Messages.Text_WallSetting_WallBrand} />
             </span>
             <div className="input-dimension-row">
-              <Select className="input-object wall-setting-brand-select" />
+              <Select
+                className="input-object wall-setting-brand-select"
+                defaultValue={selectedBrand || brandOptions[0]?.value || ""}
+                options={brandOptions}
+                onChange={(value, option) => {
+                  setSelectedBrand(value);
+                }}
+              />
             </div>
           </div>
         </div>
