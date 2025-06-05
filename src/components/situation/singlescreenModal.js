@@ -46,7 +46,7 @@ const SingleScreenModal = ({
       encoders?.forEach((encoder) => {
         encoder.key = encoder.mac;
       });
-      const decoders = await getSituationScreenDecoders(store, situation.id);
+      const decoders = await getSituationScreenDecoders(store, situation?.id);
       decoders?.forEach((decoder) => {
         decoder.key = decoder.mac;
       });

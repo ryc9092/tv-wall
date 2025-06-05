@@ -447,6 +447,14 @@ export const getWalls = async (store) => {
   });
 };
 
+export const getSituationWalls = async (store, situationId) => {
+  const apiPath = `/tvwalls/available/preset/${situationId}`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
 export const deleteWall = async (id, store) => {
   const httpMethod = "DELETE";
   const apiPath = `/tvwalls/${id}`;

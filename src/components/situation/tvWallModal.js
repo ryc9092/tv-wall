@@ -16,7 +16,7 @@ import TvWall from "./tvWall";
 import EncoderCard from "../tvwall/encoderCard";
 import {
   getActivedWall,
-  getWalls,
+  getSituationWalls,
   getTemplates,
   presetWall,
 } from "../../api/API";
@@ -62,8 +62,9 @@ const TVWallModal = ({
   useEffect(() => {
     (async () => {
       let tempWallOptions = [];
-      const result = await getWalls(store);
-      if (result) {
+      let result;
+      if (situation) result = await getSituationWalls(store, situation.id);
+      if (result && result.length > 0) {
         result.forEach((wall) => {
           tempWallOptions.push({
             value: wall.wallName,
@@ -79,7 +80,7 @@ const TVWallModal = ({
         setSelectedWall(tempWallOptions[0]);
       }
     })();
-  }, [store, isModalOpen]);
+  }, [store, isModalOpen, situation?.id]);
 
   // Set template when selected wall is changed
   useEffect(() => {
@@ -279,6 +280,7 @@ const TVWallModal = ({
     setSearchFilter("");
     setEncoders([]);
     setBlocks([]);
+    setBlocksDetail([]);
     setBlockEncoderMapping({});
   };
 
