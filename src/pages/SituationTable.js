@@ -8,6 +8,8 @@ import CreateSituation from "../components/situation/createSituation";
 import {
   getEncoders,
   getDecoders,
+  getLocalUSBs,
+  getRemoteUSBs,
   getSituations,
   getSituationDetails,
   removeSituation,
@@ -486,6 +488,8 @@ const Situation = () => {
   // get encoders & decoders
   const [decoders, setDecoders] = useState([]);
   const [encoders, setEncoders] = useState([]);
+  const [usbDecoders, setUsbDecoders] = useState([]);
+  const [usbEncoders, setUsbEncoders] = useState([]);
   useEffect(() => {
     (async () => {
       const encoders = await getEncoders(store);
@@ -498,9 +502,21 @@ const Situation = () => {
       });
       setDecoders(decoders);
       setEncoders(encoders);
+
+      const usbEncoders = await getLocalUSBs(store, editSituation?.id);
+      const usbDecoders = await getRemoteUSBs(store, editSituation?.id);
+      usbEncoders?.forEach((encoder) => {
+        encoder.key = encoder.mac;
+      });
+      usbDecoders?.forEach((decoder) => {
+        decoder.key = decoder.mac;
+      });
+      setUsbDecoders(usbDecoders);
+      setUsbEncoders(usbEncoders);
     })();
   }, [
     store,
+    editSituation,
     isTVWallModalOpen,
     isSingleScreenModalOpen,
     isUSBModalOpen,
@@ -653,10 +669,10 @@ const Situation = () => {
                   isModalOpen={isUSBModalOpen}
                   setIsModalOpen={setIsUSBModalOpen}
                   setReload={setReload}
-                  encoders={encoders}
-                  setEncoders={setEncoders}
-                  decoders={decoders}
-                  setDecoders={setDecoders}
+                  encoders={usbEncoders}
+                  setEncoders={setUsbEncoders}
+                  decoders={usbDecoders}
+                  setDecoders={setUsbDecoders}
                 />
                 <AudioSituationModal
                   situation={editSituation}
@@ -733,10 +749,10 @@ const Situation = () => {
             isModalOpen={isUSBViewModalOpen}
             setIsModalOpen={setIsUSBViewModalOpen}
             setReload={setReload}
-            encoders={encoders}
-            setEncoders={setEncoders}
-            decoders={decoders}
-            setDecoders={setDecoders}
+            encoders={usbEncoders}
+            setEncoders={setUsbEncoders}
+            decoders={usbDecoders}
+            setDecoders={setUsbDecoders}
             type={linkType}
           />
         )}

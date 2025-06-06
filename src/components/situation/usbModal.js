@@ -369,7 +369,7 @@ const USBModal = ({
                       dataSource={filteredDecoders}
                       rowSelection={{
                         columnWidth: 50,
-                        type: "checkbox",
+                        type: "radio",
                         ...decoderSelection,
                       }}
                       size={"small"}
