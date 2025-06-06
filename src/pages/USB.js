@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
 import { Button, Input, Modal, Table, Tag } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
@@ -6,8 +6,10 @@ import {
   createDeviceLink,
   removeDeviceLink,
   getDeviceLinks,
-  getDecoders,
-  getEncoders,
+  getLocalUSBs,
+  getRemoteUSBs,
+  // getEncoders,
+  // getDecoders,
 } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
@@ -39,8 +41,10 @@ const USB = () => {
 
   useEffect(() => {
     (async () => {
-      const encoders = await getEncoders(store);
-      const decoders = await getDecoders(store);
+      const encoders = await getLocalUSBs(store);
+      const decoders = await getRemoteUSBs(store);
+      // const encoders = await getEncoders(store);
+      // const decoders = await getDecoders(store);
       const deviceLinks = await getDeviceLinks({
         store: store,
         linkType: "usb",
@@ -605,7 +609,7 @@ const USB = () => {
                   dataSource={filteredDecoders}
                   rowSelection={{
                     columnWidth: 50,
-                    type: "checkbox",
+                    type: "radio",
                     ...decoderSelection,
                   }}
                   size={"small"}

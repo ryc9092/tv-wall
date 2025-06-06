@@ -190,6 +190,22 @@ export const getDecoders = async (store) => {
   });
 };
 
+export const getLocalUSBs = async (store, situationId="00") => {
+  const apiPath = `/devices/usb/local/${situationId}`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
+export const getRemoteUSBs = async (store, situationId="00") => {
+  const apiPath = `/devices/usb/remote/${situationId}`;
+  return await apiGET({
+    apiPath,
+    store,
+  });
+};
+
 export const getTVWallBrands = async (store) => {
   const apiPath = `/tv/monitorbrands`;
   return await apiGET({
