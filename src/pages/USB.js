@@ -13,7 +13,7 @@ import {
 } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
-import { showWarningNotification } from "../utils/Utils";
+import { showWarningNotification, sleep } from "../utils/Utils";
 import PlusIcon from "../assets/plus.png";
 import CaretLeftIcon from "../assets/caret-left.png";
 import PencilIcon from "../assets/pencil.png";
@@ -107,7 +107,9 @@ const USB = () => {
       encoder: encoderMac,
       decoders: [decoderMac],
     });
-    setReload(Math.random());
+    sleep(800).then(() => {
+      setReload(Math.random());
+    });
     setOpenConfirmModal(false);
   };
 
@@ -355,7 +357,9 @@ const USB = () => {
         intl.formatMessage(Messages.Text_Common_OperationFailed)
       );
     }
-    setReload(Math.random());
+    sleep(800).then(() => {
+      setReload(Math.random());
+    });
     setPageType("CONN_STATE");
   };
 
@@ -388,7 +392,9 @@ const USB = () => {
       isPreset: "N",
     });
 
-    setReload(Math.random());
+    sleep(800).then(() => {
+      setReload(Math.random());
+    });
     setPageType("CONN_STATE");
   };
 
