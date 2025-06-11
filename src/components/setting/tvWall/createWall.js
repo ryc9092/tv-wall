@@ -46,6 +46,7 @@ const CreateWall = ({ setReload }) => {
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [confirmText, setConfirmText] = useState("");
 
+  const DEFAULT_BRAND = "MonitorBrand-other"
   // get decoders & brands options
   useEffect(() => {
     (async () => {
@@ -335,7 +336,7 @@ const CreateWall = ({ setReload }) => {
             <div className="input-dimension-row">
               <Select
                 className="input-object wall-setting-brand-select"
-                defaultValue={selectedBrand || brandOptions[0]?.value || ""}
+                defaultValue={DEFAULT_BRAND}
                 options={brandOptions}
                 onChange={(value, option) => {
                   setSelectedBrand(value);
