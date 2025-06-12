@@ -582,7 +582,7 @@ const Situation = () => {
             scroll={{ x: "max-content", y: height - 395 }}
           />
           <Modal
-            className="situation-detail-modal"
+            className="situation-detail-modal close-x"
             open={openSituationDetailModal}
             onCancel={() => {
               setOpenSituationDetailModal(false);

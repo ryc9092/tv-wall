@@ -68,7 +68,6 @@
 }
 
 .situation-detail {
-    width: 960px;
     padding: 30px;
 }
 
@@ -141,4 +140,9 @@
     font-size: 16px;
     border-radius: 26px;
     color:rgb(0, 89, 255);
+}
+
+.audio-modal-close-x .ant-modal-close-x {
+    height: 32px;
+    background-color: #ffffff;
 }
