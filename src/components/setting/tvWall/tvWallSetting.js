@@ -180,7 +180,7 @@ const TVWallSetting = () => {
                 </span>
               )}
             </div>
-            <div style={{ textOverflow: "ellipsis" }}>
+            {/* <div style={{ textOverflow: "ellipsis" }}>
               <span style={{ fontWeight: 600 }}>
                 {intl.formatMessage(Messages.Text_DeviceSetting_TVBrand)}
                 {":"}
@@ -200,7 +200,7 @@ const TVWallSetting = () => {
                   {" "}
                 </span>
               )}
-            </div>
+            </div> */}
           </div>
         </td>
       );
