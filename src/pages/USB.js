@@ -559,6 +559,11 @@ const USB = () => {
                   className="usb-connection-table"
                   columns={encoderSelectionColumns}
                   dataSource={filteredEncoders}
+                  // onRow={(record) => ({
+                  //   onClick: () => {
+                  //     setSelectedEncoder(record?.mac);
+                  //   },
+                  // })}
                   rowSelection={{
                     columnWidth: 50,
                     type: "radio",
