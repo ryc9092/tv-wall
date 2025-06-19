@@ -200,7 +200,7 @@ export default defineMessages({
   },
   Text_Sidebar_SystemSetting: {
     id: "Text-Sidebar-SystemSetting",
-    defaultMessage: "系統設定",
+    defaultMessage: "電視牆設定",
   },
   Text_Sidebar_TVWallBarcode: {
     id: "Text-Sidebar-TVWallBarcode",
@@ -834,7 +834,7 @@ export default defineMessages({
   // System setting
   Text_SystemSetting_Title: {
     id: "Text-SystemSetting-Title",
-    defaultMessage: "系統設定",
+    defaultMessage: "電視牆設定",
   },
 
   // System setting - template setting
@@ -1218,6 +1218,6 @@ export default defineMessages({
   // Monitor Management
   Text_MonitorManagement_Title: {
     id: "Text-MonitorManagement-Title",
-    defaultMessage: "設備開關",
+    defaultMessage: "開關控制",
   },
 });

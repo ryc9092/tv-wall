@@ -61,7 +61,7 @@
   "Text-Sidebar-RS232Management": "RS232 管理",
   "Text-Sidebar-ScheduleManagement": "排程管理",
   "Text-Sidebar-SituationManagement": "情境管理",
-  "Text-Sidebar-SystemSetting": "系統設定",
+  "Text-Sidebar-SystemSetting": "電視牆設定",
   "Text-Sidebar-TVWallBarcode": "登入條碼",
 
   "Text-Topbar-Language": "語言",
@@ -198,7 +198,7 @@
   "Text-DeviceStatus-RestartSuccess": "已執行設備重啟",
   "Text-DeviceStatus-RebootFail": "重啟失敗",
 
-  "Text-SystemSetting-Title": "系統設定",
+  "Text-SystemSetting-Title": "電視牆設定",
 
   "Text-TemplateSetting-TemplateSetting": "操作版型設定",
   "Text-TemplateSetting-CreateTemplate": "建立版型",
@@ -274,5 +274,5 @@
   "Text-EventAndAlarm-EventDesc": "事件描述",
   "Text-EventAndAlarm-ViewAll": "檢視全部",
 
-  "Text-MonitorManagement-Title": "設備開關"
+  "Text-MonitorManagement-Title": "開關控制"
 }

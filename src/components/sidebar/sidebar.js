@@ -11,7 +11,7 @@ import AudioIcon from "../../assets/audio.png";
 import SituationIcon from "../../assets/situation.png";
 import StatusIcon from "../../assets/status.png";
 import SettingIcon from "../../assets/setting.png";
-import SurveillanceIcon from "../../assets/surveillance.png";
+// import SurveillanceIcon from "../../assets/surveillance.png";
 import "./sidebar.scss";
 
 const MenuItem = ({ item }) => {
@@ -52,15 +52,15 @@ const Sidebar = () => {
       ),
     },
     {
-      key: "monitor-mgmt",
+      key: "audio",
       label: (
         <MenuItem
           item=<span className="menu-text">
-            {intl.formatMessage(Messages.Text_MonitorManagement_Title)}
+            {intl.formatMessage(Messages.Text_Sidebar_AudioManagement)}
           </span>
         />
       ),
-      icon: <img src={PowerIcon} alt="singlescreen" className="menu-icon" />,
+      icon: <img src={AudioIcon} alt="audio" className="menu-icon" />,
     },
     {
       key: "usb",
@@ -73,6 +73,17 @@ const Sidebar = () => {
       ),
       icon: <img src={USBIcon} alt="usb" className="menu-icon" />,
     },
+    {
+      key: "monitor-mgmt",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_MonitorManagement_Title)}
+          </span>
+        />
+      ),
+      icon: <img src={PowerIcon} alt="singlescreen" className="menu-icon" />,
+    },
     // {
     //   key: "rs232",
     //   label: (
@@ -81,17 +92,6 @@ const Sidebar = () => {
     //     />
     //   ),
     // },
-    {
-      key: "audio",
-      label: (
-        <MenuItem
-          item=<span className="menu-text">
-            {intl.formatMessage(Messages.Text_Sidebar_AudioManagement)}
-          </span>
-        />
-      ),
-      icon: <img src={AudioIcon} alt="audio" className="menu-icon" />,
-    },
     {
       key: "situation",
       label: (
@@ -133,19 +133,19 @@ const Sidebar = () => {
       ),
       icon: <img src={SettingIcon} alt="setting" className="menu-icon" />,
     },
-    {
-      key: "surveillance",
-      label: (
-        <MenuItem
-          item=<span className="menu-text">
-            {intl.formatMessage(Messages.Text_Surveillance_Title)}
-          </span>
-        />
-      ),
-      icon: (
-        <img src={SurveillanceIcon} alt="surveillance" className="menu-icon" />
-      ),
-    },
+    // {
+    //   key: "surveillance",
+    //   label: (
+    //     <MenuItem
+    //       item=<span className="menu-text">
+    //         {intl.formatMessage(Messages.Text_Surveillance_Title)}
+    //       </span>
+    //     />
+    //   ),
+    //   icon: (
+    //     <img src={SurveillanceIcon} alt="surveillance" className="menu-icon" />
+    //   ),
+    // },
   ];
 
   const onNavigate = (e) => {

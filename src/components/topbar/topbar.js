@@ -87,7 +87,7 @@ function TopBar({ setLocale }) {
         <img src={Logo} alt="logo" className="topbar-logo" />
       </span>
       <span style={{ position: "absolute", right: 0 }}>
-        <img src={BellIcon} alt="bell" className="topbar-function-icon" />
+        {/* <img src={BellIcon} alt="bell" className="topbar-function-icon" /> */}
         <Dropdown
           menu={{ items }}
           trigger={["click"]}
