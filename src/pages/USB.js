@@ -11,6 +11,7 @@ import {
   // getEncoders,
   // getDecoders,
 } from "../api/API";
+import ConfirmModal from "../components/common/confirmModal";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
 import { showWarningNotification, sleep } from "../utils/Utils";
@@ -398,6 +399,30 @@ const USB = () => {
     setPageType("CONN_STATE");
   };
 
+  const confirmModalContent = (
+    <div>
+      <div>
+        <span style={{ marginRight: 12 }}>
+          <FormattedMessage {...Messages.Text_Common_EncoderSimple} />
+          {" : "}
+          {encoders?.find((encoder) => encoder.mac === selectEncoder)?.nickName}
+        </span>
+        <span className="confirm-modal-arrow-line" />
+        <span className="confirm-modal-arrow" />
+        <span style={{ marginLeft: 12 }}>
+          <FormattedMessage {...Messages.Text_Common_DecoderSimple} />
+          {" : "}
+          {decoders?.find((decoder) => decoder.mac === selectDecoder)?.nickName}
+        </span>
+      </div>
+      <br />
+      <span className="confirm-modal-confirm-text">
+        <FormattedMessage {...Messages.Text_USB_RemoveConnectionConfirm} />
+      </span>
+      <br />
+    </div>
+  );
+
   return (
     <div className="usb-layout-column">
       <div>
@@ -465,33 +490,24 @@ const USB = () => {
             <Divider style={{ marginTop: 8 }} /> */}
             <Table
               className="usb-content-table"
-              // size={"small"}
               columns={columns}
               dataSource={linkData}
               scroll={{ x: "max-content", y: height - 440 }}
             />
-            <Modal
-              className="usb-modal-close-x"
-              title={
-                <span style={{ marginRight: 12 }}>
-                  <FormattedMessage
-                    {...Messages.Text_USB_RemoveConnectionConfirm}
-                  />
-                </span>
-              }
-              width={400}
-              okText={intl.formatMessage(Messages.Text_Common_Confirm)}
-              cancelText={intl.formatMessage(Messages.Text_Button_Cancel)}
+            <ConfirmModal
               open={openConfirmModal}
-              onCancel={() => {
-                setOpenConfirmModal(false);
-              }}
+              setOpen={setOpenConfirmModal}
               onOk={() => {
                 handleRemoveLink(selectEncoder, selectDecoder);
               }}
-            >
-              <br />
-            </Modal>
+              width={460}
+              title={
+                <FormattedMessage
+                  {...Messages.Text_USB_RemoveConnectionTitle}
+                />
+              }
+              content={confirmModalContent}
+            />
           </div>
         ) : (
           <div

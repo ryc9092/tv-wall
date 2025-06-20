@@ -30,9 +30,17 @@ export default defineMessages({
     id: "Text-Common-EncoderName",
     defaultMessage: "名稱",
   },
+  Text_Common_EncoderSimple: {
+    id: "Text-Common-EncoderSimple",
+    defaultMessage: "來源",
+  },
   Text_Common_Encoder: {
     id: "Text-Common-Encoder",
     defaultMessage: "輸入來源",
+  },
+  Text_Common_DecoderSimple: {
+    id: "Text-Common-DecoderSimple",
+    defaultMessage: "終端",
   },
   Text_Common_Decoder: {
     id: "Text-Common-Decoder",
@@ -448,6 +456,10 @@ export default defineMessages({
   },
   Text_USB_RemoveConnection: {
     id: "Text-USB-RemoveConnection",
+    defaultMessage: "刪除USB連結",
+  },
+    Text_USB_RemoveConnectionTitle: {
+    id: "Text-USB-RemoveConnectionTitle",
     defaultMessage: "刪除USB連結",
   },
   Text_USB_RemoveConnectionConfirm: {
