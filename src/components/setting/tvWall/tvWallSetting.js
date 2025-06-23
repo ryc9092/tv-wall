@@ -4,6 +4,7 @@ import { Actions } from "../../store/reducer";
 import { Button, Table } from "antd";
 import CreateWall from "./createWall";
 import { getWalls, deleteWall, getWallScreensById } from "../../../api/API";
+import ConfirmModal from "../../common/confirmModal";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
 import TrashIcon from "../../../assets/trash.png";
@@ -42,6 +43,8 @@ const TVWallSetting = () => {
     })();
   }, [reload, store]);
 
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [deleteWallId, setDeleteWallId] = useState(null);
   const columns = [
     {
       title: (
@@ -96,7 +99,9 @@ const TVWallSetting = () => {
               id={text}
               type="text"
               onClick={() => {
-                removeWall(record);
+                setDeleteWallId(text);
+                setOpenConfirmModal(true);
+                // removeWall(record);
               }}
               className="table-content"
             >
@@ -214,12 +219,33 @@ const TVWallSetting = () => {
 
   const removeWall = (wall) => {
     (async () => {
-      const result = await deleteWall(wall.wallId, store);
+      const result = await deleteWall(wall, store);
       if (result) {
+        setOpenConfirmModal(false);
         setReload(Math.random());
       }
     })();
   };
+
+  const confirmModalContent = (
+    <div>
+      <div>
+        <span style={{ marginRight: 12 }}>
+          <FormattedMessage {...Messages.Text_Common_Name} />
+          {" : "}
+          {
+            walls?.find((wall) => wall.wallId === deleteWallId)
+              ?.wallName
+          }
+        </span>
+      </div>
+      <br />
+      <span className="confirm-modal-confirm-text">
+        <FormattedMessage {...Messages.Text_WallSetting_RemoveWallConfirm} />
+      </span>
+      <br />
+    </div>
+  );
 
   return (
     <div
@@ -248,6 +274,19 @@ const TVWallSetting = () => {
             dataSource={walls}
             // size="small"
             scroll={{ x: "max-content", y: height - 365 }}
+          />
+          <ConfirmModal
+            open={openConfirmModal}
+            setOpen={setOpenConfirmModal}
+            onOk={() => {
+              // deleteSituation(deleteSituationId);
+              removeWall(deleteWallId);
+            }}
+            width={460}
+            title={
+              <FormattedMessage {...Messages.Text_WallSetting_RemoveWall} />
+            }
+            content={confirmModalContent}
           />
         </div>
         <div

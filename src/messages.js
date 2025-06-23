@@ -208,7 +208,7 @@ export default defineMessages({
   },
   Text_Sidebar_SystemSetting: {
     id: "Text-Sidebar-SystemSetting",
-    defaultMessage: "電視牆設定",
+    defaultMessage: "操作設定",
   },
   Text_Sidebar_TVWallBarcode: {
     id: "Text-Sidebar-TVWallBarcode",
@@ -866,7 +866,7 @@ export default defineMessages({
   // System setting
   Text_SystemSetting_Title: {
     id: "Text-SystemSetting-Title",
-    defaultMessage: "電視牆設定",
+    defaultMessage: "操作設定",
   },
 
   // System setting - template setting
@@ -964,7 +964,7 @@ export default defineMessages({
   // System setting - wall setting
   Text_WallSetting_WallSetting: {
     id: "Text-WallSetting-WallSetting",
-    defaultMessage: "基本設定",
+    defaultMessage: "牆面組態設定",
   },
   Text_WallSetting_RemoveWall: {
     id: "Text-WallSetting-RemoveWall",
@@ -972,7 +972,7 @@ export default defineMessages({
   },
   Text_WallSetting_RemoveWallConfirm: {
     id: "Text-WallSetting-RemoveWallConfirm",
-    defaultMessage: "確定要刪除電視牆 : XXX?",
+    defaultMessage: "確定要刪除此牆面?",
   },
   Text_WallSetting_CreateWall: {
     id: "Text-WallSetting-CreateWall",

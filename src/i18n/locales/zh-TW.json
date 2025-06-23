@@ -61,7 +61,7 @@
   "Text-Sidebar-RS232Management": "RS232 管理",
   "Text-Sidebar-ScheduleManagement": "排程管理",
   "Text-Sidebar-SituationManagement": "情境管理",
-  "Text-Sidebar-SystemSetting": "電視牆設定",
+  "Text-Sidebar-SystemSetting": "操作設定",
   "Text-Sidebar-TVWallBarcode": "登入條碼",
 
   "Text-Topbar-Language": "語言",
@@ -203,7 +203,7 @@
   "Text-DeviceStatus-RestartSuccess": "已執行設備重啟",
   "Text-DeviceStatus-RebootFail": "重啟失敗",
 
-  "Text-SystemSetting-Title": "電視牆設定",
+  "Text-SystemSetting-Title": "操作設定",
 
   "Text-TemplateSetting-TemplateSetting": "操作版型設定",
   "Text-TemplateSetting-CreateTemplate": "建立版型",
@@ -218,9 +218,9 @@
   "Text-TemplateSetting-ViewTemplate": "檢視電視牆版型",
   "Text-TemplateSetting-FormatInvalid": "版型格式錯誤",
 
-  "Text-WallSetting-WallSetting": "基本設定",
+  "Text-WallSetting-WallSetting": "牆面組態設定",
   "Text-WallSetting-RemoveWall": "刪除電視牆",
-  "Text-WallSetting-RemoveWallConfirm": "確定要刪除電視牆 : XXX?",
+  "Text-WallSetting-RemoveWallConfirm": "確定要刪除此牆面?",
   "Text-WallSetting-CreateWall": "建立電視牆",
   "Text-WallSetting-WallID": "電視牆ID",
   "Text-WallSetting-WallName": "電視牆名稱",
