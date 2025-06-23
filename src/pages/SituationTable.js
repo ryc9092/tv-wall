@@ -16,6 +16,7 @@ import {
   activateSituation,
   removeSituationDetail,
 } from "../api/API";
+import ConfirmModal from "../components/common/confirmModal";
 import TVWallModal from "../components/situation/tvWallModal";
 import SingleScreenModal from "../components/situation/singlescreenModal";
 import USBModal from "../components/situation/usbModal";
@@ -98,6 +99,7 @@ const Situation = () => {
 
   const deleteSituation = async (situationId) => {
     await removeSituation(situationId, store);
+    setOpenConfirmModal(false);
     setReload(Math.random());
   };
 
@@ -140,6 +142,8 @@ const Situation = () => {
     isAudioViewModalOpen,
   ]);
 
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [deleteSituationId, setDeleteSituationId] = useState(null);
   const columns = [
     {
       title: (
@@ -250,7 +254,7 @@ const Situation = () => {
               className="audio-content-table-icon"
             />
           </Button>
-          <Popconfirm
+          {/* <Popconfirm
             id={`confirm-${record.id}`}
             title={
               <span className="pop-confirm-text">
@@ -267,20 +271,24 @@ const Situation = () => {
             onConfirm={() => {
               deleteSituation(record.id);
             }}
+          > */}
+          <Button
+            type="text"
+            id={record.id}
+            key={`remove.${record.id}`}
+            className="table-content"
+            onClick={() => {
+              setDeleteSituationId(record.id);
+              setOpenConfirmModal(true);
+            }}
           >
-            <Button
-              type="text"
-              id={record.id}
-              key={`remove.${record.id}`}
-              className="table-content"
-            >
-              <img
-                alt="remove"
-                src={TrashIcon}
-                className="audio-content-table-icon"
-              />
-            </Button>
-          </Popconfirm>
+            <img
+              alt="remove"
+              src={TrashIcon}
+              className="audio-content-table-icon"
+            />
+          </Button>
+          {/* </Popconfirm> */}
         </div>
       ),
     },
@@ -321,7 +329,7 @@ const Situation = () => {
       dataIndex: "remark",
       key: "description",
       render: (text) => {
-        return <span className="table-content">{text}</span>;
+        return <div className="table-content situation-remark-col">{text}</div>;
       },
     },
     {
@@ -523,6 +531,26 @@ const Situation = () => {
     isAudioSituationModalOpen,
   ]);
 
+  const confirmModalContent = (
+    <div>
+      <div>
+        <span style={{ marginRight: 12 }}>
+          <FormattedMessage {...Messages.Text_Common_Name} />
+          {" : "}
+          {
+            situations?.find((situation) => situation.id === deleteSituationId)
+              ?.name
+          }
+        </span>
+      </div>
+      <br />
+      <span className="confirm-modal-confirm-text">
+        <FormattedMessage {...Messages.Text_Situation_RemoveSituationConfirm} />
+      </span>
+      <br />
+    </div>
+  );
+
   return (
     <div className="page-layout-column">
       <div>
@@ -580,6 +608,18 @@ const Situation = () => {
             pagination={{ pageSize: 10 }}
             rowKey={(record) => record.id}
             scroll={{ x: "max-content", y: height - 395 }}
+          />
+          <ConfirmModal
+            open={openConfirmModal}
+            setOpen={setOpenConfirmModal}
+            onOk={() => {
+              deleteSituation(deleteSituationId);
+            }}
+            width={460}
+            title={
+              <FormattedMessage {...Messages.Text_Situation_RemoveSituation} />
+            }
+            content={confirmModalContent}
           />
           <Modal
             className="situation-detail-modal close-x"

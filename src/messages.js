@@ -661,7 +661,7 @@ export default defineMessages({
   },
   Text_Situation_RemoveSituationConfirm: {
     id: "Text-Situation-RemoveSituationConfirm",
-    defaultMessage: "確定要刪除XXX?",
+    defaultMessage: "確定要刪除此情境?",
   },
   Text_Situation_SituationName: {
     id: "Text-Situation-SituationName",
