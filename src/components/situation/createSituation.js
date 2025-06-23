@@ -55,7 +55,7 @@ const CreateSituationModal = ({
     <div>
       <Modal
         title=<span className="create-situation-modal-title">
-          {intl.formatMessage(Messages.Text_Situation_CreateSituation)}
+          {intl.formatMessage(Messages.Text_Audio_AddConnection)}
         </span>
         className="create-situation-modal create-situation-modal-close-icon create-situation modal-title"
         open={isModalOpen}
@@ -74,7 +74,7 @@ const CreateSituationModal = ({
             name="name"
             labelCol={{ span: 24 }}
             label=<span className="create-situation-subtitle">
-              {intl.formatMessage(Messages.Text_Situation_SituationName)}
+              {intl.formatMessage(Messages.Text_Audio_AudioName)}
             </span>
           >
             <Input
@@ -92,7 +92,7 @@ const CreateSituationModal = ({
             <Input.TextArea
               className="create-situation-textarea create-situation-placeholder"
               placeholder={intl.formatMessage(
-                Messages.Text_Situation_InputDescription
+                Messages.Text_Audio_InputDescription
               )}
             />
           </Form.Item>

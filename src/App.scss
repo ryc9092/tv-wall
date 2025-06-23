@@ -192,4 +192,8 @@
     font-size: 16px;
     color: #fff;
     background-color: #45413e;
+    &:hover {
+        background-color: #45413e !important;
+        color: #fff !important;
+    }
 }

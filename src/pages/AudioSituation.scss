@@ -35,10 +35,14 @@
 }
 
 .audio-situation-detail-table {
-    height: 300px;
+    max-height: calc(100vh - 390px);
 }
 
 .close-x .ant-modal-close-x {
     height: 32px;
     background-color: #ffffff;
+}
+
+.audio-remark-col {
+    min-width: 30px !important;
 }

@@ -14,6 +14,7 @@ import {
   activateSituation,
   removeSituationDetail,
 } from "../api/API";
+import ConfirmModal from "../components/common/confirmModal";
 import MixAudioMatrixModal from "../components/situation/mixAudioMatrixModal";
 import AudioModal from "../components/situation/audioModal";
 import AudioViewModal from "../components/audio/audioViewModal";
@@ -91,6 +92,7 @@ const AudioSituation = () => {
 
   const deleteSituation = async (situationId) => {
     await removeSituation(situationId, store);
+    setOpenConfirmModal(false);
     setReload(Math.random());
   };
 
@@ -114,6 +116,8 @@ const AudioSituation = () => {
     if (!isAudioViewModalOpen) setChoosedSituationDetailId(null);
   }, [isAudioViewModalOpen]);
 
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [deleteSituationId, setDeleteSituationId] = useState(null);
   const columns = [
     {
       title: (
@@ -224,7 +228,7 @@ const AudioSituation = () => {
               className="audio-content-table-icon"
             />
           </Button>
-          <Popconfirm
+          {/* <Popconfirm
             id={`confirm-${record.id}`}
             title={
               <span className="pop-confirm-text">
@@ -241,20 +245,24 @@ const AudioSituation = () => {
             onConfirm={() => {
               deleteSituation(record.id);
             }}
+          > */}
+          <Button
+            type="text"
+            id={record.id}
+            key={`remove.${record.id}`}
+            className="table-content"
+            onClick={() => {
+              setDeleteSituationId(record.id);
+              setOpenConfirmModal(true);
+            }}
           >
-            <Button
-              type="text"
-              id={record.id}
-              key={`remove.${record.id}`}
-              className="table-content"
-            >
-              <img
-                alt="remove"
-                src={TrashIcon}
-                className="audio-content-table-icon"
-              />
-            </Button>
-          </Popconfirm>
+            <img
+              alt="remove"
+              src={TrashIcon}
+              className="audio-content-table-icon"
+            />
+          </Button>
+          {/* </Popconfirm> */}
         </div>
       ),
     },
@@ -275,7 +283,7 @@ const AudioSituation = () => {
     {
       title: (
         <span className="table-head">
-          {intl.formatMessage(Messages.Text_Common_ItemName)}
+          {intl.formatMessage(Messages.Text_Audio_SubAudioClass)}
         </span>
       ),
       dataIndex: "set_type",
@@ -295,7 +303,7 @@ const AudioSituation = () => {
       dataIndex: "remark",
       key: "description",
       render: (text) => {
-        return <span className="table-content">{text}</span>;
+        return <div className="table-content audio-remark-col">{text}</div>;
       },
     },
     {
@@ -438,12 +446,32 @@ const AudioSituation = () => {
     })();
   }, [store, isMixAudioMatrixModalOpen, isAudioModalOpen]);
 
+  const confirmModalContent = (
+    <div>
+      <div>
+        <span style={{ marginRight: 12 }}>
+          <FormattedMessage {...Messages.Text_Common_Name} />
+          {" : "}
+          {
+            situations?.find((situation) => situation.id === deleteSituationId)
+              ?.name
+          }
+        </span>
+      </div>
+      <br />
+      <span className="confirm-modal-confirm-text">
+        <FormattedMessage {...Messages.Text_Audio_RemoveConnectionConfirm} />
+      </span>
+      <br />
+    </div>
+  );
+
   return (
     <div className="page-layout-column">
       <div>
         <div className="status-title-row">
           <span className="page-title">
-            <FormattedMessage {...Messages.Text_Sidebar_AudioManagement} />
+            <FormattedMessage {...Messages.Text_Audio_Route} />
           </span>
           {/* <Input
             className="status-title-input status-input"
@@ -467,9 +495,7 @@ const AudioSituation = () => {
                 className="create-situation-btn-icon"
               />
               <span className="create-situation-btn-text">
-                <FormattedMessage
-                  {...Messages.Text_Situation_CreateSituation}
-                />
+                <FormattedMessage {...Messages.Text_Audio_AddAudio} />
               </span>
             </Button>
             <CreateSituation
@@ -497,6 +523,18 @@ const AudioSituation = () => {
             rowKey={(record) => record.id}
             scroll={{ x: "max-content", y: height - 395 }}
           />
+          <ConfirmModal
+            open={openConfirmModal}
+            setOpen={setOpenConfirmModal}
+            onOk={() => {
+              deleteSituation(deleteSituationId);
+            }}
+            width={460}
+            title={
+              <FormattedMessage {...Messages.Text_Audio_RemoveConnection} />
+            }
+            content={confirmModalContent}
+          />
           <Modal
             width={1080}
             className="audio-situation-content-modal audio-modal-close-x"
@@ -520,9 +558,7 @@ const AudioSituation = () => {
             <div className="situation-detail">
               <div className="situation-title-row">
                 <div className="situation-card-title">
-                  <FormattedMessage
-                    {...Messages.Text_Situation_SituationName}
-                  />
+                  <FormattedMessage {...Messages.Text_Audio_AudioName} />
                   {`: ${editSituation?.name}`}
                 </div>
               </div>
@@ -552,9 +588,7 @@ const AudioSituation = () => {
                       className="add-situation-item-btn-icon"
                     />
                     <span className="add-situation-item-btn-text">
-                      <FormattedMessage
-                        {...Messages.Text_Situation_AddSituationItem}
-                      />
+                      <FormattedMessage {...Messages.Text_Audio_AddSubAudio} />
                     </span>
                   </Button>
                 </Dropdown>

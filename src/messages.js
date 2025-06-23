@@ -474,7 +474,23 @@ export default defineMessages({
   // Audio management
   Text_Audio_AudioMgmt: {
     id: "Text-Audio-AudioMgmt",
-    defaultMessage: "音頻管理",
+    defaultMessage: "音頻路由",
+  },
+  Text_Audio_AddAudio: {
+    id: "Text-Audio-AddAudio",
+    defaultMessage: "新增路由",
+  },
+  Text_Audio_AddSubAudio: {
+    id: "Text-Audio-AddSubAudio",
+    defaultMessage: "新增子路由",
+  },
+  Text_Audio_AudioName: {
+    id: "Text-Audio-AudioName",
+    defaultMessage: "音頻路由名稱",
+  },
+  Text_Audio_SubAudioClass: {
+    id: "Text-Audio-SubAudioClass",
+    defaultMessage: "子路由類別",
   },
   Text_Audio_InputAudioMsg: {
     id: "Text-Audio-InputAudioMsg",
@@ -494,7 +510,7 @@ export default defineMessages({
   },
   Text_Audio_AddConnection: {
     id: "Text-Audio-AddConnection",
-    defaultMessage: "新增音頻連結",
+    defaultMessage: "新增音頻路由",
   },
   Text_Audio_ChooseSource: {
     id: "Text-Audio-ChooseSource",
@@ -550,11 +566,11 @@ export default defineMessages({
   },
   Text_Audio_RemoveConnection: {
     id: "Text-Audio-RemoveConnection",
-    defaultMessage: "刪除音頻連結",
+    defaultMessage: "刪除音頻路由",
   },
   Text_Audio_RemoveConnectionConfirm: {
     id: "Text-Audio-RemoveConnectionConfirm",
-    defaultMessage: "確定要刪除此音頻連結?",
+    defaultMessage: "確定要刪除此音頻路由?",
   },
   Text_Audio_MatrixRoute: {
     id: "Text-Audio-MatrixRoute",
@@ -579,6 +595,10 @@ export default defineMessages({
   Text_Audio_DeleteConfirm: {
     id: "Text-Audio-DeleteConfirm",
     defaultMessage: "確認要刪除此組路由?",
+  },
+  Text_Audio_InputDescription: {
+    id: "Text-Audio-InputDescription",
+    defaultMessage: "輸入音頻路由相關說明",
   },
 
 
