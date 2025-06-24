@@ -256,7 +256,7 @@ export default defineMessages({
   // TV wall management
   Text_TVWall_TVWallManagement: {
     id: "Text-TVWall-TVWallManagement",
-    defaultMessage: "電視牆影像管理",
+    defaultMessage: "電視牆畫面管理",
   },
   Text_TVWall_WallName: {
     id: "Text-TVWall-WallName",
