@@ -7,6 +7,7 @@ import {
   deleteTemplate,
   getTemplateScreensById,
 } from "../../../api/API";
+import ConfirmModal from "../../common/confirmModal";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
 import TrashIcon from "../../../assets/trash.png";
@@ -39,6 +40,8 @@ const TemplateSetting = () => {
     })();
   }, [reload, store]);
 
+  const [openConfirmModal, setOpenConfirmModal] = useState(true);
+  const [deleteTemplateId, setDeleteTemplateId] = useState(null);
   const columns = [
     {
       title: (
@@ -100,7 +103,9 @@ const TemplateSetting = () => {
               id={text}
               type="text"
               onClick={() => {
-                removeTemplate(record);
+                // removeTemplate(record);
+                setDeleteTemplateId(text);
+                setOpenConfirmModal(true);
               }}
               className="table-content"
             >
@@ -204,12 +209,36 @@ const TemplateSetting = () => {
 
   const removeTemplate = (template) => {
     (async () => {
-      const result = await deleteTemplate(store, template.templateId);
+      const result = await deleteTemplate(store, template);
       if (result) {
+        setOpenConfirmModal(false);
         setReload(Math.random());
       }
     })();
   };
+
+  const confirmModalContent = (
+    <div>
+      <div>
+        <span style={{ marginRight: 12 }}>
+          <FormattedMessage {...Messages.Text_Common_Name} />
+          {" : "}
+          {
+            templates?.find(
+              (template) => template.templateId === deleteTemplateId
+            )?.templateName
+          }
+        </span>
+      </div>
+      <br />
+      <span className="confirm-modal-confirm-text">
+        <FormattedMessage
+          {...Messages.Text_TemplateSetting_RemoveTemplateConfirm}
+        />
+      </span>
+      <br />
+    </div>
+  );
 
   return (
     <div
@@ -240,6 +269,20 @@ const TemplateSetting = () => {
             dataSource={templates}
             // size="small"
             scroll={{ x: "max-content", y: height - 365 }}
+          />
+          <ConfirmModal
+            open={openConfirmModal}
+            setOpen={setOpenConfirmModal}
+            onOk={() => {
+              removeTemplate(deleteTemplateId);
+            }}
+            width={460}
+            title={
+              <FormattedMessage
+                {...Messages.Text_TemplateSetting_RemoveTemplate}
+              />
+            }
+            content={confirmModalContent}
           />
         </div>
         <div

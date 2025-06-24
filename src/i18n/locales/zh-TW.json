@@ -207,8 +207,8 @@
 
   "Text-TemplateSetting-TemplateSetting": "操作版型設定",
   "Text-TemplateSetting-CreateTemplate": "建立版型",
-  "Text-TemplateSetting-RemoveTemplate": "刪除電視牆版型",
-  "Text-TemplateSetting-RemoveTemplateConfirm": "確定要刪除電視牆版型 : XXX?",
+  "Text-TemplateSetting-RemoveTemplate": "刪除牆面版型",
+  "Text-TemplateSetting-RemoveTemplateConfirm": "請確認此版型是否正在使用後再進行刪除",
   "Text-TemplateSetting-CreateWallTemplate": "建立電視牆版型",
   "Text-TemplateSetting-TemplateId": "版型ID",
   "Text-TemplateSetting-TemplateName": "版型名稱",

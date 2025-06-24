@@ -880,11 +880,11 @@ export default defineMessages({
   },
   Text_TemplateSetting_RemoveTemplate: {
     id: "Text-TemplateSetting-RemoveTemplate",
-    defaultMessage: "刪除電視牆版型",
+    defaultMessage: "刪除牆面版型",
   },
   Text_TemplateSetting_RemoveTemplateConfirm: {
     id: "Text-TemplateSetting-RemoveTemplateConfirm",
-    defaultMessage: "確定要刪除電視牆版型 : XXX?",
+    defaultMessage: "請確認此版型是否正在使用後再進行刪除",
   },
   Text_TemplateSetting_CreateWallTemplate: {
     id: "Text-TemplateSetting-CreateWallTemplate",
