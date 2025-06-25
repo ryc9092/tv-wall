@@ -170,11 +170,13 @@ const TVWall = () => {
     activeWall(data).then((result) => {
       if (result) {
         showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_TVWall_ActiveSuccess)
+          intl.formatMessage(Messages.Text_TVWall_ActiveSuccess),
+          Math.random()
         );
       } else {
         showWarningNotification(
-          intl.formatMessage(Messages.Text_TVWall_ActiveFail)
+          intl.formatMessage(Messages.Text_TVWall_ActiveFail),
+          Math.random()
         );
       }
       setSelectedBlockNumber(null);
@@ -261,14 +263,16 @@ const TVWall = () => {
           if (!result) throw new Error("call api failed");
           else {
             showSuccessNotificationByMsg(
-              intl.formatMessage(Messages.Text_TVWall_DeactiveSuccess)
+              intl.formatMessage(Messages.Text_TVWall_DeactiveSuccess),
+              Math.random()
             );
             setClearBlockNumber(null);
             setReload(Math.random());
           }
         } catch (error) {
           showWarningNotification(
-            intl.formatMessage(Messages.Text_TVWall_DeactiveFail)
+            intl.formatMessage(Messages.Text_TVWall_DeactiveFail),
+            Math.random()
           );
         }
       }
@@ -310,11 +314,13 @@ const TVWall = () => {
       setBlocks(tempblocks);
       setBlockEncoderMapping({});
       showSuccessNotificationByMsg(
-        intl.formatMessage(Messages.Text_TVWall_DeactiveSuccess)
+        intl.formatMessage(Messages.Text_TVWall_DeactiveSuccess),
+        Math.random()
       );
     } catch (error) {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_TVWall_DeactiveFail)
+        intl.formatMessage(Messages.Text_TVWall_DeactiveFail),
+        Math.random()
       );
     }
     setOpenConfirmModal(false);

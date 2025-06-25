@@ -130,11 +130,13 @@ const SingleScreen = () => {
         });
         if (result) {
           showSuccessNotificationByMsg(
-            intl.formatMessage(Messages.Text_SingleScreen_VideoClearSuccess)
+            intl.formatMessage(Messages.Text_SingleScreen_VideoClearSuccess),
+            Math.random()
           );
         } else {
           showWarningNotification(
-            intl.formatMessage(Messages.Text_SingleScreen_VideoClearFail)
+            intl.formatMessage(Messages.Text_SingleScreen_VideoClearFail),
+            Math.random()
           );
         }
       }
@@ -308,11 +310,13 @@ const SingleScreen = () => {
       }).then((result) => {
         if (result) {
           showSuccessNotificationByMsg(
-            intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess)
+            intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess),
+            Math.random()
           );
         } else {
           showWarningNotification(
-            intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail)
+            intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail),
+            Math.random()
           );
         }
         setSelectedScreen(null);

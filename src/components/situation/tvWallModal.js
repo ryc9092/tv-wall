@@ -321,7 +321,8 @@ const TVWallModal = ({
       setIsModalOpen(false);
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_TVWall_PreviewRequiredHint)
+        intl.formatMessage(Messages.Text_TVWall_PreviewRequiredHint),
+        Math.random()
       );
     }
   };

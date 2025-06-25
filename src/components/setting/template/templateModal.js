@@ -118,12 +118,14 @@ const SettingTemplateModal = () => {
       const result = await deleteTemplate(store, templateId);
       if (result) {
         showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_TemplateSetting_DeleteSuccess)
+          intl.formatMessage(Messages.Text_TemplateSetting_DeleteSuccess),
+          Math.random()
         );
         setReload(Math.random);
       } else
         showWarningNotification(
-          intl.formatMessage(Messages.Text_TemplateSetting_DeleteFail)
+          intl.formatMessage(Messages.Text_TemplateSetting_DeleteFail),
+          Math.random()
         );
     })();
   };

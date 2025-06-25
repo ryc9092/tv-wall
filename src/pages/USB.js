@@ -355,7 +355,8 @@ const USB = () => {
     });
     if (!result) {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_Common_OperationFailed)
+        intl.formatMessage(Messages.Text_Common_OperationFailed),
+        Math.random()
       );
     }
     sleep(800).then(() => {

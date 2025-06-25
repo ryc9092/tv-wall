@@ -260,11 +260,13 @@ const SituationTVWall = ({
       openParentModal(false);
       setReloadPresetDetails(Math.random());
       showSuccessNotificationByMsg(
-        intl.formatMessage(Messages.Text_TVWall_ActiveSuccess)
+        intl.formatMessage(Messages.Text_TVWall_ActiveSuccess),
+        Math.random()
       );
     } catch (error) {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_TVWall_ActiveFail)
+        intl.formatMessage(Messages.Text_TVWall_ActiveFail),
+        Math.random()
       );
     }
   };

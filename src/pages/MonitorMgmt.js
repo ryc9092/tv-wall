@@ -34,11 +34,13 @@ const MonitorMgmt = () => {
       });
       if (result) {
         showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_Common_OperationSuccess)
+          intl.formatMessage(Messages.Text_Common_OperationSuccess),
+          Math.random()
         );
       } else {
         showWarningNotification(
-          intl.formatMessage(Messages.Text_Common_OperationFailed)
+          intl.formatMessage(Messages.Text_Common_OperationFailed),
+          Math.random()
         );
       }
     }

@@ -239,23 +239,27 @@ const CreateTemplate = ({ setReload }) => {
           );
           if (result) {
             showSuccessNotificationByMsg(
-              intl.formatMessage(Messages.Text_TemplateSetting_CreateSuccess)
+              intl.formatMessage(Messages.Text_TemplateSetting_CreateSuccess),
+              Math.random()
             );
             setReload(Math.random);
             setIsModalOpen(false);
           } else
             showWarningNotification(
-              intl.formatMessage(Messages.Text_TemplateSetting_CreateFail)
+              intl.formatMessage(Messages.Text_TemplateSetting_CreateFail),
+              Math.random()
             );
         })();
       } else {
         showWarningNotification(
-          intl.formatMessage(Messages.Text_TemplateSetting_FormatInvalid)
+          intl.formatMessage(Messages.Text_TemplateSetting_FormatInvalid),
+          Math.random()
         );
       }
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_Common_RequiredHint)
+        intl.formatMessage(Messages.Text_Common_RequiredHint),
+        Math.random()
       );
     }
   };

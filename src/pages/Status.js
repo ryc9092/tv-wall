@@ -48,11 +48,13 @@ const Status = () => {
     let result = await rebootDevice(mac, store);
     if (result) {
       showSuccessNotificationByMsg(
-        intl.formatMessage(Messages.Text_DeviceStatus_RestartSuccess)
+        intl.formatMessage(Messages.Text_DeviceStatus_RestartSuccess),
+        Math.random()
       );
     } else
       showWarningNotification(
-        intl.formatMessage(Messages.Text_DeviceStatus_RebootFail)
+        intl.formatMessage(Messages.Text_DeviceStatus_RebootFail),
+        Math.random()
       );
   };
 

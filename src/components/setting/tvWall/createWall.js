@@ -46,7 +46,7 @@ const CreateWall = ({ setReload }) => {
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [confirmText, setConfirmText] = useState("");
 
-  const DEFAULT_BRAND = "MonitorBrand-other"
+  const DEFAULT_BRAND = "MonitorBrand-other";
   // get decoders & brands options
   useEffect(() => {
     (async () => {
@@ -180,7 +180,8 @@ const CreateWall = ({ setReload }) => {
       })();
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_Common_RequiredHint)
+        intl.formatMessage(Messages.Text_Common_RequiredHint),
+        Math.random()
       );
     }
   };

@@ -1,34 +1,46 @@
 import { notification } from "antd";
 import { ExclamationCircleFilled, InfoCircleFilled } from "@ant-design/icons";
 
-export const showWarningNotification = (warningMsg) => {
-  notification.info({
+export const showWarningNotification = (warningMsg, messageKey) => {
+  notification.error({
     message: warningMsg,
-    icon: <ExclamationCircleFilled style={{ color: "#D12727" }} />,
+    // icon: <ExclamationCircleFilled style={{ color: "#D12727" }} />,
     placement: "topRight",
-    duration: 2,
+    duration: 3,
+    showProgress: true,
+    pauseOnHover: true,
     style: {
-      width: "500px",
+      // width: "500px",
       fontSize: "16px",
       borderRadius: "8px",
-      border: "1px solid #D12727",
-      backgroundColor: "rgb(250, 232, 232)",
+      // border: "1px solid #D12727",
+      backgroundColor: "#fceeee",
+    },
+    key: messageKey,
+    onClick: () => {
+      notification.destroy(messageKey)
     },
   });
 };
 
-export const showSuccessNotificationByMsg = (successMsg) => {
-  notification.info({
+export const showSuccessNotificationByMsg = (successMsg, messageKey) => {
+  notification.success({
     message: successMsg,
-    icon: <InfoCircleFilled style={{ color: "green" }} />,
+    // icon: <InfoCircleFilled style={{ color: "green" }} />,
     placement: "topRight",
-    duration: 2,
+    duration: 3,
+    showProgress: true,
+    pauseOnHover: true,
     style: {
-      width: "500px",
+      // width: "500px",
       fontSize: "16px",
       borderRadius: "8px",
-      border: "1px solid #3A84A7",
-      backgroundColor: "rgb(234, 242, 245)",
+      // border: "1px solid #3A84A7",
+      backgroundColor: "#faffdf",
+    },
+    key: messageKey,
+    onClick: () => {
+      notification.destroy(messageKey)
     },
   });
 };
@@ -49,5 +61,5 @@ export const uuid = () => {
 };
 
 export const sleep = (ms) => {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};

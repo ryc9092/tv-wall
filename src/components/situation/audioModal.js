@@ -224,7 +224,8 @@ const AudioModal = ({
       setIsModalOpen(false);
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_Common_SourceDestinationRequiredHint)
+        intl.formatMessage(Messages.Text_Common_SourceDestinationRequiredHint),
+        Math.random()
       );
     }
   };

@@ -88,7 +88,10 @@ const Login = () => {
       sessionStorage.setItem("role", decodedJwt.role);
       dispatch({ type: Actions.SetAccount, payload: account });
     } else {
-      showWarningNotification(intl.formatMessage(Messages.Text_Login_FailMsg));
+      showWarningNotification(
+        intl.formatMessage(Messages.Text_Login_FailMsg),
+        Math.random()
+      );
     }
   };
 
@@ -96,7 +99,7 @@ const Login = () => {
     <div style={{ backgroundColor: "black" }}>
       {playAnime ? (
         <div
-        id="test"
+          id="test"
           className="container"
           style={{ backgroundImage: `url(${afterLoginBackground})` }}
         >

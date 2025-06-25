@@ -130,12 +130,14 @@ const TemplateSetting = () => {
       );
       if (result) {
         showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_Common_OperationSuccess)
+          intl.formatMessage(Messages.Text_Common_OperationSuccess),
+          Math.random()
         );
         setReload(Math.random);
       } else {
         showWarningNotification(
-          intl.formatMessage(Messages.Text_DeviceSetting_OperationFailed)
+          intl.formatMessage(Messages.Text_DeviceSetting_OperationFailed),
+          Math.random()
         );
       }
       setIsEdited(false);
@@ -146,7 +148,8 @@ const TemplateSetting = () => {
       // setEditedIP("");
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_Common_RequiredHint)
+        intl.formatMessage(Messages.Text_Common_RequiredHint),
+        Math.random()
       );
     }
   };

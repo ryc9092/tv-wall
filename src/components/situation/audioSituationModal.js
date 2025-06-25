@@ -111,7 +111,8 @@ const AudioSituationModal = ({
       setIsModalOpen(false);
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_Common_RequiredHint)
+        intl.formatMessage(Messages.Text_Common_RequiredHint),
+          Math.random()
       );
     }
   };

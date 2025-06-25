@@ -226,11 +226,13 @@ const SituationAudio = ({
         openParentModal(false);
         setReloadPresetDetails(Math.random());
         showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_Audio_CreateConnectionSuccess)
+          intl.formatMessage(Messages.Text_Audio_CreateConnectionSuccess),
+          Math.random()
         );
       } else {
         showWarningNotification(
-          intl.formatMessage(Messages.Text_Audio_CreateConnectionFail)
+          intl.formatMessage(Messages.Text_Audio_CreateConnectionFail),
+          Math.random()
         );
       }
     }

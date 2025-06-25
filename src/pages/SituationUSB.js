@@ -223,11 +223,13 @@ const SituationUSB = ({
         openParentModal(false);
         setReloadPresetDetails(Math.random());
         showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_USB_CreateConnectionSuccess)
+          intl.formatMessage(Messages.Text_USB_CreateConnectionSuccess),
+          Math.random()
         );
       } else {
         showWarningNotification(
-          intl.formatMessage(Messages.Text_USB_CreateConnectionFail)
+          intl.formatMessage(Messages.Text_USB_CreateConnectionFail),
+          Math.random()
         );
       }
     }

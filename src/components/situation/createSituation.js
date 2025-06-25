@@ -46,7 +46,8 @@ const CreateSituationModal = ({
       }
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_Situation_CreateRequiredHint)
+        intl.formatMessage(Messages.Text_Situation_CreateRequiredHint),
+        Math.random()
       );
     }
   };
