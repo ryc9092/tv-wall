@@ -170,12 +170,20 @@ const TVWall = () => {
     activeWall(data).then((result) => {
       if (result) {
         showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_TVWall_ActiveSuccess),
+          intl.formatMessage(Messages.Text_TVWall_ProjectVideoSuccess, {
+            source: selectedEncoder.nickName,
+            destination: selectedWall.label,
+            block: selectedBlockNumber,
+          }),
           Math.random()
         );
       } else {
         showWarningNotification(
-          intl.formatMessage(Messages.Text_TVWall_ActiveFail),
+          intl.formatMessage(Messages.Text_TVWall_ProjectVideoFail, {
+            source: selectedEncoder.nickName,
+            destination: selectedWall.label,
+            block: selectedBlockNumber,
+          }),
           Math.random()
         );
       }
@@ -263,7 +271,11 @@ const TVWall = () => {
           if (!result) throw new Error("call api failed");
           else {
             showSuccessNotificationByMsg(
-              intl.formatMessage(Messages.Text_TVWall_DeactiveSuccess),
+              intl.formatMessage(Messages.Text_TVWall_DeactiveBlockSuccess, {
+                source: selectedEncoder.nickName,
+                destination: selectedWall.label,
+                block: clearBlockNumber,
+              }),
               Math.random()
             );
             setClearBlockNumber(null);
@@ -271,7 +283,11 @@ const TVWall = () => {
           }
         } catch (error) {
           showWarningNotification(
-            intl.formatMessage(Messages.Text_TVWall_DeactiveFail),
+            intl.formatMessage(Messages.Text_TVWall_DeactiveBlockFail, {
+              source: selectedEncoder.nickName,
+              destination: selectedWall.label,
+              block: clearBlockNumber,
+            }),
             Math.random()
           );
         }
@@ -314,12 +330,16 @@ const TVWall = () => {
       setBlocks(tempblocks);
       setBlockEncoderMapping({});
       showSuccessNotificationByMsg(
-        intl.formatMessage(Messages.Text_TVWall_DeactiveSuccess),
+        intl.formatMessage(Messages.Text_TVWall_DeactiveSuccess, {
+          destination: selectedWall.label,
+        }),
         Math.random()
       );
     } catch (error) {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_TVWall_DeactiveFail),
+        intl.formatMessage(Messages.Text_TVWall_DeactiveFail, {
+          destination: selectedWall.label,
+        }),
         Math.random()
       );
     }

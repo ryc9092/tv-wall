@@ -294,6 +294,16 @@ export default defineMessages({
     id: "Text-TVWall-InputEncoder",
     defaultMessage: "輸入影像來源名稱",
   },
+  Text_TVWall_ProjectVideoSuccess: {
+    id: "Text-TVWall-ProjectVideoSuccess",
+    defaultMessage:
+      "影像來源 [{source}] 已投放至 [{destination}] [區塊{block}]",
+  },
+  Text_TVWall_ProjectVideoFail: {
+    id: "Text-TVWall-ProjectVideoFail",
+    defaultMessage:
+      "影像來源 [{source}] 無法投放至 [{destination}] [區塊{block}] 請檢查來源/終端設備是否上線及輸出入狀態",
+  },
   Text_TVWall_ActiveSuccess: {
     id: "Text-TVWall-ActiveSuccess",
     defaultMessage: "投放影像成功",
@@ -304,11 +314,19 @@ export default defineMessages({
   },
   Text_TVWall_DeactiveSuccess: {
     id: "Text-TVWall-DeactiveSuccess",
-    defaultMessage: "清除影像連結成功",
+    defaultMessage: "完成清除 [{destination}] 牆面所有當前播放影像",
   },
   Text_TVWall_DeactiveFail: {
     id: "Text-TVWall-DeactiveFail",
-    defaultMessage: "清除影像連結失敗",
+    defaultMessage: "無法清除 [{destination}] 牆面所有當前播放影像",
+  },
+  Text_TVWall_DeactiveBlockSuccess: {
+    id: "Text-TVWall-DeactiveBlockSuccess",
+    defaultMessage: "完成清除 [{destination}] 牆面 [區塊{block}] 當前播放影像",
+  },
+  Text_TVWall_DeactiveBlockFail: {
+    id: "Text-TVWall-DeactiveBlockFail",
+    defaultMessage: "無法清除 [{destination}] 牆面 [區塊{block}] 當前播放影像",
   },
   Text_TVWall_ConnectSource: {
     id: "Text-TVWall-ConnectSource",
@@ -458,7 +476,7 @@ export default defineMessages({
     id: "Text-USB-RemoveConnection",
     defaultMessage: "刪除USB連結",
   },
-    Text_USB_RemoveConnectionTitle: {
+  Text_USB_RemoveConnectionTitle: {
     id: "Text-USB-RemoveConnectionTitle",
     defaultMessage: "刪除USB連結",
   },
@@ -601,7 +619,6 @@ export default defineMessages({
     defaultMessage: "輸入音頻路由相關說明",
   },
 
-
   // Situation
   Text_Situation_Title: {
     id: "Text-Situation-Title",
@@ -743,7 +760,6 @@ export default defineMessages({
     id: "Text-Situation-DeleteConfirm",
     defaultMessage: "確認要刪除此情境?",
   },
-
 
   // Situation legacy
   Text_Situation_Activate: {
