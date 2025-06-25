@@ -112,7 +112,7 @@ const AudioSituationModal = ({
     } else {
       showWarningNotification(
         intl.formatMessage(Messages.Text_Common_RequiredHint),
-          Math.random()
+        Math.random()
       );
     }
   };
