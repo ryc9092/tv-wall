@@ -14,7 +14,11 @@ import {
 import ConfirmModal from "../components/common/confirmModal";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
-import { showWarningNotification, sleep } from "../utils/Utils";
+import {
+  showSuccessNotificationByMsg,
+  showWarningNotification,
+  sleep,
+} from "../utils/Utils";
 import PlusIcon from "../assets/plus.png";
 import CaretLeftIcon from "../assets/caret-left.png";
 import PencilIcon from "../assets/pencil.png";
@@ -102,12 +106,33 @@ const USB = () => {
   }, [decoders, deviceLinks, encoders, searchFilter]);
 
   const handleRemoveLink = async (encoderMac, decoderMac) => {
-    await removeDeviceLink({
+    const result = await removeDeviceLink({
       store: store,
       linkType: `usb`,
       encoder: encoderMac,
       decoders: [decoderMac],
     });
+    if (result) {
+      showSuccessNotificationByMsg(
+        intl.formatMessage(Messages.Text_USB_ClearLinkSuccess, {
+          source: encoders.find((encoder) => encoder.mac === encoderMac)
+            .nickName,
+          destination: decoders.find((decoder) => decoder.mac === decoderMac)
+            .nickName,
+        }),
+        Math.random()
+      );
+    } else {
+      showWarningNotification(
+        intl.formatMessage(Messages.Text_USB_ClearLinkFail, {
+          source: encoders.find((encoder) => encoder.mac === encoderMac)
+            .nickName,
+          destination: decoders.find((decoder) => decoder.mac === decoderMac)
+            .nickName,
+        }),
+        Math.random()
+      );
+    }
     sleep(800).then(() => {
       setReload(Math.random());
     });
@@ -353,9 +378,26 @@ const USB = () => {
       remark: "",
       isPreset: "N",
     });
-    if (!result) {
+    if (result) {
+      showSuccessNotificationByMsg(
+        intl.formatMessage(Messages.Text_USB_LinkSuccess, {
+          source: encoders.find((encoder) => encoder.mac === selectedEncoder)
+            .nickName,
+          destination: decoders.find(
+            (decoder) => decoder.mac === selectedDecoders[0]
+          ).nickName,
+        }),
+        Math.random()
+      );
+    } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_Common_OperationFailed),
+        intl.formatMessage(Messages.Text_USB_LinkFail, {
+          source: encoders.find((encoder) => encoder.mac === selectedEncoder)
+            .nickName,
+          destination: decoders.find(
+            (decoder) => decoder.mac === selectedDecoders[0]
+          ).nickName,
+        }),
         Math.random()
       );
     }

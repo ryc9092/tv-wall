@@ -488,6 +488,22 @@ export default defineMessages({
     id: "Text-USB-PreviewRequiredHint",
     defaultMessage: "未選擇輸入來源/輸出終端",
   },
+  Text_USB_LinkSuccess: {
+    id: "Text-USB-LinkSuccess",
+    defaultMessage: "USB來源 [{source}] -> USB終端 [{destination}] 連接成功",
+  },
+  Text_USB_LinkFail: {
+    id: "Text-USB-LinkFail",
+    defaultMessage: "USB來源 [{source}] -> USB終端 [{destination}] 連接失敗",
+  },
+  Text_USB_ClearLinkSuccess: {
+    id: "Text-USB-ClearLinkSuccess",
+    defaultMessage: "完成解除USB來源 [{source}] -> USB終端 [{destination}] 連接",
+  },
+  Text_USB_ClearLinkFail: {
+    id: "Text-USB-ClearLinkFail",
+    defaultMessage: "無法解除USB來源 [{source}] ->USB終端 [{destination}] 連接",
+  },
 
   // Audio management
   Text_Audio_AudioMgmt: {

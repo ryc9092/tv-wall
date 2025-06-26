@@ -128,6 +128,8 @@
   "Text-USB-Operation": "操作",
   "Text-USB-RemoveConnection": "刪除USB連結",
   "Text-USB-RemoveConnectionConfirm": "確定要刪除此USB連結?",
+  "Text-USB-LinkSuccess": "USB來源 [{source}] -> USB終端 [{destination}] 連接成功",
+  "Text-USB-LinkFail": "USB來源 [{source}] -> USB終端 [{destination}] 連接失敗",
 
   "Text-Audio-AudioMgmt": "音頻路由",
   "Text-Audio-AddAudio": "新增路由",
