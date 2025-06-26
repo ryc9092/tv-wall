@@ -139,11 +139,14 @@ const SingleScreen = () => {
           );
         } else {
           showWarningNotification(
-            intl.formatMessage(Messages.Text_SingleScreen_VideoClearFail, {
-              destination: decoders.find(
-                (decoder) => decoder.mac === decoderMac
-              ).nickName,
-            }),
+            <span>{
+              intl.formatMessage(Messages.Text_SingleScreen_VideoClearFail, {
+                destination: decoders.find(
+                  (decoder) => decoder.mac === decoderMac
+                ).nickName,
+              })}<br />{
+                intl.formatMessage(Messages.Text_SingleScreen_VideoClearFailHint)}
+            </span>,
             Math.random()
           );
         }
@@ -182,8 +185,8 @@ const SingleScreen = () => {
                 selectedScreen === decoder.mac
                   ? "single-screen-card-selected"
                   : decoder.encoder.mac
-                  ? "single-screen-card-with-source"
-                  : "single-screen-card"
+                    ? "single-screen-card-with-source"
+                    : "single-screen-card"
               }
             >
               <div
@@ -328,12 +331,14 @@ const SingleScreen = () => {
           );
         } else {
           showWarningNotification(
-            intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail, {
-              source: selectedEncoder.nickName,
-              destination: decoders.find(
-                (decoder) => decoder.mac === selectedScreen
-              ).nickName,
-            }),
+            <span>
+              {intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail, {
+                source: selectedEncoder.nickName,
+                destination: decoders.find(
+                  (decoder) => decoder.mac === selectedScreen
+                ).nickName,
+              })}<br />{intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFailHint)}
+            </span>,
             Math.random()
           );
         }
@@ -392,11 +397,11 @@ const SingleScreen = () => {
           style={
             store.siderCollapse
               ? {
-                  width: width - 431,
-                }
+                width: width - 431,
+              }
               : {
-                  width: width - 600,
-                }
+                width: width - 600,
+              }
           }
           gutter={[6, 6]}
         >

@@ -110,9 +110,11 @@
   "Text-SingleScreen-PlayGroupVideo": "投放群組影像",
   "Text-SingleScreen-VideoPlaySuccess": "影像來源 [{source}] 已投放至 [{destination}]",
   "Text-SingleScreen-GroupVideoPlaySuccess": "群組之影像已投放顯示器",
-  "Text-SingleScreen-VideoPlayFail": "影像來源 [{source}] 無法投放至 [{destination}] 請檢查來源/終端設備是否上線及輸出入狀態",
+  "Text-SingleScreen-VideoPlayFail": "影像來源 [{source}] 無法投放至 [{destination}]",
+  "Text-SingleScreen-VideoPlayFailHint": "請檢查來源/終端設備是否上線及輸出入狀態",
   "Text-SingleScreen-VideoClearSuccess": "完成清除顯示終端 [{destination}] 當前投放影像",
   "Text-SingleScreen-VideoClearFail": "無法清除顯示終端 [{destination}] 當前投放影像",
+  "Text-SingleScreen-VideoClearFailHint": "請檢查終端設備是否上線",
 
   "Text-USB-USBMgmt": "USB管理",
   "Text-USB-InputUSBSource": "輸入USB來源名稱",
