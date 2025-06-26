@@ -26,6 +26,10 @@ import TVWallViewModal from "../components/tvwall/situationTvWallView";
 import USBViewModal from "../components/usb/usbViewModal";
 import SingleScreenViewModal from "../components/singleScreen/singleScreenViewModal";
 import AudioViewHintModal from "../components/audio/audioViewHintModal";
+import {
+  showWarningNotification,
+  showSuccessNotificationByMsg,
+} from "../utils/Utils";
 import PlayIcon from "../assets/play-black.png";
 import PauseIcon from "../assets/pause.png";
 import ViewIcon from "../assets/view.png";
@@ -69,7 +73,30 @@ const Situation = () => {
   // play situation
   const [situationActivated, setSituationActivated] = useState([]);
   const startSituation = async (situationId) => {
-    activateSituation(situationId, store).then(() => {
+    activateSituation(situationId, store).then((result) => {
+      if (result) {
+        showSuccessNotificationByMsg(
+          <span>
+            {intl.formatMessage(Messages.Text_Situation_PlaySuccess, {
+              name: situations.find((situation) => situation.id === situationId)
+                .name,
+            })}
+          </span>,
+          Math.random()
+        );
+      } else {
+        showWarningNotification(
+          <span>
+            {intl.formatMessage(Messages.Text_Situation_PlayFail, {
+              name: situations.find((situation) => situation.id === situationId)
+                .name,
+            })}
+            <br />
+            {intl.formatMessage(Messages.Text_Situation_PlayFailHint)}
+          </span>,
+          Math.random()
+        );
+      }
       let idx = situationActivatedList.indexOf(situationId);
       situationActivatedList.splice(idx, 1);
       setSituationActivated(situationActivatedList);

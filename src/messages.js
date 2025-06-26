@@ -829,6 +829,34 @@ export default defineMessages({
     id: "Text-Situation-DeleteConfirm",
     defaultMessage: "確認要刪除此情境?",
   },
+  Text_Situation_CreateSuccess: {
+    id: "Text-Situation-CreateSuccess",
+    defaultMessage: "情境 [{name}] 已新增至情境列表",
+  },
+  Text_Situation_CreateSuccessHint: {
+    id: "Text-Situation-CreateSuccessHint",
+    defaultMessage: "如欲執行，請至列表按下執行按鈕",
+  },
+  Text_Situation_CreateFail: {
+    id: "Text-Situation-CreateFail",
+    defaultMessage: "無法新增情境 [{name}] 至情境列表",
+  },
+  Text_Situation_CreateFailHint: {
+    id: "Text-Situation-CreateFailHint",
+    defaultMessage: "請檢查伺服器連線狀態",
+  },
+  Text_Situation_PlaySuccess: {
+    id: "Text-Situation-PlaySuccess",
+    defaultMessage: "完成執行情境 [{name}]",
+  },
+  Text_Situation_PlayFail: {
+    id: "Text-Situation-PlayFail",
+    defaultMessage: "無法完成執行情境 [{name}]",
+  },
+  Text_Situation_PlayFailHint: {
+    id: "Text-Situation-PlayFailHint",
+    defaultMessage: "請檢查各子情境設備是否所有設備均已上線",
+  },
 
   // Situation legacy
   Text_Situation_Activate: {

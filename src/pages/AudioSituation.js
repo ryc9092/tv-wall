@@ -8,7 +8,7 @@ import {
   showWarningNotification,
   showSuccessNotificationByMsg,
 } from "../utils/Utils";
-import CreateSituation from "../components/situation/createSituation";
+import CreateSituation from "../components/situation/createAudioSituation";
 import {
   getEncoders,
   getDecoders,
