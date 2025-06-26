@@ -40,7 +40,7 @@ const TemplateSetting = () => {
     })();
   }, [reload, store]);
 
-  const [openConfirmModal, setOpenConfirmModal] = useState(true);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [deleteTemplateId, setDeleteTemplateId] = useState(null);
   const columns = [
     {
