@@ -130,12 +130,20 @@ const SingleScreen = () => {
         });
         if (result) {
           showSuccessNotificationByMsg(
-            intl.formatMessage(Messages.Text_SingleScreen_VideoClearSuccess),
+            intl.formatMessage(Messages.Text_SingleScreen_VideoClearSuccess, {
+              destination: decoders.find(
+                (decoder) => decoder.mac === decoderMac
+              ).nickName,
+            }),
             Math.random()
           );
         } else {
           showWarningNotification(
-            intl.formatMessage(Messages.Text_SingleScreen_VideoClearFail),
+            intl.formatMessage(Messages.Text_SingleScreen_VideoClearFail, {
+              destination: decoders.find(
+                (decoder) => decoder.mac === decoderMac
+              ).nickName,
+            }),
             Math.random()
           );
         }
@@ -310,12 +318,22 @@ const SingleScreen = () => {
       }).then((result) => {
         if (result) {
           showSuccessNotificationByMsg(
-            intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess),
+            intl.formatMessage(Messages.Text_SingleScreen_VideoPlaySuccess, {
+              source: selectedEncoder.nickName,
+              destination: decoders.find(
+                (decoder) => decoder.mac === selectedScreen
+              ).nickName,
+            }),
             Math.random()
           );
         } else {
           showWarningNotification(
-            intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail),
+            intl.formatMessage(Messages.Text_SingleScreen_VideoPlayFail, {
+              source: selectedEncoder.nickName,
+              destination: decoders.find(
+                (decoder) => decoder.mac === selectedScreen
+              ).nickName,
+            }),
             Math.random()
           );
         }

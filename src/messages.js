@@ -396,7 +396,7 @@ export default defineMessages({
   },
   Text_SingleScreen_VideoPlaySuccess: {
     id: "Text-SingleScreen-VideoPlaySuccess",
-    defaultMessage: "影像已投放至顯示器",
+    defaultMessage: "影像來源 [{source}] 已投放至 [{destination}]",
   },
   Text_SingleScreen_GroupVideoPlaySuccess: {
     id: "Text-SingleScreen-GroupVideoPlaySuccess",
@@ -404,15 +404,15 @@ export default defineMessages({
   },
   Text_SingleScreen_VideoPlayFail: {
     id: "Text-SingleScreen-VideoPlayFail",
-    defaultMessage: "投放失敗",
+    defaultMessage: "影像來源 [{source}] 無法投放至 [{destination}] 請檢查來源/終端設備是否上線及輸出入狀態",
   },
   Text_SingleScreen_VideoClearSuccess: {
     id: "Text-SingleScreen-VideoClearSuccess",
-    defaultMessage: "影像清除成功",
+    defaultMessage: "完成清除顯示終端 [{destination}] 當前投放影像",
   },
   Text_SingleScreen_VideoClearFail: {
     id: "Text-SingleScreen-VideoClearFail",
-    defaultMessage: "影像清除失敗",
+    defaultMessage: "無法清除顯示終端 [{destination}] 當前投放影像",
   },
   Text_SingleScreen_PreviewRequiredHint: {
     id: "Text-SingleScreen-PreviewRequiredHint",
