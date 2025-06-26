@@ -634,6 +634,34 @@ export default defineMessages({
     id: "Text-Audio-InputDescription",
     defaultMessage: "輸入音頻路由相關說明",
   },
+  Text_Audio_CreateSuccess: {
+    id: "Text-Audio-CreateSuccess",
+    defaultMessage: "音頻路由 [{name}] 已新增至音頻路由清單",
+  },
+  Text_Audio_CreateSuccessHint: {
+    id: "Text-Audio-CreateSuccessHint",
+    defaultMessage: "如欲執行，請至清單按下執行按鈕",
+  },
+  Text_Audio_CreateFail: {
+    id: "Text-Audio-CreateFail",
+    defaultMessage: "無法新增音頻路由 [{name}] 至音頻路由清單",
+  },
+  Text_Audio_CreateFailHint: {
+    id: "Text-Audio-CreateFailHint",
+    defaultMessage: "請檢查伺服器連線狀態",
+  },
+  Text_Audio_PlaySuccess: {
+    id: "Text-Audio-PlaySuccess",
+    defaultMessage: "完成執行音頻路由 [{name}]",
+  },
+  Text_Audio_PlayFail: {
+    id: "Text-USB-PlayFail",
+    defaultMessage: "無法完成執行音頻路由 [{name}]",
+  },
+  Text_Audio_PlayFailHint: {
+    id: "Text-USB-PlayFailHint",
+    defaultMessage: "請檢查音頻路由是否所有設備均已上線",
+  },
 
   // Situation
   Text_Situation_Title: {

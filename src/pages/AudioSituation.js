@@ -4,6 +4,10 @@ import { Button, Dropdown, Table, Modal, Popconfirm } from "antd";
 import { StoreContext } from "../components/store/store";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
+import {
+  showWarningNotification,
+  showSuccessNotificationByMsg,
+} from "../utils/Utils";
 import CreateSituation from "../components/situation/createSituation";
 import {
   getEncoders,
@@ -62,7 +66,30 @@ const AudioSituation = () => {
   // play situation
   const [situationActivated, setSituationActivated] = useState([]);
   const startSituation = async (situationId) => {
-    activateSituation(situationId, store).then(() => {
+    activateSituation(situationId, store).then((result) => {
+      if (result) {
+        showSuccessNotificationByMsg(
+          <span>
+            {intl.formatMessage(Messages.Text_Audio_PlaySuccess, {
+              name: situations.find((situation) => situation.id === situationId)
+                .name,
+            })}
+          </span>,
+          Math.random()
+        );
+      } else {
+        showWarningNotification(
+          <span>
+            {intl.formatMessage(Messages.Text_Audio_PlayFail, {
+              name: situations.find((situation) => situation.id === situationId)
+                .name,
+            })}
+            <br />
+            {intl.formatMessage(Messages.Text_Audio_PlayFailHint)}
+          </span>,
+          Math.random()
+        );
+      }
       let idx = situationActivatedList.indexOf(situationId);
       situationActivatedList.splice(idx, 1);
       setSituationActivated(situationActivatedList);

@@ -5,7 +5,10 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { createSituation } from "../../api/API";
 import { uuid } from "../../utils/Utils";
 import Messages from "../../messages";
-import { showWarningNotification } from "../../utils/Utils";
+import {
+  showSuccessNotificationByMsg,
+  showWarningNotification,
+} from "../../utils/Utils";
 import "./createSituation.scss";
 import "../../pages/Situation.scss";
 
@@ -29,13 +32,36 @@ const CreateSituationModal = ({
   const onCreateSituation = async (values) => {
     if (values.name) {
       let situationId = `preset.${uuid()}`;
-      await createSituation({
+      const result = await createSituation({
         id: situationId,
         name: values.name,
         description: values.description ? values.description : "",
         category: category,
         store: store,
       });
+      if (result) {
+        showSuccessNotificationByMsg(
+          <span>
+            {intl.formatMessage(Messages.Text_Audio_CreateSuccess, {
+              name: values.name,
+            })}
+            <br />
+            {intl.formatMessage(Messages.Text_Audio_CreateSuccessHint)}
+          </span>,
+          Math.random()
+        );
+      } else {
+        showWarningNotification(
+          <span>
+            {intl.formatMessage(Messages.Text_Audio_CreateFail, {
+              name: values.name,
+            })}
+            <br />
+            {intl.formatMessage(Messages.Text_Audio_CreateFailHint)}
+          </span>,
+          Math.random()
+        );
+      }
       form.resetFields();
       setReload(Math.random());
       setIsModalOpen(false);
