@@ -124,12 +124,14 @@ const USB = () => {
       );
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_USB_ClearLinkFail, {
-          source: encoders.find((encoder) => encoder.mac === encoderMac)
-            .nickName,
-          destination: decoders.find((decoder) => decoder.mac === decoderMac)
-            .nickName,
-        }),
+        <span>
+          {intl.formatMessage(Messages.Text_USB_ClearLinkFail, {
+            source: encoders.find((encoder) => encoder.mac === encoderMac)
+              .nickName,
+            destination: decoders.find((decoder) => decoder.mac === decoderMac)
+              .nickName,
+          })}<br />{intl.formatMessage(Messages.Text_USB_LinkFailHint)}
+        </span>,
         Math.random()
       );
     }
@@ -391,13 +393,15 @@ const USB = () => {
       );
     } else {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_USB_LinkFail, {
-          source: encoders.find((encoder) => encoder.mac === selectedEncoder)
-            .nickName,
-          destination: decoders.find(
-            (decoder) => decoder.mac === selectedDecoders[0]
-          ).nickName,
-        }),
+        <span>
+          {intl.formatMessage(Messages.Text_USB_LinkFail, {
+            source: encoders.find((encoder) => encoder.mac === selectedEncoder)
+              .nickName,
+            destination: decoders.find(
+              (decoder) => decoder.mac === selectedDecoders[0]
+            ).nickName,
+          })}<br />{intl.formatMessage(Messages.Text_USB_LinkFailHint)}
+        </span>,
         Math.random()
       );
     }

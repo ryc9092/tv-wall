@@ -517,6 +517,10 @@ export default defineMessages({
     id: "Text-USB-LinkFail",
     defaultMessage: "USB來源 [{source}] -> USB終端 [{destination}] 連接失敗",
   },
+  Text_USB_LinkFailHint: {
+    id: "Text-USB-LinkFailHint",
+    defaultMessage: "請檢查USB來源及終端設備是否均上線",
+  },
   Text_USB_ClearLinkSuccess: {
     id: "Text-USB-ClearLinkSuccess",
     defaultMessage: "完成解除USB來源 [{source}] -> USB終端 [{destination}] 連接",
