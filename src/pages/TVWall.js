@@ -179,11 +179,14 @@ const TVWall = () => {
         );
       } else {
         showWarningNotification(
-          intl.formatMessage(Messages.Text_TVWall_ProjectVideoFail, {
-            source: selectedEncoder.nickName,
-            destination: selectedWall.label,
-            block: selectedBlockNumber,
-          }),
+          <span>
+            {intl.formatMessage(Messages.Text_TVWall_ProjectVideoFail, {
+              source: selectedEncoder.nickName,
+              destination: selectedWall.label,
+              block: selectedBlockNumber,
+            })}<br />
+            {intl.formatMessage(Messages.Text_TVWall_ProjectVideoFailHint)}
+          </span>,
           Math.random()
         );
       }
@@ -283,11 +286,14 @@ const TVWall = () => {
           }
         } catch (error) {
           showWarningNotification(
-            intl.formatMessage(Messages.Text_TVWall_DeactiveBlockFail, {
-              source: selectedEncoder.nickName,
-              destination: selectedWall.label,
-              block: clearBlockNumber,
-            }),
+            <span>
+              {intl.formatMessage(Messages.Text_TVWall_DeactiveBlockFail, {
+                source: selectedEncoder.nickName,
+                destination: selectedWall.label,
+                block: clearBlockNumber,
+              })}<br />
+              {intl.formatMessage(Messages.Text_TVWall_DeactiveBlockFailHint)}
+            </span>,
             Math.random()
           );
         }
@@ -337,9 +343,11 @@ const TVWall = () => {
       );
     } catch (error) {
       showWarningNotification(
-        intl.formatMessage(Messages.Text_TVWall_DeactiveFail, {
-          destination: selectedWall.label,
-        }),
+        <span>
+          {intl.formatMessage(Messages.Text_TVWall_DeactiveFail, {
+            destination: selectedWall.label,
+          })}<br />{intl.formatMessage(Messages.Text_TVWall_DeactiveFailHint)}
+        </span>,
         Math.random()
       );
     }
@@ -435,17 +443,17 @@ const TVWall = () => {
           style={
             store.siderCollapse
               ? {
-                  width: width - 463,
-                  height: height - 262,
-                  // border: "1px solid #a5a5a5",
-                  // borderRadius: "8px",
-                }
+                width: width - 463,
+                height: height - 262,
+                // border: "1px solid #a5a5a5",
+                // borderRadius: "8px",
+              }
               : {
-                  width: width - 614,
-                  height: height - 258,
-                  // border: "1px solid #a5a5a5",
-                  // borderRadius: "8px",
-                }
+                width: width - 614,
+                height: height - 258,
+                // border: "1px solid #a5a5a5",
+                // borderRadius: "8px",
+              }
           }
         >
           <div style={{ position: "relative" }}>

@@ -88,6 +88,7 @@
   "Text-TVWall-ActiveFail": "投放失敗",
   "Text-TVWall-DeactiveSuccess": "完成清除 [{destination}] 牆面所有當前播放影像",
   "Text-TVWall-DeactiveFail": "無法清除 [{destination}] 牆面所有當前播放影像",
+  "Text-TVWall-DeactiveFailHint": "請檢查該牆面終端設備是否均上線",
   "Text-TVWall-DeactiveBlockSuccess": "完成清除 [{destination}] 牆面 [區塊{block}] 當前播放影像",
   "Text-TVWall-DeactiveBlockFail": "無法清除 [{destination}] 牆面 [區塊{block}] 當前播放影像",
   "Text-TVWall-ConnectSource": "連接影像來源",

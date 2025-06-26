@@ -302,7 +302,12 @@ export default defineMessages({
   Text_TVWall_ProjectVideoFail: {
     id: "Text-TVWall-ProjectVideoFail",
     defaultMessage:
-      "影像來源 [{source}] 無法投放至 [{destination}] [區塊{block}] 請檢查來源/終端設備是否上線及輸出入狀態",
+      "影像來源 [{source}] 無法投放至 [{destination}] [區塊{block}]",
+  },
+  Text_TVWall_ProjectVideoFailHint: {
+    id: "Text-TVWall-ProjectVideoFailHint",
+    defaultMessage:
+      "請檢查來源/終端設備是否上線及輸出入狀態",
   },
   Text_TVWall_ActiveSuccess: {
     id: "Text-TVWall-ActiveSuccess",
@@ -320,6 +325,10 @@ export default defineMessages({
     id: "Text-TVWall-DeactiveFail",
     defaultMessage: "無法清除 [{destination}] 牆面所有當前播放影像",
   },
+  Text_TVWall_DeactiveFailHint: {
+    id: "Text-TVWall-DeactiveFailHint",
+    defaultMessage: "請檢查該牆面終端設備是否均上線",
+  },
   Text_TVWall_DeactiveBlockSuccess: {
     id: "Text-TVWall-DeactiveBlockSuccess",
     defaultMessage: "完成清除 [{destination}] 牆面 [區塊{block}] 當前播放影像",
@@ -327,6 +336,10 @@ export default defineMessages({
   Text_TVWall_DeactiveBlockFail: {
     id: "Text-TVWall-DeactiveBlockFail",
     defaultMessage: "無法清除 [{destination}] 牆面 [區塊{block}] 當前播放影像",
+  },
+  Text_TVWall_DeactiveBlockFailHint: {
+    id: "Text-TVWall-DeactiveBlockFailHint",
+    defaultMessage: "請檢查終端設備是否上線",
   },
   Text_TVWall_ConnectSource: {
     id: "Text-TVWall-ConnectSource",
