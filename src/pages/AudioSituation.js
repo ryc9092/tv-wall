@@ -477,7 +477,7 @@ const AudioSituation = () => {
     <div>
       <div>
         <span style={{ marginRight: 12 }}>
-          <FormattedMessage {...Messages.Text_Common_Name} />
+          <FormattedMessage {...Messages.Text_Audio_AudioName} />
           {" : "}
           {
             situations?.find((situation) => situation.id === deleteSituationId)

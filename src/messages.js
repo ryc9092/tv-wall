@@ -689,6 +689,10 @@ export default defineMessages({
   },
 
   // Situation
+  Text_Situation_SituationName: {
+    id: "Text-Situation-SituationName",
+    defaultMessage: "情境名稱",
+  },
   Text_Situation_Title: {
     id: "Text-Situation-Title",
     defaultMessage: "情境管理",
