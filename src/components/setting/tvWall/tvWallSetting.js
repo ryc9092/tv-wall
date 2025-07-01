@@ -231,12 +231,16 @@ const TVWallSetting = () => {
     <div>
       <div>
         <span style={{ marginRight: 12 }}>
-          <FormattedMessage {...Messages.Text_Common_Name} />
+          <span style={{ lineHeight: 2 }}>
+            <FormattedMessage {...Messages.Text_WallSetting_WallName1} />
+            {" : "}
+            {walls?.find((wall) => wall.wallId === deleteWallId)?.wallName}
+          </span>
+          <br />
+          <FormattedMessage {...Messages.Text_WallSetting_WallDimension1} />
           {" : "}
-          {
-            walls?.find((wall) => wall.wallId === deleteWallId)
-              ?.wallName
-          }
+          {walls?.find((wall) => wall.wallId === deleteWallId)?.col}
+          {" X "} {walls?.find((wall) => wall.wallId === deleteWallId)?.row}
         </span>
       </div>
       <br />

@@ -184,7 +184,7 @@ export default defineMessages({
   },
   Text_Sidebar_SingleScreenManagement: {
     id: "Text-Sidebar-SingleScreenManagement",
-    defaultMessage: "單畫面影像管理",
+    defaultMessage: "單顯示畫面管理",
   },
   Text_Sidebar_AudioManagement: {
     id: "Text-Sidebar-AudioManagement",
@@ -357,7 +357,7 @@ export default defineMessages({
   // Single screen management
   Text_SingleScreen_Management: {
     id: "Text-SingleScreen-Management",
-    defaultMessage: "單畫面影像管理",
+    defaultMessage: "單顯示畫面管理",
   },
   Text_SingleScreen_TabSingleScreen: {
     id: "Text-SingleScreen-TabSingleScreen",
@@ -689,10 +689,6 @@ export default defineMessages({
   },
 
   // Situation
-  Text_Situation_SituationName: {
-    id: "Text-Situation-SituationName",
-    defaultMessage: "情境名稱",
-  },
   Text_Situation_Title: {
     id: "Text-Situation-Title",
     defaultMessage: "情境管理",
@@ -1001,7 +997,11 @@ export default defineMessages({
   },
   Text_TemplateSetting_RemoveTemplateConfirm: {
     id: "Text-TemplateSetting-RemoveTemplateConfirm",
-    defaultMessage: "請確認此版型是否正在使用後再進行刪除",
+    defaultMessage: "請確認此版型是否正在使用後，再進行刪除",
+  },
+  Text_TemplateSetting_WallDimension: {
+    id: "Text-TemplateSetting-WallDimension",
+    defaultMessage: "對應牆面尺寸",
   },
   Text_TemplateSetting_CreateWallTemplate: {
     id: "Text-TemplateSetting-CreateWallTemplate",
@@ -1079,6 +1079,14 @@ export default defineMessages({
   },
 
   // System setting - wall setting
+  Text_WallSetting_WallName1: {
+    id: "Text-WallSetting-WallName1",
+    defaultMessage: "牆面名稱",
+  },
+  Text_WallSetting_WallDimension1: {
+    id: "Text-WallSetting-WallDimension1",
+    defaultMessage: "牆面尺寸",
+  },
   Text_WallSetting_WallSetting: {
     id: "Text-WallSetting-WallSetting",
     defaultMessage: "牆面組態設定",

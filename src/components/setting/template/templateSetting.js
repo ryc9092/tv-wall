@@ -221,12 +221,28 @@ const TemplateSetting = () => {
     <div>
       <div>
         <span style={{ marginRight: 12 }}>
-          <FormattedMessage {...Messages.Text_Common_Name} />
+          <span style={{ lineHeight: 2 }}>
+            <FormattedMessage {...Messages.Text_Common_Name} />
+            {" : "}
+            {
+              templates?.find(
+                (template) => template.templateId === deleteTemplateId
+              )?.templateName
+            }
+          </span>
+          <br />
+          <FormattedMessage {...Messages.Text_TemplateSetting_WallDimension} />
           {" : "}
           {
             templates?.find(
               (template) => template.templateId === deleteTemplateId
-            )?.templateName
+            )?.col
+          }
+          {" X "}
+          {
+            templates?.find(
+              (template) => template.templateId === deleteTemplateId
+            )?.row
           }
         </span>
       </div>

@@ -95,7 +95,7 @@
   "Text-TVWall-ConfirmClear": "是否確認清除當前所有投放於實體牆面之影像?",
   "Text-TVWall-PreviewRequiredHint": "未選擇電視牆名稱/版型",
 
-  "Text-SingleScreen-Management": "單畫面影像管理",
+  "Text-SingleScreen-Management": "單顯示畫面管理",
   "Text-SingleScreen-TabSingleScreen": "單顯示器",
   "Text-SingleScreen-Screen": "顯示終端",
   "Text-SingleScreen-Group": "顯示終端群組",
@@ -216,7 +216,7 @@
   "Text-TemplateSetting-TemplateSetting": "操作版型設定",
   "Text-TemplateSetting-CreateTemplate": "建立版型",
   "Text-TemplateSetting-RemoveTemplate": "刪除牆面版型",
-  "Text-TemplateSetting-RemoveTemplateConfirm": "請確認此版型是否正在使用後再進行刪除",
+  "Text-TemplateSetting-RemoveTemplateConfirm": "請確認此版型是否正在使用後，再進行刪除",
   "Text-TemplateSetting-CreateWallTemplate": "建立電視牆版型",
   "Text-TemplateSetting-TemplateId": "版型ID",
   "Text-TemplateSetting-TemplateName": "版型名稱",
@@ -226,6 +226,7 @@
   "Text-TemplateSetting-ViewTemplate": "檢視電視牆版型",
   "Text-TemplateSetting-FormatInvalid": "版型格式錯誤",
 
+  "Text-WallSetting-WallName1": "牆面名稱",
   "Text-WallSetting-WallSetting": "牆面組態設定",
   "Text-WallSetting-RemoveWall": "刪除電視牆",
   "Text-WallSetting-RemoveWallConfirm": "確定要刪除此牆面?",
