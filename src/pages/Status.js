@@ -48,12 +48,18 @@ const Status = () => {
     let result = await rebootDevice(mac, store);
     if (result) {
       showSuccessNotificationByMsg(
-        intl.formatMessage(Messages.Text_DeviceStatus_RestartSuccess),
+        intl.formatMessage(Messages.Text_DeviceStatus_RestartSuccess, {
+          class: devices.find((device) => device.mac === mac).model,
+          name: devices.find((device) => device.mac === mac).nickName,
+        }),
         Math.random()
       );
     } else
       showWarningNotification(
-        intl.formatMessage(Messages.Text_DeviceStatus_RebootFail),
+        intl.formatMessage(Messages.Text_DeviceStatus_RebootFail, {
+          class: devices.find((device) => device.mac === mac).model,
+          name: devices.find((device) => device.mac === mac).nickName,
+        }),
         Math.random()
       );
   };

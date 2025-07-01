@@ -306,8 +306,7 @@ export default defineMessages({
   },
   Text_TVWall_ProjectVideoFailHint: {
     id: "Text-TVWall-ProjectVideoFailHint",
-    defaultMessage:
-      "請檢查來源/終端設備是否上線及輸出入狀態",
+    defaultMessage: "請檢查來源/終端設備是否上線及輸出入狀態",
   },
   Text_TVWall_ActiveSuccess: {
     id: "Text-TVWall-ActiveSuccess",
@@ -523,7 +522,8 @@ export default defineMessages({
   },
   Text_USB_ClearLinkSuccess: {
     id: "Text-USB-ClearLinkSuccess",
-    defaultMessage: "完成解除USB來源 [{source}] -> USB終端 [{destination}] 連接",
+    defaultMessage:
+      "完成解除USB來源 [{source}] -> USB終端 [{destination}] 連接",
   },
   Text_USB_ClearLinkFail: {
     id: "Text-USB-ClearLinkFail",
@@ -935,11 +935,11 @@ export default defineMessages({
   },
   Text_DeviceStatus_RestartSuccess: {
     id: "Text-DeviceStatus-RestartSuccess",
-    defaultMessage: "已執行設備重啟",
+    defaultMessage: "[{class}] 設備 [{name}] 重啟執行成功",
   },
   Text_DeviceStatus_RebootFail: {
     id: "Text-DeviceStatus-RebootFail",
-    defaultMessage: "重啟失敗",
+    defaultMessage: "[{class}] 設備 [{name}] 重啟執行失敗",
   },
 
   // Device status legacy
