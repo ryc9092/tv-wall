@@ -498,20 +498,20 @@ const Situation = () => {
     {
       label: (
         <span className="dropdown-menu-text">
-          {intl.formatMessage(Messages.Text_Situation_USBConnection)}
-        </span>
-      ),
-      key: "usb",
-      icon: <img src={USBIcon} alt="usb" className="dropdown-menu-icon" />,
-    },
-    {
-      label: (
-        <span className="dropdown-menu-text">
           {intl.formatMessage(Messages.Text_Situation_AudioConnection)}
         </span>
       ),
       key: "audio",
       icon: <img src={AudioIcon} alt="audio" className="dropdown-menu-icon" />,
+    },
+    {
+      label: (
+        <span className="dropdown-menu-text">
+          {intl.formatMessage(Messages.Text_Situation_USBConnection)}
+        </span>
+      ),
+      key: "usb",
+      icon: <img src={USBIcon} alt="usb" className="dropdown-menu-icon" />,
     },
   ];
 

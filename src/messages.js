@@ -80,7 +80,7 @@ export default defineMessages({
   },
   Text_Common_ItemName: {
     id: "Text-Common-ItemName",
-    defaultMessage: "對應項目名稱",
+    defaultMessage: "項目類別",
   },
   Text_Common_SourceDestinationRequiredHint: {
     id: "Text-Common-SourceDestinationRequiredHint",

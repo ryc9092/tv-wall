@@ -29,7 +29,7 @@
   "Text-Common-OperationFailed": "操作失敗",
   "Text-Common-Required": "此欄位不可為空白",
   "Text-Common-RequiredHint": "欄位內容不可為空白",
-  "Text-Common-ItemName": "對應項目名稱",
+  "Text-Common-ItemName": "項目類別",
   "Text-Common-SourceDestinationRequiredHint": "未選擇輸入來源/輸出終端",
   "Text-Button-Save": "儲存",
   "Text-Button-View": "檢視",
