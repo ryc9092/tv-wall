@@ -130,7 +130,9 @@ const USB = () => {
               .nickName,
             destination: decoders.find((decoder) => decoder.mac === decoderMac)
               .nickName,
-          })}<br />{intl.formatMessage(Messages.Text_USB_LinkFailHint)}
+          })}
+          <br />
+          {intl.formatMessage(Messages.Text_USB_LinkFailHint)}
         </span>,
         Math.random()
       );
@@ -400,7 +402,9 @@ const USB = () => {
             destination: decoders.find(
               (decoder) => decoder.mac === selectedDecoders[0]
             ).nickName,
-          })}<br />{intl.formatMessage(Messages.Text_USB_LinkFailHint)}
+          })}
+          <br />
+          {intl.formatMessage(Messages.Text_USB_LinkFailHint)}
         </span>,
         Math.random()
       );
@@ -422,23 +426,52 @@ const USB = () => {
       } else return false;
     });
 
-    await removeDeviceLink({
-      store: store,
-      linkType: `usb`,
-      encoder: selectedEncoder,
-      decoders: linkedDecoders,
-    });
+    try {
+      const res1 = await removeDeviceLink({
+        store: store,
+        linkType: `usb`,
+        encoder: selectedEncoder,
+        decoders: linkedDecoders,
+      });
 
-    await createDeviceLink({
-      store: store,
-      id: `usb.${selectedEncoder}`,
-      linkType: "usb",
-      encoder: selectedEncoder,
-      decoders: selectedDecoders,
-      value1: "",
-      remark: "",
-      isPreset: "N",
-    });
+      const res2 = await createDeviceLink({
+        store: store,
+        id: `usb.${selectedEncoder}`,
+        linkType: "usb",
+        encoder: selectedEncoder,
+        decoders: selectedDecoders,
+        value1: "",
+        remark: "",
+        isPreset: "N",
+      });
+
+      if (!res1 || !res2) throw new Error("call api failed");
+      showSuccessNotificationByMsg(
+        intl.formatMessage(Messages.Text_USB_LinkSuccess, {
+          source: encoders.find((encoder) => encoder.mac === selectedEncoder)
+            .nickName,
+          destination: decoders.find(
+            (decoder) => decoder.mac === selectedDecoders[0]
+          ).nickName,
+        }),
+        Math.random()
+      );
+    } catch (error) {
+      showWarningNotification(
+        <span>
+          {intl.formatMessage(Messages.Text_USB_LinkFail, {
+            source: encoders.find((encoder) => encoder.mac === selectedEncoder)
+              .nickName,
+            destination: decoders.find(
+              (decoder) => decoder.mac === selectedDecoders[0]
+            ).nickName,
+          })}
+          <br />
+          {intl.formatMessage(Messages.Text_USB_LinkFailHint)}
+        </span>,
+        Math.random()
+      );
+    }
 
     sleep(800).then(() => {
       setReload(Math.random());
