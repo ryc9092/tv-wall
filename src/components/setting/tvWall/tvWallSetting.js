@@ -7,6 +7,10 @@ import { getWalls, deleteWall, getWallScreensById } from "../../../api/API";
 import ConfirmModal from "../../common/confirmModal";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
+import {
+  showSuccessNotificationByMsg,
+  showWarningNotification,
+} from "../../../utils/Utils";
 import TrashIcon from "../../../assets/trash.png";
 import SearchIcon from "../../../assets/magnifying-glass.png";
 import "./tvWallSetting.scss";
@@ -221,8 +225,21 @@ const TVWallSetting = () => {
     (async () => {
       const result = await deleteWall(wall, store);
       if (result) {
+        showSuccessNotificationByMsg(
+          intl.formatMessage(Messages.Text_WallSetting_DeleteSuccess, {
+            name: walls.find((w) => w.wallId === wall)?.wallName,
+          }),
+          Math.random()
+        );
         setOpenConfirmModal(false);
         setReload(Math.random());
+      } else {
+        showWarningNotification(
+          intl.formatMessage(Messages.Text_WallSetting_DeleteFail, {
+            name: walls.find((w) => w.wallId === wall)?.wallName,
+          }),
+          Math.random()
+        );
       }
     })();
   };

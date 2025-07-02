@@ -245,6 +245,10 @@
   "Text-WallSetting-CreateWallConfirmDecoder": "尚有未綁定顯示器，是否要儲存?",
   "Text-WallSetting-CreateWallConfirmIP": "尚有顯示器未填入IP，是否要儲存?",
   "Text-WallSetting-Preview": "預覽",
+  "Text-WallSetting-CreateSuccess": "牆面 [{name}] 建立成功",
+  "Text-WallSetting-CreateFail": "無法建立牆面 [{name}]，請檢查伺服器連線",
+  "Text-WallSetting-DeleteSuccess": "牆面 [{name}] 刪除成功",
+  "Text-WallSetting-DeleteFail": "無法刪除牆面 [{name}]，請檢查伺服器連線",
 
   "Text-DeviceSetting-AdvanceSetting": "設備進階設定",
   "Text-DeviceSetting-DeviceSetting": "裝置設定",

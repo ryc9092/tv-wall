@@ -1167,16 +1167,24 @@ export default defineMessages({
     id: "Text-WallSetting-Preview",
     defaultMessage: "預覽",
   },
-
-  // System setting - wall setting legacy
+  Text_WallSetting_CreateSuccess: {
+    id: "Text-WallSetting-CreateSuccess",
+    defaultMessage: "牆面 [{name}}] 建立成功",
+  },
+  Text_WallSetting_CreateFail: {
+    id: "Text-WallSetting-CreateFail",
+    defaultMessage: "無法建立牆面 [{name}]，請檢查伺服器連線",
+  },
   Text_WallSetting_DeleteSuccess: {
     id: "Text-WallSetting-DeleteSuccess",
-    defaultMessage: "電視牆移除成功",
+    defaultMessage: "牆面 [{name}] 刪除成功",
   },
   Text_WallSetting_DeleteFail: {
     id: "Text-WallSetting-DeleteFail",
-    defaultMessage: "電視牆移除失敗",
+    defaultMessage: "無法刪除牆面 [{name}]，請檢查伺服器連線",
   },
+
+  // System setting - wall setting legacy
   Text_WallSetting_Wall: {
     id: "Text-WallSetting-Wall",
     defaultMessage: "電視牆",
@@ -1184,14 +1192,6 @@ export default defineMessages({
   Text_WallSetting_ResetWall: {
     id: "Text-WallSetting-ResetWall",
     defaultMessage: "重置電視牆",
-  },
-  Text_WallSetting_CreateSuccess: {
-    id: "Text-WallSetting-CreateSuccess",
-    defaultMessage: "電視牆建立成功",
-  },
-  Text_WallSetting_CreateFail: {
-    id: "Text-WallSetting-CreateFail",
-    defaultMessage: "電視牆建立失敗",
   },
 
   // System setting - device setting

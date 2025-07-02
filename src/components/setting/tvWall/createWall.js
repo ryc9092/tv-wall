@@ -17,7 +17,10 @@ import {
 } from "../../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
-import { showWarningNotification } from "../../../utils/Utils";
+import {
+  showSuccessNotificationByMsg,
+  showWarningNotification,
+} from "../../../utils/Utils";
 import PlusIcon from "../../../assets/plus-white.png";
 import XIcon from "../../../assets/X.png";
 import ClearLinkIcon from "../../../assets/clearLinkIconRed.png";
@@ -174,8 +177,21 @@ const CreateWall = ({ setReload }) => {
           screenList
         );
         if (result) {
+          showSuccessNotificationByMsg(
+            intl.formatMessage(Messages.Text_WallSetting_CreateSuccess, {
+              name: wallName,
+            }),
+            Math.random()
+          );
           setReload(Math.random());
           setIsModalOpen(false);
+        } else {
+          showWarningNotification(
+            intl.formatMessage(Messages.Text_WallSetting_CreateFail, {
+              name: wallName,
+            }),
+            Math.random()
+          );
         }
       })();
     } else {
