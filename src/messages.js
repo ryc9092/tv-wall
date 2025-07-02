@@ -86,6 +86,14 @@ export default defineMessages({
     id: "Text-Common-SourceDestinationRequiredHint",
     defaultMessage: "未選擇輸入來源/輸出終端",
   },
+  Text_Common_TVWall: {
+    id: "Text-Common-TVWall",
+    defaultMessage: "電視牆",
+  },
+  Text_Common_SingleScreen: {
+    id: "Text-Common-SingleScreen",
+    defaultMessage: "單顯示器",
+  },
   Text_Button_Save: {
     id: "Text-Button-Save",
     defaultMessage: "儲存",
@@ -787,11 +795,11 @@ export default defineMessages({
   },
   Text_Situation_Itemtvwall: {
     id: "Text-Situation-Itemtvwall",
-    defaultMessage: "電視牆影像連結",
+    defaultMessage: "電視牆",
   },
   Text_Situation_Itemvideo: {
     id: "Text-Situation-Itemvideo",
-    defaultMessage: "單畫面影像連結",
+    defaultMessage: "單顯示器",
   },
   Text_Situation_Itemusb: {
     id: "Text-Situation-Itemusb",

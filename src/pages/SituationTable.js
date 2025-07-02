@@ -472,7 +472,7 @@ const Situation = () => {
     {
       label: (
         <span className="dropdown-menu-text">
-          {intl.formatMessage(Messages.Text_Situation_TVWallConnection)}
+          {intl.formatMessage(Messages.Text_Common_TVWall)}
         </span>
       ),
       key: "tvwall",
@@ -483,7 +483,7 @@ const Situation = () => {
     {
       label: (
         <span className="dropdown-menu-text">
-          {intl.formatMessage(Messages.Text_Situation_SingleScreenConnection)}
+          {intl.formatMessage(Messages.Text_Common_SingleScreen)}
         </span>
       ),
       key: "singlescreen",
