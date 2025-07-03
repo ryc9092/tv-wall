@@ -1039,6 +1039,22 @@ export default defineMessages({
     id: "Text-TemplateSetting-ViewTemplate",
     defaultMessage: "檢視電視牆版型",
   },
+  Text_TemplateSetting_CreateSuccess: {
+    id: "Text-TemplateSetting-CreateSuccess",
+    defaultMessage: "版型 [{name}] 建立成功",
+  },
+  Text_TemplateSetting_CreateFail: {
+    id: "Text-TemplateSetting-CreateFail",
+    defaultMessage: "無法建立版型 [{name}]，請檢查伺服器連線",
+  },
+  Text_TemplateSetting_DeleteSuccess: {
+    id: "Text-TemplateSetting-DeleteSuccess",
+    defaultMessage: "版型 [{name}] 刪除成功",
+  },
+  Text_TemplateSetting_DeleteFail: {
+    id: "Text-TemplateSetting-DeleteFail",
+    defaultMessage: "無法刪除版型 [{name}]，請檢查伺服器連線",
+  },
 
   // System setting - template setting legacy
   Text_TemplateSetting_TemplateManagement: {
@@ -1048,14 +1064,6 @@ export default defineMessages({
   Text_TemplateSetting_Default: {
     id: "Text-TemplateSetting-Default",
     defaultMessage: "預設",
-  },
-  Text_TemplateSetting_DeleteSuccess: {
-    id: "Text-TemplateSetting-DeleteSuccess",
-    defaultMessage: "版型移除成功",
-  },
-  Text_TemplateSetting_DeleteFail: {
-    id: "Text-TemplateSetting-DeleteFail",
-    defaultMessage: "版型移除失敗",
   },
   Text_TemplateSetting_Template: {
     id: "Text-TemplateSetting-Template",
@@ -1076,14 +1084,6 @@ export default defineMessages({
   Text_TemplateSetting_FormatInvalid: {
     id: "Text-TemplateSetting-FormatInvalid",
     defaultMessage: "版型格式錯誤",
-  },
-  Text_TemplateSetting_CreateSuccess: {
-    id: "Text-TemplateSetting-CreateSuccess",
-    defaultMessage: "版型建立成功",
-  },
-  Text_TemplateSetting_CreateFail: {
-    id: "Text-TemplateSetting-CreateFail",
-    defaultMessage: "版型建立失敗",
   },
 
   // System setting - wall setting

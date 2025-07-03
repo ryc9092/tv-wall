@@ -227,6 +227,10 @@
   "Text-TemplateSetting-SetToDefault": "設為電視牆維度XXX的預設值",
   "Text-TemplateSetting-ViewTemplate": "檢視電視牆版型",
   "Text-TemplateSetting-FormatInvalid": "版型格式錯誤",
+  "Text-TemplateSetting-CreateSuccess": "版型 [{name}] 建立成功",
+  "Text-TemplateSetting-CreateFail": "無法建立版型 [{name}]，請檢查伺服器連線",
+  "Text-TemplateSetting-DeleteSuccess": "版型 [{name}] 刪除成功",
+  "Text-TemplateSetting-DeleteFail": "無法刪除版型 [{name}]，請檢查伺服器連線",
 
   "Text-WallSetting-WallName1": "牆面名稱",
   "Text-WallSetting-WallSetting": "牆面組態設定",

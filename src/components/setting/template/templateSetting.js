@@ -10,6 +10,10 @@ import {
 import ConfirmModal from "../../common/confirmModal";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../../messages";
+import {
+  showSuccessNotificationByMsg,
+  showWarningNotification,
+} from "../../../utils/Utils";
 import TrashIcon from "../../../assets/trash.png";
 import SearchIcon from "../../../assets/magnifying-glass.png";
 import "./templateSetting.scss";
@@ -211,8 +215,23 @@ const TemplateSetting = () => {
     (async () => {
       const result = await deleteTemplate(store, template);
       if (result) {
+        showSuccessNotificationByMsg(
+          intl.formatMessage(Messages.Text_TemplateSetting_DeleteSuccess, {
+            name: templates.find((t) => t.templateId === template)
+              ?.templateName,
+          }),
+          Math.random()
+        );
         setOpenConfirmModal(false);
         setReload(Math.random());
+      } else {
+        showWarningNotification(
+          intl.formatMessage(Messages.Text_TemplateSetting_DeleteFail, {
+            name: templates.find((t) => t.templateId === template)
+              ?.templateName,
+          }),
+          Math.random()
+        );
       }
     })();
   };
