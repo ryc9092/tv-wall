@@ -1,5 +1,30 @@
+@import '../App.scss';
+
 .audio-situation-content-modal {
     margin-top: -45px !important;
+}
+
+.audio-situation-trash-btn {
+    display: flex;
+    min-width: 142px;
+    height: 48px;
+    cursor: pointer;
+    padding: 12px;
+    margin: 0px 20px 0px 0px;
+    border: 1px solid #c33434;
+    border-radius: 26px;
+
+    color: #c33434;
+    @extend .sdcp-font;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.audio-situation-trash-icon {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    margin-right: 6px;
 }
 
 .audio-situation-content-container {

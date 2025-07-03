@@ -22,6 +22,7 @@ import ConfirmModal from "../components/common/confirmModal";
 import MixAudioMatrixModal from "../components/situation/mixAudioMatrixModal";
 import AudioModal from "../components/situation/audioModal";
 import AudioViewModal from "../components/audio/audioViewModal";
+import ClearLinkIcon from "../assets/clearLinkIconRed.png";
 import ViewIcon from "../assets/view.png";
 import PlayIcon from "../assets/play-black.png";
 import PauseIcon from "../assets/pause.png";
@@ -511,7 +512,15 @@ const AudioSituation = () => {
               Messages.Text_DeviceStatus_InputDeviceName
             )}
           /> */}
-          <div>
+          <div style={{ display: "flex" }}>
+            <div className="audio-situation-trash-btn" onClick={() => {}}>
+              <img
+                alt="trash"
+                src={ClearLinkIcon}
+                className="audio-situation-trash-icon"
+              />
+              <FormattedMessage {...Messages.Text_Audio_ClearAudioRoute} />
+            </div>
             <Button
               onClick={() => setIsSituationModalOpen(true)}
               className="create-situation-btn"

@@ -543,6 +543,10 @@ export default defineMessages({
     id: "Text-Audio-AudioMgmt",
     defaultMessage: "音頻路由",
   },
+  Text_Audio_ClearAudioRoute: {
+    id: "Text-Audio-ClearAudioRoute",
+    defaultMessage: "清除所有音頻路由",
+  },
   Text_Audio_AddAudio: {
     id: "Text-Audio-AddAudio",
     defaultMessage: "新增路由",
