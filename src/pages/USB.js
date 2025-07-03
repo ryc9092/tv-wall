@@ -488,7 +488,7 @@ const USB = () => {
           {encoders?.find((encoder) => encoder.mac === selectEncoder)?.nickName}
         </span>
         <span className="confirm-modal-arrow-line" />
-        <span className="confirm-modal-arrow" />
+        <span style={{ fontSize: 13, color: "black" }}>▶</span>
         <span style={{ marginLeft: 12 }}>
           <FormattedMessage {...Messages.Text_Common_DecoderSimple} />
           {" : "}
