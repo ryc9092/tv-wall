@@ -150,12 +150,12 @@
 .create-situation-btn-row {
     margin-top: 54px;
     display: flex;
+    justify-content: end;
 }
 
 .cancel-btn {
     height: 48px;
     flex-grow: 0;
-    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -163,13 +163,12 @@
     padding: 0 24px;
     border-radius: 26px;
     border: solid 1px #575452;
-    margin-left: 540px;
 }
 
 .cancel-btn-text {
     height: 24px;
     flex-grow: 0;
-     @extend .sdcp-font;
+    @extend .sdcp-font;
     font-size: 16px;
     font-weight: 600;
     font-stretch: normal;
@@ -183,7 +182,6 @@
 .submit-btn {
     height: 48px;
     flex-grow: 0;
-    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
