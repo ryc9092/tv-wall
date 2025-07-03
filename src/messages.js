@@ -1157,7 +1157,7 @@ export default defineMessages({
   },
   Text_WallSetting_CreateWallConfirmDecoder: {
     id: "Text-WallSetting-CreateWallConfirmDecoder",
-    defaultMessage: "尚有未綁定顯示器，是否要儲存?",
+    defaultMessage: "尚有未綁定顯示器，無法儲存",
   },
   Text_WallSetting_CreateWallConfirmIP: {
     id: "Text-WallSetting-CreateWallConfirmIP",

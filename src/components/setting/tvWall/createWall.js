@@ -473,11 +473,15 @@ const CreateWall = ({ setReload }) => {
                 setOpenConfirmModal(false);
               }}
               onOk={() => {
-                if (confirmText !== "WallName") saveWall();
+                if (confirmText !== "WallName" && confirmText !== "Decoder")
+                  saveWall();
                 setOpenConfirmModal(false);
               }}
               cancelButtonProps={{
-                style: confirmText === "WallName" ? { display: "none" } : {},
+                style:
+                  confirmText === "WallName" || confirmText === "Decoder"
+                    ? { display: "none" }
+                    : {},
               }}
             >
               <br />
