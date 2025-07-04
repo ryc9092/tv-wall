@@ -723,37 +723,39 @@ const USB = () => {
                   pagination={false}
                   scroll={{ x: "max-content", y: height - 595 }}
                 />
-                <Button
-                  className="usb-cancel-btn"
-                  onClick={() => setPageType("CONN_STATE")}
-                >
-                  <span className="usb-cancel-btn-text">
-                    <FormattedMessage {...Messages.Text_Button_Cancel} />
-                  </span>
-                </Button>
-                <Button
-                  className="usb-add-btn"
-                  disabled={!selectedEncoder || selectedDecoders.length === 0}
-                  onClick={
-                    pageType === "ADD_LINK"
-                      ? handleAddDeviceLink
-                      : handleEditDeviceLink
-                  }
-                >
-                  <span className="usb-add-btn-text">
-                    {pageType === "ADD_LINK" ? (
-                      <FormattedMessage
-                        className="usb-add-btn-text"
-                        {...Messages.Text_Button_Add}
-                      />
-                    ) : (
-                      <FormattedMessage
-                        className="usb-add-btn-text"
-                        {...Messages.Text_Common_Confirm}
-                      />
-                    )}
-                  </span>
-                </Button>
+                <div style={{ display: "flex", justifyContent: "end", marginTop: 10 }}>
+                  <Button
+                    className="usb-cancel-btn"
+                    onClick={() => setPageType("CONN_STATE")}
+                  >
+                    <span className="usb-cancel-btn-text">
+                      <FormattedMessage {...Messages.Text_Button_Cancel} />
+                    </span>
+                  </Button>
+                  <Button
+                    className="usb-add-btn"
+                    disabled={!selectedEncoder || selectedDecoders.length === 0}
+                    onClick={
+                      pageType === "ADD_LINK"
+                        ? handleAddDeviceLink
+                        : handleEditDeviceLink
+                    }
+                  >
+                    <span className="usb-add-btn-text">
+                      {pageType === "ADD_LINK" ? (
+                        <FormattedMessage
+                          className="usb-add-btn-text"
+                          {...Messages.Text_Button_Add}
+                        />
+                      ) : (
+                        <FormattedMessage
+                          className="usb-add-btn-text"
+                          {...Messages.Text_Common_Confirm}
+                        />
+                      )}
+                    </span>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
