@@ -1,7 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../store/store";
 import { Button, Divider, Input, Modal, Table, Tag } from "antd";
-import { getPresetDeviceLink } from "../../api/API";
+import {
+  getPresetDeviceLink,
+  getP300Input,
+  getP300Output,
+  getEncoders,
+  getDecoders,
+} from "../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
 import SearchIcon from "../../assets/magnifying-glass.png";
@@ -15,14 +21,44 @@ const AudioViewModal = ({
   situationDetailId,
   isModalOpen,
   setIsModalOpen,
-  encoders,
-  decoders,
-  type
+  type,
 }) => {
   const intl = useIntl();
   const { height } = useWindowDimensions();
   const [store] = useContext(StoreContext);
+  const [encoders, setEncoders] = useState([]);
+  const [decoders, setDecoders] = useState([]);
   const [situationItemDesc, setSituationItemDesc] = useState(null);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      (async () => {
+        if (type === "p300") {
+          const inputs = await getP300Input(store);
+          inputs?.forEach((input) => {
+            input.key = input.mac;
+          });
+          const outputs = await getP300Output(store);
+          outputs?.forEach((output) => {
+            output.key = output.mac;
+          });
+          setDecoders(outputs);
+          setEncoders(inputs);
+        } else {
+          const encoders = await getEncoders(store);
+          const decoders = await getDecoders(store);
+          encoders?.forEach((encoder) => {
+            encoder.key = encoder.mac;
+          });
+          decoders?.forEach((decoder) => {
+            decoder.key = decoder.mac;
+          });
+          setFilteredDecoders(decoders);
+          setFilteredEncoders(encoders);
+        }
+      })();
+    }
+  }, [isModalOpen, encoders, decoders, store, type]);
 
   useEffect(() => {
     if (isModalOpen === true) {

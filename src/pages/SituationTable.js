@@ -22,6 +22,7 @@ import SingleScreenModal from "../components/situation/singlescreenModal";
 import USBModal from "../components/situation/usbModal";
 import AudioModal from "../components/situation/audioModal";
 import AudioSituationModal from "../components/situation/audioSituationModal";
+import AudioMainViewModal from "../components/audio/audioMainViewModal";
 import TVWallViewModal from "../components/tvwall/situationTvWallView";
 import USBViewModal from "../components/usb/usbViewModal";
 import SingleScreenViewModal from "../components/singleScreen/singleScreenViewModal";
@@ -840,7 +841,8 @@ const Situation = () => {
         )}
       {isAudioViewModalOpen === true &&
         choosedSituationDetailId !== undefined && (
-          <AudioViewHintModal
+          <AudioMainViewModal
+            audioSituationId={choosedSituationDetailId}
             isModalOpen={isAudioViewModalOpen}
             setIsModalOpen={setIsAudioViewModalOpen}
           />
