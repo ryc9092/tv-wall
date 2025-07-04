@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../../components/store/store";
 import { Button, Input, Modal, Table } from "antd";
 import { presetAudioSituation, getSituations } from "../../api/API";
+import AudioMainViewModal from "../audio/audioMainViewModal";
 import { showWarningNotification } from "../../utils/Utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
 import SearchIcon from "../../assets/magnifying-glass.png";
+import ViewIcon from "../../assets/view.png";
 import "./addSituationContent.scss";
 import "../../pages/Audio.scss";
 import "./audioSituationModal.scss";
@@ -56,7 +58,6 @@ const AudioSituationModal = ({
           {intl.formatMessage(Messages.Text_Common_Name)}
         </span>
       ),
-      width: "35%",
       dataIndex: "name",
       key: "name",
       render: (text) => {
@@ -69,11 +70,41 @@ const AudioSituationModal = ({
           {intl.formatMessage(Messages.Text_Common_Description)}
         </span>
       ),
-      width: "50%",
       dataIndex: "remark",
       key: "remark",
       render: (text) => {
         return <span>{text}</span>;
+      },
+    },
+    {
+      title: (
+        <span className="table-head">
+          {intl.formatMessage(Messages.Text_Button_Operation)}
+        </span>
+      ),
+      width: 90,
+      dataIndex: "id",
+      key: "operate",
+      render: (text, record) => {
+        return (
+          <div key={`${text}-action`}>
+            <Button
+              key={`${text}-view`}
+              type="text"
+              onClick={() => {
+                viewSituationItem(text);
+              }}
+              className="table-content"
+            >
+              <img
+                alt="view"
+                src={ViewIcon}
+                className="table-content-icon"
+                style={{ opacity: 0.6 }}
+              />
+            </Button>
+          </div>
+        );
       },
     },
   ];
@@ -117,88 +148,108 @@ const AudioSituationModal = ({
     }
   };
 
+  // view audio situation items
+  const [isAudioViewModalOpen, setIsAudioViewModalOpen] = useState(false);
+  const [choosedSituationId, setChoosedSituationId] = useState(null);
+  const viewSituationItem = async (situationId) => {
+    setChoosedSituationId(situationId);
+    setIsAudioViewModalOpen(true);
+  };
+
   return (
     <div>
       {isModalOpen && (
-        <Modal
-          title={
-            <span className="audio-modal-title">
-              <FormattedMessage {...Messages.Text_Situation_AddSituationItem} />
-              {" - "}
-              <FormattedMessage {...Messages.Text_Situation_AudioSituation} />
-            </span>
-          }
-          className="audio-situation-modal audio-situation-content-modal-close-icon audio-content modal-title"
-          open={isModalOpen}
-          footer={null}
-          onCancel={() => {
-            handleReset();
-            setIsModalOpen(false);
-          }}
-        >
-          <div id="situation-selection">
-            <div className="audio-add-subtitle">
-              <FormattedMessage
-                {...Messages.Text_Situation_ChooseAudioSituation}
+        <div>
+          <Modal
+            title={
+              <span className="audio-modal-title">
+                <FormattedMessage
+                  {...Messages.Text_Situation_AddSituationItem}
+                />
+                {" - "}
+                <FormattedMessage {...Messages.Text_Situation_AudioSituation} />
+              </span>
+            }
+            className="audio-situation-modal audio-situation-content-modal-close-icon audio-content modal-title"
+            open={isModalOpen}
+            footer={null}
+            onCancel={() => {
+              handleReset();
+              setIsModalOpen(false);
+            }}
+          >
+            <div id="situation-selection">
+              <div className="audio-add-subtitle">
+                <FormattedMessage
+                  {...Messages.Text_Situation_ChooseAudioSituation}
+                />
+              </div>
+              <Input
+                className="audio-add-input audio-input audio-add-input-placeholder"
+                variant="filled"
+                value={situationFilter}
+                onChange={(e) => {
+                  setSituationFilter(e.target.value);
+                }}
+                prefix={
+                  <img
+                    alt="search"
+                    src={SearchIcon}
+                    className="audio-add-input-prefix"
+                  />
+                }
+                placeholder={intl.formatMessage(
+                  Messages.Text_Situation_InputAudioSituationName
+                )}
+              />
+              <Table
+                className="situation-audio-table"
+                columns={audioSituationColumns}
+                dataSource={filteredSituations}
+                rowSelection={{
+                  columnWidth: 60,
+                  type: "radio",
+                  ...situationSelection,
+                }}
+                size={"small"}
+                pagination={false}
+                scroll={{ x: "max-content", y: height - 370 }}
               />
             </div>
-            <Input
-              className="audio-add-input audio-input audio-add-input-placeholder"
-              variant="filled"
-              value={situationFilter}
-              onChange={(e) => {
-                setSituationFilter(e.target.value);
-              }}
-              prefix={
-                <img
-                  alt="search"
-                  src={SearchIcon}
-                  className="audio-add-input-prefix"
-                />
-              }
-              placeholder={intl.formatMessage(
-                Messages.Text_Situation_InputAudioSituationName
-              )}
-            />
-            <Table
-              className="situation-audio-table"
-              columns={audioSituationColumns}
-              dataSource={filteredSituations}
-              rowSelection={{
-                columnWidth: 50,
-                type: "radio",
-                ...situationSelection,
-              }}
-              size={"small"}
-              pagination={false}
-              scroll={{ x: "max-content", y: height - 370 }}
-            />
-          </div>
-          <div className="situation-audio-select-item-btn-row">
-            <Button
-              className="audio-situation-cancel-btn"
-              style={{ marginRight: 16 }}
-              onClick={() => {
-                handleReset();
-                setIsModalOpen(false);
-              }}
-            >
-              <span className="audio-situation-cancel-btn-text">
-                <FormattedMessage {...Messages.Text_Button_Cancel} />
-              </span>
-            </Button>
-            <Button
-              className="audio-situation-submit-btn"
-              onClick={() => {
-                handleCreateItem();
-              }}
-            >
-              <span className="audio-situation-submit-btn-text">
-                <FormattedMessage {...Messages.Text_Button_Add} />
-              </span>
-            </Button>
-          </div>
-        </Modal>
+            <div className="situation-audio-select-item-btn-row">
+              <Button
+                className="audio-situation-cancel-btn"
+                style={{ marginRight: 16 }}
+                onClick={() => {
+                  handleReset();
+                  setIsModalOpen(false);
+                }}
+              >
+                <span className="audio-situation-cancel-btn-text">
+                  <FormattedMessage {...Messages.Text_Button_Cancel} />
+                </span>
+              </Button>
+              <Button
+                className="audio-situation-submit-btn"
+                onClick={() => {
+                  handleCreateItem();
+                }}
+              >
+                <span className="audio-situation-submit-btn-text">
+                  <FormattedMessage {...Messages.Text_Button_Add} />
+                </span>
+              </Button>
+            </div>
+          </Modal>
+          {isAudioViewModalOpen === true &&
+            choosedSituationId !== undefined && (
+              <AudioMainViewModal
+                audioSituationId={choosedSituationId}
+                isModalOpen={isAudioViewModalOpen}
+                setIsModalOpen={setIsAudioViewModalOpen}
+              />
+            )}
+        </div>
       )}
     </div>
   );

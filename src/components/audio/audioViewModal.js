@@ -53,8 +53,8 @@ const AudioViewModal = ({
           decoders?.forEach((decoder) => {
             decoder.key = decoder.mac;
           });
-          setFilteredDecoders(decoders);
-          setFilteredEncoders(encoders);
+          setDecoders(decoders);
+          setEncoders(encoders);
         }
       })();
     }
@@ -80,19 +80,6 @@ const AudioViewModal = ({
       })();
     }
   }, [isModalOpen]);
-
-  useEffect(() => {
-    (async () => {
-      encoders?.forEach((encoder) => {
-        encoder.key = encoder.mac;
-      });
-      decoders?.forEach((decoder) => {
-        decoder.key = decoder.mac;
-      });
-      setFilteredDecoders(decoders);
-      setFilteredEncoders(encoders);
-    })();
-  }, [isModalOpen, encoders, decoders]);
 
   const [selectedEncoder, setSelectedEncoder] = useState(null);
   const [encoderFilter, setEncoderFilter] = useState("");
@@ -153,7 +140,7 @@ const AudioViewModal = ({
       });
     }
     setFilteredEncoders(tempFilteredEncoders);
-  }, [encoderFilter]);
+  }, [encoderFilter, encoders]);
 
   const encoderSelection = {
     selectedRowKeys: [selectedEncoder],
@@ -221,7 +208,7 @@ const AudioViewModal = ({
       });
     }
     setFilteredDecoders(tempFilteredDecoders);
-  }, [decoderFilter]);
+  }, [decoderFilter, decoders]);
 
   const decoderSelection = {
     selectedRowKeys: selectedDecoders,
