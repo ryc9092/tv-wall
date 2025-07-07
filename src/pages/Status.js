@@ -133,6 +133,7 @@ const Status = () => {
             reboot(mac);
           }}
           className="table-content"
+          disabled={state !== "Up"}
         >
           <FormattedMessage {...Messages.Text_DeviceStatus_Reboot} />
         </Button>
