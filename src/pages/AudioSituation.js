@@ -119,9 +119,30 @@ const AudioSituation = () => {
   };
 
   const deleteSituation = async (situationId) => {
-    await removeSituation(situationId, store);
+    const result = await removeSituation(situationId, store);
+    if (result) {
+      showSuccessNotificationByMsg(
+        intl.formatMessage(Messages.Text_Audio_RemoveSuccess, {
+          name: situations?.find((situation) => situation.id === situationId)
+            ?.name,
+        }),
+        Math.random()
+      );
+      setReload(Math.random());
+    } else {
+      showWarningNotification(
+        <span>
+          {intl.formatMessage(Messages.Text_Audio_RemoveFail, {
+            name: situations?.find((situation) => situation.id === situationId)
+              ?.name,
+          })}
+          <br />
+          {intl.formatMessage(Messages.Text_Audio_CreateFailHint)}
+        </span>,
+        Math.random()
+      );
+    }
     setOpenConfirmModal(false);
-    setReload(Math.random());
   };
 
   const deleteSituationDetail = async (situationDetailId) => {

@@ -643,6 +643,14 @@ export default defineMessages({
     id: "Text-Audio-RemoveConnectionConfirm",
     defaultMessage: "確定要刪除此音頻路由?",
   },
+  Text_Audio_RemoveSuccess: {
+    id: "Text-Audio-RemoveSuccess",
+    defaultMessage: "音頻路由 [{name}] 已刪除",
+  },
+  Text_Audio_RemoveFail: {
+    id: "Text-Audio-RemoveFail",
+    defaultMessage: "無法刪除音頻路由 [{name}]",
+  },
   Text_Audio_MatrixRoute: {
     id: "Text-Audio-MatrixRoute",
     defaultMessage: "混音矩陣路由",
