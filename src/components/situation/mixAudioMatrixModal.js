@@ -42,7 +42,7 @@ const MixAudioMatrixModal = ({
         setFilteredEncoders(inputs);
       })();
     }
-  }, [isModalOpen, encoders, decoders, store]);
+  }, [isModalOpen, store]);
 
   const [selectedEncoder, setSelectedEncoder] = useState(null);
   const [encoderFilter, setEncoderFilter] = useState("");

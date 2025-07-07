@@ -58,7 +58,7 @@ const AudioViewModal = ({
         }
       })();
     }
-  }, [isModalOpen, encoders, decoders, store, type]);
+  }, [isModalOpen, store, type]);
 
   useEffect(() => {
     if (isModalOpen === true) {
