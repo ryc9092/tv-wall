@@ -64,10 +64,14 @@ const Situation = () => {
   // get situations on reload
   const [situations, setSituations] = useState([]);
   const [situationItemLength, setSituationItemLength] = useState(0);
+  const [audioSituations, setAudioSituations] = useState([]);
   useEffect(() => {
     (async () => {
       const situations = await getSituations(store, normalSituationCategory);
       setSituations(situations);
+
+      const result = await getSituations(store, audioSituationCategory);
+      setAudioSituations(result);
     })();
   }, [reload, store]);
 
@@ -351,13 +355,22 @@ const Situation = () => {
     {
       title: (
         <span className="table-head">
+          {intl.formatMessage(Messages.Text_Common_Name)}/
           {intl.formatMessage(Messages.Text_Common_Description)}
         </span>
       ),
       dataIndex: "remark",
       key: "description",
-      render: (text) => {
-        return <div className="table-content situation-remark-col">{text}</div>;
+      render: (text, record) => {
+        return (
+          <div className="table-content situation-remark-col">
+            {record.set_type === "subPreset"
+              ? audioSituations?.find(
+                  (audioSituation) => audioSituation.id === record.relation_id
+                )?.name
+              : record.remark}
+          </div>
+        );
       },
     },
     {
@@ -459,10 +472,6 @@ const Situation = () => {
     else if (event.key === "usb") setIsUSBModalOpen(true);
     else if (event.key === "audio") {
       (async () => {
-        const audioSituations = await getSituations(
-          store,
-          audioSituationCategory
-        );
         if (audioSituations?.length === 0) setOpenNoAudioHintModal(true);
         else setIsAudioSituationModalOpen(true);
       })();
