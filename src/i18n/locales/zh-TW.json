@@ -138,7 +138,7 @@
   "Text-USB-LinkFailHint": "請檢查USB來源及終端設備是否均上線",
 
   "Text-Audio-AudioMgmt": "音頻路由",
-  "Text-Audio-ClearAudioRoute": "清除所有音頻路由",
+  "Text-Audio-ClearAudioRoute": "停止所有音頻路由",
   "Text-Audio-AddAudio": "新增路由",
   "Text-Audio-AddSubAudio": "新增子路由",
   "Text-Audio-AudioName": "音頻路由名稱",

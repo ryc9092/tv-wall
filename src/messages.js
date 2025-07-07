@@ -545,7 +545,7 @@ export default defineMessages({
   },
   Text_Audio_ClearAudioRoute: {
     id: "Text-Audio-ClearAudioRoute",
-    defaultMessage: "清除所有音頻路由",
+    defaultMessage: "停止所有音頻路由",
   },
   Text_Audio_AddAudio: {
     id: "Text-Audio-AddAudio",
