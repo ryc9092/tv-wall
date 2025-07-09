@@ -15,6 +15,7 @@ import {
   getSituations,
   getSituationDetails,
   removeSituation,
+  removeDeviceLink,
   activateSituation,
   removeSituationDetail,
 } from "../api/API";
@@ -515,6 +516,48 @@ const AudioSituation = () => {
     </div>
   );
 
+  const [openConfirmClearModal, setOpenConfirmClearModal] = useState(false);
+  const confirmClearModalContent = (
+    <div>
+      <div>
+        <FormattedMessage {...Messages.Text_Audio_ClearConnectionHint} />
+      </div>
+      <br />
+      <div className="confirm-modal-confirm-text">
+        <FormattedMessage {...Messages.Text_Audio_ClearConnectionConfirm} />
+      </div>
+    </div>
+  );
+  const clearAudioRoute = async () => {
+    const result = await removeDeviceLink({
+      store: store,
+      linkType: "audio_all",
+      encoder: "all",
+      decoders: [],
+    });
+    if (result) {
+      showSuccessNotificationByMsg(
+        <span>
+          {intl.formatMessage(Messages.Text_Audio_ClearSuccess)}
+          <br />
+          {intl.formatMessage(Messages.Text_Audio_ClearSuccessHint)}
+        </span>,
+        Math.random()
+      );
+      setReload(Math.random());
+    } else {
+      showWarningNotification(
+        <span>
+          {intl.formatMessage(Messages.Text_Audio_ClearFail)}
+          <br />
+          {intl.formatMessage(Messages.Text_Audio_CreateFailHint)}
+        </span>,
+        Math.random()
+      );
+    }
+    setOpenConfirmClearModal(false);
+  };
+
   return (
     <div className="page-layout-column">
       <div>
@@ -534,7 +577,12 @@ const AudioSituation = () => {
             )}
           /> */}
           <div style={{ display: "flex" }}>
-            <div className="audio-situation-trash-btn" onClick={() => {}}>
+            <div
+              className="audio-situation-trash-btn"
+              onClick={() => {
+                setOpenConfirmClearModal(true);
+              }}
+            >
               <img
                 alt="trash"
                 src={ClearLinkIcon}
@@ -542,6 +590,21 @@ const AudioSituation = () => {
               />
               <FormattedMessage {...Messages.Text_Audio_ClearAudioRoute} />
             </div>
+            <ConfirmModal
+              open={openConfirmClearModal}
+              setOpen={setOpenConfirmClearModal}
+              onOk={() => {
+                clearAudioRoute();
+              }}
+              width={460}
+              title={
+                <FormattedMessage {...Messages.Text_Audio_ClearAudioRoute} />
+              }
+              content={confirmClearModalContent}
+              confirmBtnText={
+                <FormattedMessage {...Messages.Text_Common_Confirm} />
+              }
+            />
             <Button
               onClick={() => setIsSituationModalOpen(true)}
               className="create-situation-btn"

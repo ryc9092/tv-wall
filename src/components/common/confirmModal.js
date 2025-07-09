@@ -2,7 +2,15 @@ import { Button, Modal } from "antd";
 import { FormattedMessage } from "react-intl";
 import Messages from "../../messages";
 
-const ConfirmModal = ({ open, setOpen, width, onOk, title, content }) => {
+const ConfirmModal = ({
+  open,
+  setOpen,
+  width,
+  onOk,
+  title,
+  content,
+  confirmBtnText,
+}) => {
   return (
     <Modal
       className="confirm-modal ant-modal-close-x"
@@ -32,7 +40,11 @@ const ConfirmModal = ({ open, setOpen, width, onOk, title, content }) => {
           <FormattedMessage {...Messages.Text_Button_Cancel} />
         </Button>
         <Button className="confirm-modal-ok-btn" onClick={onOk}>
-          <FormattedMessage {...Messages.Text_Button_Delete} />
+          {confirmBtnText ? (
+            confirmBtnText
+          ) : (
+            <FormattedMessage {...Messages.Text_Button_Delete} />
+          )}
         </Button>
       </div>
     </Modal>

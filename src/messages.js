@@ -643,6 +643,14 @@ export default defineMessages({
     id: "Text-Audio-RemoveConnectionConfirm",
     defaultMessage: "確定要刪除此音頻路由?",
   },
+  Text_Audio_ClearConnectionHint: {
+    id: "Text-Audio-ClearConnectionHint",
+    defaultMessage: "此操作將中斷控管區域內所有正在播放及傳輸之音頻",
+  },
+  Text_Audio_ClearConnectionConfirm: {
+    id: "Text-Audio-ClearConnectionConfirm",
+    defaultMessage: "確定要執行此操作?",
+  },
   Text_Audio_RemoveSuccess: {
     id: "Text-Audio-RemoveSuccess",
     defaultMessage: "音頻路由 [{name}] 已刪除",
@@ -706,6 +714,18 @@ export default defineMessages({
   Text_Audio_PlayFailHint: {
     id: "Text-USB-PlayFailHint",
     defaultMessage: "請檢查音頻路由是否所有設備均已上線",
+  },
+  Text_Audio_ClearSuccess: {
+    id: "Text-Audio-ClearSuccess",
+    defaultMessage: "控管區域內所有播音音頻均已中斷",
+  },
+  Text_Audio_ClearSuccessHint: {
+    id: "Text-USB-ClearSuccessHint",
+    defaultMessage: "如欲播音，請至音頻路由或情境管理重新執行",
+  },
+  Text_Audio_ClearFail: {
+    id: "Text-USB-ClearFail",
+    defaultMessage: "無法中斷該控管區域所有播音路由",
   },
 
   // Situation
