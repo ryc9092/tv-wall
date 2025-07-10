@@ -48,9 +48,11 @@ const Record = () => {
         <DatePicker
           onChange={onChange}
           defaultValue={today}
-          style={{ height: 40, fontSize: 16 }}
+          style={{ height: 40, fontSize: 16, backgroundColor: "#e7e7e7" }}
         />
-        <Button style={{ height: 40, fontSize: 16 }}>取得報表</Button>
+        <Button className="record-get-report-btn">
+          <span className="record-get-report-btn-text ">報表下載</span>
+        </Button>
       </div>
       <Table columns={columns} />
     </div>

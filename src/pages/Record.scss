@@ -8,3 +8,24 @@
     margin-top: 22px;
     margin-left: 24px;
 }
+
+.record-get-report-btn {
+    height: 40px;
+    @extend .sdcp-font;
+    border-radius: 12px;
+    background-color: #262320;
+    padding: 0px 14px;
+    &:hover {
+        background-color: #45413e !important;
+        color: #fff !important;
+    }
+}
+
+.record-get-report-btn-text {
+    height: 24px;
+    @extend .sdcp-font;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #e7e7e7;
+}
