@@ -1376,6 +1376,12 @@ export default defineMessages({
     defaultMessage: "來源監看",
   },
 
+  // Record
+  Text_Record_Title: {
+    id: "Text-Record-Title",
+    defaultMessage: "紀錄查詢",
+  },
+
   // Barcode
   Text_Barcode_Title: {
     id: "Text-Barcode-Title",

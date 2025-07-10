@@ -12,6 +12,8 @@ import SituationIcon from "../../assets/situation.png";
 import StatusIcon from "../../assets/status.png";
 import SettingIcon from "../../assets/setting.png";
 // import SurveillanceIcon from "../../assets/surveillance.png";
+import CalendarIcon from "../../assets/calendar.png";
+// import { BookOutlined } from "@ant-design/icons";
 import "./sidebar.scss";
 
 const MenuItem = ({ item }) => {
@@ -146,6 +148,17 @@ const Sidebar = () => {
     //     <img src={SurveillanceIcon} alt="surveillance" className="menu-icon" />
     //   ),
     // },
+    {
+      key: "record",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Record_Title)}
+          </span>
+        />
+      ),
+      icon: <img src={CalendarIcon} alt="calendar" className="menu-icon" />,
+    },
   ];
 
   const onNavigate = (e) => {

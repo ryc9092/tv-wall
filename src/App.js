@@ -22,6 +22,7 @@ const Situation = loadable(() => import("./pages/Situation"));
 const Event = loadable(() => import("./pages/Event"));
 const Setting = loadable(() => import("./pages/Setting"));
 const Surveillance = loadable(() => import("./pages/Surveillance"));
+const Record = loadable(() => import("./pages/Record"));
 
 function App({ setLocale }) {
   return (
@@ -184,6 +185,18 @@ function App({ setLocale }) {
                 topbar={<Topbar setLocale={setLocale} />}
                 sidebar={<Sidebar />}
                 main={<Surveillance />}
+              />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/record"
+          element={
+            <PrivateRoute>
+              <ResponsiveLayout
+                topbar={<Topbar setLocale={setLocale} />}
+                sidebar={<Sidebar />}
+                main={<Record />}
               />
             </PrivateRoute>
           }
