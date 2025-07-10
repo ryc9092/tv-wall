@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { StoreContext } from "../components/store/store";
 import { Button, DatePicker, Table } from "antd";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../messages";
@@ -8,6 +9,7 @@ import "../App.scss";
 
 const Record = () => {
   const intl = useIntl();
+  const [store] = useContext(StoreContext);
   const today = dayjs();
 
   const onChange = (date, dateString) => {
@@ -42,9 +44,7 @@ const Record = () => {
           <FormattedMessage {...Messages.Text_Record_Title} />
         </span>
       </div>
-      <div
-        style={{ marginTop: 24, marginBottom: 24, display: "flex", gap: 16 }}
-      >
+      <div style={{ marginTop: 24, display: "flex", gap: 16 }}>
         <DatePicker
           onChange={onChange}
           defaultValue={today}
@@ -54,7 +54,15 @@ const Record = () => {
           <span className="record-get-report-btn-text ">報表下載</span>
         </Button>
       </div>
-      <Table columns={columns} />
+      <div
+        className={
+          store.siderCollapse
+            ? "record-container-collapsed"
+            : "record-container"
+        }
+      >
+        <Table columns={columns} />
+      </div>
     </div>
   );
 };
