@@ -148,17 +148,17 @@ const Sidebar = () => {
     //     <img src={SurveillanceIcon} alt="surveillance" className="menu-icon" />
     //   ),
     // },
-    {
-      key: "record",
-      label: (
-        <MenuItem
-          item=<span className="menu-text">
-            {intl.formatMessage(Messages.Text_Record_Title)}
-          </span>
-        />
-      ),
-      icon: <img src={CalendarIcon} alt="calendar" className="menu-icon" />,
-    },
+    // {
+    //   key: "record",
+    //   label: (
+    //     <MenuItem
+    //       item=<span className="menu-text">
+    //         {intl.formatMessage(Messages.Text_Record_Title)}
+    //       </span>
+    //     />
+    //   ),
+    //   icon: <img src={CalendarIcon} alt="calendar" className="menu-icon" />,
+    // },
   ];
 
   const onNavigate = (e) => {
