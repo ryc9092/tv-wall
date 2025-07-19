@@ -577,19 +577,20 @@ const AudioSituation = () => {
             )}
           /> */}
           <div style={{ display: "flex" }}>
-            <div
-              className="audio-situation-trash-btn"
-              onClick={() => {
-                setOpenConfirmClearModal(true);
-              }}
-            >
-              <img
-                alt="trash"
-                src={ClearLinkIcon}
-                className="audio-situation-trash-icon"
-              />
-              <FormattedMessage {...Messages.Text_Audio_ClearAudioRoute} />
-            </div>
+            {store.vars?.DisableStopAllAudio === true ? null : (
+              <div
+                className="audio-situation-trash-btn"
+                onClick={() => {
+                  setOpenConfirmClearModal(true);
+                }}
+              >
+                <img
+                  alt="trash"
+                  src={ClearLinkIcon}
+                  className="audio-situation-trash-icon"
+                />
+                <FormattedMessage {...Messages.Text_Audio_ClearAudioRoute} />
+              </div>)}
             <ConfirmModal
               open={openConfirmClearModal}
               setOpen={setOpenConfirmClearModal}
