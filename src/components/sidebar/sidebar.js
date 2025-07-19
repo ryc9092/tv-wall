@@ -1,7 +1,8 @@
 import { Menu } from "antd";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useIntl } from "react-intl";
+import { StoreContext } from "../store/store";
 import Messages from "../../messages";
 import TVWallIcon from "../../assets/tvWall.png";
 import SingleScreenIcon from "../../assets/screen.png";
@@ -23,12 +24,82 @@ const MenuItem = ({ item }) => {
 const Sidebar = () => {
   const intl = useIntl();
   const navigate = useNavigate();
+  const [store] = useContext(StoreContext);
   const currentPath = window.location.pathname.substring(1);
   const [sideBarMenuKey, setSideBarMenuKey] = useState(
     currentPath === "tv-wall" ? "tv-wall" : currentPath
   );
 
-  const items = [
+  const items = store.vars?.DisableTVWall === true ? [
+    {
+      key: "single-screen",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Sidebar_SingleScreenManagement)}
+          </span>
+        />
+      ),
+      icon: (
+        <img src={SingleScreenIcon} alt="singlescreen" className="menu-icon" />
+      ),
+    },
+    {
+      key: "audio",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Sidebar_AudioManagement)}
+          </span>
+        />
+      ),
+      icon: <img src={AudioIcon} alt="audio" className="menu-icon" />,
+    },
+    {
+      key: "usb",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Sidebar_USBManagement)}
+          </span>
+        />
+      ),
+      icon: <img src={USBIcon} alt="usb" className="menu-icon" />,
+    },
+    {
+      key: "monitor-mgmt",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_MonitorManagement_Title)}
+          </span>
+        />
+      ),
+      icon: <img src={PowerIcon} alt="singlescreen" className="menu-icon" />,
+    },
+    {
+      key: "situation",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Sidebar_SituationManagement)}
+          </span>
+        />
+      ),
+      icon: <img src={SituationIcon} alt="situation" className="menu-icon" />,
+    },
+    {
+      key: "equipment-status",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Sidebar_DeviceStatus)}
+          </span>
+        />
+      ),
+      icon: <img src={StatusIcon} alt="status" className="menu-icon" />,
+    },
+  ] : [
     {
       key: "tv-wall",
       label: (

@@ -366,8 +366,8 @@ const Situation = () => {
           <div className="table-content situation-remark-col">
             {record.set_type === "subPreset"
               ? audioSituations?.find(
-                  (audioSituation) => audioSituation.id === record.relation_id
-                )?.name
+                (audioSituation) => audioSituation.id === record.relation_id
+              )?.name
               : record.remark}
           </div>
         );
@@ -478,7 +478,41 @@ const Situation = () => {
     }
   };
 
-  const items = [
+  const items = store.vars?.DisableTVWall === true ? [
+    {
+      label: (
+        <span className="dropdown-menu-text">
+          {intl.formatMessage(Messages.Text_Common_SingleScreen)}
+        </span>
+      ),
+      key: "singlescreen",
+      icon: (
+        <img
+          src={SingleScreenIcon}
+          alt="singlescreen"
+          className="dropdown-menu-icon"
+        />
+      ),
+    },
+    {
+      label: (
+        <span className="dropdown-menu-text">
+          {intl.formatMessage(Messages.Text_Situation_AudioConnection)}
+        </span>
+      ),
+      key: "audio",
+      icon: <img src={AudioIcon} alt="audio" className="dropdown-menu-icon" />,
+    },
+    {
+      label: (
+        <span className="dropdown-menu-text">
+          {intl.formatMessage(Messages.Text_Situation_USBConnection)}
+        </span>
+      ),
+      key: "usb",
+      icon: <img src={USBIcon} alt="usb" className="dropdown-menu-icon" />,
+    },
+  ] : [
     {
       label: (
         <span className="dropdown-menu-text">
