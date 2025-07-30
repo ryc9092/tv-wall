@@ -573,7 +573,7 @@ const AudioSituation = () => {
             setPage("connectionStatus");
           }}
         >
-          <FormattedMessage {...Messages.Text_Audio_ConnectionStatus} />
+          <FormattedMessage {...Messages.Text_Audio_Route} />
         </div>
         <div
           className="audio-situation-topbar-option"
@@ -589,7 +589,7 @@ const AudioSituation = () => {
           <div>
             <div className="status-title-row">
               <span className="page-title">
-                <FormattedMessage {...Messages.Text_Sidebar_AudioManagement} />
+                <FormattedMessage {...Messages.Text_Audio_Route} />
               </span>
               {/* <Input
             className="status-title-input status-input"
