@@ -175,7 +175,7 @@ const AudioSituation = () => {
           {intl.formatMessage(Messages.Text_Common_Name)}
         </span>
       ),
-      width: "23%",
+      width: "25%",
       dataIndex: "name",
       key: "name",
       render: (text) => {
@@ -188,7 +188,7 @@ const AudioSituation = () => {
           {intl.formatMessage(Messages.Text_Common_Description)}
         </span>
       ),
-      width: "32%",
+      width: "35%",
       dataIndex: "remark",
       key: "remark",
       render: (text) => {
@@ -239,11 +239,11 @@ const AudioSituation = () => {
           {intl.formatMessage(Messages.Text_Button_Operation)}
         </span>
       ),
-      width: "25%",
+      width: "20%",
       key: "operate",
       dataIndex: "state",
       render: (text, record) => (
-        <div style={{ width: 155 }}>
+        <div>
           <Button
             type="text"
             className={
@@ -642,7 +642,7 @@ const AudioSituation = () => {
             // size={"small"}
             pagination={{ pageSize: 10 }}
             rowKey={(record) => record.id}
-            scroll={{ x: "max-content", y: height - 395 }}
+            scroll={{ y: height - 395 }}
           />
           <ConfirmModal
             open={openConfirmModal}
