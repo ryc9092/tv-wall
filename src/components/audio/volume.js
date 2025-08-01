@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../store/store";
 import { SearchOutlined } from "@ant-design/icons";
 import { Actions } from "../store/reducer";
-import { Button, Col, Input, Row, Table } from "antd";
+import { Button, Col, Input, Row, Slider } from "antd";
 import {
   getWalls,
   deleteWall,
@@ -17,6 +17,7 @@ import "../../App.scss";
 import "./volume.scss";
 
 import useWindowDimensions from "../../utils/WindowDimension";
+
 
 const VolumeSetting = () => {
   const intl = useIntl();
@@ -46,7 +47,19 @@ const VolumeSetting = () => {
       //   };
       let volumeCard = (
         <Col>
-          <div className="volume-card">{volume.name}</div>
+          <div className="volume-card">
+            <div style={{ height: 48 }}>{volume.name}</div>
+            <div style={{ height: 310 }}>
+              <Slider
+                style={{
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+                vertical
+                defaultValue={30}
+              />
+            </div>
+          </div>
         </Col>
       );
       tempVolumeCards.push(volumeCard);
