@@ -781,10 +781,20 @@ export const getP300Output = async (store) => {
   });
 };
 
-export const geVolumeData = async (store) => {
+export const getVolumeData = async (store) => {
   const apiPath = `/voice/p300`;
   return await apiGET({
     apiPath,
+    store,
+  });
+};
+
+export const postVolumeData = async (store, volumeData) => {
+  const apiPath = `/voice`;
+  const form = JSON.stringify(volumeData);
+  return await apiPOST({
+    apiPath,
+    form,
     store,
   });
 };

@@ -2,67 +2,124 @@ import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../store/store";
 import { SearchOutlined } from "@ant-design/icons";
 import { Actions } from "../store/reducer";
-import { Button, Col, Input, Row, Slider } from "antd";
+import { Button, Col, Input, InputNumber, Row, Slider } from "antd";
 import {
-  getWalls,
-  deleteWall,
-  getWallScreensById,
-  geVolumeData,
+  getVolumeData,
+  postVolumeData,
 } from "../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
-import TrashIcon from "../../assets/trash.png";
-import SearchIcon from "../../assets/magnifying-glass.png";
+import Speacker from "../../assets/speaker.png";
 import "../../App.scss";
 import "./volume.scss";
 
 import useWindowDimensions from "../../utils/WindowDimension";
 
 
+function truncateText(text, maxLength) {
+  if (text.length > maxLength) {
+    return text.substring(0, maxLength) + "...";
+  }
+  return text;
+}
+
 const VolumeSetting = () => {
   const intl = useIntl();
   const { width, height } = useWindowDimensions();
   const [store, dispatch] = useContext(StoreContext);
-  const [walls, setWalls] = useState([]);
   const [reload, setReload] = useState(null);
   const [volumeData, setVolumeData] = useState([]);
   const [volumeCards, setVolumeCards] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const volumeData = await geVolumeData(store);
+      const volumeData = await getVolumeData(store);
       console.log("Volume Data: ", volumeData);
       setVolumeData(volumeData);
     })();
   }, [reload, store]);
 
+  const handleVolumeChange = async (volumeData) => {
+    await postVolumeData(store, volumeData);
+
+  };
+
   useEffect(() => {
     let tempVolumeCards = [];
     volumeData?.forEach((volume) => {
-      //   let volumeCard = {
-      //     key: volume.id,
-      //     name: volume.name,
-      //     volume: volume.volume,
-      //     mute: volume.mute ? "Yes" : "No",
-      //   };
       let volumeCard = (
         <Col>
           <div className="volume-card">
-            <div style={{ height: 48 }}>{volume.name}</div>
-            <div style={{ height: 310 }}>
+            <div className="volume-card-title">
+              {truncateText(volume.name, 9)}
+            </div>
+            <div className="volume-card-devicetype">
+              {truncateText(volume.deviceType, 9)}
+            </div>
+            <div
+              style={{
+                height: 45,
+                width: 45,
+                borderRadius: 24,
+                backgroundColor: "#fbf37b",
+                cursor: "pointer",
+                alignContent: "center",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            >
+              <img alt="speacker" src={Speacker} style={{ width: 20 }} />
+            </div>
+            <div
+              className="volume-card-text"
+              style={{ marginTop: 14, marginBottom: 8 }}
+            >
+              {volume.maxVolume}
+            </div>
+            <div style={{ height: 200 }}>
               <Slider
                 style={{
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
+                max={volume.maxVolume}
+                min={volume.minVolume}
                 vertical
-                defaultValue={30}
+                defaultValue={volume.volume}
+                onChangeComplete={(value) =>
+                  handleVolumeChange({
+                    volume: value,
+                    id: volume.id,
+                    deviceType: volume.deviceType,
+                    mute: volume.mute,
+                  })
+                }
               />
             </div>
+            <div
+              className="volume-card-text"
+              style={{ marginTop: 8, marginBottom: 14 }}
+            >
+              {volume.minVolume}
+            </div>
+            <InputNumber
+              min={0}
+              max={100}
+              size="large"
+              value={volume.volume}
+              style={{ width: 60 }}
+              onChange={(value) =>
+                handleVolumeChange({
+                  volume: value,
+                  id: volume.id,
+                  deviceType: volume.deviceType,
+                  mute: volume.mute,
+                })
+              }
+            />
           </div>
         </Col>
       );
-      tempVolumeCards.push(volumeCard);
       tempVolumeCards.push(volumeCard);
     });
 
