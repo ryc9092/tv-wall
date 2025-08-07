@@ -53,10 +53,23 @@ const VolumeSetting = () => {
       console.log("Volume Data: ", volumeData);
       setVolumeData(volumeData);
     })();
-  }, [reload, store]);
+  }, [store]);
 
-  const handleVolumeChange = async (volumeData) => {
-    await postVolumeData(store, volumeData);
+  const handleVolumeChange = async (volume) => {
+    // const result = await postVolumeData(store, volume);
+    // if (result) {
+    let newVolumeData = volumeData.map((vol) => {
+      if (vol.id === volume.id) {
+        return {
+          ...vol,
+          ...volume,
+        };
+      }
+      return vol;
+    });
+    setVolumeData(newVolumeData);
+    setReload(new Date().getTime());
+    // }
   };
 
   useEffect(() => {
@@ -93,6 +106,7 @@ const VolumeSetting = () => {
             </div>
             <div style={{ height: 200 }}>
               <Slider
+                key={volume.id + `${volume.volume}`}
                 className="volume-slider-track volume-slider-rail volume-slider-handle volume-slider-handle-after volume-slider-handle-tooltip-after volume-slider-handle-hover-after volume-slider-handle-focus-after h h1 h2"
                 style={{
                   marginLeft: "auto",
@@ -140,7 +154,7 @@ const VolumeSetting = () => {
     });
 
     setVolumeCards(tempVolumeCards);
-  }, [volumeData]);
+  }, [volumeData, reload]);
 
   return (
     <div className="page-layout-column">
