@@ -3,10 +3,7 @@ import { StoreContext } from "../store/store";
 import { SearchOutlined } from "@ant-design/icons";
 import { Actions } from "../store/reducer";
 import { Button, Col, Input, InputNumber, Row, Slider } from "antd";
-import {
-  getVolumeData,
-  postVolumeData,
-} from "../../api/API";
+import { getVolumeData, postVolumeData } from "../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
 import Speacker from "../../assets/speaker.png";
@@ -14,7 +11,6 @@ import "../../App.scss";
 import "./volume.scss";
 
 import useWindowDimensions from "../../utils/WindowDimension";
-
 
 function truncateText(text, maxLength) {
   if (text.length > maxLength) {
@@ -33,7 +29,27 @@ const VolumeSetting = () => {
 
   useEffect(() => {
     (async () => {
-      const volumeData = await getVolumeData(store);
+      // const volumeData = await getVolumeData(store);
+      const volumeData = [
+        {
+          deviceType: "p300",
+          id: "11",
+          volume: 10,
+          mute: false,
+          name: "Analog input 1",
+          maxVolume: 100,
+          minVolume: 0,
+        },
+        {
+          deviceType: "p300",
+          id: "11-1",
+          volume: 10,
+          mute: false,
+          name: "Analog input 1-1",
+          maxVolume: 100,
+          minVolume: 0,
+        },
+      ];
       console.log("Volume Data: ", volumeData);
       setVolumeData(volumeData);
     })();
@@ -41,7 +57,6 @@ const VolumeSetting = () => {
 
   const handleVolumeChange = async (volumeData) => {
     await postVolumeData(store, volumeData);
-
   };
 
   useEffect(() => {
@@ -72,12 +87,13 @@ const VolumeSetting = () => {
             </div>
             <div
               className="volume-card-text"
-              style={{ marginTop: 14, marginBottom: 8 }}
+              style={{ marginTop: 14, marginBottom: 12 }}
             >
               {volume.maxVolume}
             </div>
             <div style={{ height: 200 }}>
               <Slider
+                className="volume-slider-track volume-slider-rail volume-slider-handle volume-slider-handle-after volume-slider-handle-tooltip-after volume-slider-handle-hover-after volume-slider-handle-focus-after h h1 h2"
                 style={{
                   marginLeft: "auto",
                   marginRight: "auto",
@@ -98,7 +114,7 @@ const VolumeSetting = () => {
             </div>
             <div
               className="volume-card-text"
-              style={{ marginTop: 8, marginBottom: 14 }}
+              style={{ marginTop: 12, marginBottom: 14 }}
             >
               {volume.minVolume}
             </div>
