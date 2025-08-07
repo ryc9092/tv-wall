@@ -7,6 +7,7 @@ import { getVolumeData, postVolumeData } from "../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import Messages from "../../messages";
 import Speacker from "../../assets/speaker.png";
+import SpeackerOff from "../../assets/speaker-off.png";
 import "../../App.scss";
 import "./volume.scss";
 
@@ -35,7 +36,7 @@ const VolumeSetting = () => {
           deviceType: "p300",
           id: "11",
           volume: 10,
-          mute: false,
+          mute: "ON",
           name: "Analog input 1",
           maxVolume: 100,
           minVolume: 0,
@@ -44,7 +45,7 @@ const VolumeSetting = () => {
           deviceType: "p300",
           id: "11-1",
           volume: 10,
-          mute: false,
+          mute: "OFF",
           name: "Analog input 1-1",
           maxVolume: 100,
           minVolume: 0,
@@ -54,6 +55,23 @@ const VolumeSetting = () => {
       setVolumeData(volumeData);
     })();
   }, [store]);
+
+  const handleClickSpeacker = async (volumeID) => {
+    // const result = await postVolumeData(store, volume);
+    // if (result) {
+    let newVolumeData = volumeData.map((vol) => {
+      if (vol.id === volumeID) {
+        return {
+          ...vol,
+          ...{ mute: vol.mute === "ON" ? "OFF" : "ON" },
+        };
+      }
+      return vol;
+    });
+    setVolumeData(newVolumeData);
+    setReload(new Date().getTime());
+    // }
+  };
 
   const handleVolumeChange = async (volume) => {
     // const result = await postVolumeData(store, volume);
@@ -84,20 +102,57 @@ const VolumeSetting = () => {
             <div className="volume-card-devicetype">
               {truncateText(volume.deviceType, 9)}
             </div>
-            <div
-              style={{
-                height: 45,
-                width: 45,
-                borderRadius: 24,
-                backgroundColor: "#fbf37b",
-                cursor: "pointer",
-                alignContent: "center",
-                marginLeft: "auto",
-                marginRight: "auto",
-              }}
-            >
-              <img alt="speacker" src={Speacker} style={{ width: 20 }} />
-            </div>
+            {volume.mute === "ON" ? (
+              <div
+                id={`speacker@${volume.id}`}
+                style={{
+                  height: 45,
+                  width: 45,
+                  borderRadius: 24,
+                  backgroundColor: "#fbf37b",
+                  cursor: "pointer",
+                  alignContent: "center",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+                onClick={(event) => {
+                  const volumeID = event.target.id.split("@")[1];
+                  handleClickSpeacker(volumeID);
+                }}
+              >
+                <img
+                  id={`speackerimg@${volume.id}`}
+                  alt="speacker"
+                  src={Speacker}
+                  style={{ width: 20, marginTop: 3 }}
+                />
+              </div>
+            ) : (
+              <div
+                id={`speackeroff@${volume.id}`}
+                style={{
+                  height: 45,
+                  width: 45,
+                  borderRadius: 24,
+                  border: "1px solid #575452",
+                  cursor: "pointer",
+                  alignContent: "center",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+                onClick={(event) => {
+                  const volumeID = event.target.id.split("@")[1];
+                  handleClickSpeacker(volumeID);
+                }}
+              >
+                <img
+                  id={`speackeroffimg@${volume.id}`}
+                  alt="speacker"
+                  src={SpeackerOff}
+                  style={{ width: 20, marginTop: 3 }}
+                />
+              </div>
+            )}
             <div
               className="volume-card-text"
               style={{ marginTop: 14, marginBottom: 12 }}
