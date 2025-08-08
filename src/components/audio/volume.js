@@ -190,9 +190,10 @@ const VolumeSetting = () => {
             <InputNumber
               min={0}
               max={100}
+              step="0.1"
               size="large"
               value={volume.volume}
-              style={{ width: 60 }}
+              style={{ width: 68 }}
               onChange={(value) =>
                 handleVolumeChange({
                   volume: value,
