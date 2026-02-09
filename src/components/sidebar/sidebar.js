@@ -27,79 +27,10 @@ const Sidebar = () => {
   const [store] = useContext(StoreContext);
   const currentPath = window.location.pathname.substring(1);
   const [sideBarMenuKey, setSideBarMenuKey] = useState(
-    currentPath === "tv-wall" ? "tv-wall" : currentPath
+    currentPath === "tv-wall" ? "tv-wall" : currentPath,
   );
 
-  const items = store.vars?.DisableTVWall === true ? [
-    {
-      key: "single-screen",
-      label: (
-        <MenuItem
-          item=<span className="menu-text">
-            {intl.formatMessage(Messages.Text_Sidebar_SingleScreenManagement)}
-          </span>
-        />
-      ),
-      icon: (
-        <img src={SingleScreenIcon} alt="singlescreen" className="menu-icon" />
-      ),
-    },
-    {
-      key: "audio",
-      label: (
-        <MenuItem
-          item=<span className="menu-text">
-            {intl.formatMessage(Messages.Text_Sidebar_AudioManagement)}
-          </span>
-        />
-      ),
-      icon: <img src={AudioIcon} alt="audio" className="menu-icon" />,
-    },
-    {
-      key: "usb",
-      label: (
-        <MenuItem
-          item=<span className="menu-text">
-            {intl.formatMessage(Messages.Text_Sidebar_USBManagement)}
-          </span>
-        />
-      ),
-      icon: <img src={USBIcon} alt="usb" className="menu-icon" />,
-    },
-    {
-      key: "monitor-mgmt",
-      label: (
-        <MenuItem
-          item=<span className="menu-text">
-            {intl.formatMessage(Messages.Text_MonitorManagement_Title)}
-          </span>
-        />
-      ),
-      icon: <img src={PowerIcon} alt="singlescreen" className="menu-icon" />,
-    },
-    {
-      key: "situation",
-      label: (
-        <MenuItem
-          item=<span className="menu-text">
-            {intl.formatMessage(Messages.Text_Sidebar_SituationManagement)}
-          </span>
-        />
-      ),
-      icon: <img src={SituationIcon} alt="situation" className="menu-icon" />,
-    },
-    {
-      key: "equipment-status",
-      label: (
-        <MenuItem
-          item=<span className="menu-text">
-            {intl.formatMessage(Messages.Text_Sidebar_DeviceStatus)}
-          </span>
-        />
-      ),
-      icon: <img src={StatusIcon} alt="status" className="menu-icon" />,
-    },
-  ] : [
+  let items = [
     {
       key: "tv-wall",
       label: (
@@ -231,6 +162,13 @@ const Sidebar = () => {
     //   icon: <img src={CalendarIcon} alt="calendar" className="menu-icon" />,
     // },
   ];
+
+  if (store.vars?.DisableTVWall === true) {
+    items = items.filter((item) => item.key !== "tv-wall");
+  }
+  if (store.vars?.DisableSwitchControl === true) {
+    items = items.filter((item) => item.key !== "monitor-mgmt");
+  }
 
   const onNavigate = (e) => {
     const path = e.key;
