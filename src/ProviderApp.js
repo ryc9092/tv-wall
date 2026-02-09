@@ -7,7 +7,8 @@ import { IntlProvider } from "react-intl";
 import translations from "./i18n/locales";
 
 function ProviderApp() {
-  const [locale, setLocale] = useState(navigator.language);
+  // const [locale, setLocale] = useState(navigator.language);
+  const [locale, setLocale] = useState("zh");
   const messages = translations[locale];
   return (
     <Store>
@@ -15,7 +16,7 @@ function ProviderApp() {
         locale={locale}
         key={locale}
         messages={messages}
-        defaultLocale="en"
+        defaultLocale="zh"
       >
         <VarsProvider>
           <App setLocale={setLocale} />

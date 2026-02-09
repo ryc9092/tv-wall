@@ -52,16 +52,16 @@ function TopBar({ setLocale }) {
           ),
           onClick: setLanguage,
         },
-        {
-          key: "english",
-          value: "en-US",
-          label: (
-            <span className="topbar-user-menu-text">
-              {intl.formatMessage(Messages.Text_Topbar_English)}
-            </span>
-          ),
-          onClick: setLanguage,
-        },
+        // {
+        //   key: "english",
+        //   value: "en-US",
+        //   label: (
+        //     <span className="topbar-user-menu-text">
+        //       {intl.formatMessage(Messages.Text_Topbar_English)}
+        //     </span>
+        //   ),
+        //   onClick: setLanguage,
+        // },
       ],
     },
   ];
