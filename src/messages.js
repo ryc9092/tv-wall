@@ -365,6 +365,11 @@ export default defineMessages({
     defaultMessage: "未選擇電視牆名稱/版型",
   },
 
+  Text_Multiview_MultiviewManagement: {
+    id: "Text-Multiview-MultiviewManagement",
+    defaultMessage: "多畫面管理",
+  },
+
   // Single screen management
   Text_SingleScreen_Management: {
     id: "Text-SingleScreen-Management",

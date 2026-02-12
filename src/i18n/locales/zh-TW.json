@@ -57,6 +57,7 @@
 
   "Text-Sidebar-DeviceStatus": "設備狀態",
   "Text-Sidebar-TVWallManagement": "電視牆畫面管理",
+  "Text-Sidebar-MultiviewManagement": "多畫面管理",
   "Text-Sidebar-SingleScreenManagement": "單顯示畫面管理",
   "Text-Sidebar-AudioManagement": "音頻管理",
   "Text-Sidebar-USBManagement": "USB 管理",
@@ -97,7 +98,7 @@
   "Text-TVWall-ConfirmClear": "是否確認清除當前所有投放於實體牆面之影像?",
   "Text-TVWall-PreviewRequiredHint": "未選擇電視牆名稱/版型",
 
-  "Text-Sidebar-MultiviewManagement": "多畫面管理",
+  "Text-Multiview-MultiviewManagement": "多畫面管理",
 
   "Text-SingleScreen-Management": "單顯示畫面管理",
   "Text-SingleScreen-TabSingleScreen": "單顯示器",

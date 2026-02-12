@@ -10,6 +10,7 @@ const About = loadable(() => import("./pages/About"));
 const Login = loadable(() => import("./pages/Login"));
 const Status = loadable(() => import("./pages/Status"));
 const TVWall = loadable(() => import("./pages/TVWall"));
+const Multiview = loadable(() => import("./pages/Multiview"));
 const SingleScreen = loadable(() => import("./pages/SingleScreen"));
 const MonitorMgmt = loadable(() => import("./pages/MonitorMgmt"));
 const Audio = loadable(() => import("./pages/Audio"));
@@ -65,7 +66,7 @@ function App({ setLocale }) {
               <ResponsiveLayout
                 topbar={<Topbar setLocale={setLocale} />}
                 sidebar={<Sidebar />}
-                main={<TVWall />}
+                main={<Multiview />}
               />
             </PrivateRoute>
           }
