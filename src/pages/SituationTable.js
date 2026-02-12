@@ -87,7 +87,7 @@ const Situation = () => {
                 .name,
             })}
           </span>,
-          Math.random()
+          Math.random(),
         );
       } else {
         showWarningNotification(
@@ -99,7 +99,7 @@ const Situation = () => {
             <br />
             {intl.formatMessage(Messages.Text_Situation_PlayFailHint)}
           </span>,
-          Math.random()
+          Math.random(),
         );
       }
       let idx = situationActivatedList.indexOf(situationId);
@@ -366,8 +366,8 @@ const Situation = () => {
           <div className="table-content situation-remark-col">
             {record.set_type === "subPreset"
               ? audioSituations?.find(
-                (audioSituation) => audioSituation.id === record.relation_id
-              )?.name
+                  (audioSituation) => audioSituation.id === record.relation_id,
+                )?.name
               : record.remark}
           </div>
         );
@@ -395,6 +395,9 @@ const Situation = () => {
                 viewSituationDetail(record.relation_id, record.set_type);
               }}
               className="table-content"
+              style={{
+                visibility: record.set_type === "tvwall" ? "hidden" : "visible",
+              }}
             >
               <img
                 alt="view"
@@ -478,86 +481,101 @@ const Situation = () => {
     }
   };
 
-  const items = store.vars?.DisableTVWall === true ? [
-    {
-      label: (
-        <span className="dropdown-menu-text">
-          {intl.formatMessage(Messages.Text_Common_SingleScreen)}
-        </span>
-      ),
-      key: "singlescreen",
-      icon: (
-        <img
-          src={SingleScreenIcon}
-          alt="singlescreen"
-          className="dropdown-menu-icon"
-        />
-      ),
-    },
-    {
-      label: (
-        <span className="dropdown-menu-text">
-          {intl.formatMessage(Messages.Text_Situation_AudioConnection)}
-        </span>
-      ),
-      key: "audio",
-      icon: <img src={AudioIcon} alt="audio" className="dropdown-menu-icon" />,
-    },
-    {
-      label: (
-        <span className="dropdown-menu-text">
-          {intl.formatMessage(Messages.Text_Situation_USBConnection)}
-        </span>
-      ),
-      key: "usb",
-      icon: <img src={USBIcon} alt="usb" className="dropdown-menu-icon" />,
-    },
-  ] : [
-    {
-      label: (
-        <span className="dropdown-menu-text">
-          {intl.formatMessage(Messages.Text_Common_TVWall)}
-        </span>
-      ),
-      key: "tvwall",
-      icon: (
-        <img src={TVWallIcon} alt="tvwall" className="dropdown-menu-icon" />
-      ),
-    },
-    {
-      label: (
-        <span className="dropdown-menu-text">
-          {intl.formatMessage(Messages.Text_Common_SingleScreen)}
-        </span>
-      ),
-      key: "singlescreen",
-      icon: (
-        <img
-          src={SingleScreenIcon}
-          alt="singlescreen"
-          className="dropdown-menu-icon"
-        />
-      ),
-    },
-    {
-      label: (
-        <span className="dropdown-menu-text">
-          {intl.formatMessage(Messages.Text_Situation_AudioConnection)}
-        </span>
-      ),
-      key: "audio",
-      icon: <img src={AudioIcon} alt="audio" className="dropdown-menu-icon" />,
-    },
-    {
-      label: (
-        <span className="dropdown-menu-text">
-          {intl.formatMessage(Messages.Text_Situation_USBConnection)}
-        </span>
-      ),
-      key: "usb",
-      icon: <img src={USBIcon} alt="usb" className="dropdown-menu-icon" />,
-    },
-  ];
+  const items =
+    store.vars?.DisableTVWall === true
+      ? [
+          {
+            label: (
+              <span className="dropdown-menu-text">
+                {intl.formatMessage(Messages.Text_Common_SingleScreen)}
+              </span>
+            ),
+            key: "singlescreen",
+            icon: (
+              <img
+                src={SingleScreenIcon}
+                alt="singlescreen"
+                className="dropdown-menu-icon"
+              />
+            ),
+          },
+          {
+            label: (
+              <span className="dropdown-menu-text">
+                {intl.formatMessage(Messages.Text_Situation_AudioConnection)}
+              </span>
+            ),
+            key: "audio",
+            icon: (
+              <img src={AudioIcon} alt="audio" className="dropdown-menu-icon" />
+            ),
+          },
+          {
+            label: (
+              <span className="dropdown-menu-text">
+                {intl.formatMessage(Messages.Text_Situation_USBConnection)}
+              </span>
+            ),
+            key: "usb",
+            icon: (
+              <img src={USBIcon} alt="usb" className="dropdown-menu-icon" />
+            ),
+          },
+        ]
+      : [
+          {
+            label: (
+              <span className="dropdown-menu-text">
+                {intl.formatMessage(Messages.Text_Common_TVWall)}
+              </span>
+            ),
+            key: "tvwall",
+            icon: (
+              <img
+                src={TVWallIcon}
+                alt="tvwall"
+                className="dropdown-menu-icon"
+              />
+            ),
+          },
+          {
+            label: (
+              <span className="dropdown-menu-text">
+                {intl.formatMessage(Messages.Text_Common_SingleScreen)}
+              </span>
+            ),
+            key: "singlescreen",
+            icon: (
+              <img
+                src={SingleScreenIcon}
+                alt="singlescreen"
+                className="dropdown-menu-icon"
+              />
+            ),
+          },
+          {
+            label: (
+              <span className="dropdown-menu-text">
+                {intl.formatMessage(Messages.Text_Situation_AudioConnection)}
+              </span>
+            ),
+            key: "audio",
+            icon: (
+              <img src={AudioIcon} alt="audio" className="dropdown-menu-icon" />
+            ),
+          },
+          {
+            label: (
+              <span className="dropdown-menu-text">
+                {intl.formatMessage(Messages.Text_Situation_USBConnection)}
+              </span>
+            ),
+            key: "usb",
+            icon: (
+              <img src={USBIcon} alt="usb" className="dropdown-menu-icon" />
+            ),
+          },
+        ];
 
   const menuProps = {
     items,
