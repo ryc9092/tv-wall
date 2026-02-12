@@ -5,6 +5,7 @@ import { useIntl } from "react-intl";
 import { StoreContext } from "../store/store";
 import Messages from "../../messages";
 import TVWallIcon from "../../assets/tvWall.png";
+import MultiviewIcon from "../../assets/multiview.png";
 import SingleScreenIcon from "../../assets/screen.png";
 import PowerIcon from "../../assets/power-outline.svg";
 import USBIcon from "../../assets/usb.png";
@@ -41,6 +42,17 @@ const Sidebar = () => {
         />
       ),
       icon: <img src={TVWallIcon} alt="tvwall" className="menu-icon" />,
+    },
+    {
+      key: "multiview",
+      label: (
+        <MenuItem
+          item=<span className="menu-text">
+            {intl.formatMessage(Messages.Text_Sidebar_MultiviewManagement)}
+          </span>
+        />
+      ),
+      icon: <img src={MultiviewIcon} alt="tvwall" className="menu-icon-2" />,
     },
     {
       key: "single-screen",

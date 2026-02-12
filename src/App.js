@@ -59,6 +59,18 @@ function App({ setLocale }) {
           }
         />
         <Route
+          path="/multiview"
+          element={
+            <PrivateRoute>
+              <ResponsiveLayout
+                topbar={<Topbar setLocale={setLocale} />}
+                sidebar={<Sidebar />}
+                main={<TVWall />}
+              />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/single-screen"
           element={
             <PrivateRoute>

@@ -91,6 +91,8 @@
   "Text-TVWall-ConfirmClear": "are you sure to clear all the videos?",
   "Text-TVWall-PreviewRequiredHint": "未選擇電視牆名稱/版型",
 
+  "Text-Sidebar-MultiviewManagement": "多畫面管理",
+
   "Text-SingleScreen-Management": "Source and Display Management",
   "Text-SingleScreen-TabSingleScreen": "Single Display",
   "Text-SingleScreen-Screen": "Display",

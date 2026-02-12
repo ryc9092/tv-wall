@@ -190,6 +190,10 @@ export default defineMessages({
     id: "Text-Sidebar-TVWallManagement",
     defaultMessage: "電視牆影像管理",
   },
+  Text_Sidebar_MultiviewManagement: {
+    id: "Text-Sidebar-MultiviewManagement",
+    defaultMessage: "多畫面管理",
+  },
   Text_Sidebar_SingleScreenManagement: {
     id: "Text-Sidebar-SingleScreenManagement",
     defaultMessage: "單顯示畫面管理",
