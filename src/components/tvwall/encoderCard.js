@@ -126,6 +126,7 @@ const EncoderCard = ({
                 border: 0,
                 padding: 5,
                 boxShadow: "none",
+                visibility: "hidden",
               }}
             >
               <EyeOutlined style={{ fontSize: 16 }} />
@@ -171,8 +172,8 @@ const EncoderCard = ({
                 ? "situation-encoder-card-table-container"
                 : "situation-encoder-card-table-container-without-preview"
               : showPreview
-              ? "encoder-card-table-container"
-              : "encoder-card-table-container-without-preview"
+                ? "encoder-card-table-container"
+                : "encoder-card-table-container-without-preview"
           }
         >
           <Table
