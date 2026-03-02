@@ -56,11 +56,11 @@
   "Text-Login-FailMsg": "登入失敗",
 
   "Text-Sidebar-DeviceStatus": "設備狀態",
-  "Text-Sidebar-TVWallManagement": "電視牆畫面管理",
-  "Text-Sidebar-MultiviewManagement": "多畫面管理",
-  "Text-Sidebar-SingleScreenManagement": "單顯示畫面管理",
-  "Text-Sidebar-AudioManagement": "音頻管理",
-  "Text-Sidebar-USBManagement": "USB 管理",
+  "Text-Sidebar-TVWallManagement": "電視牆",
+  "Text-Sidebar-MultiviewManagement": "分割畫面",
+  "Text-Sidebar-SingleScreenManagement": "單顯示畫面",
+  "Text-Sidebar-AudioManagement": "音頻路由",
+  "Text-Sidebar-USBManagement": "USB路由",
   "Text-Sidebar-RS232Management": "RS232 管理",
   "Text-Sidebar-ScheduleManagement": "排程管理",
   "Text-Sidebar-SituationManagement": "情境管理",
@@ -77,7 +77,7 @@
   "Text-Topbar-OccuredTime": "發生時間",
   "Text-Topbar-EventDescription": "事件描述",
 
-  "Text-TVWall-TVWallManagement": "電視牆畫面管理",
+  "Text-TVWall-TVWallManagement": "電視牆",
   "Text-TVWall-WallName": "電視牆名稱",
   "Text-TVWall-Template": "電視牆適用版型",
   "Text-TVWall-ActivateWall": "投放",
@@ -98,9 +98,9 @@
   "Text-TVWall-ConfirmClear": "是否確認清除當前所有投放於實體牆面之影像?",
   "Text-TVWall-PreviewRequiredHint": "未選擇電視牆名稱/版型",
 
-  "Text-Multiview-MultiviewManagement": "多畫面管理",
+  "Text-Multiview-MultiviewManagement": "分割畫面",
 
-  "Text-SingleScreen-Management": "單顯示畫面管理",
+  "Text-SingleScreen-Management": "單顯示畫面",
   "Text-SingleScreen-TabSingleScreen": "單顯示器",
   "Text-SingleScreen-Screen": "顯示終端",
   "Text-SingleScreen-Group": "顯示終端群組",
@@ -121,7 +121,7 @@
   "Text-SingleScreen-VideoClearFail": "無法清除顯示終端 [{destination}] 當前投放影像",
   "Text-SingleScreen-VideoClearFailHint": "請檢查終端設備是否上線",
 
-  "Text-USB-USBMgmt": "USB管理",
+  "Text-USB-USBMgmt": "USB路由",
   "Text-USB-InputUSBSource": "輸入USB來源名稱",
   "Text-USB-InputEncoderName": "輸入USB來源名稱",
   "Text-USB-InputDecoderName": "輸入USB終端名稱",

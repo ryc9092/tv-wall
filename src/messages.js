@@ -192,19 +192,19 @@ export default defineMessages({
   },
   Text_Sidebar_MultiviewManagement: {
     id: "Text-Sidebar-MultiviewManagement",
-    defaultMessage: "多畫面管理",
+    defaultMessage: "分割畫面",
   },
   Text_Sidebar_SingleScreenManagement: {
     id: "Text-Sidebar-SingleScreenManagement",
-    defaultMessage: "單顯示畫面管理",
+    defaultMessage: "單顯示畫面",
   },
   Text_Sidebar_AudioManagement: {
     id: "Text-Sidebar-AudioManagement",
-    defaultMessage: "音頻管理",
+    defaultMessage: "音頻路由",
   },
   Text_Sidebar_USBManagement: {
     id: "Text-Sidebar-USBManagement",
-    defaultMessage: "USB 管理",
+    defaultMessage: "USB路由",
   },
   Text_Sidebar_RS232Management: {
     id: "Text-Sidebar-RS232Management",
@@ -268,7 +268,7 @@ export default defineMessages({
   // TV wall management
   Text_TVWall_TVWallManagement: {
     id: "Text-TVWall-TVWallManagement",
-    defaultMessage: "電視牆畫面管理",
+    defaultMessage: "電視牆",
   },
   Text_TVWall_WallName: {
     id: "Text-TVWall-WallName",
@@ -367,13 +367,13 @@ export default defineMessages({
 
   Text_Multiview_MultiviewManagement: {
     id: "Text-Multiview-MultiviewManagement",
-    defaultMessage: "多畫面管理",
+    defaultMessage: "分割畫面",
   },
 
   // Single screen management
   Text_SingleScreen_Management: {
     id: "Text-SingleScreen-Management",
-    defaultMessage: "單顯示畫面管理",
+    defaultMessage: "單顯示畫面",
   },
   Text_SingleScreen_TabSingleScreen: {
     id: "Text-SingleScreen-TabSingleScreen",
@@ -459,7 +459,7 @@ export default defineMessages({
   // USB management
   Text_USB_USBMgmt: {
     id: "Text-USB-USBMgmt",
-    defaultMessage: "USB管理",
+    defaultMessage: "USB路由",
   },
   Text_USB_InputUSBSource: {
     id: "Text-USB-InputUSBSource",
@@ -954,7 +954,7 @@ export default defineMessages({
   },
   Text_Situation_USBManagement: {
     id: "Text-Situation-USBManagement",
-    defaultMessage: "USB管理",
+    defaultMessage: "USB路由",
   },
 
   // Device status
