@@ -5,7 +5,7 @@ import { useIntl } from "react-intl";
 import { StoreContext } from "../store/store";
 import Messages from "../../messages";
 import TVWallIcon from "../../assets/tvWall.png";
-import MultiviewIcon from "../../assets/multiview.png";
+import MultiviewIcon from "../../assets/multiview.svg";
 import SingleScreenIcon from "../../assets/screen.png";
 import PowerIcon from "../../assets/power-outline.svg";
 import USBIcon from "../../assets/usb.png";
@@ -98,7 +98,7 @@ const Sidebar = () => {
           </span>
         />
       ),
-      icon: <img src={PowerIcon} alt="singlescreen" className="menu-icon" />,
+      icon: <img src={PowerIcon} alt="singlescreen" className="menu-icon" style={{opacity: 0.7}} />,
     },
     // {
     //   key: "rs232",
