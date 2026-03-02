@@ -48,6 +48,7 @@ const TvWall = ({
           store,
           selectedTemplate.templateId
         );
+        console.log(templateScreens, "!!!!!!!!")
         const wallScreens = await getWallScreensById(
           store,
           selectedWall.wallId
@@ -80,7 +81,7 @@ const TvWall = ({
               : "";
             tempScreen.block = parseInt(templateScreens[idx].block);
             tempScreens.push(tempScreen);
-
+            console.log(tempScreens)
             if (tempBlocksDetail?.length >= 0) {
               let hasSet = false;
               tempBlocksDetail.forEach((block, idx) => {

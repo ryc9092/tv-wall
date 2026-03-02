@@ -99,6 +99,8 @@
   "Text-TVWall-PreviewRequiredHint": "未選擇電視牆名稱/版型",
 
   "Text-Multiview-MultiviewManagement": "分割畫面",
+  "Text-Multiview-EncoderChoose": "解碼器選擇",
+  "Text-Multiview-MultiviewTemplate": "分割版型",
 
   "Text-SingleScreen-Management": "單顯示畫面",
   "Text-SingleScreen-TabSingleScreen": "單顯示器",

@@ -72,6 +72,7 @@ const TVWall = () => {
           row: tempWallOptions[0].row,
         });
         setSelectedWall(tempWallOptions[0]);
+        console.log(tempWallOptions[0])
       }
       const encoders = await getEncoders(store);
       setEncoders(encoders);

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../components/store/store";
 import { Actions } from "../components/store/reducer";
 import { Select, Modal } from "antd";
-import TvWall from "../components/tvwall/tvWall";
+import MultiView from "../components/multiview/multiview";
 import EncoderCard from "../components/tvwall/encoderCard";
 import {
   activeWall,
@@ -10,6 +10,7 @@ import {
   getActivedWall,
   getWalls,
   getTemplates,
+  getDecoders,
   getEncoders,
 } from "../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -24,11 +25,11 @@ import "./TVWall.scss";
 
 import useWindowDimensions from "../utils/WindowDimension";
 
-const TVWall = () => {
+const Multiview = () => {
   const intl = useIntl();
   const [store, dispatch] = useContext(StoreContext);
   const { width, height } = useWindowDimensions();
-  const [wallOptions, setWallOptions] = useState([]);
+  const [decoderOptions, setDecoderOptions] = useState([]);
   const [wallDimension, setWallDimension] = useState({ col: 0, row: 0 });
   const [selectedWall, setSelectedWall] = useState({});
   const [templateOptions, setTemplateOptions] = useState([]);
@@ -56,46 +57,69 @@ const TVWall = () => {
   // Set "wall options", get encoders
   useEffect(() => {
     (async () => {
-      let tempWallOptions = [];
-      const result = await getWalls(store);
+      let tempDecoderOptions = [];
+      const result = await getDecoders(store); // todo: 改成multiview專用get decoder API
+      console.log(result, "=====");
       if (result) {
-        result.forEach((wall) => {
-          tempWallOptions.push({
-            value: wall.wallName,
-            label: wall.wallName,
-            ...wall,
+        result.forEach((decoder) => {
+          tempDecoderOptions.push({
+            value: decoder.mac,
+            label: decoder.nickName,
+            col: 1,
+            row: 1,
+            monitorbrand: "test",
+            wallId: "1",
+            wallName: "1",
+            ...decoder,
           });
         });
-        setWallOptions(tempWallOptions);
-        setWallDimension({
-          col: tempWallOptions[0].col,
-          row: tempWallOptions[0].row,
-        });
-        setSelectedWall(tempWallOptions[0]);
+        setDecoderOptions(tempDecoderOptions);
+        setSelectedWall(tempDecoderOptions[0]);
       }
       const encoders = await getEncoders(store);
       setEncoders(encoders);
     })();
   }, [store.vars]);
 
+  const templates = [
+    {
+      value: "1x1",
+      label: "全畫面",
+      id: "1x1",
+      groupId: "-1",
+      templateId: "1x1",
+      templateName: "1x1",
+      col: 1,
+      row: 1,
+      isDefault: 0,
+      screens: null,
+    },
+    {
+      value: "2x2",
+      label: "四分割",
+      id: "2x2",
+      groupId: "-1",
+      templateId: "2x2",
+      templateName: "2x2",
+      col: 2,
+      row: 2,
+      isDefault: 0,
+      screens: null,
+    },
+  ];
+
   // Set template when selected wall is changed
   useEffect(() => {
     (async () => {
       let tempTemplateOptions = [];
-      const result = await getTemplates(store);
-      if (result) {
-        result.forEach((template) => {
-          if (
-            template.col === wallDimension.col &&
-            template.row === wallDimension.row
-          ) {
-            tempTemplateOptions.push({
-              value: template.templateName,
-              label: template.templateName,
-              id: template.templateId,
-              ...template,
-            });
-          }
+      if (templates) {
+        templates.forEach((template) => {
+          tempTemplateOptions.push({
+            value: template.templateName,
+            label: template.templateName,
+            id: template.templateId,
+            ...template,
+          });
         });
         let activedWall;
         if (selectedWall.wallId) {
@@ -175,7 +199,7 @@ const TVWall = () => {
             destination: selectedWall.label,
             block: selectedBlockNumber,
           }),
-          Math.random()
+          Math.random(),
         );
       } else {
         showWarningNotification(
@@ -184,10 +208,11 @@ const TVWall = () => {
               source: selectedEncoder.nickName,
               destination: selectedWall.label,
               block: selectedBlockNumber,
-            })}<br />
+            })}
+            <br />
             {intl.formatMessage(Messages.Text_TVWall_ProjectVideoFailHint)}
           </span>,
-          Math.random()
+          Math.random(),
         );
       }
       setSelectedBlockNumber(null);
@@ -279,7 +304,7 @@ const TVWall = () => {
                 destination: selectedWall.label,
                 block: clearBlockNumber,
               }),
-              Math.random()
+              Math.random(),
             );
             setClearBlockNumber(null);
             setReload(Math.random());
@@ -291,10 +316,11 @@ const TVWall = () => {
                 source: selectedEncoder.nickName,
                 destination: selectedWall.label,
                 block: clearBlockNumber,
-              })}<br />
+              })}
+              <br />
               {intl.formatMessage(Messages.Text_TVWall_DeactiveBlockFailHint)}
             </span>,
-            Math.random()
+            Math.random(),
           );
         }
       }
@@ -339,16 +365,18 @@ const TVWall = () => {
         intl.formatMessage(Messages.Text_TVWall_DeactiveSuccess, {
           destination: selectedWall.label,
         }),
-        Math.random()
+        Math.random(),
       );
     } catch (error) {
       showWarningNotification(
         <span>
           {intl.formatMessage(Messages.Text_TVWall_DeactiveFail, {
             destination: selectedWall.label,
-          })}<br />{intl.formatMessage(Messages.Text_TVWall_DeactiveFailHint)}
+          })}
+          <br />
+          {intl.formatMessage(Messages.Text_TVWall_DeactiveFailHint)}
         </span>,
-        Math.random()
+        Math.random(),
       );
     }
     setOpenConfirmModal(false);
@@ -369,11 +397,11 @@ const TVWall = () => {
             }
           >
             <span className="tvwall-option-select-desc">
-              <FormattedMessage {...Messages.Text_TVWall_WallName} />
+              <FormattedMessage {...Messages.Text_Multiview_EncoderChoose} />
             </span>
             <Select
               className="tvwall-option-select"
-              options={wallOptions}
+              options={decoderOptions}
               value={selectedWall}
               onChange={(value, option) => {
                 changeWallSelected(option);
@@ -388,7 +416,7 @@ const TVWall = () => {
             }
           >
             <span className="tvwall-option-select-desc">
-              <FormattedMessage {...Messages.Text_TVWall_Template} />
+              <FormattedMessage {...Messages.Text_Multiview_MultiviewTemplate} />
             </span>
             <Select
               className="tvwall-option-select"
@@ -443,21 +471,21 @@ const TVWall = () => {
           style={
             store.siderCollapse
               ? {
-                width: width - 463,
-                height: height - 262,
-                // border: "1px solid #a5a5a5",
-                // borderRadius: "8px",
-              }
+                  width: width - 463,
+                  height: height - 262,
+                  // border: "1px solid #a5a5a5",
+                  // borderRadius: "8px",
+                }
               : {
-                width: width - 614,
-                height: height - 258,
-                // border: "1px solid #a5a5a5",
-                // borderRadius: "8px",
-              }
+                  width: width - 614,
+                  height: height - 258,
+                  // border: "1px solid #a5a5a5",
+                  // borderRadius: "8px",
+                }
           }
         >
           <div style={{ position: "relative" }}>
-            <TvWall
+            <MultiView
               selectedWall={selectedWall}
               selectedTemplate={selectedTemplate}
               selectedEncoder={selectedEncoder}
@@ -485,4 +513,4 @@ const TVWall = () => {
   );
 };
 
-export default TVWall;
+export default Multiview;

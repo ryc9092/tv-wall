@@ -369,6 +369,14 @@ export default defineMessages({
     id: "Text-Multiview-MultiviewManagement",
     defaultMessage: "分割畫面",
   },
+  Text_Multiview_EncoderChoose: {
+    id: "Text-Multiview-EncoderChoose",
+    defaultMessage: "解碼器選擇",
+  },
+  Text_Multiview_MultiviewTemplate: {
+    id: "Text-Multiview-MultiviewTemplate",
+    defaultMessage: "分割版型",
+  },
 
   // Single screen management
   Text_SingleScreen_Management: {
