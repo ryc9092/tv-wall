@@ -774,6 +774,10 @@ export default defineMessages({
     id: "Text-Situation-TVWallConnection",
     defaultMessage: "電視牆影像連結",
   },
+  Text_Situation_MultiviewConnection: {
+    id: "Text-Situation-MultiviewConnection",
+    defaultMessage: "分割畫面影像連結",
+  },
   Text_Situation_SingleScreenConnection: {
     id: "Text-Situation-SingleScreenConnection",
     defaultMessage: "單畫面影像連結",

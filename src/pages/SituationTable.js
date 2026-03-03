@@ -18,6 +18,7 @@ import {
 } from "../api/API";
 import ConfirmModal from "../components/common/confirmModal";
 import TVWallModal from "../components/situation/tvWallModal";
+import MultiviewModal from "../components/situation/multiviewModal";
 import SingleScreenModal from "../components/situation/singlescreenModal";
 import USBModal from "../components/situation/usbModal";
 import AudioModal from "../components/situation/audioModal";
@@ -38,6 +39,7 @@ import TrashIcon from "../assets/trash.png";
 import PlusIcon from "../assets/plus-white.png";
 import PlusYellowIcon from "../assets/plus-yellow.png";
 import TVWallIcon from "../assets/tvWall.png";
+import MultiviewIcon from "../assets/multiview.svg";
 import SingleScreenIcon from "../assets/screen.png";
 import USBIcon from "../assets/usb.png";
 import AudioIcon from "../assets/audio.png";
@@ -463,6 +465,7 @@ const Situation = () => {
 
   // add situation details
   const [isTVWallModalOpen, setIsTVWallModalOpen] = useState(false);
+  const [isMultiviewModalOpen, setIsMultiviewModalOpen] = useState(false);
   const [isSingleScreenModalOpen, setIsSingleScreenModalOpen] = useState(false);
   const [isUSBModalOpen, setIsUSBModalOpen] = useState(false);
   const [isAudioSituationModalOpen, setIsAudioSituationModalOpen] =
@@ -471,6 +474,7 @@ const Situation = () => {
 
   const handleMenuClick = (event) => {
     if (event.key === "tvwall") setIsTVWallModalOpen(true);
+    else if (event.key === "multiview") setIsMultiviewModalOpen(true);
     else if (event.key === "singlescreen") setIsSingleScreenModalOpen(true);
     else if (event.key === "usb") setIsUSBModalOpen(true);
     else if (event.key === "audio") {
@@ -495,6 +499,21 @@ const Situation = () => {
               <img
                 src={SingleScreenIcon}
                 alt="singlescreen"
+                className="dropdown-menu-icon"
+              />
+            ),
+          },
+          {
+            label: (
+              <span className="dropdown-menu-text">
+                {intl.formatMessage(Messages.Text_Multiview_MultiviewManagement)}
+              </span>
+            ),
+            key: "multiview",
+            icon: (
+              <img
+                src={MultiviewIcon}
+                alt="multiview"
                 className="dropdown-menu-icon"
               />
             ),
@@ -534,6 +553,21 @@ const Situation = () => {
               <img
                 src={TVWallIcon}
                 alt="tvwall"
+                className="dropdown-menu-icon"
+              />
+            ),
+          },
+          {
+            label: (
+              <span className="dropdown-menu-text">
+                {intl.formatMessage(Messages.Text_Multiview_MultiviewManagement)}
+              </span>
+            ),
+            key: "multiview",
+            icon: (
+              <img
+                src={MultiviewIcon}
+                alt="multiview"
                 className="dropdown-menu-icon"
               />
             ),
@@ -775,6 +809,17 @@ const Situation = () => {
                   situationItemLength={situationItemLength}
                   isModalOpen={isTVWallModalOpen}
                   setIsModalOpen={setIsTVWallModalOpen}
+                  setReload={setReload}
+                  encoders={encoders}
+                  setEncoders={setEncoders}
+                  decoders={decoders}
+                  setDecoders={setDecoders}
+                />
+                <MultiviewModal
+                  situation={editSituation}
+                  situationItemLength={situationItemLength}
+                  isModalOpen={isMultiviewModalOpen}
+                  setIsModalOpen={setIsMultiviewModalOpen}
                   setReload={setReload}
                   encoders={encoders}
                   setEncoders={setEncoders}
