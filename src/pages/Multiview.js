@@ -193,7 +193,7 @@ const Multiview = () => {
     activeWall(data).then((result) => {
       if (result) {
         showSuccessNotificationByMsg(
-          intl.formatMessage(Messages.Text_TVWall_ProjectVideoSuccess, {
+          intl.formatMessage(Messages.Text_Multiview_ProjectVideoSuccess, {
             source: selectedEncoder.nickName,
             destination: selectedWall.label,
             block: selectedBlockNumber,
@@ -203,7 +203,7 @@ const Multiview = () => {
       } else {
         showWarningNotification(
           <span>
-            {intl.formatMessage(Messages.Text_TVWall_ProjectVideoFail, {
+            {intl.formatMessage(Messages.Text_Multiview_ProjectVideoFail, {
               source: selectedEncoder.nickName,
               destination: selectedWall.label,
               block: selectedBlockNumber,

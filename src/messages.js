@@ -378,6 +378,16 @@ export default defineMessages({
     id: "Text-Multiview-MultiviewTemplate",
     defaultMessage: "分割版型",
   },
+  Text_Multiview_ProjectVideoSuccess: {
+    id: "Text-Multiview-ProjectVideoSuccess",
+    defaultMessage:
+      "影像來源 [{source}] 已投放至 [{destination}] [視窗{block}]",
+  },
+  Text_Multiview_ProjectVideoFail: {
+    id: "Text-Multiview-ProjectVideoFail",
+    defaultMessage:
+      "影像來源 [{source}] 無法投放至 [{destination}] [視窗{block}]",
+  },
 
   // Single screen management
   Text_SingleScreen_Management: {
