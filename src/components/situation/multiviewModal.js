@@ -19,6 +19,7 @@ import {
   getSituationWalls,
   getTemplates,
   presetWall,
+  getDecoders,
 } from "../../api/API";
 import { showWarningNotification } from "../../utils/Utils";
 import { uuid } from "../../utils/Utils";
@@ -40,6 +41,7 @@ const MultiviewModal = ({
   const intl = useIntl();
   const [store] = useContext(StoreContext);
   const [situationItemDesc, setSituationItemDesc] = useState("");
+  // const [decoderOptions, setDecoderOptions] = useState([]);
   const [wallOptions, setWallOptions] = useState([]);
   const [wallDimension, setWallDimension] = useState({ col: 0, row: 0 });
   const [selectedWall, setSelectedWall] = useState({});
@@ -61,73 +63,110 @@ const MultiviewModal = ({
   // Set "wall options"
   useEffect(() => {
     (async () => {
-      let tempWallOptions = [];
-      let result;
-      if (situation) result = await getSituationWalls(store, situation.id);
-      if (result && result.length > 0) {
-        result.forEach((wall) => {
-          tempWallOptions.push({
-            value: wall.wallName,
-            label: wall.wallName,
-            ...wall,
+      let tempDecoderOptions = [];
+      const result = await getDecoders(store); // todo: 改成multiview專用get decoder API
+      if (result) {
+        result.forEach((decoder) => {
+          tempDecoderOptions.push({
+            value: decoder.mac,
+            label: decoder.nickName,
+            col: 1,
+            row: 1,
+            monitorbrand: "test",
+            wallId: "1",
+            wallName: "1",
+            ...decoder,
           });
         });
-        setWallOptions(tempWallOptions);
-        setWallDimension({
-          col: tempWallOptions[0].col,
-          row: tempWallOptions[0].row,
-        });
-        setSelectedWall(tempWallOptions[0]);
+        setWallOptions(tempDecoderOptions);
+        setSelectedWall(tempDecoderOptions[0]);
       }
+      // let tempWallOptions = [];
+      // let result;
+      // if (situation) result = await getSituationWalls(store, situation.id);
+      // if (result && result.length > 0) {
+      //   result.forEach((wall) => {
+      //     tempWallOptions.push({
+      //       value: wall.wallName,
+      //       label: wall.wallName,
+      //       ...wall,
+      //     });
+      //   });
+      //   setWallOptions(tempWallOptions);
+      //   setWallDimension({
+      //     col: tempWallOptions[0].col,
+      //     row: tempWallOptions[0].row,
+      //   });
+      //   setSelectedWall(tempWallOptions[0]);
+      // }
     })();
   }, [store, isModalOpen, situation?.id]);
+
+  const templates = [
+    {
+      value: "1x1",
+      label: "全畫面",
+      id: "1x1",
+      groupId: "-1",
+      templateId: "1x1",
+      templateName: "1x1",
+      col: 1,
+      row: 1,
+      isDefault: 0,
+      screens: null,
+    },
+    {
+      value: "2x2",
+      label: "四分割",
+      id: "2x2",
+      groupId: "-1",
+      templateId: "2x2",
+      templateName: "2x2",
+      col: 2,
+      row: 2,
+      isDefault: 0,
+      screens: null,
+    },
+  ];
 
   // Set template when selected wall is changed
   useEffect(() => {
     (async () => {
       let tempTemplateOptions = [];
-      const result = await getTemplates(store);
-      if (result) {
-        result.forEach((template) => {
-          if (
-            template.col === wallDimension.col &&
-            template.row === wallDimension.row
-          ) {
-            tempTemplateOptions.push({
-              value: template.templateName,
-              label: template.templateName,
-              id: template.templateId,
-              ...template,
-            });
+      templates.forEach((template) => {
+        tempTemplateOptions.push({
+          value: template.templateName,
+          label: template.templateName,
+          id: template.templateId,
+          ...template,
+        });
+      });
+      const activedWall = await getActivedWall({
+        store: store,
+        activeId: selectedWall.wallId,
+      });
+      // has actived wall
+      if (activedWall) {
+        tempTemplateOptions.forEach((option) => {
+          if (option.templateId === activedWall.templateId) {
+            setSelectedTemplate(option);
           }
         });
-        const activedWall = await getActivedWall({
-          store: store,
-          activeId: selectedWall.wallId,
-        });
-        // has actived wall
-        if (activedWall) {
-          tempTemplateOptions.forEach((option) => {
-            if (option.templateId === activedWall.templateId) {
-              setSelectedTemplate(option);
-            }
-          });
-        } else {
-          // no actived wall
-          let hasDefaultTemplate = false;
-          tempTemplateOptions.forEach((template) => {
-            if (template.isDefault === 1) {
-              hasDefaultTemplate = true;
-              setSelectedTemplate(template);
-            }
-          });
-          if (!hasDefaultTemplate) {
-            setSelectedTemplate(null);
-            setBlocks([]);
+      } else {
+        // no actived wall
+        let hasDefaultTemplate = false;
+        tempTemplateOptions.forEach((template) => {
+          if (template.isDefault === 1) {
+            hasDefaultTemplate = true;
+            setSelectedTemplate(template);
           }
+        });
+        if (!hasDefaultTemplate) {
+          setSelectedTemplate(null);
+          setBlocks([]);
         }
-        setTemplateOptions(tempTemplateOptions);
       }
+      setTemplateOptions(tempTemplateOptions);
     })();
   }, [selectedWall]);
 
@@ -322,7 +361,7 @@ const MultiviewModal = ({
     } else {
       showWarningNotification(
         intl.formatMessage(Messages.Text_TVWall_PreviewRequiredHint),
-        Math.random()
+        Math.random(),
       );
     }
   };
@@ -334,7 +373,9 @@ const MultiviewModal = ({
           <span className="wall-modal-title">
             <FormattedMessage {...Messages.Text_Situation_AddSituationItem} />
             {" - "}
-            <FormattedMessage {...Messages.Text_Situation_MultiviewConnection} />
+            <FormattedMessage
+              {...Messages.Text_Situation_MultiviewConnection}
+            />
           </span>
         }
         className="wall-modal wall-content-modal-close-icon wall-content modal-title"
@@ -350,7 +391,9 @@ const MultiviewModal = ({
             <div className="situation-wall-option-row">
               <div style={{ width: "189px", marginRight: "20px" }}>
                 <div className="situation-wall-input-text">
-                  <FormattedMessage {...Messages.Text_Multiview_EncoderChoose} />
+                  <FormattedMessage
+                    {...Messages.Text_Multiview_EncoderChoose}
+                  />
                   {" : "}
                 </div>
                 <div>
@@ -366,7 +409,9 @@ const MultiviewModal = ({
               </div>
               <div style={{ width: "189px", marginRight: "20px" }}>
                 <div className="situation-wall-input-text">
-                  <FormattedMessage {...Messages.Text_Multiview_MultiviewTemplate} />
+                  <FormattedMessage
+                    {...Messages.Text_Multiview_MultiviewTemplate}
+                  />
                   {" : "}
                 </div>
                 <div>
@@ -389,7 +434,7 @@ const MultiviewModal = ({
                     className="situation-wall-input situation-wall-input-placeholder"
                     value={situationItemDesc}
                     placeholder={intl.formatMessage(
-                      Messages.Text_Situation_InputDescription
+                      Messages.Text_Situation_InputDescription,
                     )}
                     onChange={(e) => {
                       setSituationItemDesc(e.target.value);

@@ -1,10 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../store/store";
-import {
-  getTemplateScreensById,
-  getWallScreensById,
-  getDecoders,
-} from "../../api/API";
+import { getDecoders } from "../../api/API";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Button } from "antd";
 import Messages from "../../messages";
@@ -50,20 +46,28 @@ const MultiView = ({
   useEffect(() => {
     let tempScreens = [];
     let tempBlocksDetail = [];
-    if (
-      selectedWall &&
-      selectedTemplate &&
-      selectedWall.col === selectedTemplate.col &&
-      selectedWall.row === selectedTemplate.row
-    ) {
+    if (selectedWall && selectedTemplate) {
       (async () => {
-        const templateScreens = await getTemplateScreensById(
-          store,
-          selectedTemplate.templateId
+        const templateScreens = Array.from(
+          { length: selectedTemplate.col * selectedTemplate.row },
+          (value, idx) => ({
+            block: idx + 1,
+            num: idx + 1,
+          }),
         );
-        const wallScreens = await getWallScreensById(
-          store,
-          selectedWall.wallId
+        const wallScreens = Array.from(
+          { length: selectedTemplate.col * selectedTemplate.row },
+          (value, idx) => ({
+            block: idx + 1,
+            decoder: selectedWall.mac,
+            encoder: "",
+            ip: "",
+            monitorBrand: "",
+            monitorBrandName: "",
+            nickName: selectedWall.mac,
+            num: idx + 1,
+            state: "Up",
+          }),
         );
         const decoders = await getDecoders(store);
         wallScreens?.sort(function (wall1, wall2) {
@@ -81,13 +85,13 @@ const MultiView = ({
 
             // set state to screen
             const decoder = decoders?.filter(
-              (decoder) => decoder.mac === screen.decoder
+              (decoder) => decoder.mac === screen.decoder,
             )[0];
             tempScreen.state = decoder?.state;
 
             // set encoder to screen
             tempScreen.encoder = Object.values(blockEncoderMapping).includes(
-              templateScreens[idx].block
+              templateScreens[idx].block,
             )
               ? blockEncoderMapping[templateScreens[idx].block].mac
               : "";
@@ -128,7 +132,7 @@ const MultiView = ({
                 previousScreenNum = screen.num;
               } else if (
                 previousScreenNum + 1 === screen.num &&
-                blockCol < selectedWall.col
+                blockCol < selectedTemplate.col
               ) {
                 blockCol = blockCol + 1;
                 previousScreenNum = screen.num;
@@ -139,8 +143,8 @@ const MultiView = ({
           });
         }
         setTvWallSize({
-          col: selectedWall.col,
-          row: selectedWall.row,
+          col: selectedTemplate.col,
+          row: selectedTemplate.row,
         });
         setBlocksDetail(tempBlocksDetail);
         setSelectedBlockNumber(null);
@@ -367,14 +371,14 @@ const MultiView = ({
                 )}
               </div>
             </div>
-          </div>
+          </div>,
         );
       });
     }
     setWallHTML(
       <div id="wallScreens" style={{ position: "absolute" }}>
         {wallBlocksHTML}
-      </div>
+      </div>,
     );
   }, [
     blocksDetail,
