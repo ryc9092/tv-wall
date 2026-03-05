@@ -234,7 +234,7 @@ const TvWall = ({
                       : "wall-block-title"
                   }
                 >
-                  <FormattedMessage {...Messages.Text_Common_Block} />{" "}
+                  <FormattedMessage {...Messages.Text_Common_Window} />{" "}
                   {block.block}
                 </span>
               </div>
@@ -252,42 +252,6 @@ const TvWall = ({
                   {blockEncoderMapping[block.block]?.nickName
                     ? blockEncoderMapping[block.block].nickName
                     : intl.formatMessage(Messages.Text_Common_None)}
-                </div>
-              </div>
-              <div id={block.block}>
-                <div id={block.block} className="wall-block-desc">
-                  <div
-                    id={block.block}
-                    style={{
-                      display: "flex",
-                    }}
-                  >
-                    <div id={block.block}>
-                      <FormattedMessage {...Messages.Text_Common_Decoder} />
-                      {":"}
-                    </div>
-                    <div id={block.block}>
-                      {blocksDetail?.map((detail) => {
-                        if (detail.block === block.block)
-                          return detail.detail?.map((detail) => {
-                            return (
-                              <span
-                                id={block.block}
-                                style={
-                                  detail.state !== "Up"
-                                    ? { marginLeft: 4, color: "#c33434" }
-                                    : { marginLeft: 4 }
-                                }
-                              >
-                                {detail.nickName}
-                                <br />
-                              </span>
-                            );
-                          });
-                        else return null;
-                      })}
-                    </div>
-                  </div>
                 </div>
               </div>
               <div

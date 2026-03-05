@@ -59,7 +59,6 @@ const Multiview = () => {
     (async () => {
       let tempDecoderOptions = [];
       const result = await getDecoders(store); // todo: 改成multiview專用get decoder API
-      console.log(result, "=====");
       if (result) {
         result.forEach((decoder) => {
           tempDecoderOptions.push({

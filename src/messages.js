@@ -5,6 +5,7 @@ export default defineMessages({
   Text_Common_Name: { id: "Text-Common-Name", defaultMessage: "名稱" },
   Text_Common_Alias: { id: "Text-Common-Alias", defaultMessage: "別名" },
   Text_Common_Block: { id: "Text-Common-Block", defaultMessage: "區塊" },
+  Text_Common_Window: { id: "Text-Common-Window", defaultMessage: "視窗" },
   Text_Common_Screen: { id: "Text-Common-Screen", defaultMessage: "畫面" },
   Text_Common_Model: { id: "Text-Common-Model", defaultMessage: "型號" },
   Text_Common_Category: { id: "Text-Common-Category", defaultMessage: "類別" },
