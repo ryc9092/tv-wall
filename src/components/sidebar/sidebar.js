@@ -181,6 +181,9 @@ const Sidebar = () => {
   if (store.vars?.DisableSwitchControl === true) {
     items = items.filter((item) => item.key !== "monitor-mgmt");
   }
+  if (store.vars?.DisableSystemSetting === true) {
+    items = items.filter((item) => item.key !== "setting");
+  }
 
   const onNavigate = (e) => {
     const path = e.key;

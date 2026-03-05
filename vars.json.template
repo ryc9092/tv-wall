@@ -4,5 +4,6 @@
   },
   "DisableTVWall": false,
   "DisableStopAllAudio": false,
-  "DisableSwitchControl": false
+  "DisableSwitchControl": false,
+  "DisableSystemSetting": false
 }
